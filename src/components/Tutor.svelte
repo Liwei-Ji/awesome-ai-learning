@@ -3,8 +3,10 @@
   import { fly, scale } from 'svelte/transition';
   import { nav } from '../stores/state.svelte.js';
   import { CH } from '../data/chapters.js';
+  import { chOf } from '../data/localize.js';
   import { knowledgeFor } from '../data/knowledge/index.js';
   import { makeChapterIndex, searchChapter, suggestChapters } from '../lib/tutorSearch.js';
+  import { t, i18n } from '../stores/i18n.svelte.js';
   import { dur, D, ease } from '../lib/motion.js';
 
   let open = $state(false);
@@ -13,20 +15,21 @@
   let chatEl;
 
   let slug = $derived(CH[nav.current].slug);
-  let chips = $derived(knowledgeFor(slug).qs);
+  let chips = $derived(knowledgeFor(slug, i18n.locale).qs);
 
-  // 全章索引（靜態，建一次）：供範圍門檻與跨章導引
-  const CHAPTERS = Object.values(CH).map((c) => ({
-    slug: c.slug, title: c.t,
-    index: makeChapterIndex({ kb: knowledgeFor(c.slug).kb, title: c.t, terms: c.terms }),
+  // 全章索引（依語言重建）：供範圍門檻與跨章導引
+  let CHAPTERS = $derived(Object.keys(CH).map((id) => {
+    const d = chOf(+id);
+    return { slug: d.slug, title: d.t, index: makeChapterIndex({ kb: knowledgeFor(d.slug, i18n.locale).kb, title: d.t, terms: d.terms }) };
   }));
   let chIndex = $derived(CHAPTERS.find((c) => c.slug === slug)?.index);
 
   // 切章：重置對話，換上本章開場白
   $effect(() => {
     const id = nav.current;
+    i18n.locale; // 語言切換時重新產生開場白
     messages = [
-      { role: 'bot', html: `嗨，我是 AI 教授 👋 這一章我們談<b>${CH[id].t}</b>。左邊的動畫可以直接動手玩，有問題隨時問我。` },
+      { role: 'bot', html: t('tutor.opening').replace('{topic}', chOf(id).t) },
     ];
   });
 
@@ -43,14 +46,14 @@
     const sug = suggestChapters(q, CHAPTERS, slug);
     if (sug.length) {
       const names = sug.map((s) => `「${s.title}」`).join('、');
-      return `這一題不在本章（${CH[nav.current].t}）的範圍——不過 ${names} 有講到喔，切過去再問我，我能答得更完整。`;
+      return t('tutor.outScope').replace('{topic}', chOf(nav.current).t).replace('{names}', names);
     }
-    return `我是這門課的助教，專門回答課綱裡的<b>AI 概念</b>——每章的<b>定義、原理、差別、應用</b>都能問。這一題我不太有把握：換個說法、試試下面的建議問題，或直接問某個關鍵名詞。若超出課程範圍，我可能就答不上來。`;
+    return t('tutor.fallback');
   }
 
   function ask(q) {
     messages.push({ role: 'me', html: q });
-    const idx = messages.push({ role: 'bot', html: '<span class="think">思考中<span class="typing"><i></i><i></i><i></i></span></span>' }) - 1;
+    const idx = messages.push({ role: 'bot', html: `<span class="think">${t('tutor.thinking')}<span class="typing"><i></i><i></i><i></i></span></span>` }) - 1;
     const a = answer(q);
     setTimeout(() => { messages[idx].html = a; }, dur(450));
   }
@@ -73,9 +76,9 @@
     <div class="tutor-card" transition:fly={{ y: 16, duration: dur(D.base), easing: ease }}>
       <div class="tutor-head">
         <span class="av">🎓</span>
-        <span class="nm">AI 教授</span>
+        <span class="nm">{t('tutor.name')}</span>
         <div class="spacer"></div>
-        <button class="close" aria-label="收合" onclick={() => (open = false)}>✕</button>
+        <button class="close" aria-label={t('tutor.close')} onclick={() => (open = false)}>✕</button>
       </div>
       <div class="chat" bind:this={chatEl}>
         {#each messages as m}
@@ -89,8 +92,8 @@
       </div>
       <form class="tutor-in" onsubmit={submit}>
         <div class="inwrap">
-          <input bind:value={input} placeholder="問教授一個問題…" autocomplete="off" />
-          <button class="send" type="submit" aria-label="送出" disabled={!input.trim()}>
+          <input bind:value={input} placeholder={t('tutor.placeholder')} autocomplete="off" />
+          <button class="send" type="submit" aria-label={t('tutor.send')} disabled={!input.trim()}>
             <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none"
               stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
               <path d="M22 2 11 13" /><path d="M22 2 15 22 11 13 2 9 22 2Z" />
@@ -101,7 +104,7 @@
     </div>
   {/if}
 
-  <button class="fab" class:open aria-label={open ? '收合 AI 教授' : '開啟 AI 教授'} onclick={() => (open = !open)}>
+  <button class="fab" class:open aria-label={open ? t('tutor.close') : t('tutor.open')} onclick={() => (open = !open)}>
     {#if open}
       <span in:scale={{ start: 0.6, duration: dur(D.fast) }}>✕</span>
     {:else}

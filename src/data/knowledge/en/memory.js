@@ -1,0 +1,24 @@
+export default {
+  qs: ['Does AI really remember what I said?', 'What’s the difference between short-term and long-term memory?', 'Is memory the same as the context window?', 'Can my AI memories leak?'],
+  kb: [
+    [['memory', 'what is', 'definition', 'define', 'meaning'], '<b>Memory</b> means saving information from a conversation <b>outside the model</b> so the AI can use it again next time. “Remembering you” isn’t the model keeping it in its head—an external system stores it and feeds it back in when needed.'],
+    [['no memory', 'really remember', 'remember', 'does it remember', 'every time', 'blank slate', 'forgets everything'], 'A common misconception is that the AI keeps you in its head. In fact <b>the model starts every conversation as a blank slate</b>—it holds onto nothing automatically, unless an external program feeds the old content back to it.'],
+    [['how does it remember', 'how it works', 'mechanism', 'principle', 'how is it done'], 'The idea is simple: the system <b>saves what should be remembered as notes (text or vectors)</b>, and when the next conversation begins it <b>slips the relevant notes back into the context</b> along with your message. It looks like the model “recalls” it, but really it’s just being reminded.'],
+    [['short-term', 'long-term', 'difference', 'two kinds', 'distinction'], '<b>Short-term memory</b> = everything built up within this one conversation; close the window and it’s gone. <b>Long-term memory</b> = notes kept across conversations (like your name or preferences), still there when you start a fresh chat.'],
+    [['state', 'accumulate', 'current', 'so far'], '<b>State</b> is everything a conversation has accumulated so far—what you’ve asked, what it has answered. Short-term memory is really just this state, and it keeps growing as the conversation gets longer.'],
+    [['context window', 'same as memory', 'window', 'relationship', 'how are they different'], 'The two are often confused: the <b>context window</b> is the hard limit on “how much text the model can read at once”; <b>Memory</b> is the mechanism that decides “which old information to slip into that window.” The window is limited, so memory has to pick out what matters.'],
+    [['forget', 'forgot', 'earlier', 'why does it forget', 'exceed', 'truncate', 'lose track'], 'AI “forgets” things said earlier in a long chat because the content <b>exceeds the context window limit</b> and the oldest part gets pushed out (truncated). Long-term memory exists precisely to make up for this limit.'],
+    [['how is long-term stored', 'where stored', 'database', 'vector', 'notes', 'summary'], 'Long-term memory usually works like this: important information is <b>summarized or turned into vectors and stored in a database</b>, then when needed the most relevant few are found by similarity and slipped back into the context. This is almost the same technique as RAG looking up data.'],
+    [['rag', 'retrieval', 'look up data', 'like rag', 'similar to rag'], '<b>Memory and RAG are very similar</b>: both “find data from outside first, then slip it back into the context.” The difference is that RAG looks up <b>knowledge documents</b>, while Memory looks up <b>your personal history and preferences</b>.'],
+    [['application', 'example', 'where is it used', 'benefit', 'personalization', 'helps'], 'With memory, AI can be <b>personalized</b>: it remembers your name, your tone, your project background, so you don’t have to repeat yourself every time. ChatGPT’s memory feature and a support bot remembering your order both rely on this.'],
+    [['downside', 'risk', 'privacy', 'leak', 'others see it', 'security', 'danger'], 'The price of memory is <b>privacy and correctness</b>: wrong information that gets stored keeps being misused, and leaked personal data is trouble. A good system lets you <b>review, edit, and delete</b> your own memories.'],
+    [['retrain', 'training', 'learned', 'parameters', 'change the model', 'is it training'], 'Remembering you <b>is not the same as retraining the model</b>: the model’s parameters don’t change at all—all that changes is that a note about you gets slipped in each time. Actually changing the parameters is called Fine-tuning, which is a different matter.'],
+  ],
+  notes: [
+    'The model itself has no memory: every conversation starts blank, and “remembering” is done by an external system.',
+    'Remembering = storing information outside the model and slipping it back into the context next time.',
+    'Short-term memory = this one conversation; long-term memory = notes kept across conversations.',
+    'The context window is the limit on “how much it can read at once”; Memory is “which old information to put in.”',
+    'Memory brings personalization, but also responsibility for privacy and correctness—you should be able to review and delete it.',
+  ],
+};

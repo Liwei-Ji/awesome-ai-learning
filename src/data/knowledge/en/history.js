@@ -1,0 +1,25 @@
+export default {
+  qs: ['When did AI start?', 'Why did AI take off only recently?', 'Why was the Transformer a turning point?', 'What was the AI winter?'],
+  kb: [
+    [['start', 'begin', 'when', 'origin', 'history', 'born', 'how long'], 'AI is older than you might think: in <b>1950</b> Turing already asked whether machines can think, and in <b>1956</b> the Dartmouth workshop coined the term “artificial intelligence.” So AI has been around for <b>70+ years</b>—it only got truly powerful recently.'],
+    [['turing', 'turing test', 'imitation game', 'can think'], 'The <b>Turing Test (1950)</b>: if you chat through a screen and can’t tell whether the other side is a human or a machine, we can say the machine “seems to think.” It turned “can machines think?” into a <b>concrete test</b>—the intellectual starting point of AI.'],
+    [['dartmouth', '1956', 'coined', 'name', 'the term', 'who named'], 'The <b>1956 Dartmouth workshop</b> is AI’s formal starting point: a group of researchers first used the name <b>“Artificial Intelligence”</b>, and AI became a field of study.'],
+    [['winter', 'downturn', 'stagnation', 'why fail', 'quiet'], 'The <b>AI winter</b> refers to two low periods (roughly the 1970s and late 1980s–early 90s): <b>hype ran ahead of results</b>, so funding and enthusiasm froze and research stalled for years. It’s a reminder that AI progress is <b>bumpy</b>, not a straight line up.'],
+    [['deep blue', 'chess', 'kasparov', '1997'], 'In <b>1997 IBM’s Deep Blue</b> beat the world chess champion—a symbolic moment. But note: Deep Blue relied on <b>brute-force search</b>, <b>not “learning.”</b> It’s fundamentally different from today’s AI that learns patterns from data.'],
+    [['alexnet', '2012', 'deep learning', 'image', 'imagenet', 'revolution', 'turning point', 'breakthrough'], '<b>AlexNet in 2012</b> ignited deep learning: a deep neural network dominated an image-recognition contest, proving the power of <b>“lots of data + compute (GPUs) + deep networks.”</b> Deep learning became mainstream and AI’s abilities started climbing fast.'],
+    [['transformer', '2017', 'attention', 'turning point', 'architecture', 'foundation'], 'The <b>Transformer (2017</b>, the paper “Attention Is All You Need”) is the architectural foundation of modern AI. Its <b>Attention</b> mechanism lets a model read relationships across a whole sentence and train at massive scale—<b>every LLM today, including ChatGPT, is built on it.</b>'],
+    [['chatgpt', '2022', 'boom', 'mainstream', 'hype', 'why popular'], '<b>ChatGPT (late 2022)</b> brought generative AI to the public: it chats, writes, and codes, and reached hundreds of millions of users within two months—kicking off this wave of AI enthusiasm. Under the hood: Transformer + huge data + human-feedback tuning.'],
+    [['multimodal', 'agent', '2023', 'now', 'latest', 'future'], '<b>After 2023</b>, AI moved in two new directions: <b>multimodal</b> (seeing images, hearing audio, watching video—not just text) and <b>AI Agents</b> (planning, calling tools, completing tasks on their own). These are unpacked in later chapters.'],
+    [['why now', 'why recently', 'boom', 'suddenly', 'three factors'], 'The idea of AI is decades old; it only took off recently because <b>three things arrived together</b>: <b>①huge data</b> (the internet) <b>②powerful compute</b> (GPUs) <b>③better architectures</b> (deep learning, Transformer). All three at once—that’s why it’s “now.”'],
+    [['jumps', 'turning points', 'three', 'key', 'milestones', 'which'], 'AI’s abilities had <b>three big jumps</b>: <b>2012 deep learning (AlexNet)</b>, <b>2017 Transformer</b>, <b>2022 ChatGPT</b>. What they share—each was a breakthrough in <b>architecture or scale</b>, not a flash of magic.'],
+    [['misconception', 'not', 'sudden', 'overnight', 'magic', 'new'], 'A common misconception: that AI “appeared out of nowhere” in the last couple of years. In fact it took <b>70+ years</b> of ups and downs (including two winters) to get here. Knowing this history gives you a better sense of both AI’s power and its limits.'],
+  ],
+  notes: [
+    'AI is 70+ years old: 1950 Turing Test, 1956 Dartmouth coined “AI.”',
+    'It went through two “AI winters”—hype outran results and stalled.',
+    'Three big jumps: 2012 deep learning, 2017 Transformer, 2022 ChatGPT.',
+    'Each breakthrough came from architecture or scale, not magic.',
+    'The recent boom = huge data × GPU compute × better architectures, all at once.',
+    'Deep Blue (1997) used brute force, not learning—different from today’s AI.',
+  ],
+};

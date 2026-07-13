@@ -2,15 +2,16 @@
   // 主舞台：章節抬頭 + 互動 demo + 重點整理 + 關鍵名詞（皆置於中央內容下方）。
   import { fly } from 'svelte/transition';
   import { nav } from '../stores/state.svelte.js';
-  import { CH } from '../data/chapters.js';
+  import { chOf } from '../data/localize.js';
   import { demoFor } from '../demos/registry.js';
   import { knowledgeFor } from '../data/knowledge/index.js';
+  import { t, i18n } from '../stores/i18n.svelte.js';
   import { dur, D, ease } from '../lib/motion.js';
 
   let stageEl;
-  let ch = $derived(CH[nav.current]);
+  let ch = $derived(chOf(nav.current));
   let Demo = $derived(demoFor(ch.slug));
-  let notes = $derived(knowledgeFor(ch.slug).notes);
+  let notes = $derived(knowledgeFor(ch.slug, i18n.locale).notes);
 
   $effect(() => { nav.current; if (stageEl) stageEl.scrollTop = 0; });
 </script>
@@ -31,14 +32,14 @@
 
         <div class="learn">
           <section class="lbox">
-            <h4>重點整理</h4>
+            <h4>{t('stage.keyPoints')}</h4>
             {#each ch.key as [n, t]}
               <div class="kp"><span class="kn">{n}</span><span>{t}</span></div>
             {/each}
           </section>
           {#if ch.terms?.length}
             <section class="lbox">
-              <h4>關鍵名詞</h4>
+              <h4>{t('stage.keyTerms')}</h4>
               {#each ch.terms as [t, d]}
                 <div class="term"><div class="tt">{t}</div><div class="td">{d}</div></div>
               {/each}
@@ -48,7 +49,7 @@
 
         {#if notes?.length}
           <section class="lbox kbase">
-            <h4>知識庫 · 延伸知識點</h4>
+            <h4>{t('stage.knowledge')}</h4>
             <div class="notes">
               {#each notes as n}<div class="note"><span class="nb">▹</span><span>{n}</span></div>{/each}
             </div>

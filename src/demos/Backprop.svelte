@@ -7,6 +7,53 @@
   import Num from '../components/Num.svelte';
   import { clamp, sig } from '../lib/helpers.js';
   import { reduceMotion } from '../lib/motion.js';
+  import { i18n } from '../stores/i18n.svelte.js';
+
+  const L = {
+    zh: {
+      h3: '互動：誤差怎麼一層層傳回去',
+      lede: '上一章球會滾下山，但它怎麼知道<b>每個權重</b>該往哪調？答案是<b>反向傳播</b>：先前向算出答案，再把誤差<b>從輸出往回傳</b>，每條連線算出自己該負多少<b>責任</b>，照著調。',
+      tgt: '目標 {t}',
+      predK: '預測（貓）', lossK: '損失 Loss', stepsK: '訓練步數',
+      lrK: '學習率 Learning rate',
+      train: '訓練一步', pause: '⏸ 暫停', auto: '▶ 自動訓練', reset: '重置',
+      hint: '關鍵是<b>連鎖律</b>：從輸出的誤差開始，一層一層往回算「這條線改變一點，會讓誤差變多少」。這個數字就是它的<b>梯度（責任）</b>——照著往反方向調，損失就會下降。反向傳播讓深層網路第一次<b>訓練得動</b>。',
+      status: {
+        idle: '按「訓練一步」：先前向算答案，再反向把誤差傳回來',
+        forward: '① 前向傳播：輸入一路算到輸出，得到預測',
+        backward: '② 反向傳播：誤差往回傳，每條線算出自己的「責任」',
+      },
+    },
+    en: {
+      h3: 'Interactive: how the error travels back, layer by layer',
+      lede: 'Last chapter the ball rolled downhill—but how does it know which way to nudge <b>each weight</b>? The answer is <b>backpropagation</b>: first run forward to get the answer, then send the error <b>back from the output</b>, so every connection works out how much <b>blame</b> it carries and adjusts accordingly.',
+      tgt: 'Target {t}',
+      predK: 'Prediction (cat)', lossK: 'Loss', stepsK: 'Steps',
+      lrK: 'Learning rate',
+      train: 'Train one step', pause: '⏸ Pause', auto: '▶ Auto-train', reset: 'Reset',
+      hint: 'The key is the <b>chain rule</b>: starting from the error at the output, you work backward layer by layer to find “if this connection changes a little, how much does the error change.” That number is its <b>gradient (its blame)</b>—adjust in the opposite direction and the loss drops. Backpropagation is what first made deep networks <b>trainable at all</b>.',
+      status: {
+        idle: 'Press “Train one step”: first run forward to get the answer, then run backward to send the error back.',
+        forward: '① Forward pass: the input is computed all the way to the output, giving a prediction.',
+        backward: '② Backward pass: the error travels back, and each connection works out its own “blame.”',
+      },
+    },
+    ja: {
+      h3: 'インタラクティブ：誤差はどうやって一層ずつ戻っていくのか',
+      lede: '前の章ではボールが坂を転がり落ちた——でも<b>それぞれの重み</b>をどちらに動かせばいいか、どうやって分かるの？答えは<b>誤差逆伝播</b>：まず順伝播で答えを出し、次に誤差を<b>出力から後ろへ戻し</b>、各結合が自分の<b>責任</b>の大きさを割り出して、それに従って調整する。',
+      tgt: '目標 {t}',
+      predK: '予測（猫）', lossK: '損失 Loss', stepsK: '学習ステップ数',
+      lrK: '学習率 Learning rate',
+      train: '1 ステップ学習', pause: '⏸ 一時停止', auto: '▶ 自動学習', reset: 'リセット',
+      hint: '鍵は<b>連鎖律</b>：出力の誤差から出発して、一層ずつ後ろへ「この結合が少し変わると、誤差はどれだけ変わるか」を計算していく。この数字がその結合の<b>勾配（責任）</b>——反対方向へ調整すれば損失は下がる。誤差逆伝播こそ、深層ネットワークをはじめて<b>学習できるもの</b>にした立役者だ。',
+      status: {
+        idle: '「1 ステップ学習」を押す：まず順伝播で答えを出し、次に逆伝播で誤差を戻す。',
+        forward: '① 順伝播：入力が出力まで一気に計算され、予測が出る。',
+        backward: '② 逆伝播：誤差が後ろへ戻り、各結合が自分の「責任」を割り出す。',
+      },
+    },
+  };
+  let ui = $derived(L[i18n.locale] || L.zh);
 
   const X = [1.0, 0.7, 0.4];   // 固定輸入
   const TARGET = 1;            // 期望輸出（「這是貓」= 1）
@@ -119,21 +166,18 @@
     return pts;
   }
 
-  const STATUS = {
-    idle: ['按「訓練一步」：先前向算答案，再反向把誤差傳回來', 'var(--muted)'],
-    forward: ['① 前向傳播：輸入一路算到輸出，得到預測', 'var(--accent)'],
-    backward: ['② 反向傳播：誤差往回傳，每條線算出自己的「責任」', 'var(--crit)'],
+  const STATUS_COLOR = {
+    idle: 'var(--muted)',
+    forward: 'var(--accent)',
+    backward: 'var(--crit)',
   };
 
   onDestroy(() => clearTimeout(timer));
 </script>
 
 <div class="panel">
-  <div class="panel-h"><h3>互動：誤差怎麼一層層傳回去</h3><span class="eyebrow">★ Interactive</span></div>
-  <p class="lede">
-    上一章球會滾下山，但它怎麼知道<b>每個權重</b>該往哪調？答案是<b>反向傳播</b>：
-    先前向算出答案，再把誤差<b>從輸出往回傳</b>，每條連線算出自己該負多少<b>責任</b>，照著調。
-  </p>
+  <div class="panel-h"><h3>{ui.h3}</h3><span class="eyebrow">★ Interactive</span></div>
+  <p class="lede">{@html ui.lede}</p>
 
   <div class="demo-stage light">
     <svg class="net" viewBox="0 0 520 260">
@@ -183,32 +227,29 @@
       <circle cx={OX} cy={OY} r="30" fill="#e07f0e" filter="url(#bp-glow)" opacity={0.12 + 0.7 * fwd.y} />
       <circle cx={OX} cy={OY} r="22" fill="url(#bp-node)" opacity={0.45 + 0.55 * fwd.y} stroke="#c6cfdd" stroke-width="1.5" />
       <text class="olb" x={OX} y={OY + 5} text-anchor="middle">{(fwd.y).toFixed(2)}</text>
-      <text class="tlb" x={OX} y={OY - 34} text-anchor="middle">目標 {TARGET.toFixed(1)}</text>
+      <text class="tlb" x={OX} y={OY - 34} text-anchor="middle">{ui.tgt.replace('{t}', TARGET.toFixed(1))}</text>
     </svg>
   </div>
 
   <div class="stats">
-    <div><span class="k">預測（貓）</span><span class="v"><Num value={fwd.y} format={(x) => x.toFixed(2)} /></span></div>
-    <div><span class="k">損失 Loss</span><span class="v"><Num value={fwd.loss} format={(x) => x.toFixed(3)} /></span></div>
-    <div><span class="k">訓練步數</span><span class="v mono">{steps}</span></div>
+    <div><span class="k">{ui.predK}</span><span class="v"><Num value={fwd.y} format={(x) => x.toFixed(2)} /></span></div>
+    <div><span class="k">{ui.lossK}</span><span class="v"><Num value={fwd.loss} format={(x) => x.toFixed(3)} /></span></div>
+    <div><span class="k">{ui.stepsK}</span><span class="v mono">{steps}</span></div>
   </div>
 
   <div class="ctl">
-    <div class="lab"><span>學習率 Learning rate</span><b>{lr.toFixed(2)}</b></div>
+    <div class="lab"><span>{ui.lrK}</span><b>{lr.toFixed(2)}</b></div>
     <input type="range" min="0.1" max="2" step="0.1" bind:value={lr} disabled={running} />
   </div>
 
   <div class="btn-row">
-    <button class="btn primary" onclick={train} disabled={phase !== 'idle' || running}>訓練一步</button>
-    <button class="btn" onclick={auto}>{running ? '⏸ 暫停' : '▶ 自動訓練'}</button>
-    <button class="btn ghost" onclick={reset}>重置</button>
+    <button class="btn primary" onclick={train} disabled={phase !== 'idle' || running}>{ui.train}</button>
+    <button class="btn" onclick={auto}>{running ? ui.pause : ui.auto}</button>
+    <button class="btn ghost" onclick={reset}>{ui.reset}</button>
   </div>
 
-  <p class="status" style="color:{STATUS[phase][1]}">{STATUS[phase][0]}</p>
-  <p class="hint">
-    關鍵是<b>連鎖律</b>：從輸出的誤差開始，一層一層往回算「這條線改變一點，會讓誤差變多少」。
-    這個數字就是它的<b>梯度（責任）</b>——照著往反方向調，損失就會下降。反向傳播讓深層網路第一次<b>訓練得動</b>。
-  </p>
+  <p class="status" style="color:{STATUS_COLOR[phase]}">{ui.status[phase]}</p>
+  <p class="hint">{@html ui.hint}</p>
 </div>
 
 <style>

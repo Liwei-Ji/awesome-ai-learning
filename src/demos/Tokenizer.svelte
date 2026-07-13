@@ -7,6 +7,7 @@
   import { onDestroy } from 'svelte';
   import { fly } from 'svelte/transition';
   import { dur, D, ease, reduceMotion } from '../lib/motion.js';
+  import { i18n } from '../stores/i18n.svelte.js';
 
   const cp = (s) => [...s];                         // 以字元（code point）計
   const isCJK = (ch) => /[㐀-鿿]/u.test(ch);
@@ -31,6 +32,68 @@
       toks: [ ['café','word'],['␣','symbol'],['F0','byte',9],['9F','byte',9],['8E','byte',9],['89','byte',9] ],
       status: '看起來只是一個 🎉，在模型眼中其實是 4 個位元組 token！' },
   ];
+
+  // UI 字串與 preset 標籤／說明（多語）；preset 的 text/toks 是示範內容，跨語言共用。
+  const L = {
+    zh: {
+      h3: '互動：看一句話如何被切成 token',
+      lede: '模型讀文字時，不是一個字母一個字母看，而是先把文字切成一塊塊 <b>token</b>。常見的詞是一個 token；罕見的長字會被拆成幾個<b>子詞（Subword）</b>。切換範例，或自己改寫文字試試。',
+      rawCap: '原始文字 RAW TEXT', tokCap: '模型讀到的 TOKENS', chars: '字元 CHARS',
+      bd: '完整詞 {w} · 子詞 {sw} · 位元組 {b} · 符號 {sym}　|　每 token 平均 {avg} 字元',
+      legend: ['完整詞', '子詞 Subword', '位元組 Byte', '符號'],
+      glabelWord: '＝1 個詞', glabelChar: '＝1 字元',
+      editLabel: '或自己輸入試試', placeholder: '打點字看看怎麼被切…',
+      recut: '✂ 重新切分', showId: '顯示 token ID',
+      trunc: '文字太長，已截斷到 60 字元。', live: '即時切分中（示意用假分詞器，實際切法依模型而異）。',
+      hint: '這就是 <b>Tokenizer 分詞器</b>：它決定模型眼中「一句話有多長」。同樣的意思，用英文、中文還是程式碼寫，token 數可能天差地遠——這也是為什麼有些寫法「比較貴」。（註：本示範用手寫規則的假分詞器，真實模型的切法會略有不同。）',
+      presets: {
+        en: { label: '英文常見句', status: '5 個常見英文詞 → 5 個 token，乾淨俐落。' },
+        rare: { label: '罕見長詞', status: 'unbelievable 不在詞表裡 → 被拆成 un·bel·iev·able 四個子詞。' },
+        zh: { label: '中文', status: '中文沒有空格，模型多半一到兩個字就切一塊。' },
+        code: { label: '程式碼', status: '程式碼裡，每個括號、引號、符號幾乎都各自是一個 token。' },
+        emoji: { label: 'Emoji', status: '看起來只是一個 🎉，在模型眼中其實是 4 個位元組 token！' },
+      },
+    },
+    en: {
+      h3: 'Interactive: watch a sentence get split into tokens',
+      lede: 'When a model reads text, it doesn’t go letter by letter—it first splits text into chunks called <b>tokens</b>. Common words are one token; rare long words get split into several <b>subwords</b>. Switch examples, or edit the text yourself.',
+      rawCap: 'RAW TEXT', tokCap: 'TOKENS THE MODEL READS', chars: 'CHARS',
+      bd: 'Words {w} · Subwords {sw} · Bytes {b} · Symbols {sym}　|　avg {avg} chars/token',
+      legend: ['Words', 'Subword', 'Byte', 'Symbol'],
+      glabelWord: '= 1 word', glabelChar: '= 1 char',
+      editLabel: 'Or type your own', placeholder: 'Type something and see how it splits…',
+      recut: '✂ Re-tokenize', showId: 'Show token IDs',
+      trunc: 'Too long—truncated to 60 characters.', live: 'Tokenizing live (a demo pseudo-tokenizer; real models split a bit differently).',
+      hint: 'That’s the <b>tokenizer</b>: it decides how “long” a sentence is to the model. The same meaning in English, Chinese, or code can take wildly different token counts—which is why some phrasings “cost more.” (Note: this demo uses a hand-written pseudo-tokenizer; real models split a bit differently.)',
+      presets: {
+        en: { label: 'Common English', status: '5 common English words → 5 tokens, clean and simple.' },
+        rare: { label: 'Rare long word', status: '“unbelievable” isn’t in the vocab → split into un·bel·iev·able (4 subwords).' },
+        zh: { label: 'Chinese', status: 'Chinese has no spaces; models usually chunk one or two characters at a time.' },
+        code: { label: 'Code', status: 'In code, nearly every bracket, quote, and symbol is its own token.' },
+        emoji: { label: 'Emoji', status: 'It looks like just one 🎉, but to the model it’s 4 byte-tokens!' },
+      },
+    },
+    ja: {
+      h3: 'インタラクティブ：一文がトークンに切られる様子',
+      lede: 'モデルは文字を 1 つずつではなく、まず文章を <b>トークン</b> という塊に切ります。よく使う語は 1 トークン、まれな長い語は複数の <b>サブワード</b> に分かれます。例を切り替えるか、自分で書き換えてみましょう。',
+      rawCap: '原文 RAW TEXT', tokCap: 'モデルが読む TOKENS', chars: '文字 CHARS',
+      bd: '完全語 {w} · サブワード {sw} · バイト {b} · 記号 {sym}　|　1 トークン平均 {avg} 文字',
+      legend: ['完全語', 'サブワード', 'バイト', '記号'],
+      glabelWord: '＝1 語', glabelChar: '＝1 文字',
+      editLabel: '自分で入力してみる', placeholder: '入力して分かれ方を見てみよう…',
+      recut: '✂ 再分割', showId: 'トークン ID を表示',
+      trunc: '長すぎるため 60 文字に切り詰めました。', live: 'リアルタイム分割中（デモ用の簡易トークナイザ。実際のモデルとは少し異なります）。',
+      hint: 'これが <b>トークナイザ</b>：モデルにとって「一文がどれだけ長いか」を決めます。同じ意味でも英語・中国語・コードでトークン数は大きく変わり——だから「割高」な書き方もあるのです。（注：このデモは手書き規則の簡易トークナイザで、実際のモデルとは少し異なります。）',
+      presets: {
+        en: { label: '英語のよくある文', status: 'よく使う英単語 5 つ → 5 トークン、すっきり。' },
+        rare: { label: 'まれな長い語', status: '「unbelievable」は語彙になく → un·bel·iev·able の 4 サブワードに分割。' },
+        zh: { label: '中国語', status: '中国語には空白がなく、モデルは 1〜2 文字ずつ区切ることが多い。' },
+        code: { label: 'コード', status: 'コードでは、括弧・引用符・記号のほぼすべてが 1 トークン。' },
+        emoji: { label: 'Emoji', status: '1 つの 🎉 に見えても、モデルには 4 つのバイトトークン！' },
+      },
+    },
+  };
+  let ui = $derived(L[i18n.locale] || L.zh);
 
   // 由顯示 token 還原 raw 字串（去掉前導 ␣ 記號）
   const rawOf = (t, ty) => (t.startsWith('␣') ? ' ' + t.slice(1) : t);
@@ -77,7 +140,8 @@
   let presetKey = $state(PRESETS[0].key);
   let text = $state(PRESETS[0].text);
   let toks = $state(buildFromPreset(PRESETS[0]));
-  let statusMsg = $state(PRESETS[0].status);
+  let editStatus = $state(null);   // 自訂輸入時的訊息；null＝顯示目前 preset 的說明
+  let statusMsg = $derived(editStatus ?? (ui.presets[presetKey]?.status ?? ''));
   let showIds = $state(false);
   let hoverTok = $state(null);
   let playNonce = $state(0);
@@ -130,7 +194,7 @@
   function play() { hoverTok = null; playNonce++; } // 每次重掃都清掉殘留高亮
   function selectPreset(p) {
     clearTimeout(editTimer); // 取消進行中的 debounce 編輯，避免它稍後覆蓋剛選的 preset
-    presetKey = p.key; text = p.text; toks = buildFromPreset(p); statusMsg = p.status; play();
+    editStatus = null; presetKey = p.key; text = p.text; toks = buildFromPreset(p); play();
   }
   function onEdit(e) {
     const el = e.currentTarget;
@@ -141,7 +205,7 @@
       // 截斷時直接同步 DOM（相等字串賦值不會觸發更新，故手動寫回）
       if (trimmed) { v = cp(v).slice(0, 60).join(''); el.value = v; }
       presetKey = ''; text = v; toks = tokenize(v);
-      statusMsg = trimmed ? '文字太長，已截斷到 60 字元。' : '即時切分中（示意用假分詞器，實際切法依模型而異）。';
+      editStatus = trimmed ? ui.trunc : ui.live;
       play();
     }, 250);
   }
@@ -160,21 +224,18 @@
 </script>
 
 <div class="panel">
-  <div class="panel-h"><h3>互動：看一句話如何被切成 token</h3><span class="eyebrow">★ Interactive</span></div>
-  <p class="lede">
-    模型讀文字時，不是一個字母一個字母看，而是先把文字切成一塊塊 <b>token</b>。
-    常見的詞是一個 token；罕見的長字會被拆成幾個<b>子詞（Subword）</b>。切換範例，或自己改寫文字試試。
-  </p>
+  <div class="panel-h"><h3>{ui.h3}</h3><span class="eyebrow">★ Interactive</span></div>
+  <p class="lede">{@html ui.lede}</p>
 
   <div class="pills">
     {#each PRESETS as p}
-      <button class="pl" class:on={presetKey === p.key} onclick={() => selectPreset(p)}>{p.label}</button>
+      <button class="pl" class:on={presetKey === p.key} onclick={() => selectPreset(p)}>{ui.presets[p.key].label}</button>
     {/each}
   </div>
 
   <div class="demo-stage light">
     <!-- 原始文字（字元，可與晶片雙向高亮）-->
-    <div class="mono cap">原始文字 RAW TEXT</div>
+    <div class="mono cap">{ui.rawCap}</div>
     <div class="raw">
       {#each chars as c, ci}
         <span class="ch" class:hi={hiChars.has(ci)}
@@ -187,7 +248,7 @@
     <div class="track"><div class="blade" style="left:{scan * 100}%"></div></div>
 
     <!-- token 晶片 -->
-    <div class="mono cap">模型讀到的 TOKENS</div>
+    <div class="mono cap">{ui.tokCap}</div>
     <div class="chips">
       {#each groups as gr}
         <span class="grp" class:ring={gr.multi} class:byte={gr.ty === 'byte'}>
@@ -201,45 +262,43 @@
               </span>
             {/if}
           {/each}
-          {#if gr.multi && revealed[gr.ids[0]]}<span class="glabel">＝1 {gr.ty === 'byte' ? '字元' : '個詞'}</span>{/if}
+          {#if gr.multi && revealed[gr.ids[0]]}<span class="glabel">{gr.ty === 'byte' ? ui.glabelChar : ui.glabelWord}</span>{/if}
         </span>
       {/each}
     </div>
 
     <!-- 讀數：CHARS → TOKENS 壓縮 -->
     <div class="meter">
-      <div class="big"><span class="k">字元 CHARS</span><span class="v muted">{charsShown}</span></div>
+      <div class="big"><span class="k">{ui.chars}</span><span class="v muted">{charsShown}</span></div>
       <div class="arrow">→</div>
       <div class="big"><span class="k">TOKENS</span><span class="v amber">{revealedCount}</span></div>
       <div class="bar"><div class="fill" style="width:{compress}%"></div></div>
     </div>
     <div class="mono breakdown">
-      完整詞 {breakdown.word} · 子詞 {breakdown.subword} · 位元組 {breakdown.byte} · 符號 {breakdown.symbol}　|　每 token 平均 {avg} 字元
+      {ui.bd.replace('{w}', breakdown.word).replace('{sw}', breakdown.subword).replace('{b}', breakdown.byte).replace('{sym}', breakdown.symbol).replace('{avg}', avg)}
     </div>
 
     <!-- 圖例 -->
     <div class="legend">
-      <span><i class="d word"></i>完整詞</span>
-      <span><i class="d subword"></i>子詞 Subword</span>
-      <span><i class="d byte"></i>位元組 Byte</span>
-      <span><i class="d symbol"></i>符號</span>
+      <span><i class="d word"></i>{ui.legend[0]}</span>
+      <span><i class="d subword"></i>{ui.legend[1]}</span>
+      <span><i class="d byte"></i>{ui.legend[2]}</span>
+      <span><i class="d symbol"></i>{ui.legend[3]}</span>
     </div>
   </div>
 
   <div class="edit">
-    <span class="mono cap2">或自己輸入試試</span>
-    <input value={text} oninput={onEdit} placeholder="打點字看看怎麼被切…" />
+    <span class="mono cap2">{ui.editLabel}</span>
+    <input value={text} oninput={onEdit} placeholder={ui.placeholder} />
   </div>
 
   <div class="btn-row">
-    <button class="btn primary" onclick={play}>✂ 重新切分</button>
-    <label class="toggle"><input type="checkbox" bind:checked={showIds} /> 顯示 token ID</label>
+    <button class="btn primary" onclick={play}>{ui.recut}</button>
+    <label class="toggle"><input type="checkbox" bind:checked={showIds} /> {ui.showId}</label>
   </div>
 
   <p class="status">{statusMsg}</p>
-  <p class="hint">
-    這就是 <b>Tokenizer 分詞器</b>：它決定模型眼中「一句話有多長」。同樣的意思，用英文、中文還是程式碼寫，token 數可能天差地遠——這也是為什麼有些寫法「比較貴」。（註：本示範用手寫規則的假分詞器，真實模型的切法會略有不同。）
-  </p>
+  <p class="hint">{@html ui.hint}</p>
 </div>
 
 <style>

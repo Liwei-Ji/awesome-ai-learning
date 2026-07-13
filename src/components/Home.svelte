@@ -2,8 +2,10 @@
   /* 首頁／課程地圖：入口 + 學習路徑總覽（也是目錄）。
      Hero + CTA（開始學習）+ 七大階段，每章可點擊直達。亮色編輯風。 */
   import { CH } from '../data/chapters.js';
+  import { chOf } from '../data/localize.js';
   import { ROOT, BRANCHES, FLOW, SUB, PREREQ } from '../data/graph.js';
   import { go } from '../stores/state.svelte.js';
+  import { t } from '../stores/i18n.svelte.js';
   import { fly } from 'svelte/transition';
   import { dur, D, ease } from '../lib/motion.js';
 
@@ -59,13 +61,10 @@
 <main class="stage">
   <div class="home">
     <header class="hero" in:fly={{ y: 12, duration: dur(D.base), easing: ease }}>
-      <h1>從零開始，建立扎實的 AI 基礎</h1>
-      <p class="lede">
-        我們把複雜的概念拆成一個個容易理解的知識點，不用死背名詞，也不用面對一整面公式。
-        每一章都搭配<b>互動 Demo</b>，讓你邊操作、邊理解，從「AI 是什麼」一路學到能<b>自己組裝 AI 方案</b>。
-      </p>
+      <h1>{t('home.title')}</h1>
+      <p class="lede">{@html t('home.lede')}</p>
       <div class="cta">
-        <button class="btn primary lg" onclick={() => go(0)}>開始學習 →</button>
+        <button class="btn primary lg" onclick={() => go(0)}>{t('home.start')}</button>
       </div>
     </header>
 
@@ -75,14 +74,14 @@
         onclick={() => go(id)}
         onmouseenter={() => (hovered = id)} onmouseleave={() => (hovered = null)}
         onfocus={() => (hovered = id)} onblur={() => (hovered = null)}>
-        <span class="nn mono">{String(id).padStart(2, '0')}</span><span class="nt">{CH[id].t}</span>
+        <span class="nn mono">{String(id).padStart(2, '0')}</span><span class="nt">{chOf(id).t}</span>
         {#if SUB[CH[id].slug]}<span class="subs">{#each SUB[CH[id].slug] as s}<span class="subtag">{s}</span>{/each}</span>{/if}
       </button>
     {/snippet}
 
     <section class="archmap">
       <div class="amh">
-        <span class="eyebrow">AI 知識地圖</span>
+        <span class="eyebrow">{t('home.mapTitle')}</span>
       </div>
 
       <div class="tree" bind:this={treeEl}>
@@ -98,7 +97,7 @@
         <div class="branches">
           {#each BRANCHES as b}
             <div class="cat">
-              <div class="cathead">{b.t}</div>
+              <div class="cathead">{t('group.' + b.key)}</div>
               <div class="items">
                 {#each b.ids as id}{@render nodeBtn(id)}{/each}
               </div>
@@ -108,7 +107,7 @@
 
         {#each FLOW as f}
           <div class="cat wide">
-            <div class="cathead">{f.t}</div>
+            <div class="cathead">{t('group.' + f.key)}</div>
             <div class="items row">
               {#each f.ids as id}{@render nodeBtn(id)}{/each}
             </div>

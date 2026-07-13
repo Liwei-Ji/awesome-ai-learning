@@ -4,6 +4,7 @@
      但成本/執行門檻也跟著漲——從手機可跑到只能塞進資料中心。
      深色舞台、確定性、離線。 */
   import { clamp } from '../lib/helpers.js';
+  import { i18n } from '../stores/i18n.svelte.js';
 
   const COLS = 28, ROWS = 12, N = COLS * ROWS;
   const FW = 560, FH = 232, mX = 20, mY = 16;
@@ -27,18 +28,68 @@
     if (p >= 1e6) return (p / 1e6).toFixed(0) + 'M';
     return Math.round(p) + '';
   }
-  function tier(p) {
-    if (p < 3e9) return { icon: '📱', env: '手機也能跑', note: '即時、便宜、可離線（裝置端）' };
-    if (p < 2e10) return { icon: '💻', env: '筆電 / 單張顯卡', note: '開源模型，個人可自架' };
-    if (p < 2e11) return { icon: '🖥️', env: '多張顯卡（雲端）', note: '能力強，需要不少算力' };
-    return { icon: '🏢', env: '資料中心', note: '最聰明，但也最貴、最慢' };
+  const TIER_ICON = ['📱', '💻', '🖥️', '🏢'];
+  function tierIdx(p) {
+    if (p < 3e9) return 0;
+    if (p < 2e10) return 1;
+    if (p < 2e11) return 2;
+    return 3;
   }
-  let tr = $derived(tier(params));
+  let trIdx = $derived(tierIdx(params));
 
-  const PRESETS = [
-    { label: '手機小模型', p: 1e9 }, { label: '開源中模型', p: 8e9 },
-    { label: '大模型', p: 7e10 }, { label: '前沿超大', p: 5e11 },
-  ];
+  const PRESET_P = [1e9, 8e9, 7e10, 5e11];
+
+  const L = {
+    zh: {
+      h3: '互動：模型越大，到底差在哪？',
+      lede: '模型的「大小」＝它有多少<b>參數（權重）</b>。拖動看看：參數越多，能力越強，\n    但<b>成本與門檻也一起漲</b>——從手機跑得動，到只能塞進整座資料中心。',
+      fieldCap: '參數場 · 每個亮點代表一批參數（權重）',
+      unit: '參數',
+      capK: '能力 Capability', costK: '運算成本', speedK: '推論速度',
+      costLv: ['低', '中', '高', '極高'], speedLv: ['快', '中', '慢'],
+      envK: '跑得動它的地方',
+      tierEnv: ['手機也能跑', '筆電 / 單張顯卡', '多張顯卡（雲端）', '資料中心'],
+      tierNote: ['即時、便宜、可離線（裝置端）', '開源模型，個人可自架', '能力強，需要不少算力', '最聰明，但也最貴、最慢'],
+      curveK: 'Scaling Law · 能力 vs 參數量（對數）',
+      curveSmall: '小', curveBig: '超大',
+      ctlLab: '模型大小（參數量）',
+      presets: ['手機小模型', '開源中模型', '大模型', '前沿超大'],
+      hint: '這就是 <b>Scaling Law（縮放定律）</b>：參數每放大 10 倍，能力就穩定往上一階——所以大家一直把模型堆大。\n    但代價是<b>算力、成本、延遲同步暴增</b>，大到某個程度就只有資料中心養得起。所以「更大」不總是「更划算」，要看你的任務需不需要。',
+    },
+    en: {
+      h3: 'Interactive: what actually changes as a model gets bigger?',
+      lede: 'A model’s “size” = how many <b>parameters (weights)</b> it has. Drag to see: more parameters means more capability,\n    but <b>cost and requirements climb too</b>—from running on a phone to barely fitting inside a whole data center.',
+      fieldCap: 'Parameter field · each glowing dot is a batch of parameters (weights)',
+      unit: 'parameters',
+      capK: 'Capability', costK: 'Compute cost', speedK: 'Inference speed',
+      costLv: ['Low', 'Medium', 'High', 'Very high'], speedLv: ['Fast', 'Medium', 'Slow'],
+      envK: 'Where it can run',
+      tierEnv: ['Runs on a phone', 'Laptop / single GPU', 'Multiple GPUs (cloud)', 'Data center'],
+      tierNote: ['Instant, cheap, works offline (on-device)', 'Open-source models you can self-host', 'Strong, but needs serious compute', 'Smartest, but also priciest and slowest'],
+      curveK: 'Scaling Law · capability vs. parameter count (log)',
+      curveSmall: 'Small', curveBig: 'Huge',
+      ctlLab: 'Model size (parameter count)',
+      presets: ['Phone-sized', 'Open mid-size', 'Large model', 'Frontier giant'],
+      hint: 'This is the <b>Scaling Law</b>: every 10× jump in parameters reliably lifts capability another notch—which is why everyone keeps scaling models up.\n    But the price is <b>compute, cost, and latency all spiking together</b>, and past a certain point only a data center can afford to run it. So “bigger” isn’t always “better value”—it depends on whether your task actually needs it.',
+    },
+    ja: {
+      h3: 'インタラクティブ：モデルが大きくなると、結局何が変わる？',
+      lede: 'モデルの「大きさ」＝<b>パラメータ（重み）</b>がいくつあるか。ドラッグしてみよう：パラメータが多いほど能力は上がるが、\n    <b>コストとハードルも一緒に上がる</b>——スマホで動くものから、まるごとデータセンターにやっと収まるものまで。',
+      fieldCap: 'パラメータ場 · 光る点ひとつがパラメータ（重み）のかたまり',
+      unit: 'パラメータ',
+      capK: '能力 Capability', costK: '計算コスト', speedK: '推論速度',
+      costLv: ['低', '中', '高', '非常に高い'], speedLv: ['速い', '普通', '遅い'],
+      envK: '動かせる場所',
+      tierEnv: ['スマホでも動く', 'ノート PC / GPU 1 枚', 'GPU 複数枚（クラウド）', 'データセンター'],
+      tierNote: ['即時・安価・オフラインで動く（端末側）', '自分でホストできるオープンソースモデル', '高性能だがそれなりの計算力が要る', '最も賢いが、最も高価で最も遅い'],
+      curveK: 'スケーリング則 · 能力 vs パラメータ数（対数）',
+      curveSmall: '小', curveBig: '超大',
+      ctlLab: 'モデルの大きさ（パラメータ数）',
+      presets: ['スマホ級', 'オープン中型', '大型モデル', 'フロンティア超大型'],
+      hint: 'これが <b>スケーリング則（Scaling Law）</b>：パラメータを 10 倍にするたびに、能力が一段ずつ確実に上がる——だからみんなモデルを大きくし続ける。\n    ただし代償は<b>計算力・コスト・レイテンシがそろって跳ね上がること</b>で、ある規模を超えると動かせるのはデータセンターだけ。だから「大きい」＝「お得」とは限らない——自分のタスクに本当に必要かどうか次第だ。',
+    },
+  };
+  let ui = $derived(L[i18n.locale] || L.zh);
 
   // scaling 曲線
   const CX = (l) => 30 + ((l - 7) / 5) * 500;
@@ -48,17 +99,14 @@
 </script>
 
 <div class="panel">
-  <div class="panel-h"><h3>互動：模型越大，到底差在哪？</h3><span class="eyebrow">★ Interactive</span></div>
-  <p class="lede">
-    模型的「大小」＝它有多少<b>參數（權重）</b>。拖動看看：參數越多，能力越強，
-    但<b>成本與門檻也一起漲</b>——從手機跑得動，到只能塞進整座資料中心。
-  </p>
+  <div class="panel-h"><h3>{ui.h3}</h3><span class="eyebrow">★ Interactive</span></div>
+  <p class="lede">{@html ui.lede}</p>
 
   <div class="demo-stage light">
     <div class="fieldwrap">
       <div class="row1">
-        <span class="mono cap">參數場 · 每個亮點代表一批參數（權重）</span>
-        <span class="pcount">{fmt(params)} <span class="u">參數</span></span>
+        <span class="mono cap">{ui.fieldCap}</span>
+        <span class="pcount">{fmt(params)} <span class="u">{ui.unit}</span></span>
       </div>
       <svg class="field" viewBox="0 0 {FW} {FH}">
         <defs>
@@ -76,51 +124,48 @@
 
     <div class="stats">
       <div class="stat">
-        <span class="k">能力 Capability</span>
+        <span class="k">{ui.capK}</span>
         <div class="barwrap"><div class="bar cap-b" style="width:{cap}%"></div></div>
         <span class="v amber">{cap}%</span>
       </div>
       <div class="stat">
-        <span class="k">運算成本</span>
+        <span class="k">{ui.costK}</span>
         <div class="barwrap"><div class="bar cost-b" style="width:{costW}%"></div></div>
-        <span class="v cost">{costW < 25 ? '低' : costW < 55 ? '中' : costW < 80 ? '高' : '極高'}</span>
+        <span class="v cost">{ui.costLv[costW < 25 ? 0 : costW < 55 ? 1 : costW < 80 ? 2 : 3]}</span>
       </div>
       <div class="stat">
-        <span class="k">推論速度</span>
+        <span class="k">{ui.speedK}</span>
         <div class="barwrap"><div class="bar speed-b" style="width:{speedW}%"></div></div>
-        <span class="v teal">{speedW > 70 ? '快' : speedW > 40 ? '中' : '慢'}</span>
+        <span class="v teal">{ui.speedLv[speedW > 70 ? 0 : speedW > 40 ? 1 : 2]}</span>
       </div>
     </div>
 
     <div class="grid2">
       <div class="envbox">
-        <div class="mono k">跑得動它的地方</div>
-        <div class="env"><span class="ico">{tr.icon}</span><div><b>{tr.env}</b><span class="enote">{tr.note}</span></div></div>
+        <div class="mono k">{ui.envK}</div>
+        <div class="env"><span class="ico">{TIER_ICON[trIdx]}</span><div><b>{ui.tierEnv[trIdx]}</b><span class="enote">{ui.tierNote[trIdx]}</span></div></div>
       </div>
       <div class="curvebox">
-        <span class="mono k">Scaling Law · 能力 vs 參數量（對數）</span>
+        <span class="mono k">{ui.curveK}</span>
         <svg class="curve" viewBox="0 0 560 140">
           <line x1="30" y1="128" x2="530" y2="128" stroke="#d8dfea" />
           <polyline points={curve} fill="none" stroke="#0f8a80" stroke-width="2.4" stroke-linecap="round" filter="url(#ms-glow)" opacity="0.9" />
           <circle cx={CX(log10p)} cy={CY(cap)} r="6" fill="url(#ms-dot)" filter="url(#ms-glow)" />
-          <text class="ct" x="30" y="139">小</text><text class="ct" x="530" y="139" text-anchor="end">超大</text>
+          <text class="ct" x="30" y="139">{ui.curveSmall}</text><text class="ct" x="530" y="139" text-anchor="end">{ui.curveBig}</text>
         </svg>
       </div>
     </div>
   </div>
 
   <div class="ctl">
-    <div class="lab"><span>模型大小（參數量）</span><b>{fmt(params)}</b></div>
+    <div class="lab"><span>{ui.ctlLab}</span><b>{fmt(params)}</b></div>
     <input type="range" min="0" max="100" step="1" bind:value={t} />
   </div>
   <div class="btn-row">
-    {#each PRESETS as p}<button class="pl" class:on={Math.abs(t - tOf(p.p)) < 3} onclick={() => (t = tOf(p.p))}>{p.label}</button>{/each}
+    {#each PRESET_P as p, i}<button class="pl" class:on={Math.abs(t - tOf(p)) < 3} onclick={() => (t = tOf(p))}>{ui.presets[i]}</button>{/each}
   </div>
 
-  <p class="hint">
-    這就是 <b>Scaling Law（縮放定律）</b>：參數每放大 10 倍，能力就穩定往上一階——所以大家一直把模型堆大。
-    但代價是<b>算力、成本、延遲同步暴增</b>，大到某個程度就只有資料中心養得起。所以「更大」不總是「更划算」，要看你的任務需不需要。
-  </p>
+  <p class="hint">{@html ui.hint}</p>
 </div>
 
 <style>

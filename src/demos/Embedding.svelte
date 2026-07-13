@@ -11,6 +11,7 @@
   import { fly } from 'svelte/transition';
   import { dur, D, reduceMotion } from '../lib/motion.js';
   import { clamp } from '../lib/helpers.js';
+  import { i18n } from '../stores/i18n.svelte.js';
 
   const W0 = [
     ['貓',20,20,'動物'],['狗',26,24,'動物'],['老虎',16,28,'動物'],['兔子',24,16,'動物'],['大象',12,22,'動物'],['馬',29,30,'動物'],
@@ -38,6 +39,82 @@
   const sim = (a, b) => Math.exp(-(dist(a, b) ** 2) / (SIGMA * SIGMA));
   const vec = (w) => [((w.x - 50) / 10).toFixed(1), ((50 - w.y) / 10).toFixed(1)];
   const byName = (n) => words.findIndex((w) => w.w === n);
+
+  const L = {
+    zh: {
+      h3: '互動：詞語的「語意星圖」',
+      lede: '電腦不懂字，只懂<b>數字向量</b>。把每個詞的向量畫成一個點，意義相近的詞位置就會靠在一起—— 自然分成動物、食物、情緒、科技、皇室五團。滑過任一個詞，看它<b>最像的鄰居</b>。',
+      mExplore: '探索', mDrag: '拖曳改變意義', mArith: '向量運算',
+      mapCap: '語意地圖 · 2D 示意投影', mapCapDrag: '（可拖曳詞點）',
+      rtArith: '向量運算', runBtn: '▶ 開始運算',
+      rnoteArith: '把「性別方向」平移到「{a}」頭上，落點精確命中「{ans}」。這就是詞向量能做<b>語意加減法</b>的原因。',
+      rtEmbed: 'Embedding 詞嵌入', vlab: '電腦眼中 Vector = [{x}, {y}]',
+      distLabel: '距離', simLabel: '相似度', nbcap: '最近的鄰居 TOP 5',
+      rtMap: '語意星圖',
+      rnoteMap: '滑過任一個詞，看它最像的鄰居；<b>點一下</b>可鎖定，再滑到別的詞比較相似度。',
+      disc: '2D 示意投影：真實 embedding 有數百維，此處壓成 2D 方便觀察。',
+      resetBtn: '重設位置', clearBtn: '清除鎖定',
+      hint: '這就是 <b>Embedding 詞嵌入</b>：把詞變成向量後，「意義相近」變成「位置相近」，相似度就能<b>用數學算出來</b>。 （本示範用距離；真實模型多用<b>餘弦相似度 cosine</b>，精神相同——都是量兩個向量有多接近。座標為 2D 示意。）',
+      eqLabels: ['國王 − 男人 + 女人 = ？', '皇后 − 女人 + 男人 = ？'],
+      cluster: { '動物': '動物', '食物': '食物', '情緒': '情緒', '科技': '科技', '皇室': '皇室' },
+      word: {
+        '貓': '貓', '狗': '狗', '老虎': '老虎', '兔子': '兔子', '大象': '大象', '馬': '馬',
+        '蘋果': '蘋果', '香蕉': '香蕉', '麵包': '麵包', '米飯': '米飯', '披薩': '披薩', '咖啡': '咖啡',
+        '快樂': '快樂', '悲傷': '悲傷', '生氣': '生氣', '害怕': '害怕', '驚訝': '驚訝', '愛': '愛',
+        '電腦': '電腦', '手機': '手機', '網路': '網路', '程式': '程式', '機器人': '機器人', '人工智慧': '人工智慧',
+        '男人': '男人', '女人': '女人', '國王': '國王', '皇后': '皇后', '王子': '王子', '公主': '公主',
+      },
+    },
+    en: {
+      h3: 'Interactive: a semantic star map of words',
+      lede: 'Computers don’t understand words, only <b>number vectors</b>. Draw each word’s vector as a dot, and words with similar meanings end up close together—naturally splitting into five groups: animals, food, emotions, tech, and royalty. Hover over any word to see its <b>most similar neighbors</b>.',
+      mExplore: 'Explore', mDrag: 'Drag to change meaning', mArith: 'Vector arithmetic',
+      mapCap: 'Semantic map · 2D schematic projection', mapCapDrag: ' (drag the word dots)',
+      rtArith: 'Vector arithmetic', runBtn: '▶ Run',
+      rnoteArith: 'Slide the “gender direction” onto “{a},” and it lands right on “{ans}.” That’s why word vectors can do <b>semantic addition and subtraction</b>.',
+      rtEmbed: 'Embedding', vlab: 'To the computer, Vector = [{x}, {y}]',
+      distLabel: 'distance', simLabel: 'Similarity', nbcap: 'Nearest neighbors · Top 5',
+      rtMap: 'Semantic star map',
+      rnoteMap: 'Hover over any word to see its most similar neighbors; <b>click</b> to lock it, then hover another word to compare similarity.',
+      disc: '2D schematic projection: real embeddings have hundreds of dimensions; here they’re squashed to 2D so you can see them.',
+      resetBtn: 'Reset positions', clearBtn: 'Clear lock',
+      hint: 'This is <b>Embedding</b>: once words become vectors, “similar meaning” turns into “nearby position,” and similarity can be <b>computed with math</b>. (This demo uses distance; real models usually use <b>cosine similarity</b>—same spirit, both measure how close two vectors are. Coordinates are 2D for illustration.)',
+      eqLabels: ['King − Man + Woman = ?', 'Queen − Woman + Man = ?'],
+      cluster: { '動物': 'Animals', '食物': 'Food', '情緒': 'Emotions', '科技': 'Tech', '皇室': 'Royalty' },
+      word: {
+        '貓': 'Cat', '狗': 'Dog', '老虎': 'Tiger', '兔子': 'Rabbit', '大象': 'Elephant', '馬': 'Horse',
+        '蘋果': 'Apple', '香蕉': 'Banana', '麵包': 'Bread', '米飯': 'Rice', '披薩': 'Pizza', '咖啡': 'Coffee',
+        '快樂': 'Happy', '悲傷': 'Sad', '生氣': 'Angry', '害怕': 'Afraid', '驚訝': 'Surprised', '愛': 'Love',
+        '電腦': 'Computer', '手機': 'Phone', '網路': 'Internet', '程式': 'Code', '機器人': 'Robot', '人工智慧': 'AI',
+        '男人': 'Man', '女人': 'Woman', '國王': 'King', '皇后': 'Queen', '王子': 'Prince', '公主': 'Princess',
+      },
+    },
+    ja: {
+      h3: 'インタラクティブ：語の「意味の星図」',
+      lede: 'コンピュータは文字が分からず、<b>数字のベクトル</b>しか分かりません。語ごとのベクトルを点として描くと、意味が近い語は自然と近くに集まり——動物・食べ物・感情・テクノロジー・王室の 5 つのグループに分かれます。どれかの語にカーソルを合わせて、その<b>最も似た隣人</b>を見てみましょう。',
+      mExplore: '探索', mDrag: 'ドラッグで意味を変える', mArith: 'ベクトル演算',
+      mapCap: '意味マップ · 2D の概念的な投影', mapCapDrag: '（語の点をドラッグ）',
+      rtArith: 'ベクトル演算', runBtn: '▶ 実行',
+      rnoteArith: '「性別の方向」を「{a}」の上へ平行移動させると、ちょうど「{ans}」に着地します。これが、語ベクトルで<b>意味の足し算・引き算</b>ができる理由です。',
+      rtEmbed: 'Embedding 埋め込み', vlab: 'コンピュータから見た Vector = [{x}, {y}]',
+      distLabel: '距離', simLabel: '類似度', nbcap: '最も近い隣人 TOP 5',
+      rtMap: '意味の星図',
+      rnoteMap: 'どれかの語にカーソルを合わせると、最も似た隣人が見えます。<b>クリック</b>で固定し、別の語に合わせると類似度を比較できます。',
+      disc: '2D の概念的な投影：実際の embedding は数百の次元を持ちますが、ここでは見やすいように 2D に圧縮しています。',
+      resetBtn: '位置をリセット', clearBtn: '固定を解除',
+      hint: 'これが <b>Embedding 埋め込み</b>です：語をベクトルに変えると、「意味が近い」が「位置が近い」になり、類似度を<b>数学で計算</b>できます。（このデモでは距離を使いますが、実際のモデルは<b>コサイン類似度</b>を使うことが多いです——精神は同じで、どちらも 2 つのベクトルがどれだけ近いかを測ります。座標は説明用の 2D です。）',
+      eqLabels: ['王 − 男 + 女 = ？', '女王 − 女 + 男 = ？'],
+      cluster: { '動物': '動物', '食物': '食べ物', '情緒': '感情', '科技': 'テクノロジー', '皇室': '王室' },
+      word: {
+        '貓': '猫', '狗': '犬', '老虎': 'トラ', '兔子': 'ウサギ', '大象': 'ゾウ', '馬': 'ウマ',
+        '蘋果': 'リンゴ', '香蕉': 'バナナ', '麵包': 'パン', '米飯': 'ごはん', '披薩': 'ピザ', '咖啡': 'コーヒー',
+        '快樂': '喜び', '悲傷': '悲しみ', '生氣': '怒り', '害怕': '恐れ', '驚訝': '驚き', '愛': '愛',
+        '電腦': 'コンピュータ', '手機': 'スマホ', '網路': 'インターネット', '程式': 'プログラム', '機器人': 'ロボット', '人工智慧': 'AI',
+        '男人': '男', '女人': '女', '國王': '王', '皇后': '女王', '王子': '王子', '公主': '王女',
+      },
+    },
+  };
+  let ui = $derived(L[i18n.locale] || L.zh);
 
   let words = $state(W0.map(([w, x, y, cl]) => ({ w, x, y, cl })));
   let mode = $state('explore');   // explore | drag | arith
@@ -137,22 +214,19 @@
 </script>
 
 <div class="panel">
-  <div class="panel-h"><h3>互動：詞語的「語意星圖」</h3><span class="eyebrow">★ Interactive</span></div>
-  <p class="lede">
-    電腦不懂字，只懂<b>數字向量</b>。把每個詞的向量畫成一個點，意義相近的詞位置就會靠在一起——
-    自然分成動物、食物、情緒、科技、皇室五團。滑過任一個詞，看它<b>最像的鄰居</b>。
-  </p>
+  <div class="panel-h"><h3>{ui.h3}</h3><span class="eyebrow">★ Interactive</span></div>
+  <p class="lede">{@html ui.lede}</p>
 
   <div class="pills">
-    <button class="pl" class:on={mode === 'explore'} onclick={() => setMode('explore')}>探索</button>
-    <button class="pl" class:on={mode === 'drag'} onclick={() => setMode('drag')}>拖曳改變意義</button>
-    <button class="pl" class:on={mode === 'arith'} onclick={() => setMode('arith')}>向量運算</button>
+    <button class="pl" class:on={mode === 'explore'} onclick={() => setMode('explore')}>{ui.mExplore}</button>
+    <button class="pl" class:on={mode === 'drag'} onclick={() => setMode('drag')}>{ui.mDrag}</button>
+    <button class="pl" class:on={mode === 'arith'} onclick={() => setMode('arith')}>{ui.mArith}</button>
   </div>
 
   <div class="demo-stage light">
     <div class="grid">
       <div class="mapwrap">
-        <span class="mono cap">語意地圖 · 2D 示意投影{mode === 'drag' ? '（可拖曳詞點）' : ''}</span>
+        <span class="mono cap">{ui.mapCap}{mode === 'drag' ? ui.mapCapDrag : ''}</span>
         <svg class="map" viewBox="0 0 600 440" bind:this={svgEl}
           class:dragging={dragId != null}
           onpointermove={dragMove} onpointerup={dragEnd} onpointerleave={dragEnd} role="presentation">
@@ -169,7 +243,7 @@
           {/each}
           {#each CENTROIDS as c}
             <text class="cname" x={SX(c.x)} y={SY(c.y)} text-anchor="middle" fill={c.color}
-              opacity={mode === 'explore' && focusId != null && words[focusId].cl !== c.name ? 0.22 : 0.5}>{c.name}</text>
+              opacity={mode === 'explore' && focusId != null && words[focusId].cl !== c.name ? 0.22 : 0.5}>{ui.cluster[c.name]}</text>
           {/each}
 
           <!-- 探索：最近鄰連線 -->
@@ -210,7 +284,7 @@
                 fill={st === 'lock' || st === 'focus' || st === 'near' ? 'url(#emb-teal)' : 'url(#emb-dot)'}
                 filter="url(#emb-glow)"
                 onpointerdown={(e) => dotDown(i, e)} onmouseenter={() => dotEnter(i)} onmouseleave={dotLeave} onclick={() => dotClick(i)} role="presentation" />
-              <text class="wlabel dot-c" x={SX(w.x) + 10} y={SY(w.y) + 4}>{w.w}</text>
+              <text class="wlabel dot-c" x={SX(w.x) + 10} y={SY(w.y) + 4}>{ui.word[w.w]}</text>
               {#if mode !== 'arith' && neighborIds.has(i)}
                 <text class="pct" x={SX(w.x) + 10} y={SY(w.y) + 16}>{Math.round(sim(words[focusId], w) * 100)}%</text>
               {/if}
@@ -222,60 +296,57 @@
       <!-- 讀數面板 -->
       <div class="panelR">
         {#if mode === 'arith'}
-          <div class="rt">向量運算</div>
-          <p class="eqline">{eq.label}</p>
+          <div class="rt">{ui.rtArith}</div>
+          <p class="eqline">{ui.eqLabels[eqIdx]}</p>
           <div class="btn-row">
-            {#each EQS as e, i}<button class="pl sm" class:on={i === eqIdx} onclick={() => { eqIdx = i; }}>{e.label.split(' = ')[0]}</button>{/each}
+            {#each EQS as e, i}<button class="pl sm" class:on={i === eqIdx} onclick={() => { eqIdx = i; }}>{ui.eqLabels[i].split(' = ')[0]}</button>{/each}
           </div>
-          <button class="btn primary rerun" onclick={runArith}>▶ 開始運算</button>
+          <button class="btn primary rerun" onclick={runArith}>{ui.runBtn}</button>
           {#if arith.reveal}
-            <p class="answer" in:fly={{ y: 8, duration: dur(D.base) }}>= <b>{eq.answer}</b> 🎯</p>
-            <p class="rnote">把「性別方向」平移到「{eq.a}」頭上，落點精確命中「{eq.answer}」。這就是詞向量能做<b>語意加減法</b>的原因。</p>
+            <p class="answer" in:fly={{ y: 8, duration: dur(D.base) }}>= <b>{ui.word[eq.answer]}</b> 🎯</p>
+            <p class="rnote">{@html ui.rnoteArith.replace('{a}', ui.word[eq.a]).replace('{ans}', ui.word[eq.answer])}</p>
           {/if}
         {:else if focusId != null}
-          <div class="rt">Embedding 詞嵌入</div>
+          <div class="rt">{ui.rtEmbed}</div>
           <div class="fcard">
-            <div class="fw">{words[focusId].w}</div>
-            <div class="mono vlab">電腦眼中 Vector = [{vec(words[focusId])[0]}, {vec(words[focusId])[1]}]</div>
+            <div class="fw">{ui.word[words[focusId].w]}</div>
+            <div class="mono vlab">{ui.vlab.replace('{x}', vec(words[focusId])[0]).replace('{y}', vec(words[focusId])[1])}</div>
           </div>
           {#if compareId != null}
             <div class="cmp">
-              <div class="mono crow"><b style="color:var(--accent)">{words[focusId].w}</b> vs <b style="color:var(--teal)">{words[compareId].w}</b> · 距離 {pairDist}</div>
+              <div class="mono crow"><b style="color:var(--accent)">{ui.word[words[focusId].w]}</b> vs <b style="color:var(--teal)">{ui.word[words[compareId].w]}</b> · {ui.distLabel} {pairDist}</div>
               <div class="gauge"><div class="gfill" style="width:{pairSim}%"></div></div>
-              <div class="gnum">相似度 <b>{pairSim}%</b></div>
+              <div class="gnum">{ui.simLabel} <b>{pairSim}%</b></div>
             </div>
           {:else}
-            <div class="mono nbcap">最近的鄰居 TOP 5</div>
+            <div class="mono nbcap">{ui.nbcap}</div>
             {#each neighbors as nb}
               <div class="nb">
-                <span class="nw">{words[nb.i].w}</span>
+                <span class="nw">{ui.word[words[nb.i].w]}</span>
                 <div class="nbar"><div class="nfill" style="width:{Math.round(nb.s * 100)}%"></div></div>
                 <span class="np">{Math.round(nb.s * 100)}%</span>
               </div>
             {/each}
           {/if}
         {:else}
-          <div class="rt">語意星圖</div>
-          <p class="rnote">滑過任一個詞，看它最像的鄰居；<b>點一下</b>可鎖定，再滑到別的詞比較相似度。</p>
+          <div class="rt">{ui.rtMap}</div>
+          <p class="rnote">{@html ui.rnoteMap}</p>
         {/if}
 
         <div class="legend">
-          {#each CLUSTERS as c}<span><i class="d" style="background:{c.color}"></i>{c.name}</span>{/each}
+          {#each CLUSTERS as c}<span><i class="d" style="background:{c.color}"></i>{ui.cluster[c.name]}</span>{/each}
         </div>
-        <p class="disc mono">2D 示意投影：真實 embedding 有數百維，此處壓成 2D 方便觀察。</p>
+        <p class="disc mono">{ui.disc}</p>
       </div>
     </div>
   </div>
 
   <div class="btn-row">
-    {#if mode === 'drag'}<button class="btn ghost" onclick={resetPositions}>重設位置</button>{/if}
-    {#if mode === 'explore'}<button class="btn ghost" onclick={() => { lockId = null; hoverId = null; }}>清除鎖定</button>{/if}
+    {#if mode === 'drag'}<button class="btn ghost" onclick={resetPositions}>{ui.resetBtn}</button>{/if}
+    {#if mode === 'explore'}<button class="btn ghost" onclick={() => { lockId = null; hoverId = null; }}>{ui.clearBtn}</button>{/if}
   </div>
 
-  <p class="hint">
-    這就是 <b>Embedding 詞嵌入</b>：把詞變成向量後，「意義相近」變成「位置相近」，相似度就能<b>用數學算出來</b>。
-    （本示範用距離；真實模型多用<b>餘弦相似度 cosine</b>，精神相同——都是量兩個向量有多接近。座標為 2D 示意。）
-  </p>
+  <p class="hint">{@html ui.hint}</p>
 </div>
 
 <style>

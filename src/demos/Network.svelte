@@ -5,6 +5,7 @@
   import Bars from '../components/Bars.svelte';
   import { clamp, sig } from '../lib/helpers.js';
   import { reduceMotion } from '../lib/motion.js';
+  import { i18n } from '../stores/i18n.svelte.js';
 
   let { variant = 'light' } = $props();
 
@@ -16,10 +17,44 @@
   };
   let c = $derived(T[variant]);
 
+  const L = {
+    zh: {
+      h3: '互動：調整權重，看網路改變決定',
+      lede: '三個線索餵進網路，判斷「這是貓還是狗」。<b>權重＝每條線索的重要程度</b>。試著把「會汪汪叫」的權重拉高，結論會翻盤。',
+      inputNames: ['耳朵尖', '有鬍鬚', '會汪汪叫'],
+      rowNames: ['貓 Cat', '狗 Dog'],
+      cat: '貓', dog: '狗', catOrDog: '貓 or 狗',
+      strengthLab: '{n}　線索強度', weight: '權重',
+      output: '目前輸出：<b class="mono accent">{label}（{pct}%）</b>',
+      hint2: '<b>正權重＝支持是貓，負權重＝反對</b>。「會汪汪叫」預設是負權重——越汪汪叫越像狗。把它的權重拉成正的，網路就會改口說「貓」。這就是訓練在做的事：調整每一個權重。',
+    },
+    en: {
+      h3: 'Interactive: adjust the weights and watch the network change its decision',
+      lede: 'Three clues feed into the network to judge, “is this a cat or a dog?” <b>A weight = how important each clue is</b>. Try turning up the weight on “Barks” and watch the conclusion flip.',
+      inputNames: ['Pointy ears', 'Has whiskers', 'Barks'],
+      rowNames: ['Cat', 'Dog'],
+      cat: 'Cat', dog: 'Dog', catOrDog: 'Cat or Dog',
+      strengthLab: '{n} clue strength', weight: 'Weight',
+      output: 'Current output: <b class="mono accent">{label} ({pct}%)</b>',
+      hint2: '<b>A positive weight = supports “cat,” a negative weight = argues against</b>. “Barks” starts out negative—the more it barks, the more it looks like a dog. Turn its weight positive and the network changes its answer to “cat.” This is exactly what training does: adjusting every single weight.',
+    },
+    ja: {
+      h3: 'インタラクティブ：重みを調整して、ネットワークの判断が変わる様子を見よう',
+      lede: '3 つの手がかりをネットワークに入れて、「これは猫か犬か」を判断します。<b>重み＝それぞれの手がかりの重要度</b>。「ワンと鳴く」の重みを上げると、結論がひっくり返るのを見てみましょう。',
+      inputNames: ['耳がとがっている', 'ひげがある', 'ワンと鳴く'],
+      rowNames: ['猫', '犬'],
+      cat: '猫', dog: '犬', catOrDog: '猫 or 犬',
+      strengthLab: '{n}　手がかりの強さ', weight: '重み',
+      output: '現在の出力：<b class="mono accent">{label}（{pct}%）</b>',
+      hint2: '<b>正の重み＝「猫」への賛成、負の重み＝反対</b>。「ワンと鳴く」は最初マイナスに設定されている——よく鳴くほど犬らしく見えるからです。この重みをプラスに変えると、ネットワークは答えを「猫」に変えます。これがまさに訓練のしていること：一つひとつの重みを調整するのです。',
+    },
+  };
+  let ui = $derived(L[i18n.locale] || L.zh);
+
   const IN0 = [
-    { nm: '耳朵尖', v: 0.8, w: 1.6 },
-    { nm: '有鬍鬚', v: 0.7, w: 1.2 },
-    { nm: '會汪汪叫', v: 0.6, w: -1.8 },
+    { v: 0.8, w: 1.6 },
+    { v: 0.7, w: 1.2 },
+    { v: 0.6, w: -1.8 },
   ];
   const BASE = [[1.4, -0.6, 0.3], [0.5, 1.3, -0.4], [-1.2, 0.2, 1.5]];
   const V = [1.5, 1.1, -1.6];
@@ -47,8 +82,8 @@
   const edgeOpacity = (e) => 0.22 + Math.min(0.6, Math.abs(edgeVal(e)) / 3);
 
   let rows = $derived([
-    { nm: '貓 Cat', val: Math.round(o * 100), win: o > 0.5 },
-    { nm: '狗 Dog', val: Math.round((1 - o) * 100), win: o <= 0.5 },
+    { nm: ui.rowNames[0], val: Math.round(o * 100), win: o > 0.5 },
+    { nm: ui.rowNames[1], val: Math.round((1 - o) * 100), win: o <= 0.5 },
   ]);
 
   // 訊號流動：以 rAF 時間戳驅動 phase，沿線畫出彗星（頭 + 拖尾）。
@@ -88,10 +123,8 @@
 </script>
 
 <div class="panel">
-  <div class="panel-h"><h3>互動：調整權重，看網路改變決定</h3><span class="eyebrow">★ Interactive</span></div>
-  <p class="lede">
-    三個線索餵進網路，判斷「這是貓還是狗」。<b>權重＝每條線索的重要程度</b>。試著把「會汪汪叫」的權重拉高，結論會翻盤。
-  </p>
+  <div class="panel-h"><h3>{ui.h3}</h3><span class="eyebrow">★ Interactive</span></div>
+  <p class="lede">{@html ui.lede}</p>
 
   <div class="demo-stage {variant}">
     <svg class="net" viewBox="0 0 520 260">
@@ -130,7 +163,7 @@
         <circle cx={IX} cy={iy(i)} r="22" fill={c.halo} filter="url(#glow-{variant})" opacity={0.12 + 0.6 * x[i]} />
         <circle class="node" cx={IX} cy={iy(i)} r="16" fill="url(#node-{variant})" opacity={0.4 + 0.6 * x[i]}
           stroke={c.stroke} stroke-width="1.5" />
-        <text class="lbl-s" x={IX} y={iy(i) + 34} text-anchor="middle" fill={c.tSub}>{inp.nm}</text>
+        <text class="lbl-s" x={IX} y={iy(i) + 34} text-anchor="middle" fill={c.tSub}>{ui.inputNames[i]}</text>
       {/each}
       {#each [0, 1, 2] as j}
         <circle cx={HX} cy={hy(j)} r="21" fill={c.halo} filter="url(#glow-{variant})" opacity={0.1 + 0.65 * h[j]} />
@@ -142,19 +175,19 @@
       <circle cx={OX} cy={OY} r="30" fill={c.halo} filter="url(#glow-{variant})" opacity={0.12 + 0.7 * o} />
       <circle class="node" cx={OX} cy={OY} r="22" fill="url(#node-{variant})" opacity={0.45 + 0.55 * o}
         stroke={c.stroke} stroke-width="1.5" />
-      <text class="lbl" x={OX} y={OY + 5} text-anchor="middle" fill={c.tMain}>{o > 0.5 ? '貓' : '狗'}</text>
-      <text class="lbl-s" x={OX} y={OY + 46} text-anchor="middle" fill={c.tSub}>貓 or 狗</text>
+      <text class="lbl" x={OX} y={OY + 5} text-anchor="middle" fill={c.tMain}>{o > 0.5 ? ui.cat : ui.dog}</text>
+      <text class="lbl-s" x={OX} y={OY + 46} text-anchor="middle" fill={c.tSub}>{ui.catOrDog}</text>
     </svg>
   </div>
 
   <div class="ctls">
     {#each inputs as inp, i}
       <div class="ctl">
-        <div class="lab"><span>{inp.nm}　線索強度</span><b>{inp.v.toFixed(2)}</b></div>
+        <div class="lab"><span>{ui.strengthLab.replace('{n}', ui.inputNames[i])}</span><b>{inp.v.toFixed(2)}</b></div>
         <input type="range" min="0" max="100" value={inp.v * 100}
           oninput={(e) => (inp.v = (+e.currentTarget.value) / 100)} />
         <div class="wrow">
-          <span>權重</span>
+          <span>{ui.weight}</span>
           <input type="range" min="-30" max="30" value={inp.w * 10}
             oninput={(e) => (inp.w = (+e.currentTarget.value) / 10)} />
           <b class="mono wl">{(inp.w >= 0 ? '+' : '') + inp.w.toFixed(1)}</b>
@@ -165,11 +198,9 @@
 
   <div class="out">
     <Bars {rows} />
-    <p class="hint">目前輸出：<b class="mono accent">{o > 0.5 ? '貓' : '狗'}（{Math.round((o > 0.5 ? o : 1 - o) * 100)}%）</b></p>
+    <p class="hint">{@html ui.output.replace('{label}', o > 0.5 ? ui.cat : ui.dog).replace('{pct}', Math.round((o > 0.5 ? o : 1 - o) * 100))}</p>
   </div>
-  <p class="hint">
-    <b>正權重＝支持是貓，負權重＝反對</b>。「會汪汪叫」預設是負權重——越汪汪叫越像狗。把它的權重拉成正的，網路就會改口說「貓」。這就是訓練在做的事：調整每一個權重。
-  </p>
+  <p class="hint">{@html ui.hint2}</p>
 </div>
 
 <style>

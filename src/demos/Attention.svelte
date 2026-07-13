@@ -6,18 +6,68 @@
   import { draw } from 'svelte/transition';
   import { clamp } from '../lib/helpers.js';
   import { dur } from '../lib/motion.js';
+  import { i18n } from '../stores/i18n.svelte.js';
   import Stepper from '../components/Stepper.svelte';
 
-  const SENTS = [
-    { toks: ['小明', '喜歡', '小華', '，', '因為', '他', '很帥'], pron: 5, att: { 小明: 0.72, 小華: 0.18, 很帥: 0.10 }, ans: '小明' },
-    { toks: ['小華', '喜歡', '小明', '，', '因為', '他', '很帥'], pron: 5, att: { 小華: 0.70, 小明: 0.20, 很帥: 0.10 }, ans: '小華' },
-    { toks: ['貓', '追', '老鼠', '，', '然後', '牠', '累了'], pron: 5, att: { 貓: 0.68, 老鼠: 0.22, 累了: 0.10 }, ans: '貓' },
-  ];
-  const STEPS = ['讀句子', '看注意力'];
+  const L = {
+    zh: {
+      h3: '互動：「他」到底指誰？',
+      lede: '先自己猜「他／牠」指的是誰，再按鈕看 <b>Attention</b>（注意力）怎麼從代名詞連到正確的主角。線越粗＝注意力越高。',
+      steps: ['讀句子', '看注意力'],
+      join: '',
+      fieldk: '① 選一個句子',
+      cap: '「{pron}」→ {ans}',
+      waiting: '先想想：這個橘色的「<b>{pron}</b>」指的是誰？想好後按下方「▶ 顯示注意力」揭曉。',
+      reveal: '▶ 顯示注意力',
+      restart: '重來',
+      hint: '同一個「他」，指誰要看<b>上下文</b>。Attention 讓每個字算出「該多注意句子裡的哪些字」——這是機器第一次真正讀懂句子關係的關鍵。',
+      sents: [
+        { toks: ['小明', '喜歡', '小華', '，', '因為', '他', '很帥'], pron: 5, att: { 小明: 0.72, 小華: 0.18, 很帥: 0.10 }, ans: '小明' },
+        { toks: ['小華', '喜歡', '小明', '，', '因為', '他', '很帥'], pron: 5, att: { 小華: 0.70, 小明: 0.20, 很帥: 0.10 }, ans: '小華' },
+        { toks: ['貓', '追', '老鼠', '，', '然後', '牠', '累了'], pron: 5, att: { 貓: 0.68, 老鼠: 0.22, 累了: 0.10 }, ans: '貓' },
+      ],
+    },
+    en: {
+      h3: 'Interactive: who does “he / it” really refer to?',
+      lede: 'First guess who “he / it” refers to on your own, then press the button to watch <b>Attention</b> link the pronoun to the right subject. The thicker the line, the higher the attention.',
+      steps: ['Read the sentence', 'See the attention'],
+      join: ' ',
+      fieldk: '① Pick a sentence',
+      cap: '“{pron}” → {ans}',
+      waiting: 'First think: who does this orange “<b>{pron}</b>” refer to? Once you have a guess, press “▶ Show attention” below to reveal it.',
+      reveal: '▶ Show attention',
+      restart: 'Restart',
+      hint: 'The same word “he” can point to different subjects depending on <b>context</b>. Attention lets every word work out “which words in the sentence it should focus on”—this is what let machines truly read the relationships between words for the first time.',
+      sents: [
+        { toks: ['Ming', 'likes', 'Hua', ',', 'because', 'he', 'is handsome'], pron: 5, att: { Ming: 0.72, Hua: 0.18, 'is handsome': 0.10 }, ans: 'Ming' },
+        { toks: ['Hua', 'likes', 'Ming', ',', 'because', 'he', 'is handsome'], pron: 5, att: { Hua: 0.70, Ming: 0.20, 'is handsome': 0.10 }, ans: 'Hua' },
+        { toks: ['cat', 'chased', 'mouse', ',', 'then', 'it', 'got tired'], pron: 5, att: { cat: 0.68, mouse: 0.22, 'got tired': 0.10 }, ans: 'cat' },
+      ],
+    },
+    ja: {
+      h3: 'インタラクティブ：「彼」は結局だれを指す？',
+      lede: 'まず自分で「彼／それ」がだれを指すか当ててみて、それからボタンを押して <b>Attention（注意）</b> が代名詞を正しい主語につなぐ様子を見てみましょう。線が太いほど注意が高い。',
+      steps: ['文を読む', '注意を見る'],
+      join: '',
+      fieldk: '① 文を選ぶ',
+      cap: '「{pron}」→ {ans}',
+      waiting: 'まず考えてみて：このオレンジ色の「<b>{pron}</b>」はだれを指す？答えが決まったら、下の「▶ 注意を表示」を押して確かめよう。',
+      reveal: '▶ 注意を表示',
+      restart: 'やり直す',
+      hint: '同じ「彼」でも、だれを指すかは<b>文脈</b>しだいで変わります。Attention は各単語に「文中のどの単語に注目すべきか」を計算させる——機械が単語どうしの関係を初めて本当に読み取れるようになった鍵です。',
+      sents: [
+        { toks: ['ケン', 'は', 'ヒロ', 'が好き', 'なぜなら', '彼', 'はかっこいいから'], pron: 5, att: { ケン: 0.72, ヒロ: 0.18, 'はかっこいいから': 0.10 }, ans: 'ケン' },
+        { toks: ['ヒロ', 'は', 'ケン', 'が好き', 'なぜなら', '彼', 'はかっこいいから'], pron: 5, att: { ヒロ: 0.70, ケン: 0.20, 'はかっこいいから': 0.10 }, ans: 'ヒロ' },
+        { toks: ['猫', 'が', 'ネズミ', 'を追った', 'そして', 'それ', 'は疲れた'], pron: 5, att: { 猫: 0.68, ネズミ: 0.22, 'は疲れた': 0.10 }, ans: '猫' },
+      ],
+    },
+  };
+
+  let ui = $derived(L[i18n.locale] || L.zh);
 
   let sel = $state(0);
   let step = $state(0);       // 0 讀句子（先想）· 1 看注意力（揭曉）
-  let s = $derived(SENTS[sel]);
+  let s = $derived(ui.sents[sel]);
 
   const wd = (t) => Math.max(34, t.length * 15 + 16);
 
@@ -46,21 +96,19 @@
 </script>
 
 <div class="panel">
-  <div class="panel-h"><h3>互動：「他」到底指誰？</h3><span class="eyebrow">★ Interactive</span></div>
-  <p class="lede">
-    先自己猜「他／牠」指的是誰，再按鈕看 <b>Attention</b>（注意力）怎麼從代名詞連到正確的主角。線越粗＝注意力越高。
-  </p>
+  <div class="panel-h"><h3>{ui.h3}</h3><span class="eyebrow">★ Interactive</span></div>
+  <p class="lede">{@html ui.lede}</p>
 
   <div class="demo-stage light">
     <!-- 步驟指示 -->
-    <Stepper steps={STEPS} current={step} />
+    <Stepper steps={ui.steps} current={step} />
 
     <!-- 選句子 -->
     <div class="qrow">
-      <span class="fieldk">① 選一個句子</span>
+      <span class="fieldk">{ui.fieldk}</span>
       <div class="pl-row">
-        {#each SENTS as st, i}
-          <button class="pl" class:on={i === sel} onclick={() => selectSent(i)}>{st.toks.join('')}</button>
+        {#each ui.sents as st, i}
+          <button class="pl" class:on={i === sel} onclick={() => selectSent(i)}>{st.toks.join(ui.join)}</button>
         {/each}
       </div>
     </div>
@@ -83,26 +131,24 @@
           fill={i === layout.pron ? '#241500' : 'var(--ink-2)'}>{t}</text>
       {/each}
       {#if step >= 1}
-        <text class="cap" x="280" y="145" text-anchor="middle">「{s.toks[s.pron]}」→ {s.ans}</text>
+        <text class="cap" x="280" y="145" text-anchor="middle">{ui.cap.replace('{pron}', s.toks[s.pron]).replace('{ans}', s.ans)}</text>
       {/if}
     </svg>
 
     {#if step === 0}
       <div class="waiting">
-        先想想：這個橘色的「<b>{s.toks[s.pron]}</b>」指的是誰？想好後按下方「▶ 顯示注意力」揭曉。
+        {@html ui.waiting.replace('{pron}', s.toks[s.pron])}
       </div>
     {/if}
 
     <!-- 步驟按鈕 -->
     <div class="guide-actions">
-      <button class="btn primary" disabled={step !== 0} onclick={reveal}>▶ 顯示注意力</button>
-      {#if step > 0}<button class="btn ghost" onclick={restart}>重來</button>{/if}
+      <button class="btn primary" disabled={step !== 0} onclick={reveal}>{ui.reveal}</button>
+      {#if step > 0}<button class="btn ghost" onclick={restart}>{ui.restart}</button>{/if}
     </div>
   </div>
 
-  <p class="hint">
-    同一個「他」，指誰要看<b>上下文</b>。Attention 讓每個字算出「該多注意句子裡的哪些字」——這是機器第一次真正讀懂句子關係的關鍵。
-  </p>
+  <p class="hint">{@html ui.hint}</p>
 </div>
 
 <style>

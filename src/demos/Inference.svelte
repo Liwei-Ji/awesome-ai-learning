@@ -6,15 +6,90 @@
   import { onDestroy } from 'svelte';
   import { clamp } from '../lib/helpers.js';
   import { reduceMotion } from '../lib/motion.js';
+  import { i18n } from '../stores/i18n.svelte.js';
 
   const LAT = { S: 160, M: 440, L: 920 };
   const COST = { S: 1, M: 3, L: 8 };
-  const SIZEL = { S: '小模型', M: '中模型', L: '大模型' };
-  const PRESETS = [
-    { label: '翻譯', in: '把「我喜歡貓」翻成英文', out: ['I', ' like', ' cats', '.'] },
-    { label: '算術', in: '123 × 8 = ?', out: ['9', '8', '4'] },
-    { label: '寫作', in: '寫一句鼓勵的話', out: ['你', '已', '經', '做', '得', '很', '好', '了', '！'] },
-  ];
+
+  const L = {
+    zh: {
+      h3: '互動：跑一次推論看看',
+      lede: '訓練是<b>一次性</b>的（慢、貴，把規則學進權重裡）；<b>推論</b>則是你<b>每次</b>跟 AI 對話時發生的事——把輸入丟進<b>已訓練好、權重凍結</b>的模型，算出輸出。這裡跑一次看它花多少<b>延遲</b>。',
+      tagIn: '輸入 INPUT', tagOut: '輸出 OUTPUT',
+      modelTag: '模型 <span class="lock">🔒 已訓練</span>',
+      computing: '運算中…', mdone: '✓ 完成', idle: '待命',
+      latencyLabel: '本次延遲 Latency',
+      runsLabel: '推論次數', computeLabel: '累計算力', computeUnit: '單位',
+      trainHead: '訓練 Training', inferHead: '推論 Inference',
+      contrast: [
+        ['何時發生', '模型上線前 · 只做一次', '每一次你提問'],
+        ['要花多久', '數週～數月', '毫秒～幾秒'],
+        ['算力成本', '極高（一次性）', '每一次都要付'],
+        ['權重', '不斷被調整', '凍結不變 🔒'],
+      ],
+      glabIn: '輸入', glabSize: '模型大小',
+      runBtn: '▶ 執行推論',
+      hint: '你每一次跟 ChatGPT 對話，背後都是<b>一次推論</b>。訓練只做一次、把能力煉進權重；之後每一次使用都要<b>重新算一遍</b>，這就是為什麼 AI 服務要按用量收費、也為什麼<b>模型越大、回應越慢也越貴</b>。',
+      sizeL: { S: '小模型', M: '中模型', L: '大模型' },
+      presets: [
+        { label: '翻譯', in: '把「我喜歡貓」翻成英文', out: ['I', ' like', ' cats', '.'] },
+        { label: '算術', in: '123 × 8 = ?', out: ['9', '8', '4'] },
+        { label: '寫作', in: '寫一句鼓勵的話', out: ['你', '已', '經', '做', '得', '很', '好', '了', '！'] },
+      ],
+    },
+    en: {
+      h3: 'Interactive: run one inference',
+      lede: 'Training is a <b>one-time</b> job (slow and expensive—it bakes the rules into the weights); <b>inference</b> is what happens <b>every time</b> you chat with an AI: you feed the input into a <b>trained, weight-frozen</b> model and it computes the output. Run one here and see how much <b>latency</b> it takes.',
+      tagIn: 'INPUT', tagOut: 'OUTPUT',
+      modelTag: 'Model <span class="lock">🔒 trained</span>',
+      computing: 'Computing…', mdone: '✓ Done', idle: 'Idle',
+      latencyLabel: 'This run’s latency',
+      runsLabel: 'Inferences', computeLabel: 'Total compute', computeUnit: 'units',
+      trainHead: 'Training', inferHead: 'Inference',
+      contrast: [
+        ['When it happens', 'Before the model ships · just once', 'Every time you ask'],
+        ['How long it takes', 'Weeks to months', 'Milliseconds to seconds'],
+        ['Compute cost', 'Very high (one-time)', 'Paid every single time'],
+        ['Weights', 'Constantly adjusted', 'Frozen 🔒'],
+      ],
+      glabIn: 'Input', glabSize: 'Model size',
+      runBtn: '▶ Run inference',
+      hint: 'Every time you chat with ChatGPT, one <b>inference</b> is running behind the scenes. Training happens just once, forging the ability into the weights; after that, every use has to <b>recompute from scratch</b>—which is why AI services bill by usage, and why <b>a bigger model is slower and more expensive to run</b>.',
+      sizeL: { S: 'Small model', M: 'Medium model', L: 'Large model' },
+      presets: [
+        { label: 'Translate', in: 'Translate “I like cats” into French', out: ['J’', 'aime', ' les', ' chats', '.'] },
+        { label: 'Arithmetic', in: '123 × 8 = ?', out: ['9', '8', '4'] },
+        { label: 'Writing', in: 'Write a line of encouragement', out: ['You', '’ve', ' already', ' done', ' really', ' well', '!'] },
+      ],
+    },
+    ja: {
+      h3: 'インタラクティブ：推論を一度実行してみる',
+      lede: '訓練は<b>一度きり</b>の作業です（遅くて高価——規則を重みに焼き込む）。<b>推論</b>は AI と話す<b>たびに</b>起こること：入力を<b>訓練済みで重みが凍結された</b>モデルに流し込み、出力を計算します。ここで一度実行して、どれくらい<b>遅延</b>があるか見てみましょう。',
+      tagIn: '入力 INPUT', tagOut: '出力 OUTPUT',
+      modelTag: 'モデル <span class="lock">🔒 訓練済み</span>',
+      computing: '計算中…', mdone: '✓ 完了', idle: '待機中',
+      latencyLabel: 'この推論の遅延 Latency',
+      runsLabel: '推論回数', computeLabel: '累計計算量', computeUnit: '単位',
+      trainHead: '訓練 Training', inferHead: '推論 Inference',
+      contrast: [
+        ['いつ起こる', 'モデル公開前 · 一度だけ', '質問するたびに'],
+        ['どれくらいかかる', '数週間〜数か月', 'ミリ秒〜数秒'],
+        ['計算コスト', '非常に高い（一度きり）', '毎回かかる'],
+        ['重み', '絶えず調整される', '凍結 🔒'],
+      ],
+      glabIn: '入力', glabSize: 'モデルサイズ',
+      runBtn: '▶ 推論を実行',
+      hint: 'ChatGPT と話すたびに、その裏では<b>推論</b>が一度動いています。訓練は一度だけで、能力を重みに鍛え込む。その後は使うたびに<b>一から計算し直す</b>必要がある——だから AI サービスは使用量で課金し、<b>大きいモデルほど動かすのが遅く高価</b>なのです。',
+      sizeL: { S: '小型モデル', M: '中型モデル', L: '大型モデル' },
+      presets: [
+        { label: '翻訳', in: '「猫が好き」を英語に翻訳して', out: ['I', ' like', ' cats', '.'] },
+        { label: '計算', in: '123 × 8 = ?', out: ['9', '8', '4'] },
+        { label: '作文', in: '励ましのひとことを書いて', out: ['も', 'う', '十', '分', 'よ', 'く', 'や', 'っ', 'て', 'る', 'よ', '！'] },
+      ],
+    },
+  };
+
+  let ui = $derived(L[i18n.locale] || L.zh);
 
   let size = $state('M');
   let inIdx = $state(0);
@@ -34,7 +109,7 @@
 
   function runInference() {
     if (running) return;
-    const p = PRESETS[inIdx];
+    const p = ui.presets[inIdx];
     snap = { out: p.out, lat: LAT[size], total: LAT[size] + p.out.length * 80, cost: COST[size] };
     elapsed = 0; done = false; running = true; nonce++;
   }
@@ -56,37 +131,27 @@
     return () => cancelAnimationFrame(raf);
   });
   onDestroy(() => cancelAnimationFrame(raf));
-
-  const CONTRAST = [
-    ['何時發生', '模型上線前 · 只做一次', '每一次你提問'],
-    ['要花多久', '數週～數月', '毫秒～幾秒'],
-    ['算力成本', '極高（一次性）', '每一次都要付'],
-    ['權重', '不斷被調整', '凍結不變 🔒'],
-  ];
 </script>
 
 <div class="panel">
-  <div class="panel-h"><h3>互動：跑一次推論看看</h3><span class="eyebrow">★ Interactive</span></div>
-  <p class="lede">
-    訓練是<b>一次性</b>的（慢、貴，把規則學進權重裡）；<b>推論</b>則是你<b>每次</b>跟 AI 對話時發生的事——
-    把輸入丟進<b>已訓練好、權重凍結</b>的模型，算出輸出。這裡跑一次看它花多少<b>延遲</b>。
-  </p>
+  <div class="panel-h"><h3>{ui.h3}</h3><span class="eyebrow">★ Interactive</span></div>
+  <p class="lede">{@html ui.lede}</p>
 
   <div class="demo-stage light">
     <div class="flow">
       <div class="fcard">
-        <div class="ftag">輸入 INPUT</div>
-        <div class="ftext">{PRESETS[inIdx].in}</div>
+        <div class="ftag">{ui.tagIn}</div>
+        <div class="ftext">{ui.presets[inIdx].in}</div>
       </div>
       <div class="arrow">→</div>
       <div class="fcard model" class:busy={computing}>
-        <div class="ftag">模型 <span class="lock">🔒 已訓練</span></div>
+        <div class="ftag">{@html ui.modelTag}</div>
         <div class="mdots">{#each Array(7) as _, i}<span class="md" class:on={computing || done}></span>{/each}</div>
-        <div class="mstate">{running ? '運算中…' : done ? '✓ 完成' : '待命'}</div>
+        <div class="mstate">{running ? ui.computing : done ? ui.mdone : ui.idle}</div>
       </div>
       <div class="arrow">→</div>
       <div class="fcard">
-        <div class="ftag">輸出 OUTPUT</div>
+        <div class="ftag">{ui.tagOut}</div>
         <div class="ftext mono">{outText}{#if running}<span class="cur">▍</span>{/if}</div>
       </div>
       <div class="pulse" class:show={running} style="left:{pp * 100}%"></div>
@@ -94,15 +159,15 @@
 
     <div class="clock">
       <span class="cnum">{latMs}</span><span class="cunit">ms</span>
-      <span class="clabel">本次延遲 Latency</span>
+      <span class="clabel">{ui.latencyLabel}</span>
       <div class="spacer"></div>
-      <span class="mini">推論次數 <b>{runCount}</b></span>
-      <span class="mini">累計算力 <b>{totalCompute}</b> 單位</span>
+      <span class="mini">{ui.runsLabel} <b>{runCount}</b></span>
+      <span class="mini">{ui.computeLabel} <b>{totalCompute}</b> {ui.computeUnit}</span>
     </div>
 
     <div class="contrast">
-      <div class="crow head"><span></span><span class="th train">訓練 Training</span><span class="th infer">推論 Inference</span></div>
-      {#each CONTRAST as [k, a, b]}
+      <div class="crow head"><span></span><span class="th train">{ui.trainHead}</span><span class="th infer">{ui.inferHead}</span></div>
+      {#each ui.contrast as [k, a, b]}
         <div class="crow"><span class="rk">{k}</span><span class="ca">{a}</span><span class="cb">{b}</span></div>
       {/each}
     </div>
@@ -110,22 +175,19 @@
 
   <div class="ctl-row">
     <div class="grp">
-      <span class="glab">輸入</span>
-      {#each PRESETS as p, i}<button class="pl" class:on={i === inIdx} disabled={running} onclick={() => (inIdx = i)}>{p.label}</button>{/each}
+      <span class="glab">{ui.glabIn}</span>
+      {#each ui.presets as p, i}<button class="pl" class:on={i === inIdx} disabled={running} onclick={() => (inIdx = i)}>{p.label}</button>{/each}
     </div>
     <div class="grp">
-      <span class="glab">模型大小</span>
-      {#each ['S', 'M', 'L'] as s}<button class="pl" class:on={s === size} disabled={running} onclick={() => (size = s)}>{SIZEL[s]}</button>{/each}
+      <span class="glab">{ui.glabSize}</span>
+      {#each ['S', 'M', 'L'] as s}<button class="pl" class:on={s === size} disabled={running} onclick={() => (size = s)}>{ui.sizeL[s]}</button>{/each}
     </div>
   </div>
   <div class="btn-row">
-    <button class="btn primary" disabled={running} onclick={runInference}>▶ 執行推論</button>
+    <button class="btn primary" disabled={running} onclick={runInference}>{ui.runBtn}</button>
   </div>
 
-  <p class="hint">
-    你每一次跟 ChatGPT 對話，背後都是<b>一次推論</b>。訓練只做一次、把能力煉進權重；之後每一次使用都要<b>重新算一遍</b>，
-    這就是為什麼 AI 服務要按用量收費、也為什麼<b>模型越大、回應越慢也越貴</b>。
-  </p>
+  <p class="hint">{@html ui.hint}</p>
 </div>
 
 <style>

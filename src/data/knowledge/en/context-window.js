@@ -1,0 +1,24 @@
+export default {
+  qs: ['What is a context window?', 'Why does AI forget what I said earlier?', 'Is a bigger window always better?', 'How do tokens relate to the window?'],
+  kb: [
+    [['what is', 'definition', 'define', 'context window', 'meaning', 'window'], 'A <b>context window</b> is <b>the maximum amount of content a model can read at once</b>, measured in tokens. The data you paste, your question, and its own answer all have to fit inside this window.'],
+    [['how it works', 'principle', 'mechanism', 'work', 'why does it exist'], 'Every time the model generates, it <b>looks over all the tokens in the window together</b> before computing the next word. The window is like its <b>short-term working memory</b>—anything outside it simply isn’t visible right now.'],
+    [['token', 'how is it counted', 'how many words', 'unit', 'characters', 'measure'], 'The window is measured in <b>tokens</b> (see the Tokenizer chapter), not words. A rough estimate: <b>about 100 tokens ≈ 75 English words</b> (one English word is often split into just over one token; one Chinese character is roughly one-plus token). So “a few thousand tokens” does not equal “a few thousand words.”'],
+    [['forget', 'forgot', 'can’t remember', 'earlier', 'amnesia', 'loses track'], 'It’s totally normal for AI to “forget”: once a conversation gets too long and <b>exceeds the window limit, the oldest content gets pushed out</b>. If it can’t see something, that’s the same as it never happening. This isn’t poor memory—the <b>window just has a hard edge</b>.'],
+    [['exceed', 'too much', 'truncation', 'cut off', 'dropped', 'overflow', 'full'], 'When content goes over the limit, <b>truncation</b> happens—the system <b>discards the older content</b> and keeps only the most recent part. Whatever gets cut can never be referenced by the model again.'],
+    [['bigger is better', 'large window', 'downside', 'cost', 'expensive', 'slow', 'tradeoff'], 'A bigger window can take in more context at once, but it’s <b>also more expensive and slower</b>—more tokens to process means higher compute cost. So <b>bigger isn’t automatically better</b>; big enough is what matters.'],
+    [['misconception', 'myth', 'assume', 'permanent', 'remembers', 'learns it'], 'A common misconception: people assume AI will <b>permanently remember</b> whatever you feed it. In reality it can only see things <b>within the current window</b>; close the chat or push the content out of the window, and it’s gone—that content never became part of its knowledge.'],
+    [['memory', 'long-term', 'across conversations', 'difference', 'not the same'], 'The window is a <b>short-term workspace for the moment</b>; it clears once a chat gets long or you start a new one. True <b>cross-conversation memory</b> (see the Memory chapter) works by storing key points externally and feeding them back into the window next time—a different mechanism entirely.'],
+    [['use case', 'application', 'long document', 'pdf', 'summarize', 'long conversation', 'whole file'], 'Window size directly decides how useful the model is: <b>the bigger the window, the more it can read a whole long document, a large block of code, or a very long conversation in one go</b> before answering. With a small window, long documents have to be split and processed in batches.'],
+    [['what to do', 'solution', 'too long', 'won’t fit', 'technique', 'trim', 'save space'], 'When content is too long to fit, common approaches: <b>summarize and compress first, keep only the key passages, or split a long document into chunks and process them in batches</b> (this is also the idea behind RAG). The goal is to keep the genuinely important information inside the window.'],
+    [['input', 'output', 'answer', 'counted together', 'includes', 'shared', 'eats into'], 'Remember: <b>your input and the model’s output share the same window</b>. The fuller you pack the input, the less room is left for the answer—which is why an extremely long prompt sometimes forces the reply to be cut short or stop early.'],
+    [['why is there a limit', 'limit', 'not infinite', 'compute', 'why limited', 'ceiling'], 'The window has a limit because <b>the more tokens it has to look at simultaneously, the faster the compute grows and the higher the cost</b> (this ties into the Attention mechanism). The reality of hardware and cost is what keeps the window from ever being infinite.'],
+  ],
+  notes: [
+    'A context window = the max number of tokens a model can read at once; it’s its short-term working memory.',
+    'Input and output share the same window; the longer the input, the less room left for the answer.',
+    'Exceeding the limit triggers truncation: the oldest content gets pushed out first.',
+    'A bigger window = more context to consider, but also more expensive and slower—big enough is best.',
+    'The window is “in-the-moment” short-term memory, and it’s a separate thing from cross-conversation long-term Memory.',
+  ],
+};

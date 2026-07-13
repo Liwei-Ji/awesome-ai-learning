@@ -2,6 +2,7 @@
   /* 概念關聯圖（radial）：25 個知識點成環，弦線＝前置依賴（PREREQ）。
      滑過任一點高亮它的依賴、點擊進該章。自足元件、自帶 hover。 */
   import { CH } from '../data/chapters.js';
+  import { chOf } from '../data/localize.js';
   import { BRANCHES, FLOW, PREREQ } from '../data/graph.js';
   import { go } from '../stores/state.svelte.js';
 
@@ -42,7 +43,7 @@
     {/each}
     {#each LAYOUT.nodes as nd}
       <g class="cnode" class:cur={nd.id === hovered} class:link={connected.has(nd.id)}
-        role="button" tabindex="0" aria-label={CH[nd.id].t}
+        role="button" tabindex="0" aria-label={chOf(nd.id).t}
         onmouseenter={() => (hovered = nd.id)} onmouseleave={() => (hovered = null)}
         onfocus={() => (hovered = nd.id)} onblur={() => (hovered = null)}
         onclick={() => go(nd.id)}

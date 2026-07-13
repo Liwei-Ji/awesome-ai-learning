@@ -18,6 +18,10 @@ const CHROME = process.env.CHROME_PATH ||
   '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 const BASE = (process.argv[2] || 'http://localhost:5173').replace(/\/$/, '');
 const TOTAL = 27; // 最大章號（序章 0 ～ 27，共 28 章）
+// 測試語言：TEST_LANG=en|ja|zh（預設 zh）。非 zh 會在網址帶 &lang=，並用該語言問 AI 教授。
+const LANG = process.env.TEST_LANG || 'zh';
+const url = (ch) => `${BASE}/?ch=${ch}${LANG !== 'zh' ? '&lang=' + LANG : ''}`;
+const TUTOR_Q = { zh: '什麼是模型', en: 'what is a model', ja: 'モデルとは' }[LANG] || '什麼是模型';
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 const CH = ['AI簡史', 'AI是什麼', '機器學習', '資料', '深度學習', '神經網路', '梯度下降',
@@ -87,7 +91,7 @@ async function testTutor(browser) {
   attachErrorSinks(page, errs);
   const info = { opened: false, chipAnswered: false, typedAnswered: false, resetOnNav: false };
   try {
-    await page.goto(`${BASE}/?ch=1`, { waitUntil: 'networkidle2', timeout: 15000 });
+    await page.goto(url(1), { waitUntil: 'networkidle2', timeout: 15000 });
     await sleep(500);
     await page.click('.fab'); await sleep(400);
     info.opened = !!(await page.$('.tutor-card'));
@@ -96,11 +100,11 @@ async function testTutor(browser) {
     const input = await page.$('.tutor-in input');
     if (input) {
       const before = await page.$$eval('.tutor-card .msg', (n) => n.length);
-      await input.click(); await page.keyboard.type('什麼是模型'); await page.keyboard.press('Enter');
+      await input.click(); await page.keyboard.type(TUTOR_Q); await page.keyboard.press('Enter');
       await sleep(800);
       info.typedAnswered = (await page.$$eval('.tutor-card .msg', (n) => n.length)) > before;
     }
-    await page.goto(`${BASE}/?ch=11`, { waitUntil: 'networkidle2' }); await sleep(400);
+    await page.goto(url(11), { waitUntil: 'networkidle2' }); await sleep(400);
     await page.click('.fab'); await sleep(400);
     info.resetOnNav = (await page.$$eval('.tutor-card .msg', (n) => n.length)) === 1;
   } catch (e) { errs.push('TUTOR EXCEPTION: ' + e.message); }
@@ -114,7 +118,7 @@ async function testTutor(browser) {
     args: ['--no-sandbox', '--disable-gpu', '--window-size=1280,900'],
   });
   let fail = 0;
-  console.log(`\n===== 真實互動回歸測試  (${BASE}) =====\n`);
+  console.log(`\n===== 真實互動回歸測試  (${BASE})  [lang=${LANG}] =====\n`);
 
   for (let ch = 0; ch <= TOTAL; ch++) {
     const page = await browser.newPage();
@@ -123,13 +127,13 @@ async function testTutor(browser) {
     attachErrorSinks(page, errs);
     let changed = false;
     try {
-      await page.goto(`${BASE}/?ch=${ch}`, { waitUntil: 'networkidle2', timeout: 15000 });
+      await page.goto(url(ch), { waitUntil: 'networkidle2', timeout: 15000 });
       await sleep(500);
       await driveDemo(page);
     } catch (e) { errs.push('DRIVE EXCEPTION: ' + e.message); }
     // 重新載入乾淨頁面做靜默失效偵測
     try {
-      await page.goto(`${BASE}/?ch=${ch}`, { waitUntil: 'networkidle2' });
+      await page.goto(url(ch), { waitUntil: 'networkidle2' });
       await sleep(400);
       changed = await stateChanged(page);
     } catch (e) {}

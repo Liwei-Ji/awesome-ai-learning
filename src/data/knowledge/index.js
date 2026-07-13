@@ -1,23 +1,30 @@
 /* ============================================================
-   知識庫索引 —— 自動聚合 knowledge/*.js（每章一個檔）。
-   用 Vite import.meta.glob：以後新增章節「丟一個 <slug>.js 進這個資料夾就生效」，
-   不需手動維護清單。每個章節檔 export default { qs, kb, notes }：
-     qs    = AI 教授的建議問題
-     kb    = [[關鍵字陣列, HTML 答案], ...]（關鍵字比對用）
-     notes = 延伸知識點（顯示在課文下方的「知識庫」區）
+   知識庫索引 —— 自動聚合 knowledge/<slug>.js（中文，每章一檔）。
+   多語：knowledge/en/<slug>.js、knowledge/ja/<slug>.js（可選，翻好幾課就放幾課）。
+   缺該語言版本時自動 fallback 回中文。
+   每個章節檔 export default { qs, kb, notes }。
    ============================================================ */
-const mods = import.meta.glob('./*.js', { eager: true });
+const GLOBS = {
+  zh: import.meta.glob('./*.js', { eager: true }),
+  en: import.meta.glob('./en/*.js', { eager: true }),
+  ja: import.meta.glob('./ja/*.js', { eager: true }),
+};
 
-const KB = {};
-for (const path in mods) {
-  const slug = path.slice(2, -3); // './deep-learning.js' → 'deep-learning'
-  if (slug === 'index') continue;
-  KB[slug] = mods[path].default;
+function build(mods) {
+  const m = {};
+  for (const path in mods) {
+    const slug = path.replace(/^.*\//, '').replace(/\.js$/, ''); // basename → slug
+    if (slug === 'index') continue;
+    m[slug] = mods[path].default;
+  }
+  return m;
 }
+const KB = { zh: build(GLOBS.zh), en: build(GLOBS.en), ja: build(GLOBS.ja) };
 
 const EMPTY = { qs: [], kb: [], notes: [] };
 
-/** 取某章（slug）的知識庫；缺少時回空殼，UI 不會出錯。 */
-export function knowledgeFor(slug) {
-  return { ...EMPTY, ...(KB[slug] ?? {}) };
+/** 取某章（slug）在指定語言的知識庫；缺該語言就 fallback 中文，再缺回空殼。 */
+export function knowledgeFor(slug, locale = 'zh') {
+  const m = KB[locale] || KB.zh;
+  return { ...EMPTY, ...((m[slug] ?? KB.zh[slug]) ?? {}) };
 }

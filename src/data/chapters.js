@@ -349,14 +349,14 @@ const DATA = {
 };
 
 // ---------- 序章（編號 00）與課程分章（要重排/插新課，改這裡）----------
-const PROLOGUE = { t: '序章', desc: 'AI 從哪裡來', slugs: ['history'] };
+const PROLOGUE = { key: 'prologue', t: '序章', desc: 'AI 從哪裡來', slugs: ['history'] };
 const OUTLINE = [
-  { t: 'AI 基礎', desc: '建立概念', slugs: ['ai-intro', 'ml', 'data'] },
-  { t: 'AI 如何學習', desc: '模型怎麼被訓練', slugs: ['deep-learning', 'neural-network', 'training', 'backprop'] },
-  { t: '大型語言模型 LLM', desc: 'ChatGPT 的核心', slugs: ['tokenizer', 'embedding', 'transformer', 'llm', 'model-size', 'context-window', 'inference'] },
-  { t: '從模型到 ChatGPT', desc: '把模型訓練成助理', slugs: ['pretraining', 'fine-tuning'] },
-  { t: '生成式 AI 與 AI Agent', desc: '一條完整的應用鏈', slugs: ['prompt', 'generative', 'multimodal', 'rag', 'memory', 'mcp', 'agent', 'integration'] },
-  { t: 'AI 素養', desc: '會用，也會判斷', slugs: ['limits', 'evaluation', 'capstone'] },
+  { key: 'basics', t: 'AI 基礎', desc: '建立概念', slugs: ['ai-intro', 'ml', 'data'] },
+  { key: 'learn', t: 'AI 如何學習', desc: '模型怎麼被訓練', slugs: ['deep-learning', 'neural-network', 'training', 'backprop'] },
+  { key: 'llm', t: '大型語言模型 LLM', desc: 'ChatGPT 的核心', slugs: ['tokenizer', 'embedding', 'transformer', 'llm', 'model-size', 'context-window', 'inference'] },
+  { key: 'chatgpt', t: '從模型到 ChatGPT', desc: '把模型訓練成助理', slugs: ['pretraining', 'fine-tuning'] },
+  { key: 'apps', t: '生成式 AI 與 AI Agent', desc: '一條完整的應用鏈', slugs: ['prompt', 'generative', 'multimodal', 'rag', 'memory', 'mcp', 'agent', 'integration'] },
+  { key: 'literacy', t: 'AI 素養', desc: '會用，也會判斷', slugs: ['limits', 'evaluation', 'capstone'] },
 ];
 
 // ---------- 派生：有序 slug、章號、CH、GROUPS ----------
@@ -367,10 +367,10 @@ const idOf = (slug) => ORDER.indexOf(slug);
 /** 章號 → { slug, ...資料 }（history = 0，其餘 1..25） */
 export const CH = Object.fromEntries(ORDER.map((slug, i) => [i, { slug, ...DATA[slug] }]));
 
-/** 側邊欄分組（含序章）：{ t, desc, ids } */
-export const GROUPS = [PROLOGUE, ...OUTLINE].map((g) => ({ t: g.t, desc: g.desc, ids: g.slugs.map(idOf) }));
+/** 側邊欄分組（含序章）：{ key, t, desc, ids }（key 供 i18n 翻譯區段名） */
+export const GROUPS = [PROLOGUE, ...OUTLINE].map((g) => ({ key: g.key, t: g.t, desc: g.desc, ids: g.slugs.map(idOf) }));
 
 /** 知識地圖分組（不含序章，就是那 6 章）供 graph.js 使用 */
-export const MAP_GROUPS = OUTLINE.map((g) => ({ t: g.t, desc: g.desc, ids: g.slugs.map(idOf) }));
+export const MAP_GROUPS = OUTLINE.map((g) => ({ key: g.key, t: g.t, desc: g.desc, ids: g.slugs.map(idOf) }));
 
 export const TOTAL = ORDER.length;
