@@ -315,7 +315,7 @@
   .raw .ch.hi { background: var(--accent); color: #241500; }
 
   .track { position: relative; height: 6px; border-radius: 99px; background: var(--surface-3); margin: 0 0 14px; overflow: visible; }
-  .blade { position: absolute; top: -6px; width: 2px; height: 18px; background: var(--teal); box-shadow: 0 0 14px 3px #0f8a80aa; transform: translateX(-1px); }
+  .blade { position: absolute; top: -6px; width: 2px; height: 18px; background: var(--teal); transform: translateX(-1px); }
 
   .chips { display: flex; flex-wrap: wrap; gap: 7px; min-height: 40px; margin-bottom: 14px; align-items: flex-start; }
   .grp { display: inline-flex; gap: 5px; padding: 3px; border-radius: var(--r); position: relative; min-width: 0; flex-wrap: wrap; }
@@ -325,11 +325,10 @@
   .tok .tt { overflow-wrap: anywhere; }
   .tok .tid { font-family: var(--mono); font-size: 10px; margin-top: 2px; opacity: .8; }
   .tok.hi { transform: translateY(-2px) scale(1.06); }
-  .tok.word, .tok.cjk { background: var(--accent); color: #241500; box-shadow: 0 0 12px #e07f0e55; font-weight: 600; }
-  .tok.subword { background: #0f8a801a; border: 1px solid var(--teal); color: var(--teal); box-shadow: 0 0 10px #0f8a8044; }
+  .tok.word, .tok.cjk { background: var(--accent); color: #241500; font-weight: 600; }
+  .tok.subword { background: #0f8a801a; border: 1px solid var(--teal); color: var(--teal); }
   .tok.byte { background: var(--surface-2); color: var(--muted); font-family: var(--mono); font-size: var(--fs-cap); border: 1px solid var(--line); }
   .tok.symbol { background: var(--surface-2); color: var(--muted); }
-  .tok.hi.subword { box-shadow: 0 0 16px #0f8a80aa; }
 
   .meter { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
   .big { display: flex; flex-direction: column; }
