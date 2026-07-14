@@ -15,7 +15,7 @@
     zh: {
       h3a: '互動：AI 的完整管線',
       lede1: '你學過的每一章，都是這條管線的一段。按「送出資料」看訊號從底層流到應用；點任一段看它的角色。',
-      cue: '👆 點任一段看它的角色，或按「送出資料」看訊號從底層流到應用。',
+      cue: '點任一段看它的角色，或按「送出資料」看訊號從底層流到應用。',
       roles: ['資料', '從資料找規律', '多層抽特徵', '節點與權重', '理解上下文', '預測下一個 Token', '規劃＋工具', '應用'],
       details: ['原始素材：文字、圖片、紀錄', '訓練模型抓出模式', '逐層把資料抽象化', '運算的實際載體', '用 Attention 讀懂關係', '生成語言的引擎', '自主完成目標', '使用者實際接觸的產品'],
       send: '▶ 送出資料',
@@ -29,7 +29,7 @@
     en: {
       h3a: 'Interactive: the full AI pipeline',
       lede1: 'Every chapter you’ve learned is one segment of this pipeline. Press “Send data” to watch the signal flow from the bottom layer up to the application; tap any segment to see its role.',
-      cue: '👆 Tap any segment to see its role, or press “Send data” to watch the signal flow from the bottom up to the application.',
+      cue: 'Tap any segment to see its role, or press “Send data” to watch the signal flow from the bottom up to the application.',
       roles: ['Raw material', 'Finds patterns in data', 'Extracts features in layers', 'Nodes and weights', 'Understands context', 'Predicts the next token', 'Planning + tools', 'Application'],
       details: ['The raw stuff: text, images, records', 'Trains a model to catch patterns', 'Abstracts the data layer by layer', 'The actual engine that runs the computation', 'Uses Attention to read relationships', 'The engine that generates language', 'Completes goals on its own', 'The product users actually touch'],
       send: '▶ Send data',
@@ -43,7 +43,7 @@
     ja: {
       h3a: 'インタラクティブ：AI の完全なパイプライン',
       lede1: 'これまで学んだ各章は、このパイプラインの一段です。「データを送る」を押すと、信号が最下層からアプリケーションまで流れていきます。どの段でもタップすると、その役割が見られます。',
-      cue: '👆 どの段でもタップすると役割が見られます。または「データを送る」を押して、信号が下から上のアプリケーションまで流れる様子を見てみましょう。',
+      cue: 'どの段でもタップすると役割が見られます。または「データを送る」を押して、信号が下から上のアプリケーションまで流れる様子を見てみましょう。',
       roles: ['生の素材', 'データから規則を見つける', '層ごとに特徴を抽出', 'ノードと重み', '文脈を理解する', '次のトークンを予測', '計画＋ツール', 'アプリケーション'],
       details: ['生の材料：テキスト・画像・記録', 'モデルを学習させてパターンを捉える', 'データを層ごとに抽象化していく', '計算を実際に動かす土台', 'Attention で関係性を読み取る', '言語を生成するエンジン', '目標を自律的に達成する', 'ユーザーが実際に触れる製品'],
       send: '▶ データを送る',
