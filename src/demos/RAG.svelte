@@ -245,7 +245,7 @@
   .chunk { border: 1px solid var(--line); border-radius: var(--r); padding: 9px 11px; margin-bottom: var(--sp-2); background: var(--surface); transition: .25s; }
   .chunk:last-child { margin-bottom: 0; }
   .chunk.idle { opacity: .85; }
-  .chunk.used { border-color: var(--teal); background: #0f8a800c; box-shadow: 0 0 12px #0f8a8018; }
+  .chunk.used { border-color: var(--teal); background: #0f8a800c; }
   .chead { display: flex; align-items: center; gap: var(--sp-2); font-size: var(--fs-sm); }
   .chead b { color: var(--ink); }
   .sim { margin-left: auto; font-family: var(--mono); font-size: var(--fs-micro); color: var(--muted); }

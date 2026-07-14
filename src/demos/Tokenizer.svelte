@@ -335,7 +335,7 @@
   .big .k { font-size: var(--fs-eyebrow); letter-spacing: .12em; color: var(--muted); }
   .big .v { font-family: var(--mono); font-size: 26px; font-weight: 600; }
   .big .v.muted { color: var(--muted); }
-  .big .v.amber { color: var(--accent); text-shadow: 0 0 12px #e07f0e66; }
+  .big .v.amber { color: var(--accent); }
   .meter .arrow { color: var(--muted); font-size: 18px; }
   .meter .bar { flex: 1; min-width: 80px; height: 8px; border-radius: 99px; background: var(--surface-3); overflow: hidden; }
   .meter .bar .fill { height: 100%; background: var(--accent); transition: width .5s cubic-bezier(.2,.7,.2,1); }

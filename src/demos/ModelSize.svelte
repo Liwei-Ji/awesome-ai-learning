@@ -173,7 +173,7 @@
   .fieldwrap { margin-bottom: 6px; }
   .row1 { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 4px; }
   .cap { font-size: var(--fs-micro); letter-spacing: .1em; color: var(--muted); }
-  .pcount { font-family: var(--mono); font-size: 22px; font-weight: 700; color: var(--accent); text-shadow: 0 0 14px #e07f0e55; }
+  .pcount { font-family: var(--mono); font-size: 22px; font-weight: 700; color: var(--accent); }
   .pcount .u { font-size: var(--fs-micro); color: var(--muted); font-weight: 400; }
   .field { width: 100%; height: auto; display: block; }
   .pdot { transition: r .3s, opacity .3s, fill .3s; }

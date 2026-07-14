@@ -121,7 +121,7 @@
   .blocks { display: flex; flex-wrap: wrap; gap: var(--sp-2); margin-bottom: var(--sp-4); }
   .block { font-size: var(--fs-cap); padding: 8px 14px; border-radius: var(--r); border: 1px solid var(--line); background: var(--surface-2); color: var(--muted); cursor: pointer; transition: .2s; opacity: .55; }
   .block:hover { border-color: var(--accent); }
-  .block.on { opacity: 1; background: #0f8a800c; border-color: var(--teal); color: var(--teal); font-weight: 600; box-shadow: 0 0 12px #0f8a8018; }
+  .block.on { opacity: 1; background: #0f8a800c; border-color: var(--teal); color: var(--teal); font-weight: 600; }
 
   .recipe { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 12px 14px; }
   .step { display: grid; grid-template-columns: 22px 96px 1fr; align-items: center; gap: var(--sp-2); padding: 7px 0; border-bottom: 1px dashed var(--line); font-size: var(--fs-sm); }

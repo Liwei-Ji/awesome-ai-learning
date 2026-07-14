@@ -88,7 +88,7 @@ button{font-family:inherit; cursor:pointer}
 input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:99px;
   background:var(--surface-3);outline:none}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;
-  background:var(--accent);border:3px solid var(--surface);box-shadow:0 0 0 1px var(--line-2),0 0 10px var(--glow);cursor:grab}
+  background:var(--accent);border:3px solid var(--surface);box-shadow:0 0 0 1px var(--line-2);cursor:grab}
 input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--accent);
   border:3px solid var(--surface);cursor:grab}
 .ctl{margin:14px 0}

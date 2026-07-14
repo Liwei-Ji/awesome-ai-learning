@@ -196,7 +196,7 @@
   .flow { position: relative; display: flex; align-items: stretch; gap: var(--sp-2); margin-bottom: var(--sp-4); }
   .fcard { flex: 1; min-width: 0; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: var(--sp-3); }
   .fcard.model { border-color: var(--line); text-align: center; }
-  .fcard.model.busy { border-color: var(--accent); box-shadow: 0 0 22px #e07f0e44; }
+  .fcard.model.busy { border-color: var(--accent); }
   .ftag { font-family: var(--mono); font-size: var(--fs-micro); letter-spacing: .1em; color: var(--muted); margin-bottom: var(--sp-2); }
   .ftag .lock { color: var(--teal); }
   .ftext { font-size: var(--fs-body); color: var(--ink); line-height: var(--lh-snug); min-height: 22px; }
@@ -204,14 +204,14 @@
   .arrow { align-self: center; color: var(--line-2); font-size: 16px; }
   .mdots { display: flex; gap: 5px; justify-content: center; margin: var(--sp-1) 0 var(--sp-2); }
   .md { width: 9px; height: 9px; border-radius: 50%; background: var(--line); transition: background .3s, box-shadow .3s; }
-  .md.on { background: var(--accent); box-shadow: 0 0 8px #e07f0e88; }
+  .md.on { background: var(--accent); }
   .mstate { font-size: var(--fs-micro); color: var(--muted); font-family: var(--mono); }
   .pulse { position: absolute; top: 50%; width: 12px; height: 12px; border-radius: 50%; margin-left: -6px;
-    background: var(--teal); box-shadow: 0 0 14px var(--teal); opacity: 0; }
+    background: var(--teal); opacity: 0; }
   .pulse.show { opacity: 1; }
 
   .clock { display: flex; align-items: baseline; gap: var(--sp-2); margin-bottom: var(--sp-4); }
-  .cnum { font-family: var(--mono); font-size: var(--fs-display); font-weight: 700; color: var(--accent); text-shadow: 0 0 14px #e07f0e55; }
+  .cnum { font-family: var(--mono); font-size: var(--fs-display); font-weight: 700; color: var(--accent); }
   .cunit { font-family: var(--mono); font-size: var(--fs-body); color: var(--muted); }
   .clabel { font-size: var(--fs-micro); color: var(--muted); margin-left: var(--sp-1); }
   .clock .spacer { flex: 1; }

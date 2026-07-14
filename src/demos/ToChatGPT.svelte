@@ -213,7 +213,7 @@
   .step .sn { font-size: var(--fs-cap); color: var(--ink-2); font-weight: 600; }
   .step .se { font-family: var(--mono); font-size: var(--fs-micro); color: var(--muted); letter-spacing: .06em; }
   .step.cur { opacity: 1; transform: translateY(-1px); }
-  .step.cur .ico { border-color: var(--accent); background: var(--accent); color: #241500; box-shadow: 0 0 18px var(--glow); }
+  .step.cur .ico { border-color: var(--accent); background: var(--accent); color: #241500; }
   .step.done { opacity: 1; }
   .step.done .ico { border-color: var(--teal); color: var(--teal); }
   .conn { flex: 1; height: 2px; background: var(--line); margin: 0 2px 22px; transition: background .3s; }
