@@ -126,7 +126,7 @@ svg .node{transition:fill .3s,stroke .3s}
 
 /* ---------- AI Tutor（浮動視窗，容器樣式在 Tutor.svelte）---------- */
 .tutor-head{display:flex;align-items:center;gap:10px;padding:10px 16px;border-bottom:1px solid var(--line)}
-.tutor-head .av{width:26px;height:26px;border-radius:8px;background:var(--teal);
+.tutor-head .av{width:26px;height:26px;border-radius:8px;background:#fff;border:1px solid var(--line);
   display:grid;place-items:center;font-size:14px}
 .tutor-head .nm{font-weight:600;font-size:13.5px}
 .tutor-head .tag{font-family:var(--mono);font-size:10px;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:2px 8px}

@@ -120,10 +120,10 @@
   }
 
   .fab {
-    width: 56px; height: 56px; border-radius: 50%; border: none; cursor: pointer;
-    background: var(--teal);
-    color: #fff; font-size: 24px; display: grid; place-items: center;
-    box-shadow: 0 8px 24px rgba(10, 20, 40, .28), 0 0 0 4px var(--glow);
+    width: 56px; height: 56px; border-radius: 50%; border: 1px solid var(--line-2); cursor: pointer;
+    background: #fff;
+    color: var(--ink); font-size: 24px; display: grid; place-items: center;
+    box-shadow: 0 8px 24px rgba(10, 20, 40, .18);
     transition: transform .15s, box-shadow .2s;
   }
   .fab:hover { transform: translateY(-2px) scale(1.04); }
@@ -140,7 +140,7 @@
   }
 
   .tutor-head .av { width: 26px; height: 26px; border-radius: 8px; display: grid; place-items: center;
-    background: var(--teal); font-size: 14px; }
+    background: #fff; border: 1px solid var(--line); font-size: 14px; }
   .tutor-head .nm { font-weight: 600; font-size: 13.5px; }
   .tutor-head .tag { font-family: var(--mono); font-size: 10px; color: var(--muted); border: 1px solid var(--line); border-radius: 99px; padding: 2px 8px; }
   .tutor-head .spacer { flex: 1; }
