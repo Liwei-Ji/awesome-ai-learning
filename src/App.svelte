@@ -5,12 +5,15 @@
   import Stage from './components/Stage.svelte';
   import Tutor from './components/Tutor.svelte';
   import Home from './components/Home.svelte';
+  import Interview from './components/Interview.svelte';
   import { nav } from './stores/state.svelte.js';
 </script>
 
 <div class="app">
   <SideNav />
-  {#if nav.current == null}
+  {#if nav.mode === 'interview'}
+    <Interview />
+  {:else if nav.current == null}
     <Home />
   {:else}
     <Stage />

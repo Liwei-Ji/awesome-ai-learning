@@ -1,16 +1,34 @@
 <script>
-  // 側欄由 GROUPS + CH 自動生成；新增章節不需改這裡。
+  // 側欄：頂部 [課程 | 面試] 切換。
+  // 課程 mode → GROUPS + CH 自動生成章節清單；
+  // 面試 mode → 題庫（搜尋 + 分類 + 題目 label），沿用同一套 .group/.chap 樣式。
   import { GROUPS } from '../data/chapters.js';
+  import { IV_CATS, ivByCat, ivOf, ivLabel, catNameOf } from '../data/interviews.js';
   import { chOf } from '../data/localize.js';
-  import { nav, go } from '../stores/state.svelte.js';
+  import { nav, go, goIv, setMode } from '../stores/state.svelte.js';
   import { i18n, setLocale, t } from '../stores/i18n.svelte.js';
   import { LOCALES, messages } from '../i18n/index.js';
+
+  let q = $state('');
+  let cats = $derived(
+    IV_CATS.map((c) => {
+      let ids = ivByCat(c.key);
+      const needle = q.trim().toLowerCase();
+      if (needle) ids = ids.filter((id) => (ivLabel(id, i18n.locale) + ivOf(id, i18n.locale).q).toLowerCase().includes(needle));
+      return { key: c.key, name: catNameOf(c.key, i18n.locale), ids };
+    }),
+  );
 </script>
 
 <nav class="nav">
-  <button class="brand" class:on={nav.current == null} onclick={() => go(null)}>
+  <button class="brand" class:on={nav.mode === 'course' && nav.current == null} onclick={() => go(null)}>
     <span class="blogo">🎓</span><span class="bname">{t('brand')}</span>
   </button>
+
+  <div class="modesw" role="group" aria-label="Course / Interview">
+    <button class="ms" class:on={nav.mode === 'course'} onclick={() => setMode('course')}>{t('iv.course')}</button>
+    <button class="ms" class:on={nav.mode === 'interview'} onclick={() => setMode('interview')}>{t('iv.interview')}</button>
+  </div>
 
   <div class="lang" role="group" aria-label="Language / 語言">
     {#each LOCALES as l}
@@ -18,17 +36,37 @@
     {/each}
   </div>
 
-  {#each GROUPS as g}
-    <div class="group">
-      <span class="eyebrow">{t(`group.${g.key}`)}</span>
-      {#each g.ids as id}
-        <button class="chap" aria-current={id === nav.current} onclick={() => go(id)}>
-          <span class="num">{String(id).padStart(2, '0')}</span>
-          <span>{chOf(id).t}</span>
-        </button>
-      {/each}
-    </div>
-  {/each}
+  {#if nav.mode === 'interview'}
+    <div class="ivsearch"><input placeholder={t('iv.search')} bind:value={q} autocomplete="off" /></div>
+    {#each cats as c}
+      {#if !q.trim() || c.ids.length}
+        <div class="group">
+          <span class="eyebrow">{c.name}{#if c.ids.length} · {c.ids.length}{/if}</span>
+          {#if c.ids.length}
+            {#each c.ids as id}
+              <button class="chap" aria-current={id === nav.iv} onclick={() => goIv(id)}>
+                <span class="ivdot">◦</span><span>{ivLabel(id, i18n.locale)}</span>
+              </button>
+            {/each}
+          {:else}
+            <span class="soon">{t('iv.soon')}</span>
+          {/if}
+        </div>
+      {/if}
+    {/each}
+  {:else}
+    {#each GROUPS as g}
+      <div class="group">
+        <span class="eyebrow">{t(`group.${g.key}`)}</span>
+        {#each g.ids as id}
+          <button class="chap" aria-current={id === nav.current} onclick={() => go(id)}>
+            <span class="num">{String(id).padStart(2, '0')}</span>
+            <span>{chOf(id).t}</span>
+          </button>
+        {/each}
+      </div>
+    {/each}
+  {/if}
 </nav>
 
 <style>
@@ -42,6 +80,14 @@
   .brand.on { color: var(--accent-ink); }
   .brand .blogo { font-size: 17px; }
 
+  .modesw { display: flex; gap: 4px; padding: 0 6px; margin-bottom: 8px; }
+  .ms {
+    flex: 1; padding: 6px 6px; border: 1px solid var(--line); border-radius: var(--r-sm);
+    background: var(--surface); color: var(--muted); font-size: 12px; font-weight: 600; transition: .15s;
+  }
+  .ms:hover { border-color: var(--accent); color: var(--accent-ink); }
+  .ms.on { background: var(--ink); border-color: transparent; color: var(--surface); }
+
   .lang { display: flex; gap: 4px; padding: 0 6px; margin-bottom: 10px; }
   .lg {
     flex: 1; padding: 5px 6px; border: 1px solid var(--line); border-radius: var(--r-sm);
@@ -50,4 +96,15 @@
   }
   .lg:hover { border-color: var(--accent); color: var(--accent-ink); }
   .lg.on { background: var(--accent); border-color: transparent; color: #3a1e00; }
+
+  .ivsearch { padding: 0 6px; margin-bottom: 4px; }
+  .ivsearch input {
+    width: 100%; background: var(--surface-2); border: 1px solid var(--line-2);
+    border-radius: var(--r-sm); padding: 7px 10px; color: var(--ink);
+    font-family: inherit; font-size: 12.5px; outline: none;
+  }
+  .ivsearch input:focus { border-color: var(--accent); }
+  .ivdot { font-family: var(--mono); font-size: 11px; color: var(--muted); width: 24px; flex: none; text-align: center; }
+  .chap[aria-current="true"] .ivdot { color: var(--accent-ink); }
+  .soon { display: block; padding: 4px 10px 2px; font-size: 11px; color: var(--muted); font-style: italic; }
 </style>
