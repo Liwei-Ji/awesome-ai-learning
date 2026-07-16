@@ -1,36 +1,28 @@
 /* ============================================================
-   全域可反應狀態（Svelte 5 runes）。
+   全域導覽狀態（Svelte 5 runes）。路徑方案見 lib/router.js。
    兩個 mode：
-     course    —— 課程，nav.current = 章號（null = 課程首頁地圖）
-     interview —— 面試演練，nav.iv = 題目 id（null = 題庫落地頁）
-   兩者各自記住停在哪；頂部切換只是換 mode + 同步網址。
-
-   深連結：?ch=N 開課程某章；?iv=<id> 開面試某題（可分享）。
+     course    課程，nav.current = 章號（null = 課程首頁地圖）
+     interview 進階挑戰，nav.iv = 題目 id（null = 題庫落地頁）
+   語言不放這裡（由 i18n store 管），但一起編碼在路徑前綴。
+   深連結：/course/<slug>、/challenge/<id>（可分享，語言前綴 /zh、/ja）。
    ============================================================ */
-import { CH } from '../data/chapters.js';
+import { parsePath, buildPath } from '../lib/router.js';
+import { i18n, htmlLangOf } from './i18n.svelte.js';
 
 function initial() {
-  const p = new URLSearchParams(location.search);
-  if (p.get('iv') !== null) {
-    return { mode: 'interview', current: null, iv: p.get('iv') || null };
-  }
-  const raw = p.get('ch');
-  const n = raw === null ? null : (CH[Number(raw)] ? Number(raw) : null);
-  return { mode: 'course', current: n, iv: null };
+  const { mode, current, iv } = parsePath(location.pathname);
+  return { mode, current, iv };
 }
 
 export const nav = $state(initial());
 
-function syncURL() {
-  const url = new URL(location.href);
-  url.searchParams.delete('ch');
-  url.searchParams.delete('iv');
-  if (nav.mode === 'interview') {
-    if (nav.iv != null) url.searchParams.set('iv', nav.iv);
-  } else if (nav.current != null) {
-    url.searchParams.set('ch', nav.current);
-  }
-  history.replaceState(null, '', url);
+/** 依 nav + 目前語言重建路徑，寫回網址（預設 push，留下歷史）。 */
+function syncURL(replace = false) {
+  const path = buildPath({ locale: i18n.locale, mode: nav.mode, current: nav.current, iv: nav.iv });
+  if (location.pathname === path && !replace) return; // 已在該路徑，不重複 push
+  const full = path + location.hash;
+  if (replace) history.replaceState(null, '', full);
+  else history.pushState(null, '', full);
 }
 
 /** 切到課程某章；傳 null 回課程首頁 */
@@ -40,7 +32,7 @@ export function go(id) {
   syncURL();
 }
 
-/** 切到面試某題；傳 null 回題庫落地頁 */
+/** 切到進階挑戰某題；傳 null 回題庫落地頁 */
 export function goIv(id) {
   nav.mode = 'interview';
   nav.iv = id;
@@ -51,4 +43,27 @@ export function goIv(id) {
 export function setMode(m) {
   nav.mode = m;
   syncURL();
+}
+
+/** 給 <a href> 用：依目前語言算出目的地路徑（讓爬蟲能跟連結） */
+export const hrefCourse = (id) => buildPath({ locale: i18n.locale, mode: 'course', current: id });
+export const hrefIv = (id) => buildPath({ locale: i18n.locale, mode: 'interview', iv: id });
+
+/** <a> 點擊攔截：純左鍵才走 client 端導覽；cmd/ctrl/shift/中鍵維持「開新分頁」等瀏覽器預設 */
+export function onNav(e, fn) {
+  if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+  e.preventDefault();
+  fn();
+}
+
+// 上一頁／下一頁：從網址還原 nav 與語言
+if (typeof window !== 'undefined') {
+  window.addEventListener('popstate', () => {
+    const { locale, mode, current, iv } = parsePath(location.pathname);
+    nav.mode = mode;
+    nav.current = current;
+    nav.iv = iv;
+    i18n.locale = locale;
+    document.documentElement.lang = htmlLangOf(locale);
+  });
 }

@@ -4,14 +4,16 @@
      用 $effect 更新既有標籤（不新增重複節點）；純 client-side、無後端。
      元件本身不輸出任何畫面。 */
   import { nav } from '../stores/state.svelte.js';
-  import { CH } from '../data/chapters.js';
   import { chOf } from '../data/localize.js';
   import { INTERVIEWS, ivOf } from '../data/interviews.js';
   import { t, i18n } from '../stores/i18n.svelte.js';
+  import { buildPath } from '../lib/router.js';
 
   const strip = (s) => (s || '').replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
   const OG_LOCALE = { en: 'en_US', ja: 'ja_JP', zh: 'zh_TW' };
   const HTML_LANG = { en: 'en', ja: 'ja', zh: 'zh-Hant' };
+  // hreflang：[內部 locale, hreflang 代碼]
+  const HREFLANG = [['en', 'en'], ['ja', 'ja'], ['zh', 'zh-Hant']];
 
   let brand = $derived(t('brand'));
 
@@ -32,14 +34,11 @@
     return { title: `${ch.t} · ${brand}`, desc: strip(ch.sub) };
   });
 
-  // canonical：從 nav＋語言重建（比 location.href 可靠，因為 go() 用 replaceState 不觸發反應）
+  // 本頁路由（語言之外），供 canonical 與 hreflang 各語言重建路徑用
+  let route = $derived({ mode: nav.mode, current: nav.current, iv: nav.iv });
   let canonical = $derived.by(() => {
     if (typeof location === 'undefined') return '';
-    const u = new URL(location.origin + location.pathname);
-    if (nav.mode === 'interview') { if (nav.iv != null) u.searchParams.set('iv', nav.iv); }
-    else if (nav.current != null) u.searchParams.set('ch', String(nav.current));
-    if (i18n.locale !== 'en') u.searchParams.set('lang', i18n.locale);
-    return u.href;
+    return location.origin + buildPath({ ...route, locale: i18n.locale });
   });
 
   function setMeta(attr, key, val) {
@@ -50,6 +49,16 @@
   function setLink(rel, href) {
     let el = document.head.querySelector(`link[rel="${rel}"]`);
     if (!el) { el = document.createElement('link'); el.setAttribute('rel', rel); document.head.appendChild(el); }
+    el.setAttribute('href', href);
+  }
+  function setAlt(hreflang, href) {
+    let el = document.head.querySelector(`link[rel="alternate"][hreflang="${hreflang}"]`);
+    if (!el) {
+      el = document.createElement('link');
+      el.setAttribute('rel', 'alternate');
+      el.setAttribute('hreflang', hreflang);
+      document.head.appendChild(el);
+    }
     el.setAttribute('href', href);
   }
 
@@ -64,5 +73,11 @@
     setMeta('name', 'twitter:title', meta.title);
     setMeta('name', 'twitter:description', meta.desc);
     setLink('canonical', canonical);
+    // hreflang 三語互指 + x-default（指向英文，主要語言）
+    if (typeof location !== 'undefined') {
+      const origin = location.origin;
+      for (const [loc, hl] of HREFLANG) setAlt(hl, origin + buildPath({ ...route, locale: loc }));
+      setAlt('x-default', origin + buildPath({ ...route, locale: 'en' }));
+    }
   });
 </script>

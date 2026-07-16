@@ -3,8 +3,8 @@
      Hero + CTA（開始學習）+ 七大階段，每章可點擊直達。亮色編輯風。 */
   import { CH } from '../data/chapters.js';
   import { chOf } from '../data/localize.js';
-  import { ROOT, BRANCHES, FLOW, SUB, PREREQ } from '../data/graph.js';
-  import { go } from '../stores/state.svelte.js';
+  import { BRANCHES, FLOW, SUB, PREREQ } from '../data/graph.js';
+  import { go, hrefCourse, onNav } from '../stores/state.svelte.js';
   import { t } from '../stores/i18n.svelte.js';
   import { fly } from 'svelte/transition';
   import { dur, D, ease } from '../lib/motion.js';
@@ -64,19 +64,20 @@
       <h1>{t('home.title')}</h1>
       <p class="lede">{@html t('home.lede')}</p>
       <div class="cta">
-        <button class="btn primary lg" onclick={() => go(0)}>{t('home.start')}</button>
+        <a class="btn primary lg" href={hrefCourse(0)} onclick={(e) => onNav(e, () => go(0))}>{t('home.start')}</a>
       </div>
     </header>
 
     {#snippet nodeBtn(id)}
-      <button class="node" class:cur={id === hovered} class:link={connected.has(id)}
+      <a class="node" class:cur={id === hovered} class:link={connected.has(id)}
         bind:this={nodeEls[id]}
-        onclick={() => go(id)}
+        href={hrefCourse(id)}
+        onclick={(e) => onNav(e, () => go(id))}
         onmouseenter={() => (hovered = id)} onmouseleave={() => (hovered = null)}
         onfocus={() => (hovered = id)} onblur={() => (hovered = null)}>
         <span class="nn mono">{String(id).padStart(2, '0')}</span><span class="nt">{chOf(id).t}</span>
         {#if SUB[CH[id].slug]}<span class="subs">{#each SUB[CH[id].slug] as s}<span class="subtag">{s}</span>{/each}</span>{/if}
-      </button>
+      </a>
     {/snippet}
 
     <section class="archmap">
@@ -91,7 +92,7 @@
           {/each}
         </svg>
 
-        <div class="root">{ROOT}</div>
+        <div class="root">{t('home.mapRoot')}</div>
         <div class="stem" aria-hidden="true"></div>
 
         <div class="branches">
@@ -150,6 +151,7 @@
   .node { position: relative; z-index: 2; display: inline-flex; align-items: center; gap: 8px;
     padding: 8px 12px; border: 1px solid var(--line); border-radius: var(--r-sm);
     background: var(--surface); color: var(--ink-2); font-size: var(--fs-sm); text-align: left;
+    text-decoration: none; cursor: pointer;
     transition: border-color .15s, color .15s, box-shadow .15s; }
   .node:hover, .node.cur { border-color: var(--accent); color: var(--accent-ink); box-shadow: 0 2px 8px rgba(20,30,55,.08); }
   .node.link { border-color: var(--teal); color: var(--teal); }

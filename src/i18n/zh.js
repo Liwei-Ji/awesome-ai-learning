@@ -16,6 +16,7 @@ export default {
     lede: '我們把複雜的概念拆成一個個容易理解的知識點，不用死背名詞，也不用面對一整面公式。每一章都搭配<b>互動 Demo</b>，讓你邊操作、邊理解，從「AI 是什麼」一路學到能<b>自己組裝 AI 方案</b>。',
     start: '開始學習 →',
     mapTitle: 'AI 知識地圖',
+    mapRoot: 'AI（人工智慧）',
   },
   stage: { keyPoints: '重點整理', keyTerms: '關鍵名詞', knowledge: '知識庫 · 延伸知識點' },
   tutor: {

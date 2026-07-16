@@ -5,7 +5,7 @@
   import { GROUPS } from '../data/chapters.js';
   import { IV_CATS, ivByCat, ivOf, ivLabel, catNameOf } from '../data/interviews.js';
   import { chOf } from '../data/localize.js';
-  import { nav, go, goIv, setMode } from '../stores/state.svelte.js';
+  import { nav, go, goIv, setMode, hrefCourse, hrefIv, onNav } from '../stores/state.svelte.js';
   import { i18n, setLocale, t } from '../stores/i18n.svelte.js';
   import { LOCALES, messages } from '../i18n/index.js';
 
@@ -22,13 +22,13 @@
 
 <nav class="nav">
   <div class="nav-scroll">
-    <button class="brand" class:on={nav.mode === 'course' && nav.current == null} onclick={() => go(null)}>
+    <a class="brand" class:on={nav.mode === 'course' && nav.current == null} href={hrefCourse(null)} onclick={(e) => onNav(e, () => go(null))}>
       <span class="blogo">🎓</span><span class="bname">{t('brand')}</span>
-    </button>
+    </a>
 
     <div class="modesw" role="group" aria-label="Course / Interview">
-      <button class="ms" class:on={nav.mode === 'course'} onclick={() => setMode('course')}>{t('iv.course')}</button>
-      <button class="ms" class:on={nav.mode === 'interview'} onclick={() => setMode('interview')}>{t('iv.interview')}</button>
+      <a class="ms" class:on={nav.mode === 'course'} href={hrefCourse(null)} onclick={(e) => onNav(e, () => setMode('course'))}>{t('iv.course')}</a>
+      <a class="ms" class:on={nav.mode === 'interview'} href={hrefIv(null)} onclick={(e) => onNav(e, () => setMode('interview'))}>{t('iv.interview')}</a>
     </div>
 
     {#if nav.mode === 'interview'}
@@ -39,9 +39,9 @@
             <span class="eyebrow">{c.name}{#if c.ids.length} · {c.ids.length}{/if}</span>
             {#if c.ids.length}
               {#each c.ids as id}
-                <button class="chap" aria-current={id === nav.iv} onclick={() => goIv(id)}>
+                <a class="chap" aria-current={id === nav.iv} href={hrefIv(id)} onclick={(e) => onNav(e, () => goIv(id))}>
                   <span class="ivdot">◦</span><span>{ivLabel(id, i18n.locale)}</span>
-                </button>
+                </a>
               {/each}
             {:else}
               <span class="soon">{t('iv.soon')}</span>
@@ -54,10 +54,10 @@
         <div class="group">
           <span class="eyebrow">{t(`group.${g.key}`)}</span>
           {#each g.ids as id}
-            <button class="chap" aria-current={id === nav.current} onclick={() => go(id)}>
+            <a class="chap" aria-current={id === nav.current} href={hrefCourse(id)} onclick={(e) => onNav(e, () => go(id))}>
               <span class="num">{String(id).padStart(2, '0')}</span>
               <span>{chOf(id).t}</span>
-            </button>
+            </a>
           {/each}
         </div>
       {/each}
@@ -83,7 +83,7 @@
     display: flex; align-items: center; gap: 9px; width: 100%; text-align: left;
     padding: 6px 10px 8px; margin-bottom: 10px; background: none; border: none;
     color: var(--ink); font-weight: 700; font-size: 15px; letter-spacing: var(--ls-tight);
-    border-radius: var(--r-sm); transition: background .15s;
+    border-radius: var(--r-sm); transition: background .15s; text-decoration: none;
   }
   .brand:hover { background: var(--surface-2); }
   .brand.on { color: var(--accent-ink); }
@@ -94,6 +94,7 @@
   .ms {
     flex: 1; padding: 7px 6px; border: 1px solid var(--line); border-radius: var(--r-sm);
     background: var(--surface); color: var(--muted); font-size: 12.5px; font-weight: 600; transition: .15s;
+    text-align: center; text-decoration: none; cursor: pointer;
   }
   .ms:hover { border-color: var(--accent); color: var(--accent-ink); }
   .ms.on { background: var(--ink); border-color: transparent; color: var(--surface); }

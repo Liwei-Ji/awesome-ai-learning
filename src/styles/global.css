@@ -33,7 +33,7 @@ button{font-family:inherit; cursor:pointer}
 .nav .group>.eyebrow{padding:6px 10px 8px; display:block}
 .chap{display:flex; align-items:center; gap:10px; width:100%; text-align:left;
   padding:8px 10px; border-radius:var(--r-sm); border:1px solid transparent; background:none;
-  color:var(--ink-2); font-size:var(--fs-sm); transition:background .15s}
+  color:var(--ink-2); font-size:var(--fs-sm); transition:background .15s; text-decoration:none}
 .chap:hover{background:var(--surface-2); color:var(--ink)}
 .chap[aria-current="true"]{background:var(--surface-3); color:var(--ink); font-weight:600}
 .chap .num{font-family:var(--mono); font-size:11px; color:var(--muted); width:24px; flex:none}
@@ -59,7 +59,7 @@ button{font-family:inherit; cursor:pointer}
 .panel-h .eyebrow{font-size:var(--fs-eyebrow)}
 
 .btn{border:1px solid var(--line-2);background:var(--surface-2);color:var(--ink);
-  padding:8px 14px;border-radius:var(--r-sm);font-size:var(--fs-sm);font-weight:550;transition:.15s;display:inline-flex;align-items:center;gap:7px}
+  padding:8px 14px;border-radius:var(--r-sm);font-size:var(--fs-sm);font-weight:550;transition:.15s;display:inline-flex;align-items:center;gap:7px;text-decoration:none}
 .btn:hover{border-color:var(--accent);color:var(--accent-ink)}
 .btn.primary{background:var(--accent);border-color:transparent;color:#3a1e00}
 .btn.primary:hover{filter:brightness(1.06);color:#3a1e00}

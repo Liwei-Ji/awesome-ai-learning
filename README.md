@@ -1,32 +1,45 @@
 # Awesome AI Learning
 
-> 從零開始，真正搞懂 AI。
+> Understand AI from scratch, for real.
 
-![Awesome AI Learning — 課程總覽與 AI 知識地圖](docs/screenshot.png)
+![Awesome AI Learning: course overview and the AI knowledge map](docs/screenshot.png)
 
-一個互動式 AI 學習平台：不需程式基礎，打開就能學。每章專注一個核心概念，搭配可親手操作的互動 Demo——邊玩邊懂，從 AI 的基本原理，一路到組裝自己的 AI 應用。介面與教材支援 **English／日本語／繁體中文**，隨時一鍵切換。
+An interactive AI learning platform: no coding background needed, just open it and start. Each chapter focuses on one core idea and pairs it with a hands-on interactive demo, so you learn by doing, from the basic principles of AI all the way to assembling your own AI application. The interface and all the material come in **English, 日本語 and 繁體中文**, switchable anytime.
 
-## 特色
+## Features
 
-- **邊玩邊理解**：每章一個互動 Demo，操作中看懂原理，不用死背名詞、也不被公式嚇退。
-- **循序漸進**：序章＋六章、28 堂課，前一章自然銜接下一章。
-- **AI 教授隨時問**：內建離線知識庫助教，學習中有疑問直接提問，不怕卡關（純離線，不呼叫外部模型）。
-- **重點好複習**：每章附重點摘要、關鍵名詞與延伸知識。
-- **三語學習**：English／日本語／繁體中文，切換語言連教材一起換。
+- **Learn by doing**: every chapter has an interactive demo. You grasp the idea by operating it, with no jargon to memorize and no formulas to fear.
+- **Step by step**: a prologue plus six chapters, 28 lessons that build naturally on one another.
+- **Ask Professor AI anytime**: a built-in offline knowledge-base tutor. Ask questions as you learn so you never get stuck (fully offline, no external model calls).
+- **Easy to review**: each chapter comes with a summary, key terms and further reading.
+- **Trilingual**: English, 日本語, 繁體中文. Switching language switches the material too.
 
-## 課程地圖
+## Course map
 
-**序章** · AI 簡史
+**Prologue** · A brief history of AI
 
-- **① AI 基礎** — AI 是什麼 → 機器學習 → 資料（AI 的養分）
-- **② AI 如何學習** — 深度學習 → 神經網路 → 訓練（梯度下降）→ 反向傳播
-- **③ 大型語言模型 LLM** — Tokenizer → Embedding → Transformer → 大型語言模型 → Model Size → Context Window → 推論
-- **④ 從模型到 ChatGPT** — 從模型到 ChatGPT → Fine-tuning
-- **⑤ 生成式 AI 與 AI Agent** — Prompt → 生成式 AI → 多模態 → RAG → Memory → MCP → AI Agent → AI 系統整合
-- **⑥ AI 素養** — AI 的極限 → AI 評估 → 你能用 AI 做什麼
+- **① AI foundations**: What is AI → Machine learning → Data (the fuel of AI)
+- **② How AI learns**: Deep learning → Neural networks → Training (gradient descent) → Backpropagation
+- **③ Large language models (LLM)**: Tokenizer → Embedding → Transformer → Large language models → Model size → Context window → Inference
+- **④ From model to ChatGPT**: From model to ChatGPT → Fine-tuning
+- **⑤ Generative AI and AI agents**: Prompt → Generative AI → Multimodal → RAG → Memory → MCP → AI agent → System integration
+- **⑥ AI literacy**: The limits of AI → Evaluation → What you can do with AI
 
-## 開始學習
+Beyond the course, a **Challenges** mode collects advanced interview-style questions across principles, training, inference, prompting, retrieval, agents, generative models, literacy and system design, each with a think-then-reveal answer.
 
-打開網站按 **「開始學習」** 進入第一課，或從課程地圖挑任一章開始。跟著互動 Demo 一步步探索，卡住就問 AI 教授。
+## Getting started
 
-目標是讓你真正**理解** AI，而不只是學會使用 AI。
+Open the site and hit **"Start learning"** to enter the first lesson, or pick any chapter from the course map. Follow the interactive demos step by step, and ask Professor AI whenever you get stuck.
+
+The goal is for you to truly **understand** AI, not just learn to use it.
+
+## Tech
+
+Built with Vite 6 and Svelte 5. Fully frontend, zero backend, no runtime LLM: the tutor answers from a local knowledge base, so everything works offline.
+
+```bash
+npm install
+npm run dev      # local development
+npm run build    # production build to dist/
+npm run preview  # preview the production build
+```

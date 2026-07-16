@@ -13,9 +13,10 @@ export default {
   },
   home: {
     title: 'Start from zero, build a solid AI foundation',
-    lede: 'We break complex ideas into bite-sized concepts—no jargon to memorize, no walls of formulas. Every chapter comes with a <b>hands-on interactive demo</b>, so you learn by doing—from “What is AI?” all the way to <b>assembling your own AI solution</b>.',
+    lede: 'We break complex ideas into bite-sized concepts, with no jargon to memorize and no walls of formulas. Every chapter comes with a <b>hands-on interactive demo</b>, so you learn by doing, from “What is AI?” all the way to <b>assembling your own AI solution</b>.',
     start: 'Start learning →',
     mapTitle: 'AI Knowledge Map',
+    mapRoot: 'AI (Artificial Intelligence)',
   },
   stage: { keyPoints: 'Key Points', keyTerms: 'Key Terms', knowledge: 'Knowledge Base · Going Deeper' },
   tutor: {

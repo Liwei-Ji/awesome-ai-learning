@@ -362,7 +362,7 @@ const OUTLINE = [
 // ---------- 派生：有序 slug、章號、CH、GROUPS ----------
 // 序章 history 編號 0（00），其餘課程接續 1、2、3…（首頁 sentinel 改用「無 ?ch」）
 const ORDER = [...PROLOGUE.slugs, ...OUTLINE.flatMap((g) => g.slugs)];
-const idOf = (slug) => ORDER.indexOf(slug);
+export const idOf = (slug) => ORDER.indexOf(slug);
 
 /** 章號 → { slug, ...資料 }（history = 0，其餘 1..25） */
 export const CH = Object.fromEntries(ORDER.map((slug, i) => [i, { slug, ...DATA[slug] }]));
