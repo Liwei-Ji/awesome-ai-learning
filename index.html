@@ -25,6 +25,37 @@
     <meta name="twitter:description" content="從零開始，用互動 Demo 一步步搞懂 AI。28 堂課，不用死背名詞、也不用被公式嚇退。" />
 
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='88'%3E%F0%9F%8E%93%3C/text%3E%3C/svg%3E" />
+
+    <!-- 結構化資料（schema.org）：網站＋教育機構＋課程。每頁的 title/description/canonical 由 Seo.svelte 於 client 端依路由與語言更新。 -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "name": "Awesome AI Learning",
+          "alternateName": "AI 學院",
+          "description": "互動式 AI 學習平台：用可親手操作的互動 Demo 從零搞懂 AI，並附進階面試挑戰題。支援 English／日本語／繁體中文。",
+          "inLanguage": ["zh-Hant", "en", "ja"]
+        },
+        {
+          "@type": "EducationalOrganization",
+          "name": "Awesome AI Learning",
+          "description": "從零開始、邊玩邊懂的互動式 AI 教學。"
+        },
+        {
+          "@type": "Course",
+          "name": "Awesome AI Learning — 互動式 AI 課程",
+          "description": "序章加六章、共 28 堂課，從「AI 是什麼」一路到組裝自己的 AI 應用；每章搭配互動 Demo，另有進階面試挑戰題庫。",
+          "inLanguage": ["zh-Hant", "en", "ja"],
+          "teaches": ["機器學習", "深度學習", "神經網路", "Transformer", "Attention", "Embedding", "大型語言模型 LLM", "RAG", "AI Agent", "Prompt 工程", "生成式 AI"],
+          "provider": { "@type": "EducationalOrganization", "name": "Awesome AI Learning" },
+          "isAccessibleForFree": true,
+          "educationalLevel": "Beginner to Intermediate"
+        }
+      ]
+    }
+    </script>
   </head>
   <body>
     <div id="app"></div>

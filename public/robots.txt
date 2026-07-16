@@ -1,0 +1,4 @@
+# Awesome AI Learning
+# 允許所有爬蟲索引。部署後可在此加一行 Sitemap: https://<你的網域>/sitemap.xml
+User-agent: *
+Allow: /

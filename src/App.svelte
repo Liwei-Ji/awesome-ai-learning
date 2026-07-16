@@ -6,8 +6,11 @@
   import Tutor from './components/Tutor.svelte';
   import Home from './components/Home.svelte';
   import Interview from './components/Interview.svelte';
+  import Seo from './components/Seo.svelte';
   import { nav } from './stores/state.svelte.js';
 </script>
+
+<Seo />
 
 <div class="app">
   <SideNav />
