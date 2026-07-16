@@ -38,7 +38,7 @@
     const u = new URL(location.origin + location.pathname);
     if (nav.mode === 'interview') { if (nav.iv != null) u.searchParams.set('iv', nav.iv); }
     else if (nav.current != null) u.searchParams.set('ch', String(nav.current));
-    if (i18n.locale !== 'zh') u.searchParams.set('lang', i18n.locale);
+    if (i18n.locale !== 'en') u.searchParams.set('lang', i18n.locale);
     return u.href;
   });
 
@@ -55,11 +55,11 @@
 
   $effect(() => {
     document.title = meta.title;
-    document.documentElement.lang = HTML_LANG[i18n.locale] || 'zh-Hant';
+    document.documentElement.lang = HTML_LANG[i18n.locale] || 'en';
     setMeta('name', 'description', meta.desc);
     setMeta('property', 'og:title', meta.title);
     setMeta('property', 'og:description', meta.desc);
-    setMeta('property', 'og:locale', OG_LOCALE[i18n.locale] || 'zh_TW');
+    setMeta('property', 'og:locale', OG_LOCALE[i18n.locale] || 'en_US');
     setMeta('property', 'og:url', canonical);
     setMeta('name', 'twitter:title', meta.title);
     setMeta('name', 'twitter:description', meta.desc);

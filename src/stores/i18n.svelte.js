@@ -1,6 +1,7 @@
 /* ============================================================
    語言狀態（Svelte 5 runes）。
-   locale：'zh' | 'en' | 'ja'。來源優先序：?lang= → localStorage → 瀏覽器語言 → zh。
+   locale：'zh' | 'en' | 'ja'。來源優先序：?lang= → localStorage → 瀏覽器語言 → en（主要語言）。
+   內容資料層以 zh 為底、en/ja 為翻譯層（見 localize.js），與此顯示語言預設無關。
    t(key)：以點路徑取 UI 字串，缺該語言時 fallback 回中文。
    內容層（章節/知識庫/demo）另以 data 綁定，不透過這裡。
    ============================================================ */
@@ -15,10 +16,10 @@ function initialLocale() {
     const saved = localStorage.getItem('locale');
     if (LOCALES.includes(saved)) return saved;
     const nav = (navigator.language || '').toLowerCase();
+    if (nav.startsWith('zh')) return 'zh';
     if (nav.startsWith('ja')) return 'ja';
-    if (nav.startsWith('en')) return 'en';
   } catch { /* SSR/無 window 時忽略 */ }
-  return 'zh';
+  return 'en';
 }
 
 export const i18n = $state({ locale: initialLocale() });
@@ -33,7 +34,7 @@ export function setLocale(l) {
   try {
     localStorage.setItem('locale', l);
     const url = new URL(location.href);
-    if (l === 'zh') url.searchParams.delete('lang');
+    if (l === 'en') url.searchParams.delete('lang');
     else url.searchParams.set('lang', l);
     history.replaceState(null, '', url);
     document.documentElement.lang = htmlLangOf(l);

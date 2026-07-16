@@ -1,54 +1,61 @@
 <!doctype html>
-<html lang="zh-Hant">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
-    <!-- SEO -->
-    <title>Awesome AI Learning</title>
-    <meta name="description" content="互動式繁體中文 AI 學習平台。從零開始，用可親手操作的互動 Demo 一步步搞懂 AI——從「AI 是什麼」到組裝自己的 AI 應用，共 28 堂課，不用死背名詞、也不用被公式嚇退。" />
-    <meta name="keywords" content="AI 學習,人工智慧,機器學習,深度學習,神經網路,大型語言模型,LLM,Transformer,ChatGPT,互動教學,繁體中文" />
-    <meta name="author" content="AI 學院" />
+    <!-- SEO (English is the primary language; per-locale title/description set at runtime by Seo.svelte) -->
+    <title>Awesome AI Learning: Learn AI from Scratch, Interactively</title>
+    <meta name="description" content="Learn AI from scratch through hands-on interactive demos, from what AI is to building your own AI apps. 28 lessons, no jargon, no scary math. Available in English, 日本語 and 繁體中文." />
+    <meta name="keywords" content="AI, artificial intelligence, machine learning, deep learning, neural networks, large language models, LLM, Transformer, ChatGPT, embeddings, RAG, AI agents, prompt engineering, interactive learning" />
+    <meta name="author" content="Awesome AI Learning" />
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#e07f0e" />
+    <link rel="canonical" href="https://awesome-ai-learning.vercel.app/" />
 
-    <!-- Open Graph（Facebook／LINE 等分享預覽）-->
+    <!-- Open Graph (social sharing preview) -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Awesome AI Learning" />
-    <meta property="og:title" content="Awesome AI Learning — 互動式 AI 學習平台" />
-    <meta property="og:description" content="從零開始，用互動 Demo 一步步搞懂 AI。28 堂課，不用死背名詞、也不用被公式嚇退。" />
-    <meta property="og:locale" content="zh_TW" />
+    <meta property="og:title" content="Awesome AI Learning: Learn AI from Scratch, Interactively" />
+    <meta property="og:description" content="Understand AI from scratch through hands-on interactive demos. 28 lessons, no jargon, no scary math. In English, 日本語 and 繁體中文." />
+    <meta property="og:url" content="https://awesome-ai-learning.vercel.app/" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="ja_JP" />
+    <meta property="og:locale:alternate" content="zh_TW" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="Awesome AI Learning — 互動式 AI 學習平台" />
-    <meta name="twitter:description" content="從零開始，用互動 Demo 一步步搞懂 AI。28 堂課，不用死背名詞、也不用被公式嚇退。" />
+    <meta name="twitter:title" content="Awesome AI Learning: Learn AI from Scratch, Interactively" />
+    <meta name="twitter:description" content="Understand AI from scratch through hands-on interactive demos. 28 lessons, no jargon, no scary math. In English, 日本語 and 繁體中文." />
 
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='88'%3E%F0%9F%8E%93%3C/text%3E%3C/svg%3E" />
 
-    <!-- 結構化資料（schema.org）：網站＋教育機構＋課程。每頁的 title/description/canonical 由 Seo.svelte 於 client 端依路由與語言更新。 -->
+    <!-- Structured data (schema.org): WebSite + EducationalOrganization + Course. Per-page title/description/canonical are updated client-side by Seo.svelte. -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@graph": [
         {
           "@type": "WebSite",
+          "url": "https://awesome-ai-learning.vercel.app/",
           "name": "Awesome AI Learning",
           "alternateName": "AI 學院",
-          "description": "互動式 AI 學習平台：用可親手操作的互動 Demo 從零搞懂 AI，並附進階面試挑戰題。支援 English／日本語／繁體中文。",
-          "inLanguage": ["zh-Hant", "en", "ja"]
+          "description": "An interactive AI learning platform. Understand AI from scratch through hands-on demos, plus an advanced interview-style challenge bank. Available in English, 日本語 and 繁體中文.",
+          "inLanguage": ["en", "ja", "zh-Hant"]
         },
         {
           "@type": "EducationalOrganization",
+          "url": "https://awesome-ai-learning.vercel.app/",
           "name": "Awesome AI Learning",
-          "description": "從零開始、邊玩邊懂的互動式 AI 教學。"
+          "description": "Interactive, hands-on AI education you learn by doing."
         },
         {
           "@type": "Course",
-          "name": "Awesome AI Learning — 互動式 AI 課程",
-          "description": "序章加六章、共 28 堂課，從「AI 是什麼」一路到組裝自己的 AI 應用；每章搭配互動 Demo，另有進階面試挑戰題庫。",
-          "inLanguage": ["zh-Hant", "en", "ja"],
-          "teaches": ["機器學習", "深度學習", "神經網路", "Transformer", "Attention", "Embedding", "大型語言模型 LLM", "RAG", "AI Agent", "Prompt 工程", "生成式 AI"],
+          "url": "https://awesome-ai-learning.vercel.app/",
+          "name": "Awesome AI Learning: Interactive AI Course",
+          "description": "A prologue plus six chapters, 28 lessons in total, from what AI is all the way to assembling your own AI applications. Each chapter pairs with an interactive demo, plus an advanced interview-style challenge bank.",
+          "inLanguage": ["en", "ja", "zh-Hant"],
+          "teaches": ["Machine learning", "Deep learning", "Neural networks", "Transformer", "Attention", "Embeddings", "Large language models (LLM)", "RAG", "AI agents", "Prompt engineering", "Generative AI"],
           "provider": { "@type": "EducationalOrganization", "name": "Awesome AI Learning" },
           "isAccessibleForFree": true,
           "educationalLevel": "Beginner to Intermediate"
