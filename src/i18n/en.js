@@ -31,7 +31,7 @@ export default {
   },
   iv: {
     course: 'Course',
-    interview: 'Interview Prep',
+    interview: 'Challenges',
     search: 'Search questions…',
     tested: 'What’s being tested',
     think: 'Think for 30s first, then reveal the model answer.',
@@ -42,7 +42,7 @@ export default {
     traps: 'Common traps',
     related: 'Related chapters',
     soon: 'Coming soon',
-    landingTitle: 'Interview Prep',
+    landingTitle: 'Challenges',
     landingLede: 'Take what you learned and stress-test it in interview scenarios. Pick a question on the left, think first, then reveal the model answer and what’s being tested.',
   },
 };

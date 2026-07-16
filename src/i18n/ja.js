@@ -31,7 +31,7 @@ export default {
   },
   iv: {
     course: 'コース',
-    interview: '面接演習',
+    interview: 'チャレンジ',
     search: '質問を検索…',
     tested: '何が問われるか',
     think: 'まず30秒考えてから、模範回答を開こう。',
@@ -42,7 +42,7 @@ export default {
     traps: 'よくある地雷',
     related: '関連章',
     soon: '準備中',
-    landingTitle: '面接演習',
+    landingTitle: 'チャレンジ',
     landingLede: '学んだ概念を、面接のシナリオで試そう。左から質問を選び、まず自分で考えてから、模範回答と着眼点を開こう。',
   },
 };

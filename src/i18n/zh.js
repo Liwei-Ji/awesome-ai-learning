@@ -31,7 +31,7 @@ export default {
   },
   iv: {
     course: '課程',
-    interview: '面試演練',
+    interview: '進階挑戰',
     search: '搜尋題目…',
     tested: '這題在考什麼',
     think: '先自己想 30 秒，再看示範回答。',
@@ -42,7 +42,7 @@ export default {
     traps: '常見地雷',
     related: '關聯章節',
     soon: '敬請期待',
-    landingTitle: '面試演練',
+    landingTitle: '進階挑戰',
     landingLede: '把學過的概念，放進面試情境壓測。左邊選一題，先自己想，再看示範回答與考點。',
   },
 };
