@@ -37,6 +37,62 @@ const CAT_TR = {
 };
 
 export const INTERVIEWS = {
+  "realtime-assistant": {
+    cat: "design",
+    label: "設計即時資料助理",
+    q: "怎麼設計一個能查即時資料的 AI 助理？",
+    trap: "別只答「接個 API」。面試官要看你把<b>模型不會即時知道 → 靠工具/檢索補 → 還要處理失敗與權限</b>整條串起來。",
+    points: [
+      { icon: "atom", title: "拆解問題", desc: "模型知識有截止日、也不會主動連網；「即時」得靠<b>外部工具（function calling / API）或即時檢索</b>把最新資料餵進去，模型只負責理解與組織。" },
+      { icon: "scale", title: "架構取捨", desc: "每次都即時查→最新但慢又貴、還可能失敗；加快取→快又省但可能給到過期資料。要依「資料多快變」決定快取時效。" },
+      { icon: "network", title: "落地與迭代", desc: "完整迴圈：判斷是否需要查 → 呼叫工具/檢索 → 驗證與失敗處理（逾時/重試/降級）→ 帶結果作答並標時間與來源 → 監控。" },
+    ],
+    core: [
+      { h: "先點根本", d: "模型<b>知識有截止、不會主動連網</b>，所以「即時」不是模型本身能做，是靠<b>工具或檢索</b>把最新資料拉進來、它再理解組織。" },
+      { h: "架構", d: "① 判斷這題要不要即時資料；② 要→用 <b>function calling / API 或即時檢索</b>取回；③ 把結果（含<b>時間戳、來源</b>）放進 prompt 讓它作答。" },
+      { h: "關鍵取捨", d: "<b>即時查 vs 快取</b>：每次查最新但慢貴、快取快省但會過期。依資料變動速度設快取時效（股價幾秒、天氣幾分、內部資料幾小時）。" },
+      { h: "別忘了", d: "<b>失敗處理</b>（逾時、重試、查不到就誠實說沒有）、<b>權限與成本上限</b>、以及監控查詢成功率；把「查不到」也當成正常路徑。" },
+    ],
+    plus: [
+      "MCP 可把多種即時來源用統一協定接上（見 MCP）。",
+      "快取可分層：短期記憶體快取＋語意快取（相似問題重用）。",
+      "標註資料時間與來源，讓使用者能判斷新鮮度與可信度。",
+    ],
+    traps: [
+      "只答「接個 API」，不提失敗處理與快取取捨。",
+      "每次都即時查，慢、貴、又容易被單點失敗拖垮。",
+      "給了過期快取卻不標時間，使用者以為是最新。",
+    ],
+    related: ["agent", "mcp", "rag", "integration"],
+  },
+  "monitoring": {
+    cat: "design",
+    label: "設計上線監控",
+    q: "怎麼設計一個 AI 產品的「上線監控」？",
+    trap: "別只答「看有沒有報錯」。AI 最大的風險常是<b>沉默的品質下降</b>（沒 crash 但答得越來越爛）；面試官要你監控「品質」不只「可用性」。",
+    points: [
+      { icon: "atom", title: "拆解問題", desc: "傳統監控看「有沒有掛」（延遲、錯誤率）；AI 還要看「<b>答得好不好</b>」：品質會<b>無聲漂移</b>（資料變、被攻擊、模型更新），而且不會報錯。" },
+      { icon: "scale", title: "架構取捨", desc: "全部人工審→準但貴慢、覆蓋不了量；全自動指標→快但抓不到細微品質；實務常是自動指標＋抽樣人審＋使用者回饋三者搭。" },
+      { icon: "network", title: "落地與迭代", desc: "一套閉環：埋點收集（輸入/輸出/延遲/成本/回饋）→ 指標與告警 → 抓異常與失敗案例 → 進回歸測試集 → 改進。" },
+    ],
+    core: [
+      { h: "先破除誤解", d: "AI 監控不只看「有沒有掛」；最大的風險是<b>沉默的品質下降</b>：沒 crash，但因資料變化、被攻擊、或換模型而答得越來越差。" },
+      { h: "監控什麼", d: "① <b>系統面</b>：延遲、錯誤率、成本、用量；② <b>品質面</b>：任務成功率、幻覺/拒答率、使用者回饋（讚踩、重問率）；③ <b>安全面</b>：注入/越獄嘗試、異常行為。" },
+      { h: "怎麼察覺退化", d: "線上難有標準答案，重點是<b>偵測「變化」</b>：指標趨勢與分佈對照<b>上線基線</b>、定期抽樣打分追蹤、負評與重問率的異常波動，並設<b>告警門檻</b>；至於怎麼「判斷好壞」本身，見「評估並持續改善」。" },
+      { h: "出事怎麼辦", d: "閉環是<b>告警 → 分流定位（哪個環節、哪個模型）→ 止血（回滾或灰度切回舊版）→ 記錄復盤</b>；把失敗案例回灌測試集去改進，交給評估流程。監控的價值在<b>早發現、能定位、能快速止血</b>。" },
+    ],
+    plus: [
+      "全程 audit log（輸入/輸出/工具呼叫），出事能回溯。",
+      "canary/灰度發布：換模型先小流量觀察再全量。",
+      "成本與延遲要能拆到「哪個環節、哪個模型」才好優化。",
+    ],
+    traps: [
+      "只監控「有沒有報錯」，漏掉沉默的品質漂移。",
+      "沒有離線回歸集，改了 prompt 或模型不知變好變壞。",
+      "換模型直接全量上，出事才發現。",
+    ],
+    related: ["evaluation", "integration", "limits"],
+  },
   "prompt-injection": {
     cat: "literacy",
     label: "Prompt Injection",
@@ -1378,6 +1434,58 @@ export const INTERVIEWS = {
 // 各語言的內容翻譯（欄位與 base 對齊；points 只翻 title/desc，icon 沿用 base）
 const INT_TR = {
   en: {
+    "realtime-assistant": {
+      label: "Designing a real-time assistant",
+      q: "How would you design an AI assistant that can look up real-time data?",
+      trap: "Don’t just answer “hook up an API.” The interviewer wants to see you chain the whole thing together: <b>the model doesn’t know things in real time → you fill the gap with tools / retrieval → and you still have to handle failures and permissions</b>.",
+      points: [
+        { title: "Break down the problem", desc: "The model’s knowledge has a cutoff, and it won’t reach out to the internet on its own; “real-time” has to come from <b>external tools (function calling / API) or live retrieval</b> feeding in the latest data, with the model only responsible for understanding and organizing it." },
+        { title: "Architectural trade-offs", desc: "Querying live every time is the freshest but slow, expensive, and prone to failure; adding a cache is fast and cheap but can serve stale data. You set the cache TTL by “how fast the data changes.”" },
+        { title: "Shipping and iterating", desc: "A complete loop: decide whether a lookup is needed → call the tool / retrieval → validate and handle failures (timeout / retry / fallback) → answer with the results, tagging the time and source → monitor." },
+      ],
+      core: [
+        { h: "Name the root first", d: "The model’s <b>knowledge has a cutoff and it won’t reach out to the internet on its own</b>, so “real-time” isn’t something the model does by itself: it relies on <b>tools or retrieval</b> to pull in the latest data, and then it understands and organizes it." },
+        { h: "The architecture", d: "① Decide whether this question needs real-time data; ② if it does → retrieve it with <b>function calling / API or live retrieval</b>; ③ put the results (including a <b>timestamp and source</b>) into the prompt so the model can answer." },
+        { h: "The key trade-off", d: "<b>Live lookup vs. cache</b>: querying every time is freshest but slow and expensive, while a cache is fast and cheap but goes stale. Set the cache TTL by how fast the data changes (stock prices in seconds, weather in minutes, internal data in hours)." },
+        { h: "Don’t forget", d: "<b>Failure handling</b> (timeout, retry, and honestly saying so when a lookup comes up empty), <b>permissions and a cost cap</b>, and monitoring query success rate; treat “found nothing” as a normal path too." },
+      ],
+      plus: [
+        "MCP can plug in many real-time sources under one unified protocol (see MCP).",
+        "Caching can be layered: a short-term in-memory cache plus a semantic cache (reusing similar questions).",
+        "Tag each answer with the data’s time and source, so users can judge its freshness and trustworthiness.",
+      ],
+      traps: [
+        "Just answering “hook up an API,” without mentioning failure handling or the caching trade-off.",
+        "Querying live every single time: slow, expensive, and easily dragged down by a single point of failure.",
+        "Serving a stale cached result without tagging the time, so users think it’s current.",
+      ],
+    },
+    "monitoring": {
+      label: "Designing production monitoring",
+      q: "How would you design production monitoring for an AI product?",
+      trap: "Don’t just answer “watch for errors.” The biggest risk with AI is often <b>silent quality degradation</b> (nothing crashes, but the answers keep getting worse); the interviewer wants you to monitor “quality,” not just “availability.”",
+      points: [
+        { title: "Break down the problem", desc: "Traditional monitoring watches “is it down?” (latency, error rate); AI also has to watch “<b>is it answering well?</b>”: quality can <b>drift silently</b> (data shifts, attacks, a model update), and it throws no error." },
+        { title: "Architectural trade-offs", desc: "All-human review is accurate but expensive, slow, and can’t cover the volume; fully automated metrics are fast but miss subtle quality issues; in practice you usually combine all three: automated metrics plus sampled human review plus user feedback." },
+        { title: "Shipping and iterating", desc: "A closed loop: instrument and collect (input / output / latency / cost / feedback) → metrics and alerting → catch anomalies and failure cases → feed them into a regression test set → improve." },
+      ],
+      core: [
+        { h: "Dispel the misconception first", d: "AI monitoring isn’t only about “is it down?”; the biggest risk is <b>silent quality degradation</b>: nothing crashes, but the answers keep getting worse because the data shifted, it was attacked, or the model was swapped." },
+        { h: "What to monitor", d: "① <b>The system layer</b>: latency, error rate, cost, usage; ② <b>the quality layer</b>: task success rate, hallucination / refusal rate, user feedback (thumbs up / down, re-ask rate); ③ <b>the safety layer</b>: injection / jailbreak attempts, anomalous behavior." },
+        { h: "How to spot degradation", d: "Live traffic rarely has a ground-truth answer, so the point is to <b>detect “change”</b>: compare metric trends and distributions against the <b>launch baseline</b>, track a regular scored sample, watch for abnormal swings in negative feedback and re-ask rate, and set an <b>alert threshold</b>; as for how to “judge good vs. bad” itself, (see “Evaluate & improve”)." },
+        { h: "What to do when something breaks", d: "The closed loop is <b>alert → triage and pinpoint (which stage, which model) → stop the bleeding (rollback, or gradually route traffic back to the old version) → log and review</b>; feed failure cases back into the test set to improve, handing that off to the evaluation process (see “Evaluate & improve”). The value of monitoring is in <b>catching issues early, being able to pinpoint them, and stopping the bleeding fast</b>." },
+      ],
+      plus: [
+        "An audit log throughout (input / output / tool calls), so you can trace back when something goes wrong.",
+        "Canary / gradual rollout: when swapping models, watch a small slice of traffic first before going full.",
+        "Cost and latency need to break down to “which stage, which model” before you can optimize them.",
+      ],
+      traps: [
+        "Monitoring only “are there errors?”, missing the silent quality drift.",
+        "Having no offline regression set, so after changing a prompt or model you don’t know if it got better or worse.",
+        "Swapping the model and rolling it out to everyone at once, only finding out when something breaks.",
+      ],
+    },
     "prompt-injection": {
       label: "Prompt injection",
       q: "What is prompt injection, and why is it hard to defend against?",
@@ -2609,6 +2717,58 @@ const INT_TR = {
     },
   },
   ja: {
+    "realtime-assistant": {
+      label: "リアルタイムデータアシスタントの設計",
+      q: "リアルタイムデータを調べられる AI アシスタントを設計するとしたら、どう組みますか？",
+      trap: "「API をつなぐ」とだけ答えてはいけません。面接官が見たいのは、<b>モデルはリアルタイムには知りえない → ツール／検索で補う → さらに失敗と権限も処理する</b>を一本につなげられるかです。",
+      points: [
+        { title: "問題の分解", desc: "モデルの知識には締め切りがあり、自分からネットにつなぎにもいきません；「リアルタイム」は<b>外部ツール（function calling／API）またはリアルタイム検索</b>で最新データを流し込むしかなく、モデルは理解と整理だけを担います。" },
+        { title: "アーキテクチャの取捨", desc: "毎回リアルタイムに調べる → 最新だが遅く高く、失敗もしうる；キャッシュを足す → 速く安いが古いデータを返しかねない。「データがどれだけ速く変わるか」に応じてキャッシュの有効期限（TTL）を決めます。" },
+        { title: "実装と反復", desc: "完全な閉ループ：調べる必要があるか判定 → ツール／検索を呼び出す → 検証と失敗処理（タイムアウト／リトライ／フォールバック）→ 結果を携えて答え、時刻と出典を示す → 監視。" },
+      ],
+      core: [
+        { h: "まず根本を指す", d: "モデルは<b>知識に締め切りがあり、自分からネットにつなぎにいかない</b>ので、「リアルタイム」はモデル自体にできることではなく、<b>ツールや検索</b>で最新データを引き込み、それをモデルが理解して整理するのです。" },
+        { h: "アーキテクチャ", d: "① この質問にリアルタイムデータが要るか判定する；② 要る → <b>function calling／API またはリアルタイム検索</b>で取り戻す；③ 結果（<b>タイムスタンプ、出典</b>を含む）を prompt に入れて答えさせる。" },
+        { h: "重要な取捨", d: "<b>リアルタイム照会 vs キャッシュ</b>：毎回調べれば最新だが遅く高く、キャッシュは速く安いが古くなる。データの変化速度に応じてキャッシュの有効期限（TTL）を決めます（株価は数秒、天気は数分、社内データは数時間）。" },
+        { h: "忘れずに", d: "<b>失敗処理</b>（タイムアウト、リトライ、見つからなければ正直に「ありません」と言う）、<b>権限とコスト上限</b>、そして照会の成功率を監視すること；「見つからない」も正常な経路として扱います。" },
+      ],
+      plus: [
+        "MCP を使えば多様なリアルタイムソースを統一プロトコルで接続できます（MCP を参照）。",
+        "キャッシュは階層化できます：短期のメモリキャッシュ＋セマンティックキャッシュ（似た質問を再利用）。",
+        "データの時刻と出典を示し、ユーザーが鮮度と信頼度を判断できるようにします。",
+      ],
+      traps: [
+        "「API をつなぐ」とだけ答え、失敗処理とキャッシュの取捨に触れない。",
+        "毎回リアルタイムに調べ、遅く、高く、単一障害点に足を引っ張られやすい。",
+        "古いキャッシュを返しながら時刻を示さず、ユーザーは最新だと思い込む。",
+      ],
+    },
+    "monitoring": {
+      label: "本番監視の設計",
+      q: "AI 製品の「本番監視」を設計するとしたら、どう組みますか？",
+      trap: "「エラーが出ていないか見る」とだけ答えてはいけません。AI で最大のリスクはしばしば<b>沈黙する品質低下</b>（crash はしないが答えがどんどん悪くなる）です；面接官は「可用性」だけでなく「品質」も監視することを求めます。",
+      points: [
+        { title: "問題の分解", desc: "従来の監視は「落ちていないか」（レイテンシ、エラー率）を見ます；AI ではさらに「<b>ちゃんと答えられているか</b>」も見る必要があります：品質は<b>静かにドリフトし</b>（データが変わる、攻撃される、モデルが更新される）、しかもエラーを出しません。" },
+        { title: "アーキテクチャの取捨", desc: "すべて人手で審査する → 正確だが高く遅く、量をカバーしきれない；全自動の指標 → 速いが細かな品質を捉えられない；実務ではたいてい自動指標＋抽出しての人手審査＋ユーザーフィードバックの三つを組み合わせます。" },
+        { title: "実装と反復", desc: "一つの閉ループ：計測点を埋めて収集（入力／出力／レイテンシ／コスト／フィードバック）→ 指標とアラート → 異常と失敗事例を拾う → 回帰テストセットに入れる → 改善。" },
+      ],
+      core: [
+        { h: "まず誤解を解く", d: "AI の監視は「落ちていないか」だけを見るのではありません；最大のリスクは<b>沈黙する品質低下</b>です：crash はしないのに、データの変化、攻撃、あるいはモデルの入れ替えによって答えがどんどん悪くなります。" },
+        { h: "何を監視するか", d: "① <b>システム面</b>：レイテンシ、エラー率、コスト、使用量；② <b>品質面</b>：タスク成功率、ハルシネーション／拒否率、ユーザーフィードバック（高評価・低評価、問い直し率）；③ <b>セキュリティ面</b>：インジェクション／ジェイルブレイクの試み、異常な挙動。" },
+        { h: "どう劣化に気づくか", d: "オンラインでは標準的な正解を用意しにくいので、要点は<b>「変化」を検知する</b>ことです：指標のトレンドと分布を<b>本番のベースライン</b>と照らし合わせ、定期的に抽出して採点し追跡し、低評価や問い直し率の異常な変動を見て、<b>アラートのしきい値</b>を設けます；そもそも「良し悪しをどう判断するか」自体は、（「評価と継続的改善」を参照）。" },
+        { h: "問題が起きたらどうするか", d: "閉ループは<b>アラート → 切り分けて特定（どの関門か、どのモデルか）→ 止血（ロールバック、または段階リリースで旧版に戻す）→ 記録して振り返る</b>です；失敗事例をテストセットに戻して改善し、評価のフロー（「評価と継続的改善」を参照）に委ねます。監視の価値は<b>早く気づき、特定でき、素早く止血できる</b>ことにあります。" },
+      ],
+      plus: [
+        "全過程で監査ログ（入力／出力／ツール呼び出し）を取り、問題が起きたときに遡れます。",
+        "カナリア／段階リリース：モデルを替えるときはまず少量のトラフィックで観察してから全量に広げます。",
+        "コストとレイテンシは「どの関門か、どのモデルか」まで分解できてはじめて最適化しやすくなります。",
+      ],
+      traps: [
+        "「エラーが出ていないか」だけを監視し、沈黙する品質のドリフトを見落とす。",
+        "オフラインの回帰セットがなく、prompt やモデルを変えても良くなったか悪くなったか分からない。",
+        "モデルを替えていきなり全量に出し、問題が起きてはじめて気づく。",
+      ],
+    },
     "prompt-injection": {
       label: "プロンプトインジェクション",
       q: "プロンプトインジェクションって何ですか？なぜ防ぎにくいのですか？",
@@ -3851,8 +4011,8 @@ export const IV_ORDER = [
   "rag-documents", "rag-retrieval", "rag-why-wrong", "rag-vs-longcontext",
   "agent-planning", "agent-tools", "json-output", "agent-memory", "agent-eval", "agent-cost",
   "diffusion-how", "diffusion-not-collage", "multimodal-key", "genimg-errors", "diffusion-vs-gan",
-  "hallucination", "bias", "prompt-injection", "jailbreak", "guardrails", "trust-answer", "ai-limits", "design-doc-qa", "design-support-bot",
-  "design-cost", "design-eval-improve",
+  "hallucination", "bias", "prompt-injection", "jailbreak", "guardrails", "trust-answer", "ai-limits", "design-doc-qa", "design-support-bot", "realtime-assistant",
+  "design-cost", "design-eval-improve", "monitoring",
 ];
 
 /** 依分類 key 取該類題目 id 陣列（依 IV_ORDER 排序） */
