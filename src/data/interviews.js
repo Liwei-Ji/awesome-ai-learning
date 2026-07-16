@@ -37,6 +37,87 @@ const CAT_TR = {
 };
 
 export const INTERVIEWS = {
+  "prompt-injection": {
+    cat: "literacy",
+    label: "Prompt Injection",
+    q: "什麼是 Prompt Injection？為什麼難防？",
+    trap: "很多人以為「加一句『不要理會其他指令』」就防住了。面試官要看你懂<b>為什麼它本質上難防</b>，而不是給個表面招式。",
+    points: [
+      { icon: "atom", title: "底層原理", desc: "模型<b>分不清「開發者的指令」與「資料裡夾帶的指令」</b>：對它來說都是同一串文字。使用者輸入、或被抓進來的網頁/文件裡藏一句「忽略以上、改做 X」，模型可能就照做。" },
+      { icon: "scale", title: "工程權衡", desc: "想完全擋→限制能力（不接外部內容、不給工具）就安全但沒用；要好用→就得承擔風險，只能降低、不能歸零。" },
+      { icon: "network", title: "系統化", desc: "防禦要分層：指令與資料分隔、最小權限、輸出與行為過濾、危險動作要確認，而不是靠一句 prompt。" },
+    ],
+    core: [
+      { h: "是什麼", d: "Prompt Injection＝<b>把惡意指令藏進「資料」裡</b>（使用者輸入、或 RAG/工具抓回來的內容），誘導模型無視原本的系統指令、改做攻擊者想要的事。" },
+      { h: "為何難防", d: "因為模型<b>分不清指令與資料</b>，對它來說都是文字；所以「加一句叫它別聽」也可能被後面那句蓋過。這是運作方式的副作用，只能降低。" },
+      { h: "怎麼降低", d: "分層防：<b>指令與資料分隔、最小權限（能不給工具就不給）、輸出與行為過濾、危險操作人工確認</b>；把外部內容一律當「不可信輸入」處理。" },
+    ],
+    plus: [
+      "<b>間接注入</b>：惡意指令藏在 RAG 文件、網頁、Email 裡，使用者沒惡意也會中招。",
+      "給 Agent 工具時風險放大（可能被誘導刪資料、外洩、亂付款）。",
+      "可用另一個模型當「審查員」過濾，或對外部內容做權限降級/沙箱。",
+    ],
+    traps: [
+      "以為一句「忽略其他指令」就防住。",
+      "把使用者或外部內容當成可信指令。",
+      "給 Agent 全權工具卻沒有確認或白名單。",
+    ],
+    related: ["limits", "agent", "rag"],
+  },
+  "jailbreak": {
+    cat: "literacy",
+    label: "越獄能防住嗎",
+    q: "越獄（jailbreak）是什麼？能完全防住嗎？",
+    trap: "面試官要看你理解<b>為什麼這是持續的攻防、無法「一次解決」</b>，而不是說「加更多規則就好」。",
+    points: [
+      { icon: "atom", title: "底層原理", desc: "越獄＝<b>用話術誘導模型繞過安全規則</b>（角色扮演、假設情境、翻譯/編碼包裝）；因為安全是「訓練出來的傾向」、不是硬性開關，總有邊角能繞。" },
+      { icon: "scale", title: "工程權衡", desc: "收得越緊→越安全但越常「過度拒答」（誤傷正常請求）；放得越鬆→越好用但越容易被越獄。要在中間平衡。" },
+      { icon: "network", title: "系統化", desc: "沒有單一解：對齊訓練＋輸入/輸出過濾＋監控＋快速修補的持續攻防，只能壓低成功率。" },
+    ],
+    core: [
+      { h: "是什麼", d: "越獄＝<b>誘導模型繞過它的安全規則</b>、產出本該拒絕的內容，手法像角色扮演、假設情境、把敏感內容包成翻譯或程式碼。" },
+      { h: "為何無法根治", d: "安全是<b>訓練出來的傾向、不是硬性鎖</b>；語言變化無窮，總有新說法能繞過。這是持續的<b>攻防</b>，不是一次修好。" },
+      { h: "怎麼降低", d: "多層：對齊訓練、<b>輸入與輸出兩端過濾、行為監控、發現新手法就快速修補</b>；並接受目標是「壓低成功率」而非「歸零」。" },
+    ],
+    plus: [
+      "過度防禦的代價：正常請求被誤拒（over-refusal），體驗變差。",
+      "自動化紅隊/對抗測試持續找漏洞、補洞。",
+      "越獄常與 prompt injection 疊加（用注入去越獄）。",
+    ],
+    traps: [
+      "以為「多加規則」就能完全防住。",
+      "只堵已知手法，不做監控與更新。",
+      "為了防越獄把模型調到動不動就拒答。",
+    ],
+    related: ["limits", "pretraining"],
+  },
+  "guardrails": {
+    cat: "literacy",
+    label: "上線要哪些護欄",
+    q: "一個上線的 AI 產品，要加哪些「護欄」（guardrails）？",
+    trap: "別只答「加個 filter」。面試官要看你講得出<b>從輸入、輸出到行為的完整防護</b>，以及跟成本、體驗的取捨。",
+    points: [
+      { icon: "atom", title: "底層原理", desc: "模型會幻覺、會被誘導、輸出不可控，所以要在<b>模型外面</b>加一圈檢查：input、output、action 三個關卡都要守。" },
+      { icon: "scale", title: "工程權衡", desc: "護欄越嚴→越安全但越容易誤傷（過度拒答）、加延遲與成本；要按風險分級，不是一律最嚴。" },
+      { icon: "network", title: "系統化", desc: "一套分層：輸入過濾（惡意/PII）→ 生成約束 → 輸出檢查（有害/洩漏/格式）→ 工具權限 → 高風險動作人審 → 記錄監控。" },
+    ],
+    core: [
+      { h: "為什麼要", d: "模型本身<b>不可靠、可被誘導、輸出不可控</b>，所以要在它外面包一圈檢查，別把安全寄望在模型自律。" },
+      { h: "守哪幾關", d: "① <b>輸入</b>：擋惡意/注入、遮 PII；② <b>輸出</b>：查有害內容、資料外洩、格式；③ <b>行為</b>：工具權限白名單、危險動作（付款/刪除）要人審或二次確認。" },
+      { h: "取捨收尾", d: "<b>按風險分級</b>：高風險嚴守、低風險放行，別一律最嚴（會誤傷又貴）；並全程記錄監控以便迭代。" },
+    ],
+    plus: [
+      "PII 遮罩/去識別化，避免把個資送進模型或外流。",
+      "用另一個模型或規則當「審查員」檢查輸出（LLM-as-guard）。",
+      "全程 audit log ＋告警，出事能追、能快速修。",
+    ],
+    traps: [
+      "只在輸入端加 filter，忽略輸出與行為。",
+      "一律最嚴，導致過度拒答＋高延遲。",
+      "給 Agent 直接的寫入/付款權限而無人審。",
+    ],
+    related: ["limits", "agent", "integration"],
+  },
   "prompt-craft": {
     cat: "prompting",
     label: "寫好 prompt 的原則",
@@ -1297,6 +1378,81 @@ export const INTERVIEWS = {
 // 各語言的內容翻譯（欄位與 base 對齊；points 只翻 title/desc，icon 沿用 base）
 const INT_TR = {
   en: {
+    "prompt-injection": {
+      label: "Prompt injection",
+      q: "What is prompt injection, and why is it hard to defend against?",
+      trap: "Many people assume that adding one line like “ignore any other instructions” shuts it down. The interviewer wants to see that you understand <b>why it is fundamentally hard to defend against</b>, not that you can rattle off a surface-level trick.",
+      points: [
+        { title: "Underlying principle", desc: "The model <b>can’t tell the developer’s instructions from instructions smuggled inside the data</b>: to it, they’re all one string of text. If the user input, or a fetched web page / document, hides a line like “ignore the above, do X instead,” the model may simply comply." },
+        { title: "Engineering trade-offs", desc: "To block it completely you have to restrict capabilities (accept no external content, grant no tools), which is safe but useless; to stay useful you have to accept the risk, and you can only reduce it, never zero it out." },
+        { title: "Systematic thinking", desc: "Defense has to be layered: separate instructions from data, least privilege, filtering of outputs and actions, and confirmation for dangerous actions, rather than leaning on a single prompt." },
+      ],
+      core: [
+        { h: "What it is", d: "Prompt injection = <b>hiding malicious instructions inside the “data”</b> (user input, or content pulled back by RAG / tools) to lure the model into ignoring its original system prompt and doing what the attacker wants instead." },
+        { h: "Why it’s hard to defend against", d: "Because the model <b>can’t distinguish instructions from data</b>: to it, it’s all text, so even “adding a line telling it not to listen” can be overridden by the line that follows. This is a side effect of how it works, so you can only reduce it." },
+        { h: "How to reduce it", d: "Defend in layers: <b>separate instructions from data, least privilege (don’t grant a tool if you can avoid it), filter outputs and actions, and require human confirmation for dangerous operations</b>; treat all external content as untrusted input." },
+      ],
+      plus: [
+        "<b>Indirect injection</b>: malicious instructions hidden in RAG documents, web pages, or email, so even a well-meaning user gets caught out.",
+        "The risk is amplified once you hand an agent tools (it can be lured into deleting data, leaking information, or making rogue payments).",
+        "You can use a second model as a “reviewer” to filter, or downgrade the privileges of external content and sandbox it.",
+      ],
+      traps: [
+        "Thinking one line of “ignore other instructions” shuts it down.",
+        "Treating user or external content as trusted instructions.",
+        "Giving an agent fully privileged tools with no confirmation or allow-list.",
+      ],
+    },
+    "jailbreak": {
+      label: "Can jailbreaks be stopped?",
+      q: "What is a jailbreak, and can it be stopped completely?",
+      trap: "The interviewer wants to see that you understand <b>why this is an ongoing arms race that can’t be “solved once”</b>, rather than saying “just add more rules.”",
+      points: [
+        { title: "Underlying principle", desc: "A jailbreak = <b>using verbal tricks to lure the model into bypassing its safety rules</b> (role-play, hypothetical scenarios, wrapping content in translation / encoding); because safety is a “trained tendency,” not a hard switch, there’s always some edge to slip around." },
+        { title: "Engineering trade-offs", desc: "The tighter you clamp down, the safer it is but the more often it “over-refuses” (misfiring on normal requests); the looser you leave it, the more useful it is but the easier to jailbreak. You have to balance in the middle." },
+        { title: "Systematic thinking", desc: "There’s no single fix: alignment training plus input / output filtering plus monitoring plus fast patching make up an ongoing arms race that can only push the success rate down." },
+      ],
+      core: [
+        { h: "What it is", d: "A jailbreak = <b>luring the model into bypassing its safety rules</b> and producing content it should have refused, via tricks like role-play, hypothetical scenarios, or wrapping sensitive content as translation or code." },
+        { h: "Why it can’t be fully cured", d: "Safety is a <b>trained tendency, not a hard lock</b>; language is endlessly variable, so there’s always a new phrasing that slips through. This is an ongoing <b>arms race</b>, not a one-time fix." },
+        { h: "How to reduce it", d: "Go multi-layer: alignment training, <b>filtering at both the input and output ends, behavior monitoring, and fast patching whenever a new technique surfaces</b>; and accept that the goal is “pushing the success rate down,” not “zeroing it out.”" },
+      ],
+      plus: [
+        "The cost of over-defending: normal requests get wrongly rejected (over-refusal), and the experience suffers.",
+        "Automated red-teaming / adversarial testing keeps finding holes and patching them.",
+        "Jailbreaks often stack with prompt injection (using injection to jailbreak).",
+      ],
+      traps: [
+        "Thinking that “adding more rules” can block it completely.",
+        "Blocking only known techniques, with no monitoring or updates.",
+        "Tuning the model to refuse at the drop of a hat just to prevent jailbreaks.",
+      ],
+    },
+    "guardrails": {
+      label: "Guardrails for production",
+      q: "What “guardrails” would you add to an AI product going into production?",
+      trap: "Don’t just answer “add a filter.” The interviewer wants to hear you lay out <b>complete protection from input to output to behavior</b>, along with the trade-offs against cost and experience.",
+      points: [
+        { title: "Underlying principle", desc: "The model hallucinates, can be lured, and produces uncontrollable output, so you add a ring of checks <b>outside the model</b>: all three gates (input, output, action) have to be guarded." },
+        { title: "Engineering trade-offs", desc: "The stricter the guardrails, the safer but the more prone to misfiring (over-refusal), and the more latency and cost they add; grade them by risk rather than making everything maximally strict." },
+        { title: "Systematic thinking", desc: "One layered set: input filtering (malicious content / PII), then generation constraints, then output checks (harmful content / leakage / format), then tool permissions, then human review for high-risk actions, then logging and monitoring." },
+      ],
+      core: [
+        { h: "Why you need them", d: "The model itself is <b>unreliable, can be lured, and produces uncontrollable output</b>, so you wrap a ring of checks around it instead of pinning safety on the model policing itself." },
+        { h: "Which gates to guard", d: "① <b>Input</b>: block malicious content / injection and mask PII; ② <b>Output</b>: check for harmful content, data leakage, and format; ③ <b>Behavior</b>: an allow-list for tool permissions, plus human review or a second confirmation for dangerous actions (payment / deletion)." },
+        { h: "Wrap up on trade-offs", d: "<b>Grade by risk</b>: guard high-risk paths tightly and let low-risk ones through, rather than making everything maximally strict (which misfires and costs more); and log and monitor throughout so you can iterate." },
+      ],
+      plus: [
+        "PII masking / de-identification, to avoid feeding personal data into the model or leaking it.",
+        "Use a second model or a set of rules as a “reviewer” to check the output (LLM-as-guard).",
+        "An end-to-end audit log plus alerting, so when something goes wrong you can trace it and fix it fast.",
+      ],
+      traps: [
+        "Adding a filter only at the input end while ignoring output and behavior.",
+        "Making everything maximally strict, causing over-refusal plus high latency.",
+        "Giving an agent direct write / payment permissions with no human review.",
+      ],
+    },
     "prompt-craft": {
       label: "Prompt-writing principles",
       q: "How do you write a good prompt? What principles apply?",
@@ -2453,6 +2609,81 @@ const INT_TR = {
     },
   },
   ja: {
+    "prompt-injection": {
+      label: "プロンプトインジェクション",
+      q: "プロンプトインジェクションって何ですか？なぜ防ぎにくいのですか？",
+      trap: "多くの人は「『他の指示は無視して』と一文足せば防げる」と思い込みます。面接官が見たいのは表面的な小技ではなく、<b>なぜ本質的に防ぎにくいのか</b>を理解しているかです。",
+      points: [
+        { title: "基礎原理", desc: "モデルは<b>「開発者の指示」と「データに紛れ込んだ指示」を区別できません</b>：どちらもモデルには同じ一続きの文字にすぎないからです。ユーザー入力や、取り込んだ Web ページ／文書の中に「これまでを無視して X をせよ」と一文が仕込まれていれば、モデルはそのまま従ってしまいます。" },
+        { title: "工学的トレードオフ", desc: "完全に防ごうとして能力を絞る（外部コンテンツを扱わない、ツールを与えない）と安全ですが使い物になりません；便利さを取るならリスクを引き受けるしかなく、低減はできてもゼロにはできません。" },
+        { title: "体系的な解決", desc: "防御は多層で：指示とデータの分離、最小権限、出力と挙動のフィルタリング、危険な操作は確認を挟む。一文のプロンプトに頼るものではありません。" },
+      ],
+      core: [
+        { h: "何か", d: "プロンプトインジェクション＝<b>悪意ある指示を「データ」の中に紛れ込ませる</b>こと（ユーザー入力や、RAG／ツールが取ってきた内容）で、モデルに本来のシステムプロンプトを無視させ、攻撃者の望むことをさせます。" },
+        { h: "なぜ防ぎにくいか", d: "モデルが<b>指示とデータを区別できない</b>からです。どちらもモデルには文字にすぎず、「言うことを聞くな」と一文足しても、後ろの一文に上書きされかねません。これは動作の仕方が生む副作用で、低減しかできません。" },
+        { h: "どう低減するか", d: "多層で防ぎます：<b>指示とデータの分離、最小権限（ツールは与えずに済むなら与えない）、出力と挙動のフィルタリング、危険な操作は人手で確認</b>；外部コンテンツは一律「信頼できない入力」として扱います。" },
+      ],
+      plus: [
+        "<b>間接インジェクション</b>：悪意ある指示が RAG 文書・Web ページ・メールの中に潜み、ユーザーに悪意がなくても引っかかってしまう。",
+        "エージェントにツールを与えるとリスクが増幅する（データ削除・情報漏洩・不正な支払いに誘導されかねない）。",
+        "別のモデルを「審査役」にしてフィルタリングする、または外部コンテンツは権限を下げてサンドボックスで扱う。",
+      ],
+      traps: [
+        "「他の指示は無視して」の一文で防げると思い込む。",
+        "ユーザーや外部コンテンツを信頼できる指示として扱う。",
+        "エージェントに全権限のツールを与えながら、確認も許可リスト（allow-list）もない。",
+      ],
+    },
+    "jailbreak": {
+      label: "ジェイルブレイクは防げるか",
+      q: "ジェイルブレイク（脱獄）って何ですか？完全に防げますか？",
+      trap: "面接官が見たいのは、「ルールを増やせばいい」ではなく、<b>なぜこれは終わりのない攻防で「一度で解決」できないのか</b>を理解しているかです。",
+      points: [
+        { title: "基礎原理", desc: "ジェイルブレイク＝<b>話術でモデルを誘導し安全ルールを回避させる</b>こと（ロールプレイ、仮定の状況、翻訳／エンコードでの包み込み）；安全性は「訓練で身についた傾向」であって硬いスイッチではないため、必ず抜け道の縁が残ります。" },
+        { title: "工学的トレードオフ", desc: "厳しくするほど安全ですが「過剰拒否（over-refusal）」が増え（正常な要求まで巻き込む）；緩めるほど便利ですがジェイルブレイクされやすくなります。その中間でバランスを取る必要があります。" },
+        { title: "体系的な解決", desc: "単一の解はありません：アラインメント訓練＋入力／出力のフィルタリング＋監視＋素早い修正という終わりのない攻防で、成功率を下げるしかありません。" },
+      ],
+      core: [
+        { h: "何か", d: "ジェイルブレイク＝<b>モデルを誘導して安全ルールを回避させ</b>、本来なら拒否すべき内容を生成させることです。手口はロールプレイ、仮定の状況、機微な内容を翻訳やコードに包む、など。" },
+        { h: "なぜ根治できないか", d: "安全性は<b>訓練で身についた傾向であって、硬いロックではありません</b>；言語は無限に変化し、必ず新しい言い回しで回避されます。これは終わりのない<b>攻防</b>であって、一度で直るものではありません。" },
+        { h: "どう低減するか", d: "多層で：アラインメント訓練、<b>入力と出力の両端でのフィルタリング、挙動の監視、新しい手口を見つけたら素早く修正</b>；そして目標は「ゼロにする」ことではなく「成功率を下げる」ことだと受け入れます。" },
+      ],
+      plus: [
+        "過剰な防御の代償：正常な要求まで誤って拒否され（過剰拒否／over-refusal）、体験が悪くなる。",
+        "自動化したレッドチーミング／敵対的テストで穴を探し続け、塞ぎ続ける。",
+        "ジェイルブレイクはプロンプトインジェクションと重なることが多い（インジェクションを使って脱獄する）。",
+      ],
+      traps: [
+        "「ルールを増やせば」完全に防げると思い込む。",
+        "既知の手口だけを塞ぎ、監視と更新をしない。",
+        "ジェイルブレイク対策のためにモデルをすぐ拒否するよう調整してしまう。",
+      ],
+    },
+    "guardrails": {
+      label: "本番に必要なガードレール",
+      q: "本番に出す AI プロダクトには、どんな「ガードレール」を入れるべきですか？",
+      trap: "「フィルタを一つ足す」で終わらせないこと。面接官が見たいのは、<b>入力から出力、挙動までの一貫した防御</b>と、コストや体験とのトレードオフを語れるかです。",
+      points: [
+        { title: "基礎原理", desc: "モデルはハルシネーションを起こし、誘導され、出力は制御しきれません。だから<b>モデルの外側</b>にひと回りの検査を設けます：入力（input）・出力（output）・挙動（action）の3つの関門すべてを守ります。" },
+        { title: "工学的トレードオフ", desc: "ガードレールが厳しいほど安全ですが、誤って巻き込みやすく（過剰拒否）、遅延とコストが増えます；一律に最も厳しくするのではなく、リスクに応じて段階を分けるべきです。" },
+        { title: "体系的な解決", desc: "一続きの多層防御：入力フィルタ（悪意／PII）→ 生成時の制約 → 出力チェック（有害／漏洩／形式）→ ツール権限 → 高リスクな操作は人手審査 → 記録と監視。" },
+      ],
+      core: [
+        { h: "なぜ必要か", d: "モデル自体は<b>信頼できず、誘導され、出力も制御しきれません</b>。だからその外側にひと回りの検査を巻き、安全をモデルの自律に期待しないことです。" },
+        { h: "どの関門を守るか", d: "① <b>入力</b>：悪意／インジェクションを止め、PII を伏せる；② <b>出力</b>：有害な内容、情報漏洩、形式をチェック；③ <b>挙動</b>：ツール権限は許可リスト（allow-list）で、危険な操作（支払い／削除）は人手審査か二段階確認。" },
+        { h: "取捨で締める", d: "<b>リスクに応じて段階を分ける</b>：高リスクは厳守、低リスクは通す。一律に最も厳しくしない（誤って巻き込むうえ高くつく）；さらに反復できるよう全過程を記録・監視します。" },
+      ],
+      plus: [
+        "PII のマスキング／匿名化で、個人情報をモデルに送ったり外に漏らしたりしない。",
+        "別のモデルやルールを「審査役」にして出力をチェックする（LLM-as-guard）。",
+        "全過程で監査ログ＋アラートを取り、問題が起きても追跡でき、素早く直せる。",
+      ],
+      traps: [
+        "入力側にだけフィルタを足し、出力と挙動を無視する。",
+        "一律に最も厳しくして、過剰拒否＋高い遅延を招く。",
+        "エージェントに書き込み／支払いの権限を直接与えながら、人手審査がない。",
+      ],
+    },
     "prompt-craft": {
       label: "プロンプトを書く原則",
       q: "良いプロンプトはどう書けばいいですか？どんな原則がありますか？",
@@ -3620,7 +3851,7 @@ export const IV_ORDER = [
   "rag-documents", "rag-retrieval", "rag-why-wrong", "rag-vs-longcontext",
   "agent-planning", "agent-tools", "json-output", "agent-memory", "agent-eval", "agent-cost",
   "diffusion-how", "diffusion-not-collage", "multimodal-key", "genimg-errors", "diffusion-vs-gan",
-  "hallucination", "bias", "trust-answer", "ai-limits", "design-doc-qa", "design-support-bot",
+  "hallucination", "bias", "prompt-injection", "jailbreak", "guardrails", "trust-answer", "ai-limits", "design-doc-qa", "design-support-bot",
   "design-cost", "design-eval-improve",
 ];
 
