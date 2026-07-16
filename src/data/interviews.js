@@ -13,6 +13,7 @@ export const IV_CATS = [
   { key: 'principle', t: '原理機制' },
   { key: 'training', t: '訓練與微調' },
   { key: 'inference', t: '推論與部署' },
+  { key: 'prompting', t: '提示與推理' },
   { key: 'retrieval', t: '檢索與知識' },
   { key: 'agent', t: 'Agent 與工程' },
   { key: 'generative', t: '生成與多模態' },
@@ -23,19 +24,208 @@ export const IV_CATS = [
 const CAT_TR = {
   en: {
     principle: 'Principles & Mechanisms', training: 'Training & Fine-tuning',
-    inference: 'Inference & Deployment', retrieval: 'Retrieval & Knowledge',
+    inference: 'Inference & Deployment', prompting: 'Prompting & Reasoning', retrieval: 'Retrieval & Knowledge',
     agent: 'Agents & Engineering', generative: 'Generative & Multimodal',
     literacy: 'AI Literacy & Risk', design: 'System Design',
   },
   ja: {
     principle: '原理と仕組み', training: '学習とファインチューニング',
-    inference: '推論とデプロイ', retrieval: '検索と知識',
+    inference: '推論とデプロイ', prompting: 'プロンプトと推論', retrieval: '検索と知識',
     agent: 'エージェントと工学', generative: '生成とマルチモーダル',
     literacy: 'AI リテラシーとリスク', design: 'システム設計',
   },
 };
 
 export const INTERVIEWS = {
+  "prompt-craft": {
+    cat: "prompting",
+    label: "寫好 prompt 的原則",
+    q: "怎麼寫出好的 prompt？有哪些原則？",
+    trap: "很多人以為 prompt 就是「把問題打進去」。面試官要看你懂<b>為什麼同一個問題、換個寫法結果差很多</b>，以及有沒有系統性的原則。",
+    points: [
+      { icon: "atom", title: "底層原理", desc: "模型是<b>依你給的上下文猜最合理的接續</b>；你給的角色、脈絡、格式、範例，等於幫它框住「該往哪個方向生成」。" },
+      { icon: "scale", title: "工程權衡", desc: "講太少→它自由發揮容易跑偏；講太多太雜→佔 token、反而分心。要在「講清楚」與「精簡」之間拿捏。" },
+      { icon: "network", title: "系統化", desc: "好 prompt 有結構：角色＋任務＋脈絡＋輸出格式＋（範例），而且可迭代測試，不是靠運氣。" },
+    ],
+    core: [
+      { h: "先講原理", d: "prompt 決定輸出，是因為模型<b>照你給的上下文猜接續</b>；把角色、脈絡、格式講清楚，就是幫它縮小生成範圍。" },
+      { h: "幾個原則", d: "① 明確角色與任務；② 給脈絡與限制；③ <b>指定輸出格式</b>；④ <b>給範例（few-shot）比純描述有效</b>；⑤ 複雜任務請它分步。" },
+      { h: "收尾", d: "同一問題不同寫法差很多，所以 prompt 要<b>當可迭代的工程</b>：寫→測→改，不是一次到位。" },
+    ],
+    plus: [
+      "把長指令拆成「系統提示（固定角色/規則）＋使用者提示（當次任務）」。",
+      "要穩定格式就搭配 few-shot 或 schema（見「穩定輸出 JSON」）。",
+      "prompt 太長也有成本與「中段被忽略」問題（見「上下文窗口限制」）。",
+    ],
+    traps: [
+      "以為「把問題貼上去」就是 prompt，講不出原則。",
+      "一次塞超長指令，重點被稀釋。",
+      "只描述不給範例，格式與風格全靠模型猜。",
+    ],
+    related: ["prompt", "llm"],
+  },
+  "few-shot": {
+    cat: "prompting",
+    label: "few-shot vs zero-shot",
+    q: "few-shot 和 zero-shot 差在哪？什麼時候該給範例？",
+    trap: "只知道「few-shot 就是給例子」不夠。面試官要看你講得出<b>範例在幫模型做什麼</b>，以及何時值得付那個 token 成本。",
+    points: [
+      { icon: "atom", title: "底層原理", desc: "範例等於<b>當場示範「這種輸入該對應這種輸出」</b>，幫模型校準格式、風格、判斷邊界，不用重新訓練。" },
+      { icon: "scale", title: "工程權衡", desc: "範例通常比 zero-shot 準，但<b>不是越多越好</b>：有邊際遞減，選得好的一兩個範例常勝過硬塞很多；範例還吃 token、變貴變慢。" },
+      { icon: "network", title: "系統化", desc: "依任務選：格式嚴、風格特殊、分類邊界模糊→給範例；簡單通用任務→zero-shot 就好。" },
+    ],
+    core: [
+      { h: "差別", d: "zero-shot＝只給指令；few-shot＝<b>附幾個「輸入→輸出」範例</b>。範例是在 prompt 裡「當場教」，不動權重。" },
+      { h: "範例在做什麼", d: "校準<b>輸出格式、語氣、判斷邊界</b>，尤其分類、抽取、固定格式的任務，一兩個好範例常勝過長篇描述。" },
+      { h: "何時給與取捨", d: "格式嚴、風格特殊、邊界模糊時給；但範例<b>佔 token、增成本</b>，簡單任務 zero-shot 即可。" },
+    ],
+    plus: [
+      "範例要涵蓋「邊界案例」，否則模型學到偏。",
+      "再上去是 few-shot CoT（範例也示範推理過程）。",
+      "範例太多又跟問題不相關反而干擾，示範選擇很重要。",
+    ],
+    traps: [
+      "只答「給例子」，講不出範例校準了什麼。",
+      "範例全是簡單案例，遇到邊界就崩。",
+      "為了 few-shot 塞一堆範例，成本爆增卻沒更準。",
+    ],
+    related: ["prompt", "llm"],
+  },
+  "cot-prompting": {
+    cat: "prompting",
+    label: "Chain-of-Thought",
+    q: "什麼是 Chain-of-Thought（讓模型「想一想」）？為什麼有用？",
+    trap: "別把 CoT 當「加一句『請一步步想』的魔法」。面試官要看你懂<b>它為什麼有效，以及代價與界線</b>。",
+    points: [
+      { icon: "atom", title: "底層原理", desc: "讓模型<b>先產生中間推理步驟、再給答案</b>；把難題拆成小步，每一步的接續都比「一步到位」更容易猜對。" },
+      { icon: "scale", title: "工程權衡", desc: "更準但<b>更多 token、更慢、更貴</b>，而且簡單題用 CoT 是浪費。" },
+      { icon: "network", title: "系統化", desc: "本質是「用推理長度換正確率」；可搭 few-shot（示範推理）或直接叫模型分步。" },
+    ],
+    core: [
+      { h: "是什麼", d: "CoT＝讓模型<b>先寫出中間步驟再下結論</b>，而不是直接吐答案。" },
+      { h: "為何有用", d: "難題一步到位容易錯；<b>拆成小步、逐步接續</b>，每步更好猜，整體正確率上升（數學、多步推理最明顯）。" },
+      { h: "代價與界線", d: "代價是 token、延遲、成本；<b>簡單題沒必要</b>，小模型 CoT 效果有限，還可能「講得頭頭是道但結論錯」。" },
+    ],
+    plus: [
+      "few-shot CoT（範例示範推理）vs zero-shot CoT（一句「一步步想」）。",
+      "進一步有 self-consistency（多條推理投票）、或把推理藏起來只給結論。",
+      "這也是「推理模型」（o1）的雛形：把長 CoT 內化進訓練。",
+    ],
+    traps: [
+      "以為「加一句請一步步想」到處都有效。",
+      "簡單任務也硬 CoT，白花 token。",
+      "相信它寫的推理＝正確（過程漂亮不代表答案對）。",
+    ],
+    related: ["prompt", "llm"],
+  },
+  "prompt-vs-tune-vs-rag": {
+    cat: "prompting",
+    label: "調 prompt 還是換方法",
+    q: "prompt 調不出來時，該先動 prompt、還是換方法（RAG／微調）？",
+    trap: "面試官在看你<b>會不會先診斷問題類型</b>，而不是一律「再改改 prompt」或「直接微調」。",
+    points: [
+      { icon: "atom", title: "底層原理", desc: "三種手段解不同問題：prompt 改<b>當次行為</b>、RAG 補<b>缺的事實</b>、微調改<b>內化的風格與能力</b>。" },
+      { icon: "scale", title: "工程權衡", desc: "成本由低到高：prompt（幾乎免費）< RAG（中）< 微調（高）。先動便宜的。" },
+      { icon: "network", title: "系統化", desc: "先分類問題再選：格式/語氣→prompt；答錯/過時/私有知識→RAG；要穩定風格或大量固定行為→微調。" },
+    ],
+    core: [
+      { h: "先分類問題", d: "別急著動手，先問<b>是哪種問題</b>：格式不對、知識不夠、還是行為不穩。" },
+      { h: "對症下藥", d: "格式/語氣/一次性任務→<b>調 prompt（最便宜先試）</b>；答錯/過時/私有事實→<b>RAG</b>；要穩定風格、大量固定行為→<b>微調</b>。" },
+      { h: "收尾", d: "順序通常是 prompt → RAG → 微調（由便宜到貴），能用前面解決就別急著微調。" },
+    ],
+    plus: [
+      "很多「以為要微調」的，其實 prompt＋few-shot 或 RAG 就解決了。",
+      "三者可疊加：微調定風格＋RAG 補事實＋prompt 控當次。",
+      "微調不是萬靈丹：資料成本、會過時、可能災難性遺忘。",
+    ],
+    traps: [
+      "一律「再改改 prompt」，不管問題其實是缺知識。",
+      "動不動就微調，成本高又難維護。",
+      "把 RAG 當成能「教會模型記住」（RAG 是查、不是記）。",
+    ],
+    related: ["prompt", "rag", "fine-tuning"],
+  },
+  "reasoning-models": {
+    cat: "prompting",
+    label: "推理模型（o1）",
+    q: "像 o1 這種「推理模型」跟一般 LLM 差在哪？",
+    trap: "別只說「它比較聰明」。面試官要你講出<b>差在哪、代價是什麼、什麼時候該用</b>。",
+    points: [
+      { icon: "atom", title: "底層原理", desc: "被訓練成<b>回答前先進行長篇內部推理</b>（長 CoT），並用 RL 針對「推得對」優化；不只是接話，是先想再答。" },
+      { icon: "scale", title: "工程權衡", desc: "難題正確率高，但<b>更慢、更貴</b>（花大量推理 token 在「想」）；簡單題用它是浪費。" },
+      { icon: "network", title: "系統化", desc: "這是「<b>推理時算力換正確率</b>」的路線；適合數學、程式、多步規劃這類難題，不適合簡單問答。" },
+    ],
+    core: [
+      { h: "差在哪", d: "一般 LLM 傾向<b>一步到位</b>；推理模型被訓練成<b>先想很久（長 CoT）再答</b>，並用 RL 獎勵「推得對」。" },
+      { h: "代價", d: "換來正確率，但<b>延遲高、成本高</b>：它把很多 token 花在看不見的「思考」上。" },
+      { h: "何時用", d: "<b>難題</b>（數學、程式、多步規劃）值得；簡單問答用它又慢又貴，殺雞用牛刀。" },
+    ],
+    plus: [
+      "「test-time compute」：同一模型想久一點就更準（見下一題）。",
+      "訓練上把長 CoT＋RL 內化，跟一般 SFT/RLHF 的重點不同。",
+      "有的把推理過程隱藏、只給結論，避免被抄或誤導。",
+    ],
+    traps: [
+      "只說「更聰明」，講不出長 CoT／RL／代價。",
+      "什麼題都用推理模型，成本延遲爆炸。",
+      "以為它不會錯（仍會，只是難題較準）。",
+    ],
+    related: ["llm", "inference", "pretraining"],
+  },
+  "test-time-compute": {
+    cat: "prompting",
+    label: "想久一點為何更強",
+    q: "為什麼「讓模型想久一點」（test-time compute）能變聰明？",
+    trap: "面試官要看你懂<b>為什麼「推理時多花算力」能換到正確率</b>，而不只是背名詞。",
+    points: [
+      { icon: "atom", title: "底層原理", desc: "給模型<b>更多中間步驟、嘗試、自我檢查</b>的空間，等於把難題拆更細、還能回頭改，命中率自然上升。" },
+      { icon: "scale", title: "工程權衡", desc: "<b>用推理算力（時間與成本）換正確率</b>，但有<b>邊際遞減</b>，想太久 CP 值下降。" },
+      { icon: "network", title: "系統化", desc: "手段有 CoT、取樣多條再投票（self-consistency）、生成後驗證；跟「訓練時堆規模」是兩條不同的變強路線。" },
+    ],
+    core: [
+      { h: "為何有用", d: "一步到位容易錯；<b>多花步驟去拆解、嘗試、自我檢查</b>，難題就更可能答對，這就是「想」的價值。" },
+      { h: "怎麼做", d: "CoT（展開步驟）、self-consistency（多條推理投票）、生成後<b>自我檢查與驗證</b>再定案。" },
+      { h: "取捨", d: "是<b>推理算力換正確率</b>，但邊際遞減；依題目難度決定「想多久」，別無腦拉長。" },
+    ],
+    plus: [
+      "這跟「訓練時 scaling」互補：一個堆訓練、一個堆推理。",
+      "推理模型（o1）就是把「想久一點」內化成預設行為。",
+      "對簡單題，長推理反而增加出錯與成本。",
+    ],
+    traps: [
+      "把它當「一定越久越好」，忽略邊際遞減。",
+      "分不清「訓練時算力」與「推理時算力」兩條路。",
+      "簡單題也硬拉長推理。",
+    ],
+    related: ["inference", "llm"],
+  },
+  "cot-limits": {
+    cat: "prompting",
+    label: "CoT 何時沒用",
+    q: "Chain-of-Thought 一定更好嗎？什麼時候反而沒用或更糟？",
+    trap: "很多人把 CoT 當萬靈丹。面試官要看你知道<b>它的界線與副作用</b>。",
+    points: [
+      { icon: "atom", title: "底層原理", desc: "CoT 靠「展開步驟」幫忙；但<b>簡單題本來就一步能答</b>，展開只是多花 token；模型也可能<b>編一段看似合理卻錯的推理</b>。" },
+      { icon: "scale", title: "工程權衡", desc: "準確 vs 成本/延遲：難題值得、簡單題浪費；小模型 CoT 效果有限甚至更亂。" },
+      { icon: "network", title: "系統化", desc: "要<b>依題目難度與模型能力</b>決定用不用，並知道「推理漂亮 ≠ 結論正確」。" },
+    ],
+    core: [
+      { h: "不是萬靈丹", d: "CoT 對<b>多步、難題</b>有用；<b>簡單題</b>用它只是多花 token、不會更準。" },
+      { h: "副作用", d: "模型會<b>把錯誤答案配上一段像模像樣的推理</b>（自圓其說），更容易誤導人；小模型的 CoT 常不穩。" },
+      { h: "怎麼判斷", d: "依<b>題目難度＋模型能力</b>決定；並記住<b>過程漂亮不代表答案對</b>，重要結論仍要驗。" },
+    ],
+    plus: [
+      "有研究顯示某些任務 CoT 幫助有限甚至反效果，要看任務類型。",
+      "self-consistency（多條投票）可緩解單條推理走偏。",
+      "隱藏式推理：讓它想但只輸出結論，避免使用者被錯誤推理帶偏。",
+    ],
+    traps: [
+      "到處硬加 CoT，簡單題也浪費。",
+      "看到有推理過程就信結論。",
+      "用小模型硬 CoT，反而更亂。",
+    ],
+    related: ["prompt", "llm", "limits"],
+  },
   "attention-compute": {
     cat: "principle",
     label: "Attention 在算什麼",
@@ -1107,6 +1297,181 @@ export const INTERVIEWS = {
 // 各語言的內容翻譯（欄位與 base 對齊；points 只翻 title/desc，icon 沿用 base）
 const INT_TR = {
   en: {
+    "prompt-craft": {
+      label: "Prompt-writing principles",
+      q: "How do you write a good prompt? What principles apply?",
+      trap: "Many people think a prompt is just “typing in the question.” The interviewer wants to see that you understand <b>why the same question, phrased differently, gives very different results</b>, and whether you have systematic principles.",
+      points: [
+        { title: "Underlying principle", desc: "The model <b>predicts the most plausible continuation from the context you give it</b>; the role, context, format, and examples you provide frame “which direction it should generate in.”" },
+        { title: "Engineering trade-offs", desc: "Say too little and it improvises and drifts off; say too much or too messily and it eats tokens and gets distracted. You have to balance “being clear” against “being concise.”" },
+        { title: "Systematic thinking", desc: "A good prompt has structure: role + task + context + output format + (examples), and it can be tested iteratively rather than left to luck." },
+      ],
+      core: [
+        { h: "Start with the principle", d: "The prompt determines the output because the model <b>predicts the continuation from the context you give it</b>; stating the role, context, and format clearly narrows the range it generates within." },
+        { h: "A few principles", d: "① Be explicit about the role and task; ② give context and constraints; ③ <b>specify the output format</b>; ④ <b>giving examples (few-shot) works better than description alone</b>; ⑤ for complex tasks, ask it to work step by step." },
+        { h: "Wrap up", d: "The same question phrased differently gives very different results, so treat prompting as <b>iterative engineering</b>: write, test, revise, not a one-shot job." },
+      ],
+      plus: [
+        "Split a long instruction into a “system prompt (fixed role/rules) + user prompt (the task at hand).”",
+        "For a stable format, pair it with few-shot or a schema (see “Stable JSON output”).",
+        "An overly long prompt also brings cost and the “middle gets ignored” problem (see “Context window limits”).",
+      ],
+      traps: [
+        "Thinking a prompt is just “pasting in the question,” with no principles to offer.",
+        "Cramming in one huge instruction so the key points get diluted.",
+        "Only describing and never giving examples, leaving format and style entirely to the model’s guesswork.",
+      ],
+    },
+    "few-shot": {
+      label: "few-shot vs zero-shot",
+      q: "What’s the difference between few-shot and zero-shot? When should you give examples?",
+      trap: "Knowing that “few-shot just means giving examples” isn’t enough. The interviewer wants you to articulate <b>what the examples are actually doing for the model</b>, and when they’re worth the token cost.",
+      points: [
+        { title: "Underlying principle", desc: "Examples <b>demonstrate on the spot that “this kind of input maps to this kind of output,”</b> helping the model calibrate format, style, and decision boundaries without retraining." },
+        { title: "Engineering trade-offs", desc: "Examples are usually more accurate than zero-shot, but <b>more is not always better</b>: there are diminishing returns, and one or two well-chosen examples often beat cramming in many; examples also consume tokens, making things pricier and slower." },
+        { title: "Systematic thinking", desc: "Choose by task: strict format, distinctive style, or fuzzy classification boundaries mean give examples; simple, generic tasks are fine with zero-shot." },
+      ],
+      core: [
+        { h: "The difference", d: "Zero-shot = instructions only; few-shot = <b>a few “input → output” examples attached</b>. The examples “teach on the spot” inside the prompt, without touching the weights." },
+        { h: "What the examples do", d: "They calibrate <b>output format, tone, and decision boundaries</b>; especially for classification, extraction, and fixed-format tasks, one or two good examples often beat a long description." },
+        { h: "When to give them, and the trade-off", d: "Give them when the format is strict, the style is distinctive, or the boundaries are fuzzy; but examples <b>take up tokens and add cost</b>, so for simple tasks zero-shot is enough." },
+      ],
+      plus: [
+        "Examples should cover the “edge cases,” or the model picks up a skewed pattern.",
+        "The next step up is few-shot CoT (the examples also demonstrate the reasoning process).",
+        "Too many examples that aren’t relevant to the question actually interfere, so choosing the demonstrations matters.",
+      ],
+      traps: [
+        "Answering only “give examples,” without saying what the examples calibrate.",
+        "Examples that are all easy cases, so it falls apart at the boundaries.",
+        "Cramming in piles of examples for few-shot, blowing up cost without gaining accuracy.",
+      ],
+    },
+    "cot-prompting": {
+      label: "Chain-of-Thought",
+      q: "What is Chain-of-Thought (getting the model to “think it through”)? Why does it help?",
+      trap: "Don’t treat CoT as “the magic of adding ‘think step by step.’” The interviewer wants to see that you understand <b>why it works, along with its costs and limits</b>.",
+      points: [
+        { title: "Underlying principle", desc: "It has the model <b>produce intermediate reasoning steps before giving the answer</b>; breaking a hard problem into small steps makes each continuation easier to predict than going “straight to the answer.”" },
+        { title: "Engineering trade-offs", desc: "More accurate but <b>more tokens, slower, and pricier</b>, and using CoT on easy questions is a waste." },
+        { title: "Systematic thinking", desc: "At heart it’s “trading reasoning length for accuracy”; you can pair it with few-shot (demonstrating the reasoning) or just tell the model to work step by step." },
+      ],
+      core: [
+        { h: "What it is", d: "CoT = having the model <b>write out intermediate steps before reaching a conclusion</b>, rather than blurting out the answer directly." },
+        { h: "Why it helps", d: "Going straight to the answer on a hard problem is error-prone; <b>breaking it into small steps that build on each other</b> makes each step easier to predict and raises overall accuracy (most visibly on math and multi-step reasoning)." },
+        { h: "Costs and limits", d: "The cost is tokens, latency, and money; <b>it’s unnecessary on easy questions</b>, its effect is limited on small models, and it can even “sound perfectly coherent while reaching the wrong conclusion.”" },
+      ],
+      plus: [
+        "Few-shot CoT (examples that demonstrate the reasoning) vs. zero-shot CoT (a single “think step by step”).",
+        "Going further, there’s self-consistency (voting across multiple reasoning paths), or hiding the reasoning and returning only the conclusion.",
+        "This is also the prototype of reasoning models (o1): internalizing long CoT into training.",
+      ],
+      traps: [
+        "Assuming that “adding ‘think step by step’” works everywhere.",
+        "Forcing CoT even on simple tasks, wasting tokens.",
+        "Believing the reasoning it writes is correct (a polished process doesn’t mean the answer is right).",
+      ],
+    },
+    "prompt-vs-tune-vs-rag": {
+      label: "Prompt, RAG, or fine-tune?",
+      q: "When prompting isn’t getting you there, should you keep working the prompt or switch methods (RAG / fine-tuning)?",
+      trap: "The interviewer is watching whether you <b>diagnose the type of problem first</b>, instead of always “tweaking the prompt again” or “just fine-tuning.”",
+      points: [
+        { title: "Underlying principle", desc: "The three levers solve different problems: prompting changes <b>the behavior for this call</b>, RAG supplies <b>missing facts</b>, and fine-tuning changes <b>internalized style and capabilities</b>." },
+        { title: "Engineering trade-offs", desc: "Cost from low to high: prompting (almost free) < RAG (medium) < fine-tuning (high). Reach for the cheap one first." },
+        { title: "Systematic thinking", desc: "Classify the problem before choosing: format/tone → prompting; wrong/outdated answers or private knowledge → RAG; a stable style or lots of fixed behavior → fine-tuning." },
+      ],
+      core: [
+        { h: "Classify the problem first", d: "Don’t rush to act; first ask <b>which kind of problem</b> it is: wrong format, insufficient knowledge, or unstable behavior." },
+        { h: "Match the remedy to the problem", d: "Format/tone/one-off tasks → <b>tweak the prompt (try the cheapest first)</b>; wrong/outdated answers or private facts → <b>RAG</b>; a stable style and lots of fixed behavior → <b>fine-tuning</b>." },
+        { h: "Wrap up", d: "The order is usually prompting → RAG → fine-tuning (cheap to expensive); if an earlier option solves it, don’t rush to fine-tune." },
+      ],
+      plus: [
+        "Many cases people “think need fine-tuning” are actually solved by prompting + few-shot or RAG.",
+        "The three can stack: fine-tuning sets the style, RAG supplies the facts, and the prompt controls the current call.",
+        "Fine-tuning is no cure-all: data cost, it goes out of date, and it can cause catastrophic forgetting.",
+      ],
+      traps: [
+        "Always “tweaking the prompt again,” regardless of the problem actually being missing knowledge.",
+        "Fine-tuning at the drop of a hat: expensive and hard to maintain.",
+        "Treating RAG as something that can “teach the model to remember” (RAG is lookup, not memory).",
+      ],
+    },
+    "reasoning-models": {
+      label: "Reasoning models (o1)",
+      q: "How do reasoning models like o1 differ from an ordinary LLM?",
+      trap: "Don’t just say “it’s smarter.” The interviewer wants you to spell out <b>how it differs, what it costs, and when to use it</b>.",
+      points: [
+        { title: "Underlying principle", desc: "It’s trained to <b>do long internal reasoning before answering</b> (long CoT), and optimized with RL for “reasoning correctly”; it doesn’t just continue the text, it thinks before it answers." },
+        { title: "Engineering trade-offs", desc: "Higher accuracy on hard problems, but <b>slower and pricier</b> (it spends a lot of reasoning tokens on “thinking”); using it on easy questions is a waste." },
+        { title: "Systematic thinking", desc: "This is the “<b>trade test-time compute for accuracy</b>” approach; it suits hard problems like math, coding, and multi-step planning, not simple Q&A." },
+      ],
+      core: [
+        { h: "How it differs", d: "An ordinary LLM tends to <b>go straight to the answer</b>; a reasoning model is trained to <b>think for a long time (long CoT) before answering</b>, with RL rewarding “reasoning correctly.”" },
+        { h: "The cost", d: "You gain accuracy, but at <b>high latency and high cost</b>: it spends many tokens on invisible “thinking.”" },
+        { h: "When to use it", d: "It’s worth it for <b>hard problems</b> (math, coding, multi-step planning); on simple Q&A it’s slow and expensive, like using a sledgehammer to crack a nut." },
+      ],
+      plus: [
+        "“Test-time compute”: the same model gets more accurate by thinking longer (see the next question).",
+        "In training it internalizes long CoT + RL, with a different emphasis from ordinary SFT/RLHF.",
+        "Some hide the reasoning process and return only the conclusion, to avoid being copied or misleading users.",
+      ],
+      traps: [
+        "Saying only “smarter,” without articulating long CoT / RL / the costs.",
+        "Using a reasoning model for everything, blowing up cost and latency.",
+        "Assuming it can’t be wrong (it still can; it’s just more accurate on hard problems).",
+      ],
+    },
+    "test-time-compute": {
+      label: "Why thinking longer helps",
+      q: "Why does “letting the model think longer” (test-time compute) make it smarter?",
+      trap: "The interviewer wants to see that you understand <b>why “spending more compute at inference time” buys accuracy</b>, not just that you can recite the term.",
+      points: [
+        { title: "Underlying principle", desc: "Giving the model room for <b>more intermediate steps, attempts, and self-checking</b> lets it break a hard problem down further and go back to fix things, so its hit rate naturally rises." },
+        { title: "Engineering trade-offs", desc: "You <b>trade inference compute (time and cost) for accuracy</b>, but with <b>diminishing returns</b>: think too long and the value for money drops." },
+        { title: "Systematic thinking", desc: "The methods include CoT, sampling multiple paths and voting (self-consistency), and post-generation verification; this is a different path to getting stronger than “piling on scale at training time.”" },
+      ],
+      core: [
+        { h: "Why it helps", d: "Going straight to the answer is error-prone; <b>spending extra steps to break things down, try, and self-check</b> makes it more likely to get hard problems right, and that’s the value of “thinking.”" },
+        { h: "How to do it", d: "CoT (unfolding the steps), self-consistency (voting across multiple reasoning paths), and <b>self-checking and verifying</b> after generation before finalizing." },
+        { h: "The trade-off", d: "It’s <b>trading inference compute for accuracy</b>, but with diminishing returns; let the problem’s difficulty decide “how long to think,” and don’t just blindly stretch it out." },
+      ],
+      plus: [
+        "This complements “training-time scaling”: one piles on training, the other piles on inference.",
+        "Reasoning models (o1) are exactly “thinking longer” internalized as default behavior.",
+        "On easy questions, long reasoning actually adds errors and cost.",
+      ],
+      traps: [
+        "Treating it as “longer is always better,” ignoring diminishing returns.",
+        "Confusing the two paths of “training-time compute” and “inference-time compute.”",
+        "Forcing long reasoning even on easy questions.",
+      ],
+    },
+    "cot-limits": {
+      label: "When CoT doesn’t help",
+      q: "Is Chain-of-Thought always better? When does it instead fail to help, or make things worse?",
+      trap: "Many people treat CoT as a cure-all. The interviewer wants to see that you know <b>its limits and side effects</b>.",
+      points: [
+        { title: "Underlying principle", desc: "CoT helps by “unfolding the steps”; but <b>an easy question can be answered in one step anyway</b>, so unfolding just spends extra tokens; the model may also <b>fabricate reasoning that looks plausible but is wrong</b>." },
+        { title: "Engineering trade-offs", desc: "Accuracy vs. cost/latency: worth it on hard problems, wasteful on easy ones; on small models CoT has limited effect and can even make things messier." },
+        { title: "Systematic thinking", desc: "Decide whether to use it <b>based on the problem’s difficulty and the model’s capability</b>, and know that “polished reasoning ≠ a correct conclusion.”" },
+      ],
+      core: [
+        { h: "Not a cure-all", d: "CoT helps on <b>multi-step, hard problems</b>; on <b>easy questions</b> it just spends more tokens without improving accuracy." },
+        { h: "Side effects", d: "The model will <b>pair a wrong answer with a convincing-looking chain of reasoning</b> (rationalizing after the fact), which is all the more misleading; CoT on small models is often unstable." },
+        { h: "How to judge", d: "Decide by <b>problem difficulty + model capability</b>; and remember that <b>a polished process doesn’t mean the answer is right</b>, so important conclusions still need verifying." },
+      ],
+      plus: [
+        "Research shows that on some tasks CoT helps little or even backfires; it depends on the task type.",
+        "Self-consistency (voting across multiple paths) can mitigate a single reasoning chain going astray.",
+        "Hidden reasoning: let it think but output only the conclusion, so users aren’t led astray by faulty reasoning.",
+      ],
+      traps: [
+        "Forcing CoT everywhere, wasting it on easy questions too.",
+        "Trusting the conclusion just because there’s a reasoning process.",
+        "Forcing CoT on a small model, which just makes things messier.",
+      ],
+    },
     "attention-compute": {
       label: "What attention computes",
       q: "What is attention actually computing, and why does that give it context understanding?",
@@ -2088,6 +2453,181 @@ const INT_TR = {
     },
   },
   ja: {
+    "prompt-craft": {
+      label: "プロンプトを書く原則",
+      q: "良いプロンプトはどう書けばいいですか？どんな原則がありますか？",
+      trap: "多くの人はプロンプトを「質問を打ち込むだけ」だと思っています。面接官が見たいのは<b>なぜ同じ質問でも書き方を変えると結果が大きく変わるのか</b>を理解しているか、そして体系的な原則を持っているかです。",
+      points: [
+        { title: "基礎原理", desc: "モデルは<b>与えられた文脈から最も自然な続きを推測している</b>だけ；与える役割・文脈・フォーマット・例は、モデルに「どの方向へ生成すべきか」の枠をはめることに等しい。" },
+        { title: "工学的トレードオフ", desc: "説明が少なすぎる→自由に振る舞ってずれやすい；多すぎて雑然→トークンを食い、かえって注意が散る。「明確に伝える」と「簡潔さ」の間で加減する必要がある。" },
+        { title: "体系的な視点", desc: "良いプロンプトには構造がある：役割＋タスク＋文脈＋出力フォーマット＋（例）、しかも反復して検証でき、運任せではない。" },
+      ],
+      core: [
+        { h: "まず原理を話す", d: "プロンプトが出力を左右するのは、モデルが<b>与えられた文脈から続きを推測する</b>から；役割・文脈・フォーマットを明確にすることが、生成の範囲を絞り込む手助けになる。" },
+        { h: "いくつかの原則", d: "① 役割とタスクを明確にする；② 文脈と制約を与える；③ <b>出力フォーマットを指定する</b>；④ <b>例を与える（few-shot）方が説明だけより効く</b>；⑤ 複雑なタスクは段階的に考えさせる。" },
+        { h: "まとめ", d: "同じ質問でも書き方で大きく変わるので、プロンプトは<b>反復可能な工学として扱う</b>：書く→試す→直す、一発で完成させるものではない。" },
+      ],
+      plus: [
+        "長い指示は「システムプロンプト（固定の役割／ルール）＋ユーザープロンプト（その回のタスク）」に分ける。",
+        "フォーマットを安定させたいなら few-shot や schema を併用する（「JSON を安定して出力する」を参照）。",
+        "プロンプトが長すぎるとコストと「中盤が無視される」問題もある（「コンテキストウィンドウの限界」を参照）。",
+      ],
+      traps: [
+        "「質問を貼り付ける」ことがプロンプトだと思い込み、原則を語れない。",
+        "一度に超長い指示を詰め込み、要点が薄まる。",
+        "説明するだけで例を与えず、フォーマットもスタイルもすべてモデルの推測任せにする。",
+      ],
+    },
+    "few-shot": {
+      label: "few-shot vs zero-shot",
+      q: "few-shot と zero-shot は何が違いますか？いつ例を与えるべきですか？",
+      trap: "「few-shot とは例を与えること」と知っているだけでは足りません。面接官が見たいのは<b>例がモデルに対して何をしているのか</b>を説明できるか、そしていつそのトークンコストを払う価値があるかです。",
+      points: [
+        { title: "基礎原理", desc: "例は<b>「この入力にはこの出力」をその場で実演する</b>ことに等しく、モデルにフォーマット・スタイル・判断の境界を較正させる。再学習は不要。" },
+        { title: "工学的トレードオフ", desc: "例は通常 zero-shot より正確だが<b>多ければ良いわけではない</b>：限界効用の逓減があり、よく選んだ1〜2個の例が数多く詰め込むより勝ることが多い；例はトークンも食い、高く遅くなる。" },
+        { title: "体系的な視点", desc: "タスクに応じて選ぶ：フォーマットが厳格、スタイルが特殊、分類の境界が曖昧→例を与える；単純で汎用的なタスク→zero-shot で十分。" },
+      ],
+      core: [
+        { h: "違い", d: "zero-shot＝指示だけを与える；few-shot＝<b>「入力→出力」の例をいくつか添える</b>。例はプロンプト内で「その場で教える」もので、重みは動かさない。" },
+        { h: "例は何をしているか", d: "<b>出力フォーマット・語調・判断の境界</b>を較正する。とくに分類・抽出・フォーマット固定のタスクでは、良い例1〜2個が長い説明に勝ることが多い。" },
+        { h: "いつ与えるかと取捨", d: "フォーマットが厳格、スタイルが特殊、境界が曖昧なときに与える；ただし例は<b>トークンを食いコストを増やす</b>ので、単純なタスクなら zero-shot で十分。" },
+      ],
+      plus: [
+        "例は「境界ケース」を含めるべき、さもないとモデルは偏りを学ぶ。",
+        "さらに上には few-shot CoT（例が推論過程も実演する）がある。",
+        "例が多すぎて質問と無関係だと逆に邪魔になる、例の選び方が重要。",
+      ],
+      traps: [
+        "「例を与える」とだけ答え、例が何を較正しているのか説明できない。",
+        "例がすべて単純なケースで、境界に当たると崩れる。",
+        "few-shot のために大量の例を詰め込み、コストが激増するのに精度は上がらない。",
+      ],
+    },
+    "cot-prompting": {
+      label: "Chain-of-Thought",
+      q: "Chain-of-Thought（モデルに「少し考えさせる」）とは何ですか？なぜ効くのですか？",
+      trap: "CoT を「『一歩ずつ考えて』と一言足す魔法」だと思ってはいけません。面接官が見たいのは<b>なぜ効くのか、そして代償と限界</b>を理解しているかです。",
+      points: [
+        { title: "基礎原理", desc: "モデルに<b>まず中間の推論ステップを出させてから答えさせる</b>；難問を小さなステップに分解すると、各ステップの続きが「一発で答える」より当てやすくなる。" },
+        { title: "工学的トレードオフ", desc: "より正確だが<b>トークンが増え、遅く、高くなる</b>し、単純な問題に CoT を使うのは無駄。" },
+        { title: "体系的な視点", desc: "本質は「推論の長さで正確率を買う」こと；few-shot（推論を実演）と組み合わせるか、直接モデルに段階的に考えさせる。" },
+      ],
+      core: [
+        { h: "何か", d: "CoT＝モデルに<b>まず中間ステップを書かせてから結論を出させる</b>、答えを直接吐かせるのではなく。" },
+        { h: "なぜ効くか", d: "難問を一発で答えると間違えやすい；<b>小さなステップに分けて逐次つなげる</b>と各ステップが当てやすくなり、全体の正確率が上がる（数学や多段推論で最も顕著）。" },
+        { h: "代償と限界", d: "代償はトークン・遅延・コスト；<b>単純な問題には不要</b>、小さいモデルの CoT は効果が限られ、しかも「筋は通っているが結論は間違い」になることもある。" },
+      ],
+      plus: [
+        "few-shot CoT（例が推論を実演）vs zero-shot CoT（「一歩ずつ考えて」の一言）。",
+        "さらに self-consistency（複数の推論を投票）や、推論を隠して結論だけ出す手もある。",
+        "これは「推論モデル」（o1）の原型でもある：長い CoT を学習に内面化する。",
+      ],
+      traps: [
+        "「『一歩ずつ考えて』と一言足せば」どこでも効くと思い込む。",
+        "単純なタスクにも無理に CoT を使い、トークンを無駄にする。",
+        "モデルが書いた推論＝正しいと信じる（過程がきれいでも答えが正しいとは限らない）。",
+      ],
+    },
+    "prompt-vs-tune-vs-rag": {
+      label: "プロンプト調整か手法変更か",
+      q: "プロンプトで解決できないとき、まずプロンプトをいじるべきですか、それとも手法（RAG／ファインチューニング）を変えるべきですか？",
+      trap: "面接官が見ているのは<b>まず問題の種類を診断できるか</b>であって、一律に「もう少しプロンプトをいじる」や「すぐファインチューニングする」ではありません。",
+      points: [
+        { title: "基礎原理", desc: "3つの手段は異なる問題を解く：プロンプトは<b>その回の振る舞い</b>を変え、RAG は<b>欠けている事実</b>を補い、ファインチューニングは<b>内面化されたスタイルと能力</b>を変える。" },
+        { title: "工学的トレードオフ", desc: "コストは低い順に：プロンプト（ほぼ無料）< RAG（中）< ファインチューニング（高）。まず安いものから動かす。" },
+        { title: "体系的な視点", desc: "先に問題を分類してから選ぶ：フォーマット／語調→プロンプト；誤答／情報が古い／私有知識→RAG；安定したスタイルや大量の固定的な振る舞いが必要→ファインチューニング。" },
+      ],
+      core: [
+        { h: "まず問題を分類する", d: "急いで手を動かさず、まず<b>どの種類の問題か</b>を問う：フォーマットが違うのか、知識が足りないのか、それとも振る舞いが不安定なのか。" },
+        { h: "症状に合わせて処方する", d: "フォーマット／語調／一回限りのタスク→<b>プロンプト調整（最も安いので先に試す）</b>；誤答／情報が古い／私有の事実→<b>RAG</b>；安定したスタイルや大量の固定的な振る舞い→<b>ファインチューニング</b>。" },
+        { h: "まとめ", d: "順序はふつう プロンプト → RAG → ファインチューニング（安い方から高い方へ）、前段で解決できるならすぐファインチューニングに走らない。" },
+      ],
+      plus: [
+        "「ファインチューニングが必要」と思い込まれるものの多くは、実はプロンプト＋few-shot や RAG で解決する。",
+        "3つは重ねられる：ファインチューニングでスタイルを定め＋RAG で事実を補い＋プロンプトでその回を制御する。",
+        "ファインチューニングは万能薬ではない：データコスト、情報が古くなる、破滅的忘却が起こりうる。",
+      ],
+      traps: [
+        "問題が実は知識不足でも、一律に「もう少しプロンプトをいじる」で済ませる。",
+        "何かというとすぐファインチューニングし、コストが高く保守も難しい。",
+        "RAG を「モデルに覚えさせられる」ものと勘違いする（RAG は検索であって記憶ではない）。",
+      ],
+    },
+    "reasoning-models": {
+      label: "推論モデル（o1）",
+      q: "o1 のような「推論モデル」は普通の LLM と何が違いますか？",
+      trap: "「賢いから」とだけ言ってはいけません。面接官が求めるのは<b>何が違うのか、代償は何か、いつ使うべきか</b>を語ることです。",
+      points: [
+        { title: "基礎原理", desc: "<b>答える前に長い内部推論を行う</b>（長い CoT）よう訓練され、RL で「正しく推論できたか」を最適化される；ただ続きを話すのではなく、まず考えてから答える。" },
+        { title: "工学的トレードオフ", desc: "難問の正確率は高いが<b>より遅く、より高い</b>（大量の推論トークンを「考える」ことに費やす）；単純な問題に使うのは無駄。" },
+        { title: "体系的な視点", desc: "これは「<b>推論時の計算量で正確率を買う</b>」路線；数学・プログラミング・多段の計画といった難問に向き、単純な問答には向かない。" },
+      ],
+      core: [
+        { h: "何が違うか", d: "普通の LLM は<b>一発で答えがち</b>；推論モデルは<b>まず長く考えてから（長い CoT）答える</b>よう訓練され、RL で「正しく推論できたこと」を報酬にする。" },
+        { h: "代償", d: "正確率と引き換えに<b>遅延が大きく、コストが高い</b>：多くのトークンを見えない「思考」に費やす。" },
+        { h: "いつ使うか", d: "<b>難問</b>（数学・プログラミング・多段の計画）には値する；単純な問答に使うと遅く高く、鶏を割くのに牛刀を用いるようなもの。" },
+      ],
+      plus: [
+        "「test-time compute」：同じモデルでも長く考えればより正確になる（次の問題を参照）。",
+        "訓練上は長い CoT＋RL を内面化しており、通常の SFT／RLHF とは重点が異なる。",
+        "推論過程を隠して結論だけ出すものもある、盗用や誤誘導を避けるため。",
+      ],
+      traps: [
+        "「賢い」とだけ言い、長い CoT／RL／代償を語れない。",
+        "どんな問題にも推論モデルを使い、コストと遅延が爆発する。",
+        "間違えないと思い込む（依然として間違える、ただ難問でより正確なだけ）。",
+      ],
+    },
+    "test-time-compute": {
+      label: "長く考えるとなぜ強くなるか",
+      q: "なぜ「モデルに長く考えさせる」（test-time compute）と賢くなれるのですか？",
+      trap: "面接官が見たいのは<b>なぜ「推論時に計算量を多く費やす」と正確率を得られるのか</b>を理解しているかであって、用語の暗記ではありません。",
+      points: [
+        { title: "基礎原理", desc: "モデルに<b>より多くの中間ステップ・試行・自己チェック</b>の余地を与えることで、難問をより細かく分解でき、後戻りして直せもするので、命中率が自然に上がる。" },
+        { title: "工学的トレードオフ", desc: "<b>推論の計算量（時間とコスト）で正確率を買う</b>が、<b>限界効用の逓減</b>があり、考えすぎると費用対効果が下がる。" },
+        { title: "体系的な視点", desc: "手段には CoT、複数サンプリングして投票（self-consistency）、生成後の検証がある；「訓練時に規模を積む」のとは別の、強くなる路線。" },
+      ],
+      core: [
+        { h: "なぜ効くか", d: "一発で答えると間違えやすい；<b>ステップを多く費やして分解・試行・自己チェックする</b>と、難問ほど正解しやすくなる、これが「考える」ことの価値。" },
+        { h: "どうやるか", d: "CoT（ステップを展開）、self-consistency（複数の推論を投票）、生成後の<b>自己チェックと検証</b>をしてから確定する。" },
+        { h: "取捨", d: "<b>推論の計算量で正確率を買う</b>が限界効用の逓減がある；問題の難易度に応じて「どれだけ考えるか」を決め、無闇に長くしない。" },
+      ],
+      plus: [
+        "これは「訓練時のスケーリング」と補完的：一方は訓練を積み、もう一方は推論を積む。",
+        "推論モデル（o1）は「長く考える」ことを既定の振る舞いとして内面化したもの。",
+        "単純な問題では、長い推論はかえって誤りとコストを増やす。",
+      ],
+      traps: [
+        "「必ず長いほど良い」と思い込み、限界効用の逓減を無視する。",
+        "「訓練時の計算量」と「推論時の計算量」の2つの路線を区別できない。",
+        "単純な問題にも無理に推論を長くする。",
+      ],
+    },
+    "cot-limits": {
+      label: "CoT がいつ効かないか",
+      q: "Chain-of-Thought は必ず良くなりますか？いつ逆に効かない、あるいは悪化するのですか？",
+      trap: "多くの人は CoT を万能薬だと思っています。面接官が見たいのは<b>その限界と副作用</b>を知っているかです。",
+      points: [
+        { title: "基礎原理", desc: "CoT は「ステップを展開する」ことで助けになる；しかし<b>単純な問題はそもそも一歩で答えられる</b>ので、展開はトークンを余計に食うだけ；モデルは<b>もっともらしいが誤った推論を捏造する</b>こともある。" },
+        { title: "工学的トレードオフ", desc: "正確さ vs コスト／遅延：難問には値するが単純な問題では無駄；小さいモデルの CoT は効果が限られ、かえって混乱することもある。" },
+        { title: "体系的な視点", desc: "<b>問題の難易度とモデルの能力</b>に応じて使うかどうかを決め、「推論がきれい ≠ 結論が正しい」ことを知っておく必要がある。" },
+      ],
+      core: [
+        { h: "万能薬ではない", d: "CoT は<b>多段の難問</b>に有効；<b>単純な問題</b>に使ってもトークンを余計に食うだけで、より正確にはならない。" },
+        { h: "副作用", d: "モデルは<b>誤った答えにもっともらしい推論を付ける</b>（つじつま合わせ）ので、かえって人を誤らせやすい；小さいモデルの CoT はしばしば不安定。" },
+        { h: "どう判断するか", d: "<b>問題の難易度＋モデルの能力</b>で決める；そして<b>過程がきれいでも答えが正しいとは限らない</b>ことを忘れず、重要な結論はやはり検証する。" },
+      ],
+      plus: [
+        "一部のタスクでは CoT の効果が限定的、あるいは逆効果だという研究もある、タスクの種類次第。",
+        "self-consistency（複数の投票）は単一の推論がずれるのを緩和できる。",
+        "隠れ推論：考えさせつつ結論だけ出力し、ユーザーが誤った推論に引きずられるのを避ける。",
+      ],
+      traps: [
+        "どこでも無理に CoT を足し、単純な問題でも無駄にする。",
+        "推論過程があるだけで結論を信じる。",
+        "小さいモデルに無理に CoT を使い、かえって混乱させる。",
+      ],
+    },
     "attention-compute": {
       label: "アテンションは何を計算しているか",
       q: "アテンションは結局のところ何を計算していて、なぜ文脈を理解できるのですか？",
@@ -3075,7 +3615,9 @@ export const IV_ORDER = [
   "attention-compute", "positional-encoding", "transformer-vs-rnn", "embedding-meaning",
   "multi-head", "tokenizer-why", "rlhf-why", "finetune-vs-rag", "lora", "catastrophic-forgetting",
   "data-quality", "why-not-pretrain", "context-window", "train-vs-infer", "faster-inference",
-  "temperature", "rag-documents", "rag-retrieval", "rag-why-wrong", "rag-vs-longcontext",
+  "temperature",
+  "prompt-craft", "few-shot", "cot-prompting", "prompt-vs-tune-vs-rag", "reasoning-models", "test-time-compute", "cot-limits",
+  "rag-documents", "rag-retrieval", "rag-why-wrong", "rag-vs-longcontext",
   "agent-planning", "agent-tools", "json-output", "agent-memory", "agent-eval", "agent-cost",
   "diffusion-how", "diffusion-not-collage", "multimodal-key", "genimg-errors", "diffusion-vs-gan",
   "hallucination", "bias", "trust-answer", "ai-limits", "design-doc-qa", "design-support-bot",
