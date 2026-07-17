@@ -12,7 +12,7 @@ export default {
     literacy: 'AI Literacy',
   },
   home: {
-    title: 'Start from zero, build a solid AI foundation',
+    title: 'Start from zero and build a solid AI foundation',
     lede: 'We break complex ideas into bite-sized concepts, with no jargon to memorize and no walls of formulas. Every chapter comes with a <b>hands-on interactive demo</b>, so you learn by doing, from “What is AI?” all the way to <b>assembling your own AI solution</b>.',
     start: 'Start learning →',
     mapTitle: 'AI Knowledge Map',
