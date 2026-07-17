@@ -27,8 +27,8 @@
     </a>
 
     <div class="modesw" role="group" aria-label="Course / Interview">
-      <a class="ms" class:on={nav.mode === 'course'} href={hrefCourse(null)} onclick={(e) => onNav(e, () => setMode('course'))}>{t('iv.course')}</a>
-      <a class="ms" class:on={nav.mode === 'interview'} href={hrefIv(null)} onclick={(e) => onNav(e, () => setMode('interview'))}>{t('iv.interview')}</a>
+      <a class="ms" class:on={nav.mode === 'course'} href={hrefCourse(null)} onclick={(e) => onNav(e, () => setMode('course'), false)}>{t('iv.course')}</a>
+      <a class="ms" class:on={nav.mode === 'interview'} href={hrefIv(null)} onclick={(e) => onNav(e, () => setMode('interview'), false)}>{t('iv.interview')}</a>
     </div>
 
     {#if nav.mode === 'interview'}

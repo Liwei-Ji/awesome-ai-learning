@@ -49,11 +49,18 @@ export function setMode(m) {
 export const hrefCourse = (id) => buildPath({ locale: i18n.locale, mode: 'course', current: id });
 export const hrefIv = (id) => buildPath({ locale: i18n.locale, mode: 'interview', iv: id });
 
-/** <a> 點擊攔截：純左鍵才走 client 端導覽；cmd/ctrl/shift/中鍵維持「開新分頁」等瀏覽器預設 */
-export function onNav(e, fn) {
+/** 手機版：側邊欄抽屜開合狀態 */
+export const ui = $state({ menuOpen: false });
+export function toggleMenu() { ui.menuOpen = !ui.menuOpen; }
+export function closeMenu() { ui.menuOpen = false; }
+
+/** <a> 點擊攔截：純左鍵才走 client 端導覽；cmd/ctrl/shift/中鍵維持「開新分頁」等瀏覽器預設。
+    導覽後自動關閉手機抽屜（close=false 可保留，例如 course/challenge 切換） */
+export function onNav(e, fn, close = true) {
   if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
   e.preventDefault();
   fn();
+  if (close) ui.menuOpen = false;
 }
 
 // 上一頁／下一頁：從網址還原 nav 與語言

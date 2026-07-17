@@ -160,5 +160,10 @@
   .subs { display: inline-flex; flex-wrap: wrap; gap: 3px; margin-left: 6px; }
   .subtag { font-size: 10px; color: var(--muted); background: var(--surface-2); border-radius: 5px; padding: 1px 5px; }
 
-  @media (max-width: 720px) { .branches { flex-wrap: wrap; } .cat { flex-basis: 44%; } }
+  @media (max-width: 720px) {
+    .branches { flex-wrap: wrap; }
+    .cat { flex-basis: 44%; }
+    .hero { padding: 12px 0 26px; margin-bottom: 22px; }
+    .hero h1 { font-size: 29px; }
+  }
 </style>

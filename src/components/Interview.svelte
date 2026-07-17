@@ -181,4 +181,9 @@
   .catcard:hover:not(:disabled) { border-color: var(--accent); background: var(--surface-2); }
   .catcard:disabled { opacity: .5; }
   .catcard .cc { font-size: var(--fs-cap); color: var(--muted); font-family: var(--mono); flex: none; }
+
+  @media (max-width: 720px) {
+    .pts { grid-template-columns: 1fr; }
+    .cats { grid-template-columns: 1fr; }
+  }
 </style>
