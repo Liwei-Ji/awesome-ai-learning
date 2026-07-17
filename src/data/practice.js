@@ -3,7 +3,6 @@
    practical（實務上）：真正在用時的經驗法則（2-4 條）。
    decision（怎麼選）：何時用 A、何時用 B 的極簡決策指引。
    依語言分；缺該語言時「不顯示」（不 fallback）。
-   practical 由 draft->audit->translate 流程產生；decision 目前僅 rag(zh)。
    ============================================================ */
 export const PRACTICE = {
   "ml": {
@@ -158,6 +157,68 @@ export const PRACTICE = {
         "<b>載らないなら量子化する</b>：モデルを 4-bit や 8-bit に圧縮すれば、小さな GPU やローカルでも動かせて、品質の低下はたいてい少しだけ。",
         "<b>VRAM はパラメータ数から見積もる</b>：目安は「パラメータ数 × 1パラメータあたりのバイト数」。7B モデルは fp16 で約 14GB、4-bit に量子化すれば 4 から 5GB 程度で済む。"
       ]
+    },
+    "decision": {
+      "zh": {
+        "q": "任務該配大模型還是小模型？",
+        "rows": [
+          {
+            "when": "任務單純、量大、要便宜快",
+            "use": "小模型",
+            "why": "夠用就好，還能微調／量化壓成本"
+          },
+          {
+            "when": "需要複雜推理、最高品質",
+            "use": "大模型",
+            "why": "能力上限高，但貴又慢"
+          },
+          {
+            "when": "想兼顧",
+            "use": "中型或蒸餾",
+            "why": "用大模型產資料訓小模型，接近大的品質、跑小的成本"
+          }
+        ]
+      },
+      "en": {
+        "q": "Big model or small model for the task?",
+        "rows": [
+          {
+            "when": "Simple task, high volume, must be cheap and fast",
+            "use": "Small model",
+            "why": "Good enough is fine, and you can fine-tune or quantize to cut cost"
+          },
+          {
+            "when": "Needs complex reasoning or top quality",
+            "use": "Large model",
+            "why": "Higher ceiling, but expensive and slow"
+          },
+          {
+            "when": "Want a balance",
+            "use": "Mid-size or distillation",
+            "why": "Use a big model to generate data to train a small one: near-big quality at small-model cost"
+          }
+        ]
+      },
+      "ja": {
+        "q": "タスクに大きいモデルか小さいモデルか？",
+        "rows": [
+          {
+            "when": "単純・大量・安く速く",
+            "use": "小さいモデル",
+            "why": "十分なら十分。ファインチューニングや量子化でコストも下げられる"
+          },
+          {
+            "when": "複雑な推論や最高品質が要る",
+            "use": "大きいモデル",
+            "why": "上限は高いが高価で遅い"
+          },
+          {
+            "when": "両立したい",
+            "use": "中規模／蒸留",
+            "why": "大モデルでデータを作り小モデルを訓練。大に近い品質を小のコストで"
+          }
+        ]
+      }
     }
   },
   "context-window": {
@@ -180,6 +241,68 @@ export const PRACTICE = {
         "<b>長いコンテキストは RAG を完全には置き換えない</b>：毎回 10 万トークン詰めるのは遅く高くつくので、まず関連する断片を検索し、本当に必要な内容だけを渡す。",
         "<b>繰り返す前文はキャッシュで節約</b>：システムプロンプトや長い文書のように毎回同じ前置きは、prompt caching を有効にすると繰り返し分のコストを大きく減らせる。"
       ]
+    },
+    "decision": {
+      "zh": {
+        "q": "內容太長，塞不進或太貴，怎麼辦？",
+        "rows": [
+          {
+            "when": "一次性、內容不算太大",
+            "use": "直接塞長視窗",
+            "why": "最簡單，但整段都付費，中間也可能被忽略"
+          },
+          {
+            "when": "資料量大、會重複查詢",
+            "use": "RAG",
+            "why": "只取相關片段，省 token 又能擴充"
+          },
+          {
+            "when": "對話越來越長",
+            "use": "摘要舊訊息",
+            "why": "把前面壓成摘要，留重點、騰空間"
+          }
+        ]
+      },
+      "en": {
+        "q": "Content too long to fit or too costly, what now?",
+        "rows": [
+          {
+            "when": "One-off and not too large",
+            "use": "Just use a long window",
+            "why": "Simplest, but you pay for the whole thing and the middle may get ignored"
+          },
+          {
+            "when": "Large corpus, queried repeatedly",
+            "use": "RAG",
+            "why": "Pull only the relevant pieces, saves tokens and scales"
+          },
+          {
+            "when": "A conversation that keeps growing",
+            "use": "Summarize old turns",
+            "why": "Compress earlier messages to keep the key points and free up space"
+          }
+        ]
+      },
+      "ja": {
+        "q": "内容が長すぎて入らない／高すぎる、どうする？",
+        "rows": [
+          {
+            "when": "一度きりで、そこまで大きくない",
+            "use": "長い視窗にそのまま",
+            "why": "最も簡単。ただし全体に課金され、中間が無視されることも"
+          },
+          {
+            "when": "大量で、繰り返し検索する",
+            "use": "RAG",
+            "why": "関連部分だけ取り出し、トークンを節約し拡張もできる"
+          },
+          {
+            "when": "会話がどんどん長くなる",
+            "use": "古い発言を要約",
+            "why": "前半を要約に圧縮し、要点を残して空きを作る"
+          }
+        ]
+      }
     }
   },
   "inference": {
@@ -224,6 +347,68 @@ export const PRACTICE = {
         "<b>データは量より質</b>：きれいで一貫した 50 から 100 件の例が、雑音だらけの数千件に勝つことが多いので、学習前にデータを整えます。",
         "<b>まず LoRA を使う</b>：ごく一部のパラメータだけを調整するので安く速く、複数の adapter を保存して差し替えられます。全パラメータの微調整は多くの場合不要です。"
       ]
+    },
+    "decision": {
+      "zh": {
+        "q": "要客製模型行為，先從哪一步試？",
+        "rows": [
+          {
+            "when": "能用講清楚指令解決",
+            "use": "Prompt",
+            "why": "幾乎免費、馬上可改，先試這個"
+          },
+          {
+            "when": "需要最新或私有的「事實」",
+            "use": "RAG",
+            "why": "外部檢索比微調更可靠、更好更新"
+          },
+          {
+            "when": "要穩定語氣／格式，且前兩者都不夠",
+            "use": "微調",
+            "why": "把行為練進去，但要備好資料與成本"
+          }
+        ]
+      },
+      "en": {
+        "q": "To customize model behavior, which do you try first?",
+        "rows": [
+          {
+            "when": "A clear instruction can solve it",
+            "use": "Prompt",
+            "why": "Almost free and instantly changeable, try this first"
+          },
+          {
+            "when": "You need fresh or private facts",
+            "use": "RAG",
+            "why": "External retrieval is more reliable and easier to update than fine-tuning"
+          },
+          {
+            "when": "You need a stable tone/format and the first two fall short",
+            "use": "Fine-tuning",
+            "why": "Trains the behavior in, but budget for the data and the cost"
+          }
+        ]
+      },
+      "ja": {
+        "q": "モデルの振る舞いを調整したい、まずどれ？",
+        "rows": [
+          {
+            "when": "明確な指示で解決できる",
+            "use": "Prompt",
+            "why": "ほぼ無料で即修正できる。まずこれ"
+          },
+          {
+            "when": "最新または非公開の「事実」が要る",
+            "use": "RAG",
+            "why": "外部検索の方がファインチューニングより確実で更新も容易"
+          },
+          {
+            "when": "安定した口調／形式が要り、前二つでは足りない",
+            "use": "ファインチューニング",
+            "why": "振る舞いを覚えさせるが、データとコストの準備を"
+          }
+        ]
+      }
     }
   },
   "prompt": {
@@ -246,6 +431,68 @@ export const PRACTICE = {
         "<b>難しい推論は先に考えさせる</b>：「一歩ずつ考えて」と加えると精度が上がることが多いですが、2024 から 2025 年の推論モデルは内部で考えるので不要になっています。",
         "<b>長いプロンプトは中間が無視される</b>：最も重要な指示を冒頭に置き、末尾でもう一度述べ、長い文書はその間に挟むと、肝心の指示が埋もれません。"
       ]
+    },
+    "decision": {
+      "zh": {
+        "q": "同一個任務，怎麼問最有效？",
+        "rows": [
+          {
+            "when": "任務單純、講清楚就好",
+            "use": "直接說（zero-shot）",
+            "why": "現在的模型零樣本已很強，先別複雜化"
+          },
+          {
+            "when": "要固定輸出格式或風格",
+            "use": "給範例（few-shot）",
+            "why": "附 2 到 3 個「輸入→輸出」，比長篇說明更穩"
+          },
+          {
+            "when": "多步推理、容易算錯",
+            "use": "拆步驟／用推理模型",
+            "why": "讓它一步步想，或改用內建思考的模型"
+          }
+        ]
+      },
+      "en": {
+        "q": "For the same task, how do you ask most effectively?",
+        "rows": [
+          {
+            "when": "Simple task, just be clear",
+            "use": "Say it directly (zero-shot)",
+            "why": "Modern models are strong zero-shot, do not overcomplicate"
+          },
+          {
+            "when": "You need a fixed output format or style",
+            "use": "Give examples (few-shot)",
+            "why": "Attach 2 to 3 input to output pairs, steadier than a long explanation"
+          },
+          {
+            "when": "Multi-step reasoning, error-prone",
+            "use": "Break down steps / use a reasoning model",
+            "why": "Have it think step by step, or switch to a model with built-in reasoning"
+          }
+        ]
+      },
+      "ja": {
+        "q": "同じタスク、どう聞くのが一番効く？",
+        "rows": [
+          {
+            "when": "単純で、明確に言えばよい",
+            "use": "そのまま言う（zero-shot）",
+            "why": "今のモデルはゼロショットでも強い。複雑にしすぎない"
+          },
+          {
+            "when": "出力の形式やスタイルを固定したい",
+            "use": "例を見せる（few-shot）",
+            "why": "「入力→出力」を2〜3組付けると、長い説明より安定"
+          },
+          {
+            "when": "多段の推論で間違えやすい",
+            "use": "手順を分けさせる／推論モデル",
+            "why": "一歩ずつ考えさせるか、思考が組み込まれたモデルに切り替える"
+          }
+        ]
+      }
     }
   },
   "generative": {
@@ -333,6 +580,46 @@ export const PRACTICE = {
             "why": "直接在提示裡講清楚，最快也最省"
           }
         ]
+      },
+      "en": {
+        "q": "How do you get the model to use data it does not already know?",
+        "rows": [
+          {
+            "when": "You need fresh, private, or verifiable data",
+            "use": "RAG",
+            "why": "Read the data into the context on the fly, no retraining, and you can cite sources"
+          },
+          {
+            "when": "You need a fixed tone, format, or style",
+            "use": "Fine-tuning",
+            "why": "Trains the behavior into the model, but is not for injecting facts"
+          },
+          {
+            "when": "It is just a one-off tweak",
+            "use": "Prompt",
+            "why": "Just say it clearly in the prompt, fastest and cheapest"
+          }
+        ]
+      },
+      "ja": {
+        "q": "モデルに、もともと知らないデータを使わせるにはどれ？",
+        "rows": [
+          {
+            "when": "最新／非公開／出典を示せるデータが要る",
+            "use": "RAG",
+            "why": "データをその場で文脈に読み込み、モデルは変えず、出典も付けられる"
+          },
+          {
+            "when": "口調・形式・スタイルを固定したい",
+            "use": "ファインチューニング",
+            "why": "振る舞いをモデルに覚えさせる。ただし事実の注入には向かない"
+          },
+          {
+            "when": "一度きりの小さな調整だけ",
+            "use": "Prompt",
+            "why": "プロンプトで明確に伝えるのが最も速く安い"
+          }
+        ]
       }
     }
   },
@@ -400,6 +687,68 @@ export const PRACTICE = {
         "<b>費用の上限を設定する</b>：一歩ごとにモデル呼び出しが発生し、暴走したループはあっという間にコストを食います。先にトークンや金額の予算を決め、超えたら中断します。",
         "<b>危険な操作は人が確認する</b>：読み取りだけの照会は自由に走らせてよいですが、メール送信、ファイル削除、支払い、本番環境への書き込みなど不可逆な操作は、人の承認を得てから実行します。"
       ]
+    },
+    "decision": {
+      "zh": {
+        "q": "這個任務要不要做成 Agent？",
+        "rows": [
+          {
+            "when": "一步就能答完",
+            "use": "單次 Prompt",
+            "why": "最簡單可靠，別為了用而用"
+          },
+          {
+            "when": "步驟固定、可預測",
+            "use": "寫死的工作流",
+            "why": "照流程串起來，好測試、好除錯、可控"
+          },
+          {
+            "when": "步驟要看情況動態決定、要用工具",
+            "use": "Agent",
+            "why": "最靈活，但最貴也最容易失控，要限制步數並加人審"
+          }
+        ]
+      },
+      "en": {
+        "q": "Should this task be built as an agent?",
+        "rows": [
+          {
+            "when": "It can be answered in one step",
+            "use": "Single prompt",
+            "why": "Simplest and most reliable, do not use an agent just to use one"
+          },
+          {
+            "when": "The steps are fixed and predictable",
+            "use": "A hard-coded workflow",
+            "why": "Chain the steps in order: easy to test, debug, and control"
+          },
+          {
+            "when": "Steps must be decided dynamically and use tools",
+            "use": "Agent",
+            "why": "Most flexible, but priciest and easiest to run away, so cap the steps and add human review"
+          }
+        ]
+      },
+      "ja": {
+        "q": "このタスクを Agent にすべき？",
+        "rows": [
+          {
+            "when": "一手で答えられる",
+            "use": "単発の Prompt",
+            "why": "最も簡単で確実。使うために使わない"
+          },
+          {
+            "when": "手順が固定で予測できる",
+            "use": "固定のワークフロー",
+            "why": "手順どおりに繋ぐ。テストもデバッグも制御も容易"
+          },
+          {
+            "when": "手順を状況で動的に決め、ツールも使う",
+            "use": "Agent",
+            "why": "最も柔軟だが最も高価で暴走しやすい。ステップ数を制限し人の確認を入れる"
+          }
+        ]
+      }
     }
   },
   "integration": {
