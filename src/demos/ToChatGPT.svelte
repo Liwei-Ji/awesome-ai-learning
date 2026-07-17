@@ -1,6 +1,6 @@
 <script>
   /* Ch · 從模型到 ChatGPT。官方怎麼把一個「只會接話」的原始模型，
-     練成聽話又貼心的助理——三階段：預訓練 → 指令微調(SFT) → RLHF。
+     練成聽話又貼心的助理，三階段：預訓練 → 指令微調(SFT) → RLHF。
      核心：同一句要求，在每個階段的回答天差地別（接話→生硬→貼心又安全）。
      深色舞台、確定性、離線。 */
   import { onDestroy } from 'svelte';
@@ -18,8 +18,8 @@
       stageCap: ['只會接話', '會聽指令', '貼心助理'],
       stageData: ['海量網路文字（無人標註）', '人寫的「指令 → 示範回答」', '人類對多個回答的偏好評分 👍👎'],
       stageLearn: [
-        '學會語言的規律——但只會順著往下「接話」，不會聽你的指令。',
-        '學會看懂並照著指令回答——但語氣生硬、也不管安不安全。',
+        '學會語言的規律，但只會順著往下「接話」，不會聽你的指令。',
+        '學會看懂並照著指令回答，但語氣生硬、也不管安不安全。',
         '學會貼心、有禮貌、會拒絕危險或不當的要求。',
       ],
       promptQ: ['教我怎麼泡泡麵', '幫我寫幾句罵同事的話'],
@@ -52,8 +52,8 @@
       stageCap: ['Just rambles on', 'Follows instructions', 'Thoughtful assistant'],
       stageData: ['A huge amount of web text (no human labels)', 'Human-written “instruction → demonstration answer” pairs', 'Human preference ratings across several answers 👍👎'],
       stageLearn: [
-        'Learns the patterns of language—but only “rambles on,” continuing text instead of following your instructions.',
-        'Learns to read an instruction and answer it—but the tone is stiff, and it ignores whether the request is safe.',
+        'Learns the patterns of language, but only “rambles on,” continuing text instead of following your instructions.',
+        'Learns to read an instruction and answer it, but the tone is stiff, and it ignores whether the request is safe.',
         'Learns to be thoughtful and polite, and to refuse dangerous or inappropriate requests.',
       ],
       promptQ: ['Teach me how to make instant noodles', 'Write me a few lines to insult a coworker'],
@@ -70,11 +70,11 @@
         ],
       ],
       h3: 'Interactive: how a model becomes ChatGPT',
-      lede: 'A freshly pretrained model <b>only “rambles on”</b>—it can’t act as an assistant. It takes two more rounds of shaping before it follows instructions and becomes thoughtful.\n    Click through the three stages: watch how the model’s answer to the <b>same request</b> evolves along the way.',
+      lede: 'A freshly pretrained model <b>only “rambles on”</b>, it can’t act as an assistant. It takes two more rounds of shaping before it follows instructions and becomes thoughtful.\n    Click through the three stages: watch how the model’s answer to the <b>same request</b> evolves along the way.',
       canK: 'What the model can do now',
       dataK: 'Data used in this stage',
       testK: 'Test it with the same sentence',
-      verdicts: ['↑ Just continues the text—it never actually answers you', '↑ It follows the instruction now, but it’s stiff and ignores safety', '↑ Thoughtful and clear, and it refuses inappropriate requests'],
+      verdicts: ['↑ Just continues the text, it never actually answers you', '↑ It follows the instruction now, but it’s stiff and ignores safety', '↑ Thoughtful and clear, and it refuses inappropriate requests'],
       testLab: 'Test sentence',
       trainBtn: '▶ Train in order from scratch',
       resetBtn: 'Back to pretraining',
@@ -86,8 +86,8 @@
       stageCap: ['ただ続きを書くだけ', '指示に従える', '気の利くアシスタント'],
       stageData: ['大量のウェブ上のテキスト（人手のラベルなし）', '人が書いた「指示 → お手本の答え」のペア', '複数の答えに対する人間の好みの評価 👍👎'],
       stageLearn: [
-        '言語の規則を身につける——ただし指示に従うのではなく、文章の「続きを書く」だけ。',
-        '指示を読み取って答えられるようになる——ただし口調はぎこちなく、要求が安全かどうかは気にしない。',
+        '言語の規則を身につける、ただし指示に従うのではなく、文章の「続きを書く」だけ。',
+        '指示を読み取って答えられるようになる、ただし口調はぎこちなく、要求が安全かどうかは気にしない。',
         '気が利いて丁寧になり、危険だったり不適切だったりする要求を断れるようになる。',
       ],
       promptQ: ['インスタントラーメンの作り方を教えて', '同僚をけなす言葉を何個か書いて'],

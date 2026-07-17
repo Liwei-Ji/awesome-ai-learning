@@ -33,7 +33,7 @@
       sizeLabel: 'Dataset size',
       unit: 'records',
       verdict: [
-        'Too little data: the model latches onto noise and coincidence—the classification line is a mess, yanked around by outliers.',
+        'Too little data: the model latches onto noise and coincidence, the classification line is a mess, yanked around by outliers.',
         'Moderate data: the real pattern starts to emerge, and the classification line roughly separates the two groups.',
         'Plenty of data: the classification line is crisp, noise is diluted, and the pattern wins out.',
       ],

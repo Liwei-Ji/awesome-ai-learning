@@ -26,7 +26,7 @@
       cat: '貓', dog: '狗', catOrDog: '貓 or 狗',
       strengthLab: '{n}　線索強度', weight: '權重',
       output: '目前輸出：<b class="mono accent">{label}（{pct}%）</b>',
-      hint2: '<b>正權重＝支持是貓，負權重＝反對</b>。「會汪汪叫」預設是負權重——越汪汪叫越像狗。把它的權重拉成正的，網路就會改口說「貓」。這就是訓練在做的事：調整每一個權重。',
+      hint2: '<b>正權重＝支持是貓，負權重＝反對</b>。「會汪汪叫」預設是負權重，越汪汪叫越像狗。把它的權重拉成正的，網路就會改口說「貓」。這就是訓練在做的事：調整每一個權重。',
     },
     en: {
       h3: 'Interactive: adjust the weights and watch the network change its decision',
@@ -36,7 +36,7 @@
       cat: 'Cat', dog: 'Dog', catOrDog: 'Cat or Dog',
       strengthLab: '{n} clue strength', weight: 'Weight',
       output: 'Current output: <b class="mono accent">{label} ({pct}%)</b>',
-      hint2: '<b>A positive weight = supports “cat,” a negative weight = argues against</b>. “Barks” starts out negative—the more it barks, the more it looks like a dog. Turn its weight positive and the network changes its answer to “cat.” This is exactly what training does: adjusting every single weight.',
+      hint2: '<b>A positive weight = supports “cat,” a negative weight = argues against</b>. “Barks” starts out negative, the more it barks, the more it looks like a dog. Turn its weight positive and the network changes its answer to “cat.” This is exactly what training does: adjusting every single weight.',
     },
     ja: {
       h3: 'インタラクティブ：重みを調整して、ネットワークの判断が変わる様子を見よう',
@@ -46,7 +46,7 @@
       cat: '猫', dog: '犬', catOrDog: '猫 or 犬',
       strengthLab: '{n}　手がかりの強さ', weight: '重み',
       output: '現在の出力：<b class="mono accent">{label}（{pct}%）</b>',
-      hint2: '<b>正の重み＝「猫」への賛成、負の重み＝反対</b>。「ワンと鳴く」は最初マイナスに設定されている——よく鳴くほど犬らしく見えるからです。この重みをプラスに変えると、ネットワークは答えを「猫」に変えます。これがまさに訓練のしていること：一つひとつの重みを調整するのです。',
+      hint2: '<b>正の重み＝「猫」への賛成、負の重み＝反対</b>。「ワンと鳴く」は最初マイナスに設定されている、よく鳴くほど犬らしく見えるからです。この重みをプラスに変えると、ネットワークは答えを「猫」に変えます。これがまさに訓練のしていること：一つひとつの重みを調整するのです。',
     },
   };
   let ui = $derived(L[i18n.locale] || L.zh);

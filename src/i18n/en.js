@@ -27,8 +27,8 @@ export default {
     close: 'Collapse AI Professor',
     thinking: 'Thinking',
     opening: 'Hi, I’m the AI Professor 👋 This chapter is about <b>{topic}</b>. Play with the animation on the left, and ask me anything.',
-    fallback: 'I’m this course’s teaching assistant—I answer <b>AI concepts</b> from the syllabus: each chapter’s <b>definition, how it works, differences, and applications</b>. I’m not sure about this one—try rephrasing, use a suggested question, or ask about a specific term. If it’s outside the course, I may not be able to answer.',
-    outScope: 'This isn’t covered in this chapter ({topic})—but {names} covers it. Switch there and ask me for a fuller answer.',
+    fallback: 'I’m this course’s teaching assistant, I answer <b>AI concepts</b> from the syllabus: each chapter’s <b>definition, how it works, differences, and applications</b>. I’m not sure about this one, try rephrasing, use a suggested question, or ask about a specific term. If it’s outside the course, I may not be able to answer.',
+    outScope: 'This isn’t covered in this chapter ({topic}), but {names} covers it. Switch there and ask me for a fuller answer.',
   },
   iv: {
     course: 'Course',

@@ -17,7 +17,7 @@
       predK: '預測（貓）', lossK: '損失 Loss', stepsK: '訓練步數',
       lrK: '學習率 Learning rate',
       train: '訓練一步', pause: '⏸ 暫停', auto: '▶ 自動訓練', reset: '重置',
-      hint: '關鍵是<b>連鎖律</b>：從輸出的誤差開始，一層一層往回算「這條線改變一點，會讓誤差變多少」。這個數字就是它的<b>梯度（責任）</b>——照著往反方向調，損失就會下降。反向傳播讓深層網路第一次<b>訓練得動</b>。',
+      hint: '關鍵是<b>連鎖律</b>：從輸出的誤差開始，一層一層往回算「這條線改變一點，會讓誤差變多少」。這個數字就是它的<b>梯度（責任）</b>，照著往反方向調，損失就會下降。反向傳播讓深層網路第一次<b>訓練得動</b>。',
       status: {
         idle: '按「訓練一步」：先前向算答案，再反向把誤差傳回來',
         forward: '① 前向傳播：輸入一路算到輸出，得到預測',
@@ -26,12 +26,12 @@
     },
     en: {
       h3: 'Interactive: how the error travels back, layer by layer',
-      lede: 'Last chapter the ball rolled downhill—but how does it know which way to nudge <b>each weight</b>? The answer is <b>backpropagation</b>: first run forward to get the answer, then send the error <b>back from the output</b>, so every connection works out how much <b>blame</b> it carries and adjusts accordingly.',
+      lede: 'Last chapter the ball rolled downhill, but how does it know which way to nudge <b>each weight</b>? The answer is <b>backpropagation</b>: first run forward to get the answer, then send the error <b>back from the output</b>, so every connection works out how much <b>blame</b> it carries and adjusts accordingly.',
       tgt: 'Target {t}',
       predK: 'Prediction (cat)', lossK: 'Loss', stepsK: 'Steps',
       lrK: 'Learning rate',
       train: 'Train one step', pause: '⏸ Pause', auto: '▶ Auto-train', reset: 'Reset',
-      hint: 'The key is the <b>chain rule</b>: starting from the error at the output, you work backward layer by layer to find “if this connection changes a little, how much does the error change.” That number is its <b>gradient (its blame)</b>—adjust in the opposite direction and the loss drops. Backpropagation is what first made deep networks <b>trainable at all</b>.',
+      hint: 'The key is the <b>chain rule</b>: starting from the error at the output, you work backward layer by layer to find “if this connection changes a little, how much does the error change.” That number is its <b>gradient (its blame)</b>, adjust in the opposite direction and the loss drops. Backpropagation is what first made deep networks <b>trainable at all</b>.',
       status: {
         idle: 'Press “Train one step”: first run forward to get the answer, then run backward to send the error back.',
         forward: '① Forward pass: the input is computed all the way to the output, giving a prediction.',
@@ -40,12 +40,12 @@
     },
     ja: {
       h3: 'インタラクティブ：誤差はどうやって一層ずつ戻っていくのか',
-      lede: '前の章ではボールが坂を転がり落ちた——でも<b>それぞれの重み</b>をどちらに動かせばいいか、どうやって分かるの？答えは<b>誤差逆伝播</b>：まず順伝播で答えを出し、次に誤差を<b>出力から後ろへ戻し</b>、各結合が自分の<b>責任</b>の大きさを割り出して、それに従って調整する。',
+      lede: '前の章ではボールが坂を転がり落ちた、でも<b>それぞれの重み</b>をどちらに動かせばいいか、どうやって分かるの？答えは<b>誤差逆伝播</b>：まず順伝播で答えを出し、次に誤差を<b>出力から後ろへ戻し</b>、各結合が自分の<b>責任</b>の大きさを割り出して、それに従って調整する。',
       tgt: '目標 {t}',
       predK: '予測（猫）', lossK: '損失 Loss', stepsK: '学習ステップ数',
       lrK: '学習率 Learning rate',
       train: '1 ステップ学習', pause: '⏸ 一時停止', auto: '▶ 自動学習', reset: 'リセット',
-      hint: '鍵は<b>連鎖律</b>：出力の誤差から出発して、一層ずつ後ろへ「この結合が少し変わると、誤差はどれだけ変わるか」を計算していく。この数字がその結合の<b>勾配（責任）</b>——反対方向へ調整すれば損失は下がる。誤差逆伝播こそ、深層ネットワークをはじめて<b>学習できるもの</b>にした立役者だ。',
+      hint: '鍵は<b>連鎖律</b>：出力の誤差から出発して、一層ずつ後ろへ「この結合が少し変わると、誤差はどれだけ変わるか」を計算していく。この数字がその結合の<b>勾配（責任）</b>，反対方向へ調整すれば損失は下がる。誤差逆伝播こそ、深層ネットワークをはじめて<b>学習できるもの</b>にした立役者だ。',
       status: {
         idle: '「1 ステップ学習」を押す：まず順伝播で答えを出し、次に逆伝播で誤差を戻す。',
         forward: '① 順伝播：入力が出力まで一気に計算され、予測が出る。',

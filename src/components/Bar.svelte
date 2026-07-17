@@ -1,7 +1,7 @@
 <script>
   /* 單一長條：寬度與百分比數字「同步」逐格補間（不再瞬跳）。
      進場錯開（stagger by index）；之後值變動（拉滑桿）改用短時長即時跟隨。
-     以 rAF 時間戳自行補間（cubicOut）——比 CSS transition 可控，
+     以 rAF 時間戳自行補間（cubicOut），比 CSS transition 可控，
      也避免依賴 performance.now（在無頭截圖環境不前進）。 */
   import { onDestroy } from 'svelte';
   import { dur, D } from '../lib/motion.js';

@@ -1,5 +1,5 @@
 <script>
-  /* 共用步驟指示器 —— 所有「引導式」demo 的統一語言。
+  /* 共用步驟指示器，所有「引導式」demo 的統一語言。
      props：steps（字串陣列）、current（目前步驟索引，0-based）。
        · i < current  → 已完成（✓、teal）
        · i === current → 進行中（accent 實心）

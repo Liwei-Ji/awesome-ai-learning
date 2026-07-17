@@ -1,7 +1,7 @@
 <script>
   /* Ch · 訓練：梯度下降。
      一顆球沿損失曲線往下滾＝機器調整權重讓誤差變小。
-     核心互動：學習率滑桿 —— 太小龜速、剛好平滑收斂、太大 overshoot 甚至發散。
+     核心互動：學習率滑桿，太小龜速、剛好平滑收斂、太大 overshoot 甚至發散。
      深色舞台 + 發光（.demo-stage light）。 */
   import { onDestroy } from 'svelte';
   import Num from '../components/Num.svelte';
@@ -64,12 +64,12 @@
       zoneSlow: '太小 · 龜速', zoneGood: '剛好 · 平滑', zoneDiv: '太大 · 發散',
       pause: '⏸ 暫停', play: '▶ 自動下降', single: '單步', reset: '重置',
       status: {
-        idle: '準備好了 — 按「自動下降」看它自己找最低點',
+        idle: '準備好了，按「自動下降」看它自己找最低點',
         running: '下降中…每一步都往誤差更小的方向走',
         converged: '✓ 收斂！球停在谷底＝找到讓損失最小的權重',
         diverged: '💥 發散了！學習率太大，一步跨過頭、越跳越遠',
       },
-      hint: '<b>「坡度」就是梯度</b>：球感覺到腳下往哪邊低，就往那邊走一步；<b>學習率</b>決定步伐大小。 這就是訓練的本質——反覆地「往損失更小的方向，調一點點權重」，幾百萬次之後，模型就學會了。',
+      hint: '<b>「坡度」就是梯度</b>：球感覺到腳下往哪邊低，就往那邊走一步；<b>學習率</b>決定步伐大小。 這就是訓練的本質，反覆地「往損失更小的方向，調一點點權重」，幾百萬次之後，模型就學會了。',
     },
     en: {
       h3: 'Interactive: watch the machine “roll” down to the lowest point',
@@ -80,12 +80,12 @@
       zoneSlow: 'Too small · crawls', zoneGood: 'Just right · smooth', zoneDiv: 'Too big · diverges',
       pause: '⏸ Pause', play: '▶ Auto descend', single: 'Step', reset: 'Reset',
       status: {
-        idle: 'Ready — press “Auto descend” to watch it find the lowest point on its own',
+        idle: 'Ready, press “Auto descend” to watch it find the lowest point on its own',
         running: 'Descending… every step moves toward smaller error',
         converged: '✓ Converged! The ball rests at the valley floor = it found the weight that makes the loss smallest',
-        diverged: '💥 Diverged! The learning rate is too big—one step overshoots and it bounces farther and farther out',
+        diverged: '💥 Diverged! The learning rate is too big, one step overshoots and it bounces farther and farther out',
       },
-      hint: '<b>The “slope” is the gradient</b>: the ball feels which way is downhill under its feet and takes a step that way; the <b>learning rate</b> sets the step size. This is the essence of training—repeatedly “nudging the weights a little toward smaller loss,” and after millions of times, the model has learned.',
+      hint: '<b>The “slope” is the gradient</b>: the ball feels which way is downhill under its feet and takes a step that way; the <b>learning rate</b> sets the step size. This is the essence of training, repeatedly “nudging the weights a little toward smaller loss,” and after millions of times, the model has learned.',
     },
     ja: {
       h3: 'インタラクティブ：機械が自分で最低点まで「転がり落ちる」様子を見る',
@@ -96,12 +96,12 @@
       zoneSlow: '小さすぎ · 遅い', zoneGood: 'ちょうどいい · 滑らか', zoneDiv: '大きすぎ · 発散',
       pause: '⏸ 一時停止', play: '▶ 自動で下降', single: '1ステップ', reset: 'リセット',
       status: {
-        idle: '準備完了 —「自動で下降」を押して、自分で最低点を見つける様子を見てみましょう',
+        idle: '準備完了，「自動で下降」を押して、自分で最低点を見つける様子を見てみましょう',
         running: '下降中…一歩ごとに誤差の小さい方向へ進んでいます',
         converged: '✓ 収束！ボールが谷底で止まった＝損失が最小になる重みを見つけた',
         diverged: '💥 発散した！学習率が大きすぎて、一歩で行き過ぎ、どんどん遠くへ跳ねていく',
       },
-      hint: '<b>「坂の傾き」が勾配</b>：ボールは足元がどちらに下っているかを感じ取り、その方向へ一歩踏み出します。<b>学習率</b>が歩幅を決めます。これが訓練の本質——「損失が小さくなる方向へ、重みをほんの少し調整する」ことをくり返し、何百万回も重ねるうちに、モデルは学んでいくのです。',
+      hint: '<b>「坂の傾き」が勾配</b>：ボールは足元がどちらに下っているかを感じ取り、その方向へ一歩踏み出します。<b>学習率</b>が歩幅を決めます。これが訓練の本質，「損失が小さくなる方向へ、重みをほんの少し調整する」ことをくり返し、何百万回も重ねるうちに、モデルは学んでいくのです。',
     },
   };
 

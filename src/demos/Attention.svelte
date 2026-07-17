@@ -1,5 +1,5 @@
 <script>
-  /* Ch13 · Transformer Attention（核心互動）—— 引導式「先想再揭曉」。
+  /* Ch13 · Transformer Attention（核心互動），引導式「先想再揭曉」。
      ① 讀句子：先把代名詞用 accent 標示，讓你先猜「他/牠」指誰（不畫弧線）。
      ② 看注意力：按下才用 draw transition 畫出弧線、顯示百分比、揭曉答案。
      切換句子會回到步驟 0，重新思考。亮色、確定性、離線。 */
@@ -20,7 +20,7 @@
       waiting: '先想想：這個橘色的「<b>{pron}</b>」指的是誰？想好後按下方「▶ 顯示注意力」揭曉。',
       reveal: '▶ 顯示注意力',
       restart: '重來',
-      hint: '同一個「他」，指誰要看<b>上下文</b>。Attention 讓每個字算出「該多注意句子裡的哪些字」——這是機器第一次真正讀懂句子關係的關鍵。',
+      hint: '同一個「他」，指誰要看<b>上下文</b>。Attention 讓每個字算出「該多注意句子裡的哪些字」，這是機器第一次真正讀懂句子關係的關鍵。',
       sents: [
         { toks: ['小明', '喜歡', '小華', '，', '因為', '他', '很帥'], pron: 5, att: { 小明: 0.72, 小華: 0.18, 很帥: 0.10 }, ans: '小明' },
         { toks: ['小華', '喜歡', '小明', '，', '因為', '他', '很帥'], pron: 5, att: { 小華: 0.70, 小明: 0.20, 很帥: 0.10 }, ans: '小華' },
@@ -37,7 +37,7 @@
       waiting: 'First think: who does this orange “<b>{pron}</b>” refer to? Once you have a guess, press “▶ Show attention” below to reveal it.',
       reveal: '▶ Show attention',
       restart: 'Restart',
-      hint: 'The same word “he” can point to different subjects depending on <b>context</b>. Attention lets every word work out “which words in the sentence it should focus on”—this is what let machines truly read the relationships between words for the first time.',
+      hint: 'The same word “he” can point to different subjects depending on <b>context</b>. Attention lets every word work out “which words in the sentence it should focus on”, this is what let machines truly read the relationships between words for the first time.',
       sents: [
         { toks: ['Ming', 'likes', 'Hua', ',', 'because', 'he', 'is handsome'], pron: 5, att: { Ming: 0.72, Hua: 0.18, 'is handsome': 0.10 }, ans: 'Ming' },
         { toks: ['Hua', 'likes', 'Ming', ',', 'because', 'he', 'is handsome'], pron: 5, att: { Hua: 0.70, Ming: 0.20, 'is handsome': 0.10 }, ans: 'Hua' },
@@ -54,7 +54,7 @@
       waiting: 'まず考えてみて：このオレンジ色の「<b>{pron}</b>」はだれを指す？答えが決まったら、下の「▶ 注意を表示」を押して確かめよう。',
       reveal: '▶ 注意を表示',
       restart: 'やり直す',
-      hint: '同じ「彼」でも、だれを指すかは<b>文脈</b>しだいで変わります。Attention は各単語に「文中のどの単語に注目すべきか」を計算させる——機械が単語どうしの関係を初めて本当に読み取れるようになった鍵です。',
+      hint: '同じ「彼」でも、だれを指すかは<b>文脈</b>しだいで変わります。Attention は各単語に「文中のどの単語に注目すべきか」を計算させる、機械が単語どうしの関係を初めて本当に読み取れるようになった鍵です。',
       sents: [
         { toks: ['ケン', 'は', 'ヒロ', 'が好き', 'なぜなら', '彼', 'はかっこいいから'], pron: 5, att: { ケン: 0.72, ヒロ: 0.18, 'はかっこいいから': 0.10 }, ans: 'ケン' },
         { toks: ['ヒロ', 'は', 'ケン', 'が好き', 'なぜなら', '彼', 'はかっこいいから'], pron: 5, att: { ヒロ: 0.70, ケン: 0.20, 'はかっこいいから': 0.10 }, ans: 'ヒロ' },

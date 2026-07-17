@@ -45,7 +45,7 @@
       editLabel: '或自己輸入試試', placeholder: '打點字看看怎麼被切…',
       recut: '✂ 重新切分', showId: '顯示 token ID',
       trunc: '文字太長，已截斷到 60 字元。', live: '即時切分中（示意用假分詞器，實際切法依模型而異）。',
-      hint: '這就是 <b>Tokenizer 分詞器</b>：它決定模型眼中「一句話有多長」。同樣的意思，用英文、中文還是程式碼寫，token 數可能天差地遠——這也是為什麼有些寫法「比較貴」。（註：本示範用手寫規則的假分詞器，真實模型的切法會略有不同。）',
+      hint: '這就是 <b>Tokenizer 分詞器</b>：它決定模型眼中「一句話有多長」。同樣的意思，用英文、中文還是程式碼寫，token 數可能天差地遠，這也是為什麼有些寫法「比較貴」。（註：本示範用手寫規則的假分詞器，真實模型的切法會略有不同。）',
       presets: {
         en: { label: '英文常見句', status: '5 個常見英文詞 → 5 個 token，乾淨俐落。' },
         rare: { label: '罕見長詞', status: 'unbelievable 不在詞表裡 → 被拆成 un·bel·iev·able 四個子詞。' },
@@ -56,15 +56,15 @@
     },
     en: {
       h3: 'Interactive: watch a sentence get split into tokens',
-      lede: 'When a model reads text, it doesn’t go letter by letter—it first splits text into chunks called <b>tokens</b>. Common words are one token; rare long words get split into several <b>subwords</b>. Switch examples, or edit the text yourself.',
+      lede: 'When a model reads text, it doesn’t go letter by letter, it first splits text into chunks called <b>tokens</b>. Common words are one token; rare long words get split into several <b>subwords</b>. Switch examples, or edit the text yourself.',
       rawCap: 'RAW TEXT', tokCap: 'TOKENS THE MODEL READS', chars: 'CHARS',
       bd: 'Words {w} · Subwords {sw} · Bytes {b} · Symbols {sym}　|　avg {avg} chars/token',
       legend: ['Words', 'Subword', 'Byte', 'Symbol'],
       glabelWord: '= 1 word', glabelChar: '= 1 char',
       editLabel: 'Or type your own', placeholder: 'Type something and see how it splits…',
       recut: '✂ Re-tokenize', showId: 'Show token IDs',
-      trunc: 'Too long—truncated to 60 characters.', live: 'Tokenizing live (a demo pseudo-tokenizer; real models split a bit differently).',
-      hint: 'That’s the <b>tokenizer</b>: it decides how “long” a sentence is to the model. The same meaning in English, Chinese, or code can take wildly different token counts—which is why some phrasings “cost more.” (Note: this demo uses a hand-written pseudo-tokenizer; real models split a bit differently.)',
+      trunc: 'Too long, truncated to 60 characters.', live: 'Tokenizing live (a demo pseudo-tokenizer; real models split a bit differently).',
+      hint: 'That’s the <b>tokenizer</b>: it decides how “long” a sentence is to the model. The same meaning in English, Chinese, or code can take wildly different token counts, which is why some phrasings “cost more.” (Note: this demo uses a hand-written pseudo-tokenizer; real models split a bit differently.)',
       presets: {
         en: { label: 'Common English', status: '5 common English words → 5 tokens, clean and simple.' },
         rare: { label: 'Rare long word', status: '“unbelievable” isn’t in the vocab → split into un·bel·iev·able (4 subwords).' },
@@ -83,7 +83,7 @@
       editLabel: '自分で入力してみる', placeholder: '入力して分かれ方を見てみよう…',
       recut: '✂ 再分割', showId: 'トークン ID を表示',
       trunc: '長すぎるため 60 文字に切り詰めました。', live: 'リアルタイム分割中（デモ用の簡易トークナイザ。実際のモデルとは少し異なります）。',
-      hint: 'これが <b>トークナイザ</b>：モデルにとって「一文がどれだけ長いか」を決めます。同じ意味でも英語・中国語・コードでトークン数は大きく変わり——だから「割高」な書き方もあるのです。（注：このデモは手書き規則の簡易トークナイザで、実際のモデルとは少し異なります。）',
+      hint: 'これが <b>トークナイザ</b>：モデルにとって「一文がどれだけ長いか」を決めます。同じ意味でも英語・中国語・コードでトークン数は大きく変わり、だから「割高」な書き方もあるのです。（注：このデモは手書き規則の簡易トークナイザで、実際のモデルとは少し異なります。）',
       presets: {
         en: { label: '英語のよくある文', status: 'よく使う英単語 5 つ → 5 トークン、すっきり。' },
         rare: { label: 'まれな長い語', status: '「unbelievable」は語彙になく → un·bel·iev·able の 4 サブワードに分割。' },

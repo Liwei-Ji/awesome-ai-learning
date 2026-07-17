@@ -1,6 +1,6 @@
 <script>
   /* Ch · AI 的極限：幻覺與偏見。AI 常「一本正經地說錯」，而且信心很高。
-     按「查證」揭露哪些答案其實是幻覺或偏見——高信心 ≠ 正確。亮色、離線。 */
+     按「查證」揭露哪些答案其實是幻覺或偏見，高信心 ≠ 正確。亮色、離線。 */
   import { fade } from 'svelte/transition';
   import { dur, D } from '../lib/motion.js';
   import { i18n } from '../stores/i18n.svelte.js';
@@ -22,45 +22,45 @@
       badge: { ok: '✓ 正確', halluc: '✗ 幻覺', bias: '⚠ 偏見' },
       check: '🔍 查證所有答案',
       reset: '重置',
-      summary: '4 題裡有 <b>{w}</b> 題其實有問題——但信心全都 88% 以上。<b>高信心 ≠ 正確。</b>',
+      summary: '4 題裡有 <b>{w}</b> 題其實有問題，但信心全都 88% 以上。<b>高信心 ≠ 正確。</b>',
       hint: '為什麼會這樣？因為 LLM 算的是「<b>最像的答案</b>」而不是「正確的答案」，所以會流暢、也會唬爛；偏見則來自訓練資料裡的刻板印象。<b>怎麼辦</b>：重要的事要<b>查證、要它附出處、用 RAG</b>，並且永遠保留人類判斷。',
       items: [
-        { q: '台灣最高的山是？', a: '玉山，海拔約 3952 公尺。', truth: '正確——這題它真的知道。' },
-        { q: '貝爾在哪一年發明電話？', a: '亞歷山大·貝爾於 1885 年發明電話。', truth: '其實是 1876 年。年份被它「編」出來了——這叫幻覺。' },
+        { q: '台灣最高的山是？', a: '玉山，海拔約 3952 公尺。', truth: '正確，這題它真的知道。' },
+        { q: '貝爾在哪一年發明電話？', a: '亞歷山大·貝爾於 1885 年發明電話。', truth: '其實是 1876 年。年份被它「編」出來了，這叫幻覺。' },
         { q: '引用一篇關於貓認知的論文', a: '《Feline Cognition》, J. Cat, Nature, 2019。', truth: '這篇論文不存在。AI 很會捏造「看起來很真」的假來源。' },
         { q: '描述一位「護理師」', a: '她溫柔細心，總是耐心照顧病人。', truth: '預設用「她」＝性別偏見：護理師不分性別，這種傾向來自訓練資料。' },
       ],
     },
     en: {
       h3: 'Interactive: how confidently AI gets things wrong',
-      lede: 'When AI answers, it’s <b>almost always confident</b>—but high confidence doesn’t mean correct. It might <b>make things up with a straight face (hallucination)</b>, or carry a <b>bias</b>. Look at its answers and confidence first, then press “Fact-check” to reveal the truth.',
+      lede: 'When AI answers, it’s <b>almost always confident</b>, but high confidence doesn’t mean correct. It might <b>make things up with a straight face (hallucination)</b>, or carry a <b>bias</b>. Look at its answers and confidence first, then press “Fact-check” to reveal the truth.',
       qPrefix: 'Q: ',
       cl: 'AI confidence',
       badge: { ok: '✓ Correct', halluc: '✗ Hallucination', bias: '⚠ Bias' },
       check: '🔍 Fact-check all answers',
       reset: 'Reset',
-      summary: 'Of the 4 answers, <b>{w}</b> actually have problems—yet every confidence is above 88%. <b>High confidence ≠ correct.</b>',
-      hint: 'Why does this happen? An LLM computes the “<b>most plausible answer</b>,” not the “correct” one—so it’s fluent, and it bluffs; bias comes from stereotypes in the training data. <b>What to do</b>: for anything important, <b>verify it, ask for sources, use RAG</b>—and always keep a human in the loop.',
+      summary: 'Of the 4 answers, <b>{w}</b> actually have problems, yet every confidence is above 88%. <b>High confidence ≠ correct.</b>',
+      hint: 'Why does this happen? An LLM computes the “<b>most plausible answer</b>,” not the “correct” one, so it’s fluent, and it bluffs; bias comes from stereotypes in the training data. <b>What to do</b>: for anything important, <b>verify it, ask for sources, use RAG</b>, and always keep a human in the loop.',
       items: [
-        { q: 'What is Taiwan’s tallest mountain?', a: 'Yushan, about 3,952 meters above sea level.', truth: 'Correct—this one it genuinely knows.' },
-        { q: 'What year did Bell invent the telephone?', a: 'Alexander Bell invented the telephone in 1885.', truth: 'It was actually 1876. The year was “made up”—that’s a hallucination.' },
+        { q: 'What is Taiwan’s tallest mountain?', a: 'Yushan, about 3,952 meters above sea level.', truth: 'Correct, this one it genuinely knows.' },
+        { q: 'What year did Bell invent the telephone?', a: 'Alexander Bell invented the telephone in 1885.', truth: 'It was actually 1876. The year was “made up”, that’s a hallucination.' },
         { q: 'Cite a paper on feline cognition.', a: '“Feline Cognition,” J. Cat, Nature, 2019.', truth: 'This paper doesn’t exist. AI is great at fabricating fake sources that “look real.”' },
         { q: 'Describe a “nurse.”', a: 'She is gentle and attentive, always patiently caring for patients.', truth: 'Defaulting to “she” = gender bias: nurses aren’t defined by gender, and this tendency comes from the training data.' },
       ],
     },
     ja: {
       h3: 'インタラクティブ：AI はどれほど自信満々に間違えるか',
-      lede: 'AI は答えるとき、<b>ほとんどいつも自信満々</b>——でも自信が高いからといって正しいとは限りません。<b>平然と話をでっち上げる（ハルシネーション）</b>こともあれば、<b>偏見</b>を抱えていることもあります。まず答えと確信度を見て、それから「事実確認」を押して真相を確かめましょう。',
+      lede: 'AI は答えるとき、<b>ほとんどいつも自信満々</b>、でも自信が高いからといって正しいとは限りません。<b>平然と話をでっち上げる（ハルシネーション）</b>こともあれば、<b>偏見</b>を抱えていることもあります。まず答えと確信度を見て、それから「事実確認」を押して真相を確かめましょう。',
       qPrefix: 'Q：',
       cl: 'AI の確信度',
       badge: { ok: '✓ 正解', halluc: '✗ ハルシネーション', bias: '⚠ 偏見' },
       check: '🔍 すべての答えを事実確認',
       reset: 'リセット',
-      summary: '4 つの答えのうち <b>{w}</b> つは実は問題あり——なのに確信度はどれも 88% 超え。<b>高い自信 ≠ 正しさ。</b>',
-      hint: 'なぜこうなる？LLM が計算するのは「<b>いちばんもっともらしい答え</b>」であって「正しい答え」ではありません——だから流暢だし、平気で口から出まかせも言う。偏見は訓練データのステレオタイプに由来します。<b>どうする</b>：大事なことは<b>裏取りし、出典を求め、RAG を使う</b>——そして常に人間の判断を残しておくこと。',
+      summary: '4 つの答えのうち <b>{w}</b> つは実は問題あり、なのに確信度はどれも 88% 超え。<b>高い自信 ≠ 正しさ。</b>',
+      hint: 'なぜこうなる？LLM が計算するのは「<b>いちばんもっともらしい答え</b>」であって「正しい答え」ではありません、だから流暢だし、平気で口から出まかせも言う。偏見は訓練データのステレオタイプに由来します。<b>どうする</b>：大事なことは<b>裏取りし、出典を求め、RAG を使う</b>、そして常に人間の判断を残しておくこと。',
       items: [
-        { q: '台湾でいちばん高い山は？', a: '玉山（ユイシャン）、標高およそ 3,952 メートル。', truth: '正解——これは本当に知っている。' },
-        { q: 'ベルが電話を発明したのは何年？', a: 'アレクサンダー・ベルは 1885 年に電話を発明した。', truth: '本当は 1876 年。年号を「でっち上げた」——これがハルシネーション。' },
+        { q: '台湾でいちばん高い山は？', a: '玉山（ユイシャン）、標高およそ 3,952 メートル。', truth: '正解、これは本当に知っている。' },
+        { q: 'ベルが電話を発明したのは何年？', a: 'アレクサンダー・ベルは 1885 年に電話を発明した。', truth: '本当は 1876 年。年号を「でっち上げた」、これがハルシネーション。' },
         { q: '猫の認知に関する論文を引用して。', a: '「Feline Cognition」, J. Cat, Nature, 2019。', truth: 'この論文は存在しない。AI は「本物らしく見える」偽の出典をでっち上げるのが得意。' },
         { q: '「看護師」について説明して。', a: '彼女は優しく気配り上手で、いつも辛抱強く患者を看護する。', truth: '既定で「彼女」＝性別の偏見：看護師に性別は関係なく、この傾向は訓練データに由来する。' },
       ],

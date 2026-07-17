@@ -7,9 +7,9 @@ export const CH_TR = {
     "history": {
       t: "A Brief History of AI", sub: "How AI got to where it is today",
       key: [
-        ["01", "AI didn’t appear overnight—it’s 70+ years of ups and downs"],
+        ["01", "AI didn’t appear overnight, it’s 70+ years of ups and downs"],
         ["02", "Three big jumps: deep learning (2012), Transformer (2017), ChatGPT (2022)"],
-        ["03", "Each breakthrough came from architecture or scale—not magic"],
+        ["03", "Each breakthrough came from architecture or scale, not magic"],
       ],
       terms: [
         ["Turing Test", "Telling human from machine through conversation"],
@@ -69,7 +69,7 @@ export const CH_TR = {
       key: [
         ["01", "Shallow layers see details (edges), deep layers see the whole (a face)"],
         ["02", "Each layer abstracts the previous layer’s result one step further"],
-        ["03", "No hand-designed features—the network learns them itself"],
+        ["03", "No hand-designed features, the network learns them itself"],
       ],
       terms: [
         ["Layer", "A group of neurons that compute at the same time"],
@@ -85,7 +85,7 @@ export const CH_TR = {
       ],
       terms: [
         ["Weight", "The strength of a connection; it can be positive or negative"],
-        ["Activation", "How brightly a node is lit up (0–1)"],
+        ["Activation", "How brightly a node is lit up (0-1)"],
       ],
     },
     "training": {
@@ -115,7 +115,7 @@ export const CH_TR = {
     "embedding": {
       t: "Embedding", sub: "Turning tokens and meaning into vectors",
       key: [
-        ["01", "Computers don’t understand words—only number vectors"],
+        ["01", "Computers don’t understand words, only number vectors"],
         ["02", "Words with similar meanings sit close together as vectors"],
         ["03", "Once you have vectors, “similarity” can be calculated"],
       ],
@@ -139,7 +139,7 @@ export const CH_TR = {
     "llm": {
       t: "Large Language Models", sub: "Constantly predicting the next token",
       key: [
-        ["01", "ChatGPT doesn’t look up answers—it guesses the next word"],
+        ["01", "ChatGPT doesn’t look up answers, it guesses the next word"],
         ["02", "At every step it computes a probability for a whole row of candidate words"],
         ["03", "One word after another, it grows a whole answer"],
       ],
@@ -153,7 +153,7 @@ export const CH_TR = {
       key: [
         ["01", "Parameters = the total number of weights in the network"],
         ["02", "More parameters means more complex patterns it can store"],
-        ["03", "But bigger = pricier and slower—not always worth it"],
+        ["03", "But bigger = pricier and slower, not always worth it"],
       ],
       terms: [
         ["Parameter", "A single adjustable weight inside the model"],
@@ -213,7 +213,7 @@ export const CH_TR = {
       key: [
         ["01", "Spell out context, role, and format, and the answer gets more accurate"],
         ["02", "Giving examples (few-shot) works better than just describing"],
-        ["03", "Same question, different phrasing—very different results"],
+        ["03", "Same question, different phrasing, very different results"],
       ],
       terms: [
         ["Prompt", "The input instruction you give the model"],
@@ -233,7 +233,7 @@ export const CH_TR = {
       ],
     },
     "multimodal": {
-      t: "Multimodal", sub: "AI doesn’t just read text—it can see, hear, and generate too",
+      t: "Multimodal", sub: "AI doesn’t just read text, it can see, hear, and generate too",
       key: [
         ["01", "Multimodal = handling text, images, sound, and video all at once"],
         ["02", "The trick: encode every type into “the same kind of meaning vector”"],
@@ -309,7 +309,7 @@ export const CH_TR = {
       key: [
         ["01", "High confidence ≠ correct"],
         ["02", "Hallucination: confidently making up things that don’t exist"],
-        ["03", "Bias comes from data—and gets amplified by the model"],
+        ["03", "Bias comes from data, and gets amplified by the model"],
       ],
       terms: [
         ["Hallucination", "When a model fabricates plausible-looking errors"],
@@ -321,7 +321,7 @@ export const CH_TR = {
       key: [
         ["01", "Good vs. bad has standards: correct, complete, relevant, no hallucination"],
         ["02", "A benchmark is a standardized test that lets models be compared"],
-        ["03", "Newer and bigger doesn’t win at everything—it depends on your task"],
+        ["03", "Newer and bigger doesn’t win at everything, it depends on your task"],
       ],
       terms: [
         ["Benchmark", "A set of standard questions used to compare model abilities"],
@@ -347,7 +347,7 @@ export const CH_TR = {
       key: [
         ["01", "AI は突然現れたのではなく、70 年以上の浮き沈みの積み重ね"],
         ["02", "3 つの大きな飛躍：深層学習(2012)、Transformer(2017)、ChatGPT(2022)"],
-        ["03", "どの突破も「構造や規模」によるもの——魔法ではない"],
+        ["03", "どの突破も「構造や規模」によるもの、魔法ではない"],
       ],
       terms: [
         ["チューリングテスト", "会話で相手が人か機械かを見分ける"],
@@ -423,7 +423,7 @@ export const CH_TR = {
       ],
       terms: [
         ["Weight 重み", "つながりの強さ。正にも負にもなる"],
-        ["Activation 活性化", "あるノードが点灯している度合い (0–1)"],
+        ["Activation 活性化", "あるノードが点灯している度合い (0-1)"],
       ],
     },
     "training": {
@@ -659,7 +659,7 @@ export const CH_TR = {
       key: [
         ["01", "良し悪しには基準がある：正確・網羅・的確・ハルシネーションなし"],
         ["02", "ベンチマーク＝標準化されたテストで、モデルを比較できるようにする"],
-        ["03", "新しく大きいほど全勝とは限らない——あなたのタスク次第"],
+        ["03", "新しく大きいほど全勝とは限らない、あなたのタスク次第"],
       ],
       terms: [
         ["Benchmark ベンチマーク", "標準化された問題のセットで、モデルの能力を比較するために使う"],

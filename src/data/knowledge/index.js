@@ -1,5 +1,5 @@
 /* ============================================================
-   知識庫索引 —— 自動聚合 knowledge/<slug>.js（中文，每章一檔）。
+   知識庫索引，自動聚合 knowledge/<slug>.js（中文，每章一檔）。
    多語：knowledge/en/<slug>.js、knowledge/ja/<slug>.js（可選，翻好幾課就放幾課）。
    缺該語言版本時自動 fallback 回中文。
    每個章節檔 export default { qs, kb, notes }。

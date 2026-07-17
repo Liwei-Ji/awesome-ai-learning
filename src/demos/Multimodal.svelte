@@ -1,5 +1,5 @@
 <script>
-  /* Ch · 多模態 Multimodal —— 互動：選輸入型態 → 都編碼成「同一個意義向量」
+  /* Ch · 多模態 Multimodal，互動：選輸入型態 → 都編碼成「同一個意義向量」
      （共用理解空間）→ 選輸出型態 → 看這組跨模態對應到哪個真實應用。
      核心概念：不同型態、同一個意思；有了共用空間就能自由轉換。亮色、離線。 */
   import { fade } from 'svelte/transition';
@@ -12,7 +12,7 @@
   const L = {
     zh: {
       h3: '互動：不同型態，同一個意思',
-      lede: '多模態模型能同時處理<b>文字、圖片、聲音、影片</b>。訣竅是把每一種型態都編碼成\n    <b>同一種「意義向量」</b>——放進共用空間後，就能<b>在型態之間自由轉換</b>。',
+      lede: '多模態模型能同時處理<b>文字、圖片、聲音、影片</b>。訣竅是把每一種型態都編碼成\n    <b>同一種「意義向量」</b>，放進共用空間後，就能<b>在型態之間自由轉換</b>。',
       labels: ['文字', '圖片', '聲音', '影片'],
       ex: ['「一隻橘貓在陽台曬太陽」', '一張貓咪照片 🐱', '「喵～」＋環境音', '貓伸懶腰的短片'],
       field1: '① 選輸入型態',
@@ -35,11 +35,11 @@
         '圖片→影片': '讓圖片動起來',
       },
       appFallback: '跨模態理解與生成',
-      hint: '看懂了嗎？<b>「模態」＝一種資料型態</b>（文字/圖/聲/影）。多模態的關鍵不是四個模型拼在一起，\n    而是<b>一個共用的意義空間</b>——所以它能看圖說話、文字生圖、語音轉字……全都是同一招的變化。',
+      hint: '看懂了嗎？<b>「模態」＝一種資料型態</b>（文字/圖/聲/影）。多模態的關鍵不是四個模型拼在一起，\n    而是<b>一個共用的意義空間</b>，所以它能看圖說話、文字生圖、語音轉字……全都是同一招的變化。',
     },
     en: {
       h3: 'Interactive: different types, same meaning',
-      lede: 'Multimodal models can handle <b>text, images, sound, and video</b> all at once. The trick is to encode every type into\n    <b>the same kind of “meaning vector”</b>—once they’re in a shared space, you can <b>convert freely between types</b>.',
+      lede: 'Multimodal models can handle <b>text, images, sound, and video</b> all at once. The trick is to encode every type into\n    <b>the same kind of “meaning vector”</b>, once they’re in a shared space, you can <b>convert freely between types</b>.',
       labels: ['Text', 'Image', 'Sound', 'Video'],
       ex: ['“An orange cat basking in the sun on a balcony”', 'A photo of a cat 🐱', '“Meow~” + ambient sound', 'A short clip of a cat stretching'],
       field1: '① Pick an input type',
@@ -62,11 +62,11 @@
         'Image→Video': 'Bring a picture to life',
       },
       appFallback: 'Cross-modal understanding and generation',
-      hint: 'Get it? <b>A “modality” = one type of data</b> (text/image/sound/video). The key to multimodal isn’t four models bolted together,\n    but <b>one shared meaning space</b>—so it can caption images, generate images from text, turn speech into text… all variations on the same trick.',
+      hint: 'Get it? <b>A “modality” = one type of data</b> (text/image/sound/video). The key to multimodal isn’t four models bolted together,\n    but <b>one shared meaning space</b>, so it can caption images, generate images from text, turn speech into text… all variations on the same trick.',
     },
     ja: {
       h3: 'インタラクティブ：種類は違っても、意味は同じ',
-      lede: 'マルチモーダルモデルは<b>テキスト・画像・音声・動画</b>を同時に扱えます。コツは、どの種類も\n    <b>同じ形式の「意味ベクトル」</b>にエンコードすること——共有空間に入れてしまえば、<b>種類のあいだを自由に変換</b>できます。',
+      lede: 'マルチモーダルモデルは<b>テキスト・画像・音声・動画</b>を同時に扱えます。コツは、どの種類も\n    <b>同じ形式の「意味ベクトル」</b>にエンコードすること、共有空間に入れてしまえば、<b>種類のあいだを自由に変換</b>できます。',
       labels: ['テキスト', '画像', '音声', '動画'],
       ex: ['「オレンジ色の猫がバルコニーで日なたぼっこ」', '猫の写真 🐱', '「ニャー」＋環境音', '猫が伸びをする短い動画'],
       field1: '① 入力の種類を選ぶ',
@@ -89,7 +89,7 @@
         '画像→動画': '画像を動かす',
       },
       appFallback: '種類をまたぐ理解と生成',
-      hint: 'わかったかな？<b>「モダリティ」＝データの種類</b>（テキスト／画像／音声／動画）。マルチモーダルのカギは 4 つのモデルを寄せ集めることではなく、\n    <b>1 つの共有された意味空間</b>——だから画像の説明も、テキストからの画像生成も、音声のテキスト化も…すべて同じ仕組みの応用なんだ。',
+      hint: 'わかったかな？<b>「モダリティ」＝データの種類</b>（テキスト／画像／音声／動画）。マルチモーダルのカギは 4 つのモデルを寄せ集めることではなく、\n    <b>1 つの共有された意味空間</b>、だから画像の説明も、テキストからの画像生成も、音声のテキスト化も…すべて同じ仕組みの応用なんだ。',
     },
   };
 

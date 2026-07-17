@@ -29,7 +29,7 @@
         in: '🍕 密語還在視窗裡 → 模型答得出「密語是什麼」',
         out: '🍕 密語已被擠出視窗 → 模型看不到、答不出來',
       },
-      hint: '這就是為什麼 AI 有時「忘了你前面說過的話」——不是它笨，是那段內容<b>掉出了視窗</b>。視窗越大能記得越多，但運算成本也越高。（想跨對話長期記得？那要靠下一站的 <b>Memory</b>。）',
+      hint: '這就是為什麼 AI 有時「忘了你前面說過的話」，不是它笨，是那段內容<b>掉出了視窗</b>。視窗越大能記得越多，但運算成本也越高。（想跨對話長期記得？那要靠下一站的 <b>Memory</b>。）',
     },
     en: {
       // A token-by-token snippet; the secret 🍕 sits at index SPECIAL (5)
@@ -47,7 +47,7 @@
         in: '🍕 The secret is still in the window → the model can answer “what’s the secret”',
         out: '🍕 The secret has been pushed out of the window → the model can’t see it and can’t answer',
       },
-      hint: 'This is why AI sometimes “forgets what you said earlier”—it isn’t dumb; that content just <b>fell out of the window</b>. A bigger window remembers more, but the compute cost is higher too. (Want it to remember across conversations? That’s the job of the next stop, <b>Memory</b>.)',
+      hint: 'This is why AI sometimes “forgets what you said earlier”, it isn’t dumb; that content just <b>fell out of the window</b>. A bigger window remembers more, but the compute cost is higher too. (Want it to remember across conversations? That’s the job of the next stop, <b>Memory</b>.)',
     },
     ja: {
       // 一文字ずつのトークン列（日本語は中国語と同じく文字単位）；合言葉 🍕 は index SPECIAL (5)
@@ -65,7 +65,7 @@
         in: '🍕 合言葉はまだウィンドウの中 → モデルは「合言葉は何」に答えられる',
         out: '🍕 合言葉はウィンドウから押し出された → モデルには見えず、答えられない',
       },
-      hint: 'これが、AI がときどき「さっき言ったことを忘れる」理由——頭が悪いのではなく、その内容が<b>ウィンドウから外に出てしまった</b>だけ。ウィンドウが大きいほど多く覚えられますが、計算コストも高くなります。（会話をまたいで覚えてほしい？それは次の駅、<b>Memory</b> の役目です。）',
+      hint: 'これが、AI がときどき「さっき言ったことを忘れる」理由，頭が悪いのではなく、その内容が<b>ウィンドウから外に出てしまった</b>だけ。ウィンドウが大きいほど多く覚えられますが、計算コストも高くなります。（会話をまたいで覚えてほしい？それは次の駅、<b>Memory</b> の役目です。）',
     },
   };
 

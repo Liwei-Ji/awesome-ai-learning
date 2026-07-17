@@ -46,7 +46,7 @@
       glab: '加入提示成分：',
       fill: '全部加上',
       clear: '清空',
-      hint: '這就是 <b>提示工程</b>：把<b>角色、脈絡、格式</b>講清楚，答案立刻更準；附上一兩個<b>範例（few-shot）</b>更是大幅提升。同一個問題，換個問法，結果可以天差地遠——所以「會問」本身就是一種能力。',
+      hint: '這就是 <b>提示工程</b>：把<b>角色、脈絡、格式</b>講清楚，答案立刻更準；附上一兩個<b>範例（few-shot）</b>更是大幅提升。同一個問題，換個問法，結果可以天差地遠，所以「會問」本身就是一種能力。',
     },
     en: {
       h3: 'Interactive: a good prompt vs. a bad one',
@@ -73,14 +73,14 @@
         'Getting there, but short on information and a bit stiff.',
         'Presentable: it has a greeting, a reason, and mentions the handoff.',
         'Great: complete, polite, and professional.',
-        'Excellent: specific, bulleted, polite, and thoughtful—ready to send as is.',
+        'Excellent: specific, bulleted, polite, and thoughtful, ready to send as is.',
       ],
       qlabels: ['Very basic', 'Okay', 'Not bad', 'Great', 'Excellent'],
       quality: 'Quality: ',
       glab: 'Add prompt ingredients:',
       fill: 'Add all',
       clear: 'Clear',
-      hint: 'This is <b>prompt engineering</b>: spell out the <b>role, context, and format</b> and the answer gets sharper right away; adding one or two <b>examples (few-shot)</b> helps even more. Ask the same question a different way and the result can differ enormously—so <b>knowing how to ask</b> is a skill in itself.',
+      hint: 'This is <b>prompt engineering</b>: spell out the <b>role, context, and format</b> and the answer gets sharper right away; adding one or two <b>examples (few-shot)</b> helps even more. Ask the same question a different way and the result can differ enormously, so <b>knowing how to ask</b> is a skill in itself.',
     },
     ja: {
       h3: 'インタラクティブ：良いプロンプト vs. 悪いプロンプト',
@@ -114,7 +114,7 @@
       glab: 'プロンプトの要素を追加：',
       fill: 'すべて追加',
       clear: 'クリア',
-      hint: 'これが<b>プロンプトエンジニアリング</b>：<b>役割・文脈・形式</b>をはっきり伝えれば、答えはすぐに的確になります。<b>例（few-shot）</b>を一つ二つ添えれば、さらに効きます。同じ質問でも聞き方を変えれば結果は大きく変わる——だから<b>「うまく聞ける」こと</b>自体が一つの能力なのです。',
+      hint: 'これが<b>プロンプトエンジニアリング</b>：<b>役割・文脈・形式</b>をはっきり伝えれば、答えはすぐに的確になります。<b>例（few-shot）</b>を一つ二つ添えれば、さらに効きます。同じ質問でも聞き方を変えれば結果は大きく変わる、だから<b>「うまく聞ける」こと</b>自体が一つの能力なのです。',
     },
   };
 

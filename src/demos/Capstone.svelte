@@ -1,6 +1,6 @@
 <script>
   /* Ch · 總結：你能用 AI 做什麼。把整條課程的積木組成真實方案。
-     選一個目標，看要用到哪些概念（點積木可跳回該章複習）——把地圖變成行動。亮色、離線。 */
+     選一個目標，看要用到哪些概念（點積木可跳回該章複習），把地圖變成行動。亮色、離線。 */
   import { CH } from '../data/chapters.js';
   import { go } from '../stores/state.svelte.js';
   import { i18n } from '../stores/i18n.svelte.js';
@@ -16,12 +16,12 @@
   const L = {
     zh: {
       h3: '互動：組裝你的 AI 方案',
-      lede: '恭喜你走完整條路 🎓 從資料、模型、LLM 到 Agent，每一章都是一塊積木。 挑一個真實目標，看它需要用到哪些積木——這就是<b>設計 AI 應用</b>的思路。（點積木可跳回該章複習）',
+      lede: '恭喜你走完整條路 🎓 從資料、模型、LLM 到 Agent，每一章都是一塊積木。 挑一個真實目標，看它需要用到哪些積木，這就是<b>設計 AI 應用</b>的思路。（點積木可跳回該章複習）',
       wantLabel: '我想做：',
       blocksLabel: '課程積木（亮起＝這個方案會用到）',
       blockTitle: '跳到該章複習',
       recipeLabel: '方案配方',
-      hint: '看出來了嗎？大多數 AI 產品，都是這些積木的<b>組合</b>。開始的訣竅：先用<b>現成模型 + 好提示</b>解決八成問題， 需要私有資料就加 <b>RAG</b>、要固定風格再 <b>微調</b>、要自動執行才上 <b>Agent</b>。 最後一件事——<b>永遠驗證 AI 的輸出</b>。你已經有整張地圖了，去做點東西吧！',
+      hint: '看出來了嗎？大多數 AI 產品，都是這些積木的<b>組合</b>。開始的訣竅：先用<b>現成模型 + 好提示</b>解決八成問題， 需要私有資料就加 <b>RAG</b>、要固定風格再 <b>微調</b>、要自動執行才上 <b>Agent</b>。 最後一件事，<b>永遠驗證 AI 的輸出</b>。你已經有整張地圖了，去做點東西吧！',
       goals: ['公司知識問答機器人', '品牌客服助手', '幫我安排行程的助理', 'AI 生圖工具'],
       blocks: { data: '資料', llm: '大型語言模型', prompt: 'Prompt', rag: 'RAG 檢索', 'fine-tuning': 'Fine-tuning', memory: 'Memory', agent: 'AI Agent', mcp: 'MCP', generative: '生成式 AI' },
       need: [
@@ -33,12 +33,12 @@
     },
     en: {
       h3: 'Interactive: assemble your AI solution',
-      lede: 'Congrats on making it all the way through 🎓 From data and models to LLMs and Agents, every chapter is a building block. Pick a real goal and see which blocks it needs—that’s how you <b>design an AI application</b>. (Click a block to jump back and review that chapter.)',
+      lede: 'Congrats on making it all the way through 🎓 From data and models to LLMs and Agents, every chapter is a building block. Pick a real goal and see which blocks it needs, that’s how you <b>design an AI application</b>. (Click a block to jump back and review that chapter.)',
       wantLabel: 'I want to build:',
       blocksLabel: 'Course blocks (lit = used by this solution)',
       blockTitle: 'Jump to that chapter to review',
       recipeLabel: 'Solution recipe',
-      hint: 'See the pattern? Most AI products are just <b>combinations</b> of these blocks. The trick to starting: first solve 80% of the problem with an <b>off-the-shelf model + a good prompt</b>, add <b>RAG</b> when you need private data, <b>fine-tune</b> for a fixed style, and bring in an <b>Agent</b> only when you need automatic execution. One last thing—<b>always verify AI’s output</b>. You’ve got the whole map now, so go build something!',
+      hint: 'See the pattern? Most AI products are just <b>combinations</b> of these blocks. The trick to starting: first solve 80% of the problem with an <b>off-the-shelf model + a good prompt</b>, add <b>RAG</b> when you need private data, <b>fine-tune</b> for a fixed style, and bring in an <b>Agent</b> only when you need automatic execution. One last thing, <b>always verify AI’s output</b>. You’ve got the whole map now, so go build something!',
       goals: ['Company knowledge Q&A bot', 'Brand customer-service assistant', 'A scheduling assistant', 'AI image generator'],
       blocks: { data: 'Data', llm: 'LLM', prompt: 'Prompt', rag: 'RAG', 'fine-tuning': 'Fine-tuning', memory: 'Memory', agent: 'AI Agent', mcp: 'MCP', generative: 'Generative AI' },
       need: [
@@ -50,12 +50,12 @@
     },
     ja: {
       h3: 'インタラクティブ：あなたの AI ソリューションを組み立てる',
-      lede: 'ここまで走り抜けておめでとうございます 🎓 データやモデルから LLM、Agent まで、どの章も一つの積み木です。 身近な目標を一つ選び、それにどの積み木が必要かを見てみましょう——これが<b>AI アプリを設計する</b>という考え方です。（積み木をクリックすると、その章に戻って復習できます。）',
+      lede: 'ここまで走り抜けておめでとうございます 🎓 データやモデルから LLM、Agent まで、どの章も一つの積み木です。 身近な目標を一つ選び、それにどの積み木が必要かを見てみましょう、これが<b>AI アプリを設計する</b>という考え方です。（積み木をクリックすると、その章に戻って復習できます。）',
       wantLabel: '作りたいもの：',
       blocksLabel: 'コースの積み木（点灯＝このソリューションで使う）',
       blockTitle: 'その章に飛んで復習する',
       recipeLabel: 'ソリューションのレシピ',
-      hint: 'パターンが見えましたか？たいていの AI プロダクトは、これらの積み木の<b>組み合わせ</b>にすぎません。 始めるコツは、まず<b>既製モデル＋良いプロンプト</b>で 8 割の問題を片づけ、 自分のデータが要るときに <b>RAG</b>、決まった作風にしたいときに<b>ファインチューニング</b>、 自動で実行させたいときだけ <b>Agent</b> を持ち込むこと。 最後にもう一つ——<b>AI の出力は必ず検証する</b>。もう地図は全部そろっています。さあ、何か作ってみましょう！',
+      hint: 'パターンが見えましたか？たいていの AI プロダクトは、これらの積み木の<b>組み合わせ</b>にすぎません。 始めるコツは、まず<b>既製モデル＋良いプロンプト</b>で 8 割の問題を片づけ、 自分のデータが要るときに <b>RAG</b>、決まった作風にしたいときに<b>ファインチューニング</b>、 自動で実行させたいときだけ <b>Agent</b> を持ち込むこと。 最後にもう一つ、<b>AI の出力は必ず検証する</b>。もう地図は全部そろっています。さあ、何か作ってみましょう！',
       goals: ['社内ナレッジ Q&A ボット', 'ブランドのカスタマーサポートアシスタント', '予定を組んでくれるアシスタント', 'AI 画像生成ツール'],
       blocks: { data: 'データ', llm: 'LLM', prompt: 'プロンプト', rag: 'RAG', 'fine-tuning': 'ファインチューニング', memory: 'メモリ', agent: 'AI エージェント', mcp: 'MCP', generative: '生成 AI' },
       need: [

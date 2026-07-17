@@ -1,7 +1,7 @@
 <script>
   /* Ch6 · LLM Next-Token（核心互動）。
      state = ctx（開頭）+ picked（已生成的字）。distribution 由目前上下文衍生，
-     每按一次生成就把機率最高的字接上去——示範「一次只預測下一個 Token」。 */
+     每按一次生成就把機率最高的字接上去，示範「一次只預測下一個 Token」。 */
   import Bars from '../components/Bars.svelte';
   import { i18n } from '../stores/i18n.svelte.js';
 

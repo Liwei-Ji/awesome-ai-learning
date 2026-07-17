@@ -1,5 +1,5 @@
 <script>
-  /* Ch · RAG 檢索增強生成 —— 引導式三步驟：① 提問 → ② 檢索知識庫 → ③ 生成回答。
+  /* Ch · RAG 檢索增強生成，引導式三步驟：① 提問 → ② 檢索知識庫 → ③ 生成回答。
      親手走一遍「先檢索、再生成」：按檢索看它依相似度找出片段，按生成看答案照片段長出來、附來源。
      最後對照「不查資料的話會幻覺」。亮色、確定性、離線。
      相似度（sims）、門檻（THRESH）跨語言共用；顯示字串依 i18n.locale。 */
@@ -26,7 +26,7 @@
       kbNotYet: '· 尚未檢索',
       used: '✓ 取用',
       aiAnswer: 'AI 的回答',
-      waiting0: '尚未開始——先按下方「▶ 檢索知識庫」。',
+      waiting0: '尚未開始，先按下方「▶ 檢索知識庫」。',
       waiting1: '已找到 <b>{n}</b> 段相關資料 ✓　接著按「▶ 生成回答」，讓 AI 照著它們作答。',
       sources: '來源：',
       peekQ: '如果不查資料會怎樣？',
@@ -34,12 +34,12 @@
       retrieve: '▶ 檢索知識庫',
       generate: '▶ 生成回答',
       restart: '重來',
-      hint: '這就是 <b>RAG（檢索增強生成）</b>：把「<b>檢索</b>」接在「<b>生成</b>」前面。好處是能答<b>私有或最新</b>的內容、<b>減少幻覺</b>、還能<b>附來源</b>。檢索靠的正是上一站的<b>向量相似度</b>——把問題和每段資料變成向量，找最接近的幾段。',
+      hint: '這就是 <b>RAG（檢索增強生成）</b>：把「<b>檢索</b>」接在「<b>生成</b>」前面。好處是能答<b>私有或最新</b>的內容、<b>減少幻覺</b>、還能<b>附來源</b>。檢索靠的正是上一站的<b>向量相似度</b>，把問題和每段資料變成向量，找最接近的幾段。',
       kbT: ['請假規定', '退貨政策', '客服時間', '保固條款', '運費說明'],
       kbX: [
         '特休假每年最多可累積 10 天，逾期未休將歸零。',
         '商品可於購買後 14 天內申請退貨，需保持完整包裝。',
-        '客服專線服務時間為平日 09:00–18:00。',
+        '客服專線服務時間為平日 09:00-18:00。',
         '產品提供一年保固，人為損壞不在保固範圍。',
         '訂單滿 1000 元免運費，未滿酌收 80 元。',
       ],
@@ -56,7 +56,7 @@
       rag: [
         '根據內部規定，特休假每年最多可累積 <b>10 天</b>，逾期未休會歸零。',
         '依退貨政策，商品可於購買後 <b>14 天內</b>申請退貨，且需保持完整包裝。',
-        '客服服務時間為<b>平日 09:00–18:00</b>；訂單<b>滿 1000 元免運</b>，未滿收 80 元。',
+        '客服服務時間為<b>平日 09:00-18:00</b>；訂單<b>滿 1000 元免運</b>，未滿收 80 元。',
       ],
     },
     en: {
@@ -69,7 +69,7 @@
       kbNotYet: '· not retrieved yet',
       used: '✓ Used',
       aiAnswer: 'The AI’s answer',
-      waiting0: 'Not started yet—press “▶ Retrieve from KB” below first.',
+      waiting0: 'Not started yet, press “▶ Retrieve from KB” below first.',
       waiting1: 'Found <b>{n}</b> relevant passages ✓　Now press “▶ Generate answer” to have the AI answer based on them.',
       sources: 'Sources:',
       peekQ: 'What if it didn’t look anything up?',
@@ -77,12 +77,12 @@
       retrieve: '▶ Retrieve from KB',
       generate: '▶ Generate answer',
       restart: 'Restart',
-      hint: 'That’s <b>RAG (Retrieval-Augmented Generation)</b>: putting “<b>retrieve</b>” before “<b>generate</b>.” The payoff is answering <b>private or up-to-date</b> content, <b>fewer hallucinations</b>, and being able to <b>cite sources</b>. Retrieval relies on the <b>vector similarity</b> from the previous stop—turn the question and each passage into vectors, then find the few closest.',
+      hint: 'That’s <b>RAG (Retrieval-Augmented Generation)</b>: putting “<b>retrieve</b>” before “<b>generate</b>.” The payoff is answering <b>private or up-to-date</b> content, <b>fewer hallucinations</b>, and being able to <b>cite sources</b>. Retrieval relies on the <b>vector similarity</b> from the previous stop, turn the question and each passage into vectors, then find the few closest.',
       kbT: ['Leave policy', 'Return policy', 'Support hours', 'Warranty terms', 'Shipping fees'],
       kbX: [
         'Annual leave accrues up to 10 days per year; unused days expire and reset to zero.',
         'Items can be returned within 14 days of purchase, and must keep their original packaging intact.',
-        'The support hotline is open on weekdays, 09:00–18:00.',
+        'The support hotline is open on weekdays, 09:00-18:00.',
         'Products come with a one-year warranty; accidental damage is not covered.',
         'Orders of NT$1,000 or more ship free; below that, an NT$80 fee applies.',
       ],
@@ -92,14 +92,14 @@
         'What hours is support open? How much for free shipping?',
       ],
       noRag: [
-        'I’m not sure about your company’s rules—usually maybe around 30 days? (I’m just guessing.)',
+        'I’m not sure about your company’s rules, usually maybe around 30 days? (I’m just guessing.)',
         'Usually there’s a 7-day trial period? But it varies by company, so I’m honestly not sure.',
         'Support is probably during business hours? As for the free-shipping threshold, I really have no idea.',
       ],
       rag: [
         'Per internal policy, annual leave accrues up to <b>10 days</b> per year, and unused days reset to zero.',
         'Per the return policy, items can be returned <b>within 14 days</b> of purchase, and must keep their original packaging.',
-        'Support hours are <b>weekdays 09:00–18:00</b>; orders <b>over NT$1,000 ship free</b>, and below that an NT$80 fee applies.',
+        'Support hours are <b>weekdays 09:00-18:00</b>; orders <b>over NT$1,000 ship free</b>, and below that an NT$80 fee applies.',
       ],
     },
     ja: {
@@ -112,7 +112,7 @@
       kbNotYet: '· まだ検索していない',
       used: '✓ 使用',
       aiAnswer: 'AI の回答',
-      waiting0: 'まだ始めていません——先に下の「▶ 知識ベースを検索」を押してください。',
+      waiting0: 'まだ始めていません、先に下の「▶ 知識ベースを検索」を押してください。',
       waiting1: '関連する資料を <b>{n}</b> 件見つけました ✓　次に「▶ 回答を生成」を押して、AI にそれらをもとに答えさせましょう。',
       sources: '出典：',
       peekQ: '資料を調べなかったらどうなる？',
@@ -120,12 +120,12 @@
       retrieve: '▶ 知識ベースを検索',
       generate: '▶ 回答を生成',
       restart: 'やり直す',
-      hint: 'これが <b>RAG（検索拡張生成）</b>です：「<b>生成</b>」の前に「<b>検索</b>」を差し込みます。うれしいのは、<b>社内・最新</b>の内容にも答えられ、<b>幻覚が減り</b>、しかも<b>出典を添えられる</b>こと。検索が頼りにするのは前の章で見た<b>ベクトル類似度</b>です——質問と各断片をベクトルに変え、最も近いものをいくつか見つけます。',
+      hint: 'これが <b>RAG（検索拡張生成）</b>です：「<b>生成</b>」の前に「<b>検索</b>」を差し込みます。うれしいのは、<b>社内・最新</b>の内容にも答えられ、<b>幻覚が減り</b>、しかも<b>出典を添えられる</b>こと。検索が頼りにするのは前の章で見た<b>ベクトル類似度</b>です、質問と各断片をベクトルに変え、最も近いものをいくつか見つけます。',
       kbT: ['休暇規定', '返品ポリシー', 'サポート受付時間', '保証条件', '送料について'],
       kbX: [
         '特別休暇は年間最大 10 日まで繰り越せます。期限内に消化しないと 0 にリセットされます。',
         '商品は購入後 14 日以内であれば返品を申請できます。パッケージは完全な状態を保つ必要があります。',
-        'サポート専用ダイヤルの受付時間は平日 09:00–18:00 です。',
+        'サポート専用ダイヤルの受付時間は平日 09:00-18:00 です。',
         '製品には 1 年間の保証が付きます。人為的な破損は保証の対象外です。',
         'ご注文が 1,000 円以上で送料無料、それ未満は 80 円をいただきます。',
       ],
@@ -142,7 +142,7 @@
       rag: [
         '社内規定によると、特別休暇は年間最大 <b>10 日</b>まで繰り越せ、期限内に消化しないと 0 にリセットされます。',
         '返品ポリシーによると、商品は購入後 <b>14 日以内</b>であれば返品でき、パッケージは完全な状態を保つ必要があります。',
-        'サポートの受付時間は<b>平日 09:00–18:00</b>です。ご注文が<b>1,000 円以上で送料無料</b>、それ未満は 80 円をいただきます。',
+        'サポートの受付時間は<b>平日 09:00-18:00</b>です。ご注文が<b>1,000 円以上で送料無料</b>、それ未満は 80 円をいただきます。',
       ],
     },
   };

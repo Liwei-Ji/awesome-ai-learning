@@ -2,9 +2,9 @@
   /* Ch · Embedding 詞嵌入 · 語意星圖。
      30 個詞落在 2D 語意空間（示意投影），意義相近的自然聚成 5 團。
      模式：
-       探索 — 鎖定一個詞看它的 top-5 最近鄰（連線+相似度%）；再滑到別的詞即時比較。
-       拖曳 — 把詞拖到別團，最近鄰即時重算（親手改變「意義」）。
-       向量運算 — 國王 − 男人 + 女人 = 皇后（平行四邊形精確命中）。
+       探索，鎖定一個詞看它的 top-5 最近鄰（連線+相似度%）；再滑到別的詞即時比較。
+       拖曳，把詞拖到別團，最近鄰即時重算（親手改變「意義」）。
+       向量運算，國王 − 男人 + 女人 = 皇后（平行四邊形精確命中）。
      相似度＝距離型高斯 sim=exp(-d²/σ²)（跟眼睛看到「哪顆最近」一致；hint 註明真實模型多用 cosine）。
      深色舞台、確定性、離線。 */
   import { onDestroy } from 'svelte';
@@ -43,7 +43,7 @@
   const L = {
     zh: {
       h3: '互動：詞語的「語意星圖」',
-      lede: '電腦不懂字，只懂<b>數字向量</b>。把每個詞的向量畫成一個點，意義相近的詞位置就會靠在一起—— 自然分成動物、食物、情緒、科技、皇室五團。滑過任一個詞，看它<b>最像的鄰居</b>。',
+      lede: '電腦不懂字，只懂<b>數字向量</b>。把每個詞的向量畫成一個點，意義相近的詞位置就會靠在一起，自然分成動物、食物、情緒、科技、皇室五團。滑過任一個詞，看它<b>最像的鄰居</b>。',
       mExplore: '探索', mDrag: '拖曳改變意義', mArith: '向量運算',
       mapCap: '語意地圖 · 2D 示意投影', mapCapDrag: '（可拖曳詞點）',
       rtArith: '向量運算', runBtn: '▶ 開始運算',
@@ -54,7 +54,7 @@
       rnoteMap: '滑過任一個詞，看它最像的鄰居；<b>點一下</b>可鎖定，再滑到別的詞比較相似度。',
       disc: '2D 示意投影：真實 embedding 有數百維，此處壓成 2D 方便觀察。',
       resetBtn: '重設位置', clearBtn: '清除鎖定',
-      hint: '這就是 <b>Embedding 詞嵌入</b>：把詞變成向量後，「意義相近」變成「位置相近」，相似度就能<b>用數學算出來</b>。 （本示範用距離；真實模型多用<b>餘弦相似度 cosine</b>，精神相同——都是量兩個向量有多接近。座標為 2D 示意。）',
+      hint: '這就是 <b>Embedding 詞嵌入</b>：把詞變成向量後，「意義相近」變成「位置相近」，相似度就能<b>用數學算出來</b>。 （本示範用距離；真實模型多用<b>餘弦相似度 cosine</b>，精神相同，都是量兩個向量有多接近。座標為 2D 示意。）',
       eqLabels: ['國王 − 男人 + 女人 = ？', '皇后 − 女人 + 男人 = ？'],
       cluster: { '動物': '動物', '食物': '食物', '情緒': '情緒', '科技': '科技', '皇室': '皇室' },
       word: {
@@ -67,7 +67,7 @@
     },
     en: {
       h3: 'Interactive: a semantic star map of words',
-      lede: 'Computers don’t understand words, only <b>number vectors</b>. Draw each word’s vector as a dot, and words with similar meanings end up close together—naturally splitting into five groups: animals, food, emotions, tech, and royalty. Hover over any word to see its <b>most similar neighbors</b>.',
+      lede: 'Computers don’t understand words, only <b>number vectors</b>. Draw each word’s vector as a dot, and words with similar meanings end up close together, naturally splitting into five groups: animals, food, emotions, tech, and royalty. Hover over any word to see its <b>most similar neighbors</b>.',
       mExplore: 'Explore', mDrag: 'Drag to change meaning', mArith: 'Vector arithmetic',
       mapCap: 'Semantic map · 2D schematic projection', mapCapDrag: ' (drag the word dots)',
       rtArith: 'Vector arithmetic', runBtn: '▶ Run',
@@ -78,7 +78,7 @@
       rnoteMap: 'Hover over any word to see its most similar neighbors; <b>click</b> to lock it, then hover another word to compare similarity.',
       disc: '2D schematic projection: real embeddings have hundreds of dimensions; here they’re squashed to 2D so you can see them.',
       resetBtn: 'Reset positions', clearBtn: 'Clear lock',
-      hint: 'This is <b>Embedding</b>: once words become vectors, “similar meaning” turns into “nearby position,” and similarity can be <b>computed with math</b>. (This demo uses distance; real models usually use <b>cosine similarity</b>—same spirit, both measure how close two vectors are. Coordinates are 2D for illustration.)',
+      hint: 'This is <b>Embedding</b>: once words become vectors, “similar meaning” turns into “nearby position,” and similarity can be <b>computed with math</b>. (This demo uses distance; real models usually use <b>cosine similarity</b>, same spirit, both measure how close two vectors are. Coordinates are 2D for illustration.)',
       eqLabels: ['King − Man + Woman = ?', 'Queen − Woman + Man = ?'],
       cluster: { '動物': 'Animals', '食物': 'Food', '情緒': 'Emotions', '科技': 'Tech', '皇室': 'Royalty' },
       word: {
@@ -91,7 +91,7 @@
     },
     ja: {
       h3: 'インタラクティブ：語の「意味の星図」',
-      lede: 'コンピュータは文字が分からず、<b>数字のベクトル</b>しか分かりません。語ごとのベクトルを点として描くと、意味が近い語は自然と近くに集まり——動物・食べ物・感情・テクノロジー・王室の 5 つのグループに分かれます。どれかの語にカーソルを合わせて、その<b>最も似た隣人</b>を見てみましょう。',
+      lede: 'コンピュータは文字が分からず、<b>数字のベクトル</b>しか分かりません。語ごとのベクトルを点として描くと、意味が近い語は自然と近くに集まり、動物・食べ物・感情・テクノロジー・王室の 5 つのグループに分かれます。どれかの語にカーソルを合わせて、その<b>最も似た隣人</b>を見てみましょう。',
       mExplore: '探索', mDrag: 'ドラッグで意味を変える', mArith: 'ベクトル演算',
       mapCap: '意味マップ · 2D の概念的な投影', mapCapDrag: '（語の点をドラッグ）',
       rtArith: 'ベクトル演算', runBtn: '▶ 実行',
@@ -102,7 +102,7 @@
       rnoteMap: 'どれかの語にカーソルを合わせると、最も似た隣人が見えます。<b>クリック</b>で固定し、別の語に合わせると類似度を比較できます。',
       disc: '2D の概念的な投影：実際の embedding は数百の次元を持ちますが、ここでは見やすいように 2D に圧縮しています。',
       resetBtn: '位置をリセット', clearBtn: '固定を解除',
-      hint: 'これが <b>Embedding 埋め込み</b>です：語をベクトルに変えると、「意味が近い」が「位置が近い」になり、類似度を<b>数学で計算</b>できます。（このデモでは距離を使いますが、実際のモデルは<b>コサイン類似度</b>を使うことが多いです——精神は同じで、どちらも 2 つのベクトルがどれだけ近いかを測ります。座標は説明用の 2D です。）',
+      hint: 'これが <b>Embedding 埋め込み</b>です：語をベクトルに変えると、「意味が近い」が「位置が近い」になり、類似度を<b>数学で計算</b>できます。（このデモでは距離を使いますが、実際のモデルは<b>コサイン類似度</b>を使うことが多いです、精神は同じで、どちらも 2 つのベクトルがどれだけ近いかを測ります。座標は説明用の 2D です。）',
       eqLabels: ['王 − 男 + 女 = ？', '女王 − 女 + 男 = ？'],
       cluster: { '動物': '動物', '食物': '食べ物', '情緒': '感情', '科技': 'テクノロジー', '皇室': '王室' },
       word: {
@@ -253,7 +253,7 @@
                 stroke="#0f8a80" stroke-width={0.6 + nb.s * 2.4} opacity={0.25 + nb.s * 0.6} stroke-linecap="round" />
             {/each}
           {/if}
-          <!-- 比較：A–B 線 -->
+          <!-- 比較：A, B 線 -->
           {#if compareId != null}
             <line x1={SX(words[focusId].x)} y1={SY(words[focusId].y)} x2={SX(words[compareId].x)} y2={SY(words[compareId].y)}
               stroke="#e07f0e" stroke-width="2" stroke-dasharray="5 4" opacity="0.85" />

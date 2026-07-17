@@ -1,5 +1,5 @@
 <script>
-  /* Ch22 · AI Agent —— 引導式三步驟：① 選目標 → ② 規劃執行 → ③ 完成。
+  /* Ch22 · AI Agent，引導式三步驟：① 選目標 → ② 規劃執行 → ③ 完成。
      給 Agent 一個目標 → 執行 → 步驟逐條浮現（執行中…→✓）→ 完成橫幅。
      state = sel（目標）、revealed（已浮現步驟含狀態）、running、finished。
      phase 由 running / finished 推導，餵給共用 Stepper。 */
@@ -24,11 +24,11 @@
       runAgent: '▶ 執行 Agent',
       runAgain: '▶ 再執行一次',
       restart: '重來',
-      waiting: '尚未開始——先在上方選好目標，再按下方「▶ 執行 Agent」。',
+      waiting: '尚未開始，先在上方選好目標，再按下方「▶ 執行 Agent」。',
       deliveredGoal: '你交付的目標',
       running: '執行中…',
-      doneBanner: '✅ <b>目標完成</b> — Agent 自主走完全部步驟並整合出結果。',
-      hint: '<b>一般 AI</b>：問→答一次就結束。<b>Agent</b>：拿到<b>目標</b>後自己<b>拆步驟、呼叫工具、整合結果</b>，反覆執行直到完成——像會自己動手的助理。',
+      doneBanner: '✅ <b>目標完成</b>, Agent 自主走完全部步驟並整合出結果。',
+      hint: '<b>一般 AI</b>：問→答一次就結束。<b>Agent</b>：拿到<b>目標</b>後自己<b>拆步驟、呼叫工具、整合結果</b>，反覆執行直到完成，像會自己動手的助理。',
       goalName: { trip: '幫我安排東京旅行', report: '幫我寫週報' },
       goalSteps: {
         trip: [
@@ -54,11 +54,11 @@
       runAgent: '▶ Run the Agent',
       runAgain: '▶ Run again',
       restart: 'Restart',
-      waiting: 'Not started yet—pick a goal above, then press “▶ Run the Agent” below.',
+      waiting: 'Not started yet, pick a goal above, then press “▶ Run the Agent” below.',
       deliveredGoal: 'The goal you handed over',
       running: 'Running…',
-      doneBanner: '✅ <b>Goal complete</b> — the Agent worked through every step on its own and pulled the results together.',
-      hint: '<b>Regular AI</b>: ask → answer, once and done. An <b>Agent</b>: given a <b>goal</b>, it <b>breaks it into steps, calls tools, and pulls the results together</b> on its own, repeating until it’s done—like an assistant that takes action itself.',
+      doneBanner: '✅ <b>Goal complete</b>, the Agent worked through every step on its own and pulled the results together.',
+      hint: '<b>Regular AI</b>: ask → answer, once and done. An <b>Agent</b>: given a <b>goal</b>, it <b>breaks it into steps, calls tools, and pulls the results together</b> on its own, repeating until it’s done, like an assistant that takes action itself.',
       goalName: { trip: 'Plan me a trip to Tokyo', report: 'Write my weekly report' },
       goalSteps: {
         trip: [
@@ -84,11 +84,11 @@
       runAgent: '▶ Agent を実行',
       runAgain: '▶ もう一度実行',
       restart: 'やり直す',
-      waiting: 'まだ始まっていません——上で目標を選んでから、下の「▶ Agent を実行」を押してください。',
+      waiting: 'まだ始まっていません、上で目標を選んでから、下の「▶ Agent を実行」を押してください。',
       deliveredGoal: 'あなたが渡した目標',
       running: '実行中…',
-      doneBanner: '✅ <b>目標達成</b> — Agent がすべての手順を自分でこなし、結果をまとめ上げました。',
-      hint: '<b>普通の AI</b>：問い→答え、一度きりで終わり。<b>Agent</b>：<b>目標</b>を与えられると、自分で<b>手順に分解し、ツールを呼び、結果をまとめる</b>——完了まで繰り返す、自分で手を動かすアシスタントのような存在です。',
+      doneBanner: '✅ <b>目標達成</b>, Agent がすべての手順を自分でこなし、結果をまとめ上げました。',
+      hint: '<b>普通の AI</b>：問い→答え、一度きりで終わり。<b>Agent</b>：<b>目標</b>を与えられると、自分で<b>手順に分解し、ツールを呼び、結果をまとめる</b>，完了まで繰り返す、自分で手を動かすアシスタントのような存在です。',
       goalName: { trip: '東京旅行を計画して', report: '週報を書いて' },
       goalSteps: {
         trip: [

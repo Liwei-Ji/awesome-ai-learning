@@ -46,7 +46,7 @@
       ctlLab: '去噪進度 Denoising（純雜訊 → 圖）',
       btnGen: '▶ 從雜訊生成',
       btnReset: '回到純雜訊',
-      hint: '這就是 <b>擴散模型（Diffusion）</b>：訓練時學「去噪」，生成時把純雜訊一步步變清晰。同一團雜訊，換個提示就會還原成不同的圖——所以「提示」是在<b>引導去噪的方向</b>。同類技術也能生成音樂、影片。',
+      hint: '這就是 <b>擴散模型（Diffusion）</b>：訓練時學「去噪」，生成時把純雜訊一步步變清晰。同一團雜訊，換個提示就會還原成不同的圖，所以「提示」是在<b>引導去噪的方向</b>。同類技術也能生成音樂、影片。',
     },
     en: {
       h3: 'Interactive: paint an image out of noise',
@@ -58,7 +58,7 @@
       ctlLab: 'Denoising progress (pure noise → image)',
       btnGen: '▶ Generate from noise',
       btnReset: 'Back to pure noise',
-      hint: 'This is a <b>diffusion model</b>: during training it learns to “denoise,” and to generate it turns pure noise into a clear image step by step. The same noise, given a different prompt, restores into a different image—so the “prompt” <b>steers the direction of denoising</b>. The same kind of technique can also generate music and video.',
+      hint: 'This is a <b>diffusion model</b>: during training it learns to “denoise,” and to generate it turns pure noise into a clear image step by step. The same noise, given a different prompt, restores into a different image, so the “prompt” <b>steers the direction of denoising</b>. The same kind of technique can also generate music and video.',
     },
     ja: {
       h3: 'インタラクティブ：ノイズから 1 枚の絵を描く',
@@ -70,7 +70,7 @@
       ctlLab: 'ノイズ除去の進行 Denoising（純粋なノイズ → 画像）',
       btnGen: '▶ ノイズから生成',
       btnReset: '純粋なノイズに戻す',
-      hint: 'これが<b>拡散モデル（Diffusion）</b>です：学習時に「ノイズ除去」を覚え、生成時には純粋なノイズを一歩ずつ鮮明な画像へと変えていきます。同じノイズでも、プロンプトが違えば別の画像に復元される——つまり「プロンプト」は<b>ノイズ除去の方向を導いている</b>のです。同じ仕組みの技術は、音楽や動画の生成にも使えます。',
+      hint: 'これが<b>拡散モデル（Diffusion）</b>です：学習時に「ノイズ除去」を覚え、生成時には純粋なノイズを一歩ずつ鮮明な画像へと変えていきます。同じノイズでも、プロンプトが違えば別の画像に復元される、つまり「プロンプト」は<b>ノイズ除去の方向を導いている</b>のです。同じ仕組みの技術は、音楽や動画の生成にも使えます。',
     },
   };
 

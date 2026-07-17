@@ -14,7 +14,7 @@
   const L = {
     zh: {
       h3: '互動：跑一次推論看看',
-      lede: '訓練是<b>一次性</b>的（慢、貴，把規則學進權重裡）；<b>推論</b>則是你<b>每次</b>跟 AI 對話時發生的事——把輸入丟進<b>已訓練好、權重凍結</b>的模型，算出輸出。這裡跑一次看它花多少<b>延遲</b>。',
+      lede: '訓練是<b>一次性</b>的（慢、貴，把規則學進權重裡）；<b>推論</b>則是你<b>每次</b>跟 AI 對話時發生的事，把輸入丟進<b>已訓練好、權重凍結</b>的模型，算出輸出。這裡跑一次看它花多少<b>延遲</b>。',
       tagIn: '輸入 INPUT', tagOut: '輸出 OUTPUT',
       modelTag: '模型 <span class="lock">🔒 已訓練</span>',
       computing: '運算中…', mdone: '✓ 完成', idle: '待命',
@@ -39,7 +39,7 @@
     },
     en: {
       h3: 'Interactive: run one inference',
-      lede: 'Training is a <b>one-time</b> job (slow and expensive—it bakes the rules into the weights); <b>inference</b> is what happens <b>every time</b> you chat with an AI: you feed the input into a <b>trained, weight-frozen</b> model and it computes the output. Run one here and see how much <b>latency</b> it takes.',
+      lede: 'Training is a <b>one-time</b> job (slow and expensive, it bakes the rules into the weights); <b>inference</b> is what happens <b>every time</b> you chat with an AI: you feed the input into a <b>trained, weight-frozen</b> model and it computes the output. Run one here and see how much <b>latency</b> it takes.',
       tagIn: 'INPUT', tagOut: 'OUTPUT',
       modelTag: 'Model <span class="lock">🔒 trained</span>',
       computing: 'Computing…', mdone: '✓ Done', idle: 'Idle',
@@ -54,7 +54,7 @@
       ],
       glabIn: 'Input', glabSize: 'Model size',
       runBtn: '▶ Run inference',
-      hint: 'Every time you chat with ChatGPT, one <b>inference</b> is running behind the scenes. Training happens just once, forging the ability into the weights; after that, every use has to <b>recompute from scratch</b>—which is why AI services bill by usage, and why <b>a bigger model is slower and more expensive to run</b>.',
+      hint: 'Every time you chat with ChatGPT, one <b>inference</b> is running behind the scenes. Training happens just once, forging the ability into the weights; after that, every use has to <b>recompute from scratch</b>, which is why AI services bill by usage, and why <b>a bigger model is slower and more expensive to run</b>.',
       sizeL: { S: 'Small model', M: 'Medium model', L: 'Large model' },
       presets: [
         { label: 'Translate', in: 'Translate “I like cats” into French', out: ['J’', 'aime', ' les', ' chats', '.'] },
@@ -64,7 +64,7 @@
     },
     ja: {
       h3: 'インタラクティブ：推論を一度実行してみる',
-      lede: '訓練は<b>一度きり</b>の作業です（遅くて高価——規則を重みに焼き込む）。<b>推論</b>は AI と話す<b>たびに</b>起こること：入力を<b>訓練済みで重みが凍結された</b>モデルに流し込み、出力を計算します。ここで一度実行して、どれくらい<b>遅延</b>があるか見てみましょう。',
+      lede: '訓練は<b>一度きり</b>の作業です（遅くて高価，規則を重みに焼き込む）。<b>推論</b>は AI と話す<b>たびに</b>起こること：入力を<b>訓練済みで重みが凍結された</b>モデルに流し込み、出力を計算します。ここで一度実行して、どれくらい<b>遅延</b>があるか見てみましょう。',
       tagIn: '入力 INPUT', tagOut: '出力 OUTPUT',
       modelTag: 'モデル <span class="lock">🔒 訓練済み</span>',
       computing: '計算中…', mdone: '✓ 完了', idle: '待機中',
@@ -79,7 +79,7 @@
       ],
       glabIn: '入力', glabSize: 'モデルサイズ',
       runBtn: '▶ 推論を実行',
-      hint: 'ChatGPT と話すたびに、その裏では<b>推論</b>が一度動いています。訓練は一度だけで、能力を重みに鍛え込む。その後は使うたびに<b>一から計算し直す</b>必要がある——だから AI サービスは使用量で課金し、<b>大きいモデルほど動かすのが遅く高価</b>なのです。',
+      hint: 'ChatGPT と話すたびに、その裏では<b>推論</b>が一度動いています。訓練は一度だけで、能力を重みに鍛え込む。その後は使うたびに<b>一から計算し直す</b>必要がある、だから AI サービスは使用量で課金し、<b>大きいモデルほど動かすのが遅く高価</b>なのです。',
       sizeL: { S: '小型モデル', M: '中型モデル', L: '大型モデル' },
       presets: [
         { label: '翻訳', in: '「猫が好き」を英語に翻訳して', out: ['I', ' like', ' cats', '.'] },
