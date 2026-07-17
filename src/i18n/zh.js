@@ -18,7 +18,7 @@ export default {
     mapTitle: 'AI 知識地圖',
     mapRoot: 'AI（人工智慧）',
   },
-  stage: { keyPoints: '重點整理', keyTerms: '關鍵名詞', knowledge: '知識庫 · 延伸知識點' },
+  stage: { keyPoints: '重點整理', keyTerms: '關鍵名詞', knowledge: '知識庫 · 延伸知識點', practical: '實務上', decision: '怎麼選？' },
   tutor: {
     name: 'AI 教授',
     placeholder: '問教授一個問題…',

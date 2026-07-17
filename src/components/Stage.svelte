@@ -6,6 +6,7 @@
   import { demoFor } from '../demos/registry.js';
   import { knowledgeFor } from '../data/knowledge/index.js';
   import { bodyFor } from '../data/bodies.js';
+  import { practicalFor, decisionFor } from '../data/practice.js';
   import { t, i18n } from '../stores/i18n.svelte.js';
   import { dur, D, ease } from '../lib/motion.js';
 
@@ -13,6 +14,8 @@
   let ch = $derived(chOf(nav.current));
   let Demo = $derived(demoFor(ch.slug));
   let body = $derived(bodyFor(ch.slug, i18n.locale));
+  let practical = $derived(practicalFor(ch.slug, i18n.locale));
+  let decision = $derived(decisionFor(ch.slug, i18n.locale));
   let notes = $derived(knowledgeFor(ch.slug, i18n.locale).notes);
 
   $effect(() => { nav.current; if (stageEl) stageEl.scrollTop = 0; });
@@ -42,6 +45,26 @@
         {/if}
 
         <Demo id={nav.current} />
+
+        {#if practical?.length}
+          <section class="lbox practical">
+            <h4>{t('stage.practical')}</h4>
+            <ul>{#each practical as p}<li>{@html p}</li>{/each}</ul>
+          </section>
+        {/if}
+
+        {#if decision}
+          <section class="lbox guide">
+            <h4>{t('stage.decision')}</h4>
+            {#if decision.q}<p class="gq">{decision.q}</p>{/if}
+            {#each decision.rows as r}
+              <div class="grow">
+                <div class="gtop"><span class="gwhen">{r.when}</span><span class="garr">→</span><b class="guse">{r.use}</b></div>
+                {#if r.why}<p class="gwhy">{r.why}</p>{/if}
+              </div>
+            {/each}
+          </section>
+        {/if}
 
         <div class="learn">
           <section class="lbox">
@@ -82,6 +105,21 @@
   .lsec h3::before { content: ""; width: 6px; height: 6px; border-radius: 2px; background: var(--accent); flex: none; }
   .lsec p { font-size: var(--fs-body); line-height: var(--lh-body); color: var(--ink-2); margin: 0; max-width: 70ch; }
   .lsec :global(b) { color: var(--ink); font-weight: 600; }
+
+  .practical { margin-top: 16px; }
+  .practical ul { margin: 0; padding-left: 18px; }
+  .practical li { font-size: var(--fs-sm); color: var(--ink-2); line-height: var(--lh-body); margin: 7px 0; }
+  .practical li :global(b) { color: var(--ink); }
+
+  .guide { margin-top: 16px; }
+  .guide .gq { font-size: var(--fs-sm); color: var(--muted); margin: 0 0 10px; }
+  .grow { padding: 9px 0; border-bottom: 1px dashed var(--line); }
+  .grow:last-child { border-bottom: none; }
+  .gtop { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .gwhen { font-size: var(--fs-sm); color: var(--ink-2); }
+  .garr { color: var(--muted); }
+  .guse { color: var(--accent-ink); font-family: var(--mono); font-size: var(--fs-sm); }
+  .gwhy { font-size: var(--fs-cap); color: var(--muted); margin: 3px 0 0; line-height: var(--lh-snug); }
 
   .learn { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; }
   @media (max-width: 720px) { .learn { grid-template-columns: 1fr; } }

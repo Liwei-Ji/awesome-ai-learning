@@ -18,7 +18,7 @@ export default {
     mapTitle: 'AI Knowledge Map',
     mapRoot: 'AI (Artificial Intelligence)',
   },
-  stage: { keyPoints: 'Key Points', keyTerms: 'Key Terms', knowledge: 'Knowledge Base · Going Deeper' },
+  stage: { keyPoints: 'Key Points', keyTerms: 'Key Terms', knowledge: 'Knowledge Base · Going Deeper', practical: 'In practice', decision: 'Which to use?' },
   tutor: {
     name: 'AI Professor',
     placeholder: 'Ask the professor a question…',

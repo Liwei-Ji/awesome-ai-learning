@@ -18,7 +18,7 @@ export default {
     mapTitle: 'AI 知識マップ',
     mapRoot: 'AI（人工知能）',
   },
-  stage: { keyPoints: '要点整理', keyTerms: 'キーワード', knowledge: 'ナレッジベース · さらに学ぶ' },
+  stage: { keyPoints: '要点整理', keyTerms: 'キーワード', knowledge: 'ナレッジベース · さらに学ぶ', practical: '実務では', decision: 'どれを使う？' },
   tutor: {
     name: 'AI 教授',
     placeholder: '教授に質問してみよう…',
