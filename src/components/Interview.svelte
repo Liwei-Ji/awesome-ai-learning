@@ -4,6 +4,7 @@
   import { fly } from 'svelte/transition';
   import { nav, go, goIv } from '../stores/state.svelte.js';
   import { IV_CATS, ivByCat, ivOf, ivLabel, catNameOf } from '../data/interviews.js';
+  import { quizFor } from '../data/quizzes.js';
   import { CH } from '../data/chapters.js';
   import { chOf } from '../data/localize.js';
   import { t, i18n } from '../stores/i18n.svelte.js';
@@ -22,6 +23,7 @@
   let coveredCount = $derived(Object.values(covered).filter(Boolean).length);
 
   let item = $derived(nav.iv ? ivOf(nav.iv, i18n.locale) : null);
+  let quiz = $derived(nav.iv ? quizFor(nav.iv, i18n.locale) : null);
   let catName = $derived(item ? catNameOf(item.cat, i18n.locale) : '');
   let sep = $derived(i18n.locale === 'en' ? ': ' : '：'); // beat 分隔（不用破折號）
 
@@ -130,11 +132,11 @@
           {/if}
 
           <!-- 判斷題（互動）：讀完答案，換你判斷哪個回答最到位 -->
-          {#if revealed && item.quiz}
+          {#if revealed && quiz}
             <div class="panel quiz" in:fly={{ y: 8, duration: dur(D.base), easing: ease }}>
               <div class="panel-h"><h3>{t('iv.quizPrompt')}</h3><span class="eyebrow">Quiz</span></div>
               <div class="qopts">
-                {#each item.quiz.options as o, i}
+                {#each quiz as o, i}
                   <button class="qopt" class:picked={pick === i} class:correct={pick != null && o.ok} class:wrong={pick === i && !o.ok}
                     onclick={() => { if (pick == null) pick = i; }}>
                     <span class="qmark">{#if pick != null}{#if o.ok}✓{:else if pick === i}✗{/if}{/if}</span>
@@ -143,7 +145,7 @@
                 {/each}
               </div>
               {#if pick != null}
-                <p class="qwhy" in:fly={{ y: 6, duration: dur(D.base), easing: ease }}>{@html item.quiz.options[pick].why}</p>
+                <p class="qwhy" in:fly={{ y: 6, duration: dur(D.base), easing: ease }}>{@html quiz[pick].why}</p>
               {/if}
             </div>
           {/if}

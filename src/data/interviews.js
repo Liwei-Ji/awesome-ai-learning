@@ -1428,13 +1428,6 @@ export const INTERVIEWS = {
       '把「模型很自信」當成「答案很可靠」。',
     ],
     related: ['limits', 'llm', 'rag'],
-    quiz: {
-      options: [
-        { t: '幻覺是模型的 bug，只要把程式修好、把資料清乾淨，就能完全消除。', ok: false, why: '這犯了兩個最常見的誤區：把幻覺當程式錯誤，又說能「完全消除」。它是機率式生成的副作用，只能降低、無法歸零。' },
-        { t: '模型是在猜最可能的下一個字、不是查事實，不確定時仍會給出流暢答案，所以會自信地錯。成因是本質性的，只能靠 RAG、要求引用、對重要輸出校驗、讓它能說不知道來降低，無法根治。', ok: true, why: '講出成因（猜字而非查事實）＋為何無法歸零＋具體的降低手段，正是面試官想聽的層次。' },
-        { t: '只要模型夠大、訓練資料夠多，幻覺自然就會消失。', ok: false, why: '更大更多只會降低、不會消除：成因是機率生成、沒有內建的真假判斷，屬於本質限制。' },
-      ],
-    },
   },
 };
 
@@ -2696,13 +2689,6 @@ const INT_TR = {
         "Assuming “hook up RAG and it won’t hallucinate.”",
         "Taking “the model is confident” to mean “the answer is reliable.”",
       ],
-      quiz: {
-        options: [
-          { t: "Hallucination is a bug in the model. Fix the code and clean the data and it disappears completely.", why: "This makes the two most common mistakes at once: treating hallucination as a programming bug, and claiming it can be “eliminated.” It is a side effect of probabilistic generation, so it can only be reduced, never brought to zero." },
-          { t: "The model is guessing the most likely next word, not looking up facts, and when unsure it still gives a fluent answer, so it can be confidently wrong. The cause is intrinsic, so you can only reduce it (RAG, requiring citations, validating important outputs, letting it say it doesn’t know), not cure it.", why: "Naming the cause (guessing words, not looking up facts), why it can’t be zeroed out, and concrete ways to reduce it is exactly the level an interviewer wants." },
-          { t: "As long as the model is big enough and trained on enough data, hallucination will naturally disappear.", why: "Bigger and more only reduces, it doesn’t eliminate: the cause is probabilistic generation with no built-in sense of true or false, which is a fundamental limit." },
-        ],
-      },
     },
     'context-window': {
       label: 'Context window limits',
@@ -3986,13 +3972,6 @@ const INT_TR = {
         "「RAG をつなげばハルシネーションは起きない」と思い込む。",
         "「モデルが自信満々」を「答えが信頼できる」と取り違える。",
       ],
-      quiz: {
-        options: [
-          { t: "ハルシネーションはモデルの bug で、コードを直してデータをきれいにすれば完全になくせる。", why: "これは最もよくある二つの誤りを同時に犯しています：ハルシネーションをプログラムの不具合とみなし、しかも「完全になくせる」と言う点です。確率的な生成の副作用なので、低減できてもゼロにはできません。" },
-          { t: "モデルは最も可能性の高い次の語を推測しているだけで、事実を調べているのではありません。わからないときも流暢な答えを出すため、自信たっぷりに間違えます。原因は本質的なので、RAG、出典の要求、重要な出力の検証、「わからない」と言わせることで低減できても、根治はできません。", why: "原因（事実を調べず語を推測する）、なぜゼロにできないか、そして具体的な低減策まで述べる。これがまさに面接官の求めるレベルです。" },
-          { t: "モデルが十分に大きく、学習データが十分に多ければ、ハルシネーションは自然になくなる。", why: "大きく多くしても低減するだけで、なくなりません。原因は確率的な生成であり、真偽を判断する仕組みが内蔵されていないという本質的な限界だからです。" },
-        ],
-      },
     },
     'context-window': {
       label: 'コンテキストウィンドウの限界',
@@ -4070,8 +4049,5 @@ export function ivOf(id, locale = 'zh') {
     core: base.core.map((c, i) => ({ h: tr.core?.[i]?.h ?? c.h, d: tr.core?.[i]?.d ?? c.d })),
     plus: tr.plus ?? base.plus,
     traps: tr.traps ?? base.traps,
-    quiz: base.quiz
-      ? { options: base.quiz.options.map((o, i) => ({ ok: o.ok, t: tr.quiz?.options?.[i]?.t ?? o.t, why: tr.quiz?.options?.[i]?.why ?? o.why })) }
-      : base.quiz,
   };
 }
