@@ -5,12 +5,14 @@
   import { chOf } from '../data/localize.js';
   import { demoFor } from '../demos/registry.js';
   import { knowledgeFor } from '../data/knowledge/index.js';
+  import { bodyFor } from '../data/bodies.js';
   import { t, i18n } from '../stores/i18n.svelte.js';
   import { dur, D, ease } from '../lib/motion.js';
 
   let stageEl;
   let ch = $derived(chOf(nav.current));
   let Demo = $derived(demoFor(ch.slug));
+  let body = $derived(bodyFor(ch.slug, i18n.locale));
   let notes = $derived(knowledgeFor(ch.slug, i18n.locale).notes);
 
   $effect(() => { nav.current; if (stageEl) stageEl.scrollTop = 0; });
@@ -28,6 +30,17 @@
   <div class="canvas-wrap">
     {#key nav.current}
       <div in:fly={{ y: 16, duration: dur(D.slow), delay: dur(90), easing: ease }}>
+        {#if body?.length}
+          <section class="lesson">
+            {#each body as sec}
+              <div class="lsec">
+                <h3>{sec.h}</h3>
+                <p>{@html sec.p}</p>
+              </div>
+            {/each}
+          </section>
+        {/if}
+
         <Demo id={nav.current} />
 
         <div class="learn">
@@ -61,6 +74,15 @@
 </main>
 
 <style>
+  .lesson { margin: 0 0 28px; }
+  .lsec { margin: 0 0 17px; }
+  .lsec:last-child { margin-bottom: 0; }
+  .lsec h3 { font-size: 15px; font-weight: 650; color: var(--ink); margin: 0 0 6px;
+    display: flex; align-items: center; gap: 8px; }
+  .lsec h3::before { content: ""; width: 6px; height: 6px; border-radius: 2px; background: var(--accent); flex: none; }
+  .lsec p { font-size: var(--fs-body); line-height: var(--lh-body); color: var(--ink-2); margin: 0; max-width: 70ch; }
+  .lsec :global(b) { color: var(--ink); font-weight: 600; }
+
   .learn { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; }
   @media (max-width: 720px) { .learn { grid-template-columns: 1fr; } }
   .lbox {
