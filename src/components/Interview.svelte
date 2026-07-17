@@ -16,6 +16,10 @@
   let stageEl;
   let revealed = $state(false);
   let more = $state(false);
+  // 互動：自評（勾選講到的重點）＋ 判斷題
+  let covered = $state({});
+  let pick = $state(null);
+  let coveredCount = $derived(Object.values(covered).filter(Boolean).length);
 
   let item = $derived(nav.iv ? ivOf(nav.iv, i18n.locale) : null);
   let catName = $derived(item ? catNameOf(item.cat, i18n.locale) : '');
@@ -35,6 +39,8 @@
     nav.iv;
     revealed = false;
     more = false;
+    covered = {};
+    pick = null;
     if (stageEl) stageEl.scrollTop = 0;
   });
 </script>
@@ -97,9 +103,14 @@
           {:else}
             <div class="panel" in:fly={{ y: 8, duration: dur(D.base), easing: ease }}>
               <div class="panel-h"><h3>{t('iv.answer')}</h3><span class="eyebrow">Core</span></div>
+              <p class="selfhint">{t('iv.selfCheck')}</p>
               {#each item.core as c, i}
-                <div class="beat"><span class="bn">{i + 1}</span><div><b>{c.h}</b>{sep}{@html c.d}</div></div>
+                <div class="beat">
+                  <button class="bn chk" class:on={covered[i]} aria-pressed={!!covered[i]} title={t('iv.coverTip')} onclick={() => (covered[i] = !covered[i])}>{covered[i] ? '✓' : ''}</button>
+                  <div><b>{c.h}</b>{sep}{@html c.d}</div>
+                </div>
               {/each}
+              <div class="selfscore">{@html t('iv.covered').replace('{n}', coveredCount).replace('{total}', item.core.length)}</div>
 
               {#if !more}
                 <button class="btn ghost more" onclick={() => (more = true)}>{t('iv.more')}</button>
@@ -114,6 +125,25 @@
                     <ul>{#each item.traps as x}<li>{@html x}</li>{/each}</ul>
                   </div>
                 </div>
+              {/if}
+            </div>
+          {/if}
+
+          <!-- 判斷題（互動）：讀完答案，換你判斷哪個回答最到位 -->
+          {#if revealed && item.quiz}
+            <div class="panel quiz" in:fly={{ y: 8, duration: dur(D.base), easing: ease }}>
+              <div class="panel-h"><h3>{t('iv.quizPrompt')}</h3><span class="eyebrow">Quiz</span></div>
+              <div class="qopts">
+                {#each item.quiz.options as o, i}
+                  <button class="qopt" class:picked={pick === i} class:correct={pick != null && o.ok} class:wrong={pick === i && !o.ok}
+                    onclick={() => { if (pick == null) pick = i; }}>
+                    <span class="qmark">{#if pick != null}{#if o.ok}✓{:else if pick === i}✗{/if}{/if}</span>
+                    <span class="qt">{@html o.t}</span>
+                  </button>
+                {/each}
+              </div>
+              {#if pick != null}
+                <p class="qwhy" in:fly={{ y: 6, duration: dur(D.base), easing: ease }}>{@html item.quiz.options[pick].why}</p>
               {/if}
             </div>
           {/if}
@@ -181,6 +211,32 @@
   .catcard:hover:not(:disabled) { border-color: var(--accent); background: var(--surface-2); }
   .catcard:disabled { opacity: .5; }
   .catcard .cc { font-size: var(--fs-cap); color: var(--muted); font-family: var(--mono); flex: none; }
+
+  /* 互動：自評 */
+  .selfhint { margin: 2px 0 12px; font-size: var(--fs-sm); color: var(--muted); }
+  .bn.chk { cursor: pointer; background: var(--surface); color: var(--accent-ink); padding: 0; transition: background .15s, border-color .15s; }
+  .bn.chk:hover { border-color: var(--accent); }
+  .bn.chk.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .selfscore { margin: 12px 0 2px; font-size: var(--fs-sm); color: var(--ink-2); }
+  .selfscore b { color: var(--accent-ink); }
+
+  /* 互動：判斷題 */
+  .quiz { margin-top: var(--sp-4); }
+  .qopts { display: flex; flex-direction: column; gap: 10px; }
+  .qopt {
+    display: flex; gap: 10px; align-items: flex-start; text-align: left; width: 100%;
+    padding: 12px 14px; border: 1px solid var(--line-2); border-radius: var(--r-sm);
+    background: var(--surface); color: var(--ink-2); font-size: var(--fs-sm); line-height: var(--lh-snug);
+    cursor: pointer; transition: border-color .15s, background .15s;
+  }
+  .qopt:hover { border-color: var(--accent); }
+  .qopt .qmark { flex: none; width: 16px; font-weight: 700; color: var(--muted); }
+  .qopt.correct { border-color: var(--teal); background: color-mix(in srgb, var(--teal) 8%, var(--surface)); }
+  .qopt.correct .qmark { color: var(--teal); }
+  .qopt.wrong { border-color: var(--crit, #b23); background: color-mix(in srgb, var(--crit, #b23) 8%, var(--surface)); }
+  .qopt.wrong .qmark { color: var(--crit, #b23); }
+  .qwhy { margin: 12px 0 0; font-size: var(--fs-sm); color: var(--ink-2); line-height: var(--lh-body);
+    border-left: 3px solid var(--line-2); padding-left: 12px; }
 
   @media (max-width: 720px) {
     .pts { grid-template-columns: 1fr; }

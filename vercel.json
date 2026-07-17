@@ -1,5 +1,6 @@
 {
   "installCommand": "PUPPETEER_SKIP_DOWNLOAD=1 npm install",
   "buildCommand": "npm run sitemap && vite build",
+  "outputDirectory": "dist",
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
