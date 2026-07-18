@@ -10,15 +10,15 @@ import { parsePath, buildPath } from '../lib/router.js';
 import { i18n, htmlLangOf } from './i18n.svelte.js';
 
 function initial() {
-  const { mode, current, iv } = parsePath(location.pathname);
-  return { mode, current, iv };
+  const { mode, current, iv, path } = parsePath(location.pathname);
+  return { mode, current, iv, path };
 }
 
 export const nav = $state(initial());
 
 /** 依 nav + 目前語言重建路徑，寫回網址（預設 push，留下歷史）。 */
 function syncURL(replace = false) {
-  const path = buildPath({ locale: i18n.locale, mode: nav.mode, current: nav.current, iv: nav.iv });
+  const path = buildPath({ locale: i18n.locale, mode: nav.mode, current: nav.current, iv: nav.iv, path: nav.path });
   if (location.pathname === path && !replace) return; // 已在該路徑，不重複 push
   const full = path + location.hash;
   if (replace) history.replaceState(null, '', full);
@@ -39,6 +39,13 @@ export function goIv(id) {
   syncURL();
 }
 
+/** 切到學習路線某條；傳 null 回路線落地頁（卡片） */
+export function goPath(id) {
+  nav.mode = 'paths';
+  nav.path = id;
+  syncURL();
+}
+
 /** 頂部切換 course / interview（記住各自剛才的位置） */
 export function setMode(m) {
   nav.mode = m;
@@ -48,6 +55,7 @@ export function setMode(m) {
 /** 給 <a href> 用：依目前語言算出目的地路徑（讓爬蟲能跟連結） */
 export const hrefCourse = (id) => buildPath({ locale: i18n.locale, mode: 'course', current: id });
 export const hrefIv = (id) => buildPath({ locale: i18n.locale, mode: 'interview', iv: id });
+export const hrefPath = (id) => buildPath({ locale: i18n.locale, mode: 'paths', path: id });
 
 /** 手機版：側邊欄抽屜開合狀態 */
 export const ui = $state({ menuOpen: false });
@@ -66,10 +74,11 @@ export function onNav(e, fn, close = true) {
 // 上一頁／下一頁：從網址還原 nav 與語言
 if (typeof window !== 'undefined') {
   window.addEventListener('popstate', () => {
-    const { locale, mode, current, iv } = parsePath(location.pathname);
+    const { locale, mode, current, iv, path } = parsePath(location.pathname);
     nav.mode = mode;
     nav.current = current;
     nav.iv = iv;
+    nav.path = path;
     i18n.locale = locale;
     document.documentElement.lang = htmlLangOf(locale);
   });

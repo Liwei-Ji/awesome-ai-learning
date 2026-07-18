@@ -4,10 +4,18 @@
   // 面試 mode → 題庫（搜尋 + 分類 + 題目 label），沿用同一套 .group/.chap 樣式。
   import { GROUPS } from '../data/chapters.js';
   import { IV_CATS, ivByCat, ivOf, ivLabel, catNameOf } from '../data/interviews.js';
+  import { PATHS, pathText } from '../data/paths.js';
   import { chOf } from '../data/localize.js';
-  import { nav, go, goIv, setMode, hrefCourse, hrefIv, onNav } from '../stores/state.svelte.js';
+  import { nav, go, goIv, goPath, setMode, hrefCourse, hrefIv, hrefPath, onNav } from '../stores/state.svelte.js';
   import { i18n, setLocale, t } from '../stores/i18n.svelte.js';
   import { LOCALES, messages } from '../i18n/index.js';
+  import { Compass, Wrench, Cpu, PenLine, Library, Bot, ShieldCheck } from '@lucide/svelte';
+
+  const ICONS = { Compass, Wrench, Cpu, PenLine, Library, Bot, ShieldCheck };
+  const pathGroups = [
+    { key: 'journeys', list: PATHS.filter((p) => p.group === 'journey') },
+    { key: 'tracks', list: PATHS.filter((p) => p.group === 'track') },
+  ];
 
   let q = $state('');
   let cats = $derived(
@@ -26,12 +34,25 @@
       <span class="blogo">🎓</span><span class="bname">{t('brand')}</span>
     </a>
 
-    <div class="modesw" role="group" aria-label="Course / Interview">
+    <div class="modesw" role="group" aria-label="Paths / Course / Challenge">
+      <a class="ms" class:on={nav.mode === 'paths'} href={hrefPath(null)} onclick={(e) => onNav(e, () => setMode('paths'), false)}>{t('paths.nav')}</a>
       <a class="ms" class:on={nav.mode === 'course'} href={hrefCourse(null)} onclick={(e) => onNav(e, () => setMode('course'), false)}>{t('iv.course')}</a>
       <a class="ms" class:on={nav.mode === 'interview'} href={hrefIv(null)} onclick={(e) => onNav(e, () => setMode('interview'), false)}>{t('iv.interview')}</a>
     </div>
 
-    {#if nav.mode === 'interview'}
+    {#if nav.mode === 'paths'}
+      {#each pathGroups as pg}
+        <div class="group">
+          <span class="eyebrow">{t(`paths.${pg.key}`)}</span>
+          {#each pg.list as p}
+            {@const Icon = ICONS[p.icon]}
+            <a class="chap" aria-current={p.id === nav.path} href={hrefPath(p.id)} onclick={(e) => onNav(e, () => goPath(p.id))}>
+              <span class="picon"><Icon size={15} strokeWidth={1.75} /></span><span>{pathText(p, i18n.locale).title}</span>
+            </a>
+          {/each}
+        </div>
+      {/each}
+    {:else if nav.mode === 'interview'}
       <div class="ivsearch"><input placeholder={t('iv.search')} bind:value={q} autocomplete="off" /></div>
       {#each cats as c}
         {#if !q.trim() || c.ids.length}
@@ -92,9 +113,9 @@
   /* 主導覽：mode 切換（唯一的強控制，深色選中） */
   .modesw { display: flex; gap: 4px; padding: 0 6px; margin-bottom: 12px; }
   .ms {
-    flex: 1; padding: 7px 6px; border: 1px solid var(--line); border-radius: var(--r-sm);
-    background: var(--surface); color: var(--muted); font-size: 12.5px; font-weight: 600; transition: .15s;
-    text-align: center; text-decoration: none; cursor: pointer;
+    flex: 1; min-width: 0; padding: 7px 4px; border: 1px solid var(--line); border-radius: var(--r-sm);
+    background: var(--surface); color: var(--muted); font-size: 12px; font-weight: 600; transition: .15s;
+    text-align: center; text-decoration: none; cursor: pointer; white-space: nowrap;
   }
   .ms:hover { border-color: var(--accent); color: var(--accent-ink); }
   .ms.on { background: var(--ink); border-color: transparent; color: var(--surface); }
@@ -107,6 +128,8 @@
   }
   .ivsearch input:focus { border-color: var(--accent); }
   .ivdot { font-family: var(--mono); font-size: 11px; color: var(--muted); width: 24px; flex: none; text-align: center; }
+  .picon { display: inline-flex; align-items: center; justify-content: center; width: 24px; flex: none; color: var(--muted); }
+  .chap[aria-current="true"] .picon { color: var(--accent-ink); }
   .chap[aria-current="true"] .ivdot { color: var(--accent-ink); }
   .soon { display: block; padding: 4px 10px 2px; font-size: 11px; color: var(--muted); font-style: italic; }
 

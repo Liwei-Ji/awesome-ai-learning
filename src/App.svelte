@@ -6,6 +6,7 @@
   import Tutor from './components/Tutor.svelte';
   import Home from './components/Home.svelte';
   import Interview from './components/Interview.svelte';
+  import Paths from './components/Paths.svelte';
   import Seo from './components/Seo.svelte';
   import { nav, ui, toggleMenu, closeMenu, go, hrefCourse, onNav } from './stores/state.svelte.js';
   import { t } from './stores/i18n.svelte.js';
@@ -31,7 +32,9 @@
   <!-- svelte-ignore a11y_click_events_have_key_events a11y_no_static_element_interactions -->
   <div class="scrim" onclick={closeMenu} aria-hidden="true"></div>
 
-  {#if nav.mode === 'interview'}
+  {#if nav.mode === 'paths'}
+    <Paths />
+  {:else if nav.mode === 'interview'}
     <Interview />
   {:else if nav.current == null}
     <Home />

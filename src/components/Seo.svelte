@@ -6,6 +6,7 @@
   import { nav } from '../stores/state.svelte.js';
   import { chOf } from '../data/localize.js';
   import { INTERVIEWS, ivOf } from '../data/interviews.js';
+  import { pathById, pathText } from '../data/paths.js';
   import { t, i18n } from '../stores/i18n.svelte.js';
   import { buildPath } from '../lib/router.js';
 
@@ -27,6 +28,13 @@
       }
       return { title: `${t('iv.interview')} · ${brand}`, desc: strip(t('iv.landingLede')) };
     }
+    if (nav.mode === 'paths') {
+      if (nav.path) {
+        const tx = pathText(pathById(nav.path), loc);
+        return { title: `${tx.title} · ${brand}`, desc: strip(tx.tagline) };
+      }
+      return { title: `${t('paths.landingTitle')} · ${brand}`, desc: strip(t('paths.landingLede')) };
+    }
     if (nav.current == null) {
       return { title: `${brand} · ${t('home.title')}`, desc: strip(t('home.lede')) };
     }
@@ -35,7 +43,7 @@
   });
 
   // 本頁路由（語言之外），供 canonical 與 hreflang 各語言重建路徑用
-  let route = $derived({ mode: nav.mode, current: nav.current, iv: nav.iv });
+  let route = $derived({ mode: nav.mode, current: nav.current, iv: nav.iv, path: nav.path });
   let canonical = $derived.by(() => {
     if (typeof location === 'undefined') return '';
     return location.origin + buildPath({ ...route, locale: i18n.locale });
