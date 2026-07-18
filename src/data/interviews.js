@@ -78,7 +78,7 @@ export const INTERVIEWS = {
     core: [
       { h: "先破除誤解", d: "AI 監控不只看「有沒有掛」；最大的風險是<b>沉默的品質下降</b>：沒 crash，但因資料變化、被攻擊、或換模型而答得越來越差。" },
       { h: "監控什麼", d: "① <b>系統面</b>：延遲、錯誤率、成本、用量；② <b>品質面</b>：任務成功率、幻覺/拒答率、使用者回饋（讚踩、重問率）；③ <b>安全面</b>：注入/越獄嘗試、異常行為。" },
-      { h: "怎麼察覺退化", d: "線上難有標準答案，重點是<b>偵測「變化」</b>：指標趨勢與分佈對照<b>上線基線</b>、定期抽樣打分追蹤、負評與重問率的異常波動，並設<b>告警門檻</b>；至於怎麼「判斷好壞」本身，見「評估並持續改善」。" },
+      { h: "怎麼察覺退化", d: "線上難有標準答案，重點是<b>偵測「變化」</b>：指標趨勢與分佈對照<b>上線基線</b>、定期抽樣打分追蹤、負評與重問率的異常波動，並設<b>告警門檻</b>；至於怎麼「判斷好壞」本身，見「怎麼知道做得好？」。" },
       { h: "出事怎麼辦", d: "閉環是<b>告警 → 分流定位（哪個環節、哪個模型）→ 止血（回滾或灰度切回舊版）→ 記錄復盤</b>；把失敗案例回灌測試集去改進，交給評估流程。監控的價值在<b>早發現、能定位、能快速止血</b>。" },
     ],
     plus: [
@@ -908,8 +908,8 @@ export const INTERVIEWS = {
   },
   "design-eval-improve": {
     cat: "design",
-    label: "評估並持續改善",
-    q: "怎麼評估並持續改善一個已上線的 AI 產品？",
+    label: "怎麼知道做得好？",
+    q: "AI 產品上線後，怎麼知道它到底做得好不好、又要怎麼持續變更好？",
     trap: "只說「看使用者滿不滿意」或「跑個準確率」太片面。要有<b>離線固定測試集</b>加<b>線上真實回饋</b>兩條腿，還要把失敗案例變成下一輪的改進。題目考你有沒有建<b>可迭代的閉環</b>，而不是憑感覺改版。",
     points: [
       { icon: "atom", title: "拆解問題", desc: "評估要分兩種：<b>離線</b>（固定測試集，可重複、能回歸）加<b>線上</b>（真實流量，A/B、真實回饋）。缺一不可：離線防退步、線上才反映真實體驗。" },
@@ -1617,8 +1617,8 @@ const INT_TR = {
       core: [
         { h: "Dispel the misconception first", d: "AI monitoring isn’t only about “is it down?”; the biggest risk is <b>silent quality degradation</b>: nothing crashes, but the answers keep getting worse because the data shifted, it was attacked, or the model was swapped." },
         { h: "What to monitor", d: "① <b>The system layer</b>: latency, error rate, cost, usage; ② <b>the quality layer</b>: task success rate, hallucination / refusal rate, user feedback (thumbs up / down, re-ask rate); ③ <b>the safety layer</b>: injection / jailbreak attempts, anomalous behavior." },
-        { h: "How to spot degradation", d: "Live traffic rarely has a ground-truth answer, so the point is to <b>detect “change”</b>: compare metric trends and distributions against the <b>launch baseline</b>, track a regular scored sample, watch for abnormal swings in negative feedback and re-ask rate, and set an <b>alert threshold</b>; as for how to “judge good vs. bad” itself, (see “Evaluate & improve”)." },
-        { h: "What to do when something breaks", d: "The closed loop is <b>alert → triage and pinpoint (which stage, which model) → stop the bleeding (rollback, or gradually route traffic back to the old version) → log and review</b>; feed failure cases back into the test set to improve, handing that off to the evaluation process (see “Evaluate & improve”). The value of monitoring is in <b>catching issues early, being able to pinpoint them, and stopping the bleeding fast</b>." },
+        { h: "How to spot degradation", d: "Live traffic rarely has a ground-truth answer, so the point is to <b>detect “change”</b>: compare metric trends and distributions against the <b>launch baseline</b>, track a regular scored sample, watch for abnormal swings in negative feedback and re-ask rate, and set an <b>alert threshold</b>; as for how to “judge good vs. bad” itself, (see “How do you know it’s good?”)." },
+        { h: "What to do when something breaks", d: "The closed loop is <b>alert → triage and pinpoint (which stage, which model) → stop the bleeding (rollback, or gradually route traffic back to the old version) → log and review</b>; feed failure cases back into the test set to improve, handing that off to the evaluation process (see “How do you know it’s good?”). The value of monitoring is in <b>catching issues early, being able to pinpoint them, and stopping the bleeding fast</b>." },
       ],
       plus: [
         "An audit log throughout (input / output / tool calls), so you can trace back when something goes wrong.",
@@ -2385,8 +2385,8 @@ const INT_TR = {
       ],
     },
     "design-eval-improve": {
-      label: "Evaluate and keep improving",
-      q: "How do you evaluate and continuously improve an AI product that’s already live?",
+      label: "How do you know it’s good?",
+      q: "Once an AI product is live, how do you know whether it’s actually doing well, and how do you keep making it better?",
       trap: "Just saying “see if users are satisfied” or “run an accuracy number” is one-sided. You need two legs: an <b>offline fixed test set</b> plus <b>live real-world feedback</b>, and you have to turn failure cases into the next round’s improvements. The question is really testing whether you’ve built an <b>iterable closed loop</b> rather than revising by gut feeling.",
       points: [
         { title: "Break down the problem", desc: "Evaluation splits into two kinds: <b>offline</b> (a fixed test set, repeatable and good for regression) plus <b>online</b> (real traffic, A/B tests, real feedback). You need both: offline guards against regressions, and only online reflects the real experience." },
@@ -2905,8 +2905,8 @@ const INT_TR = {
       core: [
         { h: "まず誤解を解く", d: "AI の監視は「落ちていないか」だけを見るのではありません；最大のリスクは<b>沈黙する品質低下</b>です：crash はしないのに、データの変化、攻撃、あるいはモデルの入れ替えによって答えがどんどん悪くなります。" },
         { h: "何を監視するか", d: "① <b>システム面</b>：レイテンシ、エラー率、コスト、使用量；② <b>品質面</b>：タスク成功率、ハルシネーション／拒否率、ユーザーフィードバック（高評価・低評価、問い直し率）；③ <b>セキュリティ面</b>：インジェクション／ジェイルブレイクの試み、異常な挙動。" },
-        { h: "どう劣化に気づくか", d: "オンラインでは標準的な正解を用意しにくいので、要点は<b>「変化」を検知する</b>ことです：指標のトレンドと分布を<b>本番のベースライン</b>と照らし合わせ、定期的に抽出して採点し追跡し、低評価や問い直し率の異常な変動を見て、<b>アラートのしきい値</b>を設けます；そもそも「良し悪しをどう判断するか」自体は、（「評価と継続的改善」を参照）。" },
-        { h: "問題が起きたらどうするか", d: "閉ループは<b>アラート → 切り分けて特定（どの関門か、どのモデルか）→ 止血（ロールバック、または段階リリースで旧版に戻す）→ 記録して振り返る</b>です；失敗事例をテストセットに戻して改善し、評価のフロー（「評価と継続的改善」を参照）に委ねます。監視の価値は<b>早く気づき、特定でき、素早く止血できる</b>ことにあります。" },
+        { h: "どう劣化に気づくか", d: "オンラインでは標準的な正解を用意しにくいので、要点は<b>「変化」を検知する</b>ことです：指標のトレンドと分布を<b>本番のベースライン</b>と照らし合わせ、定期的に抽出して採点し追跡し、低評価や問い直し率の異常な変動を見て、<b>アラートのしきい値</b>を設けます；そもそも「良し悪しをどう判断するか」自体は、（「うまくいっているか、どう知る？」を参照）。" },
+        { h: "問題が起きたらどうするか", d: "閉ループは<b>アラート → 切り分けて特定（どの関門か、どのモデルか）→ 止血（ロールバック、または段階リリースで旧版に戻す）→ 記録して振り返る</b>です；失敗事例をテストセットに戻して改善し、評価のフロー（「うまくいっているか、どう知る？」を参照）に委ねます。監視の価値は<b>早く気づき、特定でき、素早く止血できる</b>ことにあります。" },
       ],
       plus: [
         "全過程で監査ログ（入力／出力／ツール呼び出し）を取り、問題が起きたときに遡れます。",
@@ -3673,8 +3673,8 @@ const INT_TR = {
       ],
     },
     "design-eval-improve": {
-      label: "評価と継続的改善",
-      q: "すでに運用中の AI 製品を、どう評価し継続的に改善しますか？",
+      label: "うまくいっているか、どう知る？",
+      q: "AI 製品を公開したあと、本当にうまくいっているかをどう知り、どう改善し続けますか？",
       trap: "「ユーザーが満足しているか見る」や「正解率を測る」だけでは一面的です。<b>オフラインの固定テストセット</b>と<b>オンラインの実フィードバック</b>という2本の足が必要で、さらに失敗事例を次のラウンドの改善に変える必要があります。この設問で問われるのは、感覚で作り直すのではなく<b>反復できる閉ループ</b>を築いているかどうかです。",
       points: [
         { title: "問題の分解", desc: "評価は2種類に分けます：<b>オフライン</b>（固定テストセット、再現でき回帰もできる）と<b>オンライン</b>（実トラフィック、A/B、実フィードバック）。どちらも欠かせません：オフラインは後退を防ぎ、オンラインは実際の体験を反映します。" },
