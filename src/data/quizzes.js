@@ -757,6 +757,53 @@ export const QUIZZES = {
       }
     ]
   },
+  "vlm-see": {
+    "zh": [
+      {
+        "t": "VLM 就是在 LLM 旁邊接一顆獨立的看圖模型，兩個各做各的、再把結果湊起來。",
+        "ok": false,
+        "why": "不是接力式拼接；關鍵是把圖變成跟文字同一種向量，同一個 LLM 用同一套注意力一起處理圖和字。"
+      },
+      {
+        "t": "圖片被切成 patch、由視覺編碼器（常用 CLIP 預訓練的 ViT）編成向量，再用投影層對齊進 LLM 的 token 空間，和文字 token 一起送進去讓注意力一起看，所以能用文字回答關於圖的問題。",
+        "ok": true,
+        "why": "完整講出切塊→編碼→投影對齊→一起進 LLM 的流程，這正是「看得懂」的機制。"
+      },
+      {
+        "t": "它其實是先做 OCR 把圖轉成文字，再交給 LLM 讀那段文字。",
+        "ok": false,
+        "why": "OCR 只認字；VLM 是把影像本身編碼成向量對齊進 LLM，能理解沒有文字的畫面內容，不是先轉文字。"
+      }
+    ],
+    "en": [
+      {
+        "t": "A VLM just bolts a separate image model next to the LLM; the two work independently and then their results are stitched together.",
+        "why": "It isn't a relay-style patch-up; the key is turning the image into the same kind of vector as text, so one LLM processes image and words together with one shared attention."
+      },
+      {
+        "t": "The image is cut into patches and encoded into vectors by a vision encoder (often a CLIP-pretrained ViT), then a projection layer aligns them into the LLM's token space, and they are fed in together with the text tokens so attention sees them together, which is why it can answer questions about the image in text.",
+        "why": "It spells out the full flow of patching → encoding → projection and alignment → going into the LLM together, which is exactly the mechanism behind 'understanding.'"
+      },
+      {
+        "t": "It actually runs OCR first to turn the image into text, then hands that text to the LLM to read.",
+        "why": "OCR only recognizes characters; a VLM encodes the image itself into vectors aligned into the LLM, so it can understand visual content with no text at all, rather than converting to text first."
+      }
+    ],
+    "ja": [
+      {
+        "t": "VLM は LLM の隣に独立した画像モデルを1つ付けただけで、2つが別々に処理し、その結果を後で寄せ集めるものだ。",
+        "why": "リレー式の寄せ集めではありません。鍵は画像を文字と同じ種類のベクトルに変え、同一の LLM が同じ attention で画像と文字をまとめて処理することです。"
+      },
+      {
+        "t": "画像は patch に切られ、視覚エンコーダー（多くは CLIP で事前学習した ViT）がベクトルに符号化し、projection layer が LLM の token 空間へ整合させ、文字 token と一緒に入力して attention でまとめて見るので、画像に関する質問に文字で答えられる。",
+        "why": "patch への分割→符号化→投影と整合→一緒に LLM へ、という流れを完全に述べており、これこそ「理解できる」仕組みです。"
+      },
+      {
+        "t": "実際にはまず OCR で画像を文字に変換し、その文字を LLM に読ませているのだ。",
+        "why": "OCR は文字しか認識しません。VLM は画像そのものをベクトルに符号化して LLM に整合させるので、文字のない映像内容も理解でき、先に文字へ変換するわけではありません。"
+      }
+    ]
+  },
   "hallucination": {
     "zh": [
       {
@@ -848,6 +895,53 @@ export const QUIZZES = {
       {
         "t": "Prompt Injection は悪意ある指示を「データ」（ユーザー入力や RAG・ツールが取ってきた内容）に紛れ込ませ、モデルにシステム指示を無視させる攻撃。防ぎにくいのはモデルが指示とデータを区別できず、どちらもただのテキストだからで、「聞くな」の一文も上書きされ得る。だから多層で下げるしかない：指示とデータの分離、最小権限、出力フィルタ、危険操作の人手確認。",
         "why": "原因（指示とデータを区別できない）＋下げるしかない理由＋多層の対策を述べており要点通り。"
+      }
+    ]
+  },
+  "data-leakage": {
+    "zh": [
+      {
+        "t": "用 OpenAI 這種大廠 API 就不會外洩，資料在他們那邊很安全。",
+        "ok": false,
+        "why": "送出去資料就離開你的邊界；要確認是否拿去訓練、簽 DPA、送出前去識別化，不是預設安全。"
+      },
+      {
+        "t": "資料可能從多個環節漏（送第三方、被模型背下來、RAG 越權檢索、注入誘導、日誌），所以要分層防：送出前最小化加去識別化、選不拿去訓練的方案、RAG 帶權限、輸出掃 PII、日誌去識別化，並對齊 GDPR／個資法（可刪除、簽 DPA）。",
+        "ok": true,
+        "why": "講出多個外洩環節加對應的分層防護加合規，完整。"
+      },
+      {
+        "t": "只要在輸出加一個過濾器擋掉個資就夠了。",
+        "ok": false,
+        "why": "輸出過濾只是其中一關；資料在送出、訓練、檢索、日誌等環節都可能漏，要分層防護。"
+      }
+    ],
+    "en": [
+      {
+        "t": "Using a big-vendor API like OpenAI means no leakage; the data is safe on their side.",
+        "why": "Once sent, the data leaves your boundary; you must confirm whether it trains on your data, sign a DPA, and de-identify before sending. It isn't safe by default."
+      },
+      {
+        "t": "Data can leak at multiple stages (sent to third parties, memorized by the model, over-privileged RAG retrieval, injection, logs), so defend in layers: minimize and de-identify before sending, choose a plan that won't train on your data, give RAG permissions, scan output for PII, de-identify logs, and align with GDPR / personal-data law (right to erasure, sign a DPA).",
+        "why": "It names multiple leakage stages plus the corresponding layered defenses plus compliance. Complete."
+      },
+      {
+        "t": "Just adding a filter on the output to block PII is enough.",
+        "why": "Output filtering is only one gate; data can leak at the sending, training, retrieval, and logging stages, so you need a layered defense."
+      }
+    ],
+    "ja": [
+      {
+        "t": "OpenAI のような大手ベンダーの API を使えば漏洩しない、データは彼らの側で安全だ。",
+        "why": "送信した時点でデータは境界を離れます。学習に使われるかを確認し、DPA を締結し、送信前に非識別化する必要があります。デフォルトで安全ではありません。"
+      },
+      {
+        "t": "データは複数の段階（サードパーティへの送信、モデルによる記憶、RAG の権限逸脱による検索、インジェクション誘導、ログ）で漏れうるので、多層で防ぎます：送信前に最小化と非識別化、学習に使わないプランを選ぶ、RAG に権限を付与、出力の PII をスキャン、ログを非識別化、そして GDPR／個人情報保護法に整合させる（削除可能、DPA を締結）。",
+        "why": "複数の漏洩段階に加え、対応する多層防御とコンプライアンスまで語れており、完全です。"
+      },
+      {
+        "t": "出力にフィルターを1つ足して PII を遮断すれば十分だ。",
+        "why": "出力フィルタリングは関門の一つにすぎません。データは送信、学習、検索、ログなどの段階で漏れうるので、多層防御が必要です。"
       }
     ]
   }
