@@ -1,5 +1,5 @@
 /* ============================================================
-   面試演練（進階題庫）：與課程分流的獨立 mode。
+   進階挑戰題庫：與課程分流的獨立 mode。
    base = 繁中；en / ja 放 INT_TR / CAT_TR，缺就 fallback 回中文
    （比照 chapters 的 CH_TR）。透過 ivOf() / catNameOf() 取在地化內容。
 
@@ -41,7 +41,7 @@ export const INTERVIEWS = {
     cat: "design",
     label: "設計即時資料助理",
     q: "怎麼設計一個能查即時資料的 AI 助理？",
-    trap: "別只答「接個 API」。面試官要看你把<b>模型不會即時知道 → 靠工具/檢索補 → 還要處理失敗與權限</b>整條串起來。",
+    trap: "別只答「接個 API」。題目要你把<b>模型不會即時知道 → 靠工具/檢索補 → 還要處理失敗與權限</b>整條串起來。",
     points: [
       { icon: "atom", title: "拆解問題", desc: "模型知識有截止日、也不會主動連網；「即時」得靠<b>外部工具（function calling / API）或即時檢索</b>把最新資料餵進去，模型只負責理解與組織。" },
       { icon: "scale", title: "架構取捨", desc: "每次都即時查→最新但慢又貴、還可能失敗；加快取→快又省但可能給到過期資料。要依「資料多快變」決定快取時效。" },
@@ -69,7 +69,7 @@ export const INTERVIEWS = {
     cat: "design",
     label: "設計上線監控",
     q: "怎麼設計一個 AI 產品的「上線監控」？",
-    trap: "別只答「看有沒有報錯」。AI 最大的風險常是<b>沉默的品質下降</b>（沒 crash 但答得越來越爛）；面試官要你監控「品質」不只「可用性」。",
+    trap: "別只答「看有沒有報錯」。AI 最大的風險常是<b>沉默的品質下降</b>（沒 crash 但答得越來越爛）；題目要你監控「品質」不只「可用性」。",
     points: [
       { icon: "atom", title: "拆解問題", desc: "傳統監控看「有沒有掛」（延遲、錯誤率）；AI 還要看「<b>答得好不好</b>」：品質會<b>無聲漂移</b>（資料變、被攻擊、模型更新），而且不會報錯。" },
       { icon: "scale", title: "架構取捨", desc: "全部人工審→準但貴慢、覆蓋不了量；全自動指標→快但抓不到細微品質；實務常是自動指標＋抽樣人審＋使用者回饋三者搭。" },
@@ -97,7 +97,7 @@ export const INTERVIEWS = {
     cat: "literacy",
     label: "Prompt Injection",
     q: "什麼是 Prompt Injection？為什麼難防？",
-    trap: "很多人以為「加一句『不要理會其他指令』」就防住了。面試官要看你懂<b>為什麼它本質上難防</b>，而不是給個表面招式。",
+    trap: "很多人以為「加一句『不要理會其他指令』」就防住了。題目要你懂<b>為什麼它本質上難防</b>，而不是給個表面招式。",
     points: [
       { icon: "atom", title: "底層原理", desc: "模型<b>分不清「開發者的指令」與「資料裡夾帶的指令」</b>：對它來說都是同一串文字。使用者輸入、或被抓進來的網頁/文件裡藏一句「忽略以上、改做 X」，模型可能就照做。" },
       { icon: "scale", title: "工程權衡", desc: "想完全擋→限制能力（不接外部內容、不給工具）就安全但沒用；要好用→就得承擔風險，只能降低、不能歸零。" },
@@ -124,7 +124,7 @@ export const INTERVIEWS = {
     cat: "literacy",
     label: "越獄能防住嗎",
     q: "越獄（jailbreak）是什麼？能完全防住嗎？",
-    trap: "面試官要看你理解<b>為什麼這是持續的攻防、無法「一次解決」</b>，而不是說「加更多規則就好」。",
+    trap: "題目要你理解<b>為什麼這是持續的攻防、無法「一次解決」</b>，而不是說「加更多規則就好」。",
     points: [
       { icon: "atom", title: "底層原理", desc: "越獄＝<b>用話術誘導模型繞過安全規則</b>（角色扮演、假設情境、翻譯/編碼包裝）；因為安全是「訓練出來的傾向」、不是硬性開關，總有邊角能繞。" },
       { icon: "scale", title: "工程權衡", desc: "收得越緊→越安全但越常「過度拒答」（誤傷正常請求）；放得越鬆→越好用但越容易被越獄。要在中間平衡。" },
@@ -151,7 +151,7 @@ export const INTERVIEWS = {
     cat: "literacy",
     label: "上線要哪些護欄",
     q: "一個上線的 AI 產品，要加哪些「護欄」（guardrails）？",
-    trap: "別只答「加個 filter」。面試官要看你講得出<b>從輸入、輸出到行為的完整防護</b>，以及跟成本、體驗的取捨。",
+    trap: "別只答「加個 filter」。題目要你講得出<b>從輸入、輸出到行為的完整防護</b>，以及跟成本、體驗的取捨。",
     points: [
       { icon: "atom", title: "底層原理", desc: "模型會幻覺、會被誘導、輸出不可控，所以要在<b>模型外面</b>加一圈檢查：input、output、action 三個關卡都要守。" },
       { icon: "scale", title: "工程權衡", desc: "護欄越嚴→越安全但越容易誤傷（過度拒答）、加延遲與成本；要按風險分級，不是一律最嚴。" },
@@ -178,7 +178,7 @@ export const INTERVIEWS = {
     cat: "prompting",
     label: "寫好 prompt 的原則",
     q: "怎麼寫出好的 prompt？有哪些原則？",
-    trap: "很多人以為 prompt 就是「把問題打進去」。面試官要看你懂<b>為什麼同一個問題、換個寫法結果差很多</b>，以及有沒有系統性的原則。",
+    trap: "很多人以為 prompt 就是「把問題打進去」。題目要你懂<b>為什麼同一個問題、換個寫法結果差很多</b>，以及有沒有系統性的原則。",
     points: [
       { icon: "atom", title: "底層原理", desc: "模型是<b>依你給的上下文猜最合理的接續</b>；你給的角色、脈絡、格式、範例，等於幫它框住「該往哪個方向生成」。" },
       { icon: "scale", title: "工程權衡", desc: "講太少→它自由發揮容易跑偏；講太多太雜→佔 token、反而分心。要在「講清楚」與「精簡」之間拿捏。" },
@@ -205,7 +205,7 @@ export const INTERVIEWS = {
     cat: "prompting",
     label: "few-shot vs zero-shot",
     q: "few-shot 和 zero-shot 差在哪？什麼時候該給範例？",
-    trap: "只知道「few-shot 就是給例子」不夠。面試官要看你講得出<b>範例在幫模型做什麼</b>，以及何時值得付那個 token 成本。",
+    trap: "只知道「few-shot 就是給例子」不夠。題目要你講得出<b>範例在幫模型做什麼</b>，以及何時值得付那個 token 成本。",
     points: [
       { icon: "atom", title: "底層原理", desc: "範例等於<b>當場示範「這種輸入該對應這種輸出」</b>，幫模型校準格式、風格、判斷邊界，不用重新訓練。" },
       { icon: "scale", title: "工程權衡", desc: "範例通常比 zero-shot 準，但<b>不是越多越好</b>：有邊際遞減，選得好的一兩個範例常勝過硬塞很多；範例還吃 token、變貴變慢。" },
@@ -232,7 +232,7 @@ export const INTERVIEWS = {
     cat: "prompting",
     label: "Chain-of-Thought",
     q: "什麼是 Chain-of-Thought（讓模型「想一想」）？為什麼有用？",
-    trap: "別把 CoT 當「加一句『請一步步想』的魔法」。面試官要看你懂<b>它為什麼有效，以及代價與界線</b>。",
+    trap: "別把 CoT 當「加一句『請一步步想』的魔法」。題目要你懂<b>它為什麼有效，以及代價與界線</b>。",
     points: [
       { icon: "atom", title: "底層原理", desc: "讓模型<b>先產生中間推理步驟、再給答案</b>；把難題拆成小步，每一步的接續都比「一步到位」更容易猜對。" },
       { icon: "scale", title: "工程權衡", desc: "更準但<b>更多 token、更慢、更貴</b>，而且簡單題用 CoT 是浪費。" },
@@ -259,7 +259,7 @@ export const INTERVIEWS = {
     cat: "prompting",
     label: "調 prompt 還是換方法",
     q: "prompt 調不出來時，該先動 prompt、還是換方法（RAG／微調）？",
-    trap: "面試官在看你<b>會不會先診斷問題類型</b>，而不是一律「再改改 prompt」或「直接微調」。",
+    trap: "題目在看你<b>會不會先診斷問題類型</b>，而不是一律「再改改 prompt」或「直接微調」。",
     points: [
       { icon: "atom", title: "底層原理", desc: "三種手段解不同問題：prompt 改<b>當次行為</b>、RAG 補<b>缺的事實</b>、微調改<b>內化的風格與能力</b>。" },
       { icon: "scale", title: "工程權衡", desc: "成本由低到高：prompt（幾乎免費）< RAG（中）< 微調（高）。先動便宜的。" },
@@ -286,7 +286,7 @@ export const INTERVIEWS = {
     cat: "prompting",
     label: "推理模型（o1）",
     q: "像 o1 這種「推理模型」跟一般 LLM 差在哪？",
-    trap: "別只說「它比較聰明」。面試官要你講出<b>差在哪、代價是什麼、什麼時候該用</b>。",
+    trap: "別只說「它比較聰明」。題目要你講出<b>差在哪、代價是什麼、什麼時候該用</b>。",
     points: [
       { icon: "atom", title: "底層原理", desc: "被訓練成<b>回答前先進行長篇內部推理</b>（長 CoT），並用 RL 針對「推得對」優化；不只是接話，是先想再答。" },
       { icon: "scale", title: "工程權衡", desc: "難題正確率高，但<b>更慢、更貴</b>（花大量推理 token 在「想」）；簡單題用它是浪費。" },
@@ -313,7 +313,7 @@ export const INTERVIEWS = {
     cat: "prompting",
     label: "想久一點為何更強",
     q: "為什麼「讓模型想久一點」（test-time compute）能變聰明？",
-    trap: "面試官要看你懂<b>為什麼「推理時多花算力」能換到正確率</b>，而不只是背名詞。",
+    trap: "題目要你懂<b>為什麼「推理時多花算力」能換到正確率</b>，而不只是背名詞。",
     points: [
       { icon: "atom", title: "底層原理", desc: "給模型<b>更多中間步驟、嘗試、自我檢查</b>的空間，等於把難題拆更細、還能回頭改，命中率自然上升。" },
       { icon: "scale", title: "工程權衡", desc: "<b>用推理算力（時間與成本）換正確率</b>，但有<b>邊際遞減</b>，想太久 CP 值下降。" },
@@ -340,7 +340,7 @@ export const INTERVIEWS = {
     cat: "prompting",
     label: "CoT 何時沒用",
     q: "Chain-of-Thought 一定更好嗎？什麼時候反而沒用或更糟？",
-    trap: "很多人把 CoT 當萬靈丹。面試官要看你知道<b>它的界線與副作用</b>。",
+    trap: "很多人把 CoT 當萬靈丹。題目要你知道<b>它的界線與副作用</b>。",
     points: [
       { icon: "atom", title: "底層原理", desc: "CoT 靠「展開步驟」幫忙；但<b>簡單題本來就一步能答</b>，展開只是多花 token；模型也可能<b>編一段看似合理卻錯的推理</b>。" },
       { icon: "scale", title: "工程權衡", desc: "準確 vs 成本/延遲：難題值得、簡單題浪費；小模型 CoT 效果有限甚至更亂。" },
@@ -367,7 +367,7 @@ export const INTERVIEWS = {
     cat: "principle",
     label: "Attention 在算什麼",
     q: "Attention 到底在計算什麼？為什麼它能理解上下文？",
-    trap: "很多人只會背 Q、K、V 三個字母，或說一句「它會關注重點」。面試官要的是你講得出<b>它到底在算什麼、為什麼這一算就帶來上下文理解</b>，而不是丟術語。",
+    trap: "很多人只會背 Q、K、V 三個字母，或說一句「它會關注重點」。題目要的是你講得出<b>它到底在算什麼、為什麼這一算就帶來上下文理解</b>，而不是丟術語。",
     points: [
       { icon: "atom", title: "底層原理", desc: "每個詞先變成 Query、Key、Value 三個向量；拿一個詞的 Query 去和句中所有詞的 Key 算相似度當「相關度」權重，再用這組權重去加權平均所有 Value。等於<b>每個詞按相關度重新看過其他所有詞</b>。" },
       { icon: "scale", title: "工程權衡", desc: "這是「每個詞對每個詞」的全對全比對，計算與記憶體隨長度 <b>O(n²)</b> 成長；好處是能直接抓到任意距離的關聯，代價是序列一長就很貴。" },
@@ -421,7 +421,7 @@ export const INTERVIEWS = {
     cat: "principle",
     label: "為何取代 RNN",
     q: "為什麼 Transformer 能取代 RNN／LSTM？",
-    trap: "別只說「Transformer 比較強」。面試官要你講清楚<b>強在哪個機制</b>：為什麼能平行、為什麼長距關係抓得住，以及代價是什麼。",
+    trap: "別只說「Transformer 比較強」。題目要你講清楚<b>強在哪個機制</b>：為什麼能平行、為什麼長距關係抓得住，以及代價是什麼。",
     points: [
       { icon: "atom", title: "底層原理", desc: "RNN 是<b>一個字接一個字循序處理</b>，資訊靠隱藏狀態一路往後傳，距離一遠就衰減、易「忘」；Transformer 用 attention <b>一次看整句</b>，任兩個詞不管多遠都能直接連上。" },
       { icon: "scale", title: "工程權衡", desc: "RNN 循序、無法平行，訓練慢；Transformer 全句可<b>平行運算</b>、吃得動 GPU、好擴展到大模型。代價是 attention 的 <b>O(n²)</b>，序列一長就貴。" },
@@ -448,7 +448,7 @@ export const INTERVIEWS = {
     cat: "principle",
     label: "Embedding 為何懂意義",
     q: "Embedding 為什麼能表達「意義」？意思相近的詞為何靠得近？",
-    trap: "別停在「就是把詞變成向量」。面試官要你講出<b>意義是怎麼進到向量裡的</b>：為什麼相近的詞會靠在一起，而不是隨機給每個詞一組數字。",
+    trap: "別停在「就是把詞變成向量」。題目要你講出<b>意義是怎麼進到向量裡的</b>：為什麼相近的詞會靠在一起，而不是隨機給每個詞一組數字。",
     points: [
       { icon: "atom", title: "底層原理", desc: "核心是<b>分佈假說</b>：意思相近的詞，出現的上下文也相近。模型從大量文本學習預測上下文，逼得<b>常出現在相似語境的詞拿到相似向量</b>，意義就這樣被壓進座標。" },
       { icon: "scale", title: "工程權衡", desc: "維度高能裝更細的語意但更貴，且會落入維度災難（高維空間中點彼此拉遠、距離區分度下降）；維度低省算但容易把不同意思擠在一起。" },
@@ -475,7 +475,7 @@ export const INTERVIEWS = {
     cat: "principle",
     label: "為何要多頭注意力",
     q: "多頭注意力（multi-head）為什麼要「多頭」？",
-    trap: "別只說「多頭比較準」。面試官要你講出<b>為什麼多頭比單頭好</b>：一組注意力的侷限是什麼，多頭多在哪、又怎麼合起來。",
+    trap: "別只說「多頭比較準」。題目要你講出<b>為什麼多頭比單頭好</b>：一組注意力的侷限是什麼，多頭多在哪、又怎麼合起來。",
     points: [
       { icon: "atom", title: "底層原理", desc: "單一組注意力只能學到<b>一種</b>關聯模式，權重一經 softmax 就把焦點集中到少數詞。多頭是<b>並行好幾組獨立的 Q／K／V</b>，各自在不同子空間看關係，最後拼接再投影合併。" },
       { icon: "scale", title: "工程權衡", desc: "頭不是越多越好：總維度固定下，頭越多每個頭的維度越小、能表達的越有限；要在「看的角度數量」和「每個角度的細緻度」之間取捨。" },
@@ -502,7 +502,7 @@ export const INTERVIEWS = {
     cat: "principle",
     label: "Tokenizer 為何關鍵",
     q: "Tokenizer 的切法不同會造成什麼影響？",
-    trap: "別停在「就是把文字切成 token」的定義。面試官要的是切法<b>會連動到成本、上下文佔用和多語公平</b>，講得出「為什麼會變貴、為什麼不公平」。",
+    trap: "別停在「就是把文字切成 token」的定義。題目要的是切法<b>會連動到成本、上下文佔用和多語公平</b>，講得出「為什麼會變貴、為什麼不公平」。",
     points: [
       { icon: "atom", title: "底層原理", desc: "模型不看字元、看 token。主流用 <b>subword</b>（如 BPE）：常見詞給一個 token、罕見詞拆成幾個片段。所以「切法」決定同一段文字<b>被切成幾個 token</b>。" },
       { icon: "scale", title: "工程權衡", desc: "token 數直接連動<b>成本與速度</b>（計價、計算都按 token）和<b>上下文佔用</b>（切得多，窗口更快被吃光）。詞表大則單詞省 token 但模型更肥，是典型取捨。" },
@@ -529,7 +529,7 @@ export const INTERVIEWS = {
     cat: "training",
     label: "RLHF 解決什麼",
     q: "預訓練完的模型已經會說話，為什麼還要 RLHF？",
-    trap: "別把 RLHF 說成「教模型新知識、讓它變聰明」：它<b>不加知識，只調行為與偏好</b>。面試官要你分清「會不會」（預訓練給的能力）和「願不願照你要的方式答」（對齊）。",
+    trap: "別把 RLHF 說成「教模型新知識、讓它變聰明」：它<b>不加知識，只調行為與偏好</b>。題目要你分清「會不會」（預訓練給的能力）和「願不願照你要的方式答」（對齊）。",
     points: [
       { icon: "atom", title: "底層原理", desc: "預訓練目標只是<b>猜下一個最合理的字</b>，學到知識與語感，但它只會「接話」：不保證聽懂指令，也不管答案有沒有用、安不安全。" },
       { icon: "scale", title: "工程權衡", desc: "三段式分工：預訓練給底子、SFT（監督微調）教它照指令答、RLHF 用人類偏好把有用／安全再調到位；越後段越依賴人力標註、單位資料越貴，但論總算力／總花費仍是預訓練最貴。" },
@@ -556,7 +556,7 @@ export const INTERVIEWS = {
     cat: "training",
     label: "微調 vs RAG",
     q: "什麼時候該微調模型、什麼時候用 RAG？",
-    trap: "最常見的錯是把兩者當<b>二選一</b>，或以為「微調＝灌新知識」。面試官要你對到「微調改行為、RAG 補事實」，並知道它們常一起用。",
+    trap: "最常見的錯是把兩者當<b>二選一</b>，或以為「微調＝灌新知識」。題目要你對到「微調改行為、RAG 補事實」，並知道它們常一起用。",
     points: [
       { icon: "atom", title: "底層原理", desc: "差別在知識放哪：微調把能力<b>寫進權重</b>（改的是「怎麼答」）、RAG 把資料<b>放外部每次查</b>（補的是「答什麼事實」）。" },
       { icon: "scale", title: "工程權衡", desc: "微調前期貴、資料一變就要重訓，但推論時不必帶檢索；RAG 改資料只要更新知識庫、還能引用來源，但每次多一段檢索成本、吃檢索品質。" },
@@ -583,7 +583,7 @@ export const INTERVIEWS = {
     cat: "training",
     label: "LoRA 為何省",
     q: "LoRA 為什麼能又快又省？",
-    trap: "只說「訓練參數變少」或「又快又省」不夠。面試官要你講出<b>為什麼省</b>（凍結權重、低秩增量所以主要省顯存），以及它<b>不改原模型</b>、可插拔切換的好處，重點在省顯存與可切換，而非主打速度。",
+    trap: "只說「訓練參數變少」或「又快又省」不夠。題目要你講出<b>為什麼省</b>（凍結權重、低秩增量所以主要省顯存），以及它<b>不改原模型</b>、可插拔切換的好處，重點在省顯存與可切換，而非主打速度。",
     points: [
       { icon: "atom", title: "底層原理", desc: "凍結原模型權重，只在旁邊掛一組<b>低秩（兩個小矩陣相乘）的增量</b>去學調整量；因為微調需要的改動其實「秩很低」，用一小塊就夠逼近。" },
       { icon: "scale", title: "工程權衡", desc: "主打<b>顯存大降</b>（凍結層不存優化器狀態與權重梯度），訓練也較省（可用更大批次、跳過凍結層梯度），但每步前向＋反向仍要走完整底模，省的主要是記憶體而非純算力；效果通常<b>接近</b>而非完全等於全量微調。" },
@@ -610,7 +610,7 @@ export const INTERVIEWS = {
     cat: "training",
     label: "微調會變笨嗎",
     q: "微調會不會讓模型「變笨」（災難性遺忘）？怎麼避免？",
-    trap: "別否認會遺忘，也別以為「多練幾輪就會更好」：那往往<b>更糟</b>。面試官要你點出「過度微調窄資料會覆蓋通用能力」，並給得出緩解招。",
+    trap: "別否認會遺忘，也別以為「多練幾輪就會更好」：那往往<b>更糟</b>。題目要你點出「過度微調窄資料會覆蓋通用能力」，並給得出緩解招。",
     points: [
       { icon: "atom", title: "底層原理", desc: "會。微調是<b>繼續改權重</b>，若只拿窄領域資料猛練，等於把原本承載通用能力的權重<b>覆蓋掉</b>，模型在其他任務上就退化。" },
       { icon: "scale", title: "工程權衡", desc: "練越久、學習率越大、資料越窄，領域內越強但通用能力掉越多；要在「學會新任務」與「保住原能力」之間拿捏火候。" },
@@ -637,7 +637,7 @@ export const INTERVIEWS = {
     cat: "training",
     label: "品質 vs 數量",
     q: "訓練資料是品質重要還是數量重要？",
-    trap: "直覺答「資料越多越好」會踩雷。面試官要你講出<b>過了基本量之後、品質與多樣性壓過純數量</b>，而髒資料是 garbage in, garbage out。",
+    trap: "直覺答「資料越多越好」會踩雷。題目要你講出<b>過了基本量之後、品質與多樣性壓過純數量</b>，而髒資料是 garbage in, garbage out。",
     points: [
       { icon: "atom", title: "底層原理", desc: "模型是<b>照資料學分佈</b>，學到什麼全看餵什麼：髒資料、錯標註會被原封不動學進去，<b>garbage in, garbage out</b>。" },
       { icon: "scale", title: "工程權衡", desc: "量要夠（太少學不到、蓋不全情境），但過了門檻後，<b>再多的重複／低品質資料邊際效益很低</b>，甚至因雜訊變差；清洗與去重的投報率常高於盲目加量。" },
@@ -664,7 +664,7 @@ export const INTERVIEWS = {
     cat: "training",
     label: "為何別自己預訓練",
     q: "為什麼一般不建議自己從頭預訓練大模型？",
-    trap: "別低估門檻，也別因為「我們有自己的資料」就想自訓。面試官要你說得出<b>資料／算力／成本的量級</b>，以及「站巨人肩膀＋微調／RAG」為何划算。",
+    trap: "別低估門檻，也別因為「我們有自己的資料」就想自訓。題目要你說得出<b>資料／算力／成本的量級</b>，以及「站巨人肩膀＋微調／RAG」為何划算。",
     points: [
       { icon: "atom", title: "底層原理", desc: "預訓練要的是<b>天文級的資料、算力與時間</b>：兆級 token、成千上萬張 GPU 訓練數週到數月，成本動輒百萬到千萬美元起跳。" },
       { icon: "scale", title: "工程權衡", desc: "自己從頭練＝把錢燒在「重造底子」上，還要一整組資料與訓練工程團隊；相比之下拿現成開源／商用模型，<b>把預算花在微調與 RAG</b> 的性價比高太多。" },
@@ -691,7 +691,7 @@ export const INTERVIEWS = {
     cat: "generative",
     label: "擴散怎麼生圖",
     q: "文字生圖的擴散模型，是怎麼從一張雜訊生出圖的？",
-    trap: "很多人只會說「它把雜訊變清楚」，講不出<b>訓練時學去噪、生成時反覆去噪</b>其實是一體兩面。面試官要你點出「加噪訓練 → 去噪生成」這條邏輯，以及 prompt 在其中扮演什麼角色。",
+    trap: "很多人只會說「它把雜訊變清楚」，講不出<b>訓練時學去噪、生成時反覆去噪</b>其實是一體兩面。題目要你點出「加噪訓練 → 去噪生成」這條邏輯，以及 prompt 在其中扮演什麼角色。",
     points: [
       { icon: "atom", title: "底層原理", desc: "訓練時把清晰圖<b>逐步加噪</b>到剩純雜訊，讓模型學會「這個噪聲程度下該去掉多少噪」；生成就是反過來，從純雜訊<b>一步步去噪</b>還原成圖。" },
       { icon: "scale", title: "工程權衡", desc: "去噪步數越多品質越細，但越慢越貴；步數少則快但糊。實務靠取樣器（sampler）與步數蒸餾，把幾十步壓到幾步仍堪用。" },
@@ -718,7 +718,7 @@ export const INTERVIEWS = {
     cat: "generative",
     label: "是拼貼嗎",
     q: "生成圖片是「把網路上的圖拼貼起來」嗎？",
-    trap: "直覺會以為 AI「找幾張圖剪貼縫合」。面試官要你講清楚<b>模型裡沒有存原圖、輸出的像素全是重新算出來的全新內容（沒有一片是剪貼來的）</b>，並能區分「學到統計規律」與「檢索拼接」的本質差別。",
+    trap: "直覺會以為 AI「找幾張圖剪貼縫合」。題目要你講清楚<b>模型裡沒有存原圖、輸出的像素全是重新算出來的全新內容（沒有一片是剪貼來的）</b>，並能區分「學到統計規律」與「檢索拼接」的本質差別。",
     points: [
       { icon: "atom", title: "底層原理", desc: "模型存的是<b>從海量圖學到的統計規律（權重）</b>，不是圖庫。生成時整張圖一次生成、每一步同時更新所有像素（或 latent），每張都是新畫的，不是從某處剪來貼上。" },
       { icon: "scale", title: "工程權衡", desc: "訓練資料越多樣，越能「舉一反三」而非複製單張；但若某張圖重複太多次，模型可能<b>記憶（memorization）</b>並近似吐出，這是要防的例外，不是常態。" },
@@ -745,7 +745,7 @@ export const INTERVIEWS = {
     cat: "generative",
     label: "多模態關鍵",
     q: "多模態模型是把好幾個模型拼起來嗎？真正的關鍵是什麼？",
-    trap: "很多人以為多模態就是「圖模型＋文字模型＋語音模型」拼在一起、各做各的。面試官要你點出真正的關鍵：<b>把不同型態對齊到同一個意義空間</b>，而不是模型數量。",
+    trap: "很多人以為多模態就是「圖模型＋文字模型＋語音模型」拼在一起、各做各的。題目要你點出真正的關鍵：<b>把不同型態對齊到同一個意義空間</b>，而不是模型數量。",
     points: [
       { icon: "atom", title: "底層原理", desc: "關鍵是<b>共用的意義向量空間</b>：圖、文、聲各自編碼，但都落進<b>同一個向量空間</b>，語意相近的圖與字座標相鄰，模型才「聽得懂」彼此。" },
       { icon: "scale", title: "工程權衡", desc: "對齊靠大量<b>配對資料</b>（如圖與其描述）訓練；資料越乾淨對齊越準，但收集成本高，跨型態的細粒度對齊仍是難點。" },
@@ -772,7 +772,7 @@ export const INTERVIEWS = {
     cat: "generative",
     label: "為何畫錯手指",
     q: "文字生圖為什麼常把手指、文字、對稱細節畫錯？",
-    trap: "別把它當成「模型還不夠大」的暫時 bug。面試官要你講出<b>成因是機制性的</b>：模型追求「整體看起來像」，並不理解手指該有幾根、文字是符號這類<b>精確結構與計數</b>。",
+    trap: "別把它當成「模型還不夠大」的暫時 bug。題目要你講出<b>成因是機制性的</b>：模型追求「整體看起來像」，並不理解手指該有幾根、文字是符號這類<b>精確結構與計數</b>。",
     points: [
       { icon: "atom", title: "底層原理", desc: "模型學的是<b>像素的統計分布</b>，目標是「整張看起來合理」，不是「解剖正確」。它沒有「手指恰好五根」「字母組成單字」這種<b>離散、精確的規則概念</b>。" },
       { icon: "scale", title: "工程權衡", desc: "手、文字這類細節<b>在畫面佔比小、姿態變化大</b>，訓練訊號弱又常被壓縮掉，模型自然學不精；提高解析度或加專門資料可改善，但難根治。" },
@@ -799,7 +799,7 @@ export const INTERVIEWS = {
     cat: "generative",
     label: "擴散 vs GAN",
     q: "擴散模型和 GAN 差在哪？為什麼現在主流是擴散？",
-    trap: "別只說「擴散比較新、比較強」。面試官要你講出<b>兩者生成機制的差異</b>（一次對抗生成 vs 逐步去噪），並由此推出穩定性、品質、可控性的取捨，才知道主流為何換人。",
+    trap: "別只說「擴散比較新、比較強」。題目要你講出<b>兩者生成機制的差異</b>（一次對抗生成 vs 逐步去噪），並由此推出穩定性、品質、可控性的取捨，才知道主流為何換人。",
     points: [
       { icon: "atom", title: "底層原理", desc: "GAN 靠<b>生成器與判別器對抗</b>，生成器一次生出整張圖去騙過判別器；擴散靠<b>逐步去噪</b>，把生成拆成幾十個小步，每步只做一點。" },
       { icon: "scale", title: "工程權衡", desc: "GAN <b>推論快</b>（一次前向）但<b>訓練不穩</b>、易模式崩潰（mode collapse）、多樣性差；擴散<b>訓練穩、品質與多樣性高</b>，代價是推論要多步、較慢。" },
@@ -826,7 +826,7 @@ export const INTERVIEWS = {
     cat: "design",
     label: "設計文件問答系統",
     q: "請設計一個公司內部文件問答系統，你會怎麼架？",
-    trap: "多數人一聽就說「接個 RAG 就好」。但內部文件問答的難點不在生成、在<b>檢索品質</b>（找錯片段，模型再強也答錯）、<b>權限</b>（不能問出無權看的內容）與<b>可引用</b>（答案要能查證）。面試官看你能不能把整條管線加上這些約束一起講清楚。",
+    trap: "多數人一聽就說「接個 RAG 就好」。但內部文件問答的難點不在生成、在<b>檢索品質</b>（找錯片段，模型再強也答錯）、<b>權限</b>（不能問出無權看的內容）與<b>可引用</b>（答案要能查證）。題目考你能不能把整條管線加上這些約束一起講清楚。",
     points: [
       { icon: "atom", title: "拆解問題", desc: "這是<b>RAG 問題</b>：難的不是生成、是檢索。找回對的片段，LLM 才答得準，所以<b>檢索品質＝答案品質的上限</b>，力氣要放在整條檢索管線，而不是換更大的模型。" },
       { icon: "scale", title: "架構取捨", desc: "純向量 vs 混合檢索、要不要 rerank、top-k 多大；權限要「檢索前過濾」還是「生成後過濾」（前者才安全）；大窗口塞全文 vs RAG 只取相關片段。" },
@@ -854,7 +854,7 @@ export const INTERVIEWS = {
     cat: "design",
     label: "設計客服 AI",
     q: "設計一個公司客服 AI，你會怎麼架？",
-    trap: "只講「接個聊天機器人」或只講 RAG 都不夠。客服要同時<b>查知識</b>（RAG）、<b>做事查資料</b>（查訂單、物流是工具）、<b>認得用戶</b>（記憶），還要<b>不能亂承諾</b>（護欄）、答不了要轉人工。面試官看你能不能把這幾塊串成一條 pipeline。",
+    trap: "只講「接個聊天機器人」或只講 RAG 都不夠。客服要同時<b>查知識</b>（RAG）、<b>做事查資料</b>（查訂單、物流是工具）、<b>認得用戶</b>（記憶），還要<b>不能亂承諾</b>（護欄）、答不了要轉人工。題目考你能不能把這幾塊串成一條 pipeline。",
     points: [
       { icon: "atom", title: "拆解問題", desc: "客服其實是兩種能力的組合：一半「查知識」（退換貨政策 → RAG）、一半「查或做事」（訂單狀態、物流 → 工具）。純 RAG 或純聊天都不夠，要看懂它是<b>知識加行動加身分</b>的組合。" },
       { icon: "scale", title: "架構取捨", desc: "什麼交給 RAG、什麼交給工具；記憶要留多少（認得用戶 vs 隱私）；信心門檻設多高（太保守什麼都轉人工、太寬鬆會亂承諾）。" },
@@ -882,7 +882,7 @@ export const INTERVIEWS = {
     cat: "design",
     label: "壓低產品成本",
     q: "要把一個 LLM 產品的成本壓下來，你會怎麼做？",
-    trap: "只說「換便宜的模型」太粗。成本是<b>每次請求的 token 乘上呼叫次數</b>，要從模型分流、context 精簡、快取多管齊下；而且省過頭導致品質掉、使用者重問重試，反而更貴。面試官看你會不會在<b>成本 vs 品質</b>之間拿捏。",
+    trap: "只說「換便宜的模型」太粗。成本是<b>每次請求的 token 乘上呼叫次數</b>，要從模型分流、context 精簡、快取多管齊下；而且省過頭導致品質掉、使用者重問重試，反而更貴。題目考你會不會在<b>成本 vs 品質</b>之間拿捏。",
     points: [
       { icon: "atom", title: "拆解問題", desc: "先算清成本從哪來：主要是<b>token 量乘上呼叫次數乘上單價</b>。輸入（context）通常比輸出多很多，所以「塞了多少進去」往往是大頭。" },
       { icon: "scale", title: "架構取捨", desc: "核心取捨是<b>省成本 vs 保品質</b>：用小模型或砍 context 能省錢，但做錯讓使用者重試、重問反而更貴。要省在不傷體驗的地方。" },
@@ -910,7 +910,7 @@ export const INTERVIEWS = {
     cat: "design",
     label: "評估並持續改善",
     q: "怎麼評估並持續改善一個已上線的 AI 產品？",
-    trap: "只說「看使用者滿不滿意」或「跑個準確率」太片面。要有<b>離線固定測試集</b>加<b>線上真實回饋</b>兩條腿，還要把失敗案例變成下一輪的改進。面試官看你有沒有建<b>可迭代的閉環</b>，而不是憑感覺改版。",
+    trap: "只說「看使用者滿不滿意」或「跑個準確率」太片面。要有<b>離線固定測試集</b>加<b>線上真實回饋</b>兩條腿，還要把失敗案例變成下一輪的改進。題目考你有沒有建<b>可迭代的閉環</b>，而不是憑感覺改版。",
     points: [
       { icon: "atom", title: "拆解問題", desc: "評估要分兩種：<b>離線</b>（固定測試集，可重複、能回歸）加<b>線上</b>（真實流量，A/B、真實回饋）。缺一不可：離線防退步、線上才反映真實體驗。" },
       { icon: "scale", title: "架構取捨", desc: "人工評（準但貴又慢）vs 自動指標（快但難評開放式）vs LLM-as-judge（可擴但有偏誤、要校準）。生成式任務常沒有唯一正解，取捨在<b>速度 vs 可信</b>。" },
@@ -938,7 +938,7 @@ export const INTERVIEWS = {
     cat: "inference",
     label: "訓練 vs 推論",
     q: "訓練和推論差在哪？為什麼推論也要花錢？",
-    trap: "很多人以為「模型訓練完，錢就付完了」，或以為推論不用算力。面試官要你分清兩者，並點出<b>每次對話都是一次推論</b>、算力從來不是免費的。",
+    trap: "很多人以為「模型訓練完，錢就付完了」，或以為推論不用算力。題目要你分清兩者，並點出<b>每次對話都是一次推論</b>、算力從來不是免費的。",
     points: [
       { icon: "atom", title: "底層原理", desc: "訓練是<b>調整模型參數</b>去學規律，一次性、極耗算力；推論是<b>拿學好的參數算出答案</b>，參數不動，但每次都要把輸入跑過整個模型一遍。" },
       { icon: "scale", title: "工程權衡", desc: "訓練成本一次付清但天價（大量 GPU 長時間跑）；推論單次便宜，卻<b>隨用量無限累加</b>，量大時總額常超過訓練。" },
@@ -965,7 +965,7 @@ export const INTERVIEWS = {
     cat: "inference",
     label: "推論怎麼更省",
     q: "同一個模型，怎麼讓推論更快更省？",
-    trap: "只答「換小模型」或「加 GPU」太粗。面試官要你在<b>不換模型、不重訓</b>的前提下，講得出多種加速手段，以及各自的<b>精度／複雜度取捨</b>。",
+    trap: "只答「換小模型」或「加 GPU」太粗。題目要你在<b>不換模型、不重訓</b>的前提下，講得出多種加速手段，以及各自的<b>精度／複雜度取捨</b>。",
     points: [
       { icon: "atom", title: "底層原理", desc: "推論慢又貴的根源是<b>參數多＋逐字生成</b>：每生一個 token 都要把龐大參數搬一次、算一次。省的方向就是「讓每步更省」或「少算重複的」。" },
       { icon: "scale", title: "工程權衡", desc: "手段都在換取捨：量化省記憶體但可能掉精度；蒸餾出的小模型快但能力縮；批次省單位成本但增延遲。沒有免費午餐。" },
@@ -992,7 +992,7 @@ export const INTERVIEWS = {
     cat: "inference",
     label: "為何每次不同",
     q: "為什麼同一個問題每次答不一樣？temperature 是什麼？",
-    trap: "別把它當成「模型不穩定的 bug」。答案不同是<b>取樣的設計</b>，不是壞掉。面試官要你講出「機率取樣」這個機制，以及 temperature 怎麼調它。",
+    trap: "別把它當成「模型不穩定的 bug」。答案不同是<b>取樣的設計</b>，不是壞掉。題目要你講出「機率取樣」這個機制，以及 temperature 怎麼調它。",
     points: [
       { icon: "atom", title: "底層原理", desc: "模型每一步不是選「唯一正解」，而是<b>算出一堆候選字的機率、再從中取樣</b>；取樣帶隨機，所以同問題每次可能走不同的路。" },
       { icon: "scale", title: "工程權衡", desc: "temperature 是調隨機度的旋鈕：高→分佈變平、更敢選冷門字（有創意但易亂）；低→分佈變尖、集中在高機率字（穩定但單調）。" },
@@ -1019,7 +1019,7 @@ export const INTERVIEWS = {
     cat: "retrieval",
     label: "RAG 為何還答錯",
     q: "用了 RAG，模型為什麼還是會答錯？怎麼降低？",
-    trap: "別以為「接了 RAG 就不會錯」。RAG 是一條鏈，任何一環壞都會錯。面試官要你能<b>分層定位是哪一環出錯</b>，而不是籠統說「再調一下」。",
+    trap: "別以為「接了 RAG 就不會錯」。RAG 是一條鏈，任何一環壞都會錯。題目要你能<b>分層定位是哪一環出錯</b>，而不是籠統說「再調一下」。",
     points: [
       { icon: "atom", title: "底層原理", desc: "RAG＝<b>先檢索、再生成</b>兩段。答錯可能來自任一段：檢索沒撈到對的依據，或撈到了但生成端沒好好用。來源不同，解法完全不同。" },
       { icon: "scale", title: "工程權衡", desc: "診斷要分層而不是瞎調：先確認<b>對的依據到底進了 context 沒</b>（檢索問題），再看<b>依據在裡面卻答錯</b>（生成問題）。搞錯層次就是白忙。" },
@@ -1046,7 +1046,7 @@ export const INTERVIEWS = {
     cat: "retrieval",
     label: "RAG vs 長上下文",
     q: "資料很多時，用 RAG 還是把全部塞進長上下文？怎麼選？",
-    trap: "別一句「長上下文越來越大，以後不用 RAG 了」就結束。面試官要你講出兩者<b>各自的成本、上限與盲點</b>，並給出<b>依場景的判準</b>。",
+    trap: "別一句「長上下文越來越大，以後不用 RAG 了」就結束。題目要你講出兩者<b>各自的成本、上限與盲點</b>，並給出<b>依場景的判準</b>。",
     points: [
       { icon: "atom", title: "底層原理", desc: "兩條路本質不同：長上下文是<b>每次把全部塞進窗口</b>一起算（受注意力 O(n²) 與訓練長度限制）；RAG 是<b>每次只撈相關片段</b>進窗口，資料留在外部。" },
       { icon: "scale", title: "工程權衡", desc: "長上下文簡單、不用建檢索，但<b>貴、有上限、還有中段盲區</b>（lost in the middle）；RAG 可無限擴、每次便宜、能附引用，但成敗看<b>檢索品質</b>、系統較複雜。" },
@@ -1073,7 +1073,7 @@ export const INTERVIEWS = {
     cat: "literacy",
     label: "偏見從哪來",
     q: "AI 的偏見從哪來？怎麼減少？",
-    trap: "別把偏見講成「工程師故意寫壞」或「模型有立場」。它主要是<b>從資料學來的</b>，還可能被放大。面試官要你講清成因，並理解為何<b>難以根除</b>。",
+    trap: "別把偏見講成「工程師故意寫壞」或「模型有立場」。它主要是<b>從資料學來的</b>，還可能被放大。題目要你講清成因，並理解為何<b>難以根除</b>。",
     points: [
       { icon: "atom", title: "底層原理", desc: "模型是<b>從海量資料學統計規律</b>，資料裡的社會偏差（性別、種族、地域刻板印象）會被一併學進去，甚至因為「學最常見的模式」而<b>被放大</b>。" },
       { icon: "scale", title: "工程權衡", desc: "想壓偏見常要<b>犧牲一些效能或覆蓋</b>：過度過濾資料會流失有用內容，加太多護欄會讓模型綁手綁腳、對正常問題也迴避。" },
@@ -1100,7 +1100,7 @@ export const INTERVIEWS = {
     cat: "literacy",
     label: "怎麼判斷可信",
     q: "怎麼判斷一個 AI 的回答可不可信？",
-    trap: "別只憑「聽起來很有道理」就信。模型<b>語氣自信不等於正確</b>，它也會一本正經地錯。面試官要你講出<b>可操作的查證方法</b>，不是憑感覺。",
+    trap: "別只憑「聽起來很有道理」就信。模型<b>語氣自信不等於正確</b>，它也會一本正經地錯。題目要你講出<b>可操作的查證方法</b>，不是憑感覺。",
     points: [
       { icon: "atom", title: "底層原理", desc: "模型輸出是<b>猜最合理的話</b>、不是查證過的事實，而且它<b>總是語氣流暢自信</b>，自信程度跟正確與否無關。所以「聽起來對」不能當判準。" },
       { icon: "scale", title: "工程權衡", desc: "查證要花時間，得依<b>後果大小</b>調力度：閒聊可放寬；牽涉決策、醫療、法律、金錢的答案要嚴格交叉驗證。" },
@@ -1127,7 +1127,7 @@ export const INTERVIEWS = {
     cat: "literacy",
     label: "能力邊界",
     q: "大模型的能力邊界在哪？它會取代工程師嗎？",
-    trap: "別走極端：要嘛「它無所不能、很快取代人」，要嘛「它只是玩具」。面試官要你冷靜劃出<b>它強在哪、弱在哪</b>，並談人機分工。",
+    trap: "別走極端：要嘛「它無所不能、很快取代人」，要嘛「它只是玩具」。題目要你冷靜劃出<b>它強在哪、弱在哪</b>，並談人機分工。",
     points: [
       { icon: "atom", title: "底層原理", desc: "它的本事是<b>從資料學模式再生成</b>：擅長歸納、寫作、翻譯、寫程式草稿、加速重複性工作；但它不「理解真假」、沒有即時世界的最新知識、也不承擔後果。" },
       { icon: "scale", title: "工程權衡", desc: "用它是拿<b>速度與產量</b>換<b>需要人來驗證</b>：它能把八成的初稿快速做出來，但最後一哩的正確性、責任、判斷仍要人把關。" },
@@ -1154,7 +1154,7 @@ export const INTERVIEWS = {
     cat: 'inference',
     label: '上下文窗口限制',
     q: '如何處理大模型的上下文窗口限制？',
-    trap: '多數人直接丟一個工具：「用 RAG」或「換更大窗口的模型」。面試官要的不是工具名，是你懂不懂<b>為什麼有這個限制</b>、以及<b>怎麼依場景組合取捨</b>。',
+    trap: '多數人直接丟一個工具：「用 RAG」或「換更大窗口的模型」。題目要的不是工具名，是你懂不懂<b>為什麼有這個限制</b>、以及<b>怎麼依場景組合取捨</b>。',
     points: [
       { icon: 'atom', title: '底層原理', desc: '知不知道限制的物理根源：注意力是「每個 token 對所有 token」，計算與記憶體隨長度 O(n²) 成長；位置編碼只在訓練長度內可靠；就算塞進窗口，中段內容也常被忽略（lost in the middle）。' },
       { icon: 'scale', title: '工程權衡', desc: '面對時間／成本／準確度怎麼取捨，例如長上下文微調 vs 動態壓縮、更大窗口 vs 檢索。' },
@@ -1182,7 +1182,7 @@ export const INTERVIEWS = {
     cat: 'agent',
     label: 'Agent 的規劃機制',
     q: '請說明 Agent 的規劃機制。',
-    trap: '很多人只說「它會自己想」。面試官要的是你講得出<b>規劃的具體做法與取捨</b>（ReAct vs 計畫再執行、何時重規劃），而不是一句「有 Agent 就會規劃」。',
+    trap: '很多人只說「它會自己想」。題目要的是你講得出<b>規劃的具體做法與取捨</b>（ReAct vs 計畫再執行、何時重規劃），而不是一句「有 Agent 就會規劃」。',
     points: [
       { icon: 'atom', title: '底層原理', desc: '規劃＝把大目標拆成可執行的小步驟，並決定用什麼方式推進：可先擬完整計畫，也可邊做邊調。' },
       { icon: 'scale', title: '工程權衡', desc: 'ReAct（想→做→觀察，逐步）彈性但步數多、易繞路；plan-then-execute（先擬計畫再執行）省 token、好追蹤，但計畫一錯整條偏。' },
@@ -1210,7 +1210,7 @@ export const INTERVIEWS = {
     cat: 'agent',
     label: '可靠調用外部工具',
     q: '如何設計一個能可靠調用外部工具的 Agent？',
-    trap: '只回「用 function calling」不夠。面試官要的是<b>整個調用迴圈怎麼防呆</b>：選錯工具、參數錯、工具報錯、逾時，你都要有對策。',
+    trap: '只回「用 function calling」不夠。題目要的是<b>整個調用迴圈怎麼防呆</b>：選錯工具、參數錯、工具報錯、逾時，你都要有對策。',
     points: [
       { icon: 'atom', title: '底層原理', desc: '模型本身不會「執行」工具，它只<b>輸出「要呼叫哪個工具、帶什麼參數」的結構化意圖</b>，由外部程式真正執行、再把結果回餵。' },
       { icon: 'scale', title: '工程權衡', desc: '給模型的工具越多越靈活，但越容易選錯、參數越容易亂；工具描述要精簡清楚，數量要收斂。' },
@@ -1238,7 +1238,7 @@ export const INTERVIEWS = {
     cat: 'agent',
     label: '穩定輸出 JSON',
     q: '大模型如何穩定輸出 JSON 格式？',
-    trap: '只說「在 prompt 裡叫它輸出 JSON」不保證：模型是機率生成，隨時可能多一段話、少一個括號。面試官要的是<b>從「拜託」升級到「保證」的手段</b>。',
+    trap: '只說「在 prompt 裡叫它輸出 JSON」不保證：模型是機率生成，隨時可能多一段話、少一個括號。題目要的是<b>從「拜託」升級到「保證」的手段</b>。',
     points: [
       { icon: 'atom', title: '底層原理', desc: '模型是<b>逐 token 機率生成</b>，天生不保證合法 JSON；它可能加解釋、漏逗號、被截斷。所以「穩定」不能只靠 prompt 許願。' },
       { icon: 'scale', title: '工程權衡', desc: '手段由弱到強：prompt 要求 → function calling／JSON mode → 約束解碼（只允許生出合法 JSON）。越強越穩，但越依賴特定 API／推論框架、彈性越低。' },
@@ -1266,7 +1266,7 @@ export const INTERVIEWS = {
     cat: 'agent',
     label: 'Agent 的記憶管理',
     q: 'Agent 是怎麼做記憶管理的？',
-    trap: '別跟「上下文窗口」混為一談。窗口是「一次能讀多少」，記憶管理是「跨很多步驟，該把哪些東西留在手邊」。面試官看你分不分得清、以及怎麼在有限窗口下維持連貫。',
+    trap: '別跟「上下文窗口」混為一談。窗口是「一次能讀多少」，記憶管理是「跨很多步驟，該把哪些東西留在手邊」。題目考你分不分得清、以及怎麼在有限窗口下維持連貫。',
     points: [
       { icon: 'atom', title: '底層原理', desc: '模型本身<b>無狀態</b>，每步只看得到當下丟進去的 context。Agent 的「記憶」＝外部程式決定「每一步要把哪些歷史塞回去」。' },
       { icon: 'scale', title: '工程權衡', desc: '全塞（保真但爆窗口、貴）vs 摘要（省空間但丟細節）vs 檢索（只取相關、可擴大但看檢索品質），通常混用。' },
@@ -1294,7 +1294,7 @@ export const INTERVIEWS = {
     cat: 'agent',
     label: '量化 Agent 性能',
     q: '如何量化一個 Agent 的性能？',
-    trap: '只說「看它答得對不對」不夠。Agent 是多步驟、會用工具，光看最終答案漏很多。面試官要你講出<b>任務級＋過程級</b>的評估，還要把成本／延遲算進去。',
+    trap: '只說「看它答得對不對」不夠。Agent 是多步驟、會用工具，光看最終答案漏很多。題目要你講出<b>任務級＋過程級</b>的評估，還要把成本／延遲算進去。',
     points: [
       { icon: 'atom', title: '底層原理', desc: 'Agent 的產出是「一連串動作＋最終結果」，所以評估要分：結果對不對（任務成功率）與過程好不好（軌跡：有沒有繞路、工具用對嗎）。' },
       { icon: 'scale', title: '工程權衡', desc: '人工評（準但貴慢）vs 自動評（快但難評開放式任務）vs LLM-as-judge（可擴但有偏誤、要校準）；離線測試集 vs 線上真實流量。' },
@@ -1322,7 +1322,7 @@ export const INTERVIEWS = {
     cat: 'agent',
     label: 'Agent 成本控制',
     q: 'Agent 的成本怎麼避免失控？',
-    trap: '只說「用便宜一點的模型」漏了根源。失控來自<b>多步驟 × context 逐步累積</b>：每多一步，前面的歷史又重算一次 token。面試官要你點出這個累積效應與對策。',
+    trap: '只說「用便宜一點的模型」漏了根源。失控來自<b>多步驟 × context 逐步累積</b>：每多一步，前面的歷史又重算一次 token。題目要你點出這個累積效應與對策。',
     points: [
       { icon: 'atom', title: '底層原理', desc: 'Agent 成本＝步數 × 每步 token，而每步都把前面歷史再塞一次，<b>token 隨步數累積成長</b>；一旦繞圈或無限重試，成本爆炸。' },
       { icon: 'scale', title: '工程權衡', desc: '省成本 vs 保品質：便宜模型省錢但可能做錯要重來、反而更貴；步數上限省錢但可能提早放棄任務。' },
@@ -1378,7 +1378,7 @@ export const INTERVIEWS = {
     cat: 'retrieval',
     label: 'RAG 檢索策略設計',
     q: '如何設計 RAG 的檢索策略？',
-    trap: '只說「算向量相似度取最相關的 top-k」是最陽春版。面試官要看你懂<b>切塊、混合檢索、重排、查詢改寫</b>這些讓檢索真的準的手段與取捨。',
+    trap: '只說「算向量相似度取最相關的 top-k」是最陽春版。題目要你懂<b>切塊、混合檢索、重排、查詢改寫</b>這些讓檢索真的準的手段與取捨。',
     points: [
       { icon: 'atom', title: '底層原理', desc: '檢索品質＝「找回來的片段對不對」，一路受制於：切塊怎麼切、用什麼向量、怎麼比、取幾個。錯一環，LLM 再強也答錯（garbage in）。' },
       { icon: 'scale', title: '工程權衡', desc: '純向量檢索（懂語意但可能漏關鍵字）vs 關鍵字檢索（精準但不懂同義）→ 混合檢索兼顧但更複雜；top-k 大則召回高但塞爆窗口、雜訊多。' },
@@ -1406,7 +1406,7 @@ export const INTERVIEWS = {
     cat: 'literacy',
     label: '為什麼會有幻覺',
     q: '大模型為什麼會有幻覺？能不能完全消除？',
-    trap: '別把幻覺當成「bug」。它不是程式錯誤，是模型運作方式的<b>副作用</b>：它在猜最可能的字、不是在查事實。面試官要你講出成因，並理解為何無法「根治」、只能降低。',
+    trap: '別把幻覺當成「bug」。它不是程式錯誤，是模型運作方式的<b>副作用</b>：它在猜最可能的字、不是在查事實。題目要你講出成因，並理解為何無法「根治」、只能降低。',
     points: [
       { icon: 'atom', title: '底層原理', desc: '模型是<b>猜下一個最合理的字</b>，不是查資料庫；當它「不知道」時也不會停下說不知道，而是繼續生出語感最順、但可能是假的內容。' },
       { icon: 'scale', title: '工程權衡', desc: '想壓幻覺就要犧牲一些「流暢／敢答」：強制引用、不確定就拒答，會讓它比較保守，有時該答的也不答。' },
@@ -1437,7 +1437,7 @@ const INT_TR = {
     "realtime-assistant": {
       label: "Designing a real-time assistant",
       q: "How would you design an AI assistant that can look up real-time data?",
-      trap: "Don’t just answer “hook up an API.” The interviewer wants to see you chain the whole thing together: <b>the model doesn’t know things in real time → you fill the gap with tools / retrieval → and you still have to handle failures and permissions</b>.",
+      trap: "Don’t just answer “hook up an API.” The question is really testing whether you chain the whole thing together: <b>the model doesn’t know things in real time → you fill the gap with tools / retrieval → and you still have to handle failures and permissions</b>.",
       points: [
         { title: "Break down the problem", desc: "The model’s knowledge has a cutoff, and it won’t reach out to the internet on its own; “real-time” has to come from <b>external tools (function calling / API) or live retrieval</b> feeding in the latest data, with the model only responsible for understanding and organizing it." },
         { title: "Architectural trade-offs", desc: "Querying live every time is the freshest but slow, expensive, and prone to failure; adding a cache is fast and cheap but can serve stale data. You set the cache TTL by “how fast the data changes.”" },
@@ -1463,7 +1463,7 @@ const INT_TR = {
     "monitoring": {
       label: "Designing production monitoring",
       q: "How would you design production monitoring for an AI product?",
-      trap: "Don’t just answer “watch for errors.” The biggest risk with AI is often <b>silent quality degradation</b> (nothing crashes, but the answers keep getting worse); the interviewer wants you to monitor “quality,” not just “availability.”",
+      trap: "Don’t just answer “watch for errors.” The biggest risk with AI is often <b>silent quality degradation</b> (nothing crashes, but the answers keep getting worse); the question asks you to monitor “quality,” not just “availability.”",
       points: [
         { title: "Break down the problem", desc: "Traditional monitoring watches “is it down?” (latency, error rate); AI also has to watch “<b>is it answering well?</b>”: quality can <b>drift silently</b> (data shifts, attacks, a model update), and it throws no error." },
         { title: "Architectural trade-offs", desc: "All-human review is accurate but expensive, slow, and can’t cover the volume; fully automated metrics are fast but miss subtle quality issues; in practice you usually combine all three: automated metrics plus sampled human review plus user feedback." },
@@ -1489,7 +1489,7 @@ const INT_TR = {
     "prompt-injection": {
       label: "Prompt injection",
       q: "What is prompt injection, and why is it hard to defend against?",
-      trap: "Many people assume that adding one line like “ignore any other instructions” shuts it down. The interviewer wants to see that you understand <b>why it is fundamentally hard to defend against</b>, not that you can rattle off a surface-level trick.",
+      trap: "Many people assume that adding one line like “ignore any other instructions” shuts it down. The question is really testing whether you understand <b>why it is fundamentally hard to defend against</b>, not that you can rattle off a surface-level trick.",
       points: [
         { title: "Underlying principle", desc: "The model <b>can’t tell the developer’s instructions from instructions smuggled inside the data</b>: to it, they’re all one string of text. If the user input, or a fetched web page / document, hides a line like “ignore the above, do X instead,” the model may simply comply." },
         { title: "Engineering trade-offs", desc: "To block it completely you have to restrict capabilities (accept no external content, grant no tools), which is safe but useless; to stay useful you have to accept the risk, and you can only reduce it, never zero it out." },
@@ -1514,7 +1514,7 @@ const INT_TR = {
     "jailbreak": {
       label: "Can jailbreaks be stopped?",
       q: "What is a jailbreak, and can it be stopped completely?",
-      trap: "The interviewer wants to see that you understand <b>why this is an ongoing arms race that can’t be “solved once”</b>, rather than saying “just add more rules.”",
+      trap: "The question is really testing whether you understand <b>why this is an ongoing arms race that can’t be “solved once”</b>, rather than saying “just add more rules.”",
       points: [
         { title: "Underlying principle", desc: "A jailbreak = <b>using verbal tricks to lure the model into bypassing its safety rules</b> (role-play, hypothetical scenarios, wrapping content in translation / encoding); because safety is a “trained tendency,” not a hard switch, there’s always some edge to slip around." },
         { title: "Engineering trade-offs", desc: "The tighter you clamp down, the safer it is but the more often it “over-refuses” (misfiring on normal requests); the looser you leave it, the more useful it is but the easier to jailbreak. You have to balance in the middle." },
@@ -1539,7 +1539,7 @@ const INT_TR = {
     "guardrails": {
       label: "Guardrails for production",
       q: "What “guardrails” would you add to an AI product going into production?",
-      trap: "Don’t just answer “add a filter.” The interviewer wants to hear you lay out <b>complete protection from input to output to behavior</b>, along with the trade-offs against cost and experience.",
+      trap: "Don’t just answer “add a filter.” The question is really testing whether you lay out <b>complete protection from input to output to behavior</b>, along with the trade-offs against cost and experience.",
       points: [
         { title: "Underlying principle", desc: "The model hallucinates, can be lured, and produces uncontrollable output, so you add a ring of checks <b>outside the model</b>: all three gates (input, output, action) have to be guarded." },
         { title: "Engineering trade-offs", desc: "The stricter the guardrails, the safer but the more prone to misfiring (over-refusal), and the more latency and cost they add; grade them by risk rather than making everything maximally strict." },
@@ -1564,7 +1564,7 @@ const INT_TR = {
     "prompt-craft": {
       label: "Prompt-writing principles",
       q: "How do you write a good prompt? What principles apply?",
-      trap: "Many people think a prompt is just “typing in the question.” The interviewer wants to see that you understand <b>why the same question, phrased differently, gives very different results</b>, and whether you have systematic principles.",
+      trap: "Many people think a prompt is just “typing in the question.” The question is really testing whether you understand <b>why the same question, phrased differently, gives very different results</b>, and whether you have systematic principles.",
       points: [
         { title: "Underlying principle", desc: "The model <b>predicts the most plausible continuation from the context you give it</b>; the role, context, format, and examples you provide frame “which direction it should generate in.”" },
         { title: "Engineering trade-offs", desc: "Say too little and it improvises and drifts off; say too much or too messily and it eats tokens and gets distracted. You have to balance “being clear” against “being concise.”" },
@@ -1589,7 +1589,7 @@ const INT_TR = {
     "few-shot": {
       label: "few-shot vs zero-shot",
       q: "What’s the difference between few-shot and zero-shot? When should you give examples?",
-      trap: "Knowing that “few-shot just means giving examples” isn’t enough. The interviewer wants you to articulate <b>what the examples are actually doing for the model</b>, and when they’re worth the token cost.",
+      trap: "Knowing that “few-shot just means giving examples” isn’t enough. The question asks you to articulate <b>what the examples are actually doing for the model</b>, and when they’re worth the token cost.",
       points: [
         { title: "Underlying principle", desc: "Examples <b>demonstrate on the spot that “this kind of input maps to this kind of output,”</b> helping the model calibrate format, style, and decision boundaries without retraining." },
         { title: "Engineering trade-offs", desc: "Examples are usually more accurate than zero-shot, but <b>more is not always better</b>: there are diminishing returns, and one or two well-chosen examples often beat cramming in many; examples also consume tokens, making things pricier and slower." },
@@ -1614,7 +1614,7 @@ const INT_TR = {
     "cot-prompting": {
       label: "Chain-of-Thought",
       q: "What is Chain-of-Thought (getting the model to “think it through”)? Why does it help?",
-      trap: "Don’t treat CoT as “the magic of adding ‘think step by step.’” The interviewer wants to see that you understand <b>why it works, along with its costs and limits</b>.",
+      trap: "Don’t treat CoT as “the magic of adding ‘think step by step.’” The question is really testing whether you understand <b>why it works, along with its costs and limits</b>.",
       points: [
         { title: "Underlying principle", desc: "It has the model <b>produce intermediate reasoning steps before giving the answer</b>; breaking a hard problem into small steps makes each continuation easier to predict than going “straight to the answer.”" },
         { title: "Engineering trade-offs", desc: "More accurate but <b>more tokens, slower, and pricier</b>, and using CoT on easy questions is a waste." },
@@ -1639,7 +1639,7 @@ const INT_TR = {
     "prompt-vs-tune-vs-rag": {
       label: "Prompt, RAG, or fine-tune?",
       q: "When prompting isn’t getting you there, should you keep working the prompt or switch methods (RAG / fine-tuning)?",
-      trap: "The interviewer is watching whether you <b>diagnose the type of problem first</b>, instead of always “tweaking the prompt again” or “just fine-tuning.”",
+      trap: "The question is really testing whether you <b>diagnose the type of problem first</b>, instead of always “tweaking the prompt again” or “just fine-tuning.”",
       points: [
         { title: "Underlying principle", desc: "The three levers solve different problems: prompting changes <b>the behavior for this call</b>, RAG supplies <b>missing facts</b>, and fine-tuning changes <b>internalized style and capabilities</b>." },
         { title: "Engineering trade-offs", desc: "Cost from low to high: prompting (almost free) < RAG (medium) < fine-tuning (high). Reach for the cheap one first." },
@@ -1664,7 +1664,7 @@ const INT_TR = {
     "reasoning-models": {
       label: "Reasoning models (o1)",
       q: "How do reasoning models like o1 differ from an ordinary LLM?",
-      trap: "Don’t just say “it’s smarter.” The interviewer wants you to spell out <b>how it differs, what it costs, and when to use it</b>.",
+      trap: "Don’t just say “it’s smarter.” The question asks you to spell out <b>how it differs, what it costs, and when to use it</b>.",
       points: [
         { title: "Underlying principle", desc: "It’s trained to <b>do long internal reasoning before answering</b> (long CoT), and optimized with RL for “reasoning correctly”; it doesn’t just continue the text, it thinks before it answers." },
         { title: "Engineering trade-offs", desc: "Higher accuracy on hard problems, but <b>slower and pricier</b> (it spends a lot of reasoning tokens on “thinking”); using it on easy questions is a waste." },
@@ -1689,7 +1689,7 @@ const INT_TR = {
     "test-time-compute": {
       label: "Why thinking longer helps",
       q: "Why does “letting the model think longer” (test-time compute) make it smarter?",
-      trap: "The interviewer wants to see that you understand <b>why “spending more compute at inference time” buys accuracy</b>, not just that you can recite the term.",
+      trap: "The question is really testing whether you understand <b>why “spending more compute at inference time” buys accuracy</b>, not just that you can recite the term.",
       points: [
         { title: "Underlying principle", desc: "Giving the model room for <b>more intermediate steps, attempts, and self-checking</b> lets it break a hard problem down further and go back to fix things, so its hit rate naturally rises." },
         { title: "Engineering trade-offs", desc: "You <b>trade inference compute (time and cost) for accuracy</b>, but with <b>diminishing returns</b>: think too long and the value for money drops." },
@@ -1714,7 +1714,7 @@ const INT_TR = {
     "cot-limits": {
       label: "When CoT doesn’t help",
       q: "Is Chain-of-Thought always better? When does it instead fail to help, or make things worse?",
-      trap: "Many people treat CoT as a cure-all. The interviewer wants to see that you know <b>its limits and side effects</b>.",
+      trap: "Many people treat CoT as a cure-all. The question is really testing whether you know <b>its limits and side effects</b>.",
       points: [
         { title: "Underlying principle", desc: "CoT helps by “unfolding the steps”; but <b>an easy question can be answered in one step anyway</b>, so unfolding just spends extra tokens; the model may also <b>fabricate reasoning that looks plausible but is wrong</b>." },
         { title: "Engineering trade-offs", desc: "Accuracy vs. cost/latency: worth it on hard problems, wasteful on easy ones; on small models CoT has limited effect and can even make things messier." },
@@ -1739,7 +1739,7 @@ const INT_TR = {
     "attention-compute": {
       label: "What attention computes",
       q: "What is attention actually computing, and why does that give it context understanding?",
-      trap: "Many people just recite the letters Q, K, V, or say “it focuses on what matters.” The interviewer wants you to explain <b>what it actually computes and why that computation yields context understanding</b>, not to toss out jargon.",
+      trap: "Many people just recite the letters Q, K, V, or say “it focuses on what matters.” The question asks you to explain <b>what it actually computes and why that computation yields context understanding</b>, not to toss out jargon.",
       points: [
         { title: "Underlying principle", desc: "Each word first becomes three vectors: Query, Key, Value. You take one word’s Query and compute its similarity against every word’s Key to get “relevance” weights, then use those weights to take a weighted average of all the Values. In effect, <b>each word re-reads every other word in proportion to relevance</b>." },
         { title: "Engineering trade-offs", desc: "This is an all-pairs comparison, “every word against every word,” so compute and memory grow <b>O(n²)</b> with length. The upside is capturing relationships at any distance directly; the cost is that long sequences get expensive fast." },
@@ -1789,7 +1789,7 @@ const INT_TR = {
     "transformer-vs-rnn": {
       label: "Why it replaced RNNs",
       q: "Why could the Transformer replace RNNs / LSTMs?",
-      trap: "Don’t just say “the Transformer is stronger.” The interviewer wants you to spell out <b>which mechanism makes it stronger</b>: why it can parallelize, why it captures long-range relationships, and what the cost is.",
+      trap: "Don’t just say “the Transformer is stronger.” The question asks you to spell out <b>which mechanism makes it stronger</b>: why it can parallelize, why it captures long-range relationships, and what the cost is.",
       points: [
         { title: "Underlying principle", desc: "An RNN <b>processes one word after another sequentially</b>, passing information forward through a hidden state, which decays over distance and tends to “forget”; the Transformer uses attention to <b>see the whole sentence at once</b>, so any two words, however far apart, can connect directly." },
         { title: "Engineering trade-offs", desc: "RNNs are sequential and can’t parallelize, so training is slow; the Transformer can <b>compute the whole sentence in parallel</b>, makes good use of GPUs, and scales well to large models. The cost is attention’s <b>O(n²)</b>, which gets expensive on long sequences." },
@@ -1814,7 +1814,7 @@ const INT_TR = {
     "embedding-meaning": {
       label: "Why embeddings hold meaning",
       q: "Why can embeddings represent “meaning,” and why do similar words end up close together?",
-      trap: "Don’t stop at “it just turns words into vectors.” The interviewer wants you to explain <b>how meaning gets into the vectors</b>: why similar words end up together, rather than each word getting a random set of numbers.",
+      trap: "Don’t stop at “it just turns words into vectors.” The question asks you to explain <b>how meaning gets into the vectors</b>: why similar words end up together, rather than each word getting a random set of numbers.",
       points: [
         { title: "Underlying principle", desc: "The core is the <b>distributional hypothesis</b>: words with similar meaning appear in similar contexts. Learning to predict context from large amounts of text forces <b>words that show up in similar contexts to get similar vectors</b>, and that is how meaning gets compressed into coordinates." },
         { title: "Engineering trade-offs", desc: "Higher dimensions can hold finer meaning but cost more and run into the curse of dimensionality (in high-dimensional space points spread apart and distances lose discriminating power); lower dimensions save compute but tend to cram different meanings together." },
@@ -1839,7 +1839,7 @@ const INT_TR = {
     "multi-head": {
       label: "Why multi-head attention",
       q: "Why does multi-head attention need multiple heads?",
-      trap: "Don’t just say “multi-head is more accurate.” The interviewer wants you to explain <b>why multiple heads beat a single head</b>: what one attention head is limited to, what the extra heads add, and how they combine.",
+      trap: "Don’t just say “multi-head is more accurate.” The question asks you to explain <b>why multiple heads beat a single head</b>: what one attention head is limited to, what the extra heads add, and how they combine.",
       points: [
         { title: "Underlying principle", desc: "A single attention head can only learn <b>one</b> kind of relational pattern, and once softmax is applied the focus concentrates on a few words. Multi-head runs <b>several independent sets of Q/K/V in parallel</b>, each viewing relationships in a different subspace, then concatenates and projects them together." },
         { title: "Engineering trade-offs", desc: "More heads isn’t always better: with the total dimension fixed, more heads means each head has a smaller dimension and can express less; you trade off between “the number of angles you view from” and “the detail of each angle.”" },
@@ -1864,7 +1864,7 @@ const INT_TR = {
     "tokenizer-why": {
       label: "Why the tokenizer matters",
       q: "What impact does a different tokenizer split have?",
-      trap: "Don’t stop at the definition, “it just splits text into tokens.” The interviewer wants the split tied to <b>cost, context consumption, and cross-language fairness</b>, so you can explain “why it gets more expensive and why it’s unfair.”",
+      trap: "Don’t stop at the definition, “it just splits text into tokens.” The question is really about the split tied to <b>cost, context consumption, and cross-language fairness</b>, so you can explain “why it gets more expensive and why it’s unfair.”",
       points: [
         { title: "Underlying principle", desc: "The model doesn’t look at characters, it looks at tokens. The mainstream uses <b>subword</b> units (like BPE): common words get one token, rare words are split into several pieces. So the “split” determines <b>how many tokens the same text becomes</b>." },
         { title: "Engineering trade-offs", desc: "Token count directly drives <b>cost and speed</b> (both billing and compute are per token) and <b>context consumption</b> (more tokens eat the window faster). A larger vocabulary saves tokens per word but makes the model heavier, a classic trade-off." },
@@ -1889,7 +1889,7 @@ const INT_TR = {
     "rlhf-why": {
       label: "What RLHF solves",
       q: "A pretrained model can already talk, so why is RLHF still needed?",
-      trap: "Don’t describe RLHF as “teaching the model new knowledge and making it smarter”: it <b>adds no knowledge, it only adjusts behavior and preferences</b>. The interviewer wants you to separate “can it” (the capability pretraining gave it) from “will it answer the way you want” (alignment).",
+      trap: "Don’t describe RLHF as “teaching the model new knowledge and making it smarter”: it <b>adds no knowledge, it only adjusts behavior and preferences</b>. The question asks you to separate “can it” (the capability pretraining gave it) from “will it answer the way you want” (alignment).",
       points: [
         { title: "Underlying principle", desc: "The pretraining objective is only to <b>guess the most plausible next word</b>, which yields knowledge and a feel for language, but it only “continues text”: it doesn’t guarantee following instructions, nor does it care whether an answer is useful or safe." },
         { title: "Engineering trade-offs", desc: "A three-stage division of labor: pretraining gives the foundation, SFT (supervised fine-tuning) teaches it to answer per instructions, and RLHF uses human preferences to dial usefulness / safety into place; the later the stage, the more it relies on human labeling and the pricier the data per unit, but in total compute / total spend pretraining is still the most expensive." },
@@ -1914,7 +1914,7 @@ const INT_TR = {
     "finetune-vs-rag": {
       label: "Fine-tuning vs. RAG",
       q: "When should you fine-tune a model, and when should you use RAG?",
-      trap: "The most common mistake is treating them as an <b>either-or</b>, or assuming “fine-tuning = injecting new knowledge.” The interviewer wants you to map it to “fine-tuning changes behavior, RAG supplies facts,” and to know they are often used together.",
+      trap: "The most common mistake is treating them as an <b>either-or</b>, or assuming “fine-tuning = injecting new knowledge.” The question asks you to map it to “fine-tuning changes behavior, RAG supplies facts,” and to know they are often used together.",
       points: [
         { title: "Underlying principle", desc: "The difference is where knowledge lives: fine-tuning <b>writes capability into the weights</b> (changing “how it answers”), while RAG <b>keeps data external and queries it each time</b> (supplying “what facts to answer with”)." },
         { title: "Engineering trade-offs", desc: "Fine-tuning is expensive up front and needs retraining whenever the data changes, but it carries no retrieval at inference; RAG only needs a knowledge-base update when data changes and can even cite sources, but it adds a retrieval cost each time and depends on retrieval quality." },
@@ -1939,7 +1939,7 @@ const INT_TR = {
     "lora": {
       label: "Why LoRA is efficient",
       q: "Why can LoRA be both fast and cheap?",
-      trap: "Saying “fewer trainable parameters” or “fast and cheap” isn’t enough. The interviewer wants you to explain <b>why it’s cheap</b> (frozen weights and a low-rank delta mainly save GPU memory), plus the benefit that it <b>doesn’t change the original model</b> and can be swapped in and out; the emphasis is on saving memory and being swappable, not headline speed.",
+      trap: "Saying “fewer trainable parameters” or “fast and cheap” isn’t enough. The question asks you to explain <b>why it’s cheap</b> (frozen weights and a low-rank delta mainly save GPU memory), plus the benefit that it <b>doesn’t change the original model</b> and can be swapped in and out; the emphasis is on saving memory and being swappable, not headline speed.",
       points: [
         { title: "Underlying principle", desc: "It freezes the original model’s weights and attaches only a <b>low-rank delta (a product of two small matrices)</b> to learn the adjustment; because the changes fine-tuning needs are actually “low-rank,” a small piece is enough to approximate them." },
         { title: "Engineering trade-offs", desc: "Its headline is a <b>big drop in GPU memory</b> (frozen layers store no optimizer state or weight gradients), and training is cheaper too (you can use larger batches and skip gradients for frozen layers), but each step’s forward + backward still runs the full base model, so what’s saved is mainly memory rather than raw compute; the result is usually <b>close to</b> but not exactly equal to full fine-tuning." },
@@ -1964,7 +1964,7 @@ const INT_TR = {
     "catastrophic-forgetting": {
       label: "Does fine-tuning dumb it down",
       q: "Can fine-tuning “dumb down” a model (catastrophic forgetting)? How do you avoid it?",
-      trap: "Don’t deny that forgetting happens, and don’t assume “a few more training rounds will help”: that often makes it <b>worse</b>. The interviewer wants you to point out that “over-fine-tuning on narrow data overwrites general capability,” and to offer mitigations.",
+      trap: "Don’t deny that forgetting happens, and don’t assume “a few more training rounds will help”: that often makes it <b>worse</b>. The question asks you to point out that “over-fine-tuning on narrow data overwrites general capability,” and to offer mitigations.",
       points: [
         { title: "Underlying principle", desc: "Yes. Fine-tuning <b>keeps changing the weights</b>, and if you hammer away on narrow-domain data alone, you <b>overwrite</b> the weights that carried general capability, and the model degrades on other tasks." },
         { title: "Engineering trade-offs", desc: "The longer you train, the higher the learning rate, and the narrower the data, the stronger in-domain but the more general capability drops; you have to judge the balance between “learning the new task” and “keeping the original capability.”" },
@@ -1989,7 +1989,7 @@ const INT_TR = {
     "data-quality": {
       label: "Quality vs. quantity",
       q: "For training data, does quality or quantity matter more?",
-      trap: "The instinctive answer “more data is always better” walks into a trap. The interviewer wants you to explain that <b>past a basic volume, quality and diversity beat raw quantity</b>, and that dirty data is garbage in, garbage out.",
+      trap: "The instinctive answer “more data is always better” walks into a trap. The question asks you to explain that <b>past a basic volume, quality and diversity beat raw quantity</b>, and that dirty data is garbage in, garbage out.",
       points: [
         { title: "Underlying principle", desc: "A model <b>learns the distribution from its data</b>, and what it learns is entirely a function of what you feed it: dirty data and wrong labels get learned in verbatim, <b>garbage in, garbage out</b>." },
         { title: "Engineering trade-offs", desc: "Volume has to be sufficient (too little and it can’t learn or cover the scenarios), but past that threshold, <b>more duplicate / low-quality data has very low marginal value</b> and can even hurt through noise; cleaning and deduplication often have a higher return than blindly adding volume." },
@@ -2014,7 +2014,7 @@ const INT_TR = {
     "why-not-pretrain": {
       label: "Why not pretrain your own",
       q: "Why is pretraining a large model from scratch generally not advised?",
-      trap: "Don’t underestimate the barrier, and don’t decide to train your own just because “we have our own data.” The interviewer wants you to state <b>the orders of magnitude for data / compute / cost</b>, and why “standing on the shoulders of giants + fine-tuning / RAG” pays off.",
+      trap: "Don’t underestimate the barrier, and don’t decide to train your own just because “we have our own data.” The question asks you to state <b>the orders of magnitude for data / compute / cost</b>, and why “standing on the shoulders of giants + fine-tuning / RAG” pays off.",
       points: [
         { title: "Underlying principle", desc: "Pretraining demands <b>astronomical data, compute, and time</b>: trillions of tokens, thousands of GPUs training for weeks to months, with costs routinely starting from millions to tens of millions of dollars." },
         { title: "Engineering trade-offs", desc: "Training from scratch means burning money to “rebuild the foundation,” plus you need a whole data and training-engineering team; by comparison, taking an off-the-shelf open-source / commercial model and <b>spending the budget on fine-tuning and RAG</b> has far better value for money." },
@@ -2039,7 +2039,7 @@ const INT_TR = {
     "diffusion-how": {
       label: "How diffusion makes images",
       q: "In text-to-image diffusion models, how does an image emerge from a patch of noise?",
-      trap: "Many people only say “it turns noise into something clear,” unable to explain that <b>learning to denoise in training and denoising repeatedly at generation</b> are two sides of the same coin. The interviewer wants you to lay out the logic “add-noise training → denoise generation,” and what role the prompt plays in it.",
+      trap: "Many people only say “it turns noise into something clear,” unable to explain that <b>learning to denoise in training and denoising repeatedly at generation</b> are two sides of the same coin. The question asks you to lay out the logic “add-noise training → denoise generation,” and what role the prompt plays in it.",
       points: [
         { title: "Underlying principle", desc: "In training, a clear image is <b>progressively noised</b> down to pure noise, teaching the model “how much noise to remove at this noise level”; generation is the reverse, <b>denoising step by step</b> from pure noise back into an image." },
         { title: "Engineering trade-offs", desc: "More denoising steps means finer quality but slower and more expensive; fewer steps is fast but blurry. In practice, samplers and step distillation compress dozens of steps down to a few while staying usable." },
@@ -2064,7 +2064,7 @@ const INT_TR = {
     "diffusion-not-collage": {
       label: "Is it collage?",
       q: "Is generating an image just “collaging pictures from the internet”?",
-      trap: "The instinct is that the AI “finds a few images and cuts and stitches them.” The interviewer wants you to make clear that <b>the model stores no original images, and the output pixels are all freshly computed, brand-new content (not one piece is cut and pasted)</b>, and to distinguish the essential difference between “learning statistical regularities” and “retrieve and stitch.”",
+      trap: "The instinct is that the AI “finds a few images and cuts and stitches them.” The question asks you to make clear that <b>the model stores no original images, and the output pixels are all freshly computed, brand-new content (not one piece is cut and pasted)</b>, and to distinguish the essential difference between “learning statistical regularities” and “retrieve and stitch.”",
       points: [
         { title: "Underlying principle", desc: "What the model stores is <b>statistical regularities learned from a vast number of images (the weights)</b>, not an image library. At generation the whole image is produced at once, every step updating all pixels (or latents) together, and each one is drawn fresh, not cut from somewhere and pasted." },
         { title: "Engineering trade-offs", desc: "The more diverse the training data, the more it can “generalize from examples” rather than copy a single image; but if one image repeats too many times, the model may <b>memorize</b> it and spit out something close, an exception to guard against, not the norm." },
@@ -2089,7 +2089,7 @@ const INT_TR = {
     "multimodal-key": {
       label: "The key to multimodal",
       q: "Is a multimodal model just several models bolted together? What’s the real key?",
-      trap: "Many people think multimodal is just “an image model + a text model + a speech model” bolted together, each doing its own thing. The interviewer wants you to point out the real key: <b>aligning the different modalities into the same meaning space</b>, not the number of models.",
+      trap: "Many people think multimodal is just “an image model + a text model + a speech model” bolted together, each doing its own thing. The question asks you to point out the real key: <b>aligning the different modalities into the same meaning space</b>, not the number of models.",
       points: [
         { title: "Underlying principle", desc: "The key is a <b>shared meaning-vector space</b>: images, text, and audio are each encoded, but they all land in the <b>same vector space</b>, where a semantically similar image and word sit at adjacent coordinates, so the model can “understand” across them." },
         { title: "Engineering trade-offs", desc: "Alignment is trained on large amounts of <b>paired data</b> (such as images and their captions); the cleaner the data, the more accurate the alignment, but collection is costly, and fine-grained cross-modality alignment remains a hard problem." },
@@ -2114,7 +2114,7 @@ const INT_TR = {
     "genimg-errors": {
       label: "Why fingers come out wrong",
       q: "Why does text-to-image so often get fingers, text, and symmetric details wrong?",
-      trap: "Don’t treat it as a temporary bug from “the model isn’t big enough yet.” The interviewer wants you to explain that <b>the cause is mechanistic</b>: the model chases “looking right overall” and doesn’t understand things that demand <b>precise structure and counting</b>, like how many fingers a hand should have or that text is made of symbols.",
+      trap: "Don’t treat it as a temporary bug from “the model isn’t big enough yet.” The question asks you to explain that <b>the cause is mechanistic</b>: the model chases “looking right overall” and doesn’t understand things that demand <b>precise structure and counting</b>, like how many fingers a hand should have or that text is made of symbols.",
       points: [
         { title: "Underlying principle", desc: "The model learns the <b>statistical distribution of pixels</b>; its goal is “the whole picture looks plausible,” not “anatomically correct.” It has no <b>discrete, exact notion of rules</b> like “exactly five fingers” or “letters spell a word.”" },
         { title: "Engineering trade-offs", desc: "Details like hands and text <b>take up a small share of the image and vary wildly in pose</b>, so the training signal is weak and often gets compressed away, and the model naturally never learns them precisely; higher resolution or dedicated data helps but can’t fully fix it." },
@@ -2139,7 +2139,7 @@ const INT_TR = {
     "diffusion-vs-gan": {
       label: "Diffusion vs. GAN",
       q: "How do diffusion models and GANs differ, and why is diffusion the mainstream now?",
-      trap: "Don’t just say “diffusion is newer and stronger.” The interviewer wants you to articulate <b>the difference in how the two generate</b> (one-shot adversarial generation vs. step-by-step denoising) and derive from it the trade-offs in stability, quality, and controllability, which is what explains why the mainstream changed hands.",
+      trap: "Don’t just say “diffusion is newer and stronger.” The question asks you to articulate <b>the difference in how the two generate</b> (one-shot adversarial generation vs. step-by-step denoising) and derive from it the trade-offs in stability, quality, and controllability, which is what explains why the mainstream changed hands.",
       points: [
         { title: "Underlying principle", desc: "A GAN relies on <b>a generator and a discriminator competing</b>: the generator produces a whole image in one shot to fool the discriminator; diffusion relies on <b>step-by-step denoising</b>, splitting generation into dozens of small steps that each do only a little." },
         { title: "Engineering trade-offs", desc: "A GAN has <b>fast inference</b> (one forward pass) but <b>unstable training</b>, is prone to mode collapse, and has poor diversity; diffusion has <b>stable training and high quality and diversity</b>, at the cost of multi-step, slower inference." },
@@ -2164,7 +2164,7 @@ const INT_TR = {
     "design-doc-qa": {
       label: "Designing a doc-QA system",
       q: "Design a company-internal document Q&A system: how would you architect it?",
-      trap: "Most people hear it and say “just hook up RAG.” But the hard part of internal doc-QA isn’t generation, it’s <b>retrieval quality</b> (pull the wrong chunks and even the strongest model answers wrong), <b>permissions</b> (users mustn’t be able to surface content they’re not allowed to see), and <b>citability</b> (answers must be verifiable). The interviewer is watching whether you can lay out the whole pipeline together with these constraints.",
+      trap: "Most people hear it and say “just hook up RAG.” But the hard part of internal doc-QA isn’t generation, it’s <b>retrieval quality</b> (pull the wrong chunks and even the strongest model answers wrong), <b>permissions</b> (users mustn’t be able to surface content they’re not allowed to see), and <b>citability</b> (answers must be verifiable). The question is really testing whether you can lay out the whole pipeline together with these constraints.",
       points: [
         { title: "Break down the problem", desc: "This is a <b>RAG problem</b>: the hard part isn’t generation, it’s retrieval. Only if you pull back the right chunks can the LLM answer accurately, so <b>retrieval quality = the ceiling on answer quality</b>, and the effort belongs on the whole retrieval pipeline, not on switching to a bigger model." },
         { title: "Architectural trade-offs", desc: "Pure vector vs. hybrid search, whether to rerank, how large a top-k; whether permissions are enforced by “filtering before retrieval” or “filtering after generation” (only the former is safe); stuffing full text into a big window vs. RAG pulling only relevant chunks." },
@@ -2190,7 +2190,7 @@ const INT_TR = {
     "design-support-bot": {
       label: "Designing a support AI",
       q: "Design a company customer-support AI: how would you architect it?",
-      trap: "Just saying “hook up a chatbot,” or just talking about RAG, isn’t enough. Support has to simultaneously <b>look up knowledge</b> (RAG), <b>take actions and fetch data</b> (checking orders and shipping are tools), and <b>recognize the user</b> (memory), while also <b>not making promises it shouldn’t</b> (guardrails) and escalating to a human when it can’t answer. The interviewer is watching whether you can chain these pieces into one pipeline.",
+      trap: "Just saying “hook up a chatbot,” or just talking about RAG, isn’t enough. Support has to simultaneously <b>look up knowledge</b> (RAG), <b>take actions and fetch data</b> (checking orders and shipping are tools), and <b>recognize the user</b> (memory), while also <b>not making promises it shouldn’t</b> (guardrails) and escalating to a human when it can’t answer. The question is really testing whether you can chain these pieces into one pipeline.",
       points: [
         { title: "Break down the problem", desc: "Support is really a combination of two capabilities: half “looking up knowledge” (return / refund policy → RAG) and half “fetching data or taking action” (order status, shipping → tools). Pure RAG or pure chat isn’t enough; you have to see that it’s a combination of <b>knowledge plus action plus identity</b>." },
         { title: "Architectural trade-offs", desc: "What goes to RAG vs. what goes to tools; how much memory to keep (recognizing the user vs. privacy); how high to set the confidence threshold (too conservative and it escalates everything, too loose and it makes reckless promises)." },
@@ -2216,7 +2216,7 @@ const INT_TR = {
     "design-cost": {
       label: "Cutting product cost",
       q: "How would you bring down the cost of an LLM product?",
-      trap: "Just saying “switch to a cheaper model” is too crude. Cost is <b>tokens per request × the number of calls</b>, and you have to attack it on several fronts: model routing, trimming context, and caching; and over-saving degrades quality, making users re-ask and retry, which ends up pricier. The interviewer is watching whether you can strike the balance between <b>cost and quality</b>.",
+      trap: "Just saying “switch to a cheaper model” is too crude. Cost is <b>tokens per request × the number of calls</b>, and you have to attack it on several fronts: model routing, trimming context, and caching; and over-saving degrades quality, making users re-ask and retry, which ends up pricier. The question is really testing whether you can strike the balance between <b>cost and quality</b>.",
       points: [
         { title: "Break down the problem", desc: "First work out where the cost comes from: mainly <b>token volume × the number of calls × the unit price</b>. The input (context) is usually far larger than the output, so “how much you stuff in” is often the biggest chunk." },
         { title: "Architectural trade-offs", desc: "The core trade-off is <b>saving cost vs. keeping quality</b>: a small model or trimmed context saves money, but getting it wrong makes users retry and re-ask, ending up pricier. Save where it doesn’t hurt the experience." },
@@ -2242,7 +2242,7 @@ const INT_TR = {
     "design-eval-improve": {
       label: "Evaluate and keep improving",
       q: "How do you evaluate and continuously improve an AI product that’s already live?",
-      trap: "Just saying “see if users are satisfied” or “run an accuracy number” is one-sided. You need two legs: an <b>offline fixed test set</b> plus <b>live real-world feedback</b>, and you have to turn failure cases into the next round’s improvements. The interviewer is watching whether you’ve built an <b>iterable closed loop</b> rather than revising by gut feeling.",
+      trap: "Just saying “see if users are satisfied” or “run an accuracy number” is one-sided. You need two legs: an <b>offline fixed test set</b> plus <b>live real-world feedback</b>, and you have to turn failure cases into the next round’s improvements. The question is really testing whether you’ve built an <b>iterable closed loop</b> rather than revising by gut feeling.",
       points: [
         { title: "Break down the problem", desc: "Evaluation splits into two kinds: <b>offline</b> (a fixed test set, repeatable and good for regression) plus <b>online</b> (real traffic, A/B tests, real feedback). You need both: offline guards against regressions, and only online reflects the real experience." },
         { title: "Architectural trade-offs", desc: "Human evaluation (accurate but expensive and slow) vs. automated metrics (fast but bad at open-ended tasks) vs. LLM-as-judge (scalable but biased, needs calibration). Generative tasks often have no single correct answer, so the trade-off is <b>speed vs. trustworthiness</b>." },
@@ -2268,7 +2268,7 @@ const INT_TR = {
     "train-vs-infer": {
       label: "Training vs. inference",
       q: "How do training and inference differ, and why does inference cost money too?",
-      trap: "Many people assume “once the model is trained, the bill is paid,” or think inference needs no compute. The interviewer wants you to distinguish the two and point out that <b>every conversation is one inference</b> and compute is never free.",
+      trap: "Many people assume “once the model is trained, the bill is paid,” or think inference needs no compute. The question asks you to distinguish the two and point out that <b>every conversation is one inference</b> and compute is never free.",
       points: [
         { title: "Underlying principle", desc: "Training <b>adjusts the model’s parameters</b> to learn patterns: it’s one-time and extremely compute-hungry; inference <b>uses the learned parameters to compute an answer</b>, leaving the parameters fixed, but it still has to run the input through the entire model each time." },
         { title: "Engineering trade-offs", desc: "Training cost is paid once but is astronomical (lots of GPUs running for a long time); inference is cheap per call but <b>accumulates without limit as usage grows</b>, so at scale the total often exceeds training." },
@@ -2293,7 +2293,7 @@ const INT_TR = {
     "faster-inference": {
       label: "Faster, cheaper inference",
       q: "With the same model, how do you make inference faster and cheaper?",
-      trap: "Just answering “switch to a smaller model” or “add GPUs” is too crude. The interviewer wants you, <b>without switching models or retraining</b>, to name several acceleration techniques and each one’s <b>accuracy / complexity trade-off</b>.",
+      trap: "Just answering “switch to a smaller model” or “add GPUs” is too crude. The question is really after you, <b>without switching models or retraining</b>, to name several acceleration techniques and each one’s <b>accuracy / complexity trade-off</b>.",
       points: [
         { title: "Underlying principle", desc: "The root of slow, expensive inference is <b>many parameters plus token-by-token generation</b>: producing each token means moving and computing the huge parameter set once. The ways to save are “make each step cheaper” or “compute the repeated work less.”" },
         { title: "Engineering trade-offs", desc: "Every technique is a trade-off: quantization saves memory but may lose accuracy; a distilled small model is fast but has shrunken capability; batching saves per-unit cost but adds latency. There’s no free lunch." },
@@ -2318,7 +2318,7 @@ const INT_TR = {
     "temperature": {
       label: "Why answers vary",
       q: "Why does the same question get a different answer each time? What is temperature?",
-      trap: "Don’t treat it as a “model instability bug.” Different answers are <b>by design in the sampling</b>, not a breakage. The interviewer wants you to articulate the “probabilistic sampling” mechanism and how temperature tunes it.",
+      trap: "Don’t treat it as a “model instability bug.” Different answers are <b>by design in the sampling</b>, not a breakage. The question asks you to articulate the “probabilistic sampling” mechanism and how temperature tunes it.",
       points: [
         { title: "Underlying principle", desc: "At each step the model isn’t picking “the one correct answer”; it <b>computes probabilities over a set of candidate tokens and then samples from them</b>; sampling carries randomness, so the same question can take a different path each time." },
         { title: "Engineering trade-offs", desc: "Temperature is the knob that tunes randomness: high → the distribution flattens and it more readily picks unlikely tokens (creative but prone to going off the rails); low → the distribution sharpens and concentrates on high-probability tokens (stable but monotonous)." },
@@ -2343,7 +2343,7 @@ const INT_TR = {
     "rag-why-wrong": {
       label: "Why RAG still errs",
       q: "With RAG in place, why does the model still answer wrong, and how do you reduce it?",
-      trap: "Don’t assume “hook up RAG and it won’t err.” RAG is a chain, and a break at any link causes an error. The interviewer wants you to be able to <b>localize which link failed, layer by layer</b>, rather than vaguely saying “tune it some more.”",
+      trap: "Don’t assume “hook up RAG and it won’t err.” RAG is a chain, and a break at any link causes an error. The question asks you to be able to <b>localize which link failed, layer by layer</b>, rather than vaguely saying “tune it some more.”",
       points: [
         { title: "Underlying principle", desc: "RAG = two stages, <b>retrieve first, then generate</b>. A wrong answer can come from either stage: retrieval didn’t pull back the right evidence, or it did but the generation side didn’t use it well. Different sources, completely different fixes." },
         { title: "Engineering trade-offs", desc: "Diagnose in layers rather than tuning blindly: first confirm <b>whether the right evidence actually made it into the context</b> (a retrieval problem), then look at <b>the evidence being in there yet the answer still wrong</b> (a generation problem). Get the layer wrong and you’re just wasting effort." },
@@ -2368,7 +2368,7 @@ const INT_TR = {
     "rag-vs-longcontext": {
       label: "RAG vs. long context",
       q: "When there’s a lot of data, do you use RAG or stuff it all into a long context? How do you choose?",
-      trap: "Don’t end with a one-liner like “context windows keep growing, so we won’t need RAG anymore.” The interviewer wants you to articulate <b>each one’s cost, ceiling, and blind spots</b>, and give a <b>criterion by scenario</b>.",
+      trap: "Don’t end with a one-liner like “context windows keep growing, so we won’t need RAG anymore.” The question asks you to articulate <b>each one’s cost, ceiling, and blind spots</b>, and give a <b>criterion by scenario</b>.",
       points: [
         { title: "Underlying principle", desc: "The two paths are fundamentally different: long context <b>stuffs everything into the window each time</b> to compute together (limited by attention’s O(n²) and the trained length); RAG <b>pulls only relevant chunks into the window each time</b>, leaving the data external." },
         { title: "Engineering trade-offs", desc: "Long context is simple and needs no retrieval setup, but it’s <b>expensive, has a ceiling, and has a middle blind spot</b> (lost in the middle); RAG scales without limit, is cheap per call, and can attach citations, but its success hinges on <b>retrieval quality</b> and the system is more complex." },
@@ -2393,7 +2393,7 @@ const INT_TR = {
     "bias": {
       label: "Where bias comes from",
       q: "Where does AI bias come from, and how do you reduce it?",
-      trap: "Don’t describe bias as “engineers deliberately coded it badly” or “the model has an agenda.” It’s mainly <b>learned from the data</b> and can even be amplified. The interviewer wants you to explain the causes clearly and understand why it’s <b>hard to eradicate</b>.",
+      trap: "Don’t describe bias as “engineers deliberately coded it badly” or “the model has an agenda.” It’s mainly <b>learned from the data</b> and can even be amplified. The question asks you to explain the causes clearly and understand why it’s <b>hard to eradicate</b>.",
       points: [
         { title: "Underlying principle", desc: "The model <b>learns statistical patterns from massive data</b>, so the social biases in that data (gender, race, regional stereotypes) get learned right along with everything else, and can even be <b>amplified</b> because it “learns the most common patterns.”" },
         { title: "Engineering trade-offs", desc: "Suppressing bias often means <b>sacrificing some performance or coverage</b>: over-filtering the data loses useful content, and adding too many guardrails ties the model’s hands so it dodges even normal questions." },
@@ -2418,7 +2418,7 @@ const INT_TR = {
     "trust-answer": {
       label: "Judging trustworthiness",
       q: "How do you judge whether an AI’s answer is trustworthy?",
-      trap: "Don’t trust it just because “it sounds reasonable.” A model’s <b>confident tone doesn’t mean it’s correct</b>: it will be wrong with a completely straight face. The interviewer wants you to articulate <b>actionable verification methods</b>, not gut feeling.",
+      trap: "Don’t trust it just because “it sounds reasonable.” A model’s <b>confident tone doesn’t mean it’s correct</b>: it will be wrong with a completely straight face. The question asks you to articulate <b>actionable verification methods</b>, not gut feeling.",
       points: [
         { title: "Underlying principle", desc: "A model’s output is <b>a guess at the most plausible words</b>, not a verified fact, and it’s <b>always fluent and confident in tone</b>, with the degree of confidence unrelated to whether it’s correct. So “sounds right” can’t be the criterion." },
         { title: "Engineering trade-offs", desc: "Verification takes time, so calibrate the effort to <b>how much is at stake</b>: for small talk you can relax; for answers involving decisions, medicine, law, or money, cross-verify strictly." },
@@ -2443,7 +2443,7 @@ const INT_TR = {
     "ai-limits": {
       label: "The limits of capability",
       q: "Where are the limits of a large model’s capabilities? Will it replace engineers?",
-      trap: "Don’t go to extremes: either “it can do anything and will soon replace people” or “it’s just a toy.” The interviewer wants you to calmly draw where <b>it’s strong and where it’s weak</b>, and to discuss the human-machine division of labor.",
+      trap: "Don’t go to extremes: either “it can do anything and will soon replace people” or “it’s just a toy.” The question asks you to calmly draw where <b>it’s strong and where it’s weak</b>, and to discuss the human-machine division of labor.",
       points: [
         { title: "Underlying principle", desc: "Its ability is to <b>learn patterns from data and then generate</b>: it’s good at summarizing, writing, translating, drafting code, and speeding up repetitive work; but it doesn’t “understand true vs. false,” has no up-to-the-minute knowledge of the live world, and bears no consequences." },
         { title: "Engineering trade-offs", desc: "Using it trades <b>speed and volume</b> for <b>needing a human to verify</b>: it can quickly produce eighty percent of the first draft, but the last mile of correctness, responsibility, and judgment still needs a human to sign off." },
@@ -2468,7 +2468,7 @@ const INT_TR = {
     "agent-planning": {
       label: "Agent planning",
       q: "Explain how an agent does planning.",
-      trap: "Many people just say “it figures things out on its own.” The interviewer wants you to articulate <b>the concrete approaches to planning and their trade-offs</b> (ReAct vs. plan-then-execute, when to replan), not a throwaway line like “an agent just plans by itself.”",
+      trap: "Many people just say “it figures things out on its own.” The question asks you to articulate <b>the concrete approaches to planning and their trade-offs</b> (ReAct vs. plan-then-execute, when to replan), not a throwaway line like “an agent just plans by itself.”",
       points: [
         { title: "Underlying principle", desc: "Planning means breaking a big goal into small, executable steps and deciding how to drive them forward: you can lay out a full plan up front, or adjust as you go." },
         { title: "Engineering trade-offs", desc: "ReAct (think → act → observe, step by step) is flexible but takes many steps and wanders easily; plan-then-execute (draft a plan, then run it) saves tokens and is easy to trace, but if the plan is wrong the whole thing goes off course." },
@@ -2493,7 +2493,7 @@ const INT_TR = {
     "agent-tools": {
       label: "Reliable tool calling",
       q: "How would you design an agent that reliably calls external tools?",
-      trap: "Just answering “use function calling” isn’t enough. The interviewer wants to see <b>how you fail-proof the whole calling loop</b>: wrong tool picked, bad arguments, tool errors, timeouts, you need an answer for each.",
+      trap: "Just answering “use function calling” isn’t enough. The question is really after to see <b>how you fail-proof the whole calling loop</b>: wrong tool picked, bad arguments, tool errors, timeouts, you need an answer for each.",
       points: [
         { title: "Underlying principle", desc: "The model doesn’t “execute” tools itself; it only <b>outputs a structured intent of “which tool to call, with what arguments”</b>, and external code actually runs it and feeds the result back." },
         { title: "Engineering trade-offs", desc: "The more tools you give the model, the more flexible it is, but the easier it picks the wrong one and the messier the arguments get; tool descriptions should be concise and clear, and the count kept small." },
@@ -2518,7 +2518,7 @@ const INT_TR = {
     "json-output": {
       label: "Reliable JSON output",
       q: "How do you get a large model to reliably output JSON?",
-      trap: "Just saying “tell it in the prompt to output JSON” guarantees nothing: the model generates probabilistically and can add an extra sentence or drop a bracket at any time. The interviewer wants <b>the means to go from “please” to “guaranteed”</b>.",
+      trap: "Just saying “tell it in the prompt to output JSON” guarantees nothing: the model generates probabilistically and can add an extra sentence or drop a bracket at any time. The question is really after <b>the means to go from “please” to “guaranteed”</b>.",
       points: [
         { title: "Underlying principle", desc: "The model generates <b>token by token, probabilistically</b>, so it inherently doesn’t guarantee valid JSON; it may add an explanation, drop a comma, or get truncated. So “reliable” can’t rest on wishing in the prompt." },
         { title: "Engineering trade-offs", desc: "The means run from weak to strong: prompt instructions → function calling / JSON mode → constrained decoding (only valid JSON can be emitted). Stronger is more reliable, but ties you more to a specific API / inference framework and is less flexible." },
@@ -2543,7 +2543,7 @@ const INT_TR = {
     "agent-memory": {
       label: "Agent memory",
       q: "How does an agent manage memory?",
-      trap: "Don’t conflate it with “context window.” The window is “how much it can read at once”; memory management is “across many steps, what to keep at hand.” The interviewer is watching whether you can tell them apart and how you stay coherent within a limited window.",
+      trap: "Don’t conflate it with “context window.” The window is “how much it can read at once”; memory management is “across many steps, what to keep at hand.” The question is really testing whether you can tell them apart and how you stay coherent within a limited window.",
       points: [
         { title: "Underlying principle", desc: "The model itself is <b>stateless</b>; at each step it only sees the context you put in right then. An agent’s “memory” = external code deciding “which history to feed back in at each step.”" },
         { title: "Engineering trade-offs", desc: "Stuff everything in (faithful but blows the window and costs more) vs. summarize (saves space but loses detail) vs. retrieve (pull only what’s relevant, scalable but depends on retrieval quality); usually a mix." },
@@ -2568,7 +2568,7 @@ const INT_TR = {
     "agent-eval": {
       label: "Measuring agent performance",
       q: "How would you quantify an agent’s performance?",
-      trap: "Just saying “check whether its answer is right” isn’t enough. An agent is multi-step and uses tools, so looking only at the final answer misses a lot. The interviewer wants you to lay out <b>task-level and process-level</b> evaluation, and to factor in cost / latency too.",
+      trap: "Just saying “check whether its answer is right” isn’t enough. An agent is multi-step and uses tools, so looking only at the final answer misses a lot. The question asks you to lay out <b>task-level and process-level</b> evaluation, and to factor in cost / latency too.",
       points: [
         { title: "Underlying principle", desc: "An agent’s output is “a sequence of actions + a final result,” so evaluation splits into: is the result right (task success rate) and is the process good (the trajectory: did it wander, did it use the right tools)." },
         { title: "Engineering trade-offs", desc: "Human evaluation (accurate but slow and expensive) vs. automated evaluation (fast but hard for open-ended tasks) vs. LLM-as-judge (scalable but biased and needs calibration); offline test sets vs. live real traffic." },
@@ -2593,7 +2593,7 @@ const INT_TR = {
     "agent-cost": {
       label: "Agent cost control",
       q: "How do you keep an agent’s cost from spiraling out of control?",
-      trap: "Just saying “use a cheaper model” misses the root cause. Runaway cost comes from <b>multiple steps × context piling up step by step</b>: each extra step re-computes the earlier history as tokens all over again. The interviewer wants you to name this compounding effect and the countermeasures.",
+      trap: "Just saying “use a cheaper model” misses the root cause. Runaway cost comes from <b>multiple steps × context piling up step by step</b>: each extra step re-computes the earlier history as tokens all over again. The question asks you to name this compounding effect and the countermeasures.",
       points: [
         { title: "Underlying principle", desc: "Agent cost = step count × tokens per step, and each step stuffs the earlier history in again, so <b>tokens grow cumulatively with the step count</b>; once it loops or retries endlessly, cost explodes." },
         { title: "Engineering trade-offs", desc: "Saving cost vs. keeping quality: a cheap model saves money but may get it wrong and need a redo, ending up pricier; a step limit saves money but may abandon the task too early." },
@@ -2643,7 +2643,7 @@ const INT_TR = {
     "rag-retrieval": {
       label: "RAG retrieval strategy",
       q: "How would you design a RAG retrieval strategy?",
-      trap: "Just saying “compute vector similarity and take the most relevant top-k” is the barest version. The interviewer wants to see that you understand <b>chunking, hybrid search, reranking, and query rewriting</b>, the means and trade-offs that make retrieval actually accurate.",
+      trap: "Just saying “compute vector similarity and take the most relevant top-k” is the barest version. The question is really testing whether you understand <b>chunking, hybrid search, reranking, and query rewriting</b>, the means and trade-offs that make retrieval actually accurate.",
       points: [
         { title: "Underlying principle", desc: "Retrieval quality = “are the chunks you pull back the right ones,” constrained all along by: how you chunk, which vectors you use, how you compare, and how many you take. Get one link wrong and even the strongest LLM answers wrong (garbage in)." },
         { title: "Engineering trade-offs", desc: "Pure vector search (understands semantics but may miss keywords) vs. keyword search (precise but doesn’t understand synonyms) → hybrid search covers both but is more complex; a large top-k means higher recall but blows the window and brings more noise." },
@@ -2668,7 +2668,7 @@ const INT_TR = {
     "hallucination": {
       label: "Why hallucinations happen",
       q: "Why do large models hallucinate? Can it be eliminated entirely?",
-      trap: "Don’t treat hallucination as a “bug.” It isn’t a programming error, it’s a <b>side effect</b> of how the model works: it’s guessing the most likely words, not looking up facts. The interviewer wants you to explain the causes and to understand why it can’t be “cured,” only reduced.",
+      trap: "Don’t treat hallucination as a “bug.” It isn’t a programming error, it’s a <b>side effect</b> of how the model works: it’s guessing the most likely words, not looking up facts. The question asks you to explain the causes and to understand why it can’t be “cured,” only reduced.",
       points: [
         { title: "Underlying principle", desc: "The model <b>guesses the next most plausible word</b>, it doesn’t query a database; when it “doesn’t know,” it won’t stop and say so, but keeps generating the most fluent-sounding, possibly false, content." },
         { title: "Engineering trade-offs", desc: "Suppressing hallucination means sacrificing some “fluency / willingness to answer”: forcing citations and refusing when uncertain makes it more conservative, so sometimes it won’t answer even when it should." },
@@ -2693,7 +2693,7 @@ const INT_TR = {
     'context-window': {
       label: 'Context window limits',
       q: 'How would you handle a large model’s context window limit?',
-      trap: 'Most people just name a tool: “use RAG” or “switch to a bigger-window model.” The interviewer doesn’t want a tool name; they want to see whether you understand <b>why the limit exists</b> and <b>how to combine strategies for the situation</b>.',
+      trap: 'Most people just name a tool: “use RAG” or “switch to a bigger-window model.” The question is not about naming a tool; it is about whether you understand <b>why the limit exists</b> and <b>how to combine strategies for the situation</b>.',
       points: [
         { title: 'Underlying principle', desc: 'Do you know the physical root of the limit: attention has “every token attend to every token,” so compute and memory grow O(n²) with length; positional encoding is only reliable within the trained length; and even inside the window, the middle is often under-used (lost in the middle).' },
         { title: 'Engineering trade-offs', desc: 'How you weigh time / cost / accuracy, e.g. long-context fine-tuning vs. dynamic compression, a bigger window vs. retrieval.' },
@@ -2720,7 +2720,7 @@ const INT_TR = {
     "realtime-assistant": {
       label: "リアルタイムデータアシスタントの設計",
       q: "リアルタイムデータを調べられる AI アシスタントを設計するとしたら、どう組みますか？",
-      trap: "「API をつなぐ」とだけ答えてはいけません。面接官が見たいのは、<b>モデルはリアルタイムには知りえない → ツール／検索で補う → さらに失敗と権限も処理する</b>を一本につなげられるかです。",
+      trap: "「API をつなぐ」とだけ答えてはいけません。問われているのは、<b>モデルはリアルタイムには知りえない → ツール／検索で補う → さらに失敗と権限も処理する</b>を一本につなげられるかです。",
       points: [
         { title: "問題の分解", desc: "モデルの知識には締め切りがあり、自分からネットにつなぎにもいきません；「リアルタイム」は<b>外部ツール（function calling／API）またはリアルタイム検索</b>で最新データを流し込むしかなく、モデルは理解と整理だけを担います。" },
         { title: "アーキテクチャの取捨", desc: "毎回リアルタイムに調べる → 最新だが遅く高く、失敗もしうる；キャッシュを足す → 速く安いが古いデータを返しかねない。「データがどれだけ速く変わるか」に応じてキャッシュの有効期限（TTL）を決めます。" },
@@ -2746,7 +2746,7 @@ const INT_TR = {
     "monitoring": {
       label: "本番監視の設計",
       q: "AI 製品の「本番監視」を設計するとしたら、どう組みますか？",
-      trap: "「エラーが出ていないか見る」とだけ答えてはいけません。AI で最大のリスクはしばしば<b>沈黙する品質低下</b>（crash はしないが答えがどんどん悪くなる）です；面接官は「可用性」だけでなく「品質」も監視することを求めます。",
+      trap: "「エラーが出ていないか見る」とだけ答えてはいけません。AI で最大のリスクはしばしば<b>沈黙する品質低下</b>（crash はしないが答えがどんどん悪くなる）です；この設問では、可用性だけでなく品質も監視できるかが問われます。",
       points: [
         { title: "問題の分解", desc: "従来の監視は「落ちていないか」（レイテンシ、エラー率）を見ます；AI ではさらに「<b>ちゃんと答えられているか</b>」も見る必要があります：品質は<b>静かにドリフトし</b>（データが変わる、攻撃される、モデルが更新される）、しかもエラーを出しません。" },
         { title: "アーキテクチャの取捨", desc: "すべて人手で審査する → 正確だが高く遅く、量をカバーしきれない；全自動の指標 → 速いが細かな品質を捉えられない；実務ではたいてい自動指標＋抽出しての人手審査＋ユーザーフィードバックの三つを組み合わせます。" },
@@ -2772,7 +2772,7 @@ const INT_TR = {
     "prompt-injection": {
       label: "プロンプトインジェクション",
       q: "プロンプトインジェクションって何ですか？なぜ防ぎにくいのですか？",
-      trap: "多くの人は「『他の指示は無視して』と一文足せば防げる」と思い込みます。面接官が見たいのは表面的な小技ではなく、<b>なぜ本質的に防ぎにくいのか</b>を理解しているかです。",
+      trap: "多くの人は「『他の指示は無視して』と一文足せば防げる」と思い込みます。問われているのは表面的な小技ではなく、<b>なぜ本質的に防ぎにくいのか</b>を理解しているかです。",
       points: [
         { title: "基礎原理", desc: "モデルは<b>「開発者の指示」と「データに紛れ込んだ指示」を区別できません</b>：どちらもモデルには同じ一続きの文字にすぎないからです。ユーザー入力や、取り込んだ Web ページ／文書の中に「これまでを無視して X をせよ」と一文が仕込まれていれば、モデルはそのまま従ってしまいます。" },
         { title: "工学的トレードオフ", desc: "完全に防ごうとして能力を絞る（外部コンテンツを扱わない、ツールを与えない）と安全ですが使い物になりません；便利さを取るならリスクを引き受けるしかなく、低減はできてもゼロにはできません。" },
@@ -2797,7 +2797,7 @@ const INT_TR = {
     "jailbreak": {
       label: "ジェイルブレイクは防げるか",
       q: "ジェイルブレイク（脱獄）って何ですか？完全に防げますか？",
-      trap: "面接官が見たいのは、「ルールを増やせばいい」ではなく、<b>なぜこれは終わりのない攻防で「一度で解決」できないのか</b>を理解しているかです。",
+      trap: "問われているのは、「ルールを増やせばいい」ではなく、<b>なぜこれは終わりのない攻防で「一度で解決」できないのか</b>を理解しているかです。",
       points: [
         { title: "基礎原理", desc: "ジェイルブレイク＝<b>話術でモデルを誘導し安全ルールを回避させる</b>こと（ロールプレイ、仮定の状況、翻訳／エンコードでの包み込み）；安全性は「訓練で身についた傾向」であって硬いスイッチではないため、必ず抜け道の縁が残ります。" },
         { title: "工学的トレードオフ", desc: "厳しくするほど安全ですが「過剰拒否（over-refusal）」が増え（正常な要求まで巻き込む）；緩めるほど便利ですがジェイルブレイクされやすくなります。その中間でバランスを取る必要があります。" },
@@ -2822,7 +2822,7 @@ const INT_TR = {
     "guardrails": {
       label: "本番に必要なガードレール",
       q: "本番に出す AI プロダクトには、どんな「ガードレール」を入れるべきですか？",
-      trap: "「フィルタを一つ足す」で終わらせないこと。面接官が見たいのは、<b>入力から出力、挙動までの一貫した防御</b>と、コストや体験とのトレードオフを語れるかです。",
+      trap: "「フィルタを一つ足す」で終わらせないこと。問われているのは、<b>入力から出力、挙動までの一貫した防御</b>と、コストや体験とのトレードオフを語れるかです。",
       points: [
         { title: "基礎原理", desc: "モデルはハルシネーションを起こし、誘導され、出力は制御しきれません。だから<b>モデルの外側</b>にひと回りの検査を設けます：入力（input）・出力（output）・挙動（action）の3つの関門すべてを守ります。" },
         { title: "工学的トレードオフ", desc: "ガードレールが厳しいほど安全ですが、誤って巻き込みやすく（過剰拒否）、遅延とコストが増えます；一律に最も厳しくするのではなく、リスクに応じて段階を分けるべきです。" },
@@ -2847,7 +2847,7 @@ const INT_TR = {
     "prompt-craft": {
       label: "プロンプトを書く原則",
       q: "良いプロンプトはどう書けばいいですか？どんな原則がありますか？",
-      trap: "多くの人はプロンプトを「質問を打ち込むだけ」だと思っています。面接官が見たいのは<b>なぜ同じ質問でも書き方を変えると結果が大きく変わるのか</b>を理解しているか、そして体系的な原則を持っているかです。",
+      trap: "多くの人はプロンプトを「質問を打ち込むだけ」だと思っています。問われているのは<b>なぜ同じ質問でも書き方を変えると結果が大きく変わるのか</b>を理解しているか、そして体系的な原則を持っているかです。",
       points: [
         { title: "基礎原理", desc: "モデルは<b>与えられた文脈から最も自然な続きを推測している</b>だけ；与える役割・文脈・フォーマット・例は、モデルに「どの方向へ生成すべきか」の枠をはめることに等しい。" },
         { title: "工学的トレードオフ", desc: "説明が少なすぎる→自由に振る舞ってずれやすい；多すぎて雑然→トークンを食い、かえって注意が散る。「明確に伝える」と「簡潔さ」の間で加減する必要がある。" },
@@ -2872,7 +2872,7 @@ const INT_TR = {
     "few-shot": {
       label: "few-shot vs zero-shot",
       q: "few-shot と zero-shot は何が違いますか？いつ例を与えるべきですか？",
-      trap: "「few-shot とは例を与えること」と知っているだけでは足りません。面接官が見たいのは<b>例がモデルに対して何をしているのか</b>を説明できるか、そしていつそのトークンコストを払う価値があるかです。",
+      trap: "「few-shot とは例を与えること」と知っているだけでは足りません。問われているのは<b>例がモデルに対して何をしているのか</b>を説明できるか、そしていつそのトークンコストを払う価値があるかです。",
       points: [
         { title: "基礎原理", desc: "例は<b>「この入力にはこの出力」をその場で実演する</b>ことに等しく、モデルにフォーマット・スタイル・判断の境界を較正させる。再学習は不要。" },
         { title: "工学的トレードオフ", desc: "例は通常 zero-shot より正確だが<b>多ければ良いわけではない</b>：限界効用の逓減があり、よく選んだ1〜2個の例が数多く詰め込むより勝ることが多い；例はトークンも食い、高く遅くなる。" },
@@ -2897,7 +2897,7 @@ const INT_TR = {
     "cot-prompting": {
       label: "Chain-of-Thought",
       q: "Chain-of-Thought（モデルに「少し考えさせる」）とは何ですか？なぜ効くのですか？",
-      trap: "CoT を「『一歩ずつ考えて』と一言足す魔法」だと思ってはいけません。面接官が見たいのは<b>なぜ効くのか、そして代償と限界</b>を理解しているかです。",
+      trap: "CoT を「『一歩ずつ考えて』と一言足す魔法」だと思ってはいけません。問われているのは<b>なぜ効くのか、そして代償と限界</b>を理解しているかです。",
       points: [
         { title: "基礎原理", desc: "モデルに<b>まず中間の推論ステップを出させてから答えさせる</b>；難問を小さなステップに分解すると、各ステップの続きが「一発で答える」より当てやすくなる。" },
         { title: "工学的トレードオフ", desc: "より正確だが<b>トークンが増え、遅く、高くなる</b>し、単純な問題に CoT を使うのは無駄。" },
@@ -2922,7 +2922,7 @@ const INT_TR = {
     "prompt-vs-tune-vs-rag": {
       label: "プロンプト調整か手法変更か",
       q: "プロンプトで解決できないとき、まずプロンプトをいじるべきですか、それとも手法（RAG／ファインチューニング）を変えるべきですか？",
-      trap: "面接官が見ているのは<b>まず問題の種類を診断できるか</b>であって、一律に「もう少しプロンプトをいじる」や「すぐファインチューニングする」ではありません。",
+      trap: "問われているのは<b>まず問題の種類を診断できるか</b>であって、一律に「もう少しプロンプトをいじる」や「すぐファインチューニングする」ではありません。",
       points: [
         { title: "基礎原理", desc: "3つの手段は異なる問題を解く：プロンプトは<b>その回の振る舞い</b>を変え、RAG は<b>欠けている事実</b>を補い、ファインチューニングは<b>内面化されたスタイルと能力</b>を変える。" },
         { title: "工学的トレードオフ", desc: "コストは低い順に：プロンプト（ほぼ無料）< RAG（中）< ファインチューニング（高）。まず安いものから動かす。" },
@@ -2947,7 +2947,7 @@ const INT_TR = {
     "reasoning-models": {
       label: "推論モデル（o1）",
       q: "o1 のような「推論モデル」は普通の LLM と何が違いますか？",
-      trap: "「賢いから」とだけ言ってはいけません。面接官が求めるのは<b>何が違うのか、代償は何か、いつ使うべきか</b>を語ることです。",
+      trap: "「賢いから」とだけ言ってはいけません。求められるのは<b>何が違うのか、代償は何か、いつ使うべきか</b>を語ることです。",
       points: [
         { title: "基礎原理", desc: "<b>答える前に長い内部推論を行う</b>（長い CoT）よう訓練され、RL で「正しく推論できたか」を最適化される；ただ続きを話すのではなく、まず考えてから答える。" },
         { title: "工学的トレードオフ", desc: "難問の正確率は高いが<b>より遅く、より高い</b>（大量の推論トークンを「考える」ことに費やす）；単純な問題に使うのは無駄。" },
@@ -2972,7 +2972,7 @@ const INT_TR = {
     "test-time-compute": {
       label: "長く考えるとなぜ強くなるか",
       q: "なぜ「モデルに長く考えさせる」（test-time compute）と賢くなれるのですか？",
-      trap: "面接官が見たいのは<b>なぜ「推論時に計算量を多く費やす」と正確率を得られるのか</b>を理解しているかであって、用語の暗記ではありません。",
+      trap: "問われているのは<b>なぜ「推論時に計算量を多く費やす」と正確率を得られるのか</b>を理解しているかであって、用語の暗記ではありません。",
       points: [
         { title: "基礎原理", desc: "モデルに<b>より多くの中間ステップ・試行・自己チェック</b>の余地を与えることで、難問をより細かく分解でき、後戻りして直せもするので、命中率が自然に上がる。" },
         { title: "工学的トレードオフ", desc: "<b>推論の計算量（時間とコスト）で正確率を買う</b>が、<b>限界効用の逓減</b>があり、考えすぎると費用対効果が下がる。" },
@@ -2997,7 +2997,7 @@ const INT_TR = {
     "cot-limits": {
       label: "CoT がいつ効かないか",
       q: "Chain-of-Thought は必ず良くなりますか？いつ逆に効かない、あるいは悪化するのですか？",
-      trap: "多くの人は CoT を万能薬だと思っています。面接官が見たいのは<b>その限界と副作用</b>を知っているかです。",
+      trap: "多くの人は CoT を万能薬だと思っています。問われているのは<b>その限界と副作用</b>を知っているかです。",
       points: [
         { title: "基礎原理", desc: "CoT は「ステップを展開する」ことで助けになる；しかし<b>単純な問題はそもそも一歩で答えられる</b>ので、展開はトークンを余計に食うだけ；モデルは<b>もっともらしいが誤った推論を捏造する</b>こともある。" },
         { title: "工学的トレードオフ", desc: "正確さ vs コスト／遅延：難問には値するが単純な問題では無駄；小さいモデルの CoT は効果が限られ、かえって混乱することもある。" },
@@ -3022,7 +3022,7 @@ const INT_TR = {
     "attention-compute": {
       label: "アテンションは何を計算しているか",
       q: "アテンションは結局のところ何を計算していて、なぜ文脈を理解できるのですか？",
-      trap: "多くの人は Q・K・V の3文字を暗記するか、「重要なところに注目する」と一言で済ませます。面接官が見たいのは<b>それが結局何を計算していて、なぜその計算が文脈理解につながるのか</b>であって、用語の羅列ではありません。",
+      trap: "多くの人は Q・K・V の3文字を暗記するか、「重要なところに注目する」と一言で済ませます。問われているのは<b>それが結局何を計算していて、なぜその計算が文脈理解につながるのか</b>であって、用語の羅列ではありません。",
       points: [
         { title: "基礎原理", desc: "各トークンをまず Query・Key・Value の3つのベクトルに変換する；あるトークンの Query と文中の全トークンの Key で類似度を計算して「関連度」の重みとし、その重みで全 Value を加重平均する。つまり<b>各トークンが関連度に応じて他の全トークンを見直す</b>ということ。" },
         { title: "工学的トレードオフ", desc: "これは「各トークンが各トークンを見る」総当たりの照合で、計算量とメモリが長さに対して <b>O(n²)</b> で増える；利点は任意の距離の関連を直接捉えられること、代償は系列が長くなると一気に高くつくこと。" },
@@ -3072,7 +3072,7 @@ const INT_TR = {
     "transformer-vs-rnn": {
       label: "なぜ RNN を置き換えたか",
       q: "なぜ Transformer は RNN／LSTM を置き換えられたのですか？",
-      trap: "「Transformer の方が強い」とだけ言ってはいけません。面接官が求めるのは<b>どの仕組みが強いのか</b>を明確にすること：なぜ並列化できるのか、なぜ長距離の関係を捉えられるのか、そして代償は何か、です。",
+      trap: "「Transformer の方が強い」とだけ言ってはいけません。求められるのは<b>どの仕組みが強いのか</b>を明確にすること：なぜ並列化できるのか、なぜ長距離の関係を捉えられるのか、そして代償は何か、です。",
       points: [
         { title: "基礎原理", desc: "RNN は<b>1トークンずつ逐次的に処理し</b>、情報を隠れ状態で後ろへ伝えていくため、距離が離れると減衰して「忘れ」やすい；Transformer はアテンションで<b>一度に文全体を見る</b>ので、どんなに離れた2つのトークンも直接つながる。" },
         { title: "工学的トレードオフ", desc: "RNN は逐次的で並列化できず学習が遅い；Transformer は文全体を<b>並列に計算でき</b>、GPU を活かせて大規模モデルへの拡張が容易。代償はアテンションの <b>O(n²)</b> で、系列が長くなると高くつく。" },
@@ -3097,7 +3097,7 @@ const INT_TR = {
     "embedding-meaning": {
       label: "埋め込みはなぜ意味を捉えるか",
       q: "埋め込み（embedding）はなぜ「意味」を表せるのですか？意味の近い語はなぜ近くに集まるのですか？",
-      trap: "「単語をベクトルにするだけ」で止まってはいけません。面接官が求めるのは<b>意味がどうやってベクトルに入るのか</b>：なぜ近い語は寄り集まるのか、各語にランダムな数字を割り当てるのとどう違うのか、です。",
+      trap: "「単語をベクトルにするだけ」で止まってはいけません。求められるのは<b>意味がどうやってベクトルに入るのか</b>：なぜ近い語は寄り集まるのか、各語にランダムな数字を割り当てるのとどう違うのか、です。",
       points: [
         { title: "基礎原理", desc: "核心は<b>分布仮説</b>：意味が近い語は、現れる文脈も近い。モデルは大量のテキストから文脈を予測するよう学習し、その結果<b>似た文脈に現れる語ほど似たベクトルを得る</b>ように仕向けられ、意味がこうして座標に押し込まれる。" },
         { title: "工学的トレードオフ", desc: "次元が高いほど細かい意味を表せるがコストは上がり、次元の呪い（高次元空間では点どうしが離れ、距離の区別がつきにくくなる）にも陥る；次元が低いと計算は節約できるが、異なる意味を1か所に押し込めやすい。" },
@@ -3122,7 +3122,7 @@ const INT_TR = {
     "multi-head": {
       label: "なぜマルチヘッドか",
       q: "マルチヘッド注意（multi-head）はなぜ「複数のヘッド」にするのですか？",
-      trap: "「マルチヘッドの方が精度が高い」とだけ言ってはいけません。面接官が求めるのは<b>なぜマルチヘッドがシングルヘッドより良いのか</b>：1組の注意の限界は何か、複数にすると何が増え、どう統合するのか、です。",
+      trap: "「マルチヘッドの方が精度が高い」とだけ言ってはいけません。求められるのは<b>なぜマルチヘッドがシングルヘッドより良いのか</b>：1組の注意の限界は何か、複数にすると何が増え、どう統合するのか、です。",
       points: [
         { title: "基礎原理", desc: "1組の注意は<b>1種類</b>の関連パターンしか学べず、重みは softmax を通ると少数のトークンに焦点が集中する。マルチヘッドは<b>独立した複数組の Q／K／V を並行して使い</b>、それぞれ異なる部分空間で関係を見て、最後に連結してから射影で統合する。" },
         { title: "工学的トレードオフ", desc: "ヘッドは多いほど良いわけではない：総次元が固定なら、ヘッドが多いほど各ヘッドの次元が小さくなり表現力が限られる；「見る角度の数」と「各角度の細かさ」の間で取捨が必要。" },
@@ -3147,7 +3147,7 @@ const INT_TR = {
     "tokenizer-why": {
       label: "トークナイザはなぜ重要か",
       q: "トークナイザの分け方が違うと、どんな影響が出るのですか？",
-      trap: "「文字をトークンに分けるだけ」という定義で止まってはいけません。面接官が求めるのは、分け方が<b>コスト、コンテキスト消費、多言語の公平性に連動する</b>こと：「なぜ高くなるのか、なぜ不公平になるのか」を説明できることです。",
+      trap: "「文字をトークンに分けるだけ」という定義で止まってはいけません。求められるのは、分け方が<b>コスト、コンテキスト消費、多言語の公平性に連動する</b>こと：「なぜ高くなるのか、なぜ不公平になるのか」を説明できることです。",
       points: [
         { title: "基礎原理", desc: "モデルは文字ではなくトークンを見る。主流は <b>サブワード</b>（BPE など）：よくある語には1トークン、まれな語はいくつかの断片に分ける。だから「分け方」が、同じ文章が<b>何トークンに分けられるか</b>を決める。" },
         { title: "工学的トレードオフ", desc: "トークン数は<b>コストと速度</b>（課金も計算もトークン単位）と<b>コンテキスト消費</b>（多く分けるほどウィンドウが早く埋まる）に直結する。語彙が大きいと1語あたりのトークンは節約できるがモデルは重くなる、典型的な取捨。" },
@@ -3172,7 +3172,7 @@ const INT_TR = {
     "rlhf-why": {
       label: "RLHF は何を解決するか",
       q: "事前学習を終えたモデルはもう話せるのに、なぜ RLHF が必要なのですか？",
-      trap: "RLHF を「モデルに新しい知識を教えて賢くする」と説明してはいけません：それは<b>知識を足さず、行動と好みを調整するだけ</b>。面接官は「できるかどうか」（事前学習が与える能力）と「望む形で答えてくれるか」（アライメント）を区別できるかを見ています。",
+      trap: "RLHF を「モデルに新しい知識を教えて賢くする」と説明してはいけません：それは<b>知識を足さず、行動と好みを調整するだけ</b>。この設問で問われるのは、「できるかどうか」（事前学習が与える能力）と「望む形で答えてくれるか」（アライメント）を区別できるかどうかです。",
       points: [
         { title: "基礎原理", desc: "事前学習の目的は<b>次に最もありそうなトークンを当てること</b>だけで、知識や言語感覚は身につくが、それは「続きを書く」だけ：指示を理解する保証はなく、答えが役に立つか安全かも気にしない。" },
         { title: "工学的トレードオフ", desc: "3段階の分業：事前学習が土台を作り、SFT（教師ありファインチューニング）が指示どおり答えるよう教え、RLHF が人間の好みで有用性／安全性を仕上げる；後段ほど人手のラベル付けに頼り単位データは高くつくが、総計算量／総費用でいえば依然として事前学習が最も高い。" },
@@ -3197,7 +3197,7 @@ const INT_TR = {
     "finetune-vs-rag": {
       label: "ファインチューニング vs RAG",
       q: "どんなときにモデルをファインチューニングし、どんなときに RAG を使うのですか？",
-      trap: "最もよくある誤りは、両者を<b>二者択一</b>と考えること、または「ファインチューニング＝新しい知識を詰め込むこと」と思い込むこと。面接官は「ファインチューニングは行動を変え、RAG は事実を補う」と対応づけられ、両者がよく併用されると知っていることを求めます。",
+      trap: "最もよくある誤りは、両者を<b>二者択一</b>と考えること、または「ファインチューニング＝新しい知識を詰め込むこと」と思い込むこと。求められるのは、「ファインチューニングは行動を変え、RAG は事実を補う」と対応づけられ、両者がよく併用されると知っていることです。",
       points: [
         { title: "基礎原理", desc: "違いは知識をどこに置くか：ファインチューニングは能力を<b>重みに書き込む</b>（変えるのは「どう答えるか」）、RAG はデータを<b>外部に置いて毎回引く</b>（補うのは「どんな事実を答えるか」）。" },
         { title: "工学的トレードオフ", desc: "ファインチューニングは初期コストが高く、データが変わるたびに再学習が必要だが、推論時に検索を伴わなくてよい；RAG はデータ変更が知識ベースの更新だけで済み、出典も引用できるが、毎回検索の分のコストが増え、検索品質に左右される。" },
@@ -3222,7 +3222,7 @@ const INT_TR = {
     "lora": {
       label: "LoRA はなぜ軽いか",
       q: "LoRA はなぜ速くて軽くできるのですか？",
-      trap: "「学習するパラメータが減る」「速くて軽い」とだけ言っても足りません。面接官が求めるのは<b>なぜ軽いのか</b>（重みを凍結し、低ランクの差分だけを学ぶので主に VRAM を節約する）、そして<b>元のモデルを変えず</b>、差し替えて切り替えられる利点です。要点は VRAM の節約と切り替えやすさであって、速度が主役ではありません。",
+      trap: "「学習するパラメータが減る」「速くて軽い」とだけ言っても足りません。求められるのは<b>なぜ軽いのか</b>（重みを凍結し、低ランクの差分だけを学ぶので主に VRAM を節約する）、そして<b>元のモデルを変えず</b>、差し替えて切り替えられる利点です。要点は VRAM の節約と切り替えやすさであって、速度が主役ではありません。",
       points: [
         { title: "基礎原理", desc: "元のモデルの重みを凍結し、その脇に<b>低ランク（2つの小さな行列の積）の差分</b>を1組だけ付けて調整量を学ぶ；ファインチューニングに必要な変更は実は「ランクが低い」ので、小さな1組で十分近似できる。" },
         { title: "工学的トレードオフ", desc: "主眼は<b>VRAM の大幅な削減</b>（凍結した層は最適化器の状態も重みの勾配も保存しない）で、学習も比較的軽い（より大きなバッチが使え、凍結層の勾配計算を省ける）が、各ステップの順伝播＋逆伝播は依然としてベースモデル全体を通るため、節約できるのは主にメモリで純粋な計算量ではない；効果は通常、全パラメータのファインチューニングに完全に等しくはなく<b>近い</b>。" },
@@ -3247,7 +3247,7 @@ const INT_TR = {
     "catastrophic-forgetting": {
       label: "ファインチューニングで劣化するか",
       q: "ファインチューニングはモデルを「劣化」させる（破滅的忘却）のですか？どう避けますか？",
-      trap: "忘却が起きることを否定してはいけないし、「もう数エポック回せば良くなる」と思ってもいけません：それはたいてい<b>もっと悪くなる</b>。面接官は「狭いデータで過度にファインチューニングすると汎用能力が上書きされる」と指摘でき、緩和策を出せることを求めます。",
+      trap: "忘却が起きることを否定してはいけないし、「もう数エポック回せば良くなる」と思ってもいけません：それはたいてい<b>もっと悪くなる</b>。求められるのは、「狭いデータで過度にファインチューニングすると汎用能力が上書きされる」と指摘でき、緩和策を出せることです。",
       points: [
         { title: "基礎原理", desc: "起きる。ファインチューニングは<b>重みを引き続き変えること</b>で、狭い分野のデータだけで激しく学習すると、もともと汎用能力を担っていた重みを<b>上書きしてしまい</b>、他のタスクで性能が落ちる。" },
         { title: "工学的トレードオフ", desc: "学習が長いほど、学習率が大きいほど、データが狭いほど、分野内は強くなるが汎用能力の低下も大きい；「新しいタスクを覚える」と「元の能力を保つ」の間で加減を見極める必要がある。" },
@@ -3272,7 +3272,7 @@ const INT_TR = {
     "data-quality": {
       label: "品質 vs 量",
       q: "学習データは品質と量、どちらが重要ですか？",
-      trap: "直感で「データは多いほど良い」と答えると地雷を踏みます。面接官が求めるのは<b>基本的な量を超えたら、品質と多様性が純粋な量を上回る</b>こと、そして汚いデータは garbage in, garbage out だということです。",
+      trap: "直感で「データは多いほど良い」と答えると地雷を踏みます。求められるのは<b>基本的な量を超えたら、品質と多様性が純粋な量を上回る</b>こと、そして汚いデータは garbage in, garbage out だということです。",
       points: [
         { title: "基礎原理", desc: "モデルは<b>データに従って分布を学ぶ</b>ので、何を学ぶかは何を与えるか次第：汚いデータや誤ったラベルはそのまま学び込まれる、<b>garbage in, garbage out</b>。" },
         { title: "工学的トレードオフ", desc: "量は十分に必要（少なすぎると学べず、場面を網羅できない）だが、閾値を超えると<b>重複や低品質のデータをいくら足しても限界効用は小さく</b>、ノイズでかえって悪化することさえある；クリーニングと重複除去の費用対効果は、やみくもに量を増やすより高いことが多い。" },
@@ -3297,7 +3297,7 @@ const INT_TR = {
     "why-not-pretrain": {
       label: "自前の事前学習を避ける理由",
       q: "なぜ一般に、大規模モデルを自前でゼロから事前学習するのは勧められないのですか？",
-      trap: "ハードルを低く見積もってはいけないし、「自社データがあるから」という理由で自前学習に走ってもいけません。面接官は<b>データ／計算資源／コストの桁</b>、そして「巨人の肩に乗る＋ファインチューニング／RAG」がなぜ割に合うのかを説明できることを求めます。",
+      trap: "ハードルを低く見積もってはいけないし、「自社データがあるから」という理由で自前学習に走ってもいけません。求められるのは、<b>データ／計算資源／コストの桁</b>、そして「巨人の肩に乗る＋ファインチューニング／RAG」がなぜ割に合うのかを説明できることです。",
       points: [
         { title: "基礎原理", desc: "事前学習に必要なのは<b>天文学的なデータ、計算資源、時間</b>：兆単位のトークン、数千から数万枚の GPU で数週間から数か月学習し、コストは軽く数百万から数千万ドルにのぼる。" },
         { title: "工学的トレードオフ", desc: "自前でゼロから学習するのは「土台を作り直す」ことに金を燃やすことで、しかもデータと学習エンジニアリングのチーム一式が要る；それに比べ、既存のオープンソース／商用モデルを使い、<b>予算をファインチューニングと RAG に回す</b>方が費用対効果ははるかに高い。" },
@@ -3322,7 +3322,7 @@ const INT_TR = {
     "diffusion-how": {
       label: "拡散はどう画像を生むか",
       q: "テキストから画像を生成する拡散モデルは、どうやって1枚のノイズから画像を生み出すのですか？",
-      trap: "多くの人は「ノイズをきれいにする」としか言えず、<b>学習時にノイズ除去を学び、生成時に繰り返しノイズ除去する</b>のが実は表裏一体だと説明できません。面接官は「ノイズを加えて学習 → ノイズ除去で生成」という筋道と、その中で prompt が果たす役割を指摘できることを求めます。",
+      trap: "多くの人は「ノイズをきれいにする」としか言えず、<b>学習時にノイズ除去を学び、生成時に繰り返しノイズ除去する</b>のが実は表裏一体だと説明できません。求められるのは、「ノイズを加えて学習 → ノイズ除去で生成」という筋道と、その中で prompt が果たす役割を指摘できることです。",
       points: [
         { title: "基礎原理", desc: "学習時には鮮明な画像に<b>段階的にノイズを加えて</b>純粋なノイズになるまで壊し、モデルに「このノイズの度合いではどれだけノイズを取り除くべきか」を学ばせる；生成はその逆で、純粋なノイズから<b>一歩ずつノイズ除去して</b>画像に復元する。" },
         { title: "工学的トレードオフ", desc: "ノイズ除去のステップ数が多いほど品質は細かくなるが、遅く高くつく；ステップが少ないと速いがぼやける。実務ではサンプラー（sampler）とステップ蒸留で、数十ステップを数ステップに圧縮しても実用に耐えるようにする。" },
@@ -3347,7 +3347,7 @@ const INT_TR = {
     "diffusion-not-collage": {
       label: "コラージュなのか",
       q: "画像生成は「ネット上の画像を切り貼りしている」のですか？",
-      trap: "直感では AI が「何枚かの画像を切り貼りして縫い合わせる」と思いがちです。面接官は<b>モデルの中に元画像は保存されておらず、出力する画素はすべて計算し直した完全に新しい内容である（切り貼りしたかけらは1つもない）</b>ことを明確に説明でき、「統計的な規則を学ぶ」ことと「検索して継ぎ合わせる」ことの本質的な違いを区別できることを求めます。",
+      trap: "直感では AI が「何枚かの画像を切り貼りして縫い合わせる」と思いがちです。求められるのは、<b>モデルの中に元画像は保存されておらず、出力する画素はすべて計算し直した完全に新しい内容である（切り貼りしたかけらは1つもない）</b>ことを明確に説明でき、「統計的な規則を学ぶ」ことと「検索して継ぎ合わせる」ことの本質的な違いを区別できることです。",
       points: [
         { title: "基礎原理", desc: "モデルが保存しているのは<b>膨大な画像から学んだ統計的な規則（重み）</b>であって、画像庫ではない。生成時は画像全体を一度に生成し、各ステップで全画素（または latent）を同時に更新する。どの画像も新たに描いたもので、どこかから切り取って貼ったものではない。" },
         { title: "工学的トレードオフ", desc: "学習データが多様なほど、1枚を複製するのではなく「応用を利かせる」ことができる；ただし、ある画像が何度も重複していると、モデルがそれを<b>記憶（memorization）</b>して近似的に吐き出すことがある。これは防ぐべき例外であって、常態ではない。" },
@@ -3372,7 +3372,7 @@ const INT_TR = {
     "multimodal-key": {
       label: "マルチモーダルの核心",
       q: "マルチモーダルモデルは複数のモデルをつなぎ合わせたものですか？本当の核心は何ですか？",
-      trap: "多くの人はマルチモーダルを「画像モデル＋テキストモデル＋音声モデル」をつなぎ合わせ、それぞれが別々に動くものだと思っています。面接官は本当の核心を指摘することを求めます：<b>異なるモダリティを同一の意味空間に整合させる</b>ことであって、モデルの数ではありません。",
+      trap: "多くの人はマルチモーダルを「画像モデル＋テキストモデル＋音声モデル」をつなぎ合わせ、それぞれが別々に動くものだと思っています。求められるのは、本当の核心を指摘することです：<b>異なるモダリティを同一の意味空間に整合させる</b>ことであって、モデルの数ではありません。",
       points: [
         { title: "基礎原理", desc: "核心は<b>共有された意味のベクトル空間</b>：画像・テキスト・音声はそれぞれ符号化されるが、すべて<b>同一のベクトル空間</b>に落ち、意味の近い画像と語の座標が隣り合う。そうして初めてモデルは互いを「理解できる」。" },
         { title: "工学的トレードオフ", desc: "整合は大量の<b>ペアデータ</b>（画像とその説明文など）による学習に頼る；データがきれいなほど整合は正確になるが、収集コストは高く、モダリティをまたぐ細粒度の整合はいまだ難しい。" },
@@ -3397,7 +3397,7 @@ const INT_TR = {
     "genimg-errors": {
       label: "なぜ指を描き間違えるか",
       q: "テキストからの画像生成は、なぜ指や文字、対称的な細部をよく描き間違えるのですか？",
-      trap: "「モデルがまだ大きくないだけ」の一時的な bug と捉えないこと。面接官が求めるのは<b>原因が仕組み上のものだ</b>と語れること：モデルは「全体としてそれらしく見える」ことを追い、指が何本あるべきか、文字が記号だといった<b>厳密な構造とカウント</b>を理解していません。",
+      trap: "「モデルがまだ大きくないだけ」の一時的な bug と捉えないこと。求められるのは<b>原因が仕組み上のものだ</b>と語れること：モデルは「全体としてそれらしく見える」ことを追い、指が何本あるべきか、文字が記号だといった<b>厳密な構造とカウント</b>を理解していません。",
       points: [
         { title: "基礎原理", desc: "モデルが学ぶのは<b>ピクセルの統計分布</b>で、目標は「全体がもっともらしく見える」ことであって「解剖学的に正しい」ことではありません。「指はちょうど5本」「文字が集まって単語になる」といった<b>離散的で厳密なルールの概念</b>を持っていません。" },
         { title: "工学的トレードオフ", desc: "手や文字といった細部は<b>画面に占める割合が小さく、姿勢の変化も大きい</b>ため、学習の信号が弱く、しかも圧縮で失われがちで、モデルは精密に学べません；解像度を上げたり専用データを足せば改善しますが、根治は困難です。" },
@@ -3422,7 +3422,7 @@ const INT_TR = {
     "diffusion-vs-gan": {
       label: "拡散 vs GAN",
       q: "拡散モデルと GAN は何が違いますか？なぜ今の主流は拡散なのですか？",
-      trap: "「拡散のほうが新しくて強い」とだけ言わないこと。面接官が求めるのは<b>両者の生成の仕組みの違い</b>（一度の敵対的生成 vs 逐次のノイズ除去）を語り、そこから安定性・品質・制御しやすさの取捨を導き、主流が入れ替わった理由を示すことです。",
+      trap: "「拡散のほうが新しくて強い」とだけ言わないこと。求められるのは<b>両者の生成の仕組みの違い</b>（一度の敵対的生成 vs 逐次のノイズ除去）を語り、そこから安定性・品質・制御しやすさの取捨を導き、主流が入れ替わった理由を示すことです。",
       points: [
         { title: "基礎原理", desc: "GAN は<b>生成器と識別器の敵対</b>によって動き、生成器は一度で画像全体を生成して識別器を欺こうとします；拡散は<b>逐次のノイズ除去</b>によって動き、生成を数十の小さいステップに分け、各ステップで少しずつ進めます。" },
         { title: "工学的トレードオフ", desc: "GAN は<b>推論が速い</b>（一度の順伝播）が<b>学習が不安定</b>で、モード崩壊（mode collapse）を起こしやすく多様性に乏しい；拡散は<b>学習が安定し、品質と多様性が高い</b>が、代償として推論が多ステップで遅くなります。" },
@@ -3447,7 +3447,7 @@ const INT_TR = {
     "design-doc-qa": {
       label: "文書QAシステムの設計",
       q: "社内文書のQAシステムを設計するとしたら、どう組みますか？",
-      trap: "多くの人はすぐ「RAG をつなげばいい」と言います。しかし社内文書QAの難しさは生成ではなく、<b>検索品質</b>（誤った断片を取ればモデルがいくら強くても答えを誤る）、<b>権限</b>（閲覧権のない内容を引き出せてはいけない）、<b>引用可能性</b>（答えを検証できる）にあります。面接官は、パイプライン全体にこれらの制約まで含めて明快に語れるかを見ています。",
+      trap: "多くの人はすぐ「RAG をつなげばいい」と言います。しかし社内文書QAの難しさは生成ではなく、<b>検索品質</b>（誤った断片を取ればモデルがいくら強くても答えを誤る）、<b>権限</b>（閲覧権のない内容を引き出せてはいけない）、<b>引用可能性</b>（答えを検証できる）にあります。この設問で問われるのは、パイプライン全体にこれらの制約まで含めて明快に語れるかどうかです。",
       points: [
         { title: "問題の分解", desc: "これは<b>RAG の問題</b>です：難しいのは生成ではなく検索です。正しい断片を取り戻せてはじめて LLM は正確に答えられるので、<b>検索品質＝答え品質の上限</b>であり、力を注ぐべきは検索パイプライン全体であって、より大きなモデルに替えることではありません。" },
         { title: "アーキテクチャの取捨", desc: "ベクトル検索のみ vs ハイブリッド検索、リランクの要否、top-k の大きさ；権限は「検索前にフィルタ」か「生成後にフィルタ」か（前者でなければ安全でない）；大きなウィンドウに全文を詰める vs RAG で関連する断片だけ取る。" },
@@ -3473,7 +3473,7 @@ const INT_TR = {
     "design-support-bot": {
       label: "カスタマーサポートAIの設計",
       q: "会社のカスタマーサポートAIを設計するとしたら、どう組みますか？",
-      trap: "「チャットボットをつなぐ」だけ、あるいは RAG だけでは不十分です。カスタマーサポートは同時に<b>知識を調べ</b>（RAG）、<b>作業やデータ照会を行い</b>（注文照会や物流はツール）、<b>ユーザーを認識し</b>（メモリ）、さらに<b>むやみに約束してはならず</b>（ガードレール）、対応できなければ人間にエスカレーションする必要があります。面接官は、これらの要素を1本の pipeline につなげられるかを見ています。",
+      trap: "「チャットボットをつなぐ」だけ、あるいは RAG だけでは不十分です。カスタマーサポートは同時に<b>知識を調べ</b>（RAG）、<b>作業やデータ照会を行い</b>（注文照会や物流はツール）、<b>ユーザーを認識し</b>（メモリ）、さらに<b>むやみに約束してはならず</b>（ガードレール）、対応できなければ人間にエスカレーションする必要があります。この設問で問われるのは、これらの要素を1本の pipeline につなげられるかどうかです。",
       points: [
         { title: "問題の分解", desc: "カスタマーサポートは実は2種類の能力の組み合わせです：半分は「知識を調べる」（返品交換ポリシー → RAG）、半分は「調べる／作業する」（注文状況、物流 → ツール）。RAG だけやチャットだけでは足りず、これが<b>知識＋行動＋アイデンティティ</b>の組み合わせだと見抜く必要があります。" },
         { title: "アーキテクチャの取捨", desc: "何を RAG に任せ、何をツールに任せるか；メモリをどれだけ残すか（ユーザーを認識する vs プライバシー）；確信度のしきい値をどれだけ高くするか（保守的すぎると何でも人間に回し、緩すぎるとむやみに約束してしまう）。" },
@@ -3499,7 +3499,7 @@ const INT_TR = {
     "design-cost": {
       label: "製品コストの削減",
       q: "ある LLM 製品のコストを下げるとしたら、どうしますか？",
-      trap: "「安いモデルに替える」とだけ言うのは大雑把です。コストは<b>1リクエストあたりの token に呼び出し回数を掛けたもの</b>であり、モデルルーティング、context の簡素化、キャッシュを同時に進めるべきです；しかも削りすぎて品質が落ち、ユーザーが問い直し・やり直しをすると、かえって高くつきます。面接官は、<b>コスト vs 品質</b>の間で加減できるかを見ています。",
+      trap: "「安いモデルに替える」とだけ言うのは大雑把です。コストは<b>1リクエストあたりの token に呼び出し回数を掛けたもの</b>であり、モデルルーティング、context の簡素化、キャッシュを同時に進めるべきです；しかも削りすぎて品質が落ち、ユーザーが問い直し・やり直しをすると、かえって高くつきます。この設問で問われるのは、<b>コスト vs 品質</b>の間で加減できるかどうかです。",
       points: [
         { title: "問題の分解", desc: "まずコストがどこから来るかを整理します：主に<b>token 量 × 呼び出し回数 × 単価</b>です。入力（context）は通常、出力よりずっと多いため、「どれだけ詰め込んだか」が大半を占めがちです。" },
         { title: "アーキテクチャの取捨", desc: "核心の取捨は<b>コスト削減 vs 品質維持</b>です：小さいモデルを使ったり context を削れば節約できますが、間違えてユーザーにやり直し・問い直しをさせるとかえって高くつきます。体験を損なわない箇所で節約すべきです。" },
@@ -3525,7 +3525,7 @@ const INT_TR = {
     "design-eval-improve": {
       label: "評価と継続的改善",
       q: "すでに運用中の AI 製品を、どう評価し継続的に改善しますか？",
-      trap: "「ユーザーが満足しているか見る」や「正解率を測る」だけでは一面的です。<b>オフラインの固定テストセット</b>と<b>オンラインの実フィードバック</b>という2本の足が必要で、さらに失敗事例を次のラウンドの改善に変える必要があります。面接官は、感覚で作り直すのではなく<b>反復できる閉ループ</b>を築いているかを見ています。",
+      trap: "「ユーザーが満足しているか見る」や「正解率を測る」だけでは一面的です。<b>オフラインの固定テストセット</b>と<b>オンラインの実フィードバック</b>という2本の足が必要で、さらに失敗事例を次のラウンドの改善に変える必要があります。この設問で問われるのは、感覚で作り直すのではなく<b>反復できる閉ループ</b>を築いているかどうかです。",
       points: [
         { title: "問題の分解", desc: "評価は2種類に分けます：<b>オフライン</b>（固定テストセット、再現でき回帰もできる）と<b>オンライン</b>（実トラフィック、A/B、実フィードバック）。どちらも欠かせません：オフラインは後退を防ぎ、オンラインは実際の体験を反映します。" },
         { title: "アーキテクチャの取捨", desc: "人手評価（正確だが高く遅い）vs 自動指標（速いが自由回答は評価しにくい）vs LLM-as-judge（拡張できるがバイアスがあり、キャリブレーションが必要）。生成タスクは唯一の正解がないことが多く、取捨は<b>速度 vs 信頼性</b>にあります。" },
@@ -3551,7 +3551,7 @@ const INT_TR = {
     "train-vs-infer": {
       label: "学習 vs 推論",
       q: "学習と推論は何が違いますか？なぜ推論にもお金がかかるのですか？",
-      trap: "多くの人は「モデルの学習が終われば支払いも終わり」と思い込んだり、推論には計算資源が要らないと思ったりします。面接官が求めるのは、両者を区別し、<b>会話のたびに1回の推論が走る</b>こと、計算資源は決して無料ではないことを指摘できることです。",
+      trap: "多くの人は「モデルの学習が終われば支払いも終わり」と思い込んだり、推論には計算資源が要らないと思ったりします。求められるのは、両者を区別し、<b>会話のたびに1回の推論が走る</b>こと、計算資源は決して無料ではないことを指摘できることです。",
       points: [
         { title: "基礎原理", desc: "学習は<b>モデルのパラメータを調整して</b>規則を学ぶことで、一度きりで計算資源を極端に食います；推論は<b>学習済みのパラメータで答えを計算する</b>ことで、パラメータは動きませんが、毎回入力をモデル全体に一度通す必要があります。" },
         { title: "工学的トレードオフ", desc: "学習コストは一度で支払うが天文学的です（大量の GPU を長時間動かす）；推論は1回あたりは安いものの<b>利用量に応じて無限に積み上がり</b>、量が多いと総額はしばしば学習を上回ります。" },
@@ -3576,7 +3576,7 @@ const INT_TR = {
     "faster-inference": {
       label: "推論をより省くには",
       q: "同じモデルで、推論をより速く安くするにはどうしますか？",
-      trap: "「小さいモデルに替える」や「GPU を足す」とだけ答えるのは大雑把です。面接官が求めるのは、<b>モデルを替えず、再学習もしない</b>前提で、複数の高速化手段と、それぞれの<b>精度／複雑さの取捨</b>を語れることです。",
+      trap: "「小さいモデルに替える」や「GPU を足す」とだけ答えるのは大雑把です。求められるのは、<b>モデルを替えず、再学習もしない</b>前提で、複数の高速化手段と、それぞれの<b>精度／複雑さの取捨</b>を語れることです。",
       points: [
         { title: "基礎原理", desc: "推論が遅く高い根源は<b>パラメータが多い＋一字ずつ生成する</b>ことです：token を1つ生成するたびに膨大なパラメータを一度運び、一度計算します。省く方向は「各ステップをより安くする」か「重複計算を減らす」かです。" },
         { title: "工学的トレードオフ", desc: "どの手段も取捨を伴います：量子化はメモリを節約するが精度が落ちうる；蒸留で得た小さいモデルは速いが能力が縮む；バッチは単位コストを節約するがレイテンシが増える。ただ飯はありません。" },
@@ -3601,7 +3601,7 @@ const INT_TR = {
     "temperature": {
       label: "なぜ毎回違うのか",
       q: "なぜ同じ質問なのに毎回答えが違うのですか？temperature とは何ですか？",
-      trap: "「モデルが不安定な bug」と捉えないこと。答えが違うのは<b>サンプリングの設計</b>であって、壊れているのではありません。面接官が求めるのは、「確率的サンプリング」という仕組みと、temperature がそれをどう調整するかを語ることです。",
+      trap: "「モデルが不安定な bug」と捉えないこと。答えが違うのは<b>サンプリングの設計</b>であって、壊れているのではありません。求められるのは、「確率的サンプリング」という仕組みと、temperature がそれをどう調整するかを語ることです。",
       points: [
         { title: "基礎原理", desc: "モデルは各ステップで「唯一の正解」を選ぶのではなく、<b>多数の候補語の確率を計算し、その中からサンプリングする</b>のです；サンプリングには乱数が伴うため、同じ質問でも毎回違う道をたどりうるのです。" },
         { title: "工学的トレードオフ", desc: "temperature はランダムさを調整するつまみです：高い→分布が平らになり、珍しい語も選びやすくなる（創造的だが乱れやすい）；低い→分布が尖り、高確率の語に集中する（安定だが単調）。" },
@@ -3626,7 +3626,7 @@ const INT_TR = {
     "rag-why-wrong": {
       label: "RAG でもなぜ誤答するか",
       q: "RAG を使っても、なぜモデルは誤答するのですか？どう減らしますか？",
-      trap: "「RAG をつなげば誤らない」と思い込まないこと。RAG は1本の鎖で、どの環が壊れても誤ります。面接官が求めるのは、漠然と「もう少し調整する」と言うのではなく、<b>どの環で誤ったかを層ごとに切り分けて特定できる</b>ことです。",
+      trap: "「RAG をつなげば誤らない」と思い込まないこと。RAG は1本の鎖で、どの環が壊れても誤ります。求められるのは、漠然と「もう少し調整する」と言うのではなく、<b>どの環で誤ったかを層ごとに切り分けて特定できる</b>ことです。",
       points: [
         { title: "基礎原理", desc: "RAG＝<b>まず検索し、次に生成する</b>2段構えです。誤答はどちらの段からも生じえます：検索が正しい根拠を拾えなかったか、拾えたのに生成側がうまく使わなかったか。原因が違えば、解決策もまったく違います。" },
         { title: "工学的トレードオフ", desc: "診断はやみくもに調整するのではなく層で分けます：まず<b>正しい根拠がそもそも context に入ったか</b>を確認し（検索の問題）、次に<b>根拠が入っているのに誤答する</b>かを見ます（生成の問題）。層を取り違えれば骨折り損です。" },
@@ -3651,7 +3651,7 @@ const INT_TR = {
     "rag-vs-longcontext": {
       label: "RAG vs 長コンテキスト",
       q: "データが多いとき、RAG を使いますか、それとも全部を長コンテキストに詰めますか？どう選びますか？",
-      trap: "「長コンテキストがどんどん大きくなるから、いずれ RAG は要らない」の一言で終わらせないこと。面接官が求めるのは、両者の<b>それぞれのコスト、上限、盲点</b>を語り、<b>場面に応じた判断基準</b>を示すことです。",
+      trap: "「長コンテキストがどんどん大きくなるから、いずれ RAG は要らない」の一言で終わらせないこと。求められるのは、両者の<b>それぞれのコスト、上限、盲点</b>を語り、<b>場面に応じた判断基準</b>を示すことです。",
       points: [
         { title: "基礎原理", desc: "2つの道は本質的に違います：長コンテキストは<b>毎回すべてをウィンドウに詰め込んで</b>一緒に計算する（注意の O(n²) と学習長の制約を受ける）；RAG は<b>毎回、関連する断片だけを</b>ウィンドウに取り、データは外部に残します。" },
         { title: "工学的トレードオフ", desc: "長コンテキストはシンプルで検索を構築せずに済むが<b>高く、上限があり、中盤の盲点もある</b>（lost in the middle）；RAG は無限に拡張でき、1回あたり安く、引用も付けられるが、成否は<b>検索品質</b>しだいで、システムはより複雑です。" },
@@ -3676,7 +3676,7 @@ const INT_TR = {
     "bias": {
       label: "バイアスはどこから来るか",
       q: "AI のバイアスはどこから来ますか？どう減らしますか？",
-      trap: "バイアスを「エンジニアがわざと悪く作った」や「モデルに立場がある」と語らないこと。バイアスは主に<b>データから学ばれたもの</b>で、さらに増幅されることもあります。面接官が求めるのは、原因を明快に語り、なぜ<b>根絶が難しい</b>かを理解していることです。",
+      trap: "バイアスを「エンジニアがわざと悪く作った」や「モデルに立場がある」と語らないこと。バイアスは主に<b>データから学ばれたもの</b>で、さらに増幅されることもあります。求められるのは、原因を明快に語り、なぜ<b>根絶が難しい</b>かを理解していることです。",
       points: [
         { title: "基礎原理", desc: "モデルは<b>大量のデータから統計的な規則を学ぶ</b>ため、データの中の社会的な偏り（性別、人種、地域のステレオタイプ）も一緒に学び込まれ、さらに「最もよくあるパターンを学ぶ」ことによって<b>増幅される</b>こともあります。" },
         { title: "工学的トレードオフ", desc: "バイアスを抑えようとすると、しばしば<b>いくらかの性能や網羅性を犠牲</b>にします：データを過度にフィルタすると有用な内容が失われ、ガードレールを増やしすぎるとモデルが縛られ、正常な質問まで避けてしまいます。" },
@@ -3701,7 +3701,7 @@ const INT_TR = {
     "trust-answer": {
       label: "信頼できるか見極める",
       q: "AI の回答が信頼できるかどうか、どう見極めますか？",
-      trap: "「もっともらしく聞こえる」だけで信じないこと。モデルの<b>口調の自信は正しさと同義ではなく</b>、大真面目に間違えることもあります。面接官が求めるのは、感覚頼みではなく<b>実行可能な検証方法</b>を語ることです。",
+      trap: "「もっともらしく聞こえる」だけで信じないこと。モデルの<b>口調の自信は正しさと同義ではなく</b>、大真面目に間違えることもあります。求められるのは、感覚頼みではなく<b>実行可能な検証方法</b>を語ることです。",
       points: [
         { title: "基礎原理", desc: "モデルの出力は<b>最ももっともらしい言葉を推測したもの</b>で、検証済みの事実ではありません。しかも<b>常に口調は流暢で自信ありげ</b>で、その自信の度合いは正しさとは無関係です。だから「正しく聞こえる」ことは判断基準にできません。" },
         { title: "工学的トレードオフ", desc: "検証には時間がかかるので、<b>結果の重大さ</b>に応じて力の入れ方を調整します：雑談なら緩めてよい；意思決定・医療・法律・金銭が絡む答えは厳しく相互検証すべきです。" },
@@ -3726,7 +3726,7 @@ const INT_TR = {
     "ai-limits": {
       label: "能力の限界",
       q: "大規模モデルの能力の限界はどこにありますか？エンジニアを置き換えますか？",
-      trap: "極端に走らないこと：「何でもできて、すぐ人を置き換える」か、「ただのおもちゃ」かのどちらか、ではいけません。面接官が求めるのは、冷静に<b>どこが強く、どこが弱いか</b>を線引きし、人と機械の分業を語ることです。",
+      trap: "極端に走らないこと：「何でもできて、すぐ人を置き換える」か、「ただのおもちゃ」かのどちらか、ではいけません。求められるのは、冷静に<b>どこが強く、どこが弱いか</b>を線引きし、人と機械の分業を語ることです。",
       points: [
         { title: "基礎原理", desc: "その得意技は<b>データからパターンを学んで生成する</b>ことです：帰納、文章作成、翻訳、コードの下書き、反復作業の高速化が得意；しかし「真偽を理解」せず、リアルタイムの世界の最新知識もなく、結果の責任も負いません。" },
         { title: "工学的トレードオフ", desc: "それを使うのは<b>速度と生産量</b>を、<b>人による検証が必要なこと</b>と引き換えにすることです：8割の初稿は素早く作れますが、最後の一マイルの正確性、責任、判断は依然として人が見張る必要があります。" },
@@ -3751,7 +3751,7 @@ const INT_TR = {
     "agent-planning": {
       label: "エージェントのプランニング",
       q: "エージェントのプランニング機構について説明してください。",
-      trap: "多くの人は「勝手に考えてくれる」としか言いません。面接官が見たいのは<b>プランニングの具体的なやり方と取捨</b>を語れるか（ReAct vs plan-then-execute、いつ再プランニングするか）であって、「エージェントなら勝手に計画する」の一言ではありません。",
+      trap: "多くの人は「勝手に考えてくれる」としか言いません。問われているのは<b>プランニングの具体的なやり方と取捨</b>を語れるか（ReAct vs plan-then-execute、いつ再プランニングするか）であって、「エージェントなら勝手に計画する」の一言ではありません。",
       points: [
         { title: "基礎原理", desc: "プランニング＝大きな目標を実行可能な小さいステップに分解し、どう進めるかを決めること：先に完全な計画を立てても、進めながら調整してもよい。" },
         { title: "工学的トレードオフ", desc: "ReAct（考える→実行→観察を逐次）は柔軟だがステップ数が多く遠回りしやすい；plan-then-execute（先に計画を立ててから実行）は token を節約でき追跡しやすいが、計画が一度狂うと全体がずれる。" },
@@ -3776,7 +3776,7 @@ const INT_TR = {
     "agent-tools": {
       label: "外部ツールの確実な呼び出し",
       q: "外部ツールを確実に呼び出せるエージェントを、どう設計しますか？",
-      trap: "「function calling を使う」と答えるだけでは不十分です。面接官が見たいのは<b>呼び出しループ全体をどうフールプルーフにするか</b>：ツールの選択ミス、引数の誤り、ツールのエラー、タイムアウト、どれにも対策が要ります。",
+      trap: "「function calling を使う」と答えるだけでは不十分です。問われているのは<b>呼び出しループ全体をどうフールプルーフにするか</b>：ツールの選択ミス、引数の誤り、ツールのエラー、タイムアウト、どれにも対策が要ります。",
       points: [
         { title: "基礎原理", desc: "モデル自体はツールを「実行」しない。<b>「どのツールを、どの引数で呼ぶか」という構造化された意図を出力するだけ</b>で、実際に実行するのは外部プログラムであり、その結果をモデルに戻す。" },
         { title: "工学的トレードオフ", desc: "モデルに渡すツールが多いほど柔軟になるが、選択を誤りやすく引数も乱れやすい；ツールの説明は簡潔で明確に、数は絞り込むべき。" },
@@ -3801,7 +3801,7 @@ const INT_TR = {
     "json-output": {
       label: "JSON を安定して出力",
       q: "大規模モデルに、どうやって JSON 形式を安定して出力させますか？",
-      trap: "「prompt で JSON を出力するよう指示する」だけでは保証になりません：モデルは確率的な生成なので、いつでも余計な一文が増えたり括弧が1つ抜けたりし得ます。面接官が見たいのは<b>「お願い」から「保証」へ引き上げる手段</b>です。",
+      trap: "「prompt で JSON を出力するよう指示する」だけでは保証になりません：モデルは確率的な生成なので、いつでも余計な一文が増えたり括弧が1つ抜けたりし得ます。問われているのは<b>「お願い」から「保証」へ引き上げる手段</b>です。",
       points: [
         { title: "基礎原理", desc: "モデルは<b>トークンごとの確率的な生成</b>であり、そもそも正しい JSON を保証しない；説明を付けたり、カンマを抜かしたり、途中で切れたりし得る。だから「安定」は prompt への願掛けだけでは足りない。" },
         { title: "工学的トレードオフ", desc: "手段は弱いものから強いものへ：prompt での要求 → function calling／JSON mode → 制約デコーディング（正しい JSON しか生成させない）。強いほど安定するが、特定の API／推論フレームワークに依存し柔軟性は下がる。" },
@@ -3826,7 +3826,7 @@ const INT_TR = {
     "agent-memory": {
       label: "エージェントの記憶管理",
       q: "エージェントは、どのように記憶管理をしていますか？",
-      trap: "「コンテキストウィンドウ」と混同しないこと。ウィンドウは「一度にどれだけ読めるか」、記憶管理は「多くのステップをまたいで、何を手元に残すか」です。面接官は、この2つを区別できるか、そして限られたウィンドウで一貫性をどう保つかを見ています。",
+      trap: "「コンテキストウィンドウ」と混同しないこと。ウィンドウは「一度にどれだけ読めるか」、記憶管理は「多くのステップをまたいで、何を手元に残すか」です。この設問で問われるのは、この2つを区別できるか、そして限られたウィンドウで一貫性をどう保つかです。",
       points: [
         { title: "基礎原理", desc: "モデル自体は<b>ステートレス</b>で、各ステップではそのとき渡された context しか見えない。エージェントの「記憶」＝外部プログラムが「各ステップでどの履歴を戻すか」を決めること。" },
         { title: "工学的トレードオフ", desc: "全部詰める（忠実だがウィンドウが溢れ、高い）vs 要約（場所を節約できるが細部を失う）vs 検索（関連分だけ取り拡張できるが検索品質しだい）。通常は併用する。" },
@@ -3851,7 +3851,7 @@ const INT_TR = {
     "agent-eval": {
       label: "エージェント性能の定量化",
       q: "エージェントの性能を、どう定量化しますか？",
-      trap: "「答えが正しいかを見る」だけでは不十分です。エージェントは多ステップでツールも使うので、最終的な答えだけを見ると多くを見落とします。面接官は<b>タスク単位＋プロセス単位</b>の評価を語り、さらにコスト／レイテンシも織り込むことを求めます。",
+      trap: "「答えが正しいかを見る」だけでは不十分です。エージェントは多ステップでツールも使うので、最終的な答えだけを見ると多くを見落とします。求められるのは、<b>タスク単位＋プロセス単位</b>の評価を語り、さらにコスト／レイテンシも織り込むことです。",
       points: [
         { title: "基礎原理", desc: "エージェントの産物は「一連の行動＋最終結果」なので、評価は分けて考える：結果が正しいか（タスク成功率）と、過程が良いか（軌跡：遠回りしていないか、ツールを正しく使えたか）。" },
         { title: "工学的トレードオフ", desc: "人手評価（正確だが高く遅い）vs 自動評価（速いが自由回答のタスクは評価しにくい）vs LLM-as-judge（拡張できるがバイアスがあり、キャリブレーションが必要）；オフラインのテストセット vs オンラインの実トラフィック。" },
@@ -3876,7 +3876,7 @@ const INT_TR = {
     "agent-cost": {
       label: "エージェントのコスト制御",
       q: "エージェントのコストが暴走しないよう、どう抑えますか？",
-      trap: "「もう少し安いモデルを使う」だけでは根源を見落とします。暴走の元は<b>多ステップ × context の逐次的な累積</b>：ステップが1つ増えるたびに、前の履歴の token をまた計算し直します。面接官は、この累積効果と対策を指摘することを求めます。",
+      trap: "「もう少し安いモデルを使う」だけでは根源を見落とします。暴走の元は<b>多ステップ × context の逐次的な累積</b>：ステップが1つ増えるたびに、前の履歴の token をまた計算し直します。求められるのは、この累積効果と対策を指摘することです。",
       points: [
         { title: "基礎原理", desc: "エージェントのコスト＝ステップ数 × 各ステップの token。各ステップで前の履歴を再び詰めるため、<b>token はステップ数とともに累積して増える</b>；いったん堂々巡りや無限リトライに陥ると、コストは爆発する。" },
         { title: "工学的トレードオフ", desc: "コスト削減 vs 品質維持：安いモデルは節約になるが、間違えてやり直すとかえって高くつく；ステップ数の上限は節約になるが、タスクを早々に諦めてしまうこともある。" },
@@ -3926,7 +3926,7 @@ const INT_TR = {
     "rag-retrieval": {
       label: "RAG 検索戦略の設計",
       q: "RAG の検索戦略を、どう設計しますか？",
-      trap: "「ベクトルの類似度を計算して最も関連する top-k を取る」だけでは、いちばん素朴な版です。面接官が見たいのは<b>チャンク分割、ハイブリッド検索、リランク、クエリ書き換え</b>といった、検索を本当に精確にする手段と取捨を理解しているかです。",
+      trap: "「ベクトルの類似度を計算して最も関連する top-k を取る」だけでは、いちばん素朴な版です。問われているのは<b>チャンク分割、ハイブリッド検索、リランク、クエリ書き換え</b>といった、検索を本当に精確にする手段と取捨を理解しているかです。",
       points: [
         { title: "基礎原理", desc: "検索品質＝「取り戻した断片が正しいか」であり、チャンクをどう切るか・どのベクトルを使うか・どう比較するか・いくつ取るかにずっと左右される。一つでも間違えれば、LLM がいくら強くても答えを誤る（garbage in）。" },
         { title: "工学的トレードオフ", desc: "ベクトル検索のみ（意味は分かるがキーワードを取りこぼす）vs キーワード検索（精確だが同義語を理解しない）→ ハイブリッド検索は両立できるがより複雑；top-k が大きいと再現率は上がるがウィンドウを溢れさせ、ノイズも多い。" },
@@ -3951,7 +3951,7 @@ const INT_TR = {
     "hallucination": {
       label: "ハルシネーションはなぜ起きるか",
       q: "大規模モデルはなぜハルシネーションを起こすのですか？完全になくせますか？",
-      trap: "ハルシネーションを「bug」と捉えないこと。プログラムの誤りではなく、モデルの動作の仕方が生む<b>副作用</b>です：最も可能性の高い語を推測しているのであって、事実を調べているのではありません。面接官は、原因を語り、なぜ「根治」できず低減しかできないのかを理解しているかを求めます。",
+      trap: "ハルシネーションを「bug」と捉えないこと。プログラムの誤りではなく、モデルの動作の仕方が生む<b>副作用</b>です：最も可能性の高い語を推測しているのであって、事実を調べているのではありません。求められるのは、原因を語り、なぜ「根治」できず低減しかできないのかを理解していることです。",
       points: [
         { title: "基礎原理", desc: "モデルは<b>次に最ももっともらしい語を推測する</b>のであって、データベースを調べているのではない；「知らない」ときも立ち止まって知らないと言わず、語感が最も自然な、しかし嘘かもしれない内容を生成し続ける。" },
         { title: "工学的トレードオフ", desc: "ハルシネーションを抑えるには「流暢さ／答える積極性」を多少犠牲にする必要がある：出典の強制、不確かなら回答を拒否させると、モデルは保守的になり、本来答えるべきことも答えないことがある。" },
@@ -3976,7 +3976,7 @@ const INT_TR = {
     'context-window': {
       label: 'コンテキストウィンドウの限界',
       q: '大規模モデルのコンテキストウィンドウの限界に、どう対処しますか？',
-      trap: '多くの人はツール名を1つ挙げて終わりです（「RAG を使う」「もっと大きなウィンドウのモデルに替える」）。面接官が見たいのはツール名ではなく、<b>なぜこの限界があるのか</b>、そして<b>場面に応じてどう組み合わせて取捨するか</b>です。',
+      trap: '多くの人はツール名を1つ挙げて終わりです（「RAG を使う」「もっと大きなウィンドウのモデルに替える」）。問われているのはツール名ではなく、<b>なぜこの限界があるのか</b>、そして<b>場面に応じてどう組み合わせて取捨するか</b>です。',
       points: [
         { title: '基礎原理', desc: '限界の物理的な根っこを知っているか：注意は「各トークンが全トークンを見る」ため、計算量とメモリが長さに対して O(n²) で増える；位置エンコーディングは学習した長さの範囲でしか信頼できない；ウィンドウに収めても中盤は活かされにくい（lost in the middle）。' },
         { title: '工学的トレードオフ', desc: '時間／コスト／精度をどう取捨するか。例：長コンテキストのファインチューニング vs 動的圧縮、より大きなウィンドウ vs 検索。' },

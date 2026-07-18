@@ -203,7 +203,7 @@ export const QUIZZES = {
       {
         "t": "窗口有上限是因為模型只在固定長度上訓練、位置編碼在範圍外不可靠，加上注意力 O(n²) 越塞越貴、中段還常被忽略；所以重點是管理上下文預算：留最相關／最近的（截斷、滑動視窗）、把舊的壓成摘要、用 RAG 每次只取相關片段、跨會話用記憶，依場景組合，各有取捨。",
         "ok": true,
-        "why": "講出成因＋為何不是一味開大＋多種做法與取捨，正是面試官想聽的。"
+        "why": "講出成因＋為何不是一味開大＋多種做法與取捨，正是這題想問的。"
       },
       {
         "t": "現在模型窗口都做到幾十萬 token 了，直接換大窗口的模型就好，根本不用煩惱。",
@@ -218,7 +218,7 @@ export const QUIZZES = {
       },
       {
         "t": "The window is capped because the model was trained on a fixed length, position encoding is unreliable beyond that range, and attention is O(n squared) so cramming in more gets slow and costly while the middle often gets ignored. So the real job is managing the context budget: keep the most relevant or recent parts (truncation, sliding window), compress old turns into summaries, use RAG to pull only the relevant snippets, and use memory across sessions, combining them by scenario with each having its own tradeoffs.",
-        "why": "It gives the cause, why bigger is not the answer, and several methods with their tradeoffs, which is exactly what the interviewer wants."
+        "why": "It gives the cause, why bigger is not the answer, and several methods with their tradeoffs, which is exactly what the question is really after."
       },
       {
         "t": "Models now ship with windows of hundreds of thousands of tokens, so just switch to a big-window model and stop worrying about it.",
@@ -232,7 +232,7 @@ export const QUIZZES = {
       },
       {
         "t": "窓に上限があるのは、モデルが固定長で訓練され、位置エンコーディングがその範囲外では信頼できず、さらに注意機構が O(n^2) なので詰めるほど遅く高価になり、中盤は無視されやすいからです。だから本質はコンテキスト予算の管理：最も関連する／新しい部分を残す（切り詰め、スライディングウィンドウ）、古い履歴は要約に圧縮、RAG で関連する断片だけ取り出す、セッションをまたぐなら記憶を使う、と場面ごとに組み合わせ、それぞれに取捨があります。",
-        "why": "原因＋なぜ大きくするだけではないか＋複数の手法と取捨を語っており、面接官が聞きたい内容そのものです。"
+        "why": "原因＋なぜ大きくするだけではないか＋複数の手法と取捨を語っており、まさにこの設問で問われる水準です。"
       },
       {
         "t": "今のモデルは数十万トークンの窓を積んでいるので、大きな窓のモデルに乗り換えれば悩む必要はない。",
@@ -532,7 +532,7 @@ export const QUIZZES = {
       {
         "t": "模型是在猜最可能的下一個字、不是查事實，不確定時仍會給出流暢答案，所以會自信地錯。成因是本質性的，只能靠 RAG、要求引用、對重要輸出校驗、讓它能說不知道來降低，無法根治。",
         "ok": true,
-        "why": "講出成因（猜字而非查事實）＋為何無法歸零＋具體的降低手段，正是面試官想聽的層次。"
+        "why": "講出成因（猜字而非查事實）＋為何無法歸零＋具體的降低手段，正是這題想問的層次。"
       },
       {
         "t": "只要模型夠大、訓練資料夠多，幻覺自然就會消失。",
@@ -547,7 +547,7 @@ export const QUIZZES = {
       },
       {
         "t": "The model is guessing the most likely next word, not looking up facts, and when unsure it still gives a fluent answer, so it can be confidently wrong. The cause is intrinsic, so you can only reduce it (RAG, requiring citations, validating important outputs, letting it say it doesn’t know), not cure it.",
-        "why": "Naming the cause (guessing words, not looking up facts), why it can’t be zeroed out, and concrete ways to reduce it is exactly the level an interviewer wants."
+        "why": "Naming the cause (guessing words, not looking up facts), why it can’t be zeroed out, and concrete ways to reduce it is exactly the level this question is after."
       },
       {
         "t": "As long as the model is big enough and trained on enough data, hallucination will naturally disappear.",
@@ -561,7 +561,7 @@ export const QUIZZES = {
       },
       {
         "t": "モデルは最も可能性の高い次の語を推測しているだけで、事実を調べているのではありません。わからないときも流暢な答えを出すため、自信たっぷりに間違えます。原因は本質的なので、RAG、出典の要求、重要な出力の検証、「わからない」と言わせることで低減できても、根治はできません。",
-        "why": "原因（事実を調べず語を推測する）、なぜゼロにできないか、そして具体的な低減策まで述べる。これがまさに面接官の求めるレベルです。"
+        "why": "原因（事実を調べず語を推測する）、なぜゼロにできないか、そして具体的な低減策まで述べる。これがまさにこの設問で問われる水準です。"
       },
       {
         "t": "モデルが十分に大きく、学習データが十分に多ければ、ハルシネーションは自然になくなる。",

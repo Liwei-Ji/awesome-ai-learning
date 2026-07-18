@@ -48,6 +48,6 @@ export default {
     related: '關聯章節',
     soon: '敬請期待',
     landingTitle: '進階挑戰',
-    landingLede: '把學過的概念，放進面試情境壓測。左邊選一題，先自己想，再看示範回答與考點。',
+    landingLede: '把學過的概念，用進階題目壓測一遍。左邊選一題，先自己想，再看示範回答與考點。',
   },
 };

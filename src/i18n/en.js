@@ -48,6 +48,6 @@ export default {
     related: 'Related chapters',
     soon: 'Coming soon',
     landingTitle: 'Challenges',
-    landingLede: 'Take what you learned and stress-test it in interview scenarios. Pick a question on the left, think first, then reveal the model answer and what’s being tested.',
+    landingLede: 'Take what you learned and stress-test it against tough questions. Pick a question on the left, think first, then reveal the model answer and what’s being tested.',
   },
 };
