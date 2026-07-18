@@ -616,6 +616,53 @@ export const QUIZZES = {
       }
     ]
   },
+  "agent-vs-workflow": {
+    "zh": [
+      {
+        "t": "只要用到 LLM、又串了好幾步，就是一個 Agent。",
+        "ok": false,
+        "why": "串幾步多半只是 workflow（流程你寫死）；Agent 是模型自己決定下一步。"
+      },
+      {
+        "t": "Workflow 是你把流程寫死、可預測；Agent 是模型在迴圈裡自己規劃、用工具、依結果決定下一步。能用 workflow 就別上 agent，並常用 routing、reflection、planning，加上驗證與重試上限才可靠。",
+        "ok": true,
+        "why": "講出「誰決定流程」的差別、先 workflow 的取捨、常見模式與驗證/剎車，完整。"
+      },
+      {
+        "t": "Agent 比 workflow 先進，任何任務都做成 Agent 最好。",
+        "ok": false,
+        "why": "越自主越貴越難控，能用固定流程就別上 agent；多數產品是 workflow 加幾個 LLM 步驟。"
+      }
+    ],
+    "en": [
+      {
+        "t": "If it uses an LLM and chains several steps together, it is an Agent.",
+        "why": "Chaining a few steps is usually just a workflow (you hard-code the flow); an Agent is where the model decides its own next step."
+      },
+      {
+        "t": "A Workflow hard-codes the flow and is predictable; an Agent has the model plan in a loop, use tools, and decide its next step from the results. If a workflow works, don't reach for an agent, and lean on routing, reflection, and planning, plus verification and retry limits to make it reliable.",
+        "why": "It nails the \"who decides the flow\" distinction, the workflow-first trade-off, the common patterns, and verification/brakes: complete."
+      },
+      {
+        "t": "Agents are more advanced than workflows, so it is best to build every task as an Agent.",
+        "why": "The more autonomous, the more expensive and harder to control; if a fixed flow works, don't reach for an agent, and most products are a workflow plus a few LLM steps."
+      }
+    ],
+    "ja": [
+      {
+        "t": "LLM を使い、さらに何ステップかつないでいれば、それは Agent だ。",
+        "why": "数ステップつなぐのはたいてい単なる workflow（フローはあなたが固定する）。Agent はモデル自身が次の一手を決めるもの。"
+      },
+      {
+        "t": "Workflow はフローを固定し予測可能なもの。Agent はモデルがループの中で自ら計画し、ツールを使い、結果に応じて次の一手を決めるもの。workflow で済むなら Agent を持ち出さず、routing・reflection・planning をよく使い、検証と再試行の上限を加えてこそ信頼できる。",
+        "why": "「誰がフローを決めるか」の違い、workflow を優先するトレードオフ、よく使うパターン、検証／ブレーキまで押さえていて、完全。"
+      },
+      {
+        "t": "Agent は workflow より先進的なので、どんなタスクも Agent にするのが一番よい。",
+        "why": "自律的であるほど高価で制御が難しい。固定フローで済むなら Agent を持ち出さない。多くのプロダクトは workflow ＋いくつかの LLM ステップだ。"
+      }
+    ]
+  },
   "agent-cost": {
     "zh": [
       {
