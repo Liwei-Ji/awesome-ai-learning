@@ -123,7 +123,7 @@
 
   .hero { padding: 20px 0 32px; border-bottom: 1px solid var(--line); margin-bottom: 28px; }
   .hero h1 { font-size: 40px; line-height: 1.16; letter-spacing: var(--ls-tight); font-weight: 720; margin: 0 0 16px; }
-  .hero .lede { font-size: var(--fs-lede); color: var(--ink-2); max-width: 62ch; line-height: 1.85; margin: 0; }
+  .hero .lede { font-size: var(--fs-lede); color: var(--ink-2); max-width: 78ch; line-height: 1.85; margin: 0; }
   .hero .lede + .lede { margin-top: 18px; }
   .cta { display: flex; align-items: center; gap: 18px; margin-top: 24px; flex-wrap: wrap; }
   .btn.lg { padding: 11px 22px; font-size: var(--fs-body); border-radius: var(--r-sm); }
