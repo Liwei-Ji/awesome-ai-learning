@@ -10,7 +10,7 @@ An interactive AI learning platform: no coding background needed, just open it a
 
 - **Learn by doing**: every chapter has an interactive demo. You grasp the idea by operating it, with no jargon to memorize and no formulas to fear.
 - **Step by step**: a prologue plus six chapters, 28 lessons that build naturally on one another.
-- **Ask Professor AI anytime**: a built-in offline knowledge-base tutor. Ask questions as you learn so you never get stuck (fully offline, no external model calls).
+- **Ask Professor AI anytime**: a built-in offline knowledge-base tutor. Ask questions as you learn so you never get stuck.
 - **Easy to review**: each chapter comes with a summary, key terms and further reading.
 - **Trilingual**: English, 日本語, 繁體中文. Switching language switches the material too.
 
@@ -32,14 +32,3 @@ Beyond the course, a **Challenges** mode collects advanced interview-style quest
 Open the site and hit **"Start learning"** to enter the first lesson, or pick any chapter from the course map. Follow the interactive demos step by step, and ask Professor AI whenever you get stuck.
 
 The goal is for you to truly **understand** AI, not just learn to use it.
-
-## Tech
-
-Built with Vite 6 and Svelte 5. Fully frontend, zero backend, no runtime LLM: the tutor answers from a local knowledge base, so everything works offline.
-
-```bash
-npm install
-npm run dev      # local development
-npm run build    # production build to dist/
-npm run preview  # preview the production build
-```

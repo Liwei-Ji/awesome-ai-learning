@@ -1429,6 +1429,34 @@ export const INTERVIEWS = {
     ],
     related: ['limits', 'llm', 'rag'],
   },
+  'what-model-stores': {
+    cat: 'principle',
+    label: '模型記住了什麼',
+    q: '模型的知識到底存在哪裡？它是「記住」還是「理解」？',
+    trap: '別說成「把訓練資料存進資料庫、要用時查出來」。知識是<b>壓在權重裡的模式</b>，不是存檔；模型主要在泛化，但也會逐字背下一部分資料，而且是<b>有損</b>的。題目要你講清楚這三者的分寸。',
+    points: [
+      { icon: 'atom', title: '底層原理', desc: '知識<b>分散壓縮在數十億個權重</b>裡，不是一條一條存起來。訓練是把海量文字的統計規律「擠」進參數，回答時是<b>重建</b>、不是查表。' },
+      { icon: 'scale', title: '工程權衡', desc: '記憶與泛化是一條光譜：常見的東西學成<b>可泛化的規律</b>；看過很多次的（名言、程式碼、熱門事實）會被<b>逐字背下</b>，有時原樣吐出（regurgitation），帶來隱私與著作權風險。' },
+      { icon: 'network', title: '系統化', desc: '因為是<b>有損壓縮</b>，冷門或精確的事實容易記錯、記不全，這是幻覺的來源之一；也因此有知識截止，要更新知識該用 RAG 而非微調。' },
+    ],
+    core: [
+      { h: '不是資料庫，是壓縮的模式', d: '知識<b>分散壓在權重裡</b>：訓練把文字的統計規律擠進數十億參數，回答時憑這些規律<b>重建</b>答案，不是去某處查一筆資料。' },
+      { h: '記憶 vs 泛化是光譜', d: '大多數是學到<b>可泛化的規律</b>（所以能處理沒看過的說法）；但重複出現很多次的內容會被<b>逐字記住</b>（memorization），可能原樣吐出。兩者同時存在。' },
+      { h: '它是有損的', d: '壓縮必然遺失細節，所以<b>冷門、精確的事實最容易記錯或記不全</b>，這正是幻覺的成因之一，也是為什麼模型對熱門知識準、對長尾知識虛。' },
+      { h: '所以怎麼改它「知道什麼」', d: '要最新或私有的事實，靠 <b>RAG</b> 從外部餵進來（可查證、可更新），不是靠微調（微調改行為，灌事實不可靠）。這也解釋了知識截止。' },
+    ],
+    plus: [
+      '模型越大，能塞下的規律與逐字內容越多，這跟 scaling law 直接相關。',
+      '「能背出訓練資料」是資料隱私與著作權爭議的技術根源。',
+      '知識存在哪、能不能精準修改，是研究前沿（如 model editing／probing），還沒有乾淨的解法。',
+    ],
+    traps: [
+      '說「模型把訓練資料存起來，需要時查出來」。',
+      '以為它「完全不記原文」（其實會逐字背下一部分）。',
+      '把「參數多」當成「硬碟大」（它比較像腦容量，不是檔案大小）。',
+    ],
+    related: ['llm', 'model-size', 'limits'],
+  },
 };
 
 // 各語言的內容翻譯（欄位與 base 對齊；points 只翻 title/desc，icon 沿用 base）
@@ -4004,7 +4032,7 @@ const INT_TR = {
 // 題庫顯示順序（分類內依此排；Agent 走 arc：規劃→工具→JSON→記憶→量化→成本）
 export const IV_ORDER = [
   "attention-compute", "positional-encoding", "transformer-vs-rnn", "embedding-meaning",
-  "multi-head", "tokenizer-why", "rlhf-why", "finetune-vs-rag", "lora", "catastrophic-forgetting",
+  "multi-head", "tokenizer-why", "what-model-stores", "rlhf-why", "finetune-vs-rag", "lora", "catastrophic-forgetting",
   "data-quality", "why-not-pretrain", "context-window", "train-vs-infer", "faster-inference",
   "temperature",
   "prompt-craft", "few-shot", "cot-prompting", "prompt-vs-tune-vs-rag", "reasoning-models", "test-time-compute", "cot-limits",
