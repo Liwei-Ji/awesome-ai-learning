@@ -381,6 +381,53 @@ export const QUIZZES = {
       }
     ]
   },
+  "prompt-eval": {
+    "zh": [
+      {
+        "t": "多試幾個例子，覺得回答變順、變好，就可以上線了。",
+        "ok": false,
+        "why": "憑感覺、樣本太少，容易「改 A 壞 B」，沒有可重複的依據。"
+      },
+      {
+        "t": "先定義可量的指標，建一組固定的 golden set（含刁鑽案例）離線比新舊版本、防退步；開放式用 rubric 或校準過的 LLM-as-judge；離線贏了再上線 A/B 看真實效果。",
+        "ok": true,
+        "why": "定義指標＋離線回歸＋合適的評分＋線上 A/B，才是可量測、可重複的評估。"
+      },
+      {
+        "t": "跑公開 benchmark，分數高就代表這個 prompt 好。",
+        "ok": false,
+        "why": "公開 benchmark 只是參考，跟你的實際任務常有落差，要用貼近任務的 golden set。"
+      }
+    ],
+    "en": [
+      {
+        "t": "Try a few more examples, and once the answers feel smoother and better, you can ship it.",
+        "why": "Going by gut feel with too few samples easily leads to \"fixing A while breaking B\", with no repeatable basis."
+      },
+      {
+        "t": "First define a measurable metric, build a fixed golden set (including tricky cases) to compare new and old versions offline and guard against regressions; for open-ended tasks use a rubric or a calibrated LLM-as-judge; once it wins offline, run online A/B to see the real effect.",
+        "why": "Defining metrics plus offline regression plus suitable scoring plus online A/B is what makes evaluation measurable and repeatable."
+      },
+      {
+        "t": "Run a public benchmark, and a high score means this prompt is good.",
+        "why": "A public benchmark is only a reference and often diverges from your actual task; use a golden set that is close to the task."
+      }
+    ],
+    "ja": [
+      {
+        "t": "いくつか例を試してみて、回答がスムーズで良くなったと感じたら公開してよい。",
+        "why": "感覚に頼りサンプルが少なすぎると「Aを直してBが壊れる」が起きやすく、再現可能な根拠がない。"
+      },
+      {
+        "t": "まず測定可能な指標を定義し、固定したgolden set（意地悪なケースを含む）を作ってオフラインで新旧バージョンを比較しリグレッションを防ぐ；オープンな場合はrubricか校正済みのLLM-as-judgeを使う；オフラインで勝ってからオンラインA/Bで実際の効果を見る。",
+        "why": "指標の定義＋オフラインのリグレッション＋適切な採点＋オンラインA/Bこそが、測定可能で再現可能な評価だ。"
+      },
+      {
+        "t": "公開benchmarkを走らせて、スコアが高ければこのpromptは良いということだ。",
+        "why": "公開benchmarkは参考にすぎず、実際のタスクとはしばしばずれるため、タスクに近いgolden setを使うべきだ。"
+      }
+    ]
+  },
   "few-shot": {
     "zh": [
       {
