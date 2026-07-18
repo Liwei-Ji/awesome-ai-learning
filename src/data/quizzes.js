@@ -522,6 +522,53 @@ export const QUIZZES = {
       }
     ]
   },
+  "chunking": {
+    "zh": [
+      {
+        "t": "就按固定字數（例如每 1000 字）一刀切下去，最簡單也最保險。",
+        "ok": false,
+        "why": "固定字數會攔腰切斷句子與語意，實務上多用順結構的 recursive 切法並加 overlap。"
+      },
+      {
+        "t": "先控大小與重疊（常 200 到 500 字加 overlap），盡量順著段落／句子結構切（recursive），必要時用 semantic chunk；切法要配資料型態與檢索（如小塊檢索、父段回傳），最後用測試集調參。",
+        "ok": true,
+        "why": "講出大小/重疊、按結構切、進階 semantic、配資料與檢索、用 eval 調，才完整。"
+      },
+      {
+        "t": "chunk 切越小越好，這樣每塊都很精準。",
+        "ok": false,
+        "why": "太小會切斷語意、缺上下文，反而檢索到殘缺片段；大小是取捨，不是越小越好。"
+      }
+    ],
+    "en": [
+      {
+        "t": "Just cut by a fixed character count (for example, every 1000 characters); it is the simplest and safest.",
+        "why": "A fixed character count slices sentences and meaning in half; in practice, people mostly use structure-following recursive chunking with overlap added."
+      },
+      {
+        "t": "First control size and overlap (often 200 to 500 characters plus overlap), chunk along the paragraph/sentence structure as much as possible (recursive), and use semantic chunking when needed; the method should match the data type and retrieval (such as retrieve small chunks, return the parent section), and finally tune parameters on a test set.",
+        "why": "Covering size/overlap, structure-based chunking, advanced semantic, matching data and retrieval, and tuning with eval is what makes it complete."
+      },
+      {
+        "t": "The smaller you chunk, the better, so that every chunk is precise.",
+        "why": "Too small cuts the meaning and loses context, so you end up retrieving incomplete fragments; size is a trade-off, not a matter of smaller being better."
+      }
+    ],
+    "ja": [
+      {
+        "t": "固定文字数（たとえば 1000 文字ごと）で一気に切ってしまうのが、最も簡単で最も安全だ。",
+        "why": "固定文字数は文と意味を途中でぶつ切りにする。実務では構造に沿った recursive な分け方に overlap を加えることが多い。"
+      },
+      {
+        "t": "まずサイズと overlap を制御し（多くは 200 から 500 文字に overlap を追加）、できるだけ段落／文の構造に沿って切り（recursive）、必要なら semantic chunk を使う。分け方はデータ型と検索に合わせ（小さな chunk で検索し親セクションを返すなど）、最後にテストセットでパラメータを調整する。",
+        "why": "サイズ／overlap、構造に沿った切り方、応用の semantic、データと検索への適合、eval での調整まで述べて初めて完全になる。"
+      },
+      {
+        "t": "chunk は小さく切れば切るほどよく、そうすればどの chunk も正確になる。",
+        "why": "小さすぎると意味が途切れ context が欠け、かえって不完全な断片を検索してしまう。サイズはトレードオフであり、小さいほどよいわけではない。"
+      }
+    ]
+  },
   "rag-why-wrong": {
     "zh": [
       {
