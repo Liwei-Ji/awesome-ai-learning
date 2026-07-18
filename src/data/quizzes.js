@@ -99,6 +99,53 @@ export const QUIZZES = {
       }
     ]
   },
+  "what-model-stores": {
+    "zh": [
+      {
+        "t": "模型把訓練資料存進一個大資料庫，回答時就去裡面查出最相關的一筆。",
+        "ok": false,
+        "why": "把 LLM 當查表資料庫是最常見的誤解：它是壓縮的模式，回答是重建不是查詢。"
+      },
+      {
+        "t": "知識是壓縮、分散在權重裡的模式，不是存檔：模型主要泛化，但也會逐字背下一部分資料；因為有損，冷門精確的事實容易記錯（幻覺），要更新知識靠 RAG 而非微調。",
+        "ok": true,
+        "why": "講出「壓縮模式非資料庫＋記憶/泛化光譜＋有損會錯＋用 RAG 更新」，層次完整。"
+      },
+      {
+        "t": "模型完全不會記住任何原始文字，全是抽象規律，所以不可能吐出訓練資料。",
+        "ok": false,
+        "why": "其實會逐字背下重複多次的內容並可能原樣吐出（regurgitation），這正是隱私與著作權爭議的來源。"
+      }
+    ],
+    "en": [
+      {
+        "t": "The model stores its training data in a big database and, when answering, looks up the single most relevant record from it.",
+        "why": "Treating an LLM as a lookup database is the most common misconception: it is compressed patterns, and answering is reconstruction, not a query."
+      },
+      {
+        "t": "Knowledge is compressed patterns distributed across the weights, not saved files: the model mostly generalizes, but it also memorizes some data verbatim; because it is lossy, obscure precise facts are easily misremembered (hallucination), and updating knowledge relies on RAG rather than fine-tuning.",
+        "why": "It states 'compressed patterns not a database + the memorization/generalization spectrum + lossy so it errs + updating with RAG,' a complete, layered answer."
+      },
+      {
+        "t": "The model never remembers any original text at all, only abstract regularities, so it is impossible for it to reproduce training data.",
+        "why": "In fact it memorizes verbatim content that appears repeatedly and may reproduce it exactly (regurgitation), which is precisely the source of privacy and copyright disputes."
+      }
+    ],
+    "ja": [
+      {
+        "t": "モデルは訓練データを大きなデータベースに保存し、回答時にはそこから最も関連する一件を引き出す。",
+        "why": "LLM を表引きのデータベースと捉えるのは最もよくある誤解だ。それは圧縮されたパターンであり、回答は検索ではなく再構築である。"
+      },
+      {
+        "t": "知識は圧縮され、重みに分散したパターンであって保存ファイルではない。モデルは主に汎化するが、一部のデータは逐語的に暗記もする。ロッシーであるため、マイナーで正確さを要する事実は誤って覚えられやすく（ハルシネーション）、知識の更新はファインチューニングではなく RAG に頼る。",
+        "why": "「圧縮パターンでありデータベースではない＋記憶と汎化のスペクトル＋ロッシーで誤る＋RAG で更新」を述べており、階層立てて完結している。"
+      },
+      {
+        "t": "モデルは原文をまったく覚えず、すべて抽象的な規則なので、訓練データを吐き出すことは不可能だ。",
+        "why": "実際には繰り返し現れた内容を逐語的に暗記し、そのまま吐き出すこともあり（regurgitation）、これこそがプライバシーや著作権をめぐる論争の源だ。"
+      }
+    ]
+  },
   "rlhf-why": {
     "zh": [
       {
@@ -190,6 +237,53 @@ export const QUIZZES = {
       {
         "t": "ファインチューニングと RAG は二者択一なので一つ選べばよい。どうせ RAG はその都度すぐ引けてほとんどコストもないので、全部 RAG にするのが一番手軽だ。",
         "why": "二者択一と捉えたうえ「よく併用する」ことを落とし、さらに RAG は毎回の検索に遅延とコストがあり検索を外すと答えが台無しになることを無視している。"
+      }
+    ]
+  },
+  "scaling-law": {
+    "zh": [
+      {
+        "t": "模型參數越多就一定越強，所以把參數無限加大就好。",
+        "ok": false,
+        "why": "忽略了要等比例配資料與算力，也忽略報酬遞減與資料上限。"
+      },
+      {
+        "t": "scaling law 是經驗規律：模型、資料、算力一起放大，能力可預測地提升；但要按比例配（Chinchilla：很多大模型資料餵太少），而且報酬遞減，所以近年轉向資料品質、蒸餾與推理時運算。",
+        "ok": true,
+        "why": "講出經驗律＋三者配比＋Chinchilla＋報酬遞減＋新方向，才算完整理解。"
+      },
+      {
+        "t": "scaling law 保證只要夠大就會出現任何能力，是嚴格的物理定律。",
+        "ok": false,
+        "why": "它是經驗觀察不是保證、會飽和；「湧現」說法也有爭議。"
+      }
+    ],
+    "en": [
+      {
+        "t": "The more parameters a model has, the stronger it must be, so you should just increase parameters without limit.",
+        "why": "It ignores that data and compute must be scaled proportionally, and ignores diminishing returns and the data ceiling."
+      },
+      {
+        "t": "Scaling law is an empirical regularity: scale up model, data, and compute together and capability rises predictably; but they must be matched proportionally (Chinchilla: many large models were fed too little data), and returns diminish, so recent years have shifted toward data quality, distillation, and test-time compute.",
+        "why": "Stating the empirical law + the ratio of the three + Chinchilla + diminishing returns + the new directions is what counts as complete understanding."
+      },
+      {
+        "t": "Scaling law guarantees that any capability will appear as long as the model is big enough; it is a strict physical law.",
+        "why": "It is an empirical observation, not a guarantee, and it saturates; the 'emergence' claim is also disputed."
+      }
+    ],
+    "ja": [
+      {
+        "t": "モデルのパラメータが多いほど必ず強くなるので、パラメータを無限に増やせばよい。",
+        "why": "データと計算資源を比例して組み合わせる必要があることを無視し、収穫逓減とデータの上限も無視している。"
+      },
+      {
+        "t": "scaling law は経験則だ。モデル、データ、計算資源を一緒に拡大すると能力は予測可能に向上する。ただし比例して組み合わせる必要があり（Chinchilla：多くの大規模モデルはデータを与えられなさすぎていた）、しかも収穫逓減があるため、近年はデータ品質、蒸留、推論時の計算へと転じている。",
+        "why": "経験則＋三つの配分比＋Chinchilla＋収穫逓減＋新たな方向性を述べて初めて、完全な理解といえる。"
+      },
+      {
+        "t": "scaling law は、十分大きくしさえすればどんな能力でも現れることを保証する、厳密な物理法則だ。",
+        "why": "それは経験的な観察であって保証ではなく、飽和する。「創発」という主張にも議論がある。"
       }
     ]
   },
