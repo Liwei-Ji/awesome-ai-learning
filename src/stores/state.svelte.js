@@ -10,15 +10,15 @@ import { parsePath, buildPath } from '../lib/router.js';
 import { i18n, htmlLangOf } from './i18n.svelte.js';
 
 function initial() {
-  const { mode, current, iv, path } = parsePath(location.pathname);
-  return { mode, current, iv, path };
+  const { mode, current, iv, path, step } = parsePath(location.pathname);
+  return { mode, current, iv, path, step };
 }
 
 export const nav = $state(initial());
 
 /** 依 nav + 目前語言重建路徑，寫回網址（預設 push，留下歷史）。 */
 function syncURL(replace = false) {
-  const path = buildPath({ locale: i18n.locale, mode: nav.mode, current: nav.current, iv: nav.iv, path: nav.path });
+  const path = buildPath({ locale: i18n.locale, mode: nav.mode, current: nav.current, iv: nav.iv, path: nav.path, step: nav.step });
   if (location.pathname === path && !replace) return; // 已在該路徑，不重複 push
   const full = path + location.hash;
   if (replace) history.replaceState(null, '', full);
@@ -39,16 +39,26 @@ export function goIv(id) {
   syncURL();
 }
 
-/** 切到學習路線某條；傳 null 回路線落地頁（卡片） */
+/** 切到學習路線某條；傳 null 回路線落地頁（卡片）。進入路線時重置步驟（元件會落在第一步） */
 export function goPath(id) {
   nav.mode = 'paths';
   nav.path = id;
+  nav.step = null;
+  syncURL();
+}
+
+/** 跳到某路線的某一步（ref＝課程 slug 或挑戰 id） */
+export function goPathStep(pathId, ref) {
+  nav.mode = 'paths';
+  nav.path = pathId;
+  nav.step = ref;
   syncURL();
 }
 
 /** 頂部切換 course / interview（記住各自剛才的位置） */
 export function setMode(m) {
   nav.mode = m;
+  if (m === 'course' && nav.current == null) nav.current = 0; // 課程一律從某一課進入（首頁已是路線落地頁）
   syncURL();
 }
 
@@ -56,6 +66,7 @@ export function setMode(m) {
 export const hrefCourse = (id) => buildPath({ locale: i18n.locale, mode: 'course', current: id });
 export const hrefIv = (id) => buildPath({ locale: i18n.locale, mode: 'interview', iv: id });
 export const hrefPath = (id) => buildPath({ locale: i18n.locale, mode: 'paths', path: id });
+export const hrefPathStep = (id, step) => buildPath({ locale: i18n.locale, mode: 'paths', path: id, step });
 
 /** 手機版：側邊欄抽屜開合狀態 */
 export const ui = $state({ menuOpen: false });
@@ -74,11 +85,12 @@ export function onNav(e, fn, close = true) {
 // 上一頁／下一頁：從網址還原 nav 與語言
 if (typeof window !== 'undefined') {
   window.addEventListener('popstate', () => {
-    const { locale, mode, current, iv, path } = parsePath(location.pathname);
+    const { locale, mode, current, iv, path, step } = parsePath(location.pathname);
     nav.mode = mode;
     nav.current = current;
     nav.iv = iv;
     nav.path = path;
+    nav.step = step;
     i18n.locale = locale;
     document.documentElement.lang = htmlLangOf(locale);
   });

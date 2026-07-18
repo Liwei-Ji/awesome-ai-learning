@@ -14,6 +14,10 @@
   // 考點圖標（Lucide）：底層原理→atom、工程權衡→scale、系統化→network
   const IV_ICONS = { atom: Atom, scale: Scale, network: Network };
 
+  // 可傳 id 覆寫（學習路線播放器用）；不傳則跟隨 nav.iv（挑戰模式）
+  let { id = undefined } = $props();
+  let cur = $derived(id ?? nav.iv);
+
   let stageEl;
   let revealed = $state(false);
   let more = $state(false);
@@ -22,8 +26,8 @@
   let pick = $state(null);
   let coveredCount = $derived(Object.values(covered).filter(Boolean).length);
 
-  let item = $derived(nav.iv ? ivOf(nav.iv, i18n.locale) : null);
-  let quiz = $derived(nav.iv ? quizFor(nav.iv, i18n.locale) : null);
+  let item = $derived(cur ? ivOf(cur, i18n.locale) : null);
+  let quiz = $derived(cur ? quizFor(cur, i18n.locale) : null);
   let catName = $derived(item ? catNameOf(item.cat, i18n.locale) : '');
   let sep = $derived(i18n.locale === 'en' ? ': ' : '：'); // beat 分隔（不用破折號）
 
@@ -38,7 +42,7 @@
 
   // 換題時收起解答、捲回頂端
   $effect(() => {
-    nav.iv;
+    cur;
     revealed = false;
     more = false;
     covered = {};
@@ -68,7 +72,7 @@
     </div>
   {:else}
     <div class="stage-head">
-      {#key nav.iv}
+      {#key cur}
         <div in:fly={{ y: 10, duration: dur(D.base), easing: ease }}>
           <div class="kicker"><span class="eyebrow">{t('iv.interview')} · {catName}</span></div>
           <h1>{item.q}</h1>
@@ -77,7 +81,7 @@
     </div>
 
     <div class="canvas-wrap">
-      {#key nav.iv}
+      {#key cur}
         <div in:fly={{ y: 16, duration: dur(D.slow), delay: dur(90), easing: ease }}>
           <!-- 陷阱提示 -->
           <p class="trap">{@html item.trap}</p>

@@ -33,7 +33,7 @@
         const tx = pathText(pathById(nav.path), loc);
         return { title: `${tx.title} · ${brand}`, desc: strip(tx.tagline) };
       }
-      return { title: `${t('paths.landingTitle')} · ${brand}`, desc: strip(t('paths.landingLede')) };
+      return { title: `${brand} · ${t('home.title')}`, desc: strip(t('home.lede')) };
     }
     if (nav.current == null) {
       return { title: `${brand} · ${t('home.title')}`, desc: strip(t('home.lede')) };

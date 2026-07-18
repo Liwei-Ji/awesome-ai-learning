@@ -10,20 +10,24 @@
   import { t, i18n } from '../stores/i18n.svelte.js';
   import { dur, D, ease } from '../lib/motion.js';
 
+  // 可傳 id 覆寫（學習路線播放器用）；不傳則跟隨 nav.current（課程模式）
+  let { id = undefined } = $props();
+  let cur = $derived(id ?? nav.current);
+
   let stageEl;
-  let ch = $derived(chOf(nav.current));
+  let ch = $derived(chOf(cur));
   let Demo = $derived(demoFor(ch.slug));
   let body = $derived(bodyFor(ch.slug, i18n.locale));
   let practical = $derived(practicalFor(ch.slug, i18n.locale));
   let decision = $derived(decisionFor(ch.slug, i18n.locale));
   let notes = $derived(knowledgeFor(ch.slug, i18n.locale).notes);
 
-  $effect(() => { nav.current; if (stageEl) stageEl.scrollTop = 0; });
+  $effect(() => { cur; if (stageEl) stageEl.scrollTop = 0; });
 </script>
 
 <main class="stage" bind:this={stageEl}>
   <div class="stage-head">
-    {#key nav.current}
+    {#key cur}
       <div in:fly={{ y: 10, duration: dur(D.base), easing: ease }}>
         <h1>{ch.t}</h1>
         <p class="lede">{ch.sub}</p>
@@ -31,7 +35,7 @@
     {/key}
   </div>
   <div class="canvas-wrap">
-    {#key nav.current}
+    {#key cur}
       <div in:fly={{ y: 16, duration: dur(D.slow), delay: dur(90), easing: ease }}>
         {#if body?.length}
           <section class="lesson">
@@ -44,7 +48,7 @@
           </section>
         {/if}
 
-        <Demo id={nav.current} />
+        <Demo id={cur} />
 
         {#if practical?.length}
           <section class="lbox practical">

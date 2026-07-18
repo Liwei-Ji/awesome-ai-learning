@@ -2,20 +2,37 @@
   // 側欄：頂部 [課程 | 面試] 切換（主導覽），語言切換降級到底部 footer。
   // 課程 mode → GROUPS + CH 自動生成章節清單；
   // 面試 mode → 題庫（搜尋 + 分類 + 題目 label），沿用同一套 .group/.chap 樣式。
-  import { GROUPS } from '../data/chapters.js';
+  import { GROUPS, idOf } from '../data/chapters.js';
   import { IV_CATS, ivByCat, ivOf, ivLabel, catNameOf } from '../data/interviews.js';
-  import { PATHS, pathText } from '../data/paths.js';
+  import { PATHS, pathById, pathSteps, pathText, locText } from '../data/paths.js';
   import { chOf } from '../data/localize.js';
-  import { nav, go, goIv, goPath, setMode, hrefCourse, hrefIv, hrefPath, onNav } from '../stores/state.svelte.js';
-  import { i18n, setLocale, t } from '../stores/i18n.svelte.js';
-  import { LOCALES, messages } from '../i18n/index.js';
-  import { Compass, Wrench, Cpu, PenLine, Library, Bot, ShieldCheck } from '@lucide/svelte';
+  import { nav, go, goIv, goPath, goPathStep, setMode, hrefCourse, hrefIv, hrefPath, hrefPathStep, onNav } from '../stores/state.svelte.js';
+  import { i18n, t } from '../stores/i18n.svelte.js';
 
-  const ICONS = { Compass, Wrench, Cpu, PenLine, Library, Bot, ShieldCheck };
   const pathGroups = [
     { key: 'journeys', list: PATHS.filter((p) => p.group === 'journey') },
     { key: 'tracks', list: PATHS.filter((p) => p.group === 'track') },
   ];
+
+  // 路線播放器：目前選中的路線 + 步驟目錄（帶連續編號）
+  let curPath = $derived(nav.path ? pathById(nav.path) : null);
+  let curRef = $derived.by(() => {
+    if (!curPath) return null;
+    const steps = pathSteps(curPath);
+    return nav.step && steps.some((x) => x.ref === nav.step) ? nav.step : steps[0]?.ref;
+  });
+  function stepInfo(s) {
+    if (s.k === 'course') { const id = idOf(s.ref); return { kind: 'course', badge: t('paths.lesson'), label: id >= 0 ? chOf(id).t : s.ref }; }
+    return { kind: 'iv', badge: t('paths.challenge'), label: ivLabel(s.ref, i18n.locale) };
+  }
+  let plan = $derived.by(() => {
+    if (!curPath) return [];
+    let n = 0;
+    return curPath.phases.map((ph) => ({
+      label: locText(ph.t, i18n.locale),
+      steps: ph.steps.map((s) => { n += 1; return { ...stepInfo(s), n, ref: s.ref }; }),
+    }));
+  });
 
   let q = $state('');
   let cats = $derived(
@@ -30,28 +47,46 @@
 
 <nav class="nav">
   <div class="nav-scroll">
-    <a class="brand" class:on={nav.mode === 'course' && nav.current == null} href={hrefCourse(null)} onclick={(e) => onNav(e, () => go(null))}>
-      <span class="blogo">🎓</span><span class="bname">{t('brand')}</span>
+    <a class="brand" class:on={nav.mode === 'paths' && nav.path == null} href={hrefPath(null)} onclick={(e) => onNav(e, () => goPath(null))}>
+      <span class="bname">{t('brand')}</span>
     </a>
 
-    <div class="modesw" role="group" aria-label="Paths / Course / Challenge">
-      <a class="ms" class:on={nav.mode === 'paths'} href={hrefPath(null)} onclick={(e) => onNav(e, () => setMode('paths'), false)}>{t('paths.nav')}</a>
-      <a class="ms" class:on={nav.mode === 'course'} href={hrefCourse(null)} onclick={(e) => onNav(e, () => setMode('course'), false)}>{t('iv.course')}</a>
-      <a class="ms" class:on={nav.mode === 'interview'} href={hrefIv(null)} onclick={(e) => onNav(e, () => setMode('interview'), false)}>{t('iv.interview')}</a>
-    </div>
+    <!-- 模式切換：路線播放器（已選路線）裡不顯示，靠「← 所有路線」離開即可 -->
+    {#if !(nav.mode === 'paths' && nav.path)}
+      <div class="modesw" role="group" aria-label="Paths / Course / Challenge">
+        <a class="ms" class:on={nav.mode === 'paths'} href={hrefPath(null)} onclick={(e) => onNav(e, () => setMode('paths'), false)}>{t('paths.nav')}</a>
+        <a class="ms" class:on={nav.mode === 'course'} href={hrefCourse(null)} onclick={(e) => onNav(e, () => setMode('course'), false)}>{t('iv.course')}</a>
+        <a class="ms" class:on={nav.mode === 'interview'} href={hrefIv(null)} onclick={(e) => onNav(e, () => setMode('interview'), false)}>{t('iv.interview')}</a>
+      </div>
+    {/if}
 
     {#if nav.mode === 'paths'}
-      {#each pathGroups as pg}
-        <div class="group">
-          <span class="eyebrow">{t(`paths.${pg.key}`)}</span>
-          {#each pg.list as p}
-            {@const Icon = ICONS[p.icon]}
-            <a class="chap" aria-current={p.id === nav.path} href={hrefPath(p.id)} onclick={(e) => onNav(e, () => goPath(p.id))}>
-              <span class="picon"><Icon size={15} strokeWidth={1.75} /></span><span>{pathText(p, i18n.locale).title}</span>
-            </a>
-          {/each}
-        </div>
-      {/each}
+      {#if curPath}
+        <div class="pathtitle">{pathText(curPath, i18n.locale).title}</div>
+        {#each plan as ph, i}
+          <div class="group">
+            <span class="eyebrow">{String(i + 1).padStart(2, '0')} · {ph.label}</span>
+            {#each ph.steps as s}
+              <a class="chap pstep" aria-current={s.ref === curRef} href={hrefPathStep(nav.path, s.ref)} onclick={(e) => onNav(e, () => goPathStep(nav.path, s.ref))}>
+                <span class="snum">{String(s.n).padStart(2, '0')}</span>
+                <span class="stype {s.kind}">{s.badge}</span>
+                <span class="slabel">{s.label}</span>
+              </a>
+            {/each}
+          </div>
+        {/each}
+      {:else}
+        {#each pathGroups as pg}
+          <div class="group">
+            <span class="eyebrow">{t(`paths.${pg.key}`)}</span>
+            {#each pg.list as p}
+              <a class="chap ptext" aria-current={p.id === nav.path} href={hrefPath(p.id)} onclick={(e) => onNav(e, () => goPath(p.id))}>
+                <span>{pathText(p, i18n.locale).title}</span>
+              </a>
+            {/each}
+          </div>
+        {/each}
+      {/if}
     {:else if nav.mode === 'interview'}
       <div class="ivsearch"><input placeholder={t('iv.search')} bind:value={q} autocomplete="off" /></div>
       {#each cats as c}
@@ -85,13 +120,6 @@
     {/if}
   </div>
 
-  <div class="navfoot">
-    <div class="lang" role="group" aria-label="Language / 語言">
-      {#each LOCALES as l}
-        <button class="lg" class:on={i18n.locale === l} onclick={() => setLocale(l)}>{messages[l].langName}</button>
-      {/each}
-    </div>
-  </div>
 </nav>
 
 <style>
@@ -128,18 +156,20 @@
   }
   .ivsearch input:focus { border-color: var(--accent); }
   .ivdot { font-family: var(--mono); font-size: 11px; color: var(--muted); width: 24px; flex: none; text-align: center; }
-  .picon { display: inline-flex; align-items: center; justify-content: center; width: 24px; flex: none; color: var(--muted); }
-  .chap[aria-current="true"] .picon { color: var(--accent-ink); }
+  .ptext > span { padding-left: 24px; }
+
+  /* 路線步驟目錄 */
+  .pathback { display: inline-block; font-family: var(--mono); font-size: 12px; color: var(--muted); text-decoration: none; padding: 2px 10px 6px; transition: color .15s; }
+  .pathback:hover { color: var(--accent-ink); }
+  .pathtitle { padding: 0 10px 8px; font-weight: 700; font-size: 14px; letter-spacing: var(--ls-tight); color: var(--ink); }
+  .pstep { align-items: flex-start; gap: 8px; }
+  .pstep .snum { font-family: var(--mono); font-size: 10.5px; color: var(--muted); flex: none; width: 16px; padding-top: 2px; }
+  .pstep .stype { font-family: var(--mono); font-size: 9px; letter-spacing: .03em; flex: none; padding: 2px 5px; border-radius: 5px; border: 1px solid var(--line); margin-top: 1px; white-space: nowrap; }
+  .pstep .stype.course { color: var(--accent-ink); background: var(--surface-2); }
+  .pstep .stype.iv { color: var(--muted); }
+  .pstep .slabel { flex: 1; min-width: 0; line-height: 1.4; }
+  .chap[aria-current="true"] .snum { color: var(--accent-ink); }
   .chap[aria-current="true"] .ivdot { color: var(--accent-ink); }
   .soon { display: block; padding: 4px 10px 2px; font-size: 11px; color: var(--muted); font-style: italic; }
 
-  /* 底部：語言切換（次要，輕量文字鈕，不用實心膠囊） */
-  .navfoot { flex: none; border-top: 1px solid var(--line); padding: 9px 12px; background: var(--surface); }
-  .lang { display: flex; gap: 2px; }
-  .lg {
-    flex: 1; padding: 5px 4px; border: none; background: none; color: var(--muted);
-    font-size: 11.5px; font-weight: 600; border-radius: var(--r-sm); transition: .15s; white-space: nowrap;
-  }
-  .lg:hover { color: var(--accent-ink); background: var(--surface-2); }
-  .lg.on { color: var(--accent-ink); background: var(--surface-2); }
 </style>

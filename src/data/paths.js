@@ -56,9 +56,9 @@ export const PATHS = [
     group: 'journey',
     time: { zh: '約 12 小時', en: '~12 hrs', ja: '約12時間' },
     t: {
-      zh: { title: '成為 AI 工程師', tagline: '懂原理、蓋得出來、還能判斷好壞。走完三根支柱。', who: '要做出來、要為結果負責的人。' },
-      en: { title: 'Become an AI Engineer', tagline: 'Understand it, build it, and judge it well. All three pillars.', who: 'Those who build it and own the outcome.' },
-      ja: { title: 'AI エンジニアになる', tagline: '原理を理解し、作れて、良し悪しも判断できる。三本柱を走破。', who: '実際に作り、結果に責任を持つ人。' },
+      zh: { title: '成為 AI 工程師', tagline: '懂原理、蓋得出來、還能判斷好壞，三件事都練。', who: '要做出來、要為結果負責的人。' },
+      en: { title: 'Become an AI Engineer', tagline: 'Understand it, build it, and judge it well, all three.', who: 'Those who build it and own the outcome.' },
+      ja: { title: 'AI エンジニアになる', tagline: '原理を理解し、作れて、良し悪しも判断する、その三つを鍛える。', who: '実際に作り、結果に責任を持つ人。' },
     },
     phases: [
       { t: { zh: '打底', en: 'Foundations', ja: '土台' },
