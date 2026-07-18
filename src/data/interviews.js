@@ -4243,16 +4243,24 @@ const INT_TR = {
 
 // 題庫顯示順序（分類內依此排；Agent 走 arc：規劃→工具→JSON→記憶→量化→成本）
 export const IV_ORDER = [
-  "attention-compute", "positional-encoding", "transformer-vs-rnn", "embedding-meaning",
-  "multi-head", "tokenizer-why", "what-model-stores", "rlhf-why", "finetune-vs-rag", "lora", "catastrophic-forgetting",
-  "data-quality", "why-not-pretrain", "scaling-law", "context-window", "train-vs-infer", "faster-inference",
-  "temperature",
-  "prompt-craft", "prompt-eval", "few-shot", "cot-prompting", "prompt-vs-tune-vs-rag", "reasoning-models", "test-time-compute", "cot-limits",
+  // 原理：由淺到深，對齊課程 Tokenizer → Embedding → Transformer(attention)
+  "tokenizer-why", "embedding-meaning", "attention-compute", "multi-head", "positional-encoding", "transformer-vs-rnn", "what-model-stores",
+  // 訓練
+  "rlhf-why", "finetune-vs-rag", "lora", "catastrophic-forgetting", "data-quality", "why-not-pretrain", "scaling-law",
+  // 推論：先「訓練 vs 推論」建立概念，再談限制
+  "train-vs-infer", "context-window", "faster-inference", "temperature",
+  // Prompting：先學技巧（few-shot／CoT）再學評估
+  "prompt-craft", "few-shot", "cot-prompting", "prompt-eval", "prompt-vs-tune-vs-rag", "reasoning-models", "test-time-compute", "cot-limits",
+  // 檢索（RAG）
   "rag-documents", "chunking", "rag-retrieval", "rag-why-wrong", "rag-vs-longcontext",
+  // Agent arc：概念→規劃→工具→JSON→記憶→量化→成本
   "agent-vs-workflow", "agent-planning", "agent-tools", "json-output", "agent-memory", "agent-eval", "agent-cost",
-  "diffusion-how", "diffusion-not-collage", "multimodal-key", "vlm-see", "genimg-errors", "diffusion-vs-gan",
-  "hallucination", "bias", "prompt-injection", "jailbreak", "guardrails", "data-leakage", "trust-answer", "ai-limits", "can-llm-reason", "design-doc-qa", "design-support-bot", "realtime-assistant",
-  "design-cost", "design-eval-improve", "monitoring",
+  // 生成／多模態：先生圖（擴散）成一組，再進多模態
+  "diffusion-how", "diffusion-not-collage", "genimg-errors", "diffusion-vs-gan", "multimodal-key", "vlm-see",
+  // 素養／風險：可靠性 → 安全 → 能力邊界
+  "hallucination", "bias", "trust-answer", "prompt-injection", "jailbreak", "guardrails", "data-leakage", "ai-limits", "can-llm-reason",
+  // 系統設計
+  "design-doc-qa", "design-support-bot", "realtime-assistant", "design-cost", "design-eval-improve", "monitoring",
 ];
 
 /** 依分類 key 取該類題目 id 陣列（依 IV_ORDER 排序） */
