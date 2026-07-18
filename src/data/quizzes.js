@@ -944,6 +944,53 @@ export const QUIZZES = {
         "why": "出力フィルタリングは関門の一つにすぎません。データは送信、学習、検索、ログなどの段階で漏れうるので、多層防御が必要です。"
       }
     ]
+  },
+  "can-llm-reason": {
+    "zh": [
+      {
+        "t": "LLM 內部有一個推理引擎，會像人一樣一步步做邏輯，所以算術和多步推理都可靠。",
+        "ok": false,
+        "why": "它本質是預測下一個字，沒有獨立推理引擎；精確計算、長鏈邏輯正是它會錯的地方。"
+      },
+      {
+        "t": "LLM 本質是預測下一個字，因為訓練資料有大量「推理形狀」的文字才學會像推理的續寫；它在訓練分布內很強，但精確計算、數數、長鏈邏輯、規劃、沒見過的新問題容易錯，所以要外包給工具、用 CoT、加驗證。",
+        "ok": true,
+        "why": "講出本質（token 預測）、為什麼像推理、哪裡會破、怎麼補，完整。"
+      },
+      {
+        "t": "既然它會出錯，代表它只是隨機亂猜，沒有任何實用價值。",
+        "ok": false,
+        "why": "另一個極端也不對：它在分布內表現驚人、是強力工具；重點是劃清邊界並用工具補，不是全盤否定。"
+      }
+    ],
+    "en": [
+      {
+        "t": "An LLM has a reasoning engine inside that works through logic step by step like a human, so its arithmetic and multi-step reasoning are reliable.",
+        "why": "At its core it predicts the next token and has no independent reasoning engine; exact arithmetic and long logic chains are exactly where it goes wrong."
+      },
+      {
+        "t": "An LLM at its core predicts the next token, and it only learned reasoning-like continuation because the training data holds a vast amount of 'reasoning-shaped' text; it's strong in-distribution, but exact arithmetic, counting, long logic chains, planning, and novel problems trip it up, so you outsource to tools, use CoT, and add verification.",
+        "why": "It states the core (token prediction), why it looks like reasoning, where it breaks, and how to shore it up: complete."
+      },
+      {
+        "t": "Since it makes mistakes, it must just be guessing at random and have no practical value at all.",
+        "why": "The other extreme is wrong too: it's astonishing in-distribution and a powerful tool; the point is to draw clear boundaries and shore it up with tools, not to dismiss it wholesale."
+      }
+    ],
+    "ja": [
+      {
+        "t": "LLM の内部には推論エンジンがあり、人間のように一歩ずつ論理を進めるので、算術も多段階の推論も信頼できる。",
+        "why": "本質は次のトークンを予測することであり、独立した推論エンジンはありません。正確な計算や長い論理の連鎖こそ、間違える場所です。"
+      },
+      {
+        "t": "LLM の本質は次のトークンを予測することで、学習データに「推論の形」をした文字が大量にあるからこそ推論のような続きを書くことを学んだにすぎません。訓練分布内(in-distribution)では強いですが、正確な計算、数え上げ、長い論理の連鎖、プランニング、見たことのない新しい問題では間違えやすいので、ツールに外注し、CoT を使い、検証を加えます。",
+        "why": "本質（token 予測）、なぜ推論のように見えるのか、どこで破綻するのか、どう補うのかを述べており、完全です。"
+      },
+      {
+        "t": "間違えるということは、ただランダムに当てずっぽうをしているだけで、実用的な価値は何もないということだ。",
+        "why": "もう一方の極端も誤りです：分布内(in-distribution)では驚くほどの性能を見せる強力なツールです。重要なのは境界を明確に引きツールで補うことであり、全面的に否定することではありません。"
+      }
+    ]
   }
 };
 
