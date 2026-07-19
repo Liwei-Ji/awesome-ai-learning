@@ -52,6 +52,8 @@ export default {
     landingLede: '把學過的概念，用進階題目壓測一遍。左邊選一題，先自己想，再看示範回答與考點。',
   },
   paths: {
+    deepens: '深化',
+    certNext: '接著走',
     nav: '路線',
     landingTitle: '學習路線',
     landingLede: '你想達成什麼？選一條路線，我們把課程與挑戰題串成有順序的學習地圖。',
@@ -86,6 +88,6 @@ export default {
     courseFoot: '序章 ＋ 6 章',
     challengeMeta: '59 題',
     challengeLede: '把學過的概念，用進階題目壓測一遍。',
-    challengeFoot: '9 大主題',
+    challengeFoot: '大主題',
   },
 };

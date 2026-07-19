@@ -52,6 +52,8 @@ export default {
     landingLede: '学んだ概念を、手ごわい問題で試そう。左から質問を選び、まず自分で考えてから、模範回答と着眼点を開こう。',
   },
   paths: {
+    deepens: '深掘り',
+    certNext: '次はこちら',
     nav: 'ルート',
     landingTitle: '学習ルート',
     landingLede: '何を達成したいですか？ルートを選ぶと、講義とチャレンジを順序立てたロードマップに繋げます。',
@@ -86,6 +88,6 @@ export default {
     courseFoot: '序章 + 6章',
     challengeMeta: '59 問',
     challengeLede: '学んだ概念を、手ごわい問題で試そう。',
-    challengeFoot: '9 テーマ',
+    challengeFoot: 'テーマ',
   },
 };

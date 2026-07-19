@@ -1,14 +1,16 @@
 <script>
   /* 結業證書：走完一條路線時彈出（也可從側欄重開）。純前端、可截圖分享。
      姓名選填，存 localStorage。日期取當下。 */
-  import { pathText } from '../data/paths.js';
+  import { pathText, pathById } from '../data/paths.js';
   import { progress, pathStats, setName, closeCert } from '../stores/progress.svelte.js';
+  import { goPath, hrefPath, onNav } from '../stores/state.svelte.js';
   import { t, i18n } from '../stores/i18n.svelte.js';
   import { scale, fade } from 'svelte/transition';
 
   let { path } = $props();
   let tx = $derived(pathText(path, i18n.locale));
   let stats = $derived(pathStats(path));
+  let nextPath = $derived(path?.next ? pathById(path.next) : null);
   const today = new Date().toISOString().slice(0, 10);
   const bits = Array.from({ length: 22 }, (_, i) => i);
   const colors = ['var(--accent)', 'var(--teal)', '#3f8a5b', '#4e6e96'];
@@ -36,6 +38,11 @@
     <div class="cov">{stats.total} {t('paths.certStep')} · {stats.courses} {t('paths.certLesson')} · {stats.challenges} {t('paths.certChallenge')}</div>
     <div class="cdate">{today}</div>
     <p class="chint">{t('paths.certShareHint')}</p>
+    {#if nextPath}
+      <a class="cnext" href={hrefPath(nextPath.id)} onclick={(e) => onNav(e, () => { closeCert(); goPath(nextPath.id); })}>
+        {t('paths.certNext')} · {pathText(nextPath, i18n.locale).title} →
+      </a>
+    {/if}
     <button class="cclose" onclick={closeCert}>{t('paths.certClose')}</button>
   </div>
 </div>
@@ -84,6 +91,12 @@
     font-size: 13px; font-weight: 600; padding: 8px 22px; border-radius: var(--r-sm); cursor: pointer; transition: .15s;
   }
   .cclose:hover { border-color: var(--accent); color: var(--accent-ink); }
+  .cnext {
+    display: block; width: fit-content; margin: 0 auto 10px; text-decoration: none;
+    background: var(--accent); color: #3a1e00; font-size: 13.5px; font-weight: 700;
+    padding: 9px 24px; border-radius: var(--r-sm); transition: .15s;
+  }
+  .cnext:hover { background: var(--accent-soft); }
 
   .confetti { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 1; }
   .confetti span { position: absolute; top: -12px; width: 8px; height: 12px; border-radius: 2px; opacity: .9; }

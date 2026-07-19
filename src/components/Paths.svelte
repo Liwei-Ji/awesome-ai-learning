@@ -5,7 +5,7 @@
        右側直接播放「目前步驟」的內容（課程頁 Stage 或挑戰頁 Interview），單一來源重用。 */
   import { PATHS, pathById, pathSteps, pathText, locText } from '../data/paths.js';
   import { idOf, CH } from '../data/chapters.js';
-  import { IV_ORDER } from '../data/interviews.js';
+  import { IV_ORDER, IV_CATS } from '../data/interviews.js';
   import { nav, go, goPath, setMode, hrefPath, hrefCourse, hrefIv, onNav } from '../stores/state.svelte.js';
   import { i18n, t } from '../stores/i18n.svelte.js';
   import HomeContent from './HomeContent.svelte';
@@ -20,6 +20,7 @@
   const tracks = PATHS.filter((p) => p.group === 'track');
   const courseCount = Object.keys(CH).length;     // 課程頁數（動態，不寫死）
   const challengeCount = IV_ORDER.length;          // 挑戰題數（動態，不寫死）
+  const catCount = IV_CATS.length;                 // 挑戰題分類數（動態，不寫死）
   const countLabel = (p) => `${pathSteps(p).length} ${t('paths.steps')}`;
 
   // 目前步驟：依 nav.step（ref）挑；沒有就落在第一步
@@ -74,6 +75,9 @@
           <a class="pcard t" class:complete={st.complete} href={hrefPath(p.id)} onclick={(e) => onNav(e, () => goPath(p.id))}>
             <div class="pc-title"><h3>{tx.title}</h3><span class="pc-time">{locText(p.time, locale)}</span></div>
             <p class="pc-line">{tx.tagline}</p>
+            {#if p.deepens && pathById(p.deepens)}
+              <p class="pc-deep"><span>{t('paths.deepens')}</span>{pathText(pathById(p.deepens), locale).title}</p>
+            {/if}
             <div class="pc-foot">
               {#if st.complete}<span class="pc-done">✓ {t('paths.done')}</span>{:else}<span>{st.done} / {st.total}</span>{/if}
               <span class="arrow">→</span>
@@ -94,7 +98,7 @@
         <a class="pcard t" href={hrefIv(null)} onclick={(e) => onNav(e, () => setMode('interview'))}>
           <div class="pc-title"><h3>{t('iv.interview')}</h3><span class="pc-time">{challengeCount} {t('paths.certChallenge')}</span></div>
           <p class="pc-line">{t('paths.challengeLede')}</p>
-          <div class="pc-foot">{t('paths.challengeFoot')} <span class="arrow">→</span></div>
+          <div class="pc-foot">{catCount} {t('paths.challengeFoot')} <span class="arrow">→</span></div>
         </a>
       </div>
     </section>
@@ -140,6 +144,8 @@
   .pc-line { font-size: 13.5px; color: var(--ink-2); line-height: 1.5; }
   .pc-who { font-size: 12.5px; color: var(--muted); margin-top: 12px; line-height: 1.5; }
   .pc-who span { color: var(--accent-ink); font-weight: 600; margin-right: 6px; }
+  .pc-deep { font-size: 12px; color: var(--muted); margin-top: 10px; }
+  .pc-deep span { color: var(--teal); font-weight: 600; margin-right: 6px; }
   .pc-foot { display: flex; align-items: center; justify-content: space-between; margin-top: auto; padding-top: 12px; border-top: 1px solid var(--line); font-family: var(--mono); font-size: 12px; color: var(--muted); }
   .arrow { color: var(--accent-ink); font-weight: 700; }
   .pc-done { color: var(--teal); font-weight: 700; }

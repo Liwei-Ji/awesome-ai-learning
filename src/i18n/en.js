@@ -52,6 +52,8 @@ export default {
     landingLede: 'Take what you learned and stress-test it against tough questions. Pick a question on the left, think first, then reveal the model answer and what’s being tested.',
   },
   paths: {
+    deepens: 'Deepens',
+    certNext: 'Next up',
     nav: 'Paths',
     landingTitle: 'Learning Paths',
     landingLede: 'What do you want to achieve? Pick a path and we thread the lessons and challenges into an ordered roadmap.',
@@ -86,6 +88,6 @@ export default {
     courseFoot: 'Prologue + 6 units',
     challengeMeta: '59 questions',
     challengeLede: 'Take what you learned and stress-test it against tough questions.',
-    challengeFoot: '9 topics',
+    challengeFoot: 'topics',
   },
 };
