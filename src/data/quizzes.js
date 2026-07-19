@@ -2,9 +2,103 @@
    各挑戰題的「判斷題」：讀完示範答案後，換你判斷哪個回答最到位。
    提示文字用 i18n 的 iv.quizPrompt（固定），此處只放選項。
    zh 每個選項帶 ok（哪個是正解）；en/ja 只放翻譯的 t/why，ok 由 zh 提供。
-   quizFor 合併：ok 取 zh、文字取該語言（缺則回退 zh）。新增題目改這裡即可。
+   quizFor 合併：ok 取 zh、文字取該語言（缺則回退 zh）。
    ============================================================ */
 export const QUIZZES = {
+  "tokenizer-why": {
+    "zh": [
+      {
+        "t": "Tokenizer 就是把文字切成一段段 token，切法只是內部實作細節，對使用者沒什麼實際影響。",
+        "ok": false,
+        "why": "停在定義：忽略了 token 數會連動成本、速度與上下文佔用。"
+      },
+      {
+        "t": "不同切法會讓同一段文字的 token 數不同，而計價、運算、上下文都按 token 算，所以 token 越多越貴越慢、也越快吃光上下文；又因詞表多以英文為主，中文、日文常被切成更多 token，形成多語言的系統性不公平。",
+        "ok": true,
+        "why": "完整涵蓋：token 數是源頭，並連到成本、上下文佔用與多語公平。"
+      },
+      {
+        "t": "切法不同只會影響 API 帳單金額，多花點錢就好，其他沒差。",
+        "ok": false,
+        "why": "以偏概全：漏掉上下文佔用與非英文使用者的系統性不公平。"
+      }
+    ],
+    "en": [
+      {
+        "t": "A tokenizer just splits text into tokens, and how it splits is an internal implementation detail with no real impact on users.",
+        "why": "Stops at the definition: it ignores that the token count drives cost, speed, and context usage."
+      },
+      {
+        "t": "Different splitting produces different token counts for the same text, and pricing, computation, and context are all measured in tokens, so more tokens means more expensive, slower, and faster context exhaustion; also, because vocabularies are mostly English-centric, Chinese and Japanese are often split into more tokens, creating a systematic unfairness across languages.",
+        "why": "Fully covers it: the token count is the root, connecting to cost, context usage, and cross-language fairness."
+      },
+      {
+        "t": "Different splitting only affects the API bill; just spend a bit more and nothing else matters.",
+        "why": "Overgeneralizes: it misses context usage and the systematic unfairness to non-English users."
+      }
+    ],
+    "ja": [
+      {
+        "t": "Tokenizer は文字を token に分割するだけで、分割の仕方は内部実装の詳細にすぎず、ユーザーには実質的な影響はない。",
+        "why": "定義で止まっている: token 数がコスト、速度、コンテキスト消費に連動することを見落としている。"
+      },
+      {
+        "t": "分割の仕方が違えば同じ文章でも token 数が変わり、課金、計算、コンテキストはすべて token 単位で数えられるため、token が多いほど高く遅くなり、コンテキストも早く食いつぶす。さらに語彙は英語中心のものが多いため、中国語や日本語はより多くの token に分割されがちで、多言語における体系的な不公平を生む。",
+        "why": "網羅的: token 数が起点であり、コスト、コンテキスト消費、多言語の公平性につながることを示している。"
+      },
+      {
+        "t": "分割の仕方が違っても影響するのは API の請求額だけで、少し多めに払えば済む話で、他は変わらない。",
+        "why": "一部で全体を語っている: コンテキスト消費と非英語ユーザーへの体系的な不公平を見落としている。"
+      }
+    ]
+  },
+  "embedding-meaning": {
+    "zh": [
+      {
+        "t": "靠分佈假說：一個詞的意思由它常一起出現的上下文決定；訓練時模型用上下文互相預測，為了預測準，語境相似的詞就被推到相近的向量位置，意義是從共現統計中長出來的。",
+        "ok": true,
+        "why": "完整說明意義如何進入向量，也解釋了相近詞為何會靠近。"
+      },
+      {
+        "t": "因為 embedding 就是把每個詞轉成一組向量或數字，能拿去算數學所以就代表意義。",
+        "ok": false,
+        "why": "停在定義：沒說明意義如何進到向量、相近詞為何靠近。"
+      },
+      {
+        "t": "因為訓練前有人工替每個詞標好語意分類，再把相近的詞指定到相近的座標上。",
+        "ok": false,
+        "why": "機制錯：意義不是人工標的，是從共現統計中自動學到的。"
+      }
+    ],
+    "en": [
+      {
+        "t": "It relies on the distributional hypothesis: a word's meaning is determined by the contexts it frequently appears in; during training the model predicts words from their context, and to predict accurately, words with similar contexts get pushed to nearby vector positions, so meaning grows out of co-occurrence statistics.",
+        "why": "Fully explains how meaning enters the vectors and why similar words end up close together."
+      },
+      {
+        "t": "Because an embedding just turns each word into a set of vectors or numbers that can be used in math, it therefore represents meaning.",
+        "why": "Stops at the definition: it does not explain how meaning gets into the vectors or why similar words are close."
+      },
+      {
+        "t": "Because before training, humans manually label each word with a semantic category and then assign similar words to nearby coordinates.",
+        "why": "Wrong mechanism: meaning is not manually labeled; it is learned automatically from co-occurrence statistics."
+      }
+    ],
+    "ja": [
+      {
+        "t": "分布仮説に基づく: ある語の意味は、その語がよく一緒に現れる文脈によって決まる。訓練時にモデルは文脈から語を予測し合い、正確に予測するために、文脈が似た語は近い vector 位置へ押し寄せられる。意味は共起統計から育っていく。",
+        "why": "意味がどのように vector に入るか、なぜ似た語が近づくかを完全に説明している。"
+      },
+      {
+        "t": "embedding は各語を vector や数値の組に変換し、数学的な計算に使えるようになるだけで、それがそのまま意味を表すから。",
+        "why": "定義で止まっている: 意味がどのように vector に入るか、なぜ似た語が近づくかを説明していない。"
+      },
+      {
+        "t": "訓練の前に、人手で各語に意味カテゴリを付け、似た語を近い座標に割り当てているから。",
+        "why": "仕組みが誤り: 意味は人手で付けたものではなく、共起統計から自動的に学習される。"
+      }
+    ]
+  },
   "attention-compute": {
     "zh": [
       {
@@ -49,6 +143,100 @@ export const QUIZZES = {
       {
         "t": "Attention とは、モデルが文中の重要な単語に注目することだ。大事な語に注意を向け、そうでない語は読み飛ばす。",
         "why": "「重要な部分に注目する」と言うだけで、その「重要さ」が Query と Key の類似度の重みで計算されることを答えられておらず、肝心の仕組みが抜けている。"
+      }
+    ]
+  },
+  "multi-head": {
+    "zh": [
+      {
+        "t": "多頭就是頭數比較多、參數比較大，所以整體上會算得比單頭準。",
+        "ok": false,
+        "why": "沒講原理：沒說單頭的侷限，也沒說多頭如何分工與融合。"
+      },
+      {
+        "t": "頭數越多模型一定越強，所以盡量把注意力頭加到最多就對了。",
+        "ok": false,
+        "why": "過度宣稱：總維度通常固定切給各頭，不是無腦加頭就更強。"
+      },
+      {
+        "t": "單頭注意力只能學一種關係，softmax 又傾向集中在少數詞上；多頭並行跑多組獨立的 Q／K／V，各自在子空間看一種關係（語法、指代、語意），再把各頭結果拼接投影融合，等於同時從多個角度理解一句話。",
+        "ok": true,
+        "why": "完整：點出單頭侷限，並說明多頭如何分工與合併。"
+      }
+    ],
+    "en": [
+      {
+        "t": "Multi-head just means more heads and more parameters, so overall it computes more accurately than a single head.",
+        "why": "Gives no mechanism: it does not state the limits of a single head or how multiple heads divide work and merge results."
+      },
+      {
+        "t": "The more heads, the stronger the model must be, so just add as many attention heads as possible.",
+        "why": "Overclaims: the total dimension is usually fixed and split among the heads, so blindly adding heads does not make it stronger."
+      },
+      {
+        "t": "Single-head attention can only learn one kind of relationship, and softmax tends to concentrate on a few words; multi-head runs several independent sets of Q/K/V in parallel, each looking at one kind of relationship in its subspace (syntax, coreference, semantics), then concatenates, projects, and fuses the heads' outputs, which amounts to understanding a sentence from multiple angles at once.",
+        "why": "Complete: it points out the single-head limitation and explains how multiple heads divide work and combine."
+      }
+    ],
+    "ja": [
+      {
+        "t": "multi-head とは要するに head の数が多くパラメータが大きいということで、だから全体として単一 head より正確に計算できる。",
+        "why": "原理を述べていない: 単一 head の限界も、複数 head がどう分担して統合するかも説明していない。"
+      },
+      {
+        "t": "head の数が多いほどモデルは必ず強くなるので、attention head をできるだけ多く増やせばよい。",
+        "why": "過剰な主張: 全体の次元は通常固定で各 head に分配されるため、やみくもに head を増やせば強くなるわけではない。"
+      },
+      {
+        "t": "単一 head の attention は一種類の関係しか学べず、softmax も少数の語に集中しがちである。multi-head は独立した Q/K/V の組を複数並行して走らせ、それぞれが部分空間で一種類の関係(構文、照応、意味)を捉え、各 head の出力を連結、射影して融合する。これは一文を同時に複数の視点から理解することに等しい。",
+        "why": "網羅的: 単一 head の限界を指摘し、複数 head がどう分担して統合するかを説明している。"
+      }
+    ]
+  },
+  "positional-encoding": {
+    "zh": [
+      {
+        "t": "位置編碼只是順便加上去的小優化，有沒有它都不太影響結果。",
+        "ok": false,
+        "why": "低估作用：少了它，詞序資訊會整個消失。"
+      },
+      {
+        "t": "self-attention 本質是加權平均，對詞序無感，把詞序打亂算出來的結果其實一樣，所以模型看不到誰前誰後；位置編碼把每個詞的位置變成向量，加（或旋轉）進表示，讓模型分得出「貓追狗」和「狗追貓」，主流做法是 RoPE。",
+        "ok": true,
+        "why": "完整：點出 self-attention 對順序無感，說明位置編碼補了什麼。"
+      },
+      {
+        "t": "self-attention 其實已經看得到詞的先後順序，位置編碼只是讓訓練收斂更快。",
+        "ok": false,
+        "why": "事實錯：self-attention 天生看不到詞序，順序資訊全靠位置編碼。"
+      }
+    ],
+    "en": [
+      {
+        "t": "Positional encoding is just a minor optimization added on the side, and whether it is there or not barely affects the result.",
+        "why": "Underestimates its role: without it, word-order information disappears entirely."
+      },
+      {
+        "t": "Self-attention is essentially a weighted average and is insensitive to word order; scrambling the word order actually yields the same result, so the model cannot see which word comes first; positional encoding turns each word's position into a vector and adds (or rotates) it into the representation, letting the model tell 'cat chases dog' from 'dog chases cat', and the mainstream approach is RoPE.",
+        "why": "Complete: it points out that self-attention is order-insensitive and explains what positional encoding supplies."
+      },
+      {
+        "t": "Self-attention can actually already see the order of words, and positional encoding just makes training converge faster.",
+        "why": "Factually wrong: self-attention inherently cannot see word order, and all order information comes from positional encoding."
+      }
+    ],
+    "ja": [
+      {
+        "t": "位置エンコーディングはついでに加えた小さな最適化にすぎず、あってもなくても結果にはほとんど影響しない。",
+        "why": "役割を過小評価している: これがなければ語順の情報は丸ごと消えてしまう。"
+      },
+      {
+        "t": "self-attention は本質的に加重平均であり語順に無頓着で、語順をかき混ぜても計算結果は実は同じになるため、モデルはどの語が前か後かを見分けられない。位置エンコーディングは各語の位置を vector に変え、表現に加算(または回転)して組み込み、「猫が犬を追う」と「犬が猫を追う」をモデルが区別できるようにする。主流の手法は RoPE である。",
+        "why": "網羅的: self-attention が語順に無頓着であることを指摘し、位置エンコーディングが何を補うかを説明している。"
+      },
+      {
+        "t": "self-attention は実はすでに語の前後順序を捉えられており、位置エンコーディングは訓練の収束を速くするだけである。",
+        "why": "事実が誤り: self-attention は本来語順を捉えられず、順序の情報はすべて位置エンコーディングに頼っている。"
       }
     ]
   },
@@ -240,6 +428,194 @@ export const QUIZZES = {
       }
     ]
   },
+  "lora": {
+    "zh": [
+      {
+        "t": "LoRA 凍結原模型權重，只在旁邊加一組低秩小增量去學該調多少；要訓練與儲存的參數、梯度、優化器狀態都變少，主要省下顯存與時間，而原模型不變；且 adapter 只有幾 MB 可插拔，一個底模能掛多個按任務即時切換。",
+        "ok": true,
+        "why": "完整：涵蓋凍結權重、省顯存的原因與可插拔切換的好處。"
+      },
+      {
+        "t": "因為 LoRA 讓要訓練的參數變少，所以整體就跑得比較快。",
+        "ok": false,
+        "why": "不完整：重點在省顯存與可切換，只講速度漏掉關鍵。"
+      },
+      {
+        "t": "LoRA 會壓縮並減少原模型的參數，把模型本身變小變快。",
+        "ok": false,
+        "why": "機制錯：原模型權重不動，LoRA 不會縮小底模。"
+      }
+    ],
+    "en": [
+      {
+        "t": "LoRA freezes the original model weights and adds only a small low-rank increment on the side to learn how much to adjust; the parameters, gradients, and optimizer states to train and store all shrink, mainly saving GPU memory and time while the original model stays unchanged; and since an adapter is only a few MB and pluggable, one base model can carry several adapters and switch between them per task on the fly.",
+        "why": "Complete: it covers freezing the weights, the reason for saving GPU memory, and the benefit of pluggable switching."
+      },
+      {
+        "t": "Because LoRA reduces the number of parameters to train, it runs faster overall.",
+        "why": "Incomplete: the key points are saving GPU memory and switchability; mentioning only speed misses what matters."
+      },
+      {
+        "t": "LoRA compresses and reduces the original model's parameters, making the model itself smaller and faster.",
+        "why": "Wrong mechanism: the original model weights stay untouched, and LoRA does not shrink the base model."
+      }
+    ],
+    "ja": [
+      {
+        "t": "LoRA は元のモデルの重みを凍結し、脇に低ランクの小さな増分だけを加えてどれだけ調整すべきかを学ぶ。訓練して保存すべきパラメータ、勾配、optimizer の状態がすべて減り、主に GPU メモリと時間を節約でき、元のモデルは変わらない。さらに adapter は数 MB しかなく差し替え可能で、一つのベースモデルに複数を付けてタスクごとに即座に切り替えられる。",
+        "why": "網羅的: 重みの凍結、GPU メモリを節約できる理由、差し替え可能な切り替えの利点を押さえている。"
+      },
+      {
+        "t": "LoRA は訓練するパラメータを減らすので、全体として動作が速くなるから。",
+        "why": "不完全: 要点は GPU メモリの節約と切り替え可能性にあり、速度だけを述べても肝心な点を落としている。"
+      },
+      {
+        "t": "LoRA は元のモデルのパラメータを圧縮して減らし、モデル自体を小さく速くする。",
+        "why": "仕組みが誤り: 元のモデルの重みは変わらず、LoRA がベースモデルを小さくすることはない。"
+      }
+    ]
+  },
+  "catastrophic-forgetting": {
+    "zh": [
+      {
+        "t": "不會，微調只會讓模型更強，多練幾輪連通用能力也會一起變好。",
+        "ok": false,
+        "why": "錯：過度微調窄資料反而會覆蓋掉原本的通用能力。"
+      },
+      {
+        "t": "會遺忘，但只要訓練資料量夠大就完全不會發生。",
+        "ok": false,
+        "why": "沒抓根因：問題出在過度擬合窄資料，不是單純資料量夠不夠。"
+      },
+      {
+        "t": "會，這叫災難性遺忘：只拿窄領域資料練過頭，會覆蓋掉撐起通用能力的權重；根因是過度擬合而非微調本身，可用小學習率加少步數、LoRA 凍結主體、混入通用語料、並用通用基準盯回歸來緩解。",
+        "ok": true,
+        "why": "完整：確認會遺忘、點出過頭才是根因、並給出緩解手段。"
+      }
+    ],
+    "en": [
+      {
+        "t": "No, fine-tuning only makes the model stronger, and a few more training rounds will improve its general abilities too.",
+        "why": "Wrong: over-fine-tuning on narrow data actually overwrites the original general abilities."
+      },
+      {
+        "t": "It does forget, but as long as the training data is large enough it will not happen at all.",
+        "why": "Misses the root cause: the problem is overfitting to narrow data, not simply whether there is enough data."
+      },
+      {
+        "t": "Yes, this is called catastrophic forgetting: over-training on narrow-domain data alone overwrites the weights that support general abilities; the root cause is overfitting rather than fine-tuning itself, and it can be mitigated with a small learning rate plus few steps, freezing the main body with LoRA, mixing in general-purpose corpora, and watching for regressions with general benchmarks.",
+        "why": "Complete: it confirms forgetting happens, points to over-training as the root cause, and offers mitigations."
+      }
+    ],
+    "ja": [
+      {
+        "t": "そうはならない。fine-tuning はモデルを強くするだけで、何度か多く訓練すれば汎用的な能力も一緒に良くなる。",
+        "why": "誤り: 狭いデータで過度に fine-tuning すると、かえって元の汎用能力を上書きしてしまう。"
+      },
+      {
+        "t": "忘却は起きるが、訓練データの量さえ十分に大きければまったく起こらない。",
+        "why": "根本原因を捉えていない: 問題は狭いデータへの過学習であり、単にデータ量が足りるかどうかではない。"
+      },
+      {
+        "t": "起きる。これは catastrophic forgetting(破滅的忘却)と呼ばれる。狭い領域のデータだけで訓練しすぎると、汎用能力を支える重みを上書きしてしまう。根本原因は fine-tuning そのものではなく過学習であり、小さな学習率と少ないステップ、LoRA による本体の凍結、汎用コーパスの混入、汎用ベンチマークによる退行の監視で緩和できる。",
+        "why": "網羅的: 忘却が起きることを確認し、やりすぎこそが根本原因だと指摘し、緩和手段を示している。"
+      }
+    ]
+  },
+  "data-quality": {
+    "zh": [
+      {
+        "t": "資料當然越多越好，量堆得夠大，品質差一點也能靠數量補回來。",
+        "ok": false,
+        "why": "踩雷：過了基本量後，髒資料只會 garbage in, garbage out。"
+      },
+      {
+        "t": "不是二選一：量要先夠到能涵蓋情境，但過了基本門檻後，品質與多樣性比純數量更關鍵；髒資料、錯標註會被照單全收（garbage in, garbage out），清洗、去重、修標註的投報率常高於一味加量。",
+        "ok": true,
+        "why": "完整：破二分法，說明門檻後品質壓過數量與髒資料的危害。"
+      },
+      {
+        "t": "只要資料品質夠高，數量多少完全不重要。",
+        "ok": false,
+        "why": "過度修正：量太少會學不到、涵蓋不了情境，基本量仍要先夠。"
+      }
+    ],
+    "en": [
+      {
+        "t": "More data is of course always better; pile up enough volume and slightly worse quality can be made up for by quantity.",
+        "why": "Falls into the trap: past a basic volume, dirty data only leads to garbage in, garbage out."
+      },
+      {
+        "t": "It is not either/or: volume must first be enough to cover the scenarios, but past a basic threshold, quality and diversity matter more than sheer quantity; dirty data and wrong labels are absorbed wholesale (garbage in, garbage out), and cleaning, deduplication, and fixing labels often have a higher return than blindly adding more data.",
+        "why": "Complete: it breaks the dichotomy and explains that past the threshold quality outweighs quantity, plus the harm of dirty data."
+      },
+      {
+        "t": "As long as the data quality is high enough, the amount does not matter at all.",
+        "why": "Overcorrects: too little data means the model cannot learn or cover the scenarios; a basic volume is still needed first."
+      }
+    ],
+    "ja": [
+      {
+        "t": "データは当然多いほど良く、量を十分に積み上げれば、多少品質が悪くても数で補える。",
+        "why": "落とし穴にはまっている: 基本的な量を超えると、汚いデータは garbage in, garbage out にしかならない。"
+      },
+      {
+        "t": "二者択一ではない。量はまず状況を網羅できる程度に必要だが、基本的な閾値を超えると、品質と多様性が純粋な量より重要になる。汚いデータや誤ったラベルはそのまま取り込まれ(garbage in, garbage out)、クレンジング、重複除去、ラベル修正の投資対効果は、やみくもに量を増やすことより高いことが多い。",
+        "why": "網羅的: 二分法を崩し、閾値を超えると品質が量を上回ることと、汚いデータの害を説明している。"
+      },
+      {
+        "t": "データの品質さえ十分に高ければ、量がどれだけあるかはまったく重要ではない。",
+        "why": "過剰修正: 量が少なすぎると学習できず状況を網羅できないため、基本的な量はやはりまず必要である。"
+      }
+    ]
+  },
+  "why-not-pretrain": {
+    "zh": [
+      {
+        "t": "從頭預訓練需要兆級 token、成千上萬張 GPU 練上數週數月、花費常百萬美元起跳與整組團隊，等於花大錢重造別人已做得更好的底子，而自有資料與算力通常也不夠；絕大多數情況應站在巨人肩膀上，把預算花在便宜得多的微調與 RAG。",
+        "ok": true,
+        "why": "完整：講出資料算力成本量級，也說明為何不划算與替代做法。"
+      },
+      {
+        "t": "只要我們有自己的專屬資料，就該從頭自訓一個模型，這樣才會最貼合需求。",
+        "ok": false,
+        "why": "低估門檻：自有資料量與算力通常遠不足以贏過現成模型。"
+      },
+      {
+        "t": "就只是比較貴而已，公司預算夠的話自己從頭練就好。",
+        "ok": false,
+        "why": "以偏概全：貴之外，這還是在重造現成的東西，且資料算力多半不足。"
+      }
+    ],
+    "en": [
+      {
+        "t": "Pretraining from scratch requires trillions of tokens, thousands of GPUs running for weeks or months, costs that often start in the millions of dollars, and a whole team, which amounts to spending big to rebuild a foundation others have already done better, while your own data and compute are usually insufficient; in the vast majority of cases you should stand on the shoulders of giants and spend the budget on much cheaper fine-tuning and RAG.",
+        "why": "Complete: it states the scale of data and compute costs and explains why it is not worthwhile and what to do instead."
+      },
+      {
+        "t": "As long as we have our own proprietary data, we should train a model from scratch, because that fits our needs best.",
+        "why": "Underestimates the bar: your own data volume and compute are usually far too little to beat an off-the-shelf model."
+      },
+      {
+        "t": "It is just more expensive; if the company has enough budget, just train from scratch yourself.",
+        "why": "Overgeneralizes: beyond cost, this is still rebuilding something that already exists, and data and compute are mostly insufficient."
+      }
+    ],
+    "ja": [
+      {
+        "t": "ゼロからの事前学習には兆単位の token、数千枚の GPU で数週間から数か月の訓練、しばしば数百万ドルからの費用、そしてチーム一式が必要で、これは他者がすでにより良く作った土台を大金をかけて作り直すに等しく、自前のデータと計算資源も通常は足りない。ほとんどの場合、巨人の肩の上に立ち、予算をはるかに安い fine-tuning と RAG に充てるべきである。",
+        "why": "網羅的: データと計算資源のコストの規模を述べ、なぜ割に合わないかと代替手段を説明している。"
+      },
+      {
+        "t": "自分たち専用のデータさえあれば、ゼロからモデルを自前で訓練すべきで、そうしてこそニーズに最も合う。",
+        "why": "ハードルを過小評価している: 自前のデータ量と計算資源は通常、既製モデルに勝つにはまったく足りない。"
+      },
+      {
+        "t": "単に比較的高いだけで、会社の予算が十分なら自前でゼロから訓練すればよい。",
+        "why": "一部で全体を語っている: 高いこと以外にも、これは既製のものを作り直すことであり、データと計算資源もたいてい足りない。"
+      }
+    ]
+  },
   "scaling-law": {
     "zh": [
       {
@@ -284,6 +660,53 @@ export const QUIZZES = {
       {
         "t": "scaling law は、十分大きくしさえすればどんな能力でも現れることを保証する、厳密な物理法則だ。",
         "why": "それは経験的な観察であって保証ではなく、飽和する。「創発」という主張にも議論がある。"
+      }
+    ]
+  },
+  "train-vs-infer": {
+    "zh": [
+      {
+        "t": "模型訓練完錢就一次付清了，之後拿來用（推論）幾乎不花什麼算力。",
+        "ok": false,
+        "why": "錯：每次對話都是一次推論，輸入要跑過整個模型，持續耗算力。"
+      },
+      {
+        "t": "推論確實會花錢，但那只是伺服器租金和網路費，跟運算量沒什麼關係。",
+        "ok": false,
+        "why": "錯：推論成本主要來自跑整個模型的運算（GPU、電、時間）。"
+      },
+      {
+        "t": "訓練是調參數學規律，慢、一次性、超貴；推論是用學好的參數算輸出、參數不動，平常用模型都在推論。推論也花錢是因為每問一次輸入都要跑過整個模型（大量運算），要 GPU、電與時間，用量一大就是持續成本。",
+        "ok": true,
+        "why": "完整：分清訓練與推論，並解釋推論為何是持續支出。"
+      }
+    ],
+    "en": [
+      {
+        "t": "Once the model is trained the cost is paid in one go, and using it afterward (inference) barely consumes any compute.",
+        "why": "Wrong: every conversation is an inference, the input has to run through the whole model, so it continuously consumes compute."
+      },
+      {
+        "t": "Inference does cost money, but that is just server rent and network fees, with little to do with the amount of computation.",
+        "why": "Wrong: inference cost comes mainly from the computation of running the whole model (GPU, electricity, time)."
+      },
+      {
+        "t": "Training adjusts parameters to learn patterns: slow, one-time, and very expensive; inference uses the learned parameters to compute outputs with the parameters fixed, and everyday use of the model is all inference. Inference costs money too because each query has to run the input through the whole model (a lot of computation), needing GPU, electricity, and time, and at high volume that becomes an ongoing cost.",
+        "why": "Complete: it distinguishes training from inference and explains why inference is an ongoing expense."
+      }
+    ],
+    "ja": [
+      {
+        "t": "モデルの訓練が終われば費用は一度で払い切りで、その後に使う(推論)ときはほとんど計算資源を使わない。",
+        "why": "誤り: 会話のたびに一回の推論が発生し、入力はモデル全体を通す必要があるため、継続的に計算資源を消費する。"
+      },
+      {
+        "t": "推論にはたしかに費用がかかるが、それはサーバーの賃料とネットワーク費用にすぎず、計算量とはほとんど関係ない。",
+        "why": "誤り: 推論のコストは主に、モデル全体を走らせる計算(GPU、電力、時間)から生じる。"
+      },
+      {
+        "t": "訓練はパラメータを調整して規則を学ぶもので、遅く、一度きりで、非常に高い。推論は学習済みのパラメータを使って出力を計算するもので、パラメータは動かさず、普段モデルを使うのはすべて推論である。推論も費用がかかるのは、一回問うごとに入力をモデル全体に通す必要があり(大量の計算)、GPU、電力、時間を要するためで、利用量が増えれば継続的なコストになる。",
+        "why": "網羅的: 訓練と推論を区別し、なぜ推論が継続的な支出になるかを説明している。"
       }
     ]
   },
@@ -334,6 +757,53 @@ export const QUIZZES = {
       }
     ]
   },
+  "faster-inference": {
+    "zh": [
+      {
+        "t": "最直接的辦法就是換一個更小的模型，或多加幾張 GPU 硬撐。",
+        "ok": false,
+        "why": "太粗：題目要在不換模型、不重訓的前提下的多種手段與取捨。"
+      },
+      {
+        "t": "在不換模型下有多種手段可組合：量化（降數值精度，省記憶體又加速但可能掉點準）、KV cache（快取前面 token 的 Key／Value 免得重算）、批次（一次處理多請求提高吞吐）、推測解碼（小模型草擬、大模型平行驗證，主要降延遲）；要依低延遲、高吞吐或省記憶體的目標選招，並盯著精度別掉太多。",
+        "ok": true,
+        "why": "完整：列出多種手段與各自取捨，並強調依目標選擇與組合。"
+      },
+      {
+        "t": "只要把模型量化到最低精度，推論自然又快又省，其他都不必管。",
+        "ok": false,
+        "why": "以偏概全：只用一招且忽略掉準風險與依目標選擇的取捨。"
+      }
+    ],
+    "en": [
+      {
+        "t": "The most direct approach is to switch to a smaller model, or just add a few more GPUs to brute-force it.",
+        "why": "Too crude: the question asks for multiple methods and trade-offs under the premise of not switching models and not retraining."
+      },
+      {
+        "t": "Without changing the model there are several methods you can combine: quantization (lower numerical precision, saving memory and speeding up but possibly losing some accuracy), KV cache (caching earlier tokens' Key/Value to avoid recomputing), batching (handling multiple requests at once to raise throughput), and speculative decoding (a small model drafts and a large model verifies in parallel, mainly reducing latency); choose the tactic based on your goal of low latency, high throughput, or saving memory, and keep an eye on accuracy so it does not drop too much.",
+        "why": "Complete: it lists several methods with their trade-offs and stresses choosing and combining them by goal."
+      },
+      {
+        "t": "Just quantize the model to the lowest precision and inference will naturally be fast and cheap, with nothing else to worry about.",
+        "why": "Overgeneralizes: it uses only one tactic and ignores the accuracy-drop risk and the trade-off of choosing by goal."
+      }
+    ],
+    "ja": [
+      {
+        "t": "最も手っ取り早い方法は、より小さいモデルに換えるか、GPU を数枚追加して力任せに乗り切ることである。",
+        "why": "大雑把すぎる: 設問はモデルを換えず再訓練もしないという前提での複数の手段とトレードオフを求めている。"
+      },
+      {
+        "t": "モデルを換えずに組み合わせられる手段は複数ある。量子化(数値精度を下げてメモリを節約し高速化するが、精度が多少落ちる可能性がある)、KV cache(前の token の Key/Value をキャッシュして再計算を避ける)、バッチ処理(一度に複数のリクエストを処理してスループットを上げる)、投機的デコーディング(小さいモデルが下書きし大きいモデルが並行して検証する、主に遅延を下げる)である。低遅延、高スループット、メモリ節約のどの目標かに応じて手を選び、精度が落ちすぎないよう見張る必要がある。",
+        "why": "網羅的: 複数の手段とそれぞれのトレードオフを挙げ、目標に応じて選び組み合わせることを強調している。"
+      },
+      {
+        "t": "モデルを最低精度まで量子化しさえすれば、推論は自然と速く安くなり、他は気にする必要がない。",
+        "why": "一部で全体を語っている: 一つの手だけを使い、精度低下のリスクや目標に応じて選ぶトレードオフを無視している。"
+      }
+    ]
+  },
   "temperature": {
     "zh": [
       {
@@ -381,50 +851,50 @@ export const QUIZZES = {
       }
     ]
   },
-  "prompt-eval": {
+  "prompt-craft": {
     "zh": [
       {
-        "t": "多試幾個例子，覺得回答變順、變好，就可以上線了。",
-        "ok": false,
-        "why": "憑感覺、樣本太少，容易「改 A 壞 B」，沒有可重複的依據。"
-      },
-      {
-        "t": "先定義可量的指標，建一組固定的 golden set（含刁鑽案例）離線比新舊版本、防退步；開放式用 rubric 或校準過的 LLM-as-judge；離線贏了再上線 A/B 看真實效果。",
+        "t": "prompt 的作用是把角色、脈絡、輸出格式講清楚，幫模型縮小生成範圍；原則包含明確角色與任務、給脈絡與限制、指定格式、用 few-shot 範例、複雜任務請它分步，而且要當成可迭代工程反覆寫、測、改。",
         "ok": true,
-        "why": "定義指標＋離線回歸＋合適的評分＋線上 A/B，才是可量測、可重複的評估。"
+        "why": "同時涵蓋原理、具體原則與迭代心法，完整對應重點。"
       },
       {
-        "t": "跑公開 benchmark，分數高就代表這個 prompt 好。",
+        "t": "prompt 就是把問題完整打進去，只要問題本身講清楚，模型自然會答好，寫法不太影響結果。",
         "ok": false,
-        "why": "公開 benchmark 只是參考，跟你的實際任務常有落差，要用貼近任務的 golden set。"
+        "why": "誤把 prompt 當成單純輸入問題，忽略寫法會決定模型的生成範圍。"
+      },
+      {
+        "t": "只要在開頭加一句「你是專家」並要求逐步思考，就一定能得到最佳答案，不必再調整。",
+        "ok": false,
+        "why": "把 prompt 化約成單一咒語，忽略脈絡、格式、範例與反覆迭代。"
       }
     ],
     "en": [
       {
-        "t": "Try a few more examples, and once the answers feel smoother and better, you can ship it.",
-        "why": "Going by gut feel with too few samples easily leads to \"fixing A while breaking B\", with no repeatable basis."
+        "t": "A prompt's job is to clearly specify the role, context, and output format so the model narrows its generation space. The principles include a clear role and task, giving context and constraints, specifying the format, using few-shot examples, asking it to work step by step on complex tasks, and treating it as iterative engineering that you write, test, and revise repeatedly.",
+        "why": "It covers the underlying principle, the concrete guidelines, and the iterative mindset, fully matching the key points."
       },
       {
-        "t": "First define a measurable metric, build a fixed golden set (including tricky cases) to compare new and old versions offline and guard against regressions; for open-ended tasks use a rubric or a calibrated LLM-as-judge; once it wins offline, run online A/B to see the real effect.",
-        "why": "Defining metrics plus offline regression plus suitable scoring plus online A/B is what makes evaluation measurable and repeatable."
+        "t": "A prompt is just typing the full question in; as long as the question itself is clear, the model will naturally answer well, and how you write it barely affects the result.",
+        "why": "This mistakes a prompt for merely entering a question, ignoring that how you write it determines the model's generation space."
       },
       {
-        "t": "Run a public benchmark, and a high score means this prompt is good.",
-        "why": "A public benchmark is only a reference and often diverges from your actual task; use a golden set that is close to the task."
+        "t": "Just add \"you are an expert\" at the start and ask it to think step by step, and you will always get the best answer with no further adjustment needed.",
+        "why": "This reduces a prompt to a single magic phrase, ignoring context, format, examples, and repeated iteration."
       }
     ],
     "ja": [
       {
-        "t": "いくつか例を試してみて、回答がスムーズで良くなったと感じたら公開してよい。",
-        "why": "感覚に頼りサンプルが少なすぎると「Aを直してBが壊れる」が起きやすく、再現可能な根拠がない。"
+        "t": "prompt の役割は、役割・文脈・出力形式を明確に伝えてモデルの生成範囲を絞ることです。原則としては、役割とタスクを明確にする、文脈と制約を与える、形式を指定する、few-shot の例を使う、複雑なタスクは段階的に進めさせる、そして書いて試して直すを繰り返す反復的なエンジニアリングとして扱う、が含まれます。",
+        "why": "原理、具体的な原則、反復の心構えを同時にカバーし、要点に完全に対応しています。"
       },
       {
-        "t": "まず測定可能な指標を定義し、固定したgolden set（意地悪なケースを含む）を作ってオフラインで新旧バージョンを比較しリグレッションを防ぐ；オープンな場合はrubricか校正済みのLLM-as-judgeを使う；オフラインで勝ってからオンラインA/Bで実際の効果を見る。",
-        "why": "指標の定義＋オフラインのリグレッション＋適切な採点＋オンラインA/Bこそが、測定可能で再現可能な評価だ。"
+        "t": "prompt とは質問をそのまま丸ごと打ち込むことであり、質問自体が明確でありさえすればモデルは自然にうまく答えるので、書き方は結果にあまり影響しない。",
+        "why": "prompt を単なる質問の入力だと誤解しており、書き方がモデルの生成範囲を決めることを見落としています。"
       },
       {
-        "t": "公開benchmarkを走らせて、スコアが高ければこのpromptは良いということだ。",
-        "why": "公開benchmarkは参考にすぎず、実際のタスクとはしばしばずれるため、タスクに近いgolden setを使うべきだ。"
+        "t": "冒頭に「あなたは専門家です」と一言加えて段階的に考えるよう求めさえすれば、必ず最良の答えが得られ、それ以上調整する必要はない。",
+        "why": "prompt を単一の呪文に還元しており、文脈・形式・例・繰り返しの反復を見落としています。"
       }
     ]
   },
@@ -475,6 +945,147 @@ export const QUIZZES = {
       }
     ]
   },
+  "cot-prompting": {
+    "zh": [
+      {
+        "t": "CoT 就是在 prompt 尾巴加一句「請一步步想」的萬用咒語，加了就一定更準。",
+        "ok": false,
+        "why": "把 CoT 當成魔法句，忽略它的原理、代價與適用界線。"
+      },
+      {
+        "t": "只要讓模型展開推理步驟，任何題目、任何模型的正確率都會提升，而且沒有額外成本。",
+        "ok": false,
+        "why": "忽略簡單題無益、小模型不穩，以及 token、延遲、成本的代價。"
+      },
+      {
+        "t": "CoT 是讓模型先寫出中間步驟再下結論，把難題拆成好猜的小步以提高正確率；代價是 token、延遲與成本，簡單題沒必要，小模型效果有限，還可能過程漂亮但結論錯。",
+        "ok": true,
+        "why": "說清楚是什麼、為何有用，並點出代價與界線。"
+      }
+    ],
+    "en": [
+      {
+        "t": "CoT is just a universal magic phrase, adding \"think step by step\" at the end of the prompt, and adding it always makes things more accurate.",
+        "why": "This treats CoT as a magic phrase, ignoring its underlying principle, its costs, and the limits of where it applies."
+      },
+      {
+        "t": "As long as you make the model lay out its reasoning steps, accuracy will improve on any problem and any model, with no extra cost.",
+        "why": "This ignores that it does not help on simple problems, that small models are unstable, and the costs in tokens, latency, and money."
+      },
+      {
+        "t": "CoT has the model write out intermediate steps before drawing a conclusion, breaking a hard problem into small, easier-to-guess steps to raise accuracy. The cost is tokens, latency, and money; it is unnecessary on simple problems, its effect on small models is limited, and the reasoning can look good while the conclusion is wrong.",
+        "why": "It clearly states what it is and why it helps, and points out the costs and limits."
+      }
+    ],
+    "ja": [
+      {
+        "t": "CoT とは prompt の末尾に「一歩ずつ考えてください」と付け足す万能の呪文であり、付ければ必ず精度が上がる。",
+        "why": "CoT を魔法の一文とみなし、その原理・コスト・適用の限界を見落としています。"
+      },
+      {
+        "t": "モデルに推論のステップを展開させさえすれば、どんな問題でもどんなモデルでも正確率が上がり、しかも追加コストはかからない。",
+        "why": "簡単な問題では役立たないこと、小さいモデルでは不安定なこと、そして token・レイテンシ・コストという代償を見落としています。"
+      },
+      {
+        "t": "CoT はモデルにまず中間ステップを書かせてから結論を出させるもので、難問を推測しやすい小さなステップに分解して正確率を高めます。代償は token・レイテンシ・コストで、簡単な問題では不要、小さいモデルでは効果が限られ、さらに過程は立派でも結論は間違っていることもあります。",
+        "why": "何であるか、なぜ有効かを明確にし、代償と限界も指摘しています。"
+      }
+    ]
+  },
+  "prompt-eval": {
+    "zh": [
+      {
+        "t": "多試幾個例子，覺得回答變順、變好，就可以上線了。",
+        "ok": false,
+        "why": "憑感覺、樣本太少，容易「改 A 壞 B」，沒有可重複的依據。"
+      },
+      {
+        "t": "先定義可量的指標，建一組固定的 golden set（含刁鑽案例）離線比新舊版本、防退步；開放式用 rubric 或校準過的 LLM-as-judge；離線贏了再上線 A/B 看真實效果。",
+        "ok": true,
+        "why": "定義指標＋離線回歸＋合適的評分＋線上 A/B，才是可量測、可重複的評估。"
+      },
+      {
+        "t": "跑公開 benchmark，分數高就代表這個 prompt 好。",
+        "ok": false,
+        "why": "公開 benchmark 只是參考，跟你的實際任務常有落差，要用貼近任務的 golden set。"
+      }
+    ],
+    "en": [
+      {
+        "t": "Try a few more examples, and once the answers feel smoother and better, you can ship it.",
+        "why": "Going by gut feel with too few samples easily leads to \"fixing A while breaking B\", with no repeatable basis."
+      },
+      {
+        "t": "First define a measurable metric, build a fixed golden set (including tricky cases) to compare new and old versions offline and guard against regressions; for open-ended tasks use a rubric or a calibrated LLM-as-judge; once it wins offline, run online A/B to see the real effect.",
+        "why": "Defining metrics plus offline regression plus suitable scoring plus online A/B is what makes evaluation measurable and repeatable."
+      },
+      {
+        "t": "Run a public benchmark, and a high score means this prompt is good.",
+        "why": "A public benchmark is only a reference and often diverges from your actual task; use a golden set that is close to the task."
+      }
+    ],
+    "ja": [
+      {
+        "t": "いくつか例を試してみて、回答がスムーズで良くなったと感じたら公開してよい。",
+        "why": "感覚に頼りサンプルが少なすぎると「Aを直してBが壊れる」が起きやすく、再現可能な根拠がない。"
+      },
+      {
+        "t": "まず測定可能な指標を定義し、固定したgolden set（意地悪なケースを含む）を作ってオフラインで新旧バージョンを比較しリグレッションを防ぐ；オープンな場合はrubricか校正済みのLLM-as-judgeを使う；オフラインで勝ってからオンラインA/Bで実際の効果を見る。",
+        "why": "指標の定義＋オフラインのリグレッション＋適切な採点＋オンラインA/Bこそが、測定可能で再現可能な評価だ。"
+      },
+      {
+        "t": "公開benchmarkを走らせて、スコアが高ければこのpromptは良いということだ。",
+        "why": "公開benchmarkは参考にすぎず、実際のタスクとはしばしばずれるため、タスクに近いgolden setを使うべきだ。"
+      }
+    ]
+  },
+  "prompt-vs-tune-vs-rag": {
+    "zh": [
+      {
+        "t": "不管是哪種問題，先反覆改 prompt 就對了，真的改不出來再直接跳去微調。",
+        "ok": false,
+        "why": "沒先診斷問題類型，跳過 RAG，順序與判斷都不對。"
+      },
+      {
+        "t": "先診斷問題類型：格式、語氣或一次性任務先調 prompt；答錯、過時或私有事實用 RAG；要穩定風格或大量固定行為才微調，順序由便宜到貴是 prompt → RAG → 微調。",
+        "ok": true,
+        "why": "先分類問題再對症下藥，並給出由便宜到貴的處理順序。"
+      },
+      {
+        "t": "微調一定比 prompt 和 RAG 更強，只要資源夠就應該優先微調。",
+        "ok": false,
+        "why": "忽略成本與問題類型，多數問題其實不需要微調就能解決。"
+      }
+    ],
+    "en": [
+      {
+        "t": "No matter what kind of problem it is, just keep revising the prompt first, and if that really does not work, jump straight to fine-tuning.",
+        "why": "This does not first diagnose the type of problem and skips RAG, so both the ordering and the judgment are wrong."
+      },
+      {
+        "t": "First diagnose the type of problem: for format, tone, or one-off tasks, adjust the prompt first; for wrong, outdated, or private facts, use RAG; only fine-tune when you need a stable style or a lot of fixed behavior. Ordered cheap to expensive, it is prompt → RAG → fine-tuning.",
+        "why": "It classifies the problem first and then treats it accordingly, and gives a cheap-to-expensive order of handling."
+      },
+      {
+        "t": "Fine-tuning is always stronger than prompting and RAG, so as long as you have enough resources you should fine-tune first.",
+        "why": "This ignores cost and the type of problem; most problems can actually be solved without fine-tuning."
+      }
+    ],
+    "ja": [
+      {
+        "t": "どんな問題であれ、まず prompt を繰り返し直せばよく、それでもどうにもならなければそのまま fine-tuning に飛べばよい。",
+        "why": "問題の種類をまず診断せず、RAG を飛ばしており、順序も判断も誤っています。"
+      },
+      {
+        "t": "まず問題の種類を診断します。形式・トーン・一回限りのタスクはまず prompt を調整し、誤答・古い情報・非公開の事実には RAG を使い、安定したスタイルや大量の固定的な振る舞いが必要なときだけ fine-tuning します。安い順から高い順に並べると prompt → RAG → fine-tuning です。",
+        "why": "まず問題を分類してから対症的に対処し、安い順から高い順への処理順序を示しています。"
+      },
+      {
+        "t": "fine-tuning は必ず prompt や RAG より強力なので、リソースさえ足りれば優先的に fine-tuning すべきだ。",
+        "why": "コストと問題の種類を見落としており、ほとんどの問題は実際には fine-tuning なしで解決できます。"
+      }
+    ]
+  },
   "reasoning-models": {
     "zh": [
       {
@@ -519,6 +1130,147 @@ export const QUIZZES = {
       {
         "t": "推論モデルは手順を一歩ずつしっかり考えるので、出してくる答えは間違わない。",
         "why": "難問で正解率が高いだけで依然として間違うため、間違えないわけではない。"
+      }
+    ]
+  },
+  "test-time-compute": {
+    "zh": [
+      {
+        "t": "推理時多花算力去拆解、嘗試與自我檢查，難題就更可能答對；做法有 CoT、self-consistency 多路投票、生成後驗證，但這是算力換正確率且邊際遞減，要依難度決定想多久。",
+        "ok": true,
+        "why": "解釋多花算力換正確率的原理、做法與取捨。"
+      },
+      {
+        "t": "test-time compute 只是一個名詞，指模型推理時比較慢，和正確率沒有直接關係。",
+        "ok": false,
+        "why": "只停在背名詞，沒理解多花推理步驟能換取正確率的原理。"
+      },
+      {
+        "t": "只要讓模型想越久、算越多，正確率就會一直線性上升，所以永遠拉到最長最好。",
+        "ok": false,
+        "why": "忽略邊際遞減與成本，簡單題拉長其實沒有幫助。"
+      }
+    ],
+    "en": [
+      {
+        "t": "Spending more compute at inference time to break the problem down, try things, and self-check makes hard problems more likely to be answered correctly. Approaches include CoT, self-consistency with multi-path voting, and post-generation verification, but this trades compute for accuracy with diminishing returns, so decide how long to think based on difficulty.",
+        "why": "It explains the principle of trading more compute for accuracy, the methods, and the trade-offs."
+      },
+      {
+        "t": "Test-time compute is just a term meaning the model is slower at inference time, with no direct relationship to accuracy.",
+        "why": "This stops at memorizing the term and does not understand the principle that spending more reasoning steps can buy accuracy."
+      },
+      {
+        "t": "The longer you let the model think and the more it computes, the more accuracy keeps rising linearly, so it is always best to push it to the maximum.",
+        "why": "This ignores diminishing returns and cost; drawing it out actually does not help on simple problems."
+      }
+    ],
+    "ja": [
+      {
+        "t": "推論時により多くの計算資源をかけて分解・試行・自己チェックを行うと、難問を正しく答えられる可能性が高まります。手法には CoT、self-consistency による複数経路の投票、生成後の検証があります。ただしこれは計算資源を正確率と引き換えにするもので、限界効用は逓減するため、難易度に応じてどれだけ考えるかを決めます。",
+        "why": "計算資源をより多くかけて正確率と引き換える原理・手法・トレードオフを説明しています。"
+      },
+      {
+        "t": "test-time compute は単なる用語で、モデルが推論時に遅いことを指すだけで、正確率とは直接の関係がない。",
+        "why": "用語を暗記するだけにとどまり、推論のステップをより多くかけることで正確率を得られるという原理を理解していません。"
+      },
+      {
+        "t": "モデルに長く考えさせ、より多く計算させさえすれば、正確率はずっと線形に上がり続けるので、常に最長まで引き伸ばすのが最善だ。",
+        "why": "限界効用の逓減とコストを見落としており、簡単な問題では引き伸ばしても実際には役立ちません。"
+      }
+    ]
+  },
+  "cot-limits": {
+    "zh": [
+      {
+        "t": "CoT 是萬靈丹，任何題目只要加上逐步推理都會更準、也更可信。",
+        "ok": false,
+        "why": "忽略它只對難題有用，以及自圓其說的副作用與界線。"
+      },
+      {
+        "t": "CoT 唯一的缺點就是比較慢，只要能接受延遲就永遠應該打開。",
+        "ok": false,
+        "why": "忽略對簡單題無益、可能配出像樣推理誤導人、小模型不穩。"
+      },
+      {
+        "t": "CoT 只對多步難題有用，簡單題只是多花 token；副作用是模型可能替錯答案配上像樣的推理而更誤導人，小模型常不穩，要依難度與模型能力判斷，過程漂亮不代表答案對，重要結論仍要驗證。",
+        "ok": true,
+        "why": "點出適用界線、自圓其說的副作用與該如何判斷。"
+      }
+    ],
+    "en": [
+      {
+        "t": "CoT is a cure-all: on any problem, adding step-by-step reasoning makes it more accurate and more trustworthy.",
+        "why": "This ignores that it only helps on hard problems, along with the side effect of plausible self-justification and its limits."
+      },
+      {
+        "t": "CoT's only drawback is that it is slower, so as long as you can accept the latency you should always turn it on.",
+        "why": "This ignores that it does not help on simple problems, that it can pair plausible-looking reasoning with a wrong answer and mislead you, and that small models are unstable."
+      },
+      {
+        "t": "CoT only helps on multi-step hard problems; on simple ones it just spends more tokens. A side effect is that the model may pair plausible-looking reasoning with a wrong answer and mislead you more, and small models are often unstable, so judge by difficulty and model capability. A nice-looking process does not mean the answer is right, and important conclusions still need verification.",
+        "why": "It points out the limits of where it applies, the self-justification side effect, and how to judge."
+      }
+    ],
+    "ja": [
+      {
+        "t": "CoT は万能薬であり、どんな問題でも段階的な推論を加えれば必ず精度が上がり、信頼性も高まる。",
+        "why": "難問にしか役立たないこと、そしてもっともらしく取り繕う副作用と限界を見落としています。"
+      },
+      {
+        "t": "CoT の唯一の欠点は遅いことだけであり、レイテンシを許容できるなら常にオンにすべきだ。",
+        "why": "簡単な問題では役立たないこと、もっともらしい推論を付けて人を誤導しかねないこと、小さいモデルでは不安定なことを見落としています。"
+      },
+      {
+        "t": "CoT は多段階の難問にしか役立たず、簡単な問題では token を余計に使うだけです。副作用として、モデルが誤った答えにもっともらしい推論を付けてかえって人を誤導することがあり、小さいモデルはしばしば不安定なので、難易度とモデルの能力に応じて判断します。過程が立派でも答えが正しいとは限らず、重要な結論はやはり検証が必要です。",
+        "why": "適用の限界、もっともらしく取り繕う副作用、そしてどう判断すべきかを指摘しています。"
+      }
+    ]
+  },
+  "rag-documents": {
+    "zh": [
+      {
+        "t": "把 Word 或 PDF 檔直接丟進 RAG 就能用，格式不是問題。",
+        "ok": false,
+        "why": "RAG 只吃純文字與向量，忽略了解析這一關才是成敗關鍵。"
+      },
+      {
+        "t": "RAG 存的是文字片段的向量而非檔案本身，所以要先把 Word、PDF 抽成純文字；表格、多欄、標題階層需版面感知解析，掃描檔要先 OCR，再清理、依結構切塊、向量化、存庫，解析品質就是 RAG 品質的天花板。",
+        "ok": true,
+        "why": "破除誤解並講清楚解析、切塊到入庫的完整管線與取捨。"
+      },
+      {
+        "t": "只要用工具把檔案轉成純文字就好，表格、多欄或掃描檔都能一視同仁直接抽。",
+        "ok": false,
+        "why": "忽略版面感知解析與 OCR，純抽會把表格與結構糊成一團。"
+      }
+    ],
+    "en": [
+      {
+        "t": "You can just drop a Word or PDF file straight into RAG and it works; format is not an issue.",
+        "why": "RAG only takes plain text and vectors; this ignores that the parsing step is what makes or breaks it."
+      },
+      {
+        "t": "RAG stores vectors of text fragments rather than the files themselves, so you first extract Word and PDF into plain text; tables, multiple columns, and heading hierarchies need layout-aware parsing, scanned files need OCR first, then you clean, chunk by structure, vectorize, and store. Parsing quality is the ceiling on RAG quality.",
+        "why": "It dispels the misconception and clearly lays out the full pipeline from parsing through chunking to storage, and the trade-offs."
+      },
+      {
+        "t": "You just need a tool to convert files into plain text; tables, multiple columns, and scanned files can all be extracted directly and treated the same way.",
+        "why": "This ignores layout-aware parsing and OCR; plain extraction smears tables and structure into a mush."
+      }
+    ],
+    "ja": [
+      {
+        "t": "Word や PDF のファイルをそのまま RAG に放り込めば使えて、形式は問題にならない。",
+        "why": "RAG は純テキストと embedding のベクトルしか受け付けず、解析という関門こそが成否の鍵であることを見落としています。"
+      },
+      {
+        "t": "RAG が保存するのはテキスト断片のベクトルであってファイルそのものではないため、まず Word や PDF を純テキストに抽出します。表・多段組み・見出しの階層には版面を意識した解析が必要で、スキャン文書はまず OCR にかけ、そのうえで整形し、構造に沿って chunk に分割し、ベクトル化して保存します。解析の品質こそが RAG の品質の天井です。",
+        "why": "誤解を解いたうえで、解析から chunk 分割、格納までの完全なパイプラインとトレードオフを明確に説明しています。"
+      },
+      {
+        "t": "ツールでファイルを純テキストに変換しさえすればよく、表・多段組み・スキャン文書もすべて同じように直接抽出できる。",
+        "why": "版面を意識した解析と OCR を見落としており、単純な抽出では表と構造が一団子に潰れてしまいます。"
       }
     ]
   },
@@ -569,6 +1321,53 @@ export const QUIZZES = {
       }
     ]
   },
+  "rag-retrieval": {
+    "zh": [
+      {
+        "t": "檢索品質決定 RAG 上限，且取決於整條管線：切塊大小、向量加關鍵字的混合檢索、先粗召回再 rerank 精排、調 top-k，進階再加查詢改寫與 metadata 過濾，核心是平衡召回率、精確率與成本並能量測迭代。",
+        "ok": true,
+        "why": "涵蓋切塊、混合檢索、重排、top-k 與進階手段的取捨。"
+      },
+      {
+        "t": "檢索就是算向量相似度、取最相關的 top-k，其他都不重要。",
+        "ok": false,
+        "why": "這只是最陽春版，忽略切塊、混合檢索、重排與查詢改寫。"
+      },
+      {
+        "t": "只要把 top-k 調大，撈進越多片段就越準，檢索設計就這麼簡單。",
+        "ok": false,
+        "why": "大 top-k 會帶來雜訊又佔滿窗口，也忽略切塊、rerank 與混合檢索。"
+      }
+    ],
+    "en": [
+      {
+        "t": "Retrieval quality sets the ceiling on RAG and depends on the whole pipeline: chunk size, hybrid retrieval combining vectors and keywords, coarse recall first then rerank for fine ranking, tuning top-k, and at an advanced level adding query rewriting and metadata filtering. The core is balancing recall, precision, and cost while being able to measure and iterate.",
+        "why": "It covers chunking, hybrid retrieval, reranking, top-k, and the trade-offs of advanced techniques."
+      },
+      {
+        "t": "Retrieval is just computing vector similarity and taking the most relevant top-k; nothing else matters.",
+        "why": "This is only the most bare-bones version, ignoring chunking, hybrid retrieval, reranking, and query rewriting."
+      },
+      {
+        "t": "Just turn top-k up: the more fragments you pull in, the more accurate it is; retrieval design is that simple.",
+        "why": "A large top-k brings noise and fills up the context window, and this also ignores chunking, rerank, and hybrid retrieval."
+      }
+    ],
+    "ja": [
+      {
+        "t": "検索の品質が RAG の上限を決め、それはパイプライン全体に依存します。chunk のサイズ、vector とキーワードを組み合わせたハイブリッド検索、まず粗く recall してから rerank で精密に並べ替えること、top-k の調整、さらに進んでクエリの書き換えや metadata フィルタリングを加えます。核心は recall・precision・コストのバランスを取り、計測して反復できることです。",
+        "why": "chunk 分割、ハイブリッド検索、rerank、top-k、そして高度な手法のトレードオフをカバーしています。"
+      },
+      {
+        "t": "検索とは vector の類似度を計算して最も関連する top-k を取ることであり、それ以外は重要でない。",
+        "why": "これは最も簡素な版にすぎず、chunk 分割・ハイブリッド検索・rerank・クエリの書き換えを見落としています。"
+      },
+      {
+        "t": "top-k を大きくして、より多くの断片を取り込めば取り込むほど精度が上がり、検索の設計はそれだけ単純だ。",
+        "why": "大きな top-k はノイズをもたらしコンテキストウィンドウを埋め尽くすうえ、chunk 分割・rerank・ハイブリッド検索も見落としています。"
+      }
+    ]
+  },
   "rag-why-wrong": {
     "zh": [
       {
@@ -613,6 +1412,53 @@ export const QUIZZES = {
       {
         "t": "間違いはほぼ検索が該当箇所を拾えていないせいなので、検索をひたすら改善して top-k を増やせばよい。",
         "why": "根拠はすでに context にあるのに生成側が無視していることもあり、検索のせいにして top-k を上げても生成側の誤りは直らない。"
+      }
+    ]
+  },
+  "rag-vs-longcontext": {
+    "zh": [
+      {
+        "t": "長上下文的窗口越來越大，以後就不需要 RAG 了。",
+        "ok": false,
+        "why": "忽略長上下文的成本、上限與中段被忽略，也忽略引用與可擴性。"
+      },
+      {
+        "t": "誰的窗口大就用誰，反正把所有資料一次塞進去最保險。",
+        "ok": false,
+        "why": "token 隨長度暴增又有上限、中段易漏，忽略依場景取捨。"
+      },
+      {
+        "t": "長上下文每次把全部塞進窗口，簡單但貴、有上限且中段易被忽略；RAG 只撈相關片段，可擴、單次便宜、能附引用，但答得好綁在檢索品質上；資料大又常變動、需引用出處用 RAG，資料小固定或需跨全文整體理解用長上下文，實務常混用。",
+        "ok": true,
+        "why": "比較兩者成本、上限與盲點，並給出依場景的判準。"
+      }
+    ],
+    "en": [
+      {
+        "t": "Long-context windows keep getting bigger, so RAG will not be needed in the future.",
+        "why": "This ignores the cost of long context, its ceiling, and the middle getting overlooked, and also ignores citations and scalability."
+      },
+      {
+        "t": "Just use whichever has the bigger window; stuffing all the data in at once is the safest bet anyway.",
+        "why": "Tokens explode with length and there is still a ceiling, the middle is easily missed, and this ignores choosing based on the scenario."
+      },
+      {
+        "t": "Long context stuffs everything into the window each time: simple but expensive, with a ceiling, and the middle is easily overlooked. RAG pulls only the relevant fragments: scalable, cheap per query, and able to attach citations, but answering well is tied to retrieval quality. Use RAG when data is large and changes often and you need to cite sources; use long context when data is small and fixed or you need whole-document holistic understanding. In practice the two are often combined.",
+        "why": "It compares the cost, ceiling, and blind spots of both, and gives criteria based on the scenario."
+      }
+    ],
+    "ja": [
+      {
+        "t": "long context の窓はますます大きくなっているので、今後は RAG が不要になる。",
+        "why": "long context のコスト・上限・中段が見落とされる問題を無視し、引用元の提示や拡張性も見落としています。"
+      },
+      {
+        "t": "窓が大きいほうを使えばよく、どのみち全データを一度に詰め込むのが最も安全だ。",
+        "why": "token は長さに応じて急増するうえ上限もあり、中段は漏れやすく、場面に応じた取捨選択を見落としています。"
+      },
+      {
+        "t": "long context は毎回すべてを窓に詰め込むもので、単純だが高価で、上限があり、中段が見落とされやすいです。RAG は関連する断片だけを取り出すもので、拡張しやすく、一回あたりが安く、引用を付けられますが、うまく答えられるかは検索の品質に縛られます。データが大きく頻繁に変わり、出典の引用が必要なら RAG を、データが小さく固定的か、全文を横断した全体的な理解が必要なら long context を使い、実務では両者をよく併用します。",
+        "why": "両者のコスト・上限・盲点を比較し、場面に応じた判断基準を示しています。"
       }
     ]
   },
@@ -663,6 +1509,241 @@ export const QUIZZES = {
       }
     ]
   },
+  "agent-planning": {
+    "zh": [
+      {
+        "t": "Agent 的規劃就是它會自己想、自己安排，不需要特別設計。",
+        "ok": false,
+        "why": "沒講出具體做法與取捨，也忽略重規劃與防止繞圈。"
+      },
+      {
+        "t": "規劃是把大目標拆成可執行步驟並安排推進：ReAct 想、做、觀察逐步進行較彈性但步數多，plan-then-execute 先擬完整計畫省 token、好追蹤但計畫錯就整條偏，實務常混用，並靠重規劃、錯誤恢復與步數上限維持穩定。",
+        "ok": true,
+        "why": "講出兩種主流做法的取捨與如何靠重規劃維持穩定。"
+      },
+      {
+        "t": "只要先叫模型列出完整計畫再照著做就好，計畫一旦定了就不必再改。",
+        "ok": false,
+        "why": "忽略計畫可能出錯需重規劃與錯誤恢復，也忽略邊做邊調的彈性。"
+      }
+    ],
+    "en": [
+      {
+        "t": "An agent's planning is just it thinking and arranging things on its own, with no special design needed.",
+        "why": "This does not spell out concrete methods and trade-offs, and ignores replanning and preventing it from going in circles."
+      },
+      {
+        "t": "Planning is breaking a big goal into executable steps and arranging how to move forward: ReAct proceeds step by step by thinking, acting, and observing, which is more flexible but takes many steps; plan-then-execute drafts a full plan up front, saving tokens and easy to track, but if the plan is wrong the whole chain goes off course. In practice they are often combined, and stability comes from replanning, error recovery, and a step limit.",
+        "why": "It states the trade-offs of the two mainstream approaches and how replanning keeps things stable."
+      },
+      {
+        "t": "Just have the model list a full plan first and then follow it; once the plan is set there is no need to change it.",
+        "why": "This ignores that the plan can be wrong and need replanning and error recovery, and ignores the flexibility of adjusting as you go."
+      }
+    ],
+    "ja": [
+      {
+        "t": "Agent のプランニングとは、自分で考えて自分で段取りすることであり、特別な設計は要らない。",
+        "why": "具体的な手法とトレードオフを述べておらず、再プランニングや堂々巡りの防止も見落としています。"
+      },
+      {
+        "t": "プランニングとは、大きな目標を実行可能なステップに分解して推進を段取りすることです。ReAct は考える・実行する・観察するを一歩ずつ進めるので柔軟性は高いがステップ数が多く、plan-then-execute は先に完全な計画を立てるので token を節約でき追跡しやすいが、計画が誤ると全体がずれます。実務では両者をよく併用し、再プランニング・エラー回復・ステップ数の上限によって安定を保ちます。",
+        "why": "二つの主流の手法のトレードオフと、再プランニングでどう安定を保つかを述べています。"
+      },
+      {
+        "t": "先にモデルに完全な計画を列挙させてそのとおりに実行すればよく、計画が一度決まれば変える必要はない。",
+        "why": "計画が誤って再プランニングやエラー回復が必要になりうることを見落とし、進めながら調整する柔軟性も見落としています。"
+      }
+    ]
+  },
+  "agent-tools": {
+    "zh": [
+      {
+        "t": "模型只輸出要呼叫哪個工具、帶什麼參數的結構化意圖，由外部程式執行再回餵結果；可靠性靠整個迴圈防呆：工具描述精簡、數量收斂避免選錯，給 schema 驗參數，執行加逾時、重試與權限白名單，出錯把訊息回餵讓它自我修正，再判斷完成。",
+        "ok": true,
+        "why": "說明機制並涵蓋選工具到完成整個調用迴圈的防呆。"
+      },
+      {
+        "t": "只要用 function calling 讓模型會呼叫工具，調用就可靠了。",
+        "ok": false,
+        "why": "忽略選錯工具、參數錯、工具報錯與逾時等整個迴圈的防呆。"
+      },
+      {
+        "t": "工具給得越多、能力越全，Agent 就會越可靠。",
+        "ok": false,
+        "why": "工具越多越容易選錯，應少而精，也忽略每一關的失敗與恢復。"
+      }
+    ],
+    "en": [
+      {
+        "t": "The model only outputs a structured intent of which tool to call and what parameters to pass; an external program executes it and feeds the result back. Reliability comes from making the whole loop foolproof: keep tool descriptions concise and their number small to avoid picking the wrong one, give a schema to validate parameters, add timeouts, retries, and a permission allowlist to execution, feed error messages back so it can self-correct, and then judge completion.",
+        "why": "It explains the mechanism and covers making the whole call loop, from choosing a tool to completion, foolproof."
+      },
+      {
+        "t": "Just use function calling so the model can call tools, and the calls will be reliable.",
+        "why": "This ignores foolproofing the whole loop against picking the wrong tool, wrong parameters, tool errors, timeouts, and the like."
+      },
+      {
+        "t": "The more tools you give and the more complete the capabilities, the more reliable the agent will be.",
+        "why": "The more tools there are, the easier it is to pick the wrong one, so they should be few and well-chosen; this also ignores failure and recovery at each step."
+      }
+    ],
+    "ja": [
+      {
+        "t": "モデルはどのツールをどんなパラメータで呼び出すかという構造化された意図を出力するだけで、外部のプログラムがそれを実行して結果を返します。信頼性はループ全体をフールプルーフにすることで得られます。ツールの説明は簡潔に、数は絞って選び間違いを避け、schema を与えてパラメータを検証し、実行にタイムアウト・リトライ・権限のホワイトリストを加え、エラー時はメッセージを返して自己修正させ、そのうえで完了を判断します。",
+        "why": "仕組みを説明し、ツールの選択から完了まで、呼び出しループ全体のフールプルーフ化をカバーしています。"
+      },
+      {
+        "t": "function calling を使ってモデルにツールを呼び出させさえすれば、呼び出しは信頼できる。",
+        "why": "ツールの選び間違い・パラメータの誤り・ツールのエラー・タイムアウトなど、ループ全体のフールプルーフ化を見落としています。"
+      },
+      {
+        "t": "ツールを多く与えるほど、能力が網羅的であるほど、Agent は信頼できるようになる。",
+        "why": "ツールが多いほど選び間違えやすいため少数精鋭であるべきで、各段階での失敗と回復も見落としています。"
+      }
+    ]
+  },
+  "json-output": {
+    "zh": [
+      {
+        "t": "在 prompt 裡明確寫「請只輸出 JSON」並附上格式說明，就能保證每次都是合法 JSON。",
+        "ok": false,
+        "why": "模型是逐 token 機率生成，prompt 只是拜託，仍可能多一段話或漏括號，不等於保證。"
+      },
+      {
+        "t": "先認清模型是機率生成、本質不保證合法；手段由弱到強：prompt 要求＋範例 → function calling／JSON mode → 約束解碼／grammar，並一律用 JSON Schema 校驗，失敗就把錯誤回餵重試或自動修補。",
+        "ok": true,
+        "why": "完整涵蓋機率本質、由弱到強的約束手段，以及不可少的校驗閉環。"
+      },
+      {
+        "t": "只要改用 API 的 function calling 或 JSON mode，輸出就 100% 合法，之後完全不必再做校驗。",
+        "ok": false,
+        "why": "這些手段能大幅提高合法率但非萬無一失，仍需 schema 校驗與重試閉環兜底。"
+      }
+    ],
+    "en": [
+      {
+        "t": "Explicitly writing \"output only JSON\" in the prompt and attaching a format description guarantees valid JSON every single time.",
+        "why": "The model generates token by token probabilistically; a prompt is only a request, so it may still add an extra passage or drop a bracket, which is not a guarantee."
+      },
+      {
+        "t": "First recognize that the model generates probabilistically and inherently cannot guarantee validity; techniques run from weak to strong: prompt instructions plus examples → function calling / JSON mode → constrained decoding / grammar, and always validate with JSON Schema, feeding errors back for a retry or auto-repair on failure.",
+        "why": "It fully covers the probabilistic nature, the weak-to-strong constraint techniques, and the indispensable validation loop."
+      },
+      {
+        "t": "Simply switching to the API's function calling or JSON mode makes the output 100% valid, so no validation is ever needed afterward.",
+        "why": "These techniques greatly raise the validity rate but are not foolproof; you still need schema validation and a retry loop as a safety net."
+      }
+    ],
+    "ja": [
+      {
+        "t": "プロンプトに「JSONだけを出力してください」と明記し、フォーマットの説明を添えれば、毎回必ず正しいJSONになると保証できる。",
+        "why": "モデルはtokenを1つずつ確率的に生成するため、promptはあくまでお願いにすぎず、余計な文章が付いたり括弧が抜けたりすることがあり、保証にはならない。"
+      },
+      {
+        "t": "まずモデルは確率的に生成し、本質的に合法性を保証できないと認識する。手段は弱いものから強いものへ、promptでの指示＋例 → function calling／JSON mode → constrained decoding／grammar、そして必ずJSON Schemaで検証し、失敗したらエラーを入力に戻して再試行するか自動修復する。",
+        "why": "確率的な本質、弱から強への制約手段、そして欠かせない検証のループを完全に網羅している。"
+      },
+      {
+        "t": "APIのfunction callingやJSON modeに切り替えさえすれば、出力は100%合法になり、その後は検証を一切する必要がない。",
+        "why": "これらの手段は合法率を大きく高めるが万全ではなく、schemaによる検証と再試行のループで補う必要がある。"
+      }
+    ]
+  },
+  "agent-memory": {
+    "zh": [
+      {
+        "t": "模型無狀態、每步只看當下 context，記憶是外部在決定「每步放回哪些歷史」，跟窗口容量是兩件事；實務用工作記憶＋摘要壓縮＋外部檢索，分短期與長期，本質是上下文預算管理。",
+        "ok": true,
+        "why": "分清窗口容量與記憶取捨，涵蓋分層手段與取捨，符合 core。"
+      },
+      {
+        "t": "記憶管理其實就是上下文窗口：窗口愈大能記的愈多，把窗口做大就等於做好記憶。",
+        "ok": false,
+        "why": "混淆容量與策略；窗口是一次能讀多少，記憶管理是跨步驟該保留什麼，兩者不同。"
+      },
+      {
+        "t": "把過去所有對話原封不動全部塞回 prompt，就是最完整的記憶管理。",
+        "ok": false,
+        "why": "全塞會爆窗口且成本高，記憶管理的重點正是取捨與壓縮，而非照單全收。"
+      }
+    ],
+    "en": [
+      {
+        "t": "The model is stateless and at each step only sees the current context; memory is the external decision of \"which history to put back at each step,\" which is separate from window capacity. In practice you use working memory plus summary compression plus external retrieval, split into short-term and long-term; essentially it is context budget management.",
+        "why": "It distinguishes window capacity from memory trade-offs and covers the layered techniques and trade-offs, matching the core."
+      },
+      {
+        "t": "Memory management is really just the context window: the larger the window, the more it can remember, so enlarging the window is the same as doing memory well.",
+        "why": "It confuses capacity with strategy; the window is how much can be read at once, while memory management is what to retain across steps, and the two are different."
+      },
+      {
+        "t": "Stuffing all past conversation back into the prompt untouched is the most complete memory management.",
+        "why": "Cramming everything blows past the window and is costly; the point of memory management is precisely selection and compression, not taking in everything wholesale."
+      }
+    ],
+    "ja": [
+      {
+        "t": "モデルはstatelessで、各ステップでは現在のcontextしか見ない。記憶とは「各ステップでどの履歴を戻すか」を外部が決めることであり、ウィンドウの容量とは別物である。実務では working memory ＋要約による圧縮＋外部検索を使い、短期と長期に分ける。本質はcontextの予算管理である。",
+        "why": "ウィンドウの容量と記憶の取捨を区別し、階層的な手段と取捨を網羅しており、coreに合致する。"
+      },
+      {
+        "t": "記憶管理とは要するにcontextウィンドウのことだ。ウィンドウが大きいほど多く覚えられるので、ウィンドウを大きくすることが記憶をうまく行うことと同じである。",
+        "why": "容量と戦略を混同している。ウィンドウは一度にどれだけ読めるか、記憶管理はステップをまたいで何を残すかであり、両者は異なる。"
+      },
+      {
+        "t": "過去のすべての対話をそのまま丸ごとpromptに戻すことが、最も完全な記憶管理だ。",
+        "why": "全部詰め込むとウィンドウを超えコストも高い。記憶管理の要点はまさに取捨と圧縮であり、すべてをそのまま受け入れることではない。"
+      }
+    ]
+  },
+  "agent-eval": {
+    "zh": [
+      {
+        "t": "看它最終答案對不對就好，把答對率拉高就代表這個 Agent 性能好。",
+        "ok": false,
+        "why": "Agent 是多步驟＋用工具，只看最終答案會漏掉過程繞路、工具誤用與成本延遲。"
+      },
+      {
+        "t": "開放式任務直接交給 LLM-as-judge 打分即可，它完全客觀，不必再人工抽查。",
+        "ok": false,
+        "why": "LLM-as-judge 有偏誤、需校準，仍要保留人工抽查，不能當成絕對客觀。"
+      },
+      {
+        "t": "分兩層：任務成功率（結果對不對）＋軌跡品質（過程有無繞路、工具選對用對），並量工具正確率、平均步數、成本（token）與延遲；開放任務可用 LLM-as-judge 但要校準＋人工抽查，且建固定測試集跑指標並回歸。",
+        "ok": true,
+        "why": "涵蓋任務級與過程級指標、成本延遲、LLM-judge 的限制與測試集閉環。"
+      }
+    ],
+    "en": [
+      {
+        "t": "Just check whether its final answer is right; raising the accuracy rate means this Agent performs well.",
+        "why": "An Agent is multi-step and uses tools, so looking only at the final answer misses detours in the process, tool misuse, and cost and latency."
+      },
+      {
+        "t": "For open-ended tasks just hand scoring to an LLM-as-judge; it is completely objective, so no human spot-checking is needed.",
+        "why": "An LLM-as-judge has biases and needs calibration; you must still keep human spot-checks and cannot treat it as absolutely objective."
+      },
+      {
+        "t": "Split into two layers: task success rate (whether the result is right) plus trajectory quality (whether the process detoured and whether tools were chosen and used correctly), and measure tool accuracy, average number of steps, cost (tokens), and latency; open-ended tasks may use an LLM-as-judge but with calibration plus human spot-checks, and build a fixed test set to run metrics and check regression.",
+        "why": "It covers task-level and process-level metrics, cost and latency, the limits of the LLM-judge, and the test-set loop."
+      }
+    ],
+    "ja": [
+      {
+        "t": "最終的な答えが合っているかだけを見ればよく、正答率を上げればこのAgentの性能が良いということだ。",
+        "why": "Agentは多ステップでツールを使うため、最終的な答えだけを見ると、過程での遠回り、ツールの誤用、コストや遅延を見落とす。"
+      },
+      {
+        "t": "オープンなタスクはそのままLLM-as-judgeに採点を任せればよく、完全に客観的なので人手による抜き取り検査は不要だ。",
+        "why": "LLM-as-judgeには偏りがあり校正が必要で、人手による抜き取り検査は残すべきであり、絶対に客観的とはみなせない。"
+      },
+      {
+        "t": "2つの層に分ける。タスク成功率（結果が正しいか）＋軌跡の品質（過程で遠回りがないか、ツールを正しく選び正しく使ったか）。そしてツールの正確率、平均ステップ数、コスト（token）、遅延を計測する。オープンなタスクではLLM-as-judgeを使ってよいが、校正＋人手による抜き取り検査が必要で、さらに固定のテストセットを作って指標を回し回帰を確認する。",
+        "why": "タスクレベルと過程レベルの指標、コストと遅延、LLM-judgeの限界、そしてテストセットのループを網羅している。"
+      }
+    ]
+  },
   "agent-cost": {
     "zh": [
       {
@@ -707,6 +1788,194 @@ export const QUIZZES = {
       {
         "t": "毎ステップ完全な履歴を渡して情報を漏らさないようにし、成功するまでひたすらリトライさせればよい。",
         "why": "ステップ上限がないと無限にリトライして金を燃やし、毎ステップ完全な履歴を積むと token が爆発する。まさに暴走の主因。"
+      }
+    ]
+  },
+  "diffusion-how": {
+    "zh": [
+      {
+        "t": "它就是把一張模糊帶雜訊的圖，用演算法一次銳化、去雜訊變清楚。",
+        "ok": false,
+        "why": "漏了加噪訓練與反覆去噪生成的逐步迭代，把它當單次影像銳化是誤解。"
+      },
+      {
+        "t": "訓練時把圖逐步加噪到純雜訊，模型學的是在某噪聲程度下該去掉多少噪；生成時從純雜訊出發，每步去一點噪、反覆幾十步讓圖浮現，文字 prompt 當每步去噪的條件引導方向。",
+        "ok": true,
+        "why": "點出加噪訓練與反覆去噪生成一體兩面，並說明 prompt 作為條件的角色。"
+      },
+      {
+        "t": "模型依 prompt 的關鍵字，從內部圖庫檢索出對應的圖，再加一點雜訊變化後輸出。",
+        "ok": false,
+        "why": "模型並非檢索圖庫，而是逐步去噪重新算出新圖，這說法混淆了機制。"
+      }
+    ],
+    "en": [
+      {
+        "t": "It simply takes a blurry, noisy image and sharpens and denoises it clear in one pass with an algorithm.",
+        "why": "It leaves out the noise-adding training and the step-by-step iteration of repeated denoising generation; treating it as one-shot image sharpening is a misunderstanding."
+      },
+      {
+        "t": "During training an image is gradually noised up to pure noise, and the model learns how much noise to remove at a given noise level; during generation it starts from pure noise, removes a little noise each step, and repeats dozens of steps to let the image emerge, with the text prompt acting as the condition that guides the direction of each denoising step.",
+        "why": "It points out that noise-adding training and repeated denoising generation are two sides of one coin, and explains the prompt's role as the condition."
+      },
+      {
+        "t": "Based on the prompt's keywords, the model retrieves the matching image from an internal image library, then adds a bit of noise variation before outputting it.",
+        "why": "The model does not retrieve from an image library but recomputes a new image through step-by-step denoising; this statement confuses the mechanism."
+      }
+    ],
+    "ja": [
+      {
+        "t": "ぼやけてノイズの乗った画像を、アルゴリズムで一度に鮮明化・ノイズ除去してくっきりさせるだけのものだ。",
+        "why": "ノイズを加える訓練と、繰り返しノイズを除去して生成する段階的な反復を見落としており、一度きりの画像鮮明化とみなすのは誤解である。"
+      },
+      {
+        "t": "訓練時には画像を段階的にノイズを加えて純粋なノイズにし、モデルはある程度のノイズのもとでどれだけノイズを除去すべきかを学ぶ。生成時には純粋なノイズから出発し、各ステップで少しずつノイズを除去し、数十ステップ繰り返して画像を浮かび上がらせる。テキストのpromptは各ステップのノイズ除去の条件として方向を導く。",
+        "why": "ノイズを加える訓練と繰り返しノイズを除去する生成が表裏一体であることを指摘し、promptが条件として果たす役割を説明している。"
+      },
+      {
+        "t": "モデルはpromptのキーワードに従って内部の画像ライブラリから対応する画像を検索し、少しノイズの変化を加えて出力する。",
+        "why": "モデルは画像ライブラリを検索するのではなく、段階的にノイズを除去して新しい画像を計算し直しており、この説明は仕組みを混同している。"
+      }
+    ]
+  },
+  "diffusion-not-collage": {
+    "zh": [
+      {
+        "t": "其實就是 AI 找幾張相關圖片，剪下局部再拼接縫合成一張。",
+        "ok": false,
+        "why": "模型裡沒有存原圖，輸出像素是重新算出的新內容，不是剪貼拼接。"
+      },
+      {
+        "t": "模型絕不可能重現任何訓練圖，輸出永遠 100% 原創、與訓練集毫無雷同。",
+        "ok": false,
+        "why": "忽略記憶化例外：某圖若重複過多，模型可能近似複製，這是需防範的情況。"
+      },
+      {
+        "t": "不是拼貼：模型沒存原圖，學的是海量圖片的統計規律，生成時整張一次算、每步同時更新所有像素，重畫出通常訓練集裡找不到的全新圖；例外是重複過多的圖可能被記憶而近似複製。",
+        "ok": true,
+        "why": "說清無存原圖、統計規律 vs 檢索拼接的差別，並補記憶化例外，符合 core。"
+      }
+    ],
+    "en": [
+      {
+        "t": "It is really just the AI finding several related images, cutting out parts, and stitching them together into one.",
+        "why": "The model stores no original images; the output pixels are newly computed content, not cut-and-paste stitching."
+      },
+      {
+        "t": "The model can never reproduce any training image; its output is always 100% original with no resemblance to the training set.",
+        "why": "It ignores the memorization exception: if an image repeats too often, the model may approximately copy it, a situation that must be guarded against."
+      },
+      {
+        "t": "It is not collage: the model stores no original images and learns the statistical patterns of massive numbers of images; during generation it computes the whole image at once, updating all pixels simultaneously at each step, redrawing an entirely new image usually not found in the training set; the exception is that overly repeated images may be memorized and approximately copied.",
+        "why": "It makes clear that no original images are stored and the difference between statistical patterns and retrieval-collage, and adds the memorization exception, matching the core."
+      }
+    ],
+    "ja": [
+      {
+        "t": "要するにAIが関連する画像を何枚か見つけて、一部を切り取り、つなぎ合わせて1枚にしているだけだ。",
+        "why": "モデルの中に元画像は保存されておらず、出力されるピクセルは計算し直された新しい内容であり、切り貼りのつなぎ合わせではない。"
+      },
+      {
+        "t": "モデルが訓練画像を再現することは絶対にありえず、出力は常に100%オリジナルで、訓練セットとまったく似ることはない。",
+        "why": "記憶化という例外を無視している。ある画像が繰り返し多すぎると、モデルはほぼ複製することがあり、これは防ぐべき状況である。"
+      },
+      {
+        "t": "コラージュではない。モデルは元画像を保存しておらず、膨大な画像の統計的な規則性を学ぶ。生成時には画像全体を一度に計算し、各ステップですべてのピクセルを同時に更新し、通常は訓練セットに見当たらないまったく新しい画像を描き直す。例外として、繰り返しが多すぎる画像は記憶されてほぼ複製されることがある。",
+        "why": "元画像を保存していないこと、統計的な規則性と検索・つなぎ合わせの違いを明確にし、さらに記憶化の例外を補っており、coreに合致する。"
+      }
+    ]
+  },
+  "genimg-errors": {
+    "zh": [
+      {
+        "t": "本質上它追求整體看起來合理、學的是外觀分布，沒有「手指五根」「字母拼成單字」這種硬規則；而手、文字、對稱需精確計數與一致性，卻佔比小、變化大、訓練訊號弱，加上資料偏差，屬機制性弱點，做大有幫助但難根治。",
+        "ok": true,
+        "why": "涵蓋追求外觀而非結構、為何偏偏這些細節出錯、資料因素與機制性難根治。"
+      },
+      {
+        "t": "這只是模型目前還不夠大造成的暫時 bug，等規模再大一點就會自動完全消失。",
+        "ok": false,
+        "why": "這是機制性弱點（追求外觀、不理解精確結構），做大有幫助但難完全根治，非暫時 bug。"
+      },
+      {
+        "t": "純粹因為訓練資料裡手和文字的圖太少，只要多餵這類資料就能徹底解決。",
+        "ok": false,
+        "why": "根因是模型學外觀分布、缺硬規則與計數能力，補資料助益有限，無法徹底解決。"
+      }
+    ],
+    "en": [
+      {
+        "t": "Fundamentally it pursues overall plausibility and learns the distribution of appearance, without hard rules like \"five fingers\" or \"letters spelling a word\"; yet hands, text, and symmetry require precise counting and consistency but make up a small proportion, vary widely, and give weak training signals, and combined with data bias this is a mechanistic weakness that scaling up helps but hardly cures.",
+        "why": "It covers pursuing appearance rather than structure, why these particular details go wrong, the data factors, and why it is mechanistically hard to cure."
+      },
+      {
+        "t": "This is just a temporary bug caused by the model not yet being large enough; once the scale grows a bit more it will automatically disappear completely.",
+        "why": "This is a mechanistic weakness (pursuing appearance, not understanding precise structure); scaling up helps but hardly fully cures it, and it is not a temporary bug."
+      },
+      {
+        "t": "It is purely because there are too few images of hands and text in the training data; feeding more of this kind of data will completely solve it.",
+        "why": "The root cause is that the model learns the distribution of appearance and lacks hard rules and counting ability; adding data helps only marginally and cannot completely solve it."
+      }
+    ],
+    "ja": [
+      {
+        "t": "本質的には全体がもっともらしく見えることを追求し、外観の分布を学んでおり、「指は5本」「文字が並んで単語になる」といった厳密な規則はない。一方で手、文字、対称性は正確な数え上げと一貫性を必要とするが、割合が小さく、変化が大きく、訓練の信号が弱い。加えてデータの偏りもあり、これは機構的な弱点であって、規模を大きくすれば助けにはなるが根治は難しい。",
+        "why": "構造ではなく外観を追求すること、なぜよりによってこうした細部で誤るのか、データ要因、そして機構的に根治が難しいことを網羅している。"
+      },
+      {
+        "t": "これはモデルがまだ十分に大きくないために起きる一時的なbugにすぎず、規模がもう少し大きくなれば自動的に完全に消える。",
+        "why": "これは機構的な弱点（外観を追求し、正確な構造を理解しない）であり、規模を大きくすれば助けにはなるが完全な根治は難しく、一時的なbugではない。"
+      },
+      {
+        "t": "純粋に訓練データの中に手や文字の画像が少なすぎるためであり、この種のデータをもっと与えさえすれば徹底的に解決できる。",
+        "why": "根本原因はモデルが外観の分布を学び、厳密な規則と数え上げの能力を欠くことであり、データを補っても効果は限られ、徹底的な解決はできない。"
+      }
+    ]
+  },
+  "diffusion-vs-gan": {
+    "zh": [
+      {
+        "t": "擴散就是比較新、比較強、效果更好，所以自然取代了 GAN 成為主流。",
+        "ok": false,
+        "why": "沒講機制差異與取捨；主流換人是因擴散好訓練、易堆規模、易用條件操控，非只是「更新更強」。"
+      },
+      {
+        "t": "擴散在每個面向都完勝 GAN，包括生成速度，GAN 已一無是處被完全淘汰。",
+        "ok": false,
+        "why": "擴散要跑多步、速度反而較慢，GAN 仍有快的優勢，說法過度絕對。"
+      },
+      {
+        "t": "機制上 GAN 是生成器對抗判別器、一次生出整張圖，擴散是從雜訊逐步去噪；GAN 快但難訓、易崩潰且多樣性差，擴散穩、品質與多樣性高、好用文字條件操控但多步較慢；正因好訓練、易堆規模又可控，擴散撐起大規模文字生圖成為主流。",
+        "ok": true,
+        "why": "對比兩者機制與取捨，並由此推出擴散成為主流的原因，符合 core。"
+      }
+    ],
+    "en": [
+      {
+        "t": "Diffusion is simply newer, stronger, and gives better results, so it naturally replaced GAN as the mainstream.",
+        "why": "It does not address the mechanism differences and trade-offs; the shift in mainstream happened because diffusion is easy to train, easy to scale, and easy to steer with conditions, not merely because it is \"newer and stronger.\""
+      },
+      {
+        "t": "Diffusion beats GAN completely on every front, including generation speed, and GAN is now worthless and fully obsolete.",
+        "why": "Diffusion has to run many steps and is actually slower, while GAN still holds the advantage of speed, so the claim is overly absolute."
+      },
+      {
+        "t": "Mechanically, GAN has a generator competing against a discriminator and produces the whole image at once, while diffusion denoises step by step from noise; GAN is fast but hard to train, prone to collapse, and poor in diversity, whereas diffusion is stable, high in quality and diversity, and easy to steer with text conditions but slower due to many steps; precisely because it is easy to train, easy to scale, and controllable, diffusion carries large-scale text-to-image generation and became the mainstream.",
+        "why": "It contrasts the two mechanisms and their trade-offs and from that derives why diffusion became the mainstream, matching the core."
+      }
+    ],
+    "ja": [
+      {
+        "t": "diffusionは単に新しく、強く、効果が良いので、自然にGANに取って代わって主流になった。",
+        "why": "仕組みの違いと取捨に触れていない。主流が入れ替わったのはdiffusionが訓練しやすく、規模を積みやすく、条件による操作がしやすいからであり、単に「新しくて強い」からではない。"
+      },
+      {
+        "t": "diffusionはあらゆる面で、生成速度も含めてGANに完勝しており、GANはもはや何の取り柄もなく完全に淘汰された。",
+        "why": "diffusionは多ステップを走らせる必要があり、むしろ速度は遅い。GANには依然として速いという利点があり、この主張は過度に断定的である。"
+      },
+      {
+        "t": "仕組みの上ではGANは生成器が判別器と対抗し、一度に画像全体を生み出すのに対し、diffusionはノイズから段階的にノイズを除去する。GANは速いが訓練が難しく、崩壊しやすく多様性に乏しい。diffusionは安定し、品質と多様性が高く、テキスト条件による操作がしやすいが、多ステップのため比較的遅い。訓練しやすく、規模を積みやすく、制御可能であるからこそ、diffusionは大規模なテキストからの画像生成を支え主流になった。",
+        "why": "両者の仕組みと取捨を対比し、そこからdiffusionが主流になった理由を導いており、coreに合致する。"
       }
     ]
   },
@@ -851,6 +2120,100 @@ export const QUIZZES = {
       }
     ]
   },
+  "bias": {
+    "zh": [
+      {
+        "t": "偏見是工程師刻意把立場寫進去，或模型自己有政治／價值立場所致。",
+        "ok": false,
+        "why": "偏見主要是從訓練資料學來並可能被放大，不是刻意寫入，模型也沒有自己的立場。"
+      },
+      {
+        "t": "偏見主要來自訓練資料：資料反映真實世界的社會偏差，模型照學還可能放大；減少要分層做（資料更多樣平衡、訓練端對齊去偏、輸出端評估與護欄），但根在資料與社會、公平定義彼此衝突，只能降低難以根除。",
+        "ok": true,
+        "why": "點出資料來源與放大、分層減少手段，以及難根除的原因，完整涵蓋 core。"
+      },
+      {
+        "t": "只要把訓練資料清洗乾淨、再加上輸出護欄，就能把 AI 偏見完全消除。",
+        "ok": false,
+        "why": "偏見根在資料與社會本身且公平定義會衝突，只能持續降低，無法完全消除。"
+      }
+    ],
+    "en": [
+      {
+        "t": "Bias comes from engineers deliberately writing their stance in, or from the model having its own political or value positions.",
+        "why": "Bias mainly comes from being learned from training data and possibly amplified, not from deliberate insertion, and the model has no positions of its own."
+      },
+      {
+        "t": "Bias mainly comes from training data: the data reflects real-world social biases, and the model learns them and may even amplify them; reducing it must be done in layers (more diverse and balanced data, alignment and debiasing on the training side, evaluation and guardrails on the output side), but its roots lie in the data and society and definitions of fairness conflict with each other, so it can only be lowered and is hard to eradicate.",
+        "why": "It points out the data source and amplification, the layered reduction techniques, and the reasons it is hard to eradicate, fully covering the core."
+      },
+      {
+        "t": "Simply cleaning the training data thoroughly and adding output guardrails can completely eliminate AI bias.",
+        "why": "Bias is rooted in the data and society itself and definitions of fairness conflict, so it can only be continuously lowered and cannot be completely eliminated."
+      }
+    ],
+    "ja": [
+      {
+        "t": "偏見は、エンジニアが意図的に立場を書き込むか、モデル自身が政治的・価値的な立場を持つことによって生じる。",
+        "why": "偏見は主に訓練データから学ばれ、増幅されることもあるもので、意図的に書き込まれたものではなく、モデルにも自身の立場はない。"
+      },
+      {
+        "t": "偏見は主に訓練データに由来する。データは現実世界の社会的な偏りを反映し、モデルはそれをそのまま学び、さらに増幅することもある。減らすには階層的に行う必要がある（データをより多様で均衡の取れたものにする、訓練側でのアライメントによる偏りの除去、出力側での評価とガードレール）。しかし根はデータと社会にあり、公平性の定義どうしが衝突するため、下げることしかできず根絶は難しい。",
+        "why": "データの出所と増幅、階層的な低減手段、そして根絶が難しい理由を指摘しており、coreを完全に網羅している。"
+      },
+      {
+        "t": "訓練データをきれいに洗浄し、さらに出力のガードレールを加えさえすれば、AIの偏見を完全に取り除ける。",
+        "why": "偏見の根はデータと社会そのものにあり、公平性の定義が衝突するため、継続的に下げることしかできず、完全に取り除くことはできない。"
+      }
+    ]
+  },
+  "trust-answer": {
+    "zh": [
+      {
+        "t": "語氣自信不等於正確，模型是在猜合理的話而非查過事實；判斷要看有無可查證的引用來源、換問法看答案穩不穩、用外部權威資料交叉驗證關鍵事實，並依後果調整力度：低風險放寬，涉決策或專業就逐項驗證。",
+        "ok": true,
+        "why": "破除自信＝正確的迷思，給出可操作查證方法並依風險調整，符合 core。"
+      },
+      {
+        "t": "只要回答邏輯通順、語氣自信、聽起來很有道理，就可以放心相信。",
+        "ok": false,
+        "why": "模型永遠講得流暢篤定，語氣自信不等於正確，憑感覺就信正是要避免的陷阱。"
+      },
+      {
+        "t": "AI 本來就會亂講，所以它的任何回答都不可信，乾脆完全不要用。",
+        "ok": false,
+        "why": "走向另一極端；正確作法是依後果分級查證與交叉驗證，而非一律否定。"
+      }
+    ],
+    "en": [
+      {
+        "t": "A confident tone does not equal correctness; the model is guessing plausible words rather than having checked facts; to judge, look for verifiable cited sources, rephrase the question to see whether the answer holds steady, cross-check key facts with authoritative external sources, and adjust intensity by consequence: relax for low risk, but verify item by item when decisions or expertise are involved.",
+        "why": "It debunks the myth that confidence equals correctness, gives actionable verification methods, and adjusts by risk, matching the core."
+      },
+      {
+        "t": "As long as the answer is logically coherent, confident in tone, and sounds very reasonable, you can trust it with ease.",
+        "why": "The model always speaks fluently and assuredly; a confident tone does not equal correctness, and trusting by gut feeling is exactly the trap to avoid."
+      },
+      {
+        "t": "AI makes things up anyway, so none of its answers can be trusted, and you might as well not use it at all.",
+        "why": "This swings to the other extreme; the right approach is to verify and cross-check in tiers by consequence, not to reject everything outright."
+      }
+    ],
+    "ja": [
+      {
+        "t": "自信のある口調は正しさとは等しくない。モデルは事実を調べたのではなく、もっともらしい言葉を推測している。判断するには、検証できる引用元があるかを見て、問い方を変えて答えが安定するかを確かめ、外部の権威ある資料で重要な事実を照合し、結果の重大さに応じて力の入れ方を調整する。リスクが低ければ緩め、意思決定や専門性が絡むなら一項目ずつ検証する。",
+        "why": "自信＝正しさという思い込みを打ち破り、実行できる検証方法を示し、リスクに応じて調整しており、coreに合致する。"
+      },
+      {
+        "t": "答えが論理的に筋が通り、口調が自信に満ち、とても理にかなって聞こえさえすれば、安心して信じてよい。",
+        "why": "モデルは常に流暢で断定的に話す。自信のある口調は正しさとは等しくなく、感覚だけで信じることこそ避けるべき落とし穴である。"
+      },
+      {
+        "t": "AIはそもそもでたらめを言うので、その回答はどれも信用できず、いっそまったく使わないほうがよい。",
+        "why": "もう一方の極端に振れている。正しいやり方は結果の重大さに応じて段階的に検証し照合することであり、一律に否定することではない。"
+      }
+    ]
+  },
   "prompt-injection": {
     "zh": [
       {
@@ -895,6 +2258,100 @@ export const QUIZZES = {
       {
         "t": "Prompt Injection は悪意ある指示を「データ」（ユーザー入力や RAG・ツールが取ってきた内容）に紛れ込ませ、モデルにシステム指示を無視させる攻撃。防ぎにくいのはモデルが指示とデータを区別できず、どちらもただのテキストだからで、「聞くな」の一文も上書きされ得る。だから多層で下げるしかない：指示とデータの分離、最小権限、出力フィルタ、危険操作の人手確認。",
         "why": "原因（指示とデータを区別できない）＋下げるしかない理由＋多層の対策を述べており要点通り。"
+      }
+    ]
+  },
+  "jailbreak": {
+    "zh": [
+      {
+        "t": "只要在系統裡多加一些明確的禁止規則，把漏洞逐條堵上，就能一次把越獄完全防死。",
+        "ok": false,
+        "why": "安全是訓練出的傾向而非硬鎖，語言變化無窮總有新說法繞過，無法一次修好。"
+      },
+      {
+        "t": "越獄是誘導模型繞過安全規則、產出本該拒絕的內容（如角色扮演、假設情境、包成翻譯或程式碼）；因安全是訓練出的傾向、語言變化無窮，這是持續攻防、無法根治，只能多層防禦（對齊、輸入輸出過濾、監控、快速修補）把成功率壓低而非歸零。",
+        "ok": true,
+        "why": "說明定義、為何無法根治的機制，以及多層降低而非歸零的目標，符合 core。"
+      },
+      {
+        "t": "越獄就是駭客入侵伺服器、竊取模型權限或程式碼的資安攻擊。",
+        "ok": false,
+        "why": "誤解概念：越獄是用對話誘導模型繞過安全規則，並非入侵系統或竊取權限。"
+      }
+    ],
+    "en": [
+      {
+        "t": "Just adding more explicit prohibition rules in the system and plugging the loopholes one by one can block jailbreaks completely in one go.",
+        "why": "Safety is a trained tendency rather than a hard lock, and with endless variations of language there is always a new phrasing to get around it, so it cannot be fixed in one go."
+      },
+      {
+        "t": "Jailbreaking is inducing the model to bypass safety rules and produce content it should have refused (such as role-play, hypothetical scenarios, or wrapping it as translation or code); because safety is a trained tendency and language varies endlessly, this is a continuous attack-defense contest that cannot be cured, and one can only use layered defenses (alignment, input and output filtering, monitoring, rapid patching) to push the success rate down rather than to zero.",
+        "why": "It explains the definition, the mechanism of why it cannot be cured, and the goal of layered reduction rather than reaching zero, matching the core."
+      },
+      {
+        "t": "Jailbreaking is a cybersecurity attack where hackers break into servers and steal the model's permissions or code.",
+        "why": "It misunderstands the concept: jailbreaking uses conversation to induce the model to bypass safety rules, not breaking into systems or stealing permissions."
+      }
+    ],
+    "ja": [
+      {
+        "t": "システムに明確な禁止規則をもっと加え、抜け穴を一つずつふさぎさえすれば、jailbreakを一度で完全に防ぎきれる。",
+        "why": "安全性は訓練で身についた傾向であって硬いロックではなく、言語の変化は無限で常に新しい言い回しで回避されるため、一度で直しきることはできない。"
+      },
+      {
+        "t": "jailbreakとは、モデルを誘導して安全規則を回避させ、本来拒否すべき内容を出力させることである（ロールプレイ、仮定のシナリオ、翻訳やコードに包むなど）。安全性は訓練で身についた傾向であり、言語の変化は無限であるため、これは絶え間ない攻防で根治できず、多層の防御（アライメント、入出力のフィルタリング、監視、迅速な修正）によって成功率をゼロにではなく下げることしかできない。",
+        "why": "定義、なぜ根治できないのかという仕組み、そしてゼロではなく多層で下げるという目標を説明しており、coreに合致する。"
+      },
+      {
+        "t": "jailbreakとは、ハッカーがサーバーに侵入し、モデルの権限やコードを盗むサイバーセキュリティ攻撃のことだ。",
+        "why": "概念を誤解している。jailbreakは対話でモデルを誘導して安全規則を回避させることであり、システムへの侵入や権限の窃取ではない。"
+      }
+    ]
+  },
+  "guardrails": {
+    "zh": [
+      {
+        "t": "加一個內容過濾器（filter）把不當字詞擋掉就好，其餘交給模型自己判斷。",
+        "ok": false,
+        "why": "只做單點過濾不夠：沒涵蓋輸入注入、輸出外洩與行為權限，等於把安全寄望在模型自律。"
+      },
+      {
+        "t": "只要選一個夠強、對齊得好的模型，靠它自律就不必額外外掛護欄。",
+        "ok": false,
+        "why": "過度信任模型：它本身不可靠、可被誘導，安全必須在它外面包一圈檢查，不能靠自律。"
+      },
+      {
+        "t": "在模型外圍包一圈檢查：輸入擋惡意與注入、遮 PII；輸出查有害內容、資料外洩與格式；行為做工具權限白名單、危險動作要人審；並按風險分級（高風險嚴守、低風險放行），全程記錄監控以便迭代。",
+        "ok": true,
+        "why": "完整涵蓋輸入、輸出、行為三關，並點出風險分級與監控的取捨，貼合重點。"
+      }
+    ],
+    "en": [
+      {
+        "t": "Just add a content filter to block inappropriate words, and leave the rest to the model's own judgment.",
+        "why": "A single filter point is not enough: it does not cover input injection, output leakage, or action permissions, which amounts to betting safety on the model policing itself."
+      },
+      {
+        "t": "As long as you pick a strong, well-aligned model, you can rely on its self-discipline and skip adding external guardrails.",
+        "why": "Over-trusting the model: it is inherently unreliable and can be manipulated, so safety must wrap a layer of checks around it rather than rely on self-discipline."
+      },
+      {
+        "t": "Wrap a layer of checks around the model: on input, block malicious content and injection and mask PII; on output, screen for harmful content, data leakage, and format; on behavior, use a tool-permission allowlist and require human review for dangerous actions; grade by risk (strict for high risk, pass through for low risk), and log and monitor throughout so you can iterate.",
+        "why": "Fully covers the three gates of input, output, and behavior, and calls out the trade-offs of risk grading and monitoring, matching the key points."
+      }
+    ],
+    "ja": [
+      {
+        "t": "不適切な単語をブロックするコンテンツフィルターを1つ追加するだけでよく、残りはモデル自身の判断に任せる。",
+        "why": "単一のフィルターだけでは不十分：入力のインジェクション、出力の情報漏洩、行動の権限をカバーしておらず、安全性をモデルの自律に賭けているようなものです。"
+      },
+      {
+        "t": "十分に強力でアラインメントの取れたモデルを1つ選びさえすれば、その自律に頼って追加のguardrailsは不要になる。",
+        "why": "モデルを過信しています：モデル自体は信頼できず誘導されうるため、安全性は自律に頼るのではなく、モデルの外側に検査の層を巻く必要があります。"
+      },
+      {
+        "t": "モデルの外側に検査の層を巻く：入力では悪意ある内容とインジェクションをブロックしPIIをマスクする、出力では有害な内容・情報漏洩・フォーマットをチェックする、行動ではツール権限のallowlistを設け危険な操作は人間がレビューする。さらにリスクで段階分けし（高リスクは厳格に、低リスクは通過させる）、反復改善できるよう全過程を記録・監視する。",
+        "why": "入力・出力・行動の3つの関門を完全にカバーし、リスク段階分けと監視のトレードオフにも触れており、要点に合致しています。"
       }
     ]
   },
@@ -945,6 +2402,53 @@ export const QUIZZES = {
       }
     ]
   },
+  "ai-limits": {
+    "zh": [
+      {
+        "t": "先劃清邊界：它強在模式與生成（寫作、翻譯、摘要、程式草稿、加速重複工作），弱在真確性、最新與冷門知識、責任與價值判斷；它是放大生產力的工具而非替代，需求釐清、架構取捨、正確性把關仍靠人，重點在人機分工。",
+        "ok": true,
+        "why": "同時講清強項、弱項並落在人機分工，完整貼合重點。"
+      },
+      {
+        "t": "它幾乎無所不能，很快就會全面取代工程師，該擔心的是自己何時被淘汰。",
+        "ok": false,
+        "why": "落入誇大的極端：忽略它在真確性與責任判斷上的弱點，也無視需求釐清、決策仍要人。"
+      },
+      {
+        "t": "它只是會胡言亂語的玩具，正經工作還是別用，交給人做比較實在。",
+        "ok": false,
+        "why": "走另一端過度貶低：無視它在生成與加速重複工作上的實質價值。"
+      }
+    ],
+    "en": [
+      {
+        "t": "Start by drawing the boundaries: it is strong at pattern work and generation (writing, translation, summarization, code drafts, speeding up repetitive work) and weak at factual accuracy, up-to-date and niche knowledge, and judgments of responsibility and value; it is a tool that amplifies productivity rather than a replacement, while clarifying requirements, architectural trade-offs, and correctness checks still rely on people, with the key being the division of labor between humans and machines.",
+        "why": "It clearly states both strengths and weaknesses and lands on the human-machine division of labor, fully matching the key points."
+      },
+      {
+        "t": "It can do almost anything and will soon fully replace engineers, so the thing to worry about is when you yourself will be phased out.",
+        "why": "Falls into the exaggerated extreme: it ignores the model's weaknesses in factual accuracy and judgments of responsibility, and overlooks that clarifying requirements and making decisions still need people."
+      },
+      {
+        "t": "It is just a toy that spouts nonsense, so you should not use it for serious work and are better off leaving that to people.",
+        "why": "Goes to the other extreme of over-dismissing it: ignoring its real value in generation and in speeding up repetitive work."
+      }
+    ],
+    "ja": [
+      {
+        "t": "まず境界を引く：モデルはパターンと生成（執筆、翻訳、要約、コードの下書き、繰り返し作業の高速化）に強く、事実の正確性、最新かつニッチな知識、責任と価値の判断に弱い。生産性を増幅するツールであって代替ではなく、要件の明確化、アーキテクチャの取捨選択、正確性のチェックは依然として人間に頼る。要点は人間と機械の役割分担にある。",
+        "why": "強みと弱みの両方を明確に述べ、人間と機械の役割分担に落とし込んでおり、要点に完全に合致しています。"
+      },
+      {
+        "t": "モデルはほぼ何でもでき、すぐにエンジニアを全面的に置き換えるので、心配すべきは自分がいつ淘汰されるかだ。",
+        "why": "誇張された極端に陥っています：事実の正確性と責任判断における弱点を無視し、要件の明確化や意思決定が依然として人間を必要とすることも見落としています。"
+      },
+      {
+        "t": "モデルはでたらめを並べるおもちゃにすぎず、まともな仕事には使わず人間に任せる方が確実だ。",
+        "why": "もう一方の極端で過小評価しています：生成と繰り返し作業の高速化における実質的な価値を無視しています。"
+      }
+    ]
+  },
   "can-llm-reason": {
     "zh": [
       {
@@ -989,6 +2493,288 @@ export const QUIZZES = {
       {
         "t": "間違えるということは、ただランダムに当てずっぽうをしているだけで、実用的な価値は何もないということだ。",
         "why": "もう一方の極端も誤りです：分布内(in-distribution)では驚くほどの性能を見せる強力なツールです。重要なのは境界を明確に引きツールで補うことであり、全面的に否定することではありません。"
+      }
+    ]
+  },
+  "design-doc-qa": {
+    "zh": [
+      {
+        "t": "接一套 RAG、再選個強一點的 LLM 就能上線，生成品質夠好答案自然就準。",
+        "ok": false,
+        "why": "重點放錯：難點在檢索品質、權限與可引用，找錯片段模型再強也答錯。"
+      },
+      {
+        "t": "定位成 RAG 問題、力氣放在檢索：解析（掃描檔先 OCR）→ 依結構切塊 → 向量化存庫 → 混合檢索加 rerank → 只依片段作答並附出處、查無就說「文件裡沒有」；再加權限過濾（做在 metadata 上）與可引用來源，並分開評估檢索與生成、用真實測試集回頭修切塊或檢索形成閉環。",
+        "ok": true,
+        "why": "涵蓋整條檢索管線加權限、可引用與分層評估閉環，完整命中重點。"
+      },
+      {
+        "t": "把所有內部文件整包塞進 prompt 讓 LLM 讀完再回答，就不必做檢索了。",
+        "ok": false,
+        "why": "過度簡化且不可行：context 塞不下又貴，還漏了權限過濾與出處引用。"
+      }
+    ],
+    "en": [
+      {
+        "t": "Hook up a RAG setup, pick a stronger LLM, and you can ship; once generation quality is good enough, the answers will naturally be accurate.",
+        "why": "The focus is misplaced: the hard parts are retrieval quality, permissions, and citability; if the wrong passages are retrieved, even a strong model answers wrong."
+      },
+      {
+        "t": "Frame it as a RAG problem and put the effort into retrieval: parse (OCR scanned files first) → chunk by structure → embed and store in a vector database → hybrid retrieval plus rerank → answer only from the passages with citations, and if nothing is found say \"it is not in the documents\"; then add permission filtering (done on metadata) and citable sources, evaluate retrieval and generation separately, and use a real test set to go back and fix chunking or retrieval, forming a closed loop.",
+        "why": "Covers the whole retrieval pipeline plus permissions, citability, and a layered evaluation closed loop, fully hitting the key points."
+      },
+      {
+        "t": "Cram all internal documents into the prompt in one bundle, let the LLM read everything and then answer, and you can skip retrieval.",
+        "why": "Oversimplified and unworkable: the context cannot hold it all and is expensive, and it also misses permission filtering and source citation."
+      }
+    ],
+    "ja": [
+      {
+        "t": "RAGを1セット接続し、もう少し強力なLLMを選べばリリースでき、生成品質が十分に良ければ答えは自然と正確になる。",
+        "why": "重点がずれています：難所は検索品質、権限、引用可能性にあり、間違ったチャンクを取ってくればモデルがどれだけ強力でも誤答します。"
+      },
+      {
+        "t": "RAGの問題として位置づけ、検索に力を注ぐ：解析（スキャン文書はまずOCR）→ 構造に沿ってチャンク分割 → ベクトル化してDBに保存 → ハイブリッド検索にrerankを追加 → チャンクのみに基づいて回答し出典を添え、見つからなければ「文書内にありません」と言う。さらに権限フィルタリング（metadata上で実施）と引用可能な出典を加え、検索と生成を分けて評価し、実際のテストセットで戻ってチャンク分割や検索を修正し、閉ループを形成する。",
+        "why": "検索パイプライン全体に加え、権限、引用可能性、階層的な評価の閉ループまでカバーしており、要点を完全に押さえています。"
+      },
+      {
+        "t": "すべての社内文書をまとめてpromptに詰め込み、LLMに全部読ませてから回答させれば、検索は不要になる。",
+        "why": "過度に単純化されており実行不可能です：contextに収まらず高コストな上、権限フィルタリングと出典の引用も抜けています。"
+      }
+    ]
+  },
+  "design-support-bot": {
+    "zh": [
+      {
+        "t": "直接接一個大模型聊天機器人，讓它自由回答所有客服問題就好。",
+        "ok": false,
+        "why": "過度簡化：缺了查訂單物流的工具、記憶、護欄與轉人工，還會自由發揮亂承諾。"
+      },
+      {
+        "t": "接個 RAG 查產品知識庫來回答退換貨政策，這樣就夠了。",
+        "ok": false,
+        "why": "只做 RAG 不夠：還要用工具查訂單物流、靠記憶認得用戶、加護欄並能轉人工。"
+      },
+      {
+        "t": "串成一條 pipeline：判斷意圖 → 需知識走 RAG 取政策片段、需即時資料用工具（以 MCP 接後端 API）→ 帶著記憶生成有依據的回答；加護欄（能承諾什麼寫死規則），信心低、情緒升高或涉及金額就轉真人；記憶分短長期並顧隱私，持續回收對話與負評案例迭代。",
+        "ok": true,
+        "why": "把 RAG、工具、記憶、護欄與轉人工串成一條 pipeline，完整貼合重點。"
+      }
+    ],
+    "en": [
+      {
+        "t": "Just plug in a large-model chatbot and let it freely answer all customer-service questions.",
+        "why": "Oversimplified: it lacks tools to look up orders and shipping, memory, guardrails, and handoff to a human, and it will improvise and make reckless promises."
+      },
+      {
+        "t": "Add a RAG that queries the product knowledge base to answer return and exchange policies, and that is enough.",
+        "why": "RAG alone is not enough: you also need tools to look up orders and shipping, memory to recognize the user, guardrails, and the ability to hand off to a human."
+      },
+      {
+        "t": "Chain it into a pipeline: detect intent → for knowledge needs go through RAG to fetch policy passages, for real-time data use tools (connecting to backend APIs via MCP) → generate grounded answers carrying memory; add guardrails (hard-code rules for what can be promised), and hand off to a human when confidence is low, emotions run high, or money is involved; split memory into short-term and long-term while protecting privacy, and continuously collect conversations and negative-review cases to iterate.",
+        "why": "Chains RAG, tools, memory, guardrails, and human handoff into one pipeline, fully matching the key points."
+      }
+    ],
+    "ja": [
+      {
+        "t": "大規模モデルのチャットボットを直接つなぎ、すべてのカスタマーサポートの質問に自由に答えさせるだけでよい。",
+        "why": "過度に単純化されています：注文や物流を照会するツール、記憶、guardrails、有人対応への引き継ぎが欠けており、しかも自由に振る舞って無責任な約束をしてしまいます。"
+      },
+      {
+        "t": "商品ナレッジベースを照会するRAGを接続して返品交換ポリシーに答えれば、それで十分だ。",
+        "why": "RAGだけでは不十分です：注文や物流を照会するツール、ユーザーを認識するための記憶、guardrailsの追加、有人対応への引き継ぎも必要です。"
+      },
+      {
+        "t": "1本のpipelineにつなぐ：意図を判断 → 知識が必要ならRAGでポリシーのチャンクを取得、リアルタイムのデータが必要ならツールを使う（MCPでバックエンドAPIに接続）→ 記憶を持たせて根拠のある回答を生成する。guardrailsを追加し（何を約束できるかはルールをハードコード）、信頼度が低い・感情が高ぶっている・金額が絡む場合は有人対応に引き継ぐ。記憶は短期と長期に分けてプライバシーに配慮し、会話と低評価のケースを継続的に回収して反復改善する。",
+        "why": "RAG、ツール、記憶、guardrails、有人対応への引き継ぎを1本のpipelineにつないでおり、要点に完全に合致しています。"
+      }
+    ]
+  },
+  "realtime-assistant": {
+    "zh": [
+      {
+        "t": "先點根本：模型知識有截止、預設不會主動連網，即時要靠工具或檢索把最新資料拉進來；流程是判斷是否需即時 → 用 function calling／API 或即時檢索取回 → 把結果（含時間戳與來源）放進 prompt 作答；並依資料變動速度設快取時效，處理逾時重試、查不到就誠實說沒有、權限與成本上限並監控成功率。",
+        "ok": true,
+        "why": "從根本原因到取回、快取取捨與失敗／權限處理整條串起，完整命中。"
+      },
+      {
+        "t": "接一個外部 API 讓模型隨時去呼叫，就能查到即時資料了。",
+        "ok": false,
+        "why": "只講接 API 不夠：漏了快取取捨、逾時重試、查不到的處理與權限成本控管。"
+      },
+      {
+        "t": "現在的大模型都能連網，直接問它最新資訊即可，不必特別設計。",
+        "ok": false,
+        "why": "過度誇大：模型知識有截止且預設不主動連網，即時能力得靠外部工具或檢索補進來。"
+      }
+    ],
+    "en": [
+      {
+        "t": "Start with the root cause: the model's knowledge has a cutoff and by default it does not go online on its own, so real-time needs rely on tools or retrieval to pull in the latest data; the flow is to decide whether real-time is needed → retrieve via function calling / API or live retrieval → put the results (with timestamps and sources) into the prompt to answer; and set cache lifetimes according to how fast the data changes, handle timeout retries, honestly say there is nothing when the lookup fails, apply permission and cost limits, and monitor the success rate.",
+        "why": "Chains it all together from the root cause through retrieval, cache trade-offs, and failure/permission handling, fully on point."
+      },
+      {
+        "t": "Connect an external API that the model can call at any time, and you will be able to look up real-time data.",
+        "why": "Just connecting an API is not enough: it misses cache trade-offs, timeout retries, handling of failed lookups, and permission and cost control."
+      },
+      {
+        "t": "Today's large models can all go online, so you can just ask them for the latest information and do not need any special design.",
+        "why": "Overblown: the model's knowledge has a cutoff and by default it does not go online on its own, so real-time capability must be supplied through external tools or retrieval."
+      }
+    ],
+    "ja": [
+      {
+        "t": "まず根本を突く：モデルの知識には締め切りがあり、デフォルトでは自らネットに接続しないため、リアルタイム性はツールや検索で最新データを引き込むことに頼る。流れは、リアルタイムが必要か判断 → function callingやAPI、あるいはライブ検索で取得 → 結果（タイムスタンプと出典を含む）をpromptに入れて回答する。さらにデータの変化速度に応じてキャッシュの有効期限を設定し、タイムアウト時の再試行を処理し、見つからなければ正直にないと言い、権限とコストの上限を設けて成功率を監視する。",
+        "why": "根本原因から取得、キャッシュのトレードオフ、失敗・権限の処理まで一連につないでおり、完全に的を射ています。"
+      },
+      {
+        "t": "外部APIを1つ接続してモデルがいつでも呼び出せるようにすれば、リアルタイムのデータを取得できる。",
+        "why": "APIを接続するだけでは不十分です：キャッシュのトレードオフ、タイムアウト時の再試行、見つからない場合の処理、権限とコストの管理が抜けています。"
+      },
+      {
+        "t": "今の大規模モデルはどれもネットに接続できるので、直接最新情報を尋ねればよく、特別な設計は不要だ。",
+        "why": "過度な誇張です：モデルの知識には締め切りがあり、デフォルトでは自らネットに接続しないため、リアルタイム能力は外部ツールや検索で補う必要があります。"
+      }
+    ]
+  },
+  "design-cost": {
+    "zh": [
+      {
+        "t": "直接把全部請求改用最便宜的小模型，成本自然就壓到最低。",
+        "ok": false,
+        "why": "省過頭的假省：把難題交給小模型會答錯，導致重試、客訴、轉人工反而更貴。"
+      },
+      {
+        "t": "先算成本來源（token 量 × 呼叫次數 × 單價，輸入 context 常是大頭）找出大頭；再模型分流（簡單任務用小模型、難的才升級，用輕量分流器）、砍 token 與快取（精簡 context、用 RAG 取代長 context、prompt caching、批次拿折扣）、設每請求或每用戶上限，但邊省邊盯品質指標。",
+        "ok": true,
+        "why": "從成本結構到分流、砍 token、快取與成本 vs 品質的取捨，完整命中。"
+      },
+      {
+        "t": "把模型換成更便宜的一款就好，成本主要就是看你選哪個模型。",
+        "ok": false,
+        "why": "太粗：成本是 token 量乘上呼叫次數，還要靠模型分流、精簡 context 與快取多管齊下。"
+      }
+    ],
+    "en": [
+      {
+        "t": "Just switch all requests to the cheapest small model, and the cost will naturally be driven to the minimum.",
+        "why": "A false economy that cuts too far: handing hard problems to a small model produces wrong answers, leading to retries, complaints, and human handoff that end up more expensive."
+      },
+      {
+        "t": "First compute where cost comes from (token volume × number of calls × unit price, where the input context is often the biggest chunk) to find the biggest driver; then route across models (small model for simple tasks, upgrade only for hard ones, using a lightweight router), cut tokens and cache (trim the context, use RAG instead of a long context, prompt caching, batch for discounts), set per-request or per-user limits, and watch quality metrics while you save.",
+        "why": "From cost structure to routing, token cutting, caching, and the cost versus quality trade-off, fully on point."
+      },
+      {
+        "t": "Just swap in a cheaper model; cost is mainly about which model you pick.",
+        "why": "Too crude: cost is token volume times number of calls, and it also takes model routing, trimming the context, and caching working together."
+      }
+    ],
+    "ja": [
+      {
+        "t": "全リクエストを最も安い小型モデルに切り替えれば、コストは自然と最小まで抑えられる。",
+        "why": "節約しすぎのまやかしの節約です：難題を小型モデルに任せると誤答し、再試行、クレーム、有人対応を招いてかえって高くつきます。"
+      },
+      {
+        "t": "まずコストの発生源（token量 × 呼び出し回数 × 単価、入力contextが大部分を占めることが多い）を計算して大きな要因を特定する。次にモデルを振り分け（簡単なタスクは小型モデル、難しいものだけ格上げ、軽量なルーターを使う）、tokenを削りキャッシュする（contextを簡素化、長いcontextをRAGで置き換え、prompt caching、バッチ処理で割引を得る）、リクエストごとやユーザーごとの上限を設定し、節約しながら品質指標を見張る。",
+        "why": "コスト構造からモデルの振り分け、token削減、キャッシュ、コスト対品質のトレードオフまで、完全に的を射ています。"
+      },
+      {
+        "t": "モデルをより安い1つに替えるだけでよく、コストは主にどのモデルを選ぶかで決まる。",
+        "why": "大雑把すぎます：コストはtoken量に呼び出し回数を掛けたものであり、モデルの振り分け、contextの簡素化、キャッシュを組み合わせる必要もあります。"
+      }
+    ]
+  },
+  "design-eval-improve": {
+    "zh": [
+      {
+        "t": "上線後看使用者滿不滿意就好，滿意度高就代表 AI 做得好。",
+        "ok": false,
+        "why": "太片面：缺離線固定測試集防回歸，也沒有把失敗案例變成改進的閉環。"
+      },
+      {
+        "t": "跑出一個準確率數字達標，就代表 AI 做得好，不必再看別的。",
+        "ok": false,
+        "why": "生成任務沒有唯一正解，單一準確率脫離產品目標，也漏了線上真實回饋。"
+      },
+      {
+        "t": "離線加線上兩條腿：離線用固定測試集每次改動都跑防回歸，線上做 A/B 與使用者回饋；指標貼齊產品目標（客服看解決率、問答看引用正確率與拒答是否得當），開放輸出用 LLM-as-judge 但先以人工標註校準；再把失敗案例回收 → 歸類 → 補進測試集 → 針對性修 → 回歸驗證，形成閉環。",
+        "ok": true,
+        "why": "涵蓋離線／線上兩條腿、指標對齊、LLM-judge 校準與失敗閉環，完整命中。"
+      }
+    ],
+    "en": [
+      {
+        "t": "After launch, just look at whether users are satisfied; high satisfaction means the AI is doing well.",
+        "why": "Too one-sided: it lacks an offline fixed test set to guard against regressions and does not turn failure cases into a closed loop of improvement."
+      },
+      {
+        "t": "Once you produce an accuracy number that hits the target, the AI is doing well and there is no need to look at anything else.",
+        "why": "Generation tasks have no single correct answer, a single accuracy figure is detached from the product goal, and it also misses real online feedback."
+      },
+      {
+        "t": "Stand on two legs, offline and online: offline, run a fixed test set on every change to guard against regressions; online, do A/B tests and gather user feedback; align metrics with the product goal (for customer service look at resolution rate, for QA look at citation accuracy and whether refusals are appropriate), and for open-ended output use LLM-as-judge but calibrate it first with human annotation; then collect failure cases → categorize → add to the test set → fix in a targeted way → validate against regressions, forming a closed loop.",
+        "why": "Covers both legs of offline and online, metric alignment, LLM-as-judge calibration, and the failure closed loop, fully on point."
+      }
+    ],
+    "ja": [
+      {
+        "t": "リリース後はユーザーが満足しているかを見ればよく、満足度が高ければAIがうまくやっている証拠だ。",
+        "why": "一面的すぎます：回帰を防ぐオフラインの固定テストセットが欠けており、失敗ケースを改善の閉ループに変えることもしていません。"
+      },
+      {
+        "t": "目標を達成する正解率の数字を1つ出せば、AIがうまくやっている証拠であり、他を見る必要はない。",
+        "why": "生成タスクには唯一の正解がなく、単一の正解率は製品目標から乖離しており、オンラインでの実際のフィードバックも抜けています。"
+      },
+      {
+        "t": "オフラインとオンラインの2本足で立つ：オフラインでは固定テストセットを変更のたびに走らせて回帰を防ぎ、オンラインではA/Bテストとユーザーフィードバックを行う。指標は製品目標に合わせ（カスタマーサポートは解決率、Q&Aは引用の正確率と拒否が適切かを見る）、オープンな出力にはLLM-as-judgeを使うが、まず人手のアノテーションで校正する。さらに失敗ケースを回収 → 分類 → テストセットに追加 → 的を絞って修正 → 回帰検証し、閉ループを形成する。",
+        "why": "オフラインとオンラインの2本足、指標の整合、LLM-as-judgeの校正、失敗の閉ループをカバーしており、完全に的を射ています。"
+      }
+    ]
+  },
+  "monitoring": {
+    "zh": [
+      {
+        "t": "重點是監控品質不只可用性：系統面（延遲、錯誤率、成本、用量）、品質面（任務成功率、幻覺／拒答率、讚踩與重問率）、安全面（注入／越獄、異常行為）；線上無標準答案就偵測「變化」（趨勢與分佈對照上線基線、定期抽樣打分、異常告警），出事則告警 → 定位環節 → 回滾或灰度止血 → 復盤並回灌測試集。",
+        "ok": true,
+        "why": "涵蓋沉默品質下降的風險、三面監控指標與偵測退化加止血閉環，完整命中。"
+      },
+      {
+        "t": "看系統有沒有報錯、服務有沒有掛掉就好，沒 crash 就代表一切正常。",
+        "ok": false,
+        "why": "漏掉最大風險：沉默的品質下降沒有 crash，卻答得越來越差，得監控品質而非只看可用性。"
+      },
+      {
+        "t": "只要盯著使用者的負評，有人抱怨了再去處理就行。",
+        "ok": false,
+        "why": "太被動片面：缺系統與安全面監控、缺對照基線的變化偵測，也沒有止血與回灌的閉環。"
+      }
+    ],
+    "en": [
+      {
+        "t": "The point is to monitor quality, not just availability: the system side (latency, error rate, cost, usage), the quality side (task success rate, hallucination/refusal rate, thumbs up/down and re-ask rate), and the safety side (injection/jailbreak, anomalous behavior); with no ground truth online, detect \"changes\" (compare trends and distributions against the launch baseline, sample and score periodically, alert on anomalies), and when something goes wrong: alert → locate the stage → roll back or use a canary release to stop the bleeding → do a post-mortem and feed cases back into the test set.",
+        "why": "Covers the risk of silent quality decline, the three sides of monitoring metrics, and the detect-degradation-plus-stop-the-bleeding closed loop, fully on point."
+      },
+      {
+        "t": "Just look at whether the system throws errors and whether the service goes down; no crash means everything is fine.",
+        "why": "Misses the biggest risk: silent quality decline has no crash yet answers get worse and worse, so you must monitor quality rather than only availability."
+      },
+      {
+        "t": "Just keep an eye on users' negative reviews and deal with it once someone complains.",
+        "why": "Too passive and one-sided: it lacks system-side and safety-side monitoring, lacks change detection against a baseline, and has no stop-the-bleeding and feedback closed loop."
+      }
+    ],
+    "ja": [
+      {
+        "t": "重要なのは可用性だけでなく品質を監視すること：システム面（レイテンシ、エラー率、コスト、利用量）、品質面（タスク成功率、hallucination/拒否率、高評価・低評価と再質問率）、安全面（インジェクション/jailbreak、異常な振る舞い）。オンラインでは正解がないので「変化」を検知する（トレンドと分布をリリース時のベースラインと照合、定期的にサンプリングして採点、異常をアラート）。問題が起きたらアラート → 箇所を特定 → ロールバックまたはカナリアリリースで止血 → 振り返って事例をテストセットに還流する。",
+        "why": "静かな品質低下のリスク、3つの面の監視指標、劣化検知と止血の閉ループをカバーしており、完全に的を射ています。"
+      },
+      {
+        "t": "システムがエラーを出していないか、サービスが落ちていないかを見ればよく、crashがなければすべて正常という証拠だ。",
+        "why": "最大のリスクを見落としています：静かな品質低下はcrashを起こさないのに回答がどんどん悪化するため、可用性だけを見るのではなく品質を監視する必要があります。"
+      },
+      {
+        "t": "ユーザーの低評価を見張り、誰かが不満を言ったら対処すればよい。",
+        "why": "受動的で一面的すぎます：システム面と安全面の監視が欠け、ベースラインと照合する変化検知が欠け、止血と還流の閉ループもありません。"
       }
     ]
   }
