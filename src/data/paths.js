@@ -294,11 +294,11 @@ export const PATHS = [
     },
     phases: [
       { t: { zh: '什麼叫做得好', en: 'What good looks like', ja: '良いとは何か' },
-        steps: [{ k: 'course', ref: 'evaluation' }, { k: 'iv', ref: 'trust-answer' }, { k: 'iv', ref: 'prompt-eval' }] },
+        steps: [{ k: 'course', ref: 'evaluation' }, { k: 'iv', ref: 'trust-answer' }, { k: 'iv', ref: 'prompt-eval' }, { k: 'iv', ref: 'eval-benchmark' }, { k: 'iv', ref: 'eval-llm-judge' }, { k: 'iv', ref: 'eval-set' }] },
       { t: { zh: '在方案之間選', en: 'Choosing between options', ja: '選択肢から選ぶ' },
         steps: [{ k: 'iv', ref: 'prompt-vs-tune-vs-rag' }, { k: 'iv', ref: 'finetune-vs-rag' }, { k: 'iv', ref: 'agent-vs-workflow' }, { k: 'iv', ref: 'design-build-vs-buy' }] },
       { t: { zh: '量化與改進', en: 'Measure and improve', ja: '計測して改善' },
-        steps: [{ k: 'iv', ref: 'agent-eval' }, { k: 'iv', ref: 'design-eval-improve' }, { k: 'iv', ref: 'monitoring' }] },
+        steps: [{ k: 'iv', ref: 'agent-eval' }, { k: 'iv', ref: 'design-eval-improve' }, { k: 'iv', ref: 'monitoring' }, { k: 'iv', ref: 'eval-offline-online' }, { k: 'iv', ref: 'eval-regression' }] },
       { t: { zh: '判斷力的底線', en: 'The judgment floor', ja: '判断の下限' },
         steps: [{ k: 'course', ref: 'limits' }, { k: 'iv', ref: 'ai-limits' }, { k: 'iv', ref: 'can-llm-reason' }] },
     ],

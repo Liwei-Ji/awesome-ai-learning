@@ -1052,6 +1052,35 @@ export const PRACTICE = {
     }
   },
   "integration": {
+    "decision": {
+      "zh": {
+        "q": "你的應用該用哪種架構？",
+        "rows": [
+          { "when": "單一問題、靠模型內建知識就能答", "use": "直接呼叫 LLM", "why": "最簡單，一次 prompt 就好" },
+          { "when": "要根據你自己、會變動的資料回答", "use": "RAG", "why": "先檢索再回答，不用重訓、可更新" },
+          { "when": "多步、但步驟固定可預先寫死", "use": "Workflow", "why": "每步可控、好測試、好除錯" },
+          { "when": "目標開放、需要自己決定步驟與用工具", "use": "Agent", "why": "最靈活，但最難預測、最貴，最後才考慮" }
+        ]
+      },
+      "en": {
+        "q": "Which architecture fits your use case?",
+        "rows": [
+          { "when": "A one-shot question the model already knows", "use": "Direct LLM call", "why": "Simplest, a single prompt" },
+          { "when": "Answer from your own, changing data", "use": "RAG", "why": "Retrieve then answer, no retraining, stays updatable" },
+          { "when": "Multi-step but the steps are fixed", "use": "Workflow", "why": "Each step is controllable, testable, and debuggable" },
+          { "when": "Open-ended goal, it decides its own steps and tools", "use": "Agent", "why": "Most flexible, but least predictable and priciest, so consider it last" }
+        ]
+      },
+      "ja": {
+        "q": "あなたのアプリはどの構成が合う？",
+        "rows": [
+          { "when": "単発の質問でモデルの知識で足りる", "use": "LLM を直接呼ぶ", "why": "最も単純、プロンプト一回" },
+          { "when": "自分の変わるデータに基づいて答える", "use": "RAG", "why": "検索してから回答、再学習不要で更新できる" },
+          { "when": "多段だが手順は固定", "use": "ワークフロー", "why": "各ステップが制御・テスト・デバッグしやすい" },
+          { "when": "目標が開放的で手順やツールを自分で決める", "use": "エージェント", "why": "最も柔軟だが予測しにくく高価、最後の選択肢" }
+        ]
+      }
+    },
     "practical": {
       "zh": [
         "<b>先跑通再優化</b>：別一開始就追求完美架構。先用最陽春的版本把整條管線接通、能出結果，再回頭找真正的瓶頸下手。",
@@ -1096,6 +1125,35 @@ export const PRACTICE = {
     }
   },
   "evaluation": {
+    "decision": {
+      "zh": {
+        "q": "要判斷 AI 好不好，用哪種評估？",
+        "rows": [
+          { "when": "主觀品質、量不大、要最貼近真實感受", "use": "人工評估", "why": "最準，但慢又貴、難規模化" },
+          { "when": "量大、要快、可接受近似", "use": "LLM 當評審", "why": "便宜可規模化，但評審本身也會偏，要校準" },
+          { "when": "想和其他模型或版本比高低", "use": "Benchmark 標準測驗", "why": "可比較、可追蹤，但分數不等於你任務的表現" },
+          { "when": "上線後看真實使用者反應", "use": "A/B 測試與線上指標", "why": "最真實，但要有流量、要等、要能歸因" }
+        ]
+      },
+      "en": {
+        "q": "How should you evaluate whether the AI is good?",
+        "rows": [
+          { "when": "Subjective quality, small volume, closest to real perception", "use": "Human evaluation", "why": "Most faithful, but slow, costly, and hard to scale" },
+          { "when": "High volume, fast, approximate is fine", "use": "LLM-as-judge", "why": "Cheap and scalable, but the judge is biased too, so calibrate it" },
+          { "when": "Comparing models or versions", "use": "Benchmarks", "why": "Comparable and trackable, but a score is not your task's performance" },
+          { "when": "Real users after launch", "use": "A/B tests and live metrics", "why": "Most real, but needs traffic, time, and attribution" }
+        ]
+      },
+      "ja": {
+        "q": "AI の良し悪しは、どの評価方法で判断する？",
+        "rows": [
+          { "when": "主観的な品質・少量・実感に最も近く", "use": "人手評価", "why": "最も忠実だが、遅く高価で規模化しにくい" },
+          { "when": "大量・高速・近似で可", "use": "LLM を評価者に", "why": "安く規模化できるが、評価者自身も偏るので校正が必要" },
+          { "when": "モデルや版を比較したい", "use": "ベンチマーク", "why": "比較・追跡できるが、スコアは自分のタスクの性能とは限らない" },
+          { "when": "公開後の実ユーザー反応", "use": "A/B テストと本番指標", "why": "最も実態に近いが、トラフィック・時間・要因特定が要る" }
+        ]
+      }
+    },
     "practical": {
       "zh": [
         "<b>先定「什麼叫好」再開測</b>：沒有明確標準，評估只會變成各說各話。動手前先寫下這個任務要的是正確、切題、格式對，還是不能幻覺。",

@@ -5,6 +5,91 @@
    quizFor 合併：ok 取 zh、文字取該語言（缺則回退 zh）。新增題目改這裡即可。
    ============================================================ */
 export const QUIZZES = {
+  "eval-benchmark": {
+    "en": [
+      { "t": "The higher a model's benchmark score, the better it will perform on any task you give it.", "why": "Strong at math does not mean strong at your customer-service tone; the total score also hides the subcategory you care about." },
+      { "t": "The score is only a first-pass filter: there may be question-set leakage or task mismatch, so the final call should use a blind test on your own real cases.", "why": "A benchmark measures that particular set, not necessarily your scenario, and popular question sets have often already leaked into training." },
+      { "t": "How high the score is comes down mainly to the model's parameter count and has little to do with the question set's content.", "why": "Models of the same size can still score very differently; what matters is whether the question set leaked and whether it fits your task." }
+    ],
+    "ja": [
+      { "t": "benchmark スコアが高いモデルほど、どんなタスクでも良い成績を出す。", "why": "数学が得意でも、あなたのカスタマーサポートの語り口が得意とは限らない；総合スコアはあなたが気にするサブカテゴリも覆い隠す。" },
+      { "t": "スコアは一次スクリーニングにすぎない：問題集の漏洩やタスク不一致があり得るので、最終的には自分の実ケースでブラインドテストをする。", "why": "benchmark が測るのはその問題集であって、必ずしもあなたのシナリオではなく、人気の問題集は訓練データにすでに漏れていることも多い。" },
+      { "t": "スコアの高低は主にモデルのパラメータ数で決まり、問題集の内容とはあまり関係ない。", "why": "同じサイズのモデルでもスコアは大きく異なることがあり、鍵となるのは問題集が漏洩しているか、あなたのタスクに合っているかだ。" }
+    ],
+    "zh": [
+      { "t": "跑分越高的模型，拿到任何任務上都會表現越好。", "ok": false, "why": "強在數學不代表強在你的客服語氣；總分也會掩蓋你在意的子類。" },
+      { "t": "分數只是初篩：可能有題庫洩漏或任務不合，最終要用你自己的真實案例盲測。", "ok": true, "why": "benchmark 測的是那套題，未必是你的場景，熱門題庫還常已洩漏進訓練。" },
+      { "t": "分數高低主要由模型參數量決定，跟題庫內容關係不大。", "ok": false, "why": "同樣大小的模型分數也能差很多，關鍵在題庫是否洩漏、是否貼合你的任務。" }
+    ]
+  },
+  "eval-llm-judge": {
+    "en": [
+      { "t": "Yes, but you must calibrate: the judge has biases such as favoring length and position, so first align it with human annotations and spot-check key decisions afterward.", "why": "An LLM judge is fast and scalable, but it has its own biases, so it is only trustworthy once calibrated." },
+      { "t": "An LLM judge has no stance, so the scores it produces are objective and neutral.", "why": "It favors long answers, favors the option that appears first, and favors its own style, so it is not neutral." },
+      { "t": "Letting a model judge its own output is the most accurate, because it understands its own intent best.", "why": "A model often goes easy on its own output, so self-evaluation actually skews high." }
+    ],
+    "ja": [
+      { "t": "できる、ただし較正が必要：評価者には長さや位置などへの偏りがあるので、まず人手のアノテーションと整合させ、重要な判断は抽出チェックする。", "why": "LLM 評価者は速くスケールもするが、自身に偏りがあるので、較正して初めて信頼できる。" },
+      { "t": "LLM 評価者には立場がないので、出すスコアは客観的で中立だ。", "why": "長い回答を好み、先に出てくる選択肢を好み、自分と同じスタイルを好むので、中立ではない。" },
+      { "t": "モデルに自分の出力を評価させるのが最も正確だ、自分の意図を一番よく分かっているから。", "why": "モデルは自分の出力に甘くなりがちで、自己評価はむしろ高めに偏る。" }
+    ],
+    "zh": [
+      { "t": "可以，但要校準：評審有偏長、偏位置等偏誤，先和人工標註對齊、關鍵決策再抽樣複核。", "ok": true, "why": "LLM 評審快又可規模化，但自身有偏誤，校準過才可信。" },
+      { "t": "LLM 評審沒有立場，打出來的分數是客觀中立的。", "ok": false, "why": "它會偏長答案、偏先出現的選項、偏自家風格，並不中立。" },
+      { "t": "讓模型評自己的輸出最準，因為它最懂自己的意圖。", "ok": false, "why": "模型對自己的輸出常手軟，自評反而偏高。" }
+    ]
+  },
+  "eval-set": {
+    "en": [
+      { "t": "Using a public benchmark as your own eval set is the most convenient and the most standardized.", "why": "A public question set may already have leaked into training and may not fit your task, giving inflated scores." },
+      { "t": "Just grab a few questions and test; as long as the general direction is right, there is no need to design it deliberately.", "why": "The sample is too small so the conclusions are unstable, and you also cannot see the weaknesses across different subcategories." },
+      { "t": "It should represent the real distribution, have a correct answer or rubric for each question, and be separated from the training data to prevent leakage.", "why": "Coverage, a standard, and cleanliness: only when all three are in place can you measure accurately." }
+    ],
+    "ja": [
+      { "t": "公開の benchmark を自分の評価用問題集にするのが、最も手間がかからず標準的だ。", "why": "公開の問題集は訓練データにすでに漏れている可能性があり、あなたのタスクにも合わず、スコアが水増しになる。" },
+      { "t": "適当に数問取ってテストすればよく、大まかな方向が合っていればいい、わざわざ設計する必要はない。", "why": "サンプルが少なすぎて結論が不安定になり、異なるサブカテゴリの弱点も見えない。" },
+      { "t": "実際の分布を代表し、各問に正解か基準があり、訓練データと分離して漏洩を防げるものであるべき。", "why": "カバレッジ、基準がある、クリーン、この3つがそろって初めて正確に測れる。" }
+    ],
+    "zh": [
+      { "t": "拿公開 benchmark 當自己的評估題庫最省事又標準。", "ok": false, "why": "公開題庫可能已洩漏進訓練、又不貼合你的任務，虛高。" },
+      { "t": "隨手抓幾題測一下，大方向對就行，不用刻意設計。", "ok": false, "why": "樣本太小結論不穩，也看不出不同子類的弱點。" },
+      { "t": "要能代表真實分佈、每題有正解或準則、且與訓練資料分離防洩漏。", "ok": true, "why": "覆蓋、有標準、乾淨，三者到位才量得準。" }
+    ]
+  },
+  "eval-offline-online": {
+    "en": [
+      { "t": "Testing with the offline question set is enough; online A/B is too much hassle and can be skipped.", "why": "There is a gap between the question set and real usage, so offline testing alone will miss real-world problems." },
+      { "t": "The two are complementary: first the offline question set blocks regressions, then a small-traffic A/B looks at real metrics and guardrail metrics.", "why": "Offline is fast and safe but distorted, online is real but slow; chaining them together is what makes it solid." },
+      { "t": "In A/B, as long as the primary metric wins you can roll out to everyone, and latency and cost do not matter.", "why": "Without guardrail metrics, the primary metric may win while cost or complaints surge." }
+    ],
+    "ja": [
+      { "t": "オフラインの問題集でテストすれば十分で、オンライン A/B は面倒なので省略できる。", "why": "問題集と実際の利用にはギャップがあるので、オフラインテストだけでは現実世界の問題を見落とす。" },
+      { "t": "両者は補完し合う：まずオフラインの問題集で回帰を止め、次に小トラフィックの A/B で実指標とガードレール指標を見る。", "why": "オフラインは速く安全だが実態とずれ、オンラインは現実的だが遅い；つなげて初めて安定する。" },
+      { "t": "A/B では主要指標さえ勝てば全量展開でき、レイテンシとコストは気にしなくていい。", "why": "ガードレール指標がなければ、主要指標が勝ってもコストやクレームが急増しかねない。" }
+    ],
+    "zh": [
+      { "t": "離線題庫測過就夠了，線上 A/B 太麻煩可以省略。", "ok": false, "why": "題庫和真實使用有落差，只離線測會漏掉真實世界的問題。" },
+      { "t": "兩者互補：先離線題庫擋回歸，再小流量 A/B 看真實指標與護欄指標。", "ok": true, "why": "離線快又安全但失真，線上真實但慢，串起來才穩。" },
+      { "t": "A/B 只要主要指標贏了就能全量，延遲和成本不用管。", "ok": false, "why": "沒有護欄指標，可能主要指標贏了卻讓成本或投訴暴增。" }
+    ]
+  },
+  "eval-regression": {
+    "en": [
+      { "t": "As long as you test the new features, there is no need to go back and test the old cases that used to work.", "why": "Changes are global, so a new feature getting better may quietly cause old cases to regress." },
+      { "t": "As long as a vendor's model keeps the same name, its behavior will not change, so there is no need to retest.", "why": "A model with the same name can still be quietly updated and drift in behavior, so rerun the regression set regularly." },
+      { "t": "Store what used to work plus errors you have fixed as a fixed regression set, and on every change automatically rerun and compare.", "why": "Only with a fixed regression set can you see \"whether what used to work has gotten worse.\"" }
+    ],
+    "ja": [
+      { "t": "新機能さえテストすればよく、これまでできていた古いケースを振り返ってテストする必要はない。", "why": "変更は全域的なので、新機能が良くなっても古いケースが密かに後退することがある。" },
+      { "t": "ベンダーのモデルは名前さえ変わらなければ挙動も変わらないので、再テストは不要だ。", "why": "同名のモデルでも密かに更新され、挙動がドリフトすることがあるので、定期的に回帰を再実行する。" },
+      { "t": "これまでできていたこと＋修正した誤りを固定の回帰用問題集として保存し、変更のたびに自動で再実行して比較する。", "why": "固定の回帰用問題集があって初めて「これまでできていたことが悪化していないか」が見える。" }
+    ],
+    "zh": [
+      { "t": "只要新功能測過就好，原本會的舊案例不用回頭測。", "ok": false, "why": "改動是全域的，新功能變好卻可能讓舊案例默默退步。" },
+      { "t": "供應商模型只要名字沒變，行為就不會變，不必重測。", "ok": false, "why": "同名模型也會悄悄更新、行為漂移，要定期重跑回歸。" },
+      { "t": "把原本會的＋修過的錯存成固定回歸題庫，每次改動自動重跑比對。", "ok": true, "why": "有固定回歸題庫才看得到「原本會的有沒有變爛」。" }
+    ]
+  },
   "tokenizer-why": {
     "zh": [
       {

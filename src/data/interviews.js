@@ -19,6 +19,7 @@ export const IV_CATS = [
   { key: 'generative', t: '生成與多模態' },
   { key: 'literacy', t: 'AI 素養與風險' },
   { key: 'design', t: '系統設計' },
+  { key: 'eval', t: '評估與決策' },
 ];
 
 const CAT_TR = {
@@ -26,17 +27,157 @@ const CAT_TR = {
     principle: 'Principles & Mechanisms', training: 'Training & Fine-tuning',
     inference: 'Inference & Deployment', prompting: 'Prompting & Reasoning', retrieval: 'Retrieval & Knowledge',
     agent: 'Agents & Engineering', generative: 'Generative & Multimodal',
-    literacy: 'AI Literacy & Risk', design: 'System Design',
+    literacy: 'AI Literacy & Risk', design: 'System Design', eval: 'Evaluation & Decisions',
   },
   ja: {
     principle: '原理と仕組み', training: '学習とファインチューニング',
     inference: '推論とデプロイ', prompting: 'プロンプトと推論', retrieval: '検索と知識',
     agent: 'エージェントと工学', generative: '生成とマルチモーダル',
-    literacy: 'AI リテラシーとリスク', design: 'システム設計',
+    literacy: 'AI リテラシーとリスク', design: 'システム設計', eval: '評価と意思決定',
   },
 };
 
 export const INTERVIEWS = {
+  "eval-benchmark": {
+    cat: "eval",
+    label: "Benchmark 分數能信多少？",
+    q: "看到某模型 benchmark 分數很高，能不能就相信它比較強？",
+    trap: "別把「跑分高」直接等於「在你的任務上好用」。要看：測的是不是你的場景、題目有沒有洩漏進訓練、單一分數藏了什麼。",
+    points: [
+      { icon: "atom", title: "拆解問題", desc: "<b>Benchmark</b> 是一套固定題庫（MMLU、GSM8K…）替模型打分，讓不同模型能<b>公平比較、追蹤進步</b>。但它測的是「這套題」，不一定是你的場景。" },
+      { icon: "scale", title: "三個陷阱", desc: "① <b>資料洩漏</b>：熱門題庫混進訓練資料，等於考前看過考卷；② <b>任務不合</b>：它強在數學，不代表強在你的客服語氣；③ <b>平均掩蓋</b>：總分高，但你在意的子類很差。" },
+      { icon: "network", title: "正確用法", desc: "把 benchmark 當<b>初篩</b>就好；最終決策用你自己的一小批真實案例<b>盲測</b>，只看你在意的指標與子類，不是總分。" },
+    ],
+    core: [
+      { h: "先點根本", d: "Benchmark ＝標準化考卷，讓模型能被<b>公平比較、追蹤進步</b>；但它測的是那套題，不是你的任務。" },
+      { h: "三個陷阱", d: "<b>洩漏</b>（題庫進了訓練資料）、<b>任務不合</b>（強項不是你要的）、<b>平均掩蓋</b>（總分高、你的子類低）。" },
+      { h: "正確用法", d: "當<b>初篩</b>；最終決策用你自己的真實案例盲測，看你在意的子類與指標，而非單一總分。" },
+      { h: "別忘了", d: "分數會被「追上」也會被「刷」；看排行榜要看<b>方法與日期</b>，別只看名次。" },
+    ],
+    plus: [
+      "排行榜（如 Chatbot Arena）用人類盲測配對，較難刷，但仍有樣本偏差。",
+      "同一 benchmark 換 prompt 或設定，分數差很多；比較時要對齊條件。",
+      "留意「訓練截止日晚於題庫發布」時的洩漏風險。",
+    ],
+    traps: [
+      "只看總分就換模型，忽略你在意的子類表現。",
+      "把公開題庫當自己的驗收標準（可能已洩漏、又不貼合你的任務）。",
+      "拿不同評測設定的分數硬比高低。",
+    ],
+    related: ["evaluation", "model-size", "data"],
+  },
+  "eval-llm-judge": {
+    cat: "eval",
+    label: "用 AI 評 AI 可靠嗎？",
+    q: "想用一個大模型自動替另一個模型的輸出打分，這靠譜嗎？",
+    trap: "LLM 當評審省時省錢、可規模化，但評審自己也有偏誤，別把它的分數當客觀真理。",
+    points: [
+      { icon: "atom", title: "拆解問題", desc: "<b>LLM-as-judge</b> ＝讓一個強模型照你給的準則替輸出打分或兩兩比較。好處是<b>快、便宜、可大量跑</b>，適合初篩與回歸測試。" },
+      { icon: "scale", title: "已知偏誤", desc: "評審會<b>偏長答案、偏位置</b>（先出現的選項）、<b>偏自家風格</b>，還常對<b>自己的輸出手軟</b>；準則越模糊，分數越不穩。" },
+      { icon: "network", title: "怎麼校準", desc: "給清楚準則與範例、<b>兩兩比較</b>勝過打絕對分、<b>隨機化位置</b>、先用人工標註確認評審和人一致再放大、關鍵決策仍抽樣人工複核。" },
+    ],
+    core: [
+      { h: "先點根本", d: "LLM-as-judge 就是拿模型當評分員，換取<b>速度與規模</b>；適合初篩與回歸，不適合當唯一裁判。" },
+      { h: "已知偏誤", d: "偏長、偏位置、偏風格、對自己手軟；準則越模糊越不穩。" },
+      { h: "怎麼校準", d: "先給一批有人工答案的題，確認評審打分和人<b>一致</b>，再大量評；改成<b>兩兩比較</b>通常更穩。" },
+      { h: "別忘了", d: "<b>位置隨機化</b>、附評分理由方便抽查、重要決策仍要人工複核；評審模型換版本，分數會漂移。" },
+    ],
+    plus: [
+      "兩兩比較（A vs B 哪個好）通常比打 1-10 絕對分更穩定。",
+      "用多個評審投票、或不同家模型當評審，降低單一偏誤。",
+      "評審本身也要花錢花時間，大規模時就是一筆成本。",
+    ],
+    traps: [
+      "直接相信 LLM 打的絕對分數，不做人工校準。",
+      "固定選項順序，讓位置偏誤污染結果。",
+      "用同一家模型評自己，忽略「對自己手軟」。",
+    ],
+    related: ["evaluation", "prompt", "limits"],
+  },
+  "eval-set": {
+    cat: "eval",
+    label: "怎麼建一份評估題庫？",
+    q: "要有系統地評估 AI，第一步該怎麼建自己的評估題庫（eval set）？",
+    trap: "別用零散幾題隨手測。評估題庫要能代表真實分佈、有明確答案或準則、還要防洩漏。",
+    points: [
+      { icon: "atom", title: "拆解問題", desc: "<b>Eval set</b> ＝一批「代表你真實任務」的題目＋期望答案或評分準則，當成固定考卷，每次改動都用它量好壞。" },
+      { icon: "scale", title: "三要素", desc: "① <b>覆蓋</b>：常見情境＋刁鑽邊界＋已知失敗案例；② <b>有標準</b>：每題有正解或清楚 rubric；③ <b>乾淨</b>：別和訓練／few-shot 用同一批，防洩漏。" },
+      { icon: "network", title: "怎麼建", desc: "從<b>真實使用日誌</b>取樣、標註期望輸出、標好<b>子類</b>（讓你能分群看）；先幾十題求準，再隨線上發現的錯持續加題（尤其加「壞過」的當回歸案例）。" },
+    ],
+    core: [
+      { h: "先點根本", d: "Eval set 是你自己的<b>固定考卷</b>，讓每次 prompt／模型改動都能「同一把尺」量，取代憑感覺。" },
+      { h: "三要素", d: "<b>覆蓋</b>（常見＋邊界＋失敗案例）、<b>有標準</b>（正解或 rubric）、<b>乾淨</b>（與訓練資料分離防洩漏）。" },
+      { h: "怎麼建", d: "從真實日誌取樣、標註期望答案、加上<b>子類標籤</b>；規模先小求準，再滾動擴充。" },
+      { h: "別忘了", d: "把每次線上出的錯<b>補進題庫當回歸測試</b>；資料含個資要去識別化。" },
+    ],
+    plus: [
+      "分子類看分數（不同意圖、難度），比單一總分更能指出弱點。",
+      "難例（曾出錯的、對抗性的）比容易題更有鑑別力。",
+      "eval set 會過時，要隨產品與資料變動定期更新。",
+    ],
+    traps: [
+      "只用幾題隨手測，樣本太小、結論不穩。",
+      "拿訓練或 few-shot 用過的題當考卷（洩漏、虛高）。",
+      "只看總分不分群，看不出真正弱在哪。",
+    ],
+    related: ["evaluation", "data", "rag"],
+  },
+  "eval-offline-online": {
+    cat: "eval",
+    label: "離線測 vs 線上 A/B？",
+    q: "改了 prompt 或換了模型，該用離線題庫測，還是上線做 A/B？",
+    trap: "兩者測的是不同東西：離線快又安全但不等於真實；線上最真實但慢、要流量、要能歸因。別只做一種。",
+    points: [
+      { icon: "atom", title: "拆解問題", desc: "<b>離線評估</b>＝用固定題庫在上線前打分，快、可重複、零風險。<b>線上 A/B</b>＝把新舊版本分流給真實使用者，比真實指標。" },
+      { icon: "scale", title: "各自優劣", desc: "離線：<b>快、便宜、可迭代</b>，但和真實使用有落差；線上：<b>最真實</b>，但要有流量、要等結果、要能<b>歸因</b>到這次改動，還有影響真實使用者的風險。" },
+      { icon: "network", title: "標準流程", desc: "離線題庫先擋明顯變爛 → 小流量灰度 → A/B 比<b>真實指標＋護欄指標</b>（延遲、成本、投訴率）→ 全量。兩者互補，不是二選一。" },
+    ],
+    core: [
+      { h: "先點根本", d: "離線測「在我的考卷上好不好」，線上測「真實使用者身上有沒有更好」，是<b>不同層次</b>。" },
+      { h: "各自優劣", d: "離線<b>快、安全、可重複但失真</b>；線上<b>真實但慢、要流量、要歸因、有風險</b>。" },
+      { h: "標準流程", d: "離線先擋回歸 → 小流量灰度 → A/B 看真實指標與<b>護欄指標</b> → 全量放行。" },
+      { h: "別忘了", d: "A/B 要看的不只主要指標，還有<b>護欄</b>（延遲、成本、安全）；樣本或時間不夠就別急著下結論。" },
+    ],
+    plus: [
+      "護欄指標防止「主要指標變好、但延遲／成本／投訴爆掉」。",
+      "影子測試（shadow）讓新版本先跑但不影響使用者，介於離線與 A/B 之間。",
+      "歸因難時用固定分流與足夠樣本，別把季節性當成改動效果。",
+    ],
+    traps: [
+      "只做離線就上線，真實使用和考卷的落差沒發現。",
+      "A/B 沒設護欄指標，主要指標贏了卻讓成本或投訴暴增。",
+      "樣本或時間不足就宣稱 A 贏 B。",
+    ],
+    related: ["evaluation", "integration", "inference"],
+  },
+  "eval-regression": {
+    cat: "eval",
+    label: "上線後怎麼確保沒變爛？",
+    q: "換了模型版本或改了 prompt，怎麼確保原本會的沒有默默壞掉？",
+    trap: "這是「回歸」問題：新版本在新案例上更好，卻可能在舊案例上悄悄退步。沒有回歸測試，你不會發現。",
+    points: [
+      { icon: "atom", title: "拆解問題", desc: "<b>回歸</b>＝原本會做對的，改動後默默做錯了。LLM 尤其容易，因為改 prompt 或換版本會<b>全面</b>影響行為，不像改一行程式只動一處。" },
+      { icon: "scale", title: "怎麼防", desc: "靠<b>固定回歸題庫每次都跑</b>：把曾經會的、修過的 bug、上線出過的錯，全存成題庫，每次改動<b>自動重跑比對</b>，退步就擋下。" },
+      { icon: "network", title: "別忘了漂移", desc: "供應商模型會「<b>同一個名字、行為悄悄變</b>」，所以要<b>定期</b>重跑回歸；把新發現的錯持續補進題庫。" },
+    ],
+    core: [
+      { h: "先點根本", d: "回歸＝新版本在<b>舊的、原本會的</b>案例上退步。LLM 的改動是<b>全域</b>的，特別容易顧此失彼。" },
+      { h: "怎麼防", d: "把「原本會的＋修過的錯＋上線出過的包」存成<b>固定回歸題庫</b>，每次改動自動重跑、和上一版比。" },
+      { h: "為什麼必要", d: "你以為只是微調 prompt，卻可能讓另一類問題壞掉；<b>沒有回歸測試根本看不到</b>。" },
+      { h: "別忘了", d: "供應商模型會<b>同名而行為漂移</b>，要定期重跑；把新發現的錯持續補進題庫。" },
+    ],
+    plus: [
+      "把回歸測試接進 CI，改動一提交就自動比對，擋住明顯退步。",
+      "對關鍵案例設「必過」清單（絕不能錯的），比看平均分更保險。",
+      "記錄每版分數趨勢，才看得出是進步還是慢慢劣化。",
+    ],
+    traps: [
+      "只測新功能，不回頭測原本會的，退步無感。",
+      "假設供應商模型「同名＝同行為」，不定期重測。",
+      "出過的 bug 修完就丟，沒存成回歸案例，日後又復發。",
+    ],
+    related: ["evaluation", "fine-tuning", "integration"],
+  },
   "realtime-assistant": {
     cat: "design",
     label: "設計即時資料助理",
@@ -1798,6 +1939,136 @@ export const INTERVIEWS = {
 // 各語言的內容翻譯（欄位與 base 對齊；points 只翻 title/desc，icon 沿用 base）
 const INT_TR = {
   en: {
+    "eval-benchmark": {
+      label: "How much can you trust a Benchmark score?",
+      q: "When a model posts a high benchmark score, can you just trust that it is stronger?",
+      trap: "Do not treat \"scores high\" as the same thing as \"useful on your task.\" Check: whether it tests your scenario, whether the questions leaked into training, and what a single score hides.",
+      points: [
+        { title: "Break down the problem", desc: "A <b>Benchmark</b> is a fixed question set (MMLU, GSM8K...) that scores models so different models can be <b>compared fairly and their progress tracked</b>. But it measures \"this particular set,\" which is not necessarily your scenario." },
+        { title: "Three traps", desc: "① <b>Data leakage</b>: a popular question set slips into the training data, like seeing the exam paper before the test; ② <b>Task mismatch</b>: strong at math does not mean strong at your customer-service tone; ③ <b>Averages hide detail</b>: the total is high, but the subcategory you care about is weak." },
+        { title: "The right way to use it", desc: "Treat a benchmark only as a <b>first-pass filter</b>; make the final call by running a small batch of your own real cases as a <b>blind test</b>, looking only at the metrics and subcategories you care about, not the total score." },
+      ],
+      core: [
+        { h: "Start with the fundamentals", d: "A Benchmark = a standardized exam paper that lets models be <b>compared fairly and their progress tracked</b>; but it measures that particular set, not your task." },
+        { h: "Three traps", d: "<b>Leakage</b> (the question set got into the training data), <b>task mismatch</b> (its strength is not what you need), <b>averages hide detail</b> (the total is high while your subcategory is low)." },
+        { h: "The right way to use it", d: "Use it as a <b>first-pass filter</b>; make the final call with a blind test on your own real cases, looking at the subcategories and metrics you care about rather than a single total score." },
+        { h: "Don't forget", d: "Scores get \"caught up to\" and also get \"gamed\"; when reading a leaderboard, check the <b>method and date</b>, not just the ranking." },
+      ],
+      plus: [
+        "Leaderboards (such as Chatbot Arena) use human blind-test pairings, which are harder to game, but they still have sample bias.",
+        "The same benchmark with a different prompt or settings can give very different scores; align the conditions when comparing.",
+        "Watch for leakage risk when the training cutoff is later than the question set's release.",
+      ],
+      traps: [
+        "Switching models based only on the total score, ignoring performance on the subcategory you care about.",
+        "Using a public question set as your own acceptance criterion (it may already have leaked and may not fit your task).",
+        "Forcing a comparison of scores produced under different evaluation setups.",
+      ],
+    },
+    "eval-llm-judge": {
+      label: "Is using AI to evaluate AI reliable?",
+      q: "You want to use one large model to automatically score another model's output: is that trustworthy?",
+      trap: "An LLM as judge saves time and money and scales, but the judge itself has biases, so do not treat its scores as objective truth.",
+      points: [
+        { title: "Break down the problem", desc: "<b>LLM-as-judge</b> = having a strong model score outputs, or compare them pairwise, according to the rubric you give it. The upside is that it is <b>fast, cheap, and runs at scale</b>, which suits first-pass filtering and regression testing." },
+        { title: "Known biases", desc: "The judge tends to <b>favor long answers and favor position</b> (the option that appears first), <b>favor its own style</b>, and often <b>goes easy on its own output</b>; the vaguer the rubric, the less stable the scores." },
+        { title: "How to calibrate", desc: "Give a clear rubric and examples, prefer <b>pairwise comparison</b> over absolute scoring, <b>randomize position</b>, first use human annotations to confirm the judge agrees with people before scaling up, and still spot-check key decisions manually." },
+      ],
+      core: [
+        { h: "Start with the fundamentals", d: "LLM-as-judge simply means using a model as the scorer in exchange for <b>speed and scale</b>; it suits first-pass filtering and regression, but not being the sole arbiter." },
+        { h: "Known biases", d: "Favors length, favors position, favors style, and goes easy on itself; the vaguer the rubric, the less stable." },
+        { h: "How to calibrate", d: "First give a batch of questions that have human answers, confirm the judge's scores <b>agree</b> with people, then score at scale; switching to <b>pairwise comparison</b> is usually more stable." },
+        { h: "Don't forget", d: "<b>Randomize position</b>, attach the scoring rationale to make spot-checks easy, and still have people review important decisions; when the judge model changes version, the scores will drift." },
+      ],
+      plus: [
+        "Pairwise comparison (which is better, A vs B) is usually more stable than giving an absolute 1 to 10 score.",
+        "Use multiple judges voting, or models from different providers as judges, to reduce single-source bias.",
+        "The judge itself costs money and time, so at large scale it becomes a real expense.",
+      ],
+      traps: [
+        "Trusting the LLM's absolute scores directly without doing any human calibration.",
+        "Fixing the option order and letting position bias contaminate the results.",
+        "Using the same provider's model to judge itself, ignoring that it \"goes easy on itself.\"",
+      ],
+    },
+    "eval-set": {
+      label: "How do you build an eval set?",
+      q: "To evaluate AI systematically, how should you take the first step of building your own eval set?",
+      trap: "Do not just test with a few scattered questions off the cuff. An eval set should represent the real distribution, have clear answers or a rubric, and guard against leakage.",
+      points: [
+        { title: "Break down the problem", desc: "An <b>eval set</b> = a batch of questions that \"represent your real task\" plus the expected answers or a scoring rubric, used as a fixed exam paper so you measure quality with it on every change." },
+        { title: "Three elements", desc: "① <b>Coverage</b>: common scenarios + tricky edge cases + known failures; ② <b>A standard</b>: every question has a correct answer or a clear rubric; ③ <b>Clean</b>: do not reuse the same batch as training / few-shot, to prevent leakage." },
+        { title: "How to build it", desc: "Sample from <b>real usage logs</b>, annotate the expected outputs, and label the <b>subcategories</b> well (so you can view results by group); start with a few dozen questions to get them accurate, then keep adding questions as you find errors in production (especially adding cases that \"once broke\" as regression cases)." },
+      ],
+      core: [
+        { h: "Start with the fundamentals", d: "An eval set is your own <b>fixed exam paper</b>, letting every prompt / model change be measured with \"the same ruler\" instead of by gut feeling." },
+        { h: "Three elements", d: "<b>Coverage</b> (common + edge + failure cases), <b>a standard</b> (correct answer or rubric), <b>clean</b> (separated from the training data to prevent leakage)." },
+        { h: "How to build it", d: "Sample from real logs, annotate the expected answers, and add <b>subcategory labels</b>; keep the scale small at first for accuracy, then expand on a rolling basis." },
+        { h: "Don't forget", d: "Each time an error appears in production, <b>add it to the question set as a regression test</b>; if the data contains personal information, de-identify it." },
+      ],
+      plus: [
+        "Looking at scores by subcategory (different intents, difficulties) points out weaknesses better than a single total score.",
+        "Hard cases (ones that once went wrong, or adversarial ones) are more discriminating than easy questions.",
+        "An eval set goes stale, so update it regularly as the product and data change.",
+      ],
+      traps: [
+        "Testing with just a few off-the-cuff questions: the sample is too small and the conclusions are unstable.",
+        "Using questions already seen in training or few-shot as the exam paper (leakage, inflated scores).",
+        "Looking only at the total score without breaking it down by group, so you cannot see where the real weakness is.",
+      ],
+    },
+    "eval-offline-online": {
+      label: "Offline testing vs online A/B?",
+      q: "After changing a prompt or switching models, should you test with an offline question set or go live with an A/B test?",
+      trap: "The two measure different things: offline is fast and safe but not the same as reality; online is the most realistic but slow, needs traffic, and needs attribution. Do not do only one of them.",
+      points: [
+        { title: "Break down the problem", desc: "<b>Offline evaluation</b> = scoring with a fixed question set before going live: fast, repeatable, zero risk. <b>Online A/B</b> = splitting real users between the new and old versions and comparing real metrics." },
+        { title: "Pros and cons of each", desc: "Offline: <b>fast, cheap, iterable</b>, but there is a gap from real usage; online: <b>the most realistic</b>, but it needs traffic, needs you to wait for results, needs to be <b>attributable</b> to this change, and carries the risk of affecting real users." },
+        { title: "The standard workflow", desc: "The offline question set first blocks obvious regressions → small-traffic canary → A/B comparing <b>real metrics + guardrail metrics</b> (latency, cost, complaint rate) → full rollout. The two are complementary, not either/or." },
+      ],
+      core: [
+        { h: "Start with the fundamentals", d: "Offline tests \"whether it does well on my exam paper,\" online tests \"whether it is actually better for real users\": these are <b>different levels</b>." },
+        { h: "Pros and cons of each", d: "Offline is <b>fast, safe, repeatable but distorted</b>; online is <b>real but slow, needs traffic, needs attribution, and carries risk</b>." },
+        { h: "The standard workflow", d: "Offline first blocks regressions → small-traffic canary → A/B looking at real metrics and <b>guardrail metrics</b> → full rollout." },
+        { h: "Don't forget", d: "In A/B you should look not only at the primary metric but also at <b>guardrails</b> (latency, cost, safety); if the sample or time is not enough, do not rush to a conclusion." },
+      ],
+      plus: [
+        "Guardrail metrics prevent \"the primary metric improves while latency / cost / complaints blow up.\"",
+        "Shadow testing lets the new version run first without affecting users, sitting between offline and A/B.",
+        "When attribution is hard, use fixed traffic splits and a sufficient sample, and do not mistake seasonality for the effect of your change.",
+      ],
+      traps: [
+        "Going live after only offline testing, never noticing the gap between real usage and the exam paper.",
+        "Running A/B with no guardrail metrics, so the primary metric wins but cost or complaints surge.",
+        "Claiming A beats B when the sample or time is insufficient.",
+      ],
+    },
+    "eval-regression": {
+      label: "After going live, how do you make sure nothing got worse?",
+      q: "After switching model versions or changing a prompt, how do you make sure what used to work has not quietly broken?",
+      trap: "This is a \"regression\" problem: the new version is better on new cases but may quietly regress on old ones. Without regression testing, you will not notice.",
+      points: [
+        { title: "Break down the problem", desc: "<b>Regression</b> = something that used to be done correctly is quietly done wrong after a change. LLMs are especially prone to it, because changing a prompt or switching versions affects behavior <b>across the board</b>, unlike changing one line of code that touches only one spot." },
+        { title: "How to prevent it", desc: "Rely on <b>running a fixed regression set every time</b>: store everything that once worked, bugs you have fixed, and errors that appeared in production as a question set, and on every change <b>automatically rerun and compare</b>, blocking any regression." },
+        { title: "Don't forget drift", desc: "A vendor's model can \"<b>keep the same name while its behavior quietly changes</b>,\" so rerun the regression set <b>regularly</b>; keep adding newly found errors to the question set." },
+      ],
+      core: [
+        { h: "Start with the fundamentals", d: "Regression = the new version regresses on <b>old cases that used to work</b>. Changes to an LLM are <b>global</b>, making it especially easy to fix one thing and break another." },
+        { h: "How to prevent it", d: "Store \"what used to work + errors you have fixed + the messes that appeared in production\" as a <b>fixed regression set</b>, and on every change automatically rerun it and compare against the previous version." },
+        { h: "Why it is necessary", d: "You think you are only tweaking a prompt, but you may break another category of questions; <b>without regression testing you simply cannot see it</b>." },
+        { h: "Don't forget", d: "A vendor's model can <b>drift in behavior under the same name</b>, so rerun regularly; keep adding newly found errors to the question set." },
+      ],
+      plus: [
+        "Wire regression testing into CI so the moment a change is committed it is compared automatically, blocking obvious regressions.",
+        "Set a \"must-pass\" list for critical cases (ones that must never fail); it is safer than looking at the average score.",
+        "Record the score trend for each version, so you can tell whether it is improving or slowly degrading.",
+      ],
+      traps: [
+        "Testing only new features without going back to test what used to work, so you are oblivious to regressions.",
+        "Assuming a vendor's model means \"same name = same behavior\" and not retesting regularly.",
+        "Throwing away a bug once it is fixed instead of saving it as a regression case, so it recurs later.",
+      ],
+    },
     "design-build-vs-buy": {"label":"Self-host a model or use an API","q":"Should you use a commercial API (OpenAI, Anthropic, etc.) or self-host an open-source model? How do you decide?","trap":"Do not just go by 'the API is more expensive' or 'self-hosting is safer.' This is a multi-factor trade-off: data privacy, cost structure, capability ceiling, controllability, and operational burden. The question asks you to weigh the options by context, not to settle it in one line.","points":[{"title":"Underlying principle","desc":"The two paths differ in who carries the model: <b>a commercial API</b> means renting someone else's top-tier model, ready out of the box and pay-as-you-go; <b>self-hosting</b> means deploying open weights yourself, which buys full control but leaves capability, operations, and GPU entirely on you."},{"title":"Engineering trade-off","desc":"Look at five dimensions together: <b>data privacy/compliance, cost structure, capability ceiling, controllability, and operations staffing</b>. There is no one-size-fits-all answer: low volume or early stage leans toward the API, while highly sensitive or very high volume leans toward self-hosting."},{"title":"Systematic approach","desc":"The pragmatic answer is usually <b>hybrid</b>: default to the API, and switch the paths that handle <b>sensitive data</b> or <b>very high volume</b> to a self-hosted small model; also abstract an API layer so you can swap vendors later and reduce lock-in risk."}],"core":[{"h":"Start with data and compliance","d":"Highly sensitive or regulated scenarios (personal data, healthcare, finance) where data must stay in-house → lean toward <b>self-hosting/private deployment</b>; ordinary data where the vendor promises <b>not to train on it</b> and signs a DPA → a commercial API is fine too. This gate often decides the direction outright."},{"h":"Different cost structures, neither is always cheaper","d":"The API is <b>pay-as-you-go</b> (linear with usage, zero operations); self-hosting is <b>large upfront plus fixed GPU/operations costs</b>. Low volume or early stage makes the API the better deal; only when volume is large enough to amortize the GPUs does self-hosting start to get cheaper."},{"h":"Capability vs control","d":"Top-tier <b>closed-source models</b> usually lead in capability and work out of the box; <b>self-hosted open-source</b> buys full control (pinned version, can fine-tune, can run offline), but capability may lag and you have to keep up yourself. It depends on whether you need 'the strongest' or 'controllable' more."},{"h":"Do not underestimate operations","d":"Self-hosting means handling <b>deployment, scaling, monitoring, upgrades, and GPU supply</b>, a whole set of engineering burdens; 'open-source equals free' is an illusion. The conclusion is usually a mix: default to the API, and self-host only the sensitive or high-volume parts."}],"plus":["'Self-hosting' does not equal 'training your own': it usually means deploying or fine-tuning open weights, not pre-training from scratch.","Vendor lock-in: abstract an API layer so you can later swap vendors or move to self-hosting.","You can also do 'open-source model plus cloud-hosted inference': not fully self-hosted, but more controllable than a closed-source API."],"traps":["Drawing a conclusion from a single dimension (looking only at cost, or only at privacy).","Underestimating the operations and GPU costs of self-hosting, assuming 'open-source equals free.'","Assuming self-hosting is always safer: security depends on how you do it, not on self-hosting itself."]},
     "design-data-pipeline": {"label":"Design a data pipeline","q":"To prepare data for an AI product (for RAG, fine-tuning, or evaluation), how would you design the data pipeline?","trap":"Do not treat data as a 'one-time dump.' Data changes, gets dirty, and carries privacy concerns, so you need a <b>repeatable, version-controlled</b> pipeline: collect → clean → de-identify → chunk/annotate → index/store → update. The question tests whether you treat data as engineering.","points":[{"title":"Underlying principle","desc":"Data for an AI product is not just handed to the model; you first extract it into a <b>clean, structured, retrievable</b> form. Garbage in, garbage out: the quality of this pipeline is the <b>ceiling</b> for RAG/fine-tuning/evaluation."},{"title":"Engineering trade-off","desc":"Quality vs cost vs freshness: the finer the parsing and cleaning, the more accurate but more expensive; fresher data is better but rebuilding the index has a cost. Decide how fine to go based on the use case, and make the pipeline capable of <b>incremental updates</b> rather than starting over each time."},{"title":"Systematic approach","desc":"A repeatable pipeline: <b>collect → clean/dedup → de-identify and permissions → process per use case (chunk/annotate/test set) → index/store → update and version control</b>. Datasets need versions too, so you can reproduce results and run regressions."}],"core":[{"h":"Collect and clean","d":"Collect from sources (documents, databases, APIs) and extract into <b>clean plain text</b>: PDFs/scans need OCR, denoising, and <b>deduplication</b>. The quality of this step is the ceiling of the whole system, so it is worth the effort."},{"h":"Privacy and governance","d":"Before entering the pipeline, first <b>classify and de-identify</b> (mask PII), set <b>access permissions</b>, and record source and time (provenance); align with regulations such as the <b>right to erasure</b> (right to be forgotten). Do not let sensitive raw data scatter everywhere."},{"h":"Process per use case","d":"<b>RAG</b>: chunk by structure, vectorize, and load into a vector database (with metadata permissions); <b>fine-tuning</b>: organize into 'instruction: good answer' pairs with quality control; <b>evaluation</b>: pull out a fixed test set. The same batch of data needs different processing for different uses."},{"h":"Update and versioning","d":"Data goes stale: you need to <b>update incrementally and rebuild the index</b>; both the pipeline and the dataset need <b>version control</b>, so you can reproduce results and run regressions. Something that runs once and stops is not a pipeline."}],"plus":["Parsing quality decides everything: tables, multi-column layouts, and hierarchical headings need layout-aware parsing, not brute-force text extraction.","Datasets need 'testing' too: sample checks and monitoring for distribution drift (whether they still resemble the actual live data).","Annotation is expensive: you can label first with heuristics or AI assistance, then have humans spot-check and calibrate."],"traps":["Treating data as a one-time task, with no repeatable, updatable pipeline.","Skipping de-identification and permissions, so the data leaks inside the pipeline itself.","Piling up volume while ignoring quality and deduplication, so dirty data drags down RAG and fine-tuning."]},
     "design-latency-scale": {"label":"Low latency and handling load","q":"An AI product needs low latency and must handle a large number of users; how would you design it?","trap":"Do not just answer 'add machines.' LLM inference is slow and expensive, so scaling starts from two ends, <b>'reduce how much you compute'</b> and <b>'hide the wait'</b>, with horizontal scaling only coming last. The question asks you to name concrete techniques and trade-offs.","points":[{"title":"Underlying principle","desc":"The bottleneck is that <b>every token requires a pass through the model</b>: slow and GPU-hungry. So optimization has three layers: first <b>lower the per-call cost</b>, then <b>hide the wait</b>, and finally <b>scale horizontally</b>, rather than blindly adding cards."},{"title":"Engineering trade-off","desc":"Latency, throughput, cost, and quality pull against each other: batching raises throughput but adds latency, and a small model is fast but may drop quality. First set an <b>SLO</b> (such as P95 latency), then tune around it, rather than maxing out everything."},{"title":"Systematic approach","desc":"Apply all three layers together: <b>① reduce the load</b> (model routing, quantization, KV cache, trimmed context, caching) → <b>② hide the wait</b> (streaming, async queues, batching) → <b>③ scale</b> (multiple replicas plus load balancing plus autoscale plus rate limit)."}],"core":[{"h":"First lower per-call cost and latency","d":"Pick the right <b>model size</b> (use a small model for simple tasks), <b>quantization</b>, <b>KV cache</b>, and trim the prompt/context; cache whatever results you <b>can cache</b> (identical or similar queries). When each call computes less and runs faster, scaling afterward gets easier."},{"h":"Hide the wait","d":"Use <b>streaming</b> (emitting token by token) to make the 'time to first token' feel fast; push non-real-time work to a <b>background queue</b> for async processing; <b>batching</b> computes multiple requests together to raise throughput. Users' perceived latency often matters more than the actual number."},{"h":"Horizontal scaling and traffic control","d":"Multiple replicas plus <b>load balancing</b>, with <b>autoscale</b> based on queue length; add <b>rate limit</b> and backoff to protect the backend from being overwhelmed; use a <b>queue to shave peaks</b> during spikes. Scaling is the last layer, not the first move."},{"h":"Wrap up with trade-offs and the SLO","d":"Latency/throughput/cost/quality pull against each other, so set the <b>target (such as P95 latency and budget)</b> first, then allocate. Observability should measure <b>time to first token</b> and <b>time to completion</b> separately, and watch P95/P99 tail latency, because the felt experience lives in the tail."}],"plus":["Semantic cache: similar questions can hit too, not just exactly identical queries.","Streaming must handle mid-stream interruptions: how to end gracefully when something errors or fails moderation.","Do not evaluate with average latency: users' pain lives in P95/P99 tail latency."],"traps":["Only thinking of 'add GPUs,' skipping the savings you should do first like caching, batching, and model routing.","Evaluating with average latency and ignoring P95/P99 tail latency.","Waiting synchronously for the LLM to finish before responding, so work that could be async is stuck inside the request."]},
@@ -3094,6 +3365,136 @@ const INT_TR = {
     },
   },
   ja: {
+    "eval-benchmark": {
+      label: "Benchmark のスコアはどこまで信用できる？",
+      q: "あるモデルの benchmark スコアが高いのを見て、それだけで強いと信じていい？",
+      trap: "「スコアが高い」を「あなたのタスクで使える」とそのまま同一視しないこと。測っているのがあなたのシナリオか、問題が訓練データに漏れていないか、単一のスコアが何を隠しているかを見よう。",
+      points: [
+        { title: "問題を分解する", desc: "<b>Benchmark</b> とは、固定の問題集（MMLU、GSM8K…）でモデルを採点し、異なるモデルを<b>公平に比較し、進歩を追跡</b>できるようにするもの。ただし測っているのは「その問題集」であって、必ずしもあなたのシナリオではない。" },
+        { title: "3つの落とし穴", desc: "① <b>データ漏洩</b>：人気の問題集が訓練データに紛れ込み、試験前に問題用紙を見たのと同じ状態になる；② <b>タスク不一致</b>：数学が得意でも、あなたの求めるカスタマーサポートの語り口が得意とは限らない；③ <b>平均が覆い隠す</b>：総合スコアは高くても、あなたが気にするサブカテゴリは低い。" },
+        { title: "正しい使い方", desc: "benchmark は<b>一次スクリーニング</b>として使うだけにする；最終判断は、あなた自身の少数の実ケースで<b>ブラインドテスト</b>を行い、気にする指標とサブカテゴリだけを見て、総合スコアでは判断しない。" },
+      ],
+      core: [
+        { h: "まず本質から", d: "Benchmark = 標準化された試験問題で、モデルを<b>公平に比較し、進歩を追跡</b>できる；ただし測っているのはその問題集であって、あなたのタスクではない。" },
+        { h: "3つの落とし穴", d: "<b>漏洩</b>（問題集が訓練データに入った）、<b>タスク不一致</b>（得意分野があなたの求めるものではない）、<b>平均が覆い隠す</b>（総合スコアは高いのにあなたのサブカテゴリは低い）。" },
+        { h: "正しい使い方", d: "<b>一次スクリーニング</b>として使う；最終判断は自分の実ケースでブラインドテストを行い、単一の総合スコアではなく、気にするサブカテゴリと指標を見る。" },
+        { h: "忘れずに", d: "スコアは「追いつかれる」し「盛られる」こともある；リーダーボードを見るときは<b>手法と日付</b>を確認し、順位だけを見ないこと。" },
+      ],
+      plus: [
+        "リーダーボード（Chatbot Arena など）は人間によるブラインドテストの対戦形式を使うため盛りにくいが、それでもサンプルの偏りはある。",
+        "同じ benchmark でも prompt や設定を変えるとスコアは大きく変わる；比較するときは条件をそろえること。",
+        "「訓練データのカットオフが問題集の公開より後」の場合の漏洩リスクに注意する。",
+      ],
+      traps: [
+        "総合スコアだけを見てモデルを乗り換え、気にするサブカテゴリの成績を無視する。",
+        "公開の問題集を自分の受け入れ基準にする（すでに漏洩している可能性があり、あなたのタスクにも合っていない）。",
+        "異なる評価設定で出したスコアを無理に比べて優劣をつける。",
+      ],
+    },
+    "eval-llm-judge": {
+      label: "AI で AI を評価するのは信頼できる？",
+      q: "ある大規模モデルで別のモデルの出力を自動的に採点したいが、これは信頼できる？",
+      trap: "LLM を評価者にすると時間もお金も節約でき、スケールもするが、評価者自身にも偏りがあるので、そのスコアを客観的真理として扱わないこと。",
+      points: [
+        { title: "問題を分解する", desc: "<b>LLM-as-judge</b> = 強力なモデルに、あなたが与えた基準（rubric）に従って出力を採点させたり、2つずつ比較させたりすること。利点は<b>速く、安く、大量に回せる</b>ことで、一次スクリーニングと回帰テストに向いている。" },
+        { title: "既知の偏り", desc: "評価者は<b>長い回答を好み、位置を好み</b>（先に出てくる選択肢）、<b>自分と同じスタイルを好み</b>、さらに<b>自分の出力に甘くなりがち</b>；基準が曖昧なほどスコアは不安定になる。" },
+        { title: "どう較正するか", desc: "明確な基準と例を与え、<b>2つずつの比較</b>を絶対点数より優先し、<b>位置をランダム化</b>し、まず人手のアノテーションで評価者が人と一致することを確認してから拡大し、重要な判断は依然として人手で抽出チェックする。" },
+      ],
+      core: [
+        { h: "まず本質から", d: "LLM-as-judge とは、モデルを採点者として使い、<b>速度とスケール</b>を得ること；一次スクリーニングと回帰には向くが、唯一の裁定者にするには向かない。" },
+        { h: "既知の偏り", d: "長さを好み、位置を好み、スタイルを好み、自分に甘い；基準が曖昧なほど不安定になる。" },
+        { h: "どう較正するか", d: "まず人手の答えがある問題を一群与え、評価者の採点が人と<b>一致</b>することを確認してから大量に評価する；<b>2つずつの比較</b>に変えると通常より安定する。" },
+        { h: "忘れずに", d: "<b>位置をランダム化</b>し、採点理由を添えて抽出チェックしやすくし、重要な判断は依然として人手でレビューする；評価者モデルのバージョンが変わると、スコアはドリフトする。" },
+      ],
+      plus: [
+        "2つずつの比較（A vs B のどちらが良いか）は、1 から 10 の絶対点数をつけるより通常安定する。",
+        "複数の評価者で投票させたり、異なるベンダーのモデルを評価者にしたりして、単一の偏りを減らす。",
+        "評価者自体もお金と時間がかかり、大規模になると相応のコストになる。",
+      ],
+      traps: [
+        "LLM がつけた絶対点数をそのまま信じ、人手での較正をしない。",
+        "選択肢の順序を固定し、位置の偏りが結果を汚染するに任せる。",
+        "同じベンダーのモデルに自分自身を評価させ、「自分に甘い」ことを無視する。",
+      ],
+    },
+    "eval-set": {
+      label: "評価用の問題集（eval set）はどう作る？",
+      q: "AI を体系的に評価するために、最初のステップとして自分の評価用問題集（eval set）をどう作るべき？",
+      trap: "ばらばらの数問で行き当たりばったりにテストしないこと。eval set は実際の分布を代表し、明確な答えか基準を持ち、さらに漏洩を防げるものであるべき。",
+      points: [
+        { title: "問題を分解する", desc: "<b>Eval set</b> = 「あなたの実タスクを代表する」問題群＋期待される答えか採点基準で、固定の試験問題として使い、変更のたびにそれで良し悪しを測る。" },
+        { title: "3つの要素", desc: "① <b>カバレッジ</b>：よくある状況＋厄介な境界ケース＋既知の失敗例；② <b>基準がある</b>：各問に正解か明確な rubric がある；③ <b>クリーン</b>：訓練/few-shot と同じ群を使わず、漏洩を防ぐ。" },
+        { title: "どう作るか", desc: "<b>実際の利用ログ</b>からサンプリングし、期待される出力をアノテーションし、<b>サブカテゴリ</b>をきちんとラベル付けする（グループ別に見られるように）；まず数十問で精度を出し、その後は本番で見つかった誤りに応じて問題を追加し続ける（特に「壊れたことがある」ケースを回帰ケースとして加える）。" },
+      ],
+      core: [
+        { h: "まず本質から", d: "Eval set はあなた自身の<b>固定の試験問題</b>で、prompt/モデルの変更のたびに「同じ物差し」で測れるようにし、勘に頼るのをやめさせる。" },
+        { h: "3つの要素", d: "<b>カバレッジ</b>（よくある＋境界＋失敗ケース）、<b>基準がある</b>（正解か rubric）、<b>クリーン</b>（訓練データと分離して漏洩を防ぐ）。" },
+        { h: "どう作るか", d: "実ログからサンプリングし、期待される答えをアノテーションし、<b>サブカテゴリのラベル</b>を付ける；最初は規模を小さくして精度を出し、その後は継続的に拡充する。" },
+        { h: "忘れずに", d: "本番で誤りが出るたびに、それを<b>問題集に加えて回帰テストにする</b>；データに個人情報が含まれる場合は匿名化する。" },
+      ],
+      plus: [
+        "サブカテゴリ別（異なる意図、難易度）にスコアを見るほうが、単一の総合スコアより弱点を的確に示せる。",
+        "難しいケース（かつて誤ったもの、敵対的なもの）は、簡単な問題より識別力が高い。",
+        "eval set は古くなるので、製品とデータの変化に合わせて定期的に更新する。",
+      ],
+      traps: [
+        "数問だけで行き当たりばったりにテストする：サンプルが少なすぎて結論が不安定になる。",
+        "訓練や few-shot で使った問題を試験問題にする（漏洩、スコアの水増し）。",
+        "総合スコアだけを見てグループ分けせず、本当の弱点がどこにあるか分からない。",
+      ],
+    },
+    "eval-offline-online": {
+      label: "オフラインテスト vs オンライン A/B？",
+      q: "prompt を変えたりモデルを換えたりしたとき、オフラインの問題集でテストすべきか、本番に出して A/B をやるべきか？",
+      trap: "両者は別のものを測っている：オフラインは速く安全だが現実とは同じではない；オンラインは最も現実的だが遅く、トラフィックが必要で、原因の帰属も必要だ。片方だけをやらないこと。",
+      points: [
+        { title: "問題を分解する", desc: "<b>オフライン評価</b> = 固定の問題集で本番前に採点すること：速く、再現可能で、リスクゼロ。<b>オンライン A/B</b> = 新旧バージョンを実ユーザーに振り分け、実際の指標を比較すること。" },
+        { title: "それぞれの長所と短所", desc: "オフライン：<b>速く、安く、反復できる</b>が、実際の利用とのギャップがある；オンライン：<b>最も現実的</b>だが、トラフィックが必要で、結果を待つ必要があり、今回の変更に<b>帰属</b>できる必要があり、さらに実ユーザーに影響するリスクもある。" },
+        { title: "標準的なフロー", desc: "オフラインの問題集でまず明らかな悪化を止める → 小トラフィックのカナリア → A/B で<b>実指標＋ガードレール指標</b>（レイテンシ、コスト、クレーム率）を比較する → 全量展開。両者は補完し合うもので、二者択一ではない。" },
+      ],
+      core: [
+        { h: "まず本質から", d: "オフラインは「自分の試験問題で良いか」を測り、オンラインは「実ユーザーにとって実際に良くなっているか」を測る、これは<b>異なる層</b>だ。" },
+        { h: "それぞれの長所と短所", d: "オフラインは<b>速く、安全で、再現できるが実態とずれる</b>；オンラインは<b>現実的だが遅く、トラフィックが必要で、帰属が必要で、リスクがある</b>。" },
+        { h: "標準的なフロー", d: "オフラインでまず回帰を止める → 小トラフィックのカナリア → A/B で実指標と<b>ガードレール指標</b>を見る → 全量展開。" },
+        { h: "忘れずに", d: "A/B では主要指標だけでなく<b>ガードレール</b>（レイテンシ、コスト、安全性）も見る；サンプルや時間が足りなければ、急いで結論を出さないこと。" },
+      ],
+      plus: [
+        "ガードレール指標は「主要指標は良くなったのに、レイテンシ/コスト/クレームが爆発する」ことを防ぐ。",
+        "シャドウテスト（shadow）は、新バージョンをユーザーに影響を与えずに先行して走らせるもので、オフラインと A/B の中間に位置する。",
+        "帰属が難しいときは、固定の振り分けと十分なサンプルを使い、季節性を変更の効果と取り違えないこと。",
+      ],
+      traps: [
+        "オフラインだけで本番に出し、実際の利用と試験問題とのギャップに気づかない。",
+        "A/B にガードレール指標を設けず、主要指標では勝ったのにコストやクレームが急増する。",
+        "サンプルや時間が不足しているのに A が B に勝ったと主張する。",
+      ],
+    },
+    "eval-regression": {
+      label: "本番投入後、悪化していないことをどう保証する？",
+      q: "モデルのバージョンを換えたり prompt を変えたりしたとき、これまでできていたことが密かに壊れていないことをどう確かめる？",
+      trap: "これは「回帰（リグレッション）」の問題だ：新バージョンは新しいケースで良くなっても、古いケースで密かに後退することがある。回帰テストがなければ、気づけない。",
+      points: [
+        { title: "問題を分解する", desc: "<b>回帰</b> = これまで正しくできていたことが、変更後に密かに誤るようになること。LLM は特に起こりやすい、prompt を変えたりバージョンを換えたりすると、挙動に<b>全面的</b>に影響するからで、コードを1行変えて1か所だけ動くのとは違う。" },
+        { title: "どう防ぐか", desc: "<b>固定の回帰用問題集を毎回走らせる</b>ことに頼る：かつてできていたこと、修正した bug、本番で出た誤りをすべて問題集として保存し、変更のたびに<b>自動で再実行して比較</b>し、後退したら止める。" },
+        { title: "ドリフトを忘れずに", desc: "ベンダーのモデルは「<b>同じ名前のまま、挙動が密かに変わる</b>」ことがあるので、<b>定期的</b>に回帰を再実行する；新たに見つかった誤りを問題集に加え続ける。" },
+      ],
+      core: [
+        { h: "まず本質から", d: "回帰 = 新バージョンが<b>古い、これまでできていた</b>ケースで後退すること。LLM の変更は<b>全域的</b>なので、あちらを立てればこちらが立たずになりやすい。" },
+        { h: "どう防ぐか", d: "「これまでできていたこと＋修正した誤り＋本番で出たトラブル」を<b>固定の回帰用問題集</b>として保存し、変更のたびに自動で再実行して前バージョンと比較する。" },
+        { h: "なぜ必要か", d: "prompt をちょっと調整しただけのつもりでも、別の種類の問題を壊しているかもしれない；<b>回帰テストがなければそもそも見えない</b>。" },
+        { h: "忘れずに", d: "ベンダーのモデルは<b>同名のまま挙動がドリフトする</b>ことがあるので、定期的に再実行する；新たに見つかった誤りを問題集に加え続ける。" },
+      ],
+      plus: [
+        "回帰テストを CI に組み込み、変更をコミットした瞬間に自動で比較し、明らかな後退を止める。",
+        "重要なケースには「必ず通過」リスト（絶対に誤ってはならないもの）を設ける；平均スコアを見るより安全だ。",
+        "各バージョンのスコアの推移を記録して初めて、良くなっているのか徐々に劣化しているのかが分かる。",
+      ],
+      traps: [
+        "新機能だけをテストし、これまでできていたことを振り返ってテストせず、後退に気づかない。",
+        "ベンダーのモデルは「同名＝同じ挙動」と決めつけ、定期的に再テストしない。",
+        "出た bug を直したら捨ててしまい、回帰ケースとして保存せず、後日また再発する。",
+      ],
+    },
     "design-build-vs-buy": {"label":"モデルを self-host するか API を使うか","q":"商用 API（OpenAI、Anthropic など）を使うか、open-source model を自分で self-host するか。どう決めますか？","trap":"「API のほうが高い」「self-host のほうが安全」だけで判断してはいけません。これは複数の要因が絡むトレードオフです：データのプライバシー、コスト構造、能力の上限、コントロールしやすさ、運用の負担。この問題は、状況に応じて重みづけすることを求めており、一言で結論づけるものではありません。","points":[{"title":"基本原理","desc":"2 つの道は「誰がモデルを背負うか」で分かれます：<b>商用 API</b> は他社のトップクラスのモデルを借りるもので、すぐ使えて使った分だけ払う方式です；<b>self-host</b> は open weights を自分でデプロイするもので、完全なコントロールが手に入る代わりに、能力・運用・GPU をすべて自分で面倒を見る必要があります。"},{"title":"エンジニアリング上のトレードオフ","desc":"5 つの軸をまとめて見ます：<b>データのプライバシー／コンプライアンス、コスト構造、能力の上限、コントロールしやすさ、運用の人手</b>。一律の答えはなく、低量や初期段階は API 寄り、高機密や超大量は self-host 寄りになります。"},{"title":"体系化","desc":"現実的にはたいてい<b>ハイブリッド</b>です：デフォルトは API を使い、<b>機密データ</b>や<b>超大量</b>の経路だけ self-host の小型モデルに切り替えます；さらに API を 1 層抽象化しておくと、あとで vendor を乗り換えやすく、lock-in のリスクを下げられます。"}],"core":[{"h":"まずデータとコンプライアンスを見る","d":"高機密や法規制の対象（個人情報、医療、金融）で、データを自社内に留めたい場面 → <b>self-host／プライベート展開</b>寄り；一般的なデータで、vendor が<b>学習に使わない</b>と約束し DPA を結ぶなら → 商用 API でも問題ありません。この関門でそのまま方向が決まることがよくあります。"},{"h":"コスト構造が違う、どちらかが必ず高いわけではない","d":"API は<b>使った分だけ払う</b>（使用量に比例、運用ゼロ）；self-host は<b>大きな初期費用＋固定の GPU／運用コスト</b>です。低量や初期段階は API が得；GPU を分散できるほど量が大きくなって初めて、self-host が安くなり始めます。"},{"h":"能力 vs コントロール","d":"トップクラスの<b>クローズドソースのモデル</b>はたいてい能力が先行し、すぐ使えます；<b>self-host の open-source</b> は完全なコントロール（バージョン固定、fine-tune 可能、オフライン可能）が手に入りますが、能力は遅れることがあり、自分で追いかける必要があります。「最強」と「コントロール可能」のどちらをより必要とするかによります。"},{"h":"運用を過小評価しない","d":"self-host では<b>デプロイ、スケーリング、監視、アップグレード、GPU の確保</b>を扱う必要があり、これは一式のエンジニアリング負担です。「open-source＝無料」は錯覚です。結論はたいていハイブリッドです：デフォルトは API、機密や大量の部分だけ self-host。"}],"plus":["「self-host」は「自分で訓練する」とは違います：多くは open weights をデプロイまたは fine-tune するもので、ゼロから事前学習するわけではありません。","vendor lock-in：API を 1 層抽象化しておくと、あとで vendor を乗り換えたり self-host に移したりしやすくなります。","「open-source model ＋クラウドホスト推論」という手もあります：完全な self-host ではありませんが、クローズドソースの API よりコントロールしやすいです。"],"traps":["単一の軸（コストだけ、あるいはプライバシーだけ）で結論を出すこと。","self-host の運用と GPU のコストを過小評価し、「open-source＝無料」だと思い込むこと。","self-host が必ず安全だと思い込むこと：安全性はやり方次第であって、self-host それ自体で決まるものではありません。"]},
     "design-data-pipeline": {"label":"データパイプラインを設計する","q":"AI 製品のためにデータを準備する（RAG、fine-tune、または評価用）とき、データパイプラインをどう設計しますか？","trap":"データを「一度きりで流し込むもの」と考えてはいけません。データは変わり、汚れ、プライバシーを含みます。だから<b>再実行可能でバージョン管理された</b>パイプラインが必要です：収集 → クレンジング → de-identify → chunk／アノテーション → index／保存 → 更新。この問題は、「データをエンジニアリングとして」扱えているかを問うています。","points":[{"title":"基本原理","desc":"AI 製品のデータはモデルに投げれば済むものではなく、まず<b>クリーンで、構造化され、検索可能な</b>形に抽出します。garbage in, garbage out（入れるものがゴミなら出てくるものもゴミ）：このパイプラインの品質が、そのまま RAG／fine-tune／評価の<b>上限</b>になります。"},{"title":"エンジニアリング上のトレードオフ","desc":"品質 vs コスト vs 鮮度：解析とクレンジングを細かくするほど正確ですが高くつきます；データは新しいほど良いですが、index の再構築にはコストがかかります。用途に応じてどこまで細かくやるかを決め、パイプラインを毎回やり直すのではなく<b>増分更新</b>できるようにします。"},{"title":"体系化","desc":"再実行可能なパイプライン：<b>収集 → クレンジング／重複除去 → de-identify と権限 → 用途に応じた加工（chunk／アノテーション／テストセット）→ index／保存 → 更新とバージョン管理</b>。データセットもバージョン管理して、初めて再現と回帰ができます。"}],"core":[{"h":"収集とクレンジング","d":"ソース（ドキュメント、データベース、API）から収集し、<b>クリーンなプレーンテキスト</b>に抽出します：PDF／スキャンは OCR、ノイズ除去、<b>重複除去</b>が必要です。このステップの品質がシステム全体の上限であり、力をかける価値があります。"},{"h":"プライバシーとガバナンス","d":"パイプラインに入れる前に、まず<b>分類と de-identify</b>（PII をマスク）し、<b>アクセス権限</b>を設定し、出所と時刻（provenance）を記録します；<b>削除可能性</b>（忘れられる権利）などの法規制に合わせます。機密の生データをあちこちに散らばらせないこと。"},{"h":"用途に応じた加工","d":"<b>RAG</b>：構造に応じて chunk し、ベクトル化して vector database に入れる（metadata の権限付き）；<b>fine-tune</b>：「指示：良い回答」のペアに整理し品質管理する；<b>評価</b>：固定のテストセットを抜き出す。同じデータでも、用途が違えば加工も変える必要があります。"},{"h":"更新とバージョン管理","d":"データは古くなります：<b>増分更新し、index を再構築</b>できる必要があります；パイプラインもデータセットも<b>バージョン管理</b>して、初めて結果を再現し回帰を行えます。一度走らせて終わりのものは、パイプラインとは言えません。"}],"plus":["解析の品質がすべてを決めます：表、多段組み、階層的な見出しは layout-aware な解析が必要で、力任せに文字を抜き出すのではありません。","データセットも「テスト」が必要です：サンプル検査と、分布のドリフト（本番の実データとまだ似ているか）の監視。","アノテーションはコストが高いです：まずヒューリスティックや AI 補助でラベル付けし、その後に人手で抜き取り検査して校正できます。"],"traps":["データを一度きりの作業と見なし、再実行や更新ができるパイプラインがないこと。","de-identify と権限を省き、データがパイプラインの中で先に漏れてしまうこと。","量を積むだけで品質や重複除去を放置し、汚れたデータが RAG と fine-tune の足を引っ張ること。"]},
     "design-latency-scale": {"label":"低 latency と大量トラフィックへの対応","q":"AI 製品で低 latency を保ちつつ大量のユーザーを捌くには、どう設計しますか？","trap":"「マシンを増やす」だけで答えてはいけません。LLM の推論は遅くて高いので、規模に耐えるには<b>「計算する量を減らす」</b>と<b>「待ち時間を隠す」</b>の両端から着手し、水平スケールは最後に考えます。この問題は、具体的な手段とトレードオフを述べることを求めています。","points":[{"title":"基本原理","desc":"ボトルネックは<b>token ごとにモデルを 1 回走らせる必要がある</b>ことです：遅く、GPU を食います。だから最適化は 3 層に分かれます：まず<b>1 回あたりのコストを下げ</b>、次に<b>待ち時間を隠し</b>、最後に<b>水平スケール</b>する、やみくもにカードを増やすのではありません。"},{"title":"エンジニアリング上のトレードオフ","desc":"latency、throughput、コスト、品質は互いに引っ張り合います：batching は throughput を上げますが latency が増え、小型モデルは速いですが品質が落ちることがあります。まず <b>SLO</b>（P95 latency など）を定め、それに合わせて調整する、すべてを極限まで振り切るのではありません。"},{"title":"体系化","desc":"3 層を一緒に進めます：<b>① 量を減らす</b>（モデルの振り分け、quantization、KV cache、context の削減、キャッシュ）→ <b>② 待ち時間を隠す</b>（streaming、非同期キュー、batching）→ <b>③ スケール</b>（複数レプリカ＋load balancing＋autoscale＋rate limit）。"}],"core":[{"h":"まず 1 回あたりのコストと latency を下げる","d":"適切な<b>モデルサイズ</b>を選び（単純なタスクには小型モデル）、<b>quantization</b>、<b>KV cache</b>、prompt／context の削減を行います；<b>キャッシュ</b>できる結果はキャッシュします（同一または類似のクエリ）。1 回の計算が少なく速くなれば、後でスケールしやすくなります。"},{"h":"待ち時間を隠す","d":"<b>streaming</b>（1 文字ずつ吐き出す）で「最初の 1 文字までの latency」を速く感じさせます；リアルタイムでない作業は<b>バックグラウンドのキュー</b>に回して非同期処理します；<b>batching</b> は複数のリクエストをまとめて計算し throughput を上げます。ユーザーの体感 latency は、実際の値より重要なことが多いです。"},{"h":"水平スケールとトラフィック制御","d":"複数レプリカ＋<b>load balancing</b>、キューの長さに応じて<b>autoscale</b>；<b>rate limit</b> とバックオフを加えてバックエンドが潰されないよう守る；ピーク時は<b>キューで山を削る</b>。スケールは最後の層であって、最初の一手ではありません。"},{"h":"最後にトレードオフと SLO を見る","d":"latency／throughput／コスト／品質は互いに引っ張り合うので、まず<b>目標（P95 latency や予算など）</b>を定めてから配分します。観測では<b>最初の 1 文字までの latency</b>と<b>完了までの latency</b>を分けて計測し、P95／P99 の tail latency を注視します。体感は尻尾（tail）に出るからです。"}],"plus":["semantic cache：完全に同じクエリだけでなく、似た質問でもヒットできます。","streaming は途中での中断に対応する必要があります：エラーが起きたり審査に通らなかったりしたときに、どう優雅に締めくくるか。","平均 latency で評価しないこと：ユーザーの痛みは P95／P99 の tail latency にあります。"],"traps":["「GPU を増やす」しか思いつかず、先にやるべき節約策であるキャッシュ、batching、モデルの振り分けを飛ばすこと。","平均 latency で評価し、P95／P99 の tail latency を無視すること。","LLM が終わるまで同期的に待ってから応答し、非同期にできる作業までリクエストの中に詰まらせること。"]},
@@ -4411,6 +4812,8 @@ export const IV_ORDER = [
   "hallucination", "bias", "trust-answer", "prompt-injection", "jailbreak", "guardrails", "data-leakage", "ai-limits", "can-llm-reason",
   // 系統設計
   "design-doc-qa", "design-support-bot", "realtime-assistant", "design-build-vs-buy", "design-data-pipeline", "design-latency-scale", "design-cost", "design-eval-improve", "monitoring",
+  // 評估與決策
+  "eval-benchmark", "eval-llm-judge", "eval-set", "eval-offline-online", "eval-regression",
 ];
 
 /** 依分類 key 取該類題目 id 陣列（依 IV_ORDER 排序） */
