@@ -2,7 +2,7 @@
    各挑戰題的「判斷題」：讀完示範答案後，換你判斷哪個回答最到位。
    提示文字用 i18n 的 iv.quizPrompt（固定），此處只放選項。
    zh 每個選項帶 ok（哪個是正解）；en/ja 只放翻譯的 t/why，ok 由 zh 提供。
-   quizFor 合併：ok 取 zh、文字取該語言（缺則回退 zh）。
+   quizFor 合併：ok 取 zh、文字取該語言（缺則回退 zh）。新增題目改這裡即可。
    ============================================================ */
 export const QUIZZES = {
   "tokenizer-why": {
@@ -331,6 +331,53 @@ export const QUIZZES = {
       {
         "t": "モデルは原文をまったく覚えず、すべて抽象的な規則なので、訓練データを吐き出すことは不可能だ。",
         "why": "実際には繰り返し現れた内容を逐語的に暗記し、そのまま吐き出すこともあり（regurgitation）、これこそがプライバシーや著作権をめぐる論争の源だ。"
+      }
+    ]
+  },
+  "emergence": {
+    "zh": [
+      {
+        "t": "GPT-4 就是把 GPT-3 等比例放大，參數變多所以每件事都做得更準一點，本質是同一個模型。",
+        "ok": false,
+        "why": "放大帶來的不只是更準；跨過某個規模會湧現出小模型根本不會的新能力，是質變不只是量變。"
+      },
+      {
+        "t": "scaling law 讓 loss 隨參數、資料、算力放大而平滑下降；但某些下游能力會在某個規模「突然」出現（湧現），所以 GPT-4 相對 GPT-3 是量變引發質變、多了新能力，而非線性放大。不過這「突然」有一部分是評測指標造成的錯覺。",
+        "ok": true,
+        "why": "講出 loss 平滑 vs 能力跳升（湧現）、量變到質變，還補上指標錯覺的但書，完整。"
+      },
+      {
+        "t": "模型只要一直變大，任何能力都會自動無限湧現，越大一定越好。",
+        "ok": false,
+        "why": "湧現有門檻也有指標錯覺成分，且報酬會遞減、資料會枯竭，「一直放大就無限變強」不成立。"
+      }
+    ],
+    "en": [
+      {
+        "t": "GPT-4 is just GPT-3 scaled up proportionally; with more parameters it does everything a bit more accurately, and it is essentially the same model.",
+        "why": "Scaling brings more than accuracy; past a certain scale, new abilities that small models fundamentally cannot do emerge, a qualitative change and not only a quantitative one."
+      },
+      {
+        "t": "A scaling law makes loss fall smoothly as parameters, data, and compute scale up; but some downstream abilities appear 'suddenly' at a certain scale (emergence), so GPT-4 relative to GPT-3 is a quantitative change triggering a qualitative one, gaining new abilities, rather than a linear scale-up. That said, part of this 'suddenness' is an illusion created by evaluation metrics.",
+        "why": "It states smooth loss vs jumping ability (emergence) and quantitative to qualitative change, and adds the caveat about the metric illusion; complete."
+      },
+      {
+        "t": "As long as a model keeps getting bigger, any ability will automatically emerge without limit, and bigger is always better.",
+        "why": "Emergence has thresholds and a metric-illusion component, returns diminish, and data runs out, so 'keep scaling and get infinitely stronger' does not hold."
+      }
+    ],
+    "ja": [
+      {
+        "t": "GPT-4 は GPT-3 を比例してスケールしただけで、parameters が増えたので何でも少し正確にこなす、本質的には同じモデルである。",
+        "why": "スケールがもたらすのは正確さだけではありません。ある規模を超えると、小さいモデルには全くできない新しい能力が創発し、量的変化だけでなく質的変化です。"
+      },
+      {
+        "t": "scaling law は loss を parameters、data、compute のスケールに応じて滑らかに下げるが、一部の下流の能力はある規模で「突然」現れる(創発)ので、GPT-4 は GPT-3 に対して量的変化が質的変化を引き起こし、新しい能力が増えたのであり、線形なスケールアップではない。ただしこの「突然」の一部は評価指標が生む錯覚である。",
+        "why": "loss の滑らかさ vs 能力の跳躍(創発)、量的変化から質的変化までを述べ、さらに指標の錯覚という但し書きも補っており、完全です。"
+      },
+      {
+        "t": "モデルはひたすら大きくしさえすれば、あらゆる能力が自動的に無限に創発し、大きいほど必ず良い。",
+        "why": "創発には閾値があり指標の錯覚の要素もあり、さらに収穫は逓減し data も枯渇するので、「ひたすらスケールすれば無限に強くなる」は成り立ちません。"
       }
     ]
   },
