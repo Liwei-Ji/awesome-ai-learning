@@ -4,7 +4,8 @@
      - nav.path 有值   → 引導播放器：側邊欄放這條路線的步驟目錄（見 SideNav），
        右側直接播放「目前步驟」的內容（課程頁 Stage 或挑戰頁 Interview），單一來源重用。 */
   import { PATHS, pathById, pathSteps, pathText, locText } from '../data/paths.js';
-  import { idOf } from '../data/chapters.js';
+  import { idOf, CH } from '../data/chapters.js';
+  import { IV_ORDER } from '../data/interviews.js';
   import { nav, go, goPath, setMode, hrefPath, hrefCourse, hrefIv, onNav } from '../stores/state.svelte.js';
   import { i18n, t } from '../stores/i18n.svelte.js';
   import HomeContent from './HomeContent.svelte';
@@ -17,6 +18,8 @@
   let path = $derived(nav.path ? pathById(nav.path) : null);
   const journeys = PATHS.filter((p) => p.group === 'journey');
   const tracks = PATHS.filter((p) => p.group === 'track');
+  const courseCount = Object.keys(CH).length;     // 課程頁數（動態，不寫死）
+  const challengeCount = IV_ORDER.length;          // 挑戰題數（動態，不寫死）
   const countLabel = (p) => `${pathSteps(p).length} ${t('paths.steps')}`;
 
   // 目前步驟：依 nav.step（ref）挑；沒有就落在第一步
@@ -84,12 +87,12 @@
       <div class="grouphead"><h2>{t('paths.browseTitle')}</h2><span class="ghint">{t('paths.browseHint')}</span></div>
       <div class="grid grid-t">
         <a class="pcard t" href={hrefCourse(0)} onclick={(e) => onNav(e, () => go(0))}>
-          <div class="pc-title"><h3>{t('iv.course')}</h3><span class="pc-time">{t('paths.courseMeta')}</span></div>
+          <div class="pc-title"><h3>{t('iv.course')}</h3><span class="pc-time">{courseCount} {t('paths.certLesson')}</span></div>
           <p class="pc-line">{t('paths.courseLede')}</p>
           <div class="pc-foot">{t('paths.courseFoot')} <span class="arrow">→</span></div>
         </a>
         <a class="pcard t" href={hrefIv(null)} onclick={(e) => onNav(e, () => setMode('interview'))}>
-          <div class="pc-title"><h3>{t('iv.interview')}</h3><span class="pc-time">{t('paths.challengeMeta')}</span></div>
+          <div class="pc-title"><h3>{t('iv.interview')}</h3><span class="pc-time">{challengeCount} {t('paths.certChallenge')}</span></div>
           <p class="pc-line">{t('paths.challengeLede')}</p>
           <div class="pc-foot">{t('paths.challengeFoot')} <span class="arrow">→</span></div>
         </a>

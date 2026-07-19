@@ -2731,6 +2731,147 @@ export const QUIZZES = {
       }
     ]
   },
+  "design-build-vs-buy": {
+    "zh": [
+      {
+        "t": "API 一定比較貴又不安全，能自架就自架，開源模型免費又可控。",
+        "ok": false,
+        "why": "「開源＝免費」是錯覺（GPU 加維運成本高）；安全取決於怎麼做，不是自架本身；低量時 API 往往更划算。"
+      },
+      {
+        "t": "沒有一律答案，要按情境權衡：高敏感／受法規、要資料留自家傾向自架；低量或早期用 API 划算，量夠大攤平 GPU 才輪到自架；再看能力 vs 可控與維運人力。實務常混用：預設 API，敏感或高量路徑自架。",
+        "ok": true,
+        "why": "講出多維度取捨（隱私、成本結構、能力/可控、維運）與混合策略，完整。"
+      },
+      {
+        "t": "一律用商用 API 最好，因為它最強又零維運，成本永遠比自架低。",
+        "ok": false,
+        "why": "量夠大時自架可能更便宜；且高敏感或合規場景未必能用外部 API，不是一律 API。"
+      }
+    ],
+    "en": [
+      {
+        "t": "APIs are always more expensive and less secure, so self-host whenever you can; open-source models are free and controllable.",
+        "why": "'Open-source equals free' is an illusion (GPU plus operations costs are high); security depends on how you do it, not on self-hosting itself; at low volume the API is often the better deal."
+      },
+      {
+        "t": "There is no one-size-fits-all answer; weigh it by context: highly sensitive/regulated cases that must keep data in-house lean toward self-hosting; low volume or early stage makes the API the better deal, and self-hosting only comes into play once volume is large enough to amortize the GPUs; then consider capability vs control and operations staffing. In practice you often mix: default to the API, self-host the sensitive or high-volume paths.",
+        "why": "It spells out the multi-dimensional trade-off (privacy, cost structure, capability/control, operations) and the hybrid strategy; complete."
+      },
+      {
+        "t": "Always using a commercial API is best, because it is the strongest and has zero operations, and its cost is always lower than self-hosting.",
+        "why": "At large enough volume self-hosting can be cheaper; and highly sensitive or compliance scenarios may not allow an external API, so it is not always the API."
+      }
+    ],
+    "ja": [
+      {
+        "t": "API は必ず高くて安全でないから、self-host できるなら self-host すべきで、open-source model は無料でコントロールもできる。",
+        "why": "「open-source＝無料」は錯覚（GPU と運用のコストが高い）；安全性はやり方次第であって self-host 自体ではない；低量では API のほうが得なことが多い。"
+      },
+      {
+        "t": "一律の答えはなく、状況に応じて重みづけする：高機密／法規制の対象でデータを自社に留めたい場合は self-host 寄り；低量や初期段階は API が得で、GPU を分散できるほど量が大きくなって初めて self-host の出番；さらに能力 vs コントロールと運用の人手を見る。実務ではよく混ぜる：デフォルトは API、機密や大量の経路は self-host。",
+        "why": "多面的なトレードオフ（プライバシー、コスト構造、能力／コントロール、運用）とハイブリッド戦略を述べており、完全。"
+      },
+      {
+        "t": "一律で商用 API が最良、なぜなら最強で運用ゼロだし、コストも常に self-host より低いから。",
+        "why": "量が十分大きいと self-host のほうが安いこともある；また高機密やコンプライアンスの場面では外部 API を使えないこともあり、一律 API ではない。"
+      }
+    ]
+  },
+  "design-data-pipeline": {
+    "zh": [
+      {
+        "t": "把所有文件一次倒進向量庫就好，資料準備是一次性的工作。",
+        "ok": false,
+        "why": "資料會變、會髒、有隱私；要可重跑、可更新、可版本控的管線，還要去識別化與去重，不是一次性。"
+      },
+      {
+        "t": "設計成一條可重跑的管線：收集 → 清洗去重 → 去識別化與權限 → 依用途加工（RAG 切塊向量化、微調做指令對、評估抽測試集）→ 索引存 → 增量更新與版本控。解析與清洗品質是整個系統的天花板。",
+        "ok": true,
+        "why": "涵蓋收集清洗、隱私治理、依用途加工、更新版本，把資料當工程，完整。"
+      },
+      {
+        "t": "資料越多越好，先全部塞進去，品質和去重之後再說。",
+        "ok": false,
+        "why": "garbage in, garbage out：髒資料與重複會拖垮 RAG 與微調，品質與去重比堆量更關鍵。"
+      }
+    ],
+    "en": [
+      {
+        "t": "Just dump all the documents into the vector database at once; data preparation is a one-time job.",
+        "why": "Data changes, gets dirty, and carries privacy concerns; you need a repeatable, updatable, version-controlled pipeline, plus de-identification and deduplication, not a one-time job."
+      },
+      {
+        "t": "Design it as a repeatable pipeline: collect → clean and dedup → de-identify and permissions → process per use case (RAG chunk and vectorize, fine-tuning build instruction pairs, evaluation pull a test set) → index and store → incremental update and version control. Parsing and cleaning quality is the ceiling of the whole system.",
+        "why": "It covers collection and cleaning, privacy governance, per-use processing, and update and versioning, treating data as engineering; complete."
+      },
+      {
+        "t": "More data is always better; cram it all in first and worry about quality and deduplication later.",
+        "why": "Garbage in, garbage out: dirty data and duplicates drag down RAG and fine-tuning, so quality and deduplication matter more than piling up volume."
+      }
+    ],
+    "ja": [
+      {
+        "t": "すべてのドキュメントを一度に vector database に流し込めばよく、データ準備は一度きりの作業だ。",
+        "why": "データは変わり、汚れ、プライバシーを含む；再実行可能で更新可能、バージョン管理できるパイプラインが必要で、さらに de-identify と重複除去も要る、一度きりではない。"
+      },
+      {
+        "t": "再実行可能なパイプラインとして設計する：収集 → クレンジングと重複除去 → de-identify と権限 → 用途に応じた加工（RAG は chunk してベクトル化、fine-tune は指示ペアを作成、評価はテストセットを抜き出す）→ index して保存 → 増分更新とバージョン管理。解析とクレンジングの品質がシステム全体の上限。",
+        "why": "収集とクレンジング、プライバシーのガバナンス、用途に応じた加工、更新とバージョン管理を網羅し、データをエンジニアリングとして扱っており、完全。"
+      },
+      {
+        "t": "データは多いほど良く、まず全部詰め込んで、品質や重複除去は後で考えればよい。",
+        "why": "garbage in, garbage out（入れるものがゴミなら出てくるものもゴミ）：汚れたデータと重複は RAG と fine-tune の足を引っ張るので、品質と重複除去は量を積むことより重要。"
+      }
+    ]
+  },
+  "design-latency-scale": {
+    "zh": [
+      {
+        "t": "要更快更能撐流量，就是一直加 GPU、開更多機器。",
+        "ok": false,
+        "why": "加機器是最後一層；該先減量（模型分流、量化、KV cache、快取）與藏等待（streaming、非同步、批次），否則只是燒錢。"
+      },
+      {
+        "t": "三層一起做：先降單次成本（模型分流、量化、KV cache、精簡 context、快取）→ 藏等待（streaming、非同步佇列、批次）→ 水平擴展（多副本、負載平衡、自動擴縮、rate limit）；並先定 SLO（如 P95 延遲）再權衡延遲、吞吐、成本、品質。",
+        "ok": true,
+        "why": "講出減量/藏等待/擴展三層加 SLO 與取捨，還點出尾延遲，完整。"
+      },
+      {
+        "t": "只要平均延遲夠低就代表夠快，批次能提高吞吐所以永遠該開最大批次。",
+        "ok": false,
+        "why": "體感在 P95/P99 尾延遲，不是平均；批次提高吞吐但增延遲，要按 SLO 權衡，不是一律最大。"
+      }
+    ],
+    "en": [
+      {
+        "t": "To go faster and handle more traffic, you just keep adding GPUs and spinning up more machines.",
+        "why": "Adding machines is the last layer; you should first reduce the load (model routing, quantization, KV cache, caching) and hide the wait (streaming, async, batching), otherwise you are just burning money."
+      },
+      {
+        "t": "Do all three layers together: first lower the per-call cost (model routing, quantization, KV cache, trimmed context, caching) → hide the wait (streaming, async queues, batching) → scale horizontally (multiple replicas, load balancing, autoscale, rate limit); and set an SLO (such as P95 latency) first, then weigh latency, throughput, cost, and quality.",
+        "why": "It names the three layers of reduce/hide the wait/scale plus the SLO and trade-offs, and also points out tail latency; complete."
+      },
+      {
+        "t": "As long as average latency is low enough it means fast enough, and since batching raises throughput you should always run the largest batch.",
+        "why": "The felt experience lives in P95/P99 tail latency, not the average; batching raises throughput but adds latency, so weigh it against the SLO rather than always going maximum."
+      }
+    ],
+    "ja": [
+      {
+        "t": "より速く、より多くのトラフィックを捌くには、ひたすら GPU を増やし、マシンを増やせばよい。",
+        "why": "マシンを増やすのは最後の層；先に量を減らし（モデルの振り分け、quantization、KV cache、キャッシュ）、待ち時間を隠す（streaming、非同期、batching）べきで、そうしなければ金を燃やすだけ。"
+      },
+      {
+        "t": "3 層を一緒にやる：まず 1 回あたりのコストを下げ（モデルの振り分け、quantization、KV cache、context の削減、キャッシュ）→ 待ち時間を隠し（streaming、非同期キュー、batching）→ 水平スケール（複数レプリカ、load balancing、autoscale、rate limit）；さらに先に SLO（P95 latency など）を定めてから latency、throughput、コスト、品質を天秤にかける。",
+        "why": "量を減らす／待ち時間を隠す／スケールの 3 層に SLO とトレードオフを加えて述べ、さらに tail latency にも触れており、完全。"
+      },
+      {
+        "t": "平均 latency さえ十分低ければ十分速いということで、batching は throughput を上げるから常に最大の batch にすべき。",
+        "why": "体感は P95/P99 の tail latency にあり、平均ではない；batching は throughput を上げるが latency も増えるので、一律で最大にするのではなく SLO に照らして天秤にかける。"
+      }
+    ]
+  },
   "design-cost": {
     "zh": [
       {
