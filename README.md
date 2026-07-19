@@ -2,6 +2,8 @@
 
 > Understand AI from scratch, for real.
 
+![Awesome AI Learning: 50-second product tour](docs/promo.gif)
+
 ![Awesome AI Learning: course overview and the AI knowledge map](docs/screenshot.png)
 
 An interactive AI learning platform: no coding background needed, just open it and start. Each chapter focuses on one core idea and pairs it with a hands-on interactive demo, so you learn by doing, from the basic principles of AI all the way to assembling your own AI application. The interface and all the material come in **English, 日本語 and 繁體中文**, switchable anytime.
