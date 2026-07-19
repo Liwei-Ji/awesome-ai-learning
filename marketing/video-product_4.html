@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<!-- video-product_4.html · intro variant 4: Blur -->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Awesome AI Learning · Product Video (intro 4: Blur)</title>
+<style>
+  :root {
+    --bg:#eef1f6; --surface:#ffffff; --surface-2:#f6f8fb; --surface-3:#eceff5;
+    --ink:#141821; --ink-2:#3b4557; --muted:#5b6678; --line:#dde3ec; --line-2:#c6cfdd;
+    --accent:#e07f0e; --accent-soft:#f6a940; --accent-ink:#a85a08;
+    --teal:#0f8a80; --teal-soft:#3fb6a8; --good:#1f9d57; --crit:#d23f3f;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Noto Sans TC",sans-serif;
+    --r:12px; --e-1:0 1px 2px rgba(20,30,55,.05); --e-2:0 3px 10px rgba(20,30,55,.06); --e-3:0 14px 36px rgba(20,30,55,.11);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; background: #c9d1de; font-family: var(--sans); overflow: hidden; }
+  body { display: grid; place-items: center; }
+
+  .frame {
+    position: relative; aspect-ratio: 16 / 9;
+    width: min(100vw, calc(100svh * 16 / 9)); height: auto;
+    container-type: size; background: var(--bg); color: var(--ink); overflow: hidden;
+    box-shadow: 0 0 60px rgba(0,0,0,.25);
+  }
+
+  /* chrome */
+  .beatglow { position: absolute; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(58% 52% at 50% 50%, var(--accent-soft), transparent 70%); opacity: calc(var(--beat, 0) * 0.2); }
+  .progress { position: absolute; left: 0; bottom: 0; height: .6cqh; width: 0; background: linear-gradient(90deg, var(--accent), var(--teal)); z-index: 7; box-shadow: 0 0 calc(4px + var(--beat, 0) * 16px) rgba(224, 127, 14, calc(.25 + var(--beat, 0) * .55)); }
+  .controls { position: absolute; bottom: 3cqh; right: 6cqw; display: flex; gap: 1.4cqw; z-index: 7; transition: opacity .4s; }
+  .controls button { background: var(--surface); border: 1px solid var(--line-2); color: var(--ink-2); width: 6cqh; height: 6cqh; border-radius: 50%; font-size: 2.6cqh; cursor: pointer; box-shadow: var(--e-1); }
+  .frame.clean .controls, .frame.clean .progress { display: none; }
+  .frame.idle .controls { opacity: 0; }
+
+  /* scenes */
+  .stage { position: absolute; inset: 0; z-index: 1; }
+  .scene { position: absolute; inset: 0; padding: 17cqh 6cqw 12cqh; display: grid; align-content: center; opacity: 0; visibility: hidden; transition: opacity .5s ease; }
+  .scene.active { opacity: 1; visibility: visible; }
+  .scene.split { grid-template-columns: 1.02fr .98fr; gap: 5cqw; align-items: center; align-content: center; }
+  .scene.center { justify-items: center; text-align: center; align-content: center; }
+
+  .eb { font-family: var(--mono); font-size: 2.4cqh; letter-spacing: .16em; text-transform: uppercase; color: var(--accent-ink); margin-bottom: 2.6cqh; }
+  h2 { font-size: 8.4cqh; line-height: 1.12; letter-spacing: -.01em; font-weight: 720; color: var(--ink); max-width: 19ch; text-wrap: balance; }
+  .scene.center h2 { max-width: 24ch; margin-left: auto; margin-right: auto; }
+  .sub { margin-top: 3cqh; font-size: 3.5cqh; line-height: 1.5; color: var(--ink-2); max-width: 32ch; }
+  .scene.center .sub { max-width: 40ch; margin-left: auto; margin-right: auto; }
+
+  /* entrance */
+  .scene .eb, .scene h2, .scene .sub, .scene .viz { opacity: 0; }
+  .scene.active .eb { animation: rise .6s .05s forwards; }
+  .scene.active h2 { animation: rise .7s .16s forwards; }
+  .scene.active .sub { animation: rise .7s .32s forwards; }
+  .scene.active .viz { animation: rise .8s .3s forwards; }
+  @keyframes rise { from { opacity: 0; transform: translateY(2cqh); } to { opacity: 1; transform: none; } }
+
+  /* intro variants for the opening (?intro=1..6); same copy, different entrance */
+  @keyframes fadeonly { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes wipe { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+  @keyframes blurin { from { opacity: 0; filter: blur(14px); } to { opacity: 1; filter: blur(0); } }
+  @keyframes zoomin { from { opacity: 0; transform: scale(.9); } to { opacity: 1; transform: none; } }
+  .scene.intro-2.active .eb { animation: fadeonly .7s .05s forwards; }
+  .scene.intro-2.active h2 { animation: fadeonly .9s .2s forwards; }
+  .scene.intro-2.active .sub { animation: fadeonly .9s .45s forwards; }
+  .scene.intro-3 h2 { opacity: 1; }
+  .scene.intro-3.active h2 { clip-path: inset(0 100% 0 0); animation: wipe 1s .2s forwards; }
+  .scene.intro-4.active .eb { animation: blurin .8s .05s forwards; }
+  .scene.intro-4.active h2 { animation: blurin 1s .2s forwards; }
+  .scene.intro-4.active .sub { animation: blurin 1s .45s forwards; }
+  .scene.intro-5 h2 { transform-origin: left center; }
+  .scene.intro-5.active h2 { animation: zoomin .85s .18s forwards; }
+  .scene.intro-6 h2 { opacity: 1; }
+  .scene.intro-6 h2 .w { display: inline-block; opacity: 0; }
+  .scene.intro-6.active h2 .w { animation: rise .55s forwards; }
+
+  /* ===== visuals (light) ===== */
+  .viz { display: grid; place-items: center; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); box-shadow: var(--e-2); }
+
+  /* scatter (the gap) */
+  .scatter { position: relative; width: 100%; height: 46cqh; }
+  .scatter span { position: absolute; width: 30%; height: 18%; border-radius: 8px; background: var(--surface); border: 1px solid var(--line); box-shadow: var(--e-1); }
+  .scatter span::before, .scatter span::after { content: ""; position: absolute; left: 10%; height: 8%; background: var(--line-2); border-radius: 2px; }
+  .scatter span::before { top: 30%; width: 70%; } .scatter span::after { top: 58%; width: 45%; }
+
+  /* node graph (the turn) */
+  .graph { position: relative; width: 90%; height: 46cqh; }
+  .graph svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .graph svg line { stroke: var(--line-2); stroke-width: 1.5; }
+  .graph .n { position: absolute; width: 3.4cqh; height: 3.4cqh; border-radius: 50%; background: var(--surface); border: 2px solid var(--teal); box-shadow: var(--e-1); transform: translate(-50%, -50%); }
+  .graph .n.hot { border-color: var(--accent); background: var(--accent-soft); }
+
+  /* tokenizer */
+  .tok { display: flex; flex-wrap: wrap; gap: 1.4cqw; justify-content: center; }
+  .tok span { padding: 1.8cqh 2.2cqw; border-radius: 1.2cqh; font-family: var(--mono); font-size: 3.4cqh; font-weight: 600; box-shadow: var(--e-1); }
+  .tok span:nth-child(odd) { background: rgba(224,127,14,.12); color: var(--accent-ink); }
+  .tok span:nth-child(even) { background: rgba(15,138,128,.12); color: var(--teal); }
+
+  /* attention matrix */
+  .attn { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2cqh; width: 40cqh; }
+  .attn i { aspect-ratio: 1; border-radius: 1cqh; border: 1px solid var(--line); }
+
+  /* rag */
+  .rag { display: flex; align-items: center; gap: 2cqw; }
+  .rag .pill { padding: 2cqh 2cqw; border-radius: 1.2cqh; font-weight: 600; font-size: 2.6cqh; text-align: center; }
+  .rag .q { background: var(--surface); border: 1px solid var(--line); box-shadow: var(--e-1); }
+  .rag .docs { display: grid; gap: 1cqh; }
+  .rag .docs b { display: block; width: 12cqw; height: 3.2cqh; border-radius: .8cqh; background: var(--surface); border: 1px solid var(--teal); box-shadow: var(--e-1); }
+  .rag .arr { color: var(--accent); font-size: 4cqh; font-weight: 700; }
+  .rag .a { background: var(--surface); border: 1.5px solid var(--teal); color: var(--ink); box-shadow: var(--e-2); }
+  .rag .a small { display: block; margin-top: .6cqh; font-family: var(--mono); font-size: 1.8cqh; color: var(--teal); }
+
+  /* knowledge cutoff */
+  .know { width: 100%; max-width: 52cqh; }
+  .axis { position: relative; height: 10cqh; display: flex; gap: 1.6cqw; }
+  .axis .z { height: 100%; border-radius: 1.2cqh; display: grid; place-items: center; font-family: var(--mono); font-size: 1.9cqh; letter-spacing: .06em; }
+  .axis .zin { flex: 0 0 62%; background: rgba(15,138,128,.1); border: 1px solid var(--teal); color: var(--teal); }
+  .axis .zout { flex: 1; background: var(--surface-2); border: 1px dashed var(--line-2); color: var(--muted); }
+  .axis .cut { position: absolute; left: 62%; top: -1.6cqh; bottom: -1.6cqh; border-left: 2px dashed var(--crit); }
+  .axis .cut span { position: absolute; top: -3.4cqh; left: 50%; transform: translateX(-50%); font-family: var(--mono); font-size: 1.7cqh; color: var(--crit); white-space: nowrap; }
+  .know .stat { margin-top: 4.5cqh; display: grid; gap: 1.4cqh; }
+  .know .stat div { padding: 1.8cqh 2cqw; border-radius: 1.2cqh; font-weight: 700; font-size: 2.8cqh; }
+  .know .no { color: var(--crit); background: rgba(210,63,63,.08); border: 1px solid rgba(210,63,63,.4); }
+  .know .yes { color: var(--teal); background: rgba(15,138,128,.09); border: 1px solid var(--teal); opacity: 0; }
+  .scene.active .know .yes { animation: rise .6s 2.2s forwards; }
+
+  /* depth stepper */
+  .depth { display: flex; flex-direction: column; gap: 1.8cqh; align-items: flex-start; }
+  .depth .step { display: flex; align-items: center; gap: 1.6cqw; font-size: 3cqh; color: var(--ink-2); }
+  .depth .tick { width: 3.6cqh; height: 3.6cqh; border-radius: 50%; background: var(--teal); color: #fff; display: grid; place-items: center; font-size: 2.2cqh; font-weight: 800; flex: none; }
+  .depth .seal { margin-top: 1.4cqh; align-self: center; width: 15cqh; height: 15cqh; border-radius: 50%; display: grid; place-items: center; background: var(--surface); border: 2px solid var(--accent); box-shadow: var(--e-2); font-size: 6cqh; }
+
+  /* values pills */
+  .pills { display: flex; gap: 1.6cqw; margin-top: 4cqh; flex-wrap: wrap; justify-content: center; }
+  .pills span { font-family: var(--mono); font-size: 2.4cqh; letter-spacing: .08em; padding: 1.4cqh 2.4cqw; border-radius: 100px; background: var(--surface); border: 1px solid var(--line-2); color: var(--ink-2); box-shadow: var(--e-1); }
+
+  /* cta */
+  .cta-url { margin-top: 4cqh; font-family: var(--mono); font-size: 4.2cqh; font-weight: 600; color: var(--accent-ink); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .scene .eb, .scene h2, .scene .sub, .scene .viz, .know .yes, .scene h2 .w { opacity: 1 !important; animation: none !important; filter: none !important; }
+    .scene.intro-3.active h2 { clip-path: none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="frame" id="frame">
+  <div class="beatglow"></div>
+
+  <div class="stage" id="stage">
+    <!-- 1 hook -->
+    <section class="scene"><div class="txt">
+      <div class="eb">Awesome AI Learning</div>
+      <h2>Using AI isn't the same as understanding it.</h2>
+      <p class="sub">Anyone can prompt AI. Few understand how it actually works.</p>
+    </div></section>
+
+    <!-- 2 gap -->
+    <section class="scene split"><div class="txt">
+      <div class="eb">The Gap</div>
+      <h2>The internet teaches prompts.</h2>
+      <p class="sub">It rarely explains how AI actually works.</p>
+    </div><div class="viz"><div class="scatter">
+      <span style="left:4%;top:8%;transform:rotate(-7deg)"></span>
+      <span style="left:46%;top:2%;transform:rotate(5deg)"></span>
+      <span style="left:24%;top:34%;transform:rotate(-3deg)"></span>
+      <span style="left:60%;top:40%;transform:rotate(8deg)"></span>
+      <span style="left:8%;top:62%;transform:rotate(4deg)"></span>
+      <span style="left:52%;top:74%;transform:rotate(-6deg)"></span>
+    </div></div></section>
+
+    <!-- 3 turn -->
+    <section class="scene split"><div class="txt">
+      <div class="eb">The Idea</div>
+      <h2>Learn AI by building it.</h2>
+      <p class="sub">An interactive journey from first principles to real AI systems.</p>
+    </div><div class="viz"><div class="graph" id="graph"></div></div></section>
+
+    <!-- 4 tokenizer -->
+    <section class="scene split"><div class="txt">
+      <div class="eb">Hands-on · Tokenizer</div>
+      <h2>See how text becomes tokens.</h2>
+      <p class="sub">Models don't read words. They read tokens.</p>
+    </div><div class="viz"><div class="tok"><span>Under</span><span>stand</span><span>ing</span><span>AI</span></div></div></section>
+
+    <!-- 5 attention -->
+    <section class="scene split"><div class="txt">
+      <div class="eb">Hands-on · Transformer</div>
+      <h2>See how attention finds what matters.</h2>
+      <p class="sub">Each token learns which other tokens matter most.</p>
+    </div><div class="viz"><div class="attn" id="attn"></div></div></section>
+
+    <!-- 6 rag -->
+    <section class="scene split"><div class="txt">
+      <div class="eb">Hands-on · RAG</div>
+      <h2>Learn why RAG retrieves before it responds.</h2>
+      <p class="sub">Retrieve reliable information, then generate an answer.</p>
+    </div><div class="viz"><div class="rag">
+      <div class="pill q">Question</div>
+      <div class="docs"><b></b><b></b><b></b></div>
+      <div class="arr">→</div>
+      <div class="pill a">Answer<small>★ Source</small></div>
+    </div></div></section>
+
+    <!-- 7 knowledge -->
+    <section class="scene split"><div class="txt">
+      <div class="eb">Hands-on · Model Knowledge</div>
+      <h2>Know what a model knows, and what it doesn't.</h2>
+      <p class="sub">When training ends, context and retrieval fill the gaps.</p>
+    </div><div class="viz"><div class="know">
+      <div class="axis"><div class="z zin">Training</div><div class="z zout">After Cutoff</div><div class="cut"><span>Cutoff</span></div></div>
+      <div class="stat">
+        <div class="no">Today's News &nbsp;✗</div>
+        <div class="yes">+ Retrieval &nbsp;✓</div>
+      </div>
+    </div></div></section>
+
+    <!-- 8 depth -->
+    <section class="scene split"><div class="txt">
+      <div class="eb">Go Deeper</div>
+      <h2>Test your understanding.</h2>
+      <p class="sub">Challenges, learning paths, and a certificate when you finish.</p>
+    </div><div class="viz"><div class="depth">
+      <div class="step"><span class="tick">✓</span> Lesson</div>
+      <div class="step"><span class="tick">✓</span> Challenge</div>
+      <div class="step"><span class="tick">✓</span> Learning Path</div>
+      <div class="seal">🎓</div>
+    </div></div></section>
+
+    <!-- 9 values -->
+    <section class="scene center"><div class="txt">
+      <div class="eb">Built for Learning</div>
+      <h2>English, 日本語, and 繁體中文.</h2>
+      <p class="sub">Learn anywhere. No internet required.</p>
+      <div class="viz"><div class="pills"><span>100% OFFLINE</span><span>FREE</span><span>OPEN SOURCE</span></div></div>
+    </div></section>
+
+    <!-- 10 cta -->
+    <section class="scene center"><div class="txt">
+      <div class="eb">Start Now</div>
+      <h2>Understand AI from the ground up.</h2>
+      <p class="sub">Start learning today.</p>
+      <div class="cta-url">awesome-ai-learning.vercel.app</div>
+    </div></section>
+  </div>
+
+  <audio id="bgm" src="background_music.mp3" loop preload="auto"></audio>
+  <div class="progress" id="progress"></div>
+  <div class="controls" id="controls">
+    <button id="btnPlay" title="play/pause">⏸</button>
+    <button id="btnReset" title="restart">↺</button>
+    <button id="btnMute" title="mute/unmute">🔊</button>
+  </div>
+</div>
+
+<script>
+(function () {
+  const durs = [4800, 4800, 4800, 4600, 4600, 4800, 5400, 5200, 4800, 5600];
+  const total = durs.reduce((a, b) => a + b, 0);
+  const ENERGY_FPS = 12, ENERGY = [0,0,0,0,0,0,0,0.311,0.681,0.669,0.475,0.471,0.394,0.316,0.26,0.189,0.352,0.354,0.354,0.274,0.181,0.198,0.582,0.473,0.369,0.289,0.237,0.315,0.273,0.264,0.185,0.134,0.151,0.134,0.122,0.098,0.441,0.455,0.326,0.244,0.218,0.237,0.318,0.232,0.164,0.213,0.187,0.276,0.264,0.231,0.248,0.282,0.262,0.23,0.261,0.271,0.243,0.194,0.325,0.248,0.226,0.279,0.229,0.155,0.155,0.347,0.285,0.288,0.387,0.399,0.355,0.307,0.216,0.168,0.29,0.212,0.215,0.175,0.131,0.222,0.327,0.283,0.255,0.217,0.177,0.266,0.279,0.295,0.254,0.209,0.198,0.141,0.112,0.229,0.372,0.253,0.263,0.255,0.199,0.276,0.241,0.203,0.184,0.14,0.258,0.334,0.283,0.241,0.376,0.278,0.354,0.247,0.248,0.191,0.148,0.3,0.265,0.29,0.289,0.277,0.254,0.23,0.243,0.352,0.238,0.178,0.296,0.312,0.324,0.341,0.269,0.198,0.157,0.19,0.19,0.16,0.126,0.308,0.323,0.279,0.221,0.208,0.282,0.342,0.21,0.19,0.129,0.133,0.122,0.095,0.065,0.324,0.409,0.213,0.145,0.35,0.469,0.448,0.289,0.235,0.168,0.181,0.249,0.187,0.145,0.186,0.282,0.275,0.259,0.181,0.199,0.306,0.327,0.447,0.306,0.26,0.234,0.272,0.193,0.152,0.447,0.466,0.486,0.167,0.34,0.344,0.214,0.204,0.149,0.258,0.266,0.281,0.275,0.21,0.326,0.594,0.509,0.424,0.337,0.303,0.325,0.312,0.237,0.19,0.164,0.156,0.13,0.124,0.094,0.399,0.24,0.223,0.181,0.198,0.277,0.279,0.258,0.187,0.176,0.188,0.534,0.41,0.284,0.305,0.332,0.242,0.15,0.176,0.15,0.144,0.243,0.321,0.223,0.186,0.351,0.273,0.188,0.221,0.894,0.742,0.65,0.511,0.486,0.445,0.387,0.718,0.637,0.502,0.39,0.318,0.353,0.299,0.786,0.784,0.45,0.397,0.273,0.285,0.341,0.624,0.77,0.251,0.19,0.156,0.134,0.111,0.432,0.785,0.551,0.4,0.358,0.379,0.393,0.517,0.729,0.633,0.302,0.415,0.386,0.33,0.323,0.769,0.647,0.326,0.318,0.412,0.283,0.231,0.706,0.718,0.365,0.472,0.347,0.365,0.326,0.681,0.677,0.442,0.464,0.439,0.497,0.422,0.532,0.724,0.43,0.294,0.349,0.346,0.216,0.366,0.801,0.637,0.351,0.31,0.241,0.297,0.27,0.813,0.658,0.286,0.236,0.164,0.15,0.128,0.728,0.683,0.373,0.342,0.299,0.305,0.318,0.591,0.703,0.279,0.244,0.459,0.478,0.311,0.644,0.762,0.574,0.351,0.263,0.203,0.246,0.313,0.841,0.633,0.24,0.296,0.22,0.303,0.211,0.775,0.749,0.554,0.549,0.471,0.479,0.324,0.687,0.638,0.403,0.279,0.32,0.343,0.183,0.687,0.917,0.594,0.478,0.433,0.289,0.332,0.548,0.739,0.426,0.199,0.227,0.223,0.132,0.284,0.948,0.603,0.397,0.423,0.266,0.484,0.376,0.718,0.674,0.375,0.34,0.453,0.519,0.255,0.761,0.609,0.441,0.318,0.486,0.344,0.345,0.697,0.739,0.42,0.222,0.408,0.255,0.201,0.528,0.747,0.527,0.399,0.576,0.488,0.611,0.454,0.77,0.593,0.475,0.413,0.283,0.274,0.137,0.882,0.737,0.497,0.374,0.274,0.251,0.315,0.703,0.701,0.333,0.264,0.268,0.209,0.174,0.718,0.732,0.579,0.444,0.44,0.287,0.531,0.574,0.731,0.422,0.256,0.422,0.322,0.435,0.286,0.778,0.596,0.373,0.282,0.302,0.204,0.159,0.835,0.662,0.442,0.339,0.436,0.284,0.214,0.68,0.661,0.48,0.307,0.577,0.417,0.519,0.652,0.719,0.378,0.254,0.29,0.188,0.309,0.474,0.787,0.544,0.374,0.312,0.302,0.449,0.402,0.746,0.484,0.243,0.187,0.196,0.147,0.138,0.914,0.673,0.359,0.227,0.516,0.496,0.393,0.681,0.585,0.328,0.262,0.417,0.189,0.218,0.552,0.762,0.414,0.316,0.28,0.228,0.474,0.584,0.803,0.44,0.429,0.365,0.335,0.3,0.368,0.868,0.702,0.573,0.408,0.519,0.47,0.416,0.787,0.632,0.552,0.342,0.479,0.321,0.317,0.734,0.868,0.555,0.455,0.417,0.347,0.42,0.622,0.746,0.3,0.254,0.187,0.159,0.111,0.558,1,0.858,0.696,0.662,0.56,0.518,0.636,0.84,0.552,0.35,0.834,0.821,0.601,0.499,0.827,0.799,0.53,0.456,0.511,0.397,0.649,0.729,0.751,0.439,0.437,0.403,0.32,0.326,0.714,0.865,0.619,0.527,0.442,0.467,0.557,0.57,0.736,0.51,0.425,0.59,0.665,0.515,0.459,0.859,0.693,0.604,0.529,0.454,0.267,0.263,0.723,0.684,0.4,0.397,0.383,0.334,0.33,0.754,0.711,0.387,0.369,0.388,0.434,0.397,0.626,0.727,0.3,0.295,0.301,0.274,0.207,0.492,0.906,0.674,0.7,0.619,0.619,0.487,0.485,0.837,0.671,0.385,0.483,0.441,0.315,0.319,0.894,0.695,0.39,0.42,0.365,0.386,0.365,0.717,0.687,0.381,0.296,0.632,0.572,0.439,0.763,0.809,0.431,0.459,0.399,0.438,0.362,0.634,0.832,0.602,0.422,0.473,0.371,0.325,0.345,0.822,0.62,0.44,0.504,0.4,0.336,0.314,0.741,0.58,0.249,0.445,0.335,0.426,0.296,0.79,0.828,0.742,0.775,0.679,0.44,0.455,0.714,0.742,0.418,0.464,0.549,0.5,0.215,0.558,0.762,0.721,0.46,0.559,0.491,0.415,0.538,0.743,0.656,0.279,0.477,0.45,0.472,0.378,0.852,0.638,0.406,0.422,0.382,0.499,0.323,0.799,0.771,0.529,0.515,0.399,0.465,0.302,0.657,0.791,0.492,0.39,0.33,0.317,0.174,0.612,0.7,0.486,0.252,0.307,0.225,0.237,0.372,0.774,0.923,0.674,0.551,0.326,0.455,0.381,0.764,0.598,0.252,0.341,0.294,0.256,0.198,0.827,0.741,0.539,0.476,0.385,0.367,0.323,0.734,0.714,0.443,0.285,0.569,0.487,0.47,0.661,0.79,0.608,0.366,0.529,0.326,0.3,0.329,0.855,0.605,0.301,0.425,0.256,0.536,0.424,0.921,0.732,0.568,0.467,0.389,0.364,0.373,0.393,0.309,0.421,0.338,0.362,0.302,0.242,0.182,0.124,0.194,0.177,0.303,0.295,0.294,0.248,0.238,0.25,0.235,0.328,0.237,0.211,0.221,0.939,0.724,0.688,0.587,0.526,0.471,0.342,0.71,0.604,0.522,0.363,0.38,0.373,0.24,0.838,0.781,0.505,0.358,0.311,0.294,0.388,0.621,0.805,0.297,0.245,0.25,0.189,0.156,0.444,0.78,0.502,0.346,0.431,0.288,0.603,0.372,0.798,0.544,0.374,0.406,0.353,0.375,0.258,0.797,0.607,0.438,0.238,0.427,0.272,0.227,0.708,0.684,0.463,0.305,0.407,0.315,0.368,0.68,0.741,0.496,0.478,0.474,0.484,0.465,0.549,0.74,0.416,0.308,0.35,0.338,0.368,0.238,0.819,0.62,0.401,0.268,0.252,0.293,0.261,0.84,0.661,0.306,0.249,0.25,0.161,0.171,0.743,0.682,0.389,0.332,0.334,0.305,0.32,0.589,0.711,0.296,0.249,0.506,0.373,0.455,0.521,0.846,0.48,0.447,0.311,0.263,0.299,0.319,0.837,0.555,0.404,0.198,0.315,0.272,0.231,0.788,0.704,0.568,0.446,0.545,0.439,0.338,0.687,0.661,0.429,0.333,0.375,0.277,0.336,0.613,0.931,0.548,0.551,0.393,0.279,0.337,0.571,0.736,0.398,0.26,0.177,0.198,0.121,0.263,0.948,0.571,0.514,0.402,0.367,0.415,0.412,0.688,0.673,0.368,0.379,0.532,0.34,0.445,0.688,0.658,0.357,0.457,0.481,0.359,0.426,0.57,0.813,0.274,0.277,0.351,0.324,0.234,0.546,0.765,0.487,0.5,0.444,0.658,0.488,0.482,0.739,0.625,0.488,0.35,0.31,0.273,0.204,0.885,0.744,0.482,0.394,0.313,0.28,0.308,0.71,0.709,0.315,0.296,0.25,0.199,0.175,0.724,0.764,0.452,0.575,0.347,0.391,0.448,0.59,0.749,0.438,0.31,0.355,0.467,0.294,0.427,0.795,0.67,0.358,0.296,0.337,0.217,0.176,0.806,0.728,0.37,0.443,0.36,0.309,0.286,0.63,0.736,0.354,0.492,0.469,0.537,0.42,0.676,0.707,0.355,0.318,0.221,0.303,0.192,0.553,0.772,0.571,0.357,0.319,0.299,0.396,0.42,0.721,0.506,0.213,0.27,0.188,0.177,0.143,0.869,0.705,0.273,0.325,0.498,0.539,0.399,0.676,0.597,0.314,0.297,0.292,0.301,0.154,0.607,0.733,0.45,0.306,0.332,0.277,0.439,0.614,0.739,0.533,0.367,0.447,0.356,0.27,0.413,0.839,0.811,0.462,0.549,0.458,0.582,0.411,0.81,0.717,0.483,0.494,0.379,0.406,0.26,0.749,0.833,0.563,0.459,0.398,0.44,0.323,0.636,0.71,0.33,0.245,0.207,0.214,0.122,0.405,0.885,0.673,0.585,0.594,0.468,0.381,0.394,0.304,0.182,0.186,0.696,0.668,0.48,0.296,0.299,0.341,0.275,0.324,0.383,0.379,0.617,0.47,0.344,0.319,0.291,0.238,0.162,0.098,0.365,0.469,0.438,0.305,0.346,0.244,0.265,0.252,0.224,0.193,0.092,0.517,0.61,0.487,0.418,0.374,0.266,0.26,0.319,0.256,0.202,0.123,0.421,0.271,0.25,0.265,0.257,0.179,0.151,0.337,0.33,0.258,0.212,0.182,0.136,0.223,0.165,0.087,0.076,0.067,0.072,0.056,0.049,0.33,0.536,0.517,0.688,0.579,0.433,0.372,0.294,0.342,0.273,0.161,0.235,0.207,0.153,0.158,0.532,0.424,0.293,0.312,0.226,0.276,0.234,0.207,0.153,0.278,0.245,0.569,0.523,0.428,0.531,0.41,0.32,0.24,0.31,0.264,0.169,0.297,0.395,0.302,0.215,0.305,0.244,0.184,0.159,0.398,0.329,0.263,0.272,0.181,0.17,0.149,0.207,0.144,0.096,0.163,0.108,0.097,0.084,0.444,0.537,0.752,0.677,0.576,0.267,0.365,0.304,0.22,0.19,0.192,0.343,0.239,0.163,0.31,0.495,0.442,0.319,0.363,0.261,0.3,0.263,0.203,0.144,0.111,0.253,0.34,0.308,0.282,0.409,0.222,0.317,0.33,0.305,0.241,0.182,0.386,0.383,0.283,0.229,0.273,0.181,0.16,0.225,0.159,0.128,0.164,0.112,0.092,0.085,0.131,0.091,0.078,0.074,0.142,0.103,0.102,0.186,0.414,0.663,0.654,0.551,0.36,0.37,0.353,0.288,0.212,0.114,0.215,0.21,0.177,0.129,0.442,0.532,0.403,0.311,0.302,0.284,0.215,0.197,0.217,0.202,0.125,0.471,0.438,0.4,0.407,0.386,0.347,0.276,0.262,0.199,0.103,0.116,0.285,0.219,0.154,0.262,0.192,0.4,0.408,0.536,0.395,0.31,0.238,0.193,0.178,0.182,0.184,0.171,0.164,0.133,0.126,0.111,0.102,0.105,0.112,0.105,0.103,0.088,0.088,0.103,0.09,0.103,0.11,0.108,0.155,0.155,0.208,0.415,0.892,0.775,0.598,0.47,0.456,0.489,0.53,0.763,0.67,0.341,0.449,0.692,0.569,0.505,0.715,0.761,0.542,0.629,0.447,0.385,0.24,0.585,0.77,0.381,0.367,0.412,0.316,0.208,0.561,0.748,0.461,0.337,0.346,0.473,0.396,0.395,0.767,0.566,0.331,0.34,0.348,0.317,0.315,0.853,0.762,0.696,0.652,0.68,0.494,0.417,0.752,0.775,0.407,0.401,0.443,0.352,0.281,0.741,0.789,0.444,0.399,0.362,0.406,0.432,0.642,0.622,0.531,0.339,0.539,0.573,0.482,0.551,0.804,0.636,0.4,0.427,0.381,0.47,0.404,0.842,0.729,0.434,0.462,0.447,0.342,0.272,0.77,0.723,0.488,0.486,0.397,0.379,0.262,0.634,0.726,0.305,0.313,0.415,0.394,0.222,0.598,0.806,0.869,0.684,0.667,0.492,0.528,0.51,0.809,0.641,0.357,0.569,0.432,0.306,0.216,0.84,0.754,0.467,0.53,0.464,0.483,0.374,0.786,0.667,0.382,0.353,0.496,0.461,0.344,0.81,0.665,0.487,0.383,0.441,0.363,0.258,0.6,0.781,0.648,0.372,0.498,0.359,0.37,0.372,0.886,0.759,0.383,0.493,0.246,0.325,0.18,0.762,0.548,0.301,0.32,0.251,0.281,0.237,0.728,0.822,0.708,0.52,0.424,0.327,0.441,0.655,0.709,0.361,0.262,0.418,0.306,0.257,0.561,0.813,0.631,0.405,0.528,0.338,0.406,0.424,0.768,0.606,0.319,0.493,0.485,0.554,0.399,0.811,0.691,0.492,0.452,0.358,0.308,0.176,0.736,0.694,0.44,0.295,0.441,0.479,0.455,0.732,0.844,0.588,0.417,0.384,0.241,0.337,0.32,0.32,0.353,0.303,0.421,0.26,0.294,0.204,0.251,0.295,0.292,0.349,0.344,0.362,0.31,0.319,0.227,0.248,0.253,0.276,0.368,0.482,0.629,0.509,0.547,0.3,0.458,0.294,0.393,0.294,0.261,0.325,0.29,0.298,0.21,0.31,0.148,0.222,0.193,0.155,0.122,0.141,0.159,0.088,0.12,0.09,0.118,0.084,0.091,0.093,0.075,0.078,0.066,0.067,0.047,0.046,0.041,0.04,0.038,0.038,0.036,0.032,0.031,0.026,0.021,0.022,0.017,0.017,0.016,0.015,0.014,0.013,0.013,0.012,0.011,0.011,0.01,0.009,0.008,0.007,0.007,0.006,0.005,0.005,0.005,0.003,0.003,0.003,0.003,0.003,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.001,0.001,0.001,0.001,0.001,0.001,0.001,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+
+  // node graph
+  const graph = document.getElementById('graph');
+  const pts = [[14, 26], [46, 12], [80, 30], [30, 62], [64, 66], [90, 74]];
+  const svg = '<svg><line x1="14%" y1="26%" x2="46%" y2="12%"/><line x1="46%" y1="12%" x2="80%" y2="30%"/><line x1="14%" y1="26%" x2="30%" y2="62%"/><line x1="46%" y1="12%" x2="64%" y2="66%"/><line x1="80%" y1="30%" x2="90%" y2="74%"/><line x1="30%" y1="62%" x2="64%" y2="66%"/></svg>';
+  graph.innerHTML = svg + pts.map((p, i) => `<div class="n${i === 1 ? ' hot' : ''}" style="left:${p[0]}%;top:${p[1]}%"></div>`).join('');
+
+  // attention matrix
+  const w = [0.85, 0.14, 0.1, 0.2, 0.18, 0.8, 0.14, 0.1, 0.1, 0.24, 0.72, 0.2, 0.15, 0.1, 0.3, 0.85];
+  document.getElementById('attn').innerHTML = w.map(a => `<i style="background:rgba(15,138,128,${a})"></i>`).join('');
+
+  // sequencer
+  const scenes = [...document.querySelectorAll('.scene')];
+  const progress = document.getElementById('progress');
+  const frame = document.getElementById('frame');
+  let elapsed = 0, playing = true, last = null, idx = -1;
+
+  const params = new URLSearchParams(location.search);
+  if (params.get('clean') === '1') frame.classList.add('clean');
+
+  // intro animation variant for the opening scene (?intro=1..6)
+  const intro = params.get('intro') || '4';
+  scenes[0].classList.add('intro-' + intro);
+  if (intro === '6') {
+    const h = scenes[0].querySelector('h2');
+    h.innerHTML = h.textContent.split(' ')
+      .map((w, i) => `<span class="w" style="animation-delay:${(0.12 + i * 0.07).toFixed(2)}s">${w}</span>`).join(' ');
+  }
+
+  // --- background music (background_music.mp3); visuals synced via a precomputed energy envelope ---
+  const bgm = document.getElementById('bgm');
+  let muted = false, audioStarted = false, beatSmooth = 0;
+  function startAudio() {
+    if (audioStarted) return; audioStarted = true;
+    bgm.volume = 0.85; bgm.muted = muted; bgm.play().catch(() => {});
+  }
+  ['pointerdown', 'keydown', 'touchstart'].forEach(ev => document.addEventListener(ev, startAudio));
+
+  function setActive(i) {
+    scenes.forEach(s => s.classList.remove('active'));
+    scenes[i].classList.add('active');
+  }
+  function tick(t) {
+    if (last == null) last = t;
+    const dt = t - last; last = t;
+    if (playing) { elapsed += dt; if (elapsed >= total) { elapsed = 0; idx = -1; } }
+    let acc = 0, cur = 0;
+    for (let i = 0; i < durs.length; i++) { if (elapsed < acc + durs[i]) { cur = i; break; } acc += durs[i]; cur = i; }
+    if (cur !== idx) { setActive(cur); idx = cur; }
+    if (ENERGY.length && !bgm.paused) {
+      const target = ENERGY[Math.floor(bgm.currentTime * ENERGY_FPS)] || 0;
+      beatSmooth += (target - beatSmooth) * 0.35;
+      frame.style.setProperty('--beat', beatSmooth.toFixed(3));
+    }
+    progress.style.width = (elapsed / total * 100) + '%';
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+
+  const btnPlay = document.getElementById('btnPlay');
+  btnPlay.onclick = () => { playing = !playing; btnPlay.textContent = playing ? '⏸' : '▶'; };
+  document.getElementById('btnReset').onclick = () => { elapsed = 0; idx = -1; playing = true; btnPlay.textContent = '⏸'; };
+  const btnMute = document.getElementById('btnMute');
+  btnMute.onclick = () => { startAudio(); muted = !muted; bgm.muted = muted; btnMute.textContent = muted ? '🔇' : '🔊'; };
+  document.addEventListener('keydown', e => {
+    if (e.code === 'Space') { e.preventDefault(); btnPlay.click(); }
+    if (e.key === 'r' || e.key === 'R') document.getElementById('btnReset').click();
+  });
+  let idleT; const wake = () => { frame.classList.remove('idle'); clearTimeout(idleT); idleT = setTimeout(() => frame.classList.add('idle'), 2200); };
+  document.addEventListener('mousemove', wake); wake();
+
+  window.__jump = (i) => { let a = 0; for (let k = 0; k < i; k++) a += durs[k]; elapsed = a + 60; idx = -1; playing = false; btnPlay.textContent = '▶'; };
+})();
+</script>
+</body>
+</html>

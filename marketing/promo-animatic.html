@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Awesome AI Learning · Promo Animatic</title>
+<style>
+  :root {
+    --bg: #080b10; --bg2: #0e141c; --panel: #131c26; --panel2: #18232f;
+    --line: rgba(255,255,255,.10); --line2: rgba(255,255,255,.16);
+    --ink: #eef3f8; --ink2: #b3c0cd; --muted: #74828f;
+    --accent: #f2913e; --accent2: #ffb268;
+    --teal: #34c6b2; --crit: #f2585e;
+    --sans: "Helvetica Neue", "PingFang TC", "Hiragino Kaku Gothic ProN", system-ui, -apple-system, sans-serif;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; background: #000; color: var(--ink); font-family: var(--sans); overflow: hidden; }
+  body { display: grid; place-items: center; }
+
+  .frame {
+    position: relative; aspect-ratio: 9 / 16;
+    height: min(100svh, calc(100vw * 16 / 9)); width: auto;
+    container-type: size;
+    background: radial-gradient(120% 80% at 50% 0%, var(--bg2) 0%, var(--bg) 55%);
+    overflow: hidden; box-shadow: 0 0 80px rgba(0,0,0,.6);
+  }
+
+  /* ambient glows + grid */
+  .bg { position: absolute; inset: 0; pointer-events: none; }
+  .bg .glow { position: absolute; border-radius: 50%; filter: blur(60px); opacity: .5; }
+  .bg .g1 { width: 70cqw; height: 70cqw; left: -20cqw; top: 8cqh; background: radial-gradient(circle, rgba(242,145,62,.55), transparent 70%); animation: drift1 14s ease-in-out infinite; }
+  .bg .g2 { width: 65cqw; height: 65cqw; right: -18cqw; bottom: 10cqh; background: radial-gradient(circle, rgba(52,198,178,.5), transparent 70%); animation: drift2 16s ease-in-out infinite; }
+  .bg .grid { position: absolute; inset: 0; opacity: .35;
+    background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 7cqw 7cqw; mask-image: radial-gradient(120% 80% at 50% 40%, #000 30%, transparent 78%); }
+  .bg .vig { position: absolute; inset: 0; background: radial-gradient(120% 90% at 50% 45%, transparent 55%, rgba(0,0,0,.55) 100%); }
+  @keyframes drift1 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(8cqw,4cqh); } }
+  @keyframes drift2 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(-7cqw,-5cqh); } }
+
+  /* top bar */
+  .topbar { position: absolute; top: 3.2cqh; left: 5cqw; right: 5cqw; display: flex; align-items: center; justify-content: space-between; z-index: 6; }
+  .brand { display: flex; align-items: center; gap: 2cqw; font-weight: 700; font-size: 2.5cqh; letter-spacing: .02em; }
+  .brand .dot { width: 2.6cqh; height: 2.6cqh; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--teal)); box-shadow: 0 0 12px rgba(242,145,62,.6); }
+  .brand small { color: var(--ink2); font-weight: 500; }
+  .langs { display: flex; gap: 1.2cqw; font-family: var(--mono); font-size: 1.7cqh; }
+  .langs button { background: transparent; border: 1px solid var(--line2); color: var(--ink2); border-radius: 100px; padding: .7cqh 1.8cqw; cursor: pointer; transition: .15s; }
+  .langs button.on { background: var(--ink); color: #10151b; border-color: var(--ink); font-weight: 700; }
+
+  /* stage + scenes */
+  .stage { position: absolute; inset: 0; }
+  .scene { position: absolute; inset: 0; display: grid; place-items: center; padding: 4cqh 8cqw 35cqh; opacity: 0; visibility: hidden; transition: opacity .5s ease; }
+  .scene.active { opacity: 1; visibility: visible; }
+  .viz { width: 100%; display: grid; place-items: center; }
+
+  /* caption lower-third */
+  .caption { position: absolute; left: 8cqw; right: 8cqw; bottom: 9cqh; z-index: 5; text-align: center; }
+  .cap-k { font-family: var(--mono); font-size: 1.9cqh; letter-spacing: .18em; text-transform: uppercase; color: var(--accent2); margin-bottom: 1.6cqh; }
+  .cap-t { font-size: 5.4cqh; line-height: 1.12; font-weight: 780; letter-spacing: -.01em; text-wrap: balance; }
+  .cap-n { margin-top: 2cqh; font-size: 2.6cqh; line-height: 1.4; color: var(--ink2); text-wrap: balance; }
+  .cap-url { margin-top: 2.6cqh; font-family: var(--mono); font-size: 2.7cqh; color: var(--teal); font-weight: 600; }
+  .caption .cap-k, .caption .cap-t, .caption .cap-n, .caption .cap-url { opacity: 0; }
+  .caption.show .cap-k { animation: rise .6s .05s forwards; }
+  .caption.show .cap-t { animation: rise .7s .15s forwards; }
+  .caption.show .cap-n { animation: rise .7s .32s forwards; }
+  .caption.show .cap-url { animation: rise .7s .5s forwards; }
+  @keyframes rise { from { opacity: 0; transform: translateY(1.6cqh); } to { opacity: 1; transform: none; } }
+
+  /* progress + controls */
+  .progress { position: absolute; left: 0; bottom: 0; height: .6cqh; width: 0; background: linear-gradient(90deg, var(--accent), var(--teal)); z-index: 7; box-shadow: 0 0 10px rgba(52,198,178,.6); }
+  .controls { position: absolute; bottom: 2.4cqh; left: 50%; transform: translateX(-50%); display: flex; gap: 2cqw; z-index: 7; transition: opacity .4s; }
+  .controls button { background: rgba(0,0,0,.4); border: 1px solid var(--line2); color: var(--ink); width: 6cqh; height: 6cqh; border-radius: 50%; font-size: 2.4cqh; cursor: pointer; backdrop-filter: blur(6px); }
+  .frame.clean .topbar, .frame.clean .controls, .frame.clean .progress { display: none; }
+  .frame.idle .controls { opacity: 0; }
+
+  /* ============ scene visuals ============ */
+  .orbit { position: relative; width: 34cqh; height: 34cqh; }
+  .orbit .core { position: absolute; inset: 38%; border-radius: 50%; background: radial-gradient(circle, var(--accent2), var(--accent)); box-shadow: 0 0 6cqh rgba(242,145,62,.6); }
+  .orbit .ring { position: absolute; inset: 0; border: 1px solid var(--line2); border-radius: 50%; }
+  .orbit .ring.r2 { inset: 14%; border-color: rgba(52,198,178,.35); }
+  .scene.active .orbit .ring { animation: spin 9s linear infinite; }
+  .scene.active .orbit .ring.r2 { animation: spin 6s linear infinite reverse; }
+  .orbit .sat { position: absolute; width: 2.4cqh; height: 2.4cqh; border-radius: 50%; top: -1.2cqh; left: calc(50% - 1.2cqh); }
+  .orbit .sat.a { background: var(--teal); box-shadow: 0 0 12px var(--teal); }
+  .orbit .r2 .sat.b { background: var(--accent2); box-shadow: 0 0 12px var(--accent2); }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* node graph (what) */
+  .graph { width: 60cqw; height: 34cqh; position: relative; }
+  .graph .n { position: absolute; width: 3cqh; height: 3cqh; border-radius: 50%; background: var(--panel2); border: 1.5px solid var(--teal); box-shadow: 0 0 10px rgba(52,198,178,.4); opacity: 0; }
+  .scene.active .graph .n { animation: pop .5s forwards; }
+  .graph svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .graph svg line { stroke: var(--line2); stroke-width: 1.5; stroke-dasharray: 120; stroke-dashoffset: 120; }
+  .scene.active .graph svg line { animation: draw 1s .2s forwards; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  @keyframes pop { from { opacity: 0; transform: scale(.4); } to { opacity: 1; transform: scale(1); } }
+
+  /* stats */
+  .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 3cqh 5cqw; width: 74cqw; }
+  .stats .st:last-child { grid-column: 1 / -1; }
+  .stats .st { text-align: center; opacity: 0; }
+  .scene.active .stats .st { animation: rise .6s forwards; }
+  .stats .st:nth-child(2) { animation-delay: .12s; }
+  .stats .st:nth-child(3) { animation-delay: .24s; }
+  .stats .st:nth-child(4) { animation-delay: .36s; }
+  .stats .st:nth-child(5) { animation-delay: .48s; }
+  .stats .num { font-size: 8cqh; font-weight: 800; line-height: 1; background: linear-gradient(120deg, var(--accent2), var(--teal)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .stats .lab { margin-top: 1cqh; font-family: var(--mono); font-size: 2cqh; color: var(--ink2); letter-spacing: .05em; }
+
+  /* generic pill / chips */
+  .chips { display: flex; flex-wrap: wrap; gap: 1.6cqw; justify-content: center; width: 76cqw; }
+  .chip { padding: 1.4cqh 2.6cqw; border-radius: 100px; font-size: 2.5cqh; font-weight: 600; background: var(--panel); border: 1px solid var(--line2); opacity: 0; }
+  .scene.active .chip { animation: pop .45s forwards; }
+
+  /* tokenizer */
+  .tok { display: flex; gap: 1.4cqw; font-family: var(--mono); font-size: 4cqh; font-weight: 600; }
+  .tok span { padding: 1.4cqh 2.4cqw; border-radius: 1.4cqh; opacity: 0; }
+  .scene.active .tok span { animation: pop .4s forwards; }
+  .tok span:nth-child(1) { background: rgba(242,145,62,.22); color: var(--accent2); }
+  .tok span:nth-child(2) { background: rgba(52,198,178,.2); color: var(--teal); animation-delay: .15s; }
+  .tok span:nth-child(3) { background: rgba(242,145,62,.22); color: var(--accent2); animation-delay: .3s; }
+  .tok span:nth-child(4) { background: rgba(52,198,178,.2); color: var(--teal); animation-delay: .45s; }
+
+  /* attention matrix */
+  .attn { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2cqh; width: 44cqh; }
+  .attn .cell { aspect-ratio: 1; border-radius: 1cqh; background: var(--teal); opacity: 0; }
+  .scene.active .attn .cell { animation: cellin .5s forwards; }
+
+  /* next token bars */
+  .next { width: 72cqw; }
+  .next .prompt { font-family: var(--mono); font-size: 3cqh; color: var(--ink2); margin-bottom: 2.4cqh; text-align: center; }
+  .next .prompt b { color: var(--ink); }
+  .bar { display: flex; align-items: center; gap: 2cqw; margin: 1.4cqh 0; }
+  .bar .w { width: 20cqw; font-family: var(--mono); font-size: 2.4cqh; text-align: right; color: var(--ink2); }
+  .bar .track { flex: 1; height: 3.4cqh; background: var(--panel); border-radius: 100px; overflow: hidden; }
+  .bar .fill { height: 100%; background: var(--panel2); border-radius: 100px; transform-origin: left; }
+  .scene.active .bar .fill { animation: grow .9s forwards cubic-bezier(.2,.8,.3,1); }
+  .bar.top .w { color: var(--accent2); font-weight: 700; }
+  .bar.top .fill { background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+
+  /* knowledge cutoff */
+  .know { width: 76cqw; }
+  .axis { position: relative; height: 9cqh; display: flex; gap: 2cqw; }
+  .axis .z { height: 100%; border-radius: 1.4cqh; display: grid; place-items: center; font-family: var(--mono); font-size: 1.8cqh; letter-spacing: .08em; }
+  .axis .zin { flex: 0 0 64%; background: rgba(52,198,178,.12); border: 1px solid var(--teal); color: var(--teal); }
+  .axis .zout { flex: 1; background: var(--panel); border: 1px dashed var(--line2); color: var(--muted); }
+  .axis .cut { position: absolute; left: 64%; top: -1.4cqh; bottom: -1.4cqh; border-left: 2px dashed var(--crit); }
+  .axis .cut span { position: absolute; top: -3cqh; left: 50%; transform: translateX(-50%); white-space: nowrap; font-family: var(--mono); font-size: 1.6cqh; color: var(--crit); }
+  .know .badge { margin-top: 4cqh; text-align: center; font-size: 3cqh; font-weight: 700; padding: 1.6cqh; border-radius: 1.4cqh; }
+  .know .badge.no { color: var(--crit); background: rgba(242,88,94,.1); border: 1px solid rgba(242,88,94,.4); opacity: 0; }
+  .know .badge.yes { color: var(--teal); background: rgba(52,198,178,.1); border: 1px solid var(--teal); opacity: 0; }
+  .scene.active .know .badge.no { animation: flash .4s .6s forwards, fadeout .3s 2.2s forwards; }
+  .scene.active .know .badge.yes { animation: rise .5s 2.6s forwards; }
+  @keyframes fadeout { to { opacity: 0; height: 0; margin: 0; } }
+  @keyframes flash { from { opacity: 0; transform: scale(.9); } to { opacity: 1; transform: none; } }
+
+  /* rag flow */
+  .rag { display: flex; align-items: center; gap: 2.5cqw; width: 82cqw; justify-content: center; }
+  .rag .q, .rag .a { padding: 2cqh 2cqw; border-radius: 1.6cqh; background: var(--panel); border: 1px solid var(--line2); font-size: 2.2cqh; text-align: center; }
+  .rag .docs { display: grid; gap: 1cqh; }
+  .rag .docs .d { width: 14cqw; height: 3cqh; border-radius: .8cqh; background: var(--panel2); opacity: 0; }
+  .scene.active .rag .docs .d { animation: cellin .5s forwards; }
+  .rag .docs .d:nth-child(2) { animation-delay: .18s; }
+  .rag .docs .d:nth-child(3) { animation-delay: .36s; }
+  .rag .arr { color: var(--teal); font-size: 4cqh; opacity: 0; }
+  .scene.active .rag .arr { animation: rise .4s .7s forwards; }
+  .rag .a { opacity: 0; border-color: var(--teal); }
+  .scene.active .rag .a { animation: rise .5s 1s forwards; }
+  .rag .a .src { display: block; margin-top: .8cqh; font-family: var(--mono); font-size: 1.6cqh; color: var(--teal); }
+
+  /* diffusion */
+  .diff { position: relative; width: 40cqh; height: 40cqh; border-radius: 2cqh; overflow: hidden; border: 1px solid var(--line2); }
+  .diff .noise { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(12, 1fr); grid-template-rows: repeat(12, 1fr); }
+  .diff .noise i { background: #fff; }
+  .diff .img { position: absolute; inset: 0; opacity: 0; background:
+    radial-gradient(circle at 70% 28%, #ffd27a 0 6%, transparent 7%),
+    linear-gradient(180deg, #1a3a5c 0 55%, #2e6b4f 55% 100%); }
+  .diff .img::after { content: ""; position: absolute; left: -5%; bottom: 30%; width: 60%; height: 30%; background: #24405e; clip-path: polygon(0 100%, 45% 20%, 100% 100%); }
+  .scene.active .diff .noise { animation: fadeaway .3s 1.6s forwards; }
+  .scene.active .diff .img { animation: rise .8s 1.4s forwards; }
+  @keyframes fadeaway { to { opacity: 0; } }
+
+  /* stepper -> certificate */
+  .path { display: flex; flex-direction: column; gap: 1.6cqh; width: 60cqw; align-items: flex-start; }
+  .path .step { display: flex; align-items: center; gap: 2cqw; font-size: 2.4cqh; color: var(--ink2); opacity: 0; }
+  .scene.active .path .step { animation: rise .4s forwards; }
+  .path .step:nth-child(2) { animation-delay: .3s; }
+  .path .step:nth-child(3) { animation-delay: .6s; }
+  .path .tick { width: 3.4cqh; height: 3.4cqh; border-radius: 50%; background: var(--teal); color: #08110f; display: grid; place-items: center; font-size: 2cqh; font-weight: 800; flex: none; }
+  .seal { margin: 2cqh auto 0; width: 16cqh; height: 16cqh; border-radius: 50%; display: grid; place-items: center; background: radial-gradient(circle, var(--panel2), var(--panel)); border: 2px solid var(--accent); box-shadow: 0 0 5cqh rgba(242,145,62,.5); font-size: 6cqh; color: var(--accent2); opacity: 0; }
+  .scene.active .seal { animation: stamp .6s 1s forwards; }
+  @keyframes stamp { 0% { opacity: 0; transform: scale(1.6) rotate(-12deg); } 100% { opacity: 1; transform: none; } }
+
+  /* trilingual */
+  .tri { display: flex; flex-direction: column; gap: 2.4cqh; align-items: center; font-weight: 750; }
+  .tri div { font-size: 5cqh; color: var(--muted); transition: .4s; }
+  .scene.active .tri div:nth-child(1) { animation: hl 1.1s .2s; }
+  .scene.active .tri div:nth-child(2) { animation: hl 1.1s 1.2s; }
+  .scene.active .tri div:nth-child(3) { animation: hl 1.1s 2.2s; }
+  @keyframes hl { 0%,100% { color: var(--muted); transform: none; } 40%,70% { color: var(--ink); transform: scale(1.06); } }
+
+  @keyframes cellin { from { opacity: 0; transform: scale(.6); } to { opacity: 1; transform: scale(1); } }
+  @keyframes grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .scene *, .bg .glow { animation: none !important; }
+    .caption .cap-k, .caption .cap-t, .caption .cap-n, .caption .cap-url { opacity: 1 !important; }
+    .stats .st, .chip, .tok span, .attn .cell, .path .step, .seal, .know .badge.no, .rag .docs .d, .rag .a, .rag .arr, .graph .n, .diff .img { opacity: 1 !important; }
+    .know .badge.yes { opacity: 1 !important; }
+    .diff .noise { opacity: 0 !important; }
+  }
+</style>
+</head>
+<body>
+<div class="frame" id="frame">
+  <div class="bg"><div class="glow g1"></div><div class="glow g2"></div><div class="grid"></div><div class="vig"></div></div>
+
+  <div class="topbar">
+    <div class="brand"><span class="dot"></span>Awesome AI Learning <small>· AI 學院</small></div>
+    <div class="langs">
+      <button data-lang="en" class="on">EN</button>
+      <button data-lang="ja">日</button>
+      <button data-lang="zh">中</button>
+    </div>
+  </div>
+
+  <div class="stage" id="stage">
+    <section class="scene" data-id="hook"><div class="viz"><div class="orbit"><div class="ring"><span class="sat a"></span></div><div class="ring r2"><span class="sat b"></span></div><div class="core"></div></div></div></section>
+
+    <section class="scene" data-id="what"><div class="viz"><div class="graph" id="graph"></div></div></section>
+
+    <section class="scene" data-id="stats"><div class="viz"><div class="stats" id="stats"></div></div></section>
+
+    <section class="scene" data-id="tour"><div class="viz"><div class="orbit"><div class="ring"><span class="sat a"></span></div><div class="core"></div></div></div></section>
+
+    <section class="scene" data-id="tok"><div class="viz"><div class="tok"><span>Under</span><span>stand</span><span>ing</span><span>AI</span></div></div></section>
+
+    <section class="scene" data-id="attn"><div class="viz"><div class="attn" id="attn"></div></div></section>
+
+    <section class="scene" data-id="next"><div class="viz"><div class="next">
+      <div class="prompt">The sky is <b>___</b></div>
+      <div class="bar top"><span class="w">blue</span><div class="track"><div class="fill" style="width:86%"></div></div></div>
+      <div class="bar"><span class="w">clear</span><div class="track"><div class="fill" style="width:52%"></div></div></div>
+      <div class="bar"><span class="w">falling</span><div class="track"><div class="fill" style="width:24%"></div></div></div>
+    </div></div></section>
+
+    <section class="scene" data-id="know"><div class="viz"><div class="know">
+      <div class="axis"><div class="z zin">IN TRAINING</div><div class="z zout">AFTER CUTOFF</div><div class="cut"><span>cutoff</span></div></div>
+      <div class="badge no">"Today's news" &nbsp;✗&nbsp; not known</div>
+      <div class="badge yes">+ source (RAG) &nbsp;✓&nbsp; answered</div>
+    </div></div></section>
+
+    <section class="scene" data-id="rag"><div class="viz"><div class="rag">
+      <div class="q">Q</div>
+      <div class="docs"><div class="d"></div><div class="d"></div><div class="d"></div></div>
+      <div class="arr">→</div>
+      <div class="a">Answer<span class="src">★ source</span></div>
+    </div></div></section>
+
+    <section class="scene" data-id="diff"><div class="viz"><div class="diff"><div class="noise" id="noise"></div><div class="img"></div></div></div></section>
+
+    <section class="scene" data-id="more"><div class="viz"><div class="chips">
+      <span class="chip">Embedding</span><span class="chip">Attention</span><span class="chip">Agent</span><span class="chip">MCP</span><span class="chip">Memory</span><span class="chip">Multimodal</span><span class="chip">Fine-tuning</span><span class="chip">Evaluation</span><span class="chip">Prompting</span>
+    </div></div></section>
+
+    <section class="scene" data-id="chal"><div class="viz"><div class="next">
+      <div class="prompt" style="text-align:left">Which answer is best?</div>
+      <div class="bar"><span class="w" style="width:8cqw">A</span><div class="track"><div class="fill" style="width:70%"></div></div></div>
+      <div class="bar top"><span class="w" style="width:8cqw">B ✓</span><div class="track"><div class="fill" style="width:88%"></div></div></div>
+      <div class="bar"><span class="w" style="width:8cqw">C</span><div class="track"><div class="fill" style="width:40%"></div></div></div>
+    </div></div></section>
+
+    <section class="scene" data-id="path"><div class="viz"><div class="path">
+      <div class="step"><span class="tick">✓</span> Lesson</div>
+      <div class="step"><span class="tick">✓</span> Lesson</div>
+      <div class="step"><span class="tick">✓</span> Challenge</div>
+      <div class="seal">🎓</div>
+    </div></div></section>
+
+    <section class="scene" data-id="tri"><div class="viz"><div class="tri"><div>English</div><div>日本語</div><div>繁體中文</div></div></div></section>
+
+    <section class="scene" data-id="cta"><div class="viz"><div class="orbit"><div class="ring"><span class="sat a"></span></div><div class="ring r2"><span class="sat b"></span></div><div class="core"></div></div></div></section>
+  </div>
+
+  <div class="caption" id="caption"><div class="cap-k"></div><div class="cap-t"></div><div class="cap-n"></div><div class="cap-url"></div></div>
+  <div class="progress" id="progress"></div>
+  <div class="controls" id="controls">
+    <button id="btnPlay" title="play/pause">⏸</button>
+    <button id="btnReset" title="restart">↺</button>
+  </div>
+</div>
+
+<script>
+(function () {
+  const scenes = [
+    { id: 'hook', dur: 4200 }, { id: 'what', dur: 3800 }, { id: 'stats', dur: 4200 },
+    { id: 'tour', dur: 2200 }, { id: 'tok', dur: 3800 }, { id: 'attn', dur: 3800 },
+    { id: 'next', dur: 4200 }, { id: 'know', dur: 5200 }, { id: 'rag', dur: 4200 },
+    { id: 'diff', dur: 4200 }, { id: 'more', dur: 3600 }, { id: 'chal', dur: 4200 },
+    { id: 'path', dur: 4600 }, { id: 'tri', dur: 3800 }, { id: 'cta', dur: 5200 },
+  ];
+  const CAP = {
+    en: {
+      hook: { k: 'Awesome AI Learning', t: 'Using AI ≠ Understanding it' },
+      what: { k: 'What it is', t: 'One path to actually get AI', n: 'Interactive, offline, trilingual' },
+      stats: { k: "What's inside", t: '', n: '' },
+      tour: { k: 'The courses', t: 'Understand every piece, hands on' },
+      tok: { k: 'Lesson · Tokenizer', t: 'Text becomes tokens', n: 'A model reads tokens, not letters' },
+      attn: { k: 'Lesson · Transformer', t: 'Attention: who looks at whom', n: 'Context decides what each word attends to' },
+      next: { k: 'Lesson · LLM', t: 'One token at a time', n: 'An LLM just predicts the next token' },
+      know: { k: "Lesson · A Model's Knowledge", t: 'What it knows, and where it stops', n: 'After the cutoff, RAG or context fills the gap' },
+      rag: { k: 'Lesson · RAG', t: 'Retrieve first, then answer', n: 'Fewer hallucinations, with sources' },
+      diff: { k: 'Lesson · Generative AI', t: 'From noise to an image', n: 'Diffusion denoises step by step' },
+      more: { k: 'And more', t: '29 lessons into one map', n: 'Embedding, agents, memory, multimodal, evaluation' },
+      chal: { k: 'Challenges', t: '64 judgment challenges', n: 'Train decisions, not memorized answers' },
+      path: { k: 'Learning paths', t: 'One path, start to finish', n: 'Complete it, earn your certificate' },
+      tri: { k: 'Trilingual', t: 'English · 日本語 · 繁中', n: 'One site, switch languages instantly' },
+      cta: { k: 'Start now', t: 'Understand AI, from here', n: 'Free · Open source · No signup', url: 'awesome-ai-learning.vercel.app' },
+    },
+    zh: {
+      hook: { k: 'Awesome AI Learning', t: '會用 AI ≠ 懂 AI' },
+      what: { k: '這是什麼', t: '看懂 AI 的一條路', n: '互動、離線、三語的學習網站' },
+      stats: { k: '裡面有什麼', t: '', n: '' },
+      tour: { k: '課程導覽', t: '每一塊，都動手看懂' },
+      tok: { k: '課 · Tokenizer', t: '文字，變成 Token', n: '模型讀的是 token，不是字' },
+      attn: { k: '課 · Transformer', t: 'Attention：誰該注意誰', n: '上下文決定每個字看向哪裡' },
+      next: { k: '課 · 大型語言模型', t: '一次一個 Token', n: 'LLM 就是在猜下一個 token' },
+      know: { k: '課 · 模型的知識', t: '它知道什麼、到哪為止', n: '截止日之後，靠 RAG 或上下文補' },
+      rag: { k: '課 · RAG', t: '先查資料，再回答', n: '減少幻覺，還能附來源' },
+      diff: { k: '課 · 生成式 AI', t: '從雜訊，長出一張圖', n: 'Diffusion：一步步去噪' },
+      more: { k: '還有更多', t: '29 堂課，串成一張地圖', n: 'Embedding、Agent、記憶、多模態、評估' },
+      chal: { k: '進階挑戰', t: '64 道判斷題', n: '練的是決策，不是背答案' },
+      path: { k: '學習路線', t: '一條路，從頭走到尾', n: '走完路線，領結業證書' },
+      tri: { k: '三語', t: 'English · 日本語 · 繁中', n: '同一個網站，切換即翻頁' },
+      cta: { k: '現在開始', t: '看懂 AI，從這裡', n: '免費 · 開源 · 免註冊', url: 'awesome-ai-learning.vercel.app' },
+    },
+    ja: {
+      hook: { k: 'Awesome AI Learning', t: 'AI を使える ≠ 理解している' },
+      what: { k: 'これは何', t: 'AI を本当に理解する道', n: 'インタラクティブ・オフライン・三言語' },
+      stats: { k: '中身は', t: '', n: '' },
+      tour: { k: 'コース案内', t: '一つずつ、手を動かして理解' },
+      tok: { k: 'レッスン · Tokenizer', t: '文字がトークンに', n: 'モデルが読むのは文字でなくトークン' },
+      attn: { k: 'レッスン · Transformer', t: 'Attention：どこに注目するか', n: '文脈が各単語の注目先を決める' },
+      next: { k: 'レッスン · LLM', t: '一度に一トークン', n: 'LLM は次のトークンを予測しているだけ' },
+      know: { k: 'レッスン · モデルの知識', t: '何を、どこまで知っているか', n: '締め切り後は RAG かコンテキストで補う' },
+      rag: { k: 'レッスン · RAG', t: 'まず検索、それから回答', n: 'ハルシネーションを減らし、出典も付く' },
+      diff: { k: 'レッスン · 生成 AI', t: 'ノイズから一枚の画像へ', n: 'Diffusion：少しずつノイズを除去' },
+      more: { k: 'さらに', t: '29 レッスンが一枚の地図に', n: 'Embedding、Agent、記憶、マルチモーダル、評価' },
+      chal: { k: '上級チャレンジ', t: '64 の判断問題', n: '暗記でなく、判断を鍛える' },
+      path: { k: '学習ルート', t: '一本道で最後まで', n: 'ルート修了で、修了証を獲得' },
+      tri: { k: '三言語', t: 'English · 日本語 · 繁中', n: '同じサイトで、切り替え即翻訳' },
+      cta: { k: '今すぐ開始', t: 'AI を理解する、ここから', n: '無料 · オープンソース · 登録不要', url: 'awesome-ai-learning.vercel.app' },
+    },
+  };
+  const STAT = {
+    en: [['29', 'lessons'], ['64', 'challenges'], ['12', 'paths'], ['3', 'languages'], ['100%', 'offline']],
+    zh: [['29', '課程'], ['64', '挑戰題'], ['12', '學習路線'], ['3', '語言'], ['100%', '離線']],
+    ja: [['29', 'レッスン'], ['64', 'チャレンジ'], ['12', 'ルート'], ['3', '言語'], ['100%', 'オフライン']],
+  };
+
+  // build dynamic bits
+  const graph = document.getElementById('graph');
+  const gp = [[12, 20], [42, 10], [74, 24], [26, 55], [60, 60], [86, 62], [45, 88]];
+  let svg = '<svg><line x1="12%" y1="20%" x2="42%" y2="10%"/><line x1="42%" y1="10%" x2="74%" y2="24%"/><line x1="12%" y1="20%" x2="26%" y2="55%"/><line x1="42%" y1="10%" x2="60%" y2="60%"/><line x1="74%" y1="24%" x2="86%" y2="62%"/><line x1="26%" y1="55%" x2="45%" y2="88%"/><line x1="60%" y1="60%" x2="45%" y2="88%"/><line x1="26%" y1="55%" x2="60%" y2="60%"/></svg>';
+  graph.innerHTML = svg + gp.map((p, i) => `<div class="n" style="left:${p[0]}%;top:${p[1]}%;animation-delay:${0.2 + i * 0.09}s"></div>`).join('');
+
+  const attn = document.getElementById('attn');
+  const weights = [0.9, 0.2, 0.15, 0.1, 0.25, 0.85, 0.2, 0.15, 0.6, 0.3, 0.8, 0.2, 0.15, 0.5, 0.25, 0.9];
+  attn.innerHTML = weights.map((w, i) => `<div class="cell" style="opacity:0;--o:${w};animation-delay:${i * 0.05}s"></div>`).join('');
+  // apply final opacity via animation end -> set inline target
+  [...attn.children].forEach((c, i) => { c.style.setProperty('background', `rgba(52,198,178,${weights[i]})`); });
+
+  const noise = document.getElementById('noise');
+  let cells = '';
+  for (let i = 0; i < 144; i++) { cells += `<i style="opacity:${(Math.sin(i * 12.9898) * 43758.5453 % 1 + 1) % 1}"></i>`; }
+  noise.innerHTML = cells;
+
+  // sequencer
+  const sceneEls = [...document.querySelectorAll('.scene')];
+  const caption = document.getElementById('caption');
+  const progress = document.getElementById('progress');
+  const frame = document.getElementById('frame');
+  const total = scenes.reduce((s, x) => s + x.dur, 0);
+  let LANG = 'en', elapsed = 0, playing = true, last = null, idx = -1;
+
+  const params = new URLSearchParams(location.search);
+  if (params.get('clean') === '1') frame.classList.add('clean');
+  if (params.get('lang')) LANG = params.get('lang');
+
+  function renderCaption(i) {
+    const c = (CAP[LANG] || CAP.en)[scenes[i].id] || {};
+    caption.querySelector('.cap-k').textContent = c.k || '';
+    caption.querySelector('.cap-t').textContent = c.t || '';
+    caption.querySelector('.cap-n').textContent = c.n || '';
+    const u = caption.querySelector('.cap-url'); u.textContent = c.url || ''; u.style.display = c.url ? '' : 'none';
+    caption.classList.remove('show'); void caption.offsetWidth; caption.classList.add('show');
+  }
+  function renderStats() {
+    document.getElementById('stats').innerHTML = (STAT[LANG] || STAT.en)
+      .map(s => `<div class="st"><div class="num">${s[0]}</div><div class="lab">${s[1]}</div></div>`).join('');
+  }
+  function setActive(i) {
+    sceneEls.forEach(e => e.classList.remove('active'));
+    sceneEls[i].classList.add('active');
+    if (scenes[i].id === 'stats') renderStats();
+    renderCaption(i);
+  }
+  function tick(t) {
+    if (last == null) last = t;
+    const dt = t - last; last = t;
+    if (playing) { elapsed += dt; if (elapsed >= total) elapsed = 0, idx = -1; }
+    let acc = 0, cur = 0;
+    for (let i = 0; i < scenes.length; i++) { if (elapsed < acc + scenes[i].dur) { cur = i; break; } acc += scenes[i].dur; cur = i; }
+    if (cur !== idx) { setActive(cur); idx = cur; }
+    progress.style.width = (elapsed / total * 100) + '%';
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+
+  // controls
+  const btnPlay = document.getElementById('btnPlay');
+  document.getElementById('btnReset').onclick = () => { elapsed = 0; idx = -1; playing = true; btnPlay.textContent = '⏸'; };
+  btnPlay.onclick = () => { playing = !playing; btnPlay.textContent = playing ? '⏸' : '▶'; };
+  document.querySelectorAll('.langs button').forEach(b => b.onclick = () => {
+    document.querySelectorAll('.langs button').forEach(x => x.classList.remove('on'));
+    b.classList.add('on'); LANG = b.dataset.lang; renderCaption(idx < 0 ? 0 : idx); if (scenes[idx]?.id === 'stats') renderStats();
+  });
+  document.addEventListener('keydown', e => {
+    if (e.code === 'Space') { e.preventDefault(); btnPlay.click(); }
+    if (e.key === 'r' || e.key === 'R') document.getElementById('btnReset').click();
+  });
+  // idle-hide controls
+  let idleT; const wake = () => { frame.classList.remove('idle'); clearTimeout(idleT); idleT = setTimeout(() => frame.classList.add('idle'), 2200); };
+  document.addEventListener('mousemove', wake); wake();
+
+  // test hook
+  window.__jump = (i) => { let acc = 0; for (let k = 0; k < i; k++) acc += scenes[k].dur; elapsed = acc + 50; idx = -1; playing = false; btnPlay.textContent = '▶'; };
+  window.__lang = (l) => { LANG = l; renderCaption(idx < 0 ? 0 : idx); if (scenes[idx]?.id === 'stats') renderStats(); };
+})();
+</script>
+</body>
+</html>
