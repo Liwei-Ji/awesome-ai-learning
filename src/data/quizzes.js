@@ -428,6 +428,53 @@ export const QUIZZES = {
       }
     ]
   },
+  "dpo-pipeline": {
+    "zh": [
+      {
+        "t": "對齊就是 RLHF：訓一個獎勵模型再用 PPO 去 RL，沒有別的做法。",
+        "ok": false,
+        "why": "漏了 SFT 打底，也漏了 DPO 這條更主流的簡化路線（直接用偏好對優化、不用獎勵模型與 RL）。"
+      },
+      {
+        "t": "從預訓練 → SFT → 偏好對齊是一條管線；偏好對齊可用 RLHF（獎勵模型＋PPO，複雜不穩）或 DPO（直接在偏好對上算損失，穩、省、好復現）。DPO 把 RLHF 的目標改寫成可直接訓練的 loss，但仍需高品質偏好資料，也一樣只調行為不加知識。",
+        "ok": true,
+        "why": "講出三階段管線、RLHF vs DPO 的差別與 DPO 的洞見，還補上資料與界線，完整。"
+      },
+      {
+        "t": "DPO 比 RLHF 好，因為它不需要偏好資料、還能讓模型更聰明。",
+        "ok": false,
+        "why": "DPO 一樣要高品質偏好資料；且對齊只調行為與偏好、不加知識，不會讓模型更聰明。"
+      }
+    ],
+    "en": [
+      {
+        "t": "Alignment is just RLHF: train a reward model and then do RL with PPO, and there is no other way.",
+        "why": "It misses the SFT groundwork, and it misses DPO, the more mainstream simplified route (optimize directly on preference pairs, with no reward model and no RL)."
+      },
+      {
+        "t": "Pretraining → SFT → preference optimization is a pipeline; preference optimization can use RLHF (reward model plus PPO, complex and unstable) or DPO (compute a loss directly on preference pairs, stable, cheap, reproducible). DPO rewrites RLHF's objective into a loss you can train directly, but it still needs high-quality preference data and likewise only tunes behavior without adding knowledge.",
+        "why": "It lays out the three-stage pipeline, the difference between RLHF and DPO, and DPO's insight, and adds the point about data and limits: complete."
+      },
+      {
+        "t": "DPO is better than RLHF because it needs no preference data and can also make the model smarter.",
+        "why": "DPO still requires high-quality preference data; and alignment only tunes behavior and preferences and adds no knowledge, so it will not make the model smarter."
+      }
+    ],
+    "ja": [
+      {
+        "t": "アライメントとはつまり RLHF だ：reward model を1つ訓練し、その後 PPO で RL するだけで、ほかのやり方はない。",
+        "why": "SFT の土台作りを見落としており、より主流の簡略ルートである DPO（preference pairs で直接最適化し、reward model と RL を使わない）も見落としています。"
+      },
+      {
+        "t": "pretraining → SFT → preference optimization は1本のパイプラインだ。preference optimization には RLHF（reward model ＋ PPO、複雑で不安定）か DPO（preference pairs 上で直接 loss を計算、安定・低コスト・再現しやすい）を使える。DPO は RLHF の目的を直接学習できる loss に書き換えるが、それでも高品質な preference data を必要とし、同様に振る舞いを調整するだけで知識は追加しない。",
+        "why": "三段階のパイプライン、RLHF と DPO の違い、DPO の洞察を述べ、さらにデータと限界まで補っており、完全です。"
+      },
+      {
+        "t": "DPO は RLHF より優れている、なぜなら preference data が要らず、しかもモデルをより賢くできるからだ。",
+        "why": "DPO も同様に高品質な preference data を必要とします。さらにアライメントは振る舞いと preference を調整するだけで知識は追加しないため、モデルがより賢くなることはありません。"
+      }
+    ]
+  },
   "finetune-vs-rag": {
     "zh": [
       {
