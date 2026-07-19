@@ -2,7 +2,7 @@
 
 > Understand AI from scratch, for real.
 
-![Awesome AI Learning: 50-second product tour](docs/promo.gif)
+<img src="docs/promo.gif" width="100%" alt="Awesome AI Learning: 50-second product tour" />
 
 ![Awesome AI Learning: course overview and the AI knowledge map](docs/screenshot.png)
 
