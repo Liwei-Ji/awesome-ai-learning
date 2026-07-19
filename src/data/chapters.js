@@ -166,6 +166,18 @@ const DATA = {
       ['Scaling Law 縮放定律', '規模與能力之間的經驗關係'],
     ],
   },
+  'model-knowledge': {
+    t: '模型的知識', sub: '它知道什麼、存在哪、到哪為止',
+    key: [
+      ['01', '知識在預訓練時被壓進參數，不是存成一份可查的資料庫'],
+      ['02', '有截止日：訓練之後的事、你的私有資料，模型天生不知道'],
+      ['03', '記憶是模糊重建，會記不全或記錯；補新知識靠 RAG 或上下文，不是微調'],
+    ],
+    terms: [
+      ['Knowledge Cutoff 知識截止日', '訓練資料的時間終點，之後發生的事模型並不知道'],
+      ['Parametric Knowledge 參數知識', '壓進權重、靠生成重建的知識，相對於臨時檢索的外部資料'],
+    ],
+  },
   'context-window': {
     t: 'Context Window', sub: '模型一次能看多少內容',
     key: [
@@ -353,7 +365,7 @@ const PROLOGUE = { key: 'prologue', t: '序章', desc: 'AI 從哪裡來', slugs:
 const OUTLINE = [
   { key: 'basics', t: 'AI 基礎', desc: '建立概念', slugs: ['ai-intro', 'ml', 'data'] },
   { key: 'learn', t: 'AI 如何學習', desc: '模型怎麼被訓練', slugs: ['deep-learning', 'neural-network', 'training', 'backprop'] },
-  { key: 'llm', t: '大型語言模型 LLM', desc: 'ChatGPT 的核心', slugs: ['tokenizer', 'embedding', 'transformer', 'llm', 'model-size', 'context-window', 'inference'] },
+  { key: 'llm', t: '大型語言模型 LLM', desc: 'ChatGPT 的核心', slugs: ['tokenizer', 'embedding', 'transformer', 'llm', 'model-size', 'model-knowledge', 'context-window', 'inference'] },
   { key: 'chatgpt', t: '從模型到 ChatGPT', desc: '把模型訓練成助理', slugs: ['pretraining', 'fine-tuning'] },
   { key: 'apps', t: '生成式 AI 與 AI Agent', desc: '一條完整的應用鏈', slugs: ['prompt', 'generative', 'multimodal', 'rag', 'memory', 'mcp', 'agent', 'integration'] },
   { key: 'literacy', t: 'AI 素養', desc: '會用，也會判斷', slugs: ['limits', 'evaluation', 'capstone'] },

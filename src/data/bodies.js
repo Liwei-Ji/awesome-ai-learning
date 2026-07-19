@@ -890,6 +890,74 @@ export const BODIES = {
       }
     ]
   },
+  "model-knowledge": {
+    "en": [
+      {
+        "h": "Knowledge is \"read\" in",
+        "p": "A model's knowledge is not typed in one fact at a time. During <b>pretraining</b> it reads through enormous amounts of text and <b>compresses recurring patterns and facts into billions of parameters (weights)</b>. What it learns is \"which words tend to follow which,\" and along the way it also absorbs a great deal of common knowledge."
+      },
+      {
+        "h": "It lives in parameters, not a database",
+        "p": "This knowledge is <b>spread</b> across the weights of the whole network; no single cell explicitly says \"Paris is the capital of France.\" When answering, it rebuilds knowledge by <b>predicting the next word over and over</b>, which is more like \"speaking from impression\" than \"looking up a table.\" So it may be <b>incomplete or simply wrong</b>, and it can still sound very confident."
+      },
+      {
+        "h": "Knowledge has a cutoff",
+        "p": "Once training stops, knowledge <b>freezes</b> at that moment, which is called the <b>knowledge cutoff</b>. Anything that happens after the cutoff, along with your company's internal or personal <b>private data</b>, is something the model has never read, so of course it does not know it. Asking it about the \"latest\" news and believing every word is an easy way to get burned."
+      },
+      {
+        "h": "How to fill the gaps",
+        "p": "There are three ways to let a model use knowledge it does not already have: <b>①</b> paste it straight <b>into the context</b> (put the data into the prompt: fastest for a one-off); <b>②</b> <b>RAG</b>, which retrieves from an external knowledge base in real time and can even cite sources, ideal for facts that change often or are private; <b>③</b> <b>fine-tuning</b>, which writes tone, format, and workflow into the weights, but is <b>not suited for loading in facts</b>."
+      },
+      {
+        "h": "Common misconceptions",
+        "p": "Do not assume \"the model is smart, so it knows everything.\" What it knows is <b>what is common in the training data</b>; niche, recent, or private content is often a blank. And do not count on <b>fine-tuning</b> to cram in the latest facts and make them stick. For facts that keep changing, <b>RAG is more reliable</b>."
+      }
+    ],
+    "ja": [
+      {
+        "h": "知識は「読んで」身につく",
+        "p": "モデルの知識は、誰かが一つずつ入力したものではありません。<b>事前学習</b>のときに膨大なテキストを読ませ、繰り返し現れる規則性や事実を<b>数十億個のパラメータ（重み）に圧縮</b>します。学ぶのは「ある単語の後にどんな単語が続きやすいか」であり、そのついでに大量の一般常識も覚えていきます。"
+      },
+      {
+        "h": "パラメータの中にあり、データベースではない",
+        "p": "こうした知識はネットワーク全体の重みに<b>分散</b>しており、「パリはフランスの首都」とはっきり書かれたマスは一つもありません。回答するときは<b>次の単語を一つずつつなげて</b>知識を再構築するので、「表を引く」というより「印象で語る」に近く、そのため<b>抜けたり、間違えたり</b>することがあり、しかも自信たっぷりに話します。"
+      },
+      {
+        "h": "知識には締め切りがある",
+        "p": "学習が止まると、知識はその時点で<b>凍結</b>します。これを<b>知識の締め切り（knowledge cutoff）</b>と呼びます。締め切り後に起きた出来事や、あなたの会社内部・個人の<b>非公開データ</b>は、モデルが一度も読んでいないので当然知りません。「最新」の話を尋ねて丸ごと信じると、地雷を踏みやすくなります。"
+      },
+      {
+        "h": "足りないとき、どう補うか",
+        "p": "モデルに、もともと知らない知識を使わせる道は三つあります：<b>①</b>そのまま<b>コンテキストに貼る</b>（データを prompt に入れる：一回きりなら最速）；<b>②</b><b>RAG</b>、外部の知識ベースからリアルタイムに検索し、出典も付けられる。頻繁に変わる事実や非公開の事実に向く；<b>③</b><b>ファインチューニング</b>、口調・書式・手順を重みに書き込むが、<b>事実を詰め込む用途には向かない</b>。"
+      },
+      {
+        "h": "よくある誤解",
+        "p": "「モデルは賢いから何でも知っている」と思い込まないでください。知っているのは<b>学習データの中でありふれたこと</b>であり、マイナー・最新・非公開の内容はしばしば空白です。また<b>ファインチューニング</b>で最新の事実を詰め込んでしっかり覚えさせようと期待しないこと。変動する事実につなぐなら、<b>RAG のほうが信頼できます</b>。"
+      }
+    ],
+    "zh": [
+      {
+        "h": "知識是「讀」出來的",
+        "p": "模型的知識不是有人一條條輸入的，而是在<b>預訓練</b>時讓它讀過海量文字，把反覆出現的規律和事實<b>壓進幾十億個參數（權重）</b>裡。它學的是「什麼字後面常接什麼」，順帶把大量常識也記了下來。"
+      },
+      {
+        "h": "存在參數裡，不是資料庫",
+        "p": "這些知識<b>分散</b>在整個網路的權重中，沒有一格明確寫著「巴黎是法國首都」。回答時它靠<b>一路接下一個字</b>把知識重建出來，比較像「憑印象說」而不是「查表」，所以可能<b>記不全、也可能記錯</b>，還會講得很有信心。"
+      },
+      {
+        "h": "知識有截止日",
+        "p": "訓練一停，知識就<b>凍結</b>在那個時間點，稱為<b>知識截止日（knowledge cutoff）</b>。截止日之後發生的事，以及你公司內部或個人的<b>私有資料</b>，模型從沒讀過，自然不知道。問它「最新」的事還全信，很容易踩雷。"
+      },
+      {
+        "h": "不夠時，怎麼補",
+        "p": "要讓模型用它本來不知道的知識有三條路：<b>①</b>直接<b>貼進上下文</b>（把資料放進 prompt，一次性最快）；<b>②</b><b>RAG</b>，從外部知識庫即時檢索、還能附來源，適合常變動或私有的事實；<b>③</b><b>微調</b>，把語氣、格式、流程寫進權重，但<b>不適合用來灌事實</b>。"
+      },
+      {
+        "h": "常見誤解",
+        "p": "別以為「模型很聰明所以什麼都知道」。它知道的是<b>訓練資料裡的常態</b>，冷門、最新、私有的內容常常是空白。也別指望<b>微調</b>把最新事實塞進去記牢，要接會變動的事實，<b>RAG 更可靠</b>。"
+      }
+    ]
+  },
   "context-window": {
     "zh": [
       {

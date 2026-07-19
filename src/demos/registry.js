@@ -11,6 +11,7 @@ import DataSize from './DataSize.svelte';
 import DataFuel from './DataFuel.svelte';
 import Layers from './Layers.svelte';
 import ModelSize from './ModelSize.svelte';
+import ModelKnowledge from './ModelKnowledge.svelte';
 import Inference from './Inference.svelte';
 import Network from './Network.svelte';
 import GradientDescent from './GradientDescent.svelte';
@@ -41,6 +42,7 @@ const demos = {
   'deep-learning': Layers,
   'neural-network': Network,   // 深色發光版
   'model-size': ModelSize,     // 深色發光版
+  'model-knowledge': ModelKnowledge,
   'inference': Inference,      // 深色發光版
   'training': GradientDescent, // 深色發光版
   'backprop': Backprop,        // 深色發光版

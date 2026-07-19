@@ -221,6 +221,90 @@ export const PRACTICE = {
       }
     }
   },
+  "model-knowledge": {
+    "practical": {
+      "en": [
+        "<b>Watch the cutoff when asking about the \"latest\"</b>: the model may stop before a certain point in time, so verify time-sensitive information separately, or switch to a solution that can go online / use RAG.",
+        "<b>Confidence ≠ correct memory</b>: the more specific the number, date, or quotation, the easier it is to get wrong. For facts that matter, ask it to attach sources or trace them through RAG; do not take everything at face value.",
+        "<b>For private data, think RAG first, not fine-tuning</b>: fine-tuning is costly and hard to update, and it often fails to retain facts. Putting the data into a knowledge base and retrieving it is usually faster and easier to maintain.",
+        "<b>When switching models, note that cutoffs differ</b>: different models have different knowledge cutoffs, so the same question can yield answers of different freshness. Do not assume they all know the same amount."
+      ],
+      "ja": [
+        "<b>「最新」の話を尋ねるときは締め切りに注意</b>：モデルはある時点より前で止まっている可能性があるので、重要な時効性のある情報は別途確認するか、ネット接続／RAG が使える方式に切り替えましょう。",
+        "<b>自信がある ≠ 覚えが正しい</b>：具体的な数字・日付・引用ほど間違えやすいものです。重要な事実は、出典を付けさせるか RAG でたどらせ、鵜呑みにしないでください。",
+        "<b>非公開データはまず RAG を、ファインチューニングではなく</b>：ファインチューニングはコストが高く更新も難しいうえ、事実が定着しないことも多いです。データを知識ベースに入れて検索するほうが、たいてい速く、保守もしやすくなります。",
+        "<b>モデルを替えるときは締め切りの違いに注意</b>：モデルごとに知識の締め切りは異なり、同じ質問でも答えの新しさが変わります。どれも同じだけ知っていると思い込まないでください。"
+      ],
+      "zh": [
+        "<b>問「最新」的事要留意截止日</b>：模型可能停在某個時間點之前，重要時效資訊要另外查證，或改用能連網／RAG 的方案。",
+        "<b>有信心 ≠ 記得對</b>：越具體的數字、日期、引文越容易記錯。要緊的事實請要求它附來源或用 RAG 溯源，別照單全收。",
+        "<b>私有資料優先想 RAG，而不是微調</b>：微調成本高又難更新，還常記不牢事實；把資料放進知識庫用檢索，通常更快、更好維護。",
+        "<b>換模型注意截止日不同</b>：不同模型的知識截止日不一樣，同一個問題答案的時效也會不同，別假設它們知道的一樣多。"
+      ]
+    },
+    "decision": {
+      "en": {
+        "q": "You want the model to use knowledge it does not already have. How should you supply it?",
+        "rows": [
+          {
+            "when": "One-off, temporary, small amount of data",
+            "use": "Paste into context",
+            "why": "Put it straight into the prompt: fastest, no system to build"
+          },
+          {
+            "when": "Changes often, private, needs source citations",
+            "use": "RAG",
+            "why": "Real-time retrieval from an external knowledge base: updatable without touching the model"
+          },
+          {
+            "when": "Fixed tone, format, or workflow",
+            "use": "Fine-tuning",
+            "why": "Writes behavior into the weights, but do not use it to load in facts"
+          }
+        ]
+      },
+      "ja": {
+        "q": "モデルに、もともと知らない知識を使わせたい。どう渡せばいい？",
+        "rows": [
+          {
+            "when": "一回きり・一時的・データ量が少ない",
+            "use": "コンテキストに貼る",
+            "why": "そのまま prompt に入れる：最速で、システムを組む必要がない"
+          },
+          {
+            "when": "頻繁に変わる・非公開・出典を引用したい",
+            "use": "RAG",
+            "why": "外部の知識ベースからリアルタイムに検索：モデルを変えずに更新できる"
+          },
+          {
+            "when": "口調・書式・手順を固定したい",
+            "use": "ファインチューニング",
+            "why": "振る舞いを重みに書き込む。ただし事実を詰め込む用途には使わない"
+          }
+        ]
+      },
+      "zh": {
+        "q": "想讓模型用它本來不知道的知識，該怎麼給？",
+        "rows": [
+          {
+            "when": "一次性、臨時、資料量不大",
+            "use": "貼進上下文",
+            "why": "直接放進 prompt，最快，不用建系統"
+          },
+          {
+            "when": "常變動、私有、要引用來源",
+            "use": "RAG",
+            "why": "外部知識庫即時檢索，不改模型又能更新"
+          },
+          {
+            "when": "固定語氣、格式、流程",
+            "use": "微調",
+            "why": "把行為寫進權重，但別拿來灌事實"
+          }
+        ]
+      }
+    }
+  },
   "context-window": {
     "practical": {
       "zh": [

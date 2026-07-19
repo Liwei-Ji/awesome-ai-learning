@@ -4,6 +4,18 @@
    ============================================================ */
 export const CH_TR = {
   en: {
+    "model-knowledge": {
+      t: "A Model's Knowledge", sub: "What it knows, where it lives, and how far it goes",
+      key: [
+        ["01", "Knowledge is compressed into parameters during pretraining, not stored as a lookup database"],
+        ["02", "It has a cutoff: anything after training, plus your private data, the model simply does not know"],
+        ["03", "Memory is a fuzzy reconstruction, so it can be incomplete or wrong; add fresh knowledge via RAG or context, not fine-tuning"],
+      ],
+      terms: [
+        ["Knowledge Cutoff", "The endpoint of the training data in time: the model does not know what happened afterward"],
+        ["Parametric Knowledge", "Knowledge compressed into the weights and rebuilt through generation, as opposed to external data retrieved on the fly"],
+      ],
+    },
     "history": {
       t: "A Brief History of AI", sub: "How AI got to where it is today",
       key: [
@@ -342,6 +354,18 @@ export const CH_TR = {
     },
   },
   ja: {
+    "model-knowledge": {
+      t: "モデルの知識", sub: "何を知っていて、どこにあり、どこまでか",
+      key: [
+        ["01", "知識は事前学習の段階でパラメータに圧縮される。参照できるデータベースとして保存されるわけではない"],
+        ["02", "締め切りがある：学習後の出来事やあなたの非公開データを、モデルは生まれつき知らない"],
+        ["03", "記憶はあいまいな再構築なので、抜けたり間違えたりする。新しい知識を補うのは RAG かコンテキストであり、ファインチューニングではない"],
+      ],
+      terms: [
+        ["Knowledge Cutoff 知識の締め切り", "学習データの時間的な終点：それ以降に起きたことをモデルは知らない"],
+        ["Parametric Knowledge パラメータ知識", "重みに圧縮され、生成によって再構築される知識。その場で検索する外部データとは対照的なもの"],
+      ],
+    },
     "history": {
       t: "AI の歴史", sub: "AI が今日に至るまでの歩み",
       key: [
