@@ -12,6 +12,8 @@ import DataFuel from './DataFuel.svelte';
 import Layers from './Layers.svelte';
 import ModelSize from './ModelSize.svelte';
 import ModelKnowledge from './ModelKnowledge.svelte';
+import SequenceMemory from './SequenceMemory.svelte';
+import ConvFilter from './ConvFilter.svelte';
 import Inference from './Inference.svelte';
 import Network from './Network.svelte';
 import GradientDescent from './GradientDescent.svelte';
@@ -46,9 +48,11 @@ const demos = {
   'inference': Inference,      // 深色發光版
   'training': GradientDescent, // 深色發光版
   'backprop': Backprop,        // 深色發光版
+  'cnn': ConvFilter,
   'context-window': ContextWindow, // 深色發光版
   'tokenizer': Tokenizer,          // 深色發光版
   'embedding': Embedding,          // 深色發光版
+  'rnn': SequenceMemory,
   'transformer': Attention,
   'llm': NextToken,
   'pretraining': ToChatGPT,    // 深色發光版

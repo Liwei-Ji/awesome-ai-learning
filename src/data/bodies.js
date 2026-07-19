@@ -550,6 +550,74 @@ export const BODIES = {
       }
     ]
   },
+  "cnn": {
+    "en": [
+      {
+        "h": "To a computer, an image is a pile of numbers",
+        "p": "Inside a computer, an image is just a grid of pixel numbers. Feeding a whole image straight into an ordinary fully connected network makes the parameters explode, and it never learns that 'the same thing in a different position is still the same thing'. Seeing images needs a smarter approach."
+      },
+      {
+        "h": "CNN: scanning everywhere with a small filter",
+        "p": "The key to a <b>CNN (convolutional neural network)</b> is a tiny <b>filter</b>, for example 3×3, that <b>slides across the whole image cell by cell</b>, specialized to detect some local pattern (edges, corners). The same filter is reused across the entire image, so it recognizes a cat whether it is in the top left or the bottom right. This is called <b>weight sharing</b> and <b>positional invariance</b>, and as a bonus it makes the parameters far fewer."
+      },
+      {
+        "h": "From edges to a face: abstraction layer by layer",
+        "p": "A single layer of filters can only see simple patterns. Stack many layers together: <b>shallow layers see edges → middle layers see shapes and textures → deep layers see eyes, faces, whole objects</b>. This is exactly the 'layer-by-layer abstraction' from the deep learning lesson, and a CNN is what it looks like in concrete form for images. In between, <b>pooling</b> is also used to shrink the image and keep the strongest signals, which saves compute and makes it more robust to shifts in position."
+      },
+      {
+        "h": "It ignited this wave of AI",
+        "p": "In 2012, a CNN called AlexNet left its rivals far behind in the image recognition contest (ImageNet), proving that 'enough data and a deep enough network' really works, and directly ignited this wave of deep learning (the turning point mentioned in Lesson 0). Later, face recognition, medical imaging, and self-driving vision mostly have a CNN underneath."
+      },
+      {
+        "h": "Common misconceptions",
+        "p": "A CNN is not the kind of 'filter effect' you get in photo editing. Its filters are not designed by people; they are <b>learned by the model itself from data</b>. In recent years Transformer has also been brought to images (Vision Transformer), but in many settings CNN is still fast and accurate. And when a <b>multimodal model looks at an image</b>, the front-end image encoder is often a CNN too."
+      }
+    ],
+    "ja": [
+      {
+        "h": "画像はコンピュータにとって数字の集まり",
+        "p": "一枚の画像はコンピュータの中では升目状のピクセルの数字にすぎません。普通の全結合ネットワークで画像全体をそのまま入力すると、パラメータが爆発的に増え、しかも「同じものが位置を変えても同じものだ」ということを学べません。画像を見るには、もっと賢いやり方が必要です。"
+      },
+      {
+        "h": "CNN：小さなフィルタであちこちを走査する",
+        "p": "<b>CNN（畳み込みニューラルネットワーク）</b>の要は、例えば 3×3 の小さな<b>フィルタ（filter）</b>で、画像全体を<b>一マスずつ滑らせ</b>、ある局所的な模様（エッジ、角）を専門に検出します。同じフィルタを画像全体で繰り返し使うので、猫が左上にいても右下にいても認識できます。これを<b>重み共有</b>と<b>位置不変性</b>と呼び、ついでにパラメータも大幅に減らします。"
+      },
+      {
+        "h": "エッジから顔へ：一層ずつ抽象化する",
+        "p": "一層のフィルタは単純な模様しか見られません。たくさんの層を重ねると、<b>浅い層はエッジを見て → 中間の層は形や質感を見て → 深い層は目、顔、物体全体を見ます</b>。これこそ深層学習の課で述べた「一層ずつの抽象化」であり、CNN はそれが画像上で具体化した姿です。途中では<b>プーリング（pooling）</b>を使って画像を縮小し、最も強い信号を残すことで、計算を節約し、位置の変化にもより強くなります。"
+      },
+      {
+        "h": "それがこの AI の波に火をつけた",
+        "p": "2012 年、AlexNet という CNN が画像認識コンテスト（ImageNet）で競合を大きく引き離し、「データが十分に多く、ネットワークが十分に深ければ」本当に効くことを証明し、この深層学習ブームに直接火をつけました（第 0 課で触れたあの転換点です）。その後の顔認識、医療画像、自動運転の視覚は、下層の多くに CNN があります。"
+      },
+      {
+        "h": "よくある誤解",
+        "p": "CNN は写真加工でいう「フィルタ効果」ではありません。そのフィルタは人が設計するのではなく、<b>モデル自身がデータから学習した</b>ものです。近年は Transformer も画像に持ち込まれていますが（Vision Transformer）、多くの場面で CNN は今なお速く正確です。さらに<b>マルチモーダルモデルが画像を見る</b>とき、フロントの画像エンコーダも CNN であることがよくあります。"
+      }
+    ],
+    "zh": [
+      {
+        "h": "圖片對電腦是一堆數字",
+        "p": "一張圖在電腦裡就是一格格像素的數字。用一般的全連接網路直接吃整張圖，參數會爆炸，而且它學不會「同一個東西換個位置還是同一個東西」。看圖需要更聰明的做法。"
+      },
+      {
+        "h": "CNN：用小濾鏡到處掃",
+        "p": "<b>CNN（卷積神經網路）</b>的關鍵是一個小小的<b>濾鏡（filter）</b>，例如 3×3，在整張圖上<b>一格格滑過去</b>，專門偵測某種局部花樣（邊緣、角落）。同一個濾鏡在整張圖重複使用，所以不管貓在左上還右下都認得，這叫<b>權重共享</b>與<b>位置不變</b>，順帶讓參數少很多。"
+      },
+      {
+        "h": "從邊緣到臉：一層層抽象",
+        "p": "一層濾鏡只看得到簡單花樣。把很多層疊起來：<b>淺層看邊緣 → 中層看形狀、紋理 → 深層看到眼睛、臉、整個物件</b>。這正是深度學習那課說的「逐層抽象」，CNN 就是它在影像上的具體長相。中間還會用<b>池化（pooling）</b>把圖縮小、留下最強訊號，省算力也更耐位置變化。"
+      },
+      {
+        "h": "它點燃了這波 AI",
+        "p": "2012 年，一個叫 AlexNet 的 CNN 在影像辨識大賽（ImageNet）遠遠甩開對手，證明「資料夠多、網路夠深」真的管用，直接點燃這波深度學習熱潮（第 0 課提過的那個轉折）。之後的人臉辨識、醫療影像、自駕視覺，底層大多有 CNN。"
+      },
+      {
+        "h": "常見誤解",
+        "p": "CNN 不是修圖那種「濾鏡效果」。它的濾鏡不是人設計的，是<b>自己從資料學出來</b>的。近年 Transformer 也被搬到影像（Vision Transformer），但很多場景 CNN 仍又快又準；而且<b>多模態模型看圖</b>時，前端影像編碼器也常是 CNN。"
+      }
+    ]
+  },
   "tokenizer": {
     "zh": [
       {
@@ -683,6 +751,74 @@ export const BODIES = {
       {
         "h": "よくある誤解",
         "p": "それぞれの次元が読み取れる属性に対応している（たとえば第3次元＝かわいさ）と思い込まないでください。1つの数字だけを見てもほとんど意味はなく、意味は、ベクトル全体が他の語に対してどこに位置するかから初めて立ち現れます。"
+      }
+    ]
+  },
+  "rnn": {
+    "en": [
+      {
+        "h": "Language has an order",
+        "p": "Text is not just a bag of independent words; order changes meaning. 'Dog bites man' and 'man bites dog' use the same words but mean opposite things. So a model that reads language has to read <b>in order</b>, one word at a time, and remember what came before. Models like this are called <b>sequence models</b>."
+      },
+      {
+        "h": "RNN: reading and remembering at once",
+        "p": "The classic sequence model is the <b>RNN (recurrent neural network)</b>. It reads one word at a time, compressing 'what it understands so far' into a single <b>hidden state</b>, and carries that state forward to read the next word. It is like listening to someone talk while continuously updating, in your head, 'what they are saying so far'. This constantly passed-along state is its <b>memory</b>."
+      },
+      {
+        "h": "Two built-in flaws",
+        "p": "Reading one step after another has two serious weaknesses. <b>① Forgetfulness</b>: as a sentence gets longer, the information at the start is diluted through all that compression, so by the end of the sentence the model has often forgotten the beginning. <b>② No parallelism</b>: the 10th word cannot be computed until the first 9 are done, which makes training slow. Improved versions like <b>LSTM</b> add 'gates' to help it remember longer, but these two limits never truly go away."
+      },
+      {
+        "h": "And so Transformer arrived",
+        "p": "The 2017 <b>Transformer</b> took a different approach: instead of going one step after another, it uses <b>Attention</b> to let every word <b>see the whole sentence at once</b> and directly work out what to pay attention to. This solves both forgetfulness (even distant words can connect directly) and the lack of parallelism (all words are computed together), which is what made today's large language models possible. The next lesson covers it."
+      },
+      {
+        "h": "Common misconceptions",
+        "p": "Do not assume RNNs are useless now. They are <b>small and resource-efficient</b>, and remain practical for <b>short sequences, real-time work, and on-device use</b> (some speech and sensor signals). It is only when you need to handle long text quickly and powerfully that Transformer becomes the current mainstream."
+      }
+    ],
+    "ja": [
+      {
+        "h": "言語には順序がある",
+        "p": "文章は独立した単語の寄せ集めではなく、順序が意味を変えます。「犬が人を噛む」と「人が犬を噛む」は同じ単語を使っていても意味は正反対です。だから言語を読むモデルは<b>順番どおりに</b>一語ずつ読み、前に出てきた内容も覚えておく必要があります。こうしたモデルを<b>シーケンスモデル</b>と呼びます。"
+      },
+      {
+        "h": "RNN：読みながら覚える",
+        "p": "最も代表的なシーケンスモデルが <b>RNN（循環ニューラルネットワーク）</b>です。一語ずつ読み、「ここまでの理解」を一つの<b>隠れ状態（hidden state）</b>に凝縮して、それを持ったまま次の語を読みます。人の話を聞きながら、心の中で「今この人が何を話しているか」を更新し続けるようなものです。この絶えず受け渡される状態こそが、その<b>記憶</b>です。"
+      },
+      {
+        "h": "生まれつきの二つの弱点",
+        "p": "一つずつ処理するやり方には二つの致命的な弱点があります。<b>①健忘</b>：文が長くなると、冒頭の情報が凝縮を重ねるうちに薄まり、文末まで読むころには最初を忘れがちです。<b>②並列化できない</b>：10 番目の語は前の 9 語を計算し終えないと計算できず、学習が遅くなります。<b>LSTM</b> のような改良版は「ゲート」を加えて記憶を少し長持ちさせますが、この二つの制約が本当に消えるわけではありません。"
+      },
+      {
+        "h": "そこで Transformer が登場した",
+        "p": "2017 年の <b>Transformer</b> は発想を変えました。一つずつではなく、<b>Attention</b> によって各語が<b>一度に文全体を見て</b>、誰に注目すべきかを直接計算します。これにより健忘（どれだけ離れた語でも直接つながる）と並列化できない問題（すべての語を一緒に計算する）を同時に解決し、その後の大規模言語モデルが生まれました。次の課で扱います。"
+      },
+      {
+        "h": "よくある誤解",
+        "p": "RNN がもう役に立たないと思わないでください。<b>構造が小さく、省リソース</b>で、<b>短いシーケンス、リアルタイム、デバイス側</b>（一部の音声やセンサー信号）では今も実用的です。長い文章を速く強力に扱いたいときにこそ、Transformer が現在の主流になるのです。"
+      }
+    ],
+    "zh": [
+      {
+        "h": "語言是有順序的",
+        "p": "文字不是一堆獨立的詞，順序會改變意思：「狗咬人」和「人咬狗」用的字一樣，意思卻相反。所以讀語言的模型得能<b>順著順序</b>一個字一個字讀，還要記住前面講過什麼。這類模型就叫<b>序列模型</b>。"
+      },
+      {
+        "h": "RNN：邊讀邊記",
+        "p": "最經典的序列模型是 <b>RNN（循環神經網路）</b>。它一次讀一個字，把「目前為止的理解」濃縮成一個<b>隱藏狀態（hidden state）</b>，帶著它去讀下一個字。像一邊聽人講話、一邊在心裡更新「他到現在在說什麼」。這個不斷傳遞的狀態就是它的<b>記憶</b>。"
+      },
+      {
+        "h": "兩個天生的毛病",
+        "p": "一個接一個的做法有兩個硬傷：<b>①健忘</b>，句子一長，開頭的資訊在一路濃縮中被稀釋，讀到句尾常常忘了開頭；<b>②不能平行</b>，第 10 個字要等前 9 個字算完才能算，訓練很慢。<b>LSTM</b> 這類改良版加了「閘門」讓它記得久一點，但這兩個限制沒有真正消失。"
+      },
+      {
+        "h": "於是有了 Transformer",
+        "p": "2017 年的 <b>Transformer</b> 換了思路：不再一個接一個，而是用 <b>Attention</b> 讓每個字<b>一次看到全句</b>，直接算出該注意誰。這同時解掉了健忘（再遠的字都能直接連上）和不能平行（所有字一起算），才有了後來的大型語言模型。下一課就講它。"
+      },
+      {
+        "h": "常見誤解",
+        "p": "別以為 RNN 沒用了。它<b>結構小、省資源</b>，在<b>短序列、即時、裝置端</b>（部分語音、感測器訊號）仍然實用。只是要處理長文字又要又快又強，Transformer 才是現在的主流。"
       }
     ]
   },

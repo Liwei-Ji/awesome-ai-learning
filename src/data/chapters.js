@@ -106,6 +106,18 @@ const DATA = {
       ['Chain Rule 連鎖律', '逐層計算責任的數學基礎'],
     ],
   },
+  'cnn': {
+    t: 'CNN：AI 怎麼看圖', sub: '用一個小濾鏡，從邊緣看到整張臉',
+    key: [
+      ['01', 'CNN 用小濾鏡在整張圖滑動，偵測到處都可能出現的局部花樣'],
+      ['02', '同一濾鏡重複用（權重共享）：換位置也認得，參數更少'],
+      ['03', '疊很多層：邊緣 → 形狀 → 物件；濾鏡是學出來的，不是人設計的'],
+    ],
+    terms: [
+      ['Convolution 卷積', '小濾鏡在整張圖上滑動、逐區偵測局部花樣的運算'],
+      ['Filter 濾鏡', 'CNN 用來偵測某種花樣的小權重方塊，從資料學出來'],
+    ],
+  },
   'tokenizer': {
     t: 'Tokenizer', sub: '把文字切成模型看得懂的 token',
     key: [
@@ -128,6 +140,18 @@ const DATA = {
     terms: [
       ['Embedding 詞嵌入', '把符號映射到向量空間'],
       ['Vector 向量', '一串代表意義的數字座標'],
+    ],
+  },
+  'rnn': {
+    t: '序列模型：一次讀一個字', sub: 'Transformer 之前，AI 怎麼讀懂一句話',
+    key: [
+      ['01', '序列模型順著順序讀，用「隱藏狀態」把前面讀到的濃縮成記憶'],
+      ['02', 'RNN 兩大限制：長了會忘（健忘）、一個接一個不能平行（慢）'],
+      ['03', 'Transformer 用 Attention 一次看全句，同時解決健忘與平行，才有了 LLM'],
+    ],
+    terms: [
+      ['RNN 循環神經網路', '一次讀一個字、用隱藏狀態帶著記憶往下讀的序列模型'],
+      ['Hidden State 隱藏狀態', 'RNN 對「目前為止讀到什麼」的濃縮記憶，逐字傳遞'],
     ],
   },
   'transformer': {
@@ -364,8 +388,8 @@ const DATA = {
 const PROLOGUE = { key: 'prologue', t: '序章', desc: 'AI 從哪裡來', slugs: ['history'] };
 const OUTLINE = [
   { key: 'basics', t: 'AI 基礎', desc: '建立概念', slugs: ['ai-intro', 'ml', 'data'] },
-  { key: 'learn', t: 'AI 如何學習', desc: '模型怎麼被訓練', slugs: ['deep-learning', 'neural-network', 'training', 'backprop'] },
-  { key: 'llm', t: '大型語言模型 LLM', desc: 'ChatGPT 的核心', slugs: ['tokenizer', 'embedding', 'transformer', 'llm', 'model-size', 'model-knowledge', 'context-window', 'inference'] },
+  { key: 'learn', t: 'AI 如何學習', desc: '模型怎麼被訓練', slugs: ['deep-learning', 'neural-network', 'training', 'backprop', 'cnn'] },
+  { key: 'llm', t: '大型語言模型 LLM', desc: 'ChatGPT 的核心', slugs: ['tokenizer', 'embedding', 'rnn', 'transformer', 'llm', 'model-size', 'model-knowledge', 'context-window', 'inference'] },
   { key: 'chatgpt', t: '從模型到 ChatGPT', desc: '把模型訓練成助理', slugs: ['pretraining', 'fine-tuning'] },
   { key: 'apps', t: '生成式 AI 與 AI Agent', desc: '一條完整的應用鏈', slugs: ['prompt', 'generative', 'multimodal', 'rag', 'memory', 'mcp', 'agent', 'integration'] },
   { key: 'literacy', t: 'AI 素養', desc: '會用，也會判斷', slugs: ['limits', 'evaluation', 'capstone'] },

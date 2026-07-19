@@ -71,6 +71,150 @@ export const PRACTICE = {
       ]
     }
   },
+  "rnn": {
+    "practical": {
+      "en": [
+        "<b>Do not expect an RNN to remember the beginning of a long text</b>: as the sequence grows, early information gets diluted. For long context, use the Transformer family.",
+        "<b>RNN still has a place</b>: for short sequences, low latency, and compute-limited on-device settings (speech, sensors), a compact RNN / LSTM is often good enough and economical.",
+        "<b>'Having memory' does not mean 'remembering accurately'</b>: the hidden state is a compression, so details are lost; do not treat it as a record that can be replayed in full.",
+        "<b>When you see Attention, think of it as fixing RNN's pain points</b>: remember first that RNNs are slow and forgetful, and you will understand why Attention matters."
+      ],
+      "ja": [
+        "<b>長い文章では RNN が冒頭を覚えていると期待しない</b>：シーケンスが長くなると初期の情報は薄まります。長い文脈が必要なら Transformer 系を使いましょう。",
+        "<b>RNN にはまだ出番がある</b>：短いシーケンス、低遅延、計算資源が限られたデバイス側（音声、センサー）では、小型の RNN／LSTM で十分かつ省エネなことが多いです。",
+        "<b>「記憶がある」＝「正確に覚えている」ではない</b>：hidden state は圧縮なので細部は失われます。完全に再生できる記録だと思わないでください。",
+        "<b>Attention を見たら、それが RNN の痛みを解決していると考える</b>：まず RNN が遅くて健忘だと覚えておけば、Attention がなぜ重要かが分かります。"
+      ],
+      "zh": [
+        "<b>長文本別指望 RNN 記得住開頭</b>：序列一長，早期資訊會被稀釋。要長上下文，用 Transformer 系。",
+        "<b>RNN 仍有位子</b>：短序列、低延遲、算力有限的裝置端（語音、感測器），小巧的 RNN／LSTM 往往夠用又省。",
+        "<b>「有記憶」不等於「記得準」</b>：hidden state 是壓縮，細節會流失，別當成能完整回放的記錄。",
+        "<b>看到 Attention 就想到它在解 RNN 的痛</b>：先記得 RNN 慢又健忘，才懂 Attention 為何重要。"
+      ]
+    },
+    "decision": {
+      "en": {
+        "q": "To handle sequences, which one should you use?",
+        "rows": [
+          {
+            "when": "Short sequences, real-time, on-device, limited resources",
+            "use": "RNN／LSTM",
+            "why": "Small structure, low compute, fast enough"
+          },
+          {
+            "when": "Long text, want parallel training, want the strongest performance",
+            "use": "Transformer",
+            "why": "Sees the whole sentence at once, parallelizable, longer context"
+          },
+          {
+            "when": "You just want to build an application quickly",
+            "use": "Use an off-the-shelf LLM",
+            "why": "No need to choose an architecture yourself"
+          }
+        ]
+      },
+      "ja": {
+        "q": "シーケンスを扱うなら、どれを使う？",
+        "rows": [
+          {
+            "when": "短いシーケンス、リアルタイム、デバイス側、資源が限られる",
+            "use": "RNN／LSTM",
+            "why": "構造が小さく、省計算、十分に速い"
+          },
+          {
+            "when": "長い文章、並列学習したい、最高の性能がほしい",
+            "use": "Transformer",
+            "why": "一度に文全体を見る、並列化可能、文脈がより長い"
+          },
+          {
+            "when": "手早くアプリを作りたいだけ",
+            "use": "既製の LLM を使う",
+            "why": "自分でアーキテクチャを選ばなくてよい"
+          }
+        ]
+      },
+      "zh": {
+        "q": "要處理序列，用哪種？",
+        "rows": [
+          { "when": "短序列、即時、裝置端、資源有限", "use": "RNN／LSTM", "why": "結構小、省算力、夠快" },
+          { "when": "長文字、要並行訓練、要最強效果", "use": "Transformer", "why": "一次看全句、可平行、上下文更長" },
+          { "when": "只想快速做應用", "use": "直接用現成 LLM", "why": "不用自己選架構" }
+        ]
+      }
+    }
+  },
+  "cnn": {
+    "practical": {
+      "en": [
+        "<b>For image problems, think CNN first</b>: for classification, detection, and segmentation, CNN is still a fast and stable baseline.",
+        "<b>When data is scarce, use pretraining</b>: take a CNN already trained on a large image dataset and fine-tune it (transfer learning); it is far cheaper than training from scratch.",
+        "<b>A CNN looks at local features and texture</b>: it is weaker at overall composition and long-range relationships, which is exactly what Vision Transformer aims to make up for.",
+        "<b>The 'eyes' of a multimodal system are often a CNN</b>: when a VLM looks at an image, its front-end image encoder usually contains a CNN, so understanding it helps you understand VLMs."
+      ],
+      "ja": [
+        "<b>画像の問題ではまず CNN を考える</b>：分類、検出、セグメンテーションでは、CNN は今も速くて安定したベースラインです。",
+        "<b>データが足りなければ事前学習を使う</b>：大きな画像データセットで学習済みの CNN を微調整する（転移学習）方が、ゼロから学習するよりずっと省コストです。",
+        "<b>CNN が見るのは局所と質感</b>：全体の構図や長距離の関係には弱く、そこを補おうとするのが Vision Transformer です。",
+        "<b>マルチモーダルの「目」はよく CNN</b>：VLM が画像を見るとき、フロントの画像エンコーダにはたいてい CNN が入っており、それが分かると VLM の理解に役立ちます。"
+      ],
+      "zh": [
+        "<b>影像類問題先想 CNN</b>：分類、偵測、切割，CNN 仍是又快又穩的基準線。",
+        "<b>資料不夠就用預訓練</b>：拿大圖庫上訓練好的 CNN 再微調（transfer learning），比從頭訓練省太多。",
+        "<b>CNN 看的是局部與紋理</b>：對整體構圖、長距關係較弱，這正是 Vision Transformer 想補的地方。",
+        "<b>多模態的「眼睛」常是 CNN</b>：VLM 看圖時前端影像編碼器多半有 CNN，懂它有助懂 VLM。"
+      ]
+    },
+    "decision": {
+      "en": {
+        "q": "To handle images, which one should you use?",
+        "rows": [
+          {
+            "when": "General image tasks, limited data or compute, need speed",
+            "use": "CNN",
+            "why": "Mature, efficient, easy to fine-tune"
+          },
+          {
+            "when": "Very large data, need global relationships, chasing the highest accuracy",
+            "use": "Vision Transformer",
+            "why": "Global attention, but data-hungry"
+          },
+          {
+            "when": "You just want to use ready-made capabilities (describe an image, ask about an image)",
+            "use": "Multimodal / VLM",
+            "why": "No need to train it yourself, just use it"
+          }
+        ]
+      },
+      "ja": {
+        "q": "画像を扱うなら、どれを使う？",
+        "rows": [
+          {
+            "when": "一般的な画像タスク、データや計算資源が限られる、速さが必要",
+            "use": "CNN",
+            "why": "成熟していて高効率、微調整しやすい"
+          },
+          {
+            "when": "超大規模データ、全体的な関係を捉えたい、最高精度を追う",
+            "use": "Vision Transformer",
+            "why": "全体的な注意だが、データを大量に必要とする"
+          },
+          {
+            "when": "既製の能力を使いたいだけ（画像を説明する、画像について尋ねる）",
+            "use": "マルチモーダル / VLM",
+            "why": "自分で学習せず、そのまま使える"
+          }
+        ]
+      },
+      "zh": {
+        "q": "要處理影像，用哪種？",
+        "rows": [
+          { "when": "一般影像任務、資料或算力有限、要快", "use": "CNN", "why": "成熟、高效、好微調" },
+          { "when": "超大資料、要抓全局關係、追最高精度", "use": "Vision Transformer", "why": "全局注意力，但吃資料" },
+          { "when": "只想用現成能力（描述圖、問圖）", "use": "多模態 / VLM", "why": "免自己訓練，直接用" }
+        ]
+      }
+    }
+  },
   "tokenizer": {
     "practical": {
       "zh": [

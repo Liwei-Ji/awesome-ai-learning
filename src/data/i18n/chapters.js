@@ -4,6 +4,30 @@
    ============================================================ */
 export const CH_TR = {
   en: {
+    "rnn": {
+      t: "Sequence Models: Reading One Word at a Time", sub: "Before Transformer, how AI made sense of a sentence",
+      key: [
+        ["01", "Sequence models read in order, using a 'hidden state' to compress what came before into memory"],
+        ["02", "RNN's two big limits: it forgets over long inputs (forgetful), and it runs one step at a time so it cannot parallelize (slow)"],
+        ["03", "Transformer uses Attention to see the whole sentence at once, solving both forgetfulness and the parallelism problem, which is what made LLMs possible"],
+      ],
+      terms: [
+        ["RNN", "a sequence model that reads one word at a time, carrying memory forward through a hidden state"],
+        ["Hidden State", "the RNN's compressed memory of 'what it has read so far', passed along word by word"],
+      ],
+    },
+    "cnn": {
+      t: "CNN: How AI Sees Images", sub: "With one small filter, from edges to a whole face",
+      key: [
+        ["01", "CNN slides a small filter across the whole image to detect local patterns that can appear anywhere"],
+        ["02", "The same filter is reused (weight sharing): it recognizes patterns wherever they move, with fewer parameters"],
+        ["03", "Stack many layers: edges → shapes → objects; the filters are learned, not designed by hand"],
+      ],
+      terms: [
+        ["Convolution", "the operation of sliding a small filter across the whole image to detect local patterns region by region"],
+        ["Filter", "a small block of weights that a CNN uses to detect a certain pattern, learned from data"],
+      ],
+    },
     "model-knowledge": {
       t: "A Model's Knowledge", sub: "What it knows, where it lives, and how far it goes",
       key: [
@@ -354,6 +378,30 @@ export const CH_TR = {
     },
   },
   ja: {
+    "rnn": {
+      t: "シーケンスモデル：一度に一語ずつ読む", sub: "Transformer 以前、AI はどうやって文を理解したのか",
+      key: [
+        ["01", "シーケンスモデルは順番どおりに読み、「隠れ状態」で前に読んだ内容を記憶として凝縮する"],
+        ["02", "RNN の二大制約：長いと忘れる（健忘）、一つずつ処理するので並列化できない（遅い）"],
+        ["03", "Transformer は Attention で一度に文全体を見て、健忘と並列化を同時に解決し、LLM が生まれた"],
+      ],
+      terms: [
+        ["RNN 循環ニューラルネットワーク", "一語ずつ読み、隠れ状態で記憶を持ちながら先へ読み進めるシーケンスモデル"],
+        ["Hidden State 隠れ状態", "RNN が「ここまでに何を読んだか」を凝縮した記憶で、一語ずつ伝えられる"],
+      ],
+    },
+    "cnn": {
+      t: "CNN：AI はどうやって画像を見るのか", sub: "小さなフィルタ一つで、エッジから顔全体まで見る",
+      key: [
+        ["01", "CNN は小さなフィルタを画像全体でスライドさせ、どこにでも現れうる局所的な模様を検出する"],
+        ["02", "同じフィルタを繰り返し使う（重み共有）：位置が変わっても認識でき、パラメータが少ない"],
+        ["03", "たくさんの層を重ねる：エッジ → 形 → 物体；フィルタは人が設計するのではなく学習される"],
+      ],
+      terms: [
+        ["Convolution 畳み込み", "小さなフィルタを画像全体でスライドさせ、領域ごとに局所的な模様を検出する演算"],
+        ["Filter フィルタ", "CNN がある模様を検出するために使う小さな重みのブロックで、データから学習される"],
+      ],
+    },
     "model-knowledge": {
       t: "モデルの知識", sub: "何を知っていて、どこにあり、どこまでか",
       key: [
