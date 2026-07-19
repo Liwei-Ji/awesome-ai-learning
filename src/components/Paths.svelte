@@ -10,6 +10,8 @@
   import HomeContent from './HomeContent.svelte';
   import Stage from './Stage.svelte';
   import Interview from './Interview.svelte';
+  import Certificate from './Certificate.svelte';
+  import { progress, markDone, pathStats } from '../stores/progress.svelte.js';
 
   let locale = $derived(i18n.locale);
   let path = $derived(nav.path ? pathById(nav.path) : null);
@@ -23,8 +25,13 @@
     const steps = pathSteps(path);
     const chosen = (nav.step && steps.find((x) => x.ref === nav.step)) || steps[0];
     if (!chosen) return null;
-    return chosen.k === 'course' ? { k: 'course', chId: idOf(chosen.ref) } : { k: 'iv', ref: chosen.ref };
+    return chosen.k === 'course'
+      ? { k: 'course', ref: chosen.ref, chId: idOf(chosen.ref) }
+      : { k: 'iv', ref: chosen.ref };
   });
+
+  // 走到某步就記為完成（跨路線共用）。導覽走側邊欄目錄；證書由側欄「結業證書」按鈕領取。
+  $effect(() => { if (curStep) markDone(curStep.k, curStep.ref); });
 </script>
 
 {#if !path}
@@ -41,11 +48,15 @@
       <div class="grid grid-j">
         {#each journeys as p}
           {@const tx = pathText(p, locale)}
-          <a class="pcard j" href={hrefPath(p.id)} onclick={(e) => onNav(e, () => goPath(p.id))}>
+          {@const st = pathStats(p)}
+          <a class="pcard j" class:complete={st.complete} href={hrefPath(p.id)} onclick={(e) => onNav(e, () => goPath(p.id))}>
             <div class="pc-title"><h3>{tx.title}</h3><span class="pc-time">{locText(p.time, locale)}</span></div>
             <p class="pc-line">{tx.tagline}</p>
             <p class="pc-who"><span>{t('paths.forWho')}</span>{tx.who}</p>
-            <div class="pc-foot">{countLabel(p)} <span class="arrow">→</span></div>
+            <div class="pc-foot">
+              {#if st.complete}<span class="pc-done">✓ {t('paths.done')}</span>{:else}<span>{st.done} / {st.total}</span>{/if}
+              <span class="arrow">→</span>
+            </div>
           </a>
         {/each}
       </div>
@@ -56,10 +67,14 @@
       <div class="grid grid-t">
         {#each tracks as p}
           {@const tx = pathText(p, locale)}
-          <a class="pcard t" href={hrefPath(p.id)} onclick={(e) => onNav(e, () => goPath(p.id))}>
+          {@const st = pathStats(p)}
+          <a class="pcard t" class:complete={st.complete} href={hrefPath(p.id)} onclick={(e) => onNav(e, () => goPath(p.id))}>
             <div class="pc-title"><h3>{tx.title}</h3><span class="pc-time">{locText(p.time, locale)}</span></div>
             <p class="pc-line">{tx.tagline}</p>
-            <div class="pc-foot">{countLabel(p)} <span class="arrow">→</span></div>
+            <div class="pc-foot">
+              {#if st.complete}<span class="pc-done">✓ {t('paths.done')}</span>{:else}<span>{st.done} / {st.total}</span>{/if}
+              <span class="arrow">→</span>
+            </div>
           </a>
         {/each}
       </div>
@@ -85,6 +100,10 @@
   <Stage id={curStep.chId} />
 {:else if curStep}
   <Interview id={curStep.ref} />
+{/if}
+
+{#if progress.certFor && pathById(progress.certFor)}
+  <Certificate path={pathById(progress.certFor)} />
 {/if}
 
 <style>
@@ -120,4 +139,6 @@
   .pc-who span { color: var(--accent-ink); font-weight: 600; margin-right: 6px; }
   .pc-foot { display: flex; align-items: center; justify-content: space-between; margin-top: auto; padding-top: 12px; border-top: 1px solid var(--line); font-family: var(--mono); font-size: 12px; color: var(--muted); }
   .arrow { color: var(--accent-ink); font-weight: 700; }
+  .pc-done { color: var(--teal); font-weight: 700; }
+  .pcard.complete { border-color: color-mix(in srgb, var(--teal) 45%, var(--line)); }
 </style>
