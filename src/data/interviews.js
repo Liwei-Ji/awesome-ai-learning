@@ -253,7 +253,7 @@ export const INTERVIEWS = {
       "簡單任務也硬 CoT，白花 token。",
       "相信它寫的推理＝正確（過程漂亮不代表答案對）。",
     ],
-    related: ["prompt", "llm"],
+    related: ["prompt", "llm", "reasoning"],
   },
   "prompt-vs-tune-vs-rag": {
     cat: "prompting",
@@ -307,7 +307,7 @@ export const INTERVIEWS = {
       "什麼題都用推理模型，成本延遲爆炸。",
       "以為它不會錯（仍會，只是難題較準）。",
     ],
-    related: ["llm", "inference", "pretraining"],
+    related: ["llm", "inference", "pretraining", "reasoning"],
   },
   "test-time-compute": {
     cat: "prompting",
@@ -334,7 +334,7 @@ export const INTERVIEWS = {
       "分不清「訓練時算力」與「推理時算力」兩條路。",
       "簡單題也硬拉長推理。",
     ],
-    related: ["inference", "llm"],
+    related: ["inference", "llm", "reasoning"],
   },
   "cot-limits": {
     cat: "prompting",
@@ -442,7 +442,7 @@ export const INTERVIEWS = {
       "忘了提代價 O(n²)，把它講成沒有缺點。",
       "把「一次看全句」和「有記憶」搞混，其實它沒有跨序列的內建記憶。",
     ],
-    related: ["transformer", "llm"],
+    related: ["transformer", "llm", "rnn"],
   },
   "embedding-meaning": {
     cat: "principle",
@@ -577,7 +577,7 @@ export const INTERVIEWS = {
       "以為微調是「灌新事實」的好方法（那是 RAG 的活）。",
       "忽略 RAG 每次檢索的延遲與成本，以及檢索錯了就白搭。",
     ],
-    related: ["fine-tuning", "rag", "pretraining"],
+    related: ["fine-tuning", "rag", "pretraining", "model-knowledge"],
   },
   "lora": {
     cat: "training",
@@ -1203,7 +1203,7 @@ export const INTERVIEWS = {
       '忽略終止條件與步數上限，導致無限繞圈（也是成本失控的來源）。',
       '把規劃講成一次性，不提「邊做邊重規劃」。',
     ],
-    related: ['agent', 'integration', 'mcp'],
+    related: ['agent', 'integration', 'mcp', 'reasoning'],
   },
 
   'agent-tools': {
@@ -1427,7 +1427,7 @@ export const INTERVIEWS = {
       '以為「接了 RAG 就不會幻覺」。',
       '把「模型很自信」當成「答案很可靠」。',
     ],
-    related: ['limits', 'llm', 'rag'],
+    related: ['limits', 'llm', 'rag', 'model-knowledge'],
   },
   'what-model-stores': {
     cat: 'principle',
@@ -1455,7 +1455,7 @@ export const INTERVIEWS = {
       '以為它「完全不記原文」（其實會逐字背下一部分）。',
       '把「參數多」當成「硬碟大」（它比較像腦容量，不是檔案大小）。',
     ],
-    related: ['llm', 'model-size', 'limits'],
+    related: ['llm', 'model-size', 'limits', 'model-knowledge'],
   },
   'scaling-law': {
     cat: 'training',
@@ -1623,7 +1623,7 @@ export const INTERVIEWS = {
       '以為它像人一樣「看見」，於是拿去數精確數量、讀小字、判斷精準位置，這些正是它最會錯的地方。',
       '把「看圖理解」和「文字生圖」當成同一件事（前者影像進 LLM，後者多半是擴散模型）。',
     ],
-    related: ['multimodal', 'embedding', 'transformer'],
+    related: ['multimodal', 'embedding', 'transformer', 'cnn'],
   },
   'can-llm-reason': {
     cat: 'literacy',
@@ -1651,7 +1651,7 @@ export const INTERVIEWS = {
       '以為「模型夠大就自動會嚴謹推理」；真確性、精確運算、一致性是結構性弱點，不是純靠放大解決。',
       '看到它解出難題就以為會通用推理，忽略那多半在訓練分布內；換個沒見過的新形式就露餡。',
     ],
-    related: ['limits', 'pretraining', 'inference'],
+    related: ['limits', 'pretraining', 'inference', 'reasoning'],
   },
   'emergence': {
     cat: 'principle',
