@@ -639,6 +639,78 @@ export const PRACTICE = {
       }
     }
   },
+  "reasoning": {
+    "practical": {
+      "en": [
+        "<b>Use reasoning models only for hard problems</b>: multi-step reasoning, math, code, and planning are worth long thinking; for general Q&A, extraction, and rewriting, a standard model is fast and cheap.",
+        "<b>Thinking longer = more expensive and slower</b>: thinking token still costs money and time, the cost can be several times that of a standard model, so do not turn it on by default for everything.",
+        "<b>Do not treat the thinking process as the truth</b>: that reasoning is not necessarily the model's real computation, so do not use it as a reliable explanation or basis for compliance audit.",
+        "<b>Try a standard model + CoT first</b>: often a single 'think step by step' is enough, and you do not necessarily need to switch to an expensive reasoning model."
+      ],
+      "ja": [
+        "<b>難問にだけ推論モデルを使う</b>：多段の推論、数学、コード、計画は長考の価値がある。一般的な質疑応答、抽出、書き換えは通常のモデルが速くて安い。",
+        "<b>長く考える＝より高く、より遅い</b>：思考の token も同じく課金され、待ち時間もかかる。コストは通常のモデルの数倍になりうるので、初期設定で常時オンにしないこと。",
+        "<b>思考過程を真実とみなさない</b>：その推論は必ずしもモデルの本当の計算ではないので、信頼できる説明やコンプライアンス監査の根拠に使わないこと。",
+        "<b>まず通常のモデル + CoT を試す</b>：多くの場合、「一歩ずつ考えて」の一言で十分で、必ずしも高価な推論モデルに切り替える必要はない。"
+      ],
+      "zh": [
+        "<b>難題才用推理模型</b>：多步推理、數學、程式、規劃值得長考；一般問答、抽取、改寫用一般模型又快又便宜。",
+        "<b>想久＝更貴更慢</b>：思考 token 一樣要算錢、要等，成本可能是一般模型的好幾倍，別預設全開。",
+        "<b>別把思考過程當真相</b>：那段推理不一定是模型真正的計算，別拿來當可靠解釋或合規稽核依據。",
+        "<b>先試一般模型 + CoT</b>：很多時候一句「一步步想」就夠了，不一定要換昂貴的推理模型。"
+      ]
+    },
+    "decision": {
+      "en": {
+        "q": "Should this task use a reasoning model?",
+        "rows": [
+          {
+            "when": "Multi-step reasoning, math, code, or planning, and you need the highest accuracy",
+            "use": "A reasoning model (o1-style)",
+            "why": "Long thinking buys accuracy, and hard problems are worth it"
+          },
+          {
+            "when": "General Q&A, extraction, or rewriting, and you want it fast and cheap",
+            "use": "A standard model",
+            "why": "Fast and economical, and enough for anything but hard problems"
+          },
+          {
+            "when": "You want to save money but still be a bit more accurate",
+            "use": "Standard model + CoT prompt",
+            "why": "A single 'think step by step' is often enough"
+          }
+        ]
+      },
+      "ja": {
+        "q": "この問題に推論モデルを使うべきか？",
+        "rows": [
+          {
+            "when": "多段の推論、数学、コード、計画で、最高の正確さが必要",
+            "use": "推論モデル（o1 系）",
+            "why": "長考で正確さを買う。難問には価値がある"
+          },
+          {
+            "when": "一般的な質疑応答、抽出、書き換えで、速く安くしたい",
+            "use": "通常のモデル",
+            "why": "速くて省コスト。難問以外なら十分"
+          },
+          {
+            "when": "コストを抑えつつ、もう少し正確にしたい",
+            "use": "通常モデル + CoT プロンプト",
+            "why": "「一歩ずつ考えて」の一言でたいてい足りる"
+          }
+        ]
+      },
+      "zh": {
+        "q": "這題要用推理模型嗎？",
+        "rows": [
+          { "when": "多步推理、數學、程式、規劃，要最高正確率", "use": "推理模型（o1 類）", "why": "長考換正確率，難題值得" },
+          { "when": "一般問答、抽取、改寫，要快要便宜", "use": "一般模型", "why": "又快又省，難題以外都夠用" },
+          { "when": "想省錢又想準一點", "use": "一般模型 + CoT 提示", "why": "一句「一步步想」常常就夠" }
+        ]
+      }
+    }
+  },
   "prompt": {
     "practical": {
       "zh": [

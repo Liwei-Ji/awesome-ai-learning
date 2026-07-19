@@ -1366,6 +1366,74 @@ export const BODIES = {
       }
     ]
   },
+  "reasoning": {
+    "en": [
+      {
+        "h": "Think First, Then Answer",
+        "p": "A standard LLM starts spitting out its answer word by word the moment it finishes reading the question, with no step where it first 'works things out on scratch paper'. On hard problems like math or multi-step reasoning, this is often exactly where it goes wrong: it is already talking before it has thought things through."
+      },
+      {
+        "h": "CoT: A Prompting Technique",
+        "p": "Early on, people found that simply adding a line like 'think step by step' to the prompt, getting the model to first write out a <b>Chain of Thought</b> and lay its reasoning out in the open, clearly raised accuracy, because a hard problem gets broken into a series of easier little steps. But keep in mind: CoT is <b>a prompt technique</b>. It relies on you asking for it in your input; the model itself has not changed."
+      },
+      {
+        "h": "Reasoning Models: Training the Thinking In",
+        "p": "A new generation of <b>reasoning models</b> (such as o1) goes a step further: they use <b>post-training (reinforcement learning)</b> to build 'think long first, then answer' directly into the model itself. It produces a long stretch of internal thinking, checks, backtracks, tries different paths, and only then gives an answer, so you no longer have to teach it to think step by step. The difference is this: <b>CoT relies on prompting, reasoning models rely on training</b>."
+      },
+      {
+        "h": "Trading Compute for Accuracy",
+        "p": "At its core this is not 'smarter magic' but a trade-off: <b>test-time compute</b>. The longer it thinks (the more thinking token it generates), the slower and more expensive it gets, but the better it does on hard problems. Simple questions do not need long thinking; thinking long there just wastes time and money. <b>Only hard problems are worth</b> spending compute to buy those few points of accuracy."
+      },
+      {
+        "h": "Common Misconceptions",
+        "p": "Two things to remember. First, it is <b>not getting smarter</b>; it just spends more compute to think a few more steps, and it will still make mistakes and hallucinate. Second, the 'thinking process' it prints out is <b>not necessarily its real internal computation</b>; it is more like an after-the-fact explanation shown to you, so do not treat it as a reliable explanation or basis for audit. And you should not use it on every problem: for everyday tasks a standard model is both fast and good enough."
+      }
+    ],
+    "ja": [
+      {
+        "h": "考えてから答える",
+        "p": "通常の LLM は問題を読み終えるとすぐ一語ずつ答えを吐き出し始め、途中に「まず紙の上で計算する」というステップがない。数学や多段の推論といった難問では、たいていここで間違える。考えがまとまる前に、もう話し始めているのだ。"
+      },
+      {
+        "h": "CoT：ひとつのプロンプト技法",
+        "p": "初期に人々は、プロンプトに「一歩ずつ考えて」と一言加え、モデルにまず<b>思考の連鎖（Chain of Thought）</b>を書き出させて推論の過程を表に出させるだけで、正答率がはっきり上がることに気づいた。難問が一連のやさしい小さなステップに分解されるからだ。ただし覚えておきたい。CoT は<b>ひとつの prompt の技法</b>で、入力時にあなたがそう求めることに頼っており、モデル自体は変わっていない。"
+      },
+      {
+        "h": "推論モデル：「考える力」を組み込む",
+        "p": "新世代の<b>推論モデル</b>（o1 など）はさらに一歩進む。<b>後訓練（強化学習）</b>によって「まず長く考えてから答える」をモデル自体に直接組み込むのだ。まず長い内部思考を生成し、確認し、戻り、異なる経路を試して、最後に答えを出す。もう一歩ずつ考えるよう教える必要はない。違いはここにある。<b>CoT はプロンプトに頼り、推論モデルは訓練に頼る</b>。"
+      },
+      {
+        "h": "計算で正確さを買う",
+        "p": "その本質は「より賢い魔法」ではなく、ひとつの取捨だ。<b>test-time compute（推論時の計算）</b>である。長く考えるほど（思考の token を多く生成するほど）遅く、高コストになるが、難問はより良く解ける。簡単な問題に長考は要らず、そこで長く考えても時間とコストを無駄にするだけだ。<b>難問だけが</b>、計算を使って数ポイントの正確さを買う価値がある。"
+      },
+      {
+        "h": "よくある誤解",
+        "p": "二点を覚えておきたい。ひとつ、それは<b>賢くなっているわけではない</b>。ただより多くの計算を使って数ステップ多く考えるだけで、依然として間違えるし幻覚も起こす。ふたつ、印字される「思考過程」は<b>必ずしもその本当の内部計算ではない</b>。むしろ事後にあなたへ見せる説明に近いので、信頼できる説明や監査の根拠にしてはいけない。そして毎回それを使うべきでもない。日常のタスクなら通常のモデルが速くて十分だ。"
+      }
+    ],
+    "zh": [
+      {
+        "h": "先想再答",
+        "p": "一般 LLM 讀完題目就開始一個字一個字吐答案，中間沒有「先在草稿紙上算」的步驟。碰到數學、多步推理這種難題，常常就錯在這：它還沒想清楚，就已經在講了。"
+      },
+      {
+        "h": "CoT：一種提示技巧",
+        "p": "早期大家發現，只要在提示裡加一句「一步步想」，讓模型先寫出<b>思維鏈（Chain of Thought）</b>、把推理過程攤開，答對率就明顯上升，因為難題被拆成一連串比較容易的小步。但要記住：CoT 是<b>一種 prompt 技巧</b>，靠你在輸入時要求它這麼做，模型本身沒有改變。"
+      },
+      {
+        "h": "推理模型：把「會想」練進去",
+        "p": "新一代<b>推理模型</b>（如 o1）更進一步：用<b>後訓練（強化學習）</b>把「先長考、再作答」直接練進模型本身。它會先產生一大段內部思考，檢查、回頭、嘗試不同路徑，最後才給答案，你不用再教它一步步想。差別就在：<b>CoT 靠提示，推理模型靠訓練</b>。"
+      },
+      {
+        "h": "用算力換正確率",
+        "p": "它的本質不是「更聰明的魔法」，而是一個取捨：<b>test-time compute（推論期算力）</b>。想越久（生成越多思考 token）就越慢、越貴，但難題答得越好。簡單問題不需要長考，長考只是白花時間與成本；<b>難問題才值得</b>用算力換那幾分正確率。"
+      },
+      {
+        "h": "常見誤解",
+        "p": "兩點要記住：一，它<b>不是變聰明</b>，只是花更多算力多想幾步，仍會錯、會幻覺；二，它印出來的那段「思考過程」<b>不一定是它真正的內部計算</b>，比較像事後給你看的說明，別當成可靠的解釋或稽核依據。也不是每題都該用它，日常任務一般模型又快又夠好。"
+      }
+    ]
+  },
   "prompt": {
     "zh": [
       {

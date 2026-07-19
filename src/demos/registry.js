@@ -14,6 +14,7 @@ import ModelSize from './ModelSize.svelte';
 import ModelKnowledge from './ModelKnowledge.svelte';
 import SequenceMemory from './SequenceMemory.svelte';
 import ConvFilter from './ConvFilter.svelte';
+import ThinkingBudget from './ThinkingBudget.svelte';
 import Inference from './Inference.svelte';
 import Network from './Network.svelte';
 import GradientDescent from './GradientDescent.svelte';
@@ -56,6 +57,7 @@ const demos = {
   'transformer': Attention,
   'llm': NextToken,
   'pretraining': ToChatGPT,    // 深色發光版
+  'reasoning': ThinkingBudget,
   'prompt': PromptCraft,
   'rag': RAG,
   'fine-tuning': FineTune,

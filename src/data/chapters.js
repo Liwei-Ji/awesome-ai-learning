@@ -250,6 +250,18 @@ const DATA = {
       ['LoRA', '只調整一小部分參數的高效微調法'],
     ],
   },
+  'reasoning': {
+    t: '推理模型：讓 AI 想久一點', sub: '為什麼「多想幾步」能讓答案更好',
+    key: [
+      ['01', '一般 LLM 讀完就答；推理模型先產生一大段思考、檢查回頭，才給答案'],
+      ['02', 'CoT 是用 prompt 鼓勵它寫出中間步驟；推理模型用後訓練把「會想」練進模型本身'],
+      ['03', '核心取捨是 test-time compute：想越久越準，但越慢越貴，難題才值得'],
+    ],
+    terms: [
+      ['Chain of Thought 思維鏈', '一種 prompt 技巧，鼓勵模型寫出中間推理步驟，難題答對率會提高'],
+      ['Test-time Compute 推論期算力', '作答時多花算力想久一點，用速度與成本換正確率'],
+    ],
+  },
   'prompt': {
     t: 'Prompt：怎麼跟 AI 溝通', sub: '提示決定輸出品質',
     key: [
@@ -390,7 +402,7 @@ const OUTLINE = [
   { key: 'basics', t: 'AI 基礎', desc: '建立概念', slugs: ['ai-intro', 'ml', 'data'] },
   { key: 'learn', t: 'AI 如何學習', desc: '模型怎麼被訓練', slugs: ['deep-learning', 'neural-network', 'training', 'backprop', 'cnn'] },
   { key: 'llm', t: '大型語言模型 LLM', desc: 'ChatGPT 的核心', slugs: ['tokenizer', 'embedding', 'rnn', 'transformer', 'llm', 'model-size', 'model-knowledge', 'context-window', 'inference'] },
-  { key: 'chatgpt', t: '從模型到 ChatGPT', desc: '把模型訓練成助理', slugs: ['pretraining', 'fine-tuning'] },
+  { key: 'chatgpt', t: '從模型到 ChatGPT', desc: '把模型訓練成助理', slugs: ['pretraining', 'fine-tuning', 'reasoning'] },
   { key: 'apps', t: '生成式 AI 與 AI Agent', desc: '一條完整的應用鏈', slugs: ['prompt', 'generative', 'multimodal', 'rag', 'memory', 'mcp', 'agent', 'integration'] },
   { key: 'literacy', t: 'AI 素養', desc: '會用，也會判斷', slugs: ['limits', 'evaluation', 'capstone'] },
 ];

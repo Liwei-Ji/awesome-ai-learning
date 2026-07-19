@@ -4,6 +4,18 @@
    ============================================================ */
 export const CH_TR = {
   en: {
+    "reasoning": {
+      t: "Reasoning Models: Letting AI Think Longer", sub: "Why thinking a few more steps makes answers better",
+      key: [
+        ["01", "A standard LLM answers as soon as it finishes reading; a reasoning model first produces a long stretch of thinking, checks and backtracks, and only then gives an answer"],
+        ["02", "CoT uses the prompt to encourage it to write out the intermediate steps; a reasoning model uses post-training to build the ability to think into the model itself"],
+        ["03", "The core trade-off is test-time compute: the longer it thinks the more accurate it gets, but also the slower and more expensive, so only hard problems are worth it"],
+      ],
+      terms: [
+        ["Chain of Thought", "A prompt technique that encourages the model to write out its intermediate reasoning steps, which raises accuracy on hard problems"],
+        ["Test-time Compute", "Spending more compute at answer time to think a bit longer, trading speed and cost for accuracy"],
+      ],
+    },
     "rnn": {
       t: "Sequence Models: Reading One Word at a Time", sub: "Before Transformer, how AI made sense of a sentence",
       key: [
@@ -378,6 +390,18 @@ export const CH_TR = {
     },
   },
   ja: {
+    "reasoning": {
+      t: "推論モデル：AI にもっと長く考えさせる", sub: "なぜ「もう数ステップ考える」と答えが良くなるのか",
+      key: [
+        ["01", "通常の LLM は読み終えるとすぐ答える。推論モデルはまず長い思考を生成し、確認して戻り、それから答えを出す"],
+        ["02", "CoT は prompt で中間ステップを書き出させる。推論モデルは後訓練で「考える力」をモデル自体に組み込む"],
+        ["03", "核心のトレードオフは test-time compute。長く考えるほど正確になるが、遅く高コストにもなるので、難問だけが価値に見合う"],
+      ],
+      terms: [
+        ["Chain of Thought 思考の連鎖", "モデルに中間の推論ステップを書き出させる prompt の技法。難問の正答率が上がる"],
+        ["Test-time Compute 推論時の計算", "回答時により多くの計算を使って少し長く考えること。速度とコストを正確さと交換する"],
+      ],
+    },
     "rnn": {
       t: "シーケンスモデル：一度に一語ずつ読む", sub: "Transformer 以前、AI はどうやって文を理解したのか",
       key: [
