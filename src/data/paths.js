@@ -16,9 +16,9 @@ export const PATHS = [
     group: 'journey',
     time: { zh: '約 2 小時', en: '~2 hrs', ja: '約2時間' },
     t: {
-      zh: { title: '搞懂 AI', tagline: '看懂新聞在講什麼，會用工具，不被唬。', who: '想快速建立正確概念，不碰工程細節。' },
-      en: { title: 'Understand AI', tagline: 'Follow the headlines, use the tools, and not get fooled.', who: 'Build correct intuition fast, skip the engineering internals.' },
-      ja: { title: 'AI をざっくり掴む', tagline: 'ニュースがわかり、ツールを使え、惑わされない。', who: '正しい概念を素早く。エンジニアリングの内部は省略。' },
+      zh: { title: '搞懂 AI', tagline: '看懂新聞在講什麼，會用工具，不被唬。', who: '完全新手：不寫程式、不碰數學，從這裡開始。' },
+      en: { title: 'Understand AI', tagline: 'Follow the headlines, use the tools, and not get fooled.', who: 'Complete beginners: no code and no math, start here.' },
+      ja: { title: 'AI をざっくり掴む', tagline: 'ニュースがわかり、ツールを使え、惑わされない。', who: '完全な初心者：コードも数式もなし、ここから。' },
     },
     phases: [
       { t: { zh: '認識 AI', en: 'What AI is', ja: 'AI とは' },
@@ -33,11 +33,11 @@ export const PATHS = [
     id: 'builder',
     icon: 'Wrench',
     group: 'journey',
-    time: { zh: '約 5 小時', en: '~5 hrs', ja: '約5時間' },
+    time: { zh: '約 3.5 小時', en: '~3.5 hrs', ja: '約3.5時間' },
     t: {
-      zh: { title: '用 AI 做產品', tagline: '不深挖理論，專心把 AI 應用做出來、上得了線。', who: '應用開發者、PM，想把 AI 接進產品。' },
-      en: { title: 'Build with AI', tagline: 'Skip the deep theory, focus on shipping a real AI feature.', who: 'App developers and PMs wiring AI into a product.' },
-      ja: { title: 'AI でプロダクトを作る', tagline: '深い理論は飛ばし、動くAI機能を出すことに集中。', who: 'AI をプロダクトに組み込む開発者・PM。' },
+      zh: { title: '用 AI 做產品', tagline: '不深挖理論，專心把 AI 應用做出來、上得了線。', who: '應用開發者與親自動手的 PM：要把 AI 接進產品。' },
+      en: { title: 'Build with AI', tagline: 'Skip the deep theory, focus on shipping a real AI feature.', who: 'App developers and hands-on PMs who will wire AI into a product themselves.' },
+      ja: { title: 'AI でプロダクトを作る', tagline: '深い理論は飛ばし、動くAI機能を出すことに集中。', who: '自分で手を動かす開発者・PM：AI をプロダクトに組み込む人。' },
     },
     phases: [
       { t: { zh: '夠用的底', en: 'Enough foundation', ja: '必要な土台' },
@@ -54,11 +54,11 @@ export const PATHS = [
     id: 'engineer',
     icon: 'Cpu',
     group: 'journey',
-    time: { zh: '約 12 小時', en: '~12 hrs', ja: '約12時間' },
+    time: { zh: '約 8 小時', en: '~8 hrs', ja: '約8時間' },
     t: {
-      zh: { title: '成為 AI 工程師', tagline: '懂原理、蓋得出來、還能判斷好壞，三件事都練。', who: '要做出來、要為結果負責的人。' },
-      en: { title: 'Become an AI Engineer', tagline: 'Understand it, build it, and judge it well, all three.', who: 'Those who build it and own the outcome.' },
-      ja: { title: 'AI エンジニアになる', tagline: '原理を理解し、作れて、良し悪しも判断する、その三つを鍛える。', who: '実際に作り、結果に責任を持つ人。' },
+      zh: { title: '成為 AI 工程師', tagline: '懂原理、蓋得出來、還能判斷好壞，三件事都練。', who: '想連底層也搞懂的工程師：原理、訓練、上線判斷，不只是接線。' },
+      en: { title: 'Become an AI Engineer', tagline: 'Understand it, build it, and judge it well, all three.', who: 'Engineers who want the internals too: theory, training, and production judgment, not just wiring.' },
+      ja: { title: 'AI エンジニアになる', tagline: '原理を理解し、作れて、良し悪しも判断する、その三つを鍛える。', who: '内部まで理解したいエンジニア：配線だけでなく原理・学習・本番の判断まで。' },
     },
     phases: [
       { t: { zh: '打底', en: 'Foundations', ja: '土台' },
@@ -78,11 +78,11 @@ export const PATHS = [
     id: 'leader',
     icon: 'Compass',
     group: 'journey',
-    time: { zh: '約 4 小時', en: '~4 hrs', ja: '約4時間' },
+    time: { zh: '約 3 小時', en: '~3 hrs', ja: '約3時間' },
     t: {
-      zh: { title: '決策者的 AI', tagline: '不寫程式，但要能做技術選型、評估、抓風險與成本。', who: '主管、PM、決策者：對 AI 做判斷，不碰底層數學。' },
-      en: { title: 'AI for Leaders', tagline: 'No coding, but able to choose the tech, evaluate it, and weigh risk and cost.', who: 'Managers, PMs and decision-makers who judge AI without the underlying math.' },
-      ja: { title: '意思決定者のための AI', tagline: 'コードは書かないが、技術選定・評価・リスクとコストの判断ができる。', who: '管理職・PM・意思決定者：数式には踏み込まず AI を判断する人。' },
+      zh: { title: '決策者的 AI', tagline: '不寫程式，但要能做技術選型、評估、抓風險與成本。', who: '主管與決策者：評估、採購、治理 AI，不用寫程式。' },
+      en: { title: 'AI for Leaders', tagline: 'No coding, but able to choose the tech, evaluate it, and weigh risk and cost.', who: 'Managers and decision-makers who evaluate, buy, and govern AI without touching code.' },
+      ja: { title: '意思決定者のための AI', tagline: 'コードは書かないが、技術選定・評価・リスクとコストの判断ができる。', who: '管理職・意思決定者：コードを書かずに AI を評価・導入・統治する人。' },
     },
     phases: [
       { t: { zh: '看懂在買什麼', en: 'Know what you are buying', ja: '何を導入するか理解する' },
@@ -101,7 +101,7 @@ export const PATHS = [
     id: 'foundations',
     icon: 'Layers',
     group: 'track',
-    time: { zh: '約 3 小時', en: '~3 hrs', ja: '約3時間' },
+    time: { zh: '約 1.5 小時', en: '~1.5 hrs', ja: '約1.5時間' },
     t: {
       zh: { title: '打好 AI 底子', tagline: '從神經網路到訓練與 CNN，看懂模型是怎麼學出來的。', who: '想弄懂「模型到底怎麼訓練」的人。' },
       en: { title: 'AI Foundations', tagline: 'From neural networks to training and CNNs, see how a model actually learns.', who: 'Anyone who wants to understand how models are trained.' },
@@ -122,7 +122,7 @@ export const PATHS = [
     id: 'prompt',
     icon: 'PenLine',
     group: 'track',
-    time: { zh: '約 2 小時', en: '~2 hrs', ja: '約2時間' },
+    time: { zh: '約 1.5 小時', en: '~1.5 hrs', ja: '約1.5時間' },
     t: {
       zh: { title: '精通 Prompt', tagline: '從寫法、少樣本到 CoT 與評估，把 prompt 用到極致。', who: '想把手上模型榨出更好結果的人。' },
       en: { title: 'Master Prompting', tagline: 'From craft and few-shot to CoT and evaluation.', who: 'Squeeze the best out of the model you already have.' },
@@ -141,7 +141,7 @@ export const PATHS = [
     id: 'rag',
     icon: 'Library',
     group: 'track',
-    time: { zh: '約 2 小時', en: '~2 hrs', ja: '約2時間' },
+    time: { zh: '約 1.5 小時', en: '~1.5 hrs', ja: '約1.5時間' },
     t: {
       zh: { title: '打造知識庫（RAG）', tagline: '讓 AI 查你的資料：切塊、檢索、為何還錯、怎麼取捨。', who: '要做文件問答／企業知識庫的人。' },
       en: { title: 'Build a RAG System', tagline: 'Let AI look things up: chunking, retrieval, why it still errs.', who: 'Building doc Q&A or an enterprise knowledge base.' },
@@ -162,7 +162,7 @@ export const PATHS = [
     id: 'agent',
     icon: 'Bot',
     group: 'track',
-    time: { zh: '約 3 小時', en: '~3 hrs', ja: '約3時間' },
+    time: { zh: '約 1.5 小時', en: '~1.5 hrs', ja: '約1.5時間' },
     t: {
       zh: { title: '打造 AI Agent', tagline: '從 workflow vs agent、工具、記憶到量化與成本。', who: '要做會自己動手的 AI 系統的人。' },
       en: { title: 'Build AI Agents', tagline: 'From workflow vs agent to tools, memory, metrics and cost.', who: 'Building AI that takes actions on its own.' },
@@ -183,7 +183,7 @@ export const PATHS = [
     id: 'safety',
     icon: 'ShieldCheck',
     group: 'track',
-    time: { zh: '約 3 小時', en: '~3 hrs', ja: '約3時間' },
+    time: { zh: '約 1.5 小時', en: '~1.5 hrs', ja: '約1.5時間' },
     t: {
       zh: { title: 'AI 風險與安全', tagline: '幻覺、偏見、注入、越獄、護欄、資料外洩，一次看懂。', who: '在意可靠性、合規與上線風險的人。' },
       en: { title: 'AI Risk & Safety', tagline: 'Hallucination, bias, injection, jailbreak, guardrails, leakage.', who: 'Those who care about reliability, compliance and launch risk.' },
@@ -225,7 +225,7 @@ export const PATHS = [
     id: 'train-tune',
     icon: 'Cpu',
     group: 'track',
-    time: { zh: '約 3 小時', en: '~3 hrs', ja: '約3時間' },
+    time: { zh: '約 2 小時', en: '~2 hrs', ja: '約2時間' },
     t: {
       zh: { title: '訓練與微調', tagline: '模型怎麼練出來、怎麼調：RLHF、LoRA、微調還是 RAG。', who: '想懂訓練流程與調校選擇的人。' },
       en: { title: 'Training & Fine-tuning', tagline: 'How a model is trained and tuned: RLHF, LoRA, fine-tune vs RAG.', who: 'Anyone who wants to understand training and tuning choices.' },
@@ -246,7 +246,7 @@ export const PATHS = [
     id: 'genmm',
     icon: 'PenLine',
     group: 'track',
-    time: { zh: '約 2 小時', en: '~2 hrs', ja: '約2時間' },
+    time: { zh: '約 1 小時', en: '~1 hr', ja: '約1時間' },
     t: {
       zh: { title: '生成式 AI／多模態', tagline: 'AI 怎麼畫圖、看圖，跨越文字與影像。', who: '想懂圖像生成與多模態的人。' },
       en: { title: 'Generative & Multimodal', tagline: 'How AI draws, sees, and crosses between text and images.', who: 'Anyone curious about image generation and multimodal models.' },
@@ -265,7 +265,7 @@ export const PATHS = [
     id: 'system-design',
     icon: 'Wrench',
     group: 'track',
-    time: { zh: '約 3 小時', en: '~3 hrs', ja: '約3時間' },
+    time: { zh: '約 2 小時', en: '~2 hrs', ja: '約2時間' },
     t: {
       zh: { title: '系統設計實戰', tagline: '把 AI 組成能上線的產品：架構、成本、監控。', who: '要設計、負責 AI 產品的人。' },
       en: { title: 'System Design', tagline: 'Assemble AI into a product that ships: architecture, cost, monitoring.', who: 'Those who design and own AI products.' },
@@ -286,7 +286,7 @@ export const PATHS = [
     id: 'evaluate',
     icon: 'Scale',
     group: 'track',
-    time: { zh: '約 3 小時', en: '~3 hrs', ja: '約3時間' },
+    time: { zh: '約 2 小時', en: '~2 hrs', ja: '約2時間' },
     t: {
       zh: { title: '評估與決策', tagline: '怎麼知道 AI 做得好不好，怎麼在方案之間選對的。', who: '要為 AI 品質與技術選型負責的人。' },
       en: { title: 'Evaluation & Decisions', tagline: 'How to tell if AI is doing well, and how to pick the right option.', who: 'Anyone who owns AI quality and technology choices.' },
