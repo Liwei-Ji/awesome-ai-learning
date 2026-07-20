@@ -1220,6 +1220,32 @@ export const PRACTICE = {
     }
   },
   "deep-learning": {
+    "decision": {
+      "zh": {
+        "q": "手上這個問題，該用深度學習嗎？",
+        "rows": [
+          { "when": "資料量小、表格類數字、要快又要能解釋", "use": "傳統機器學習", "why": "少量資料就學得動，訓練快、好調、容易說清楚為什麼" },
+          { "when": "影像、聲音、文字，資料量大，特徵難手工設計", "use": "深度學習", "why": "能自己抽特徵、抓複雜模式，但吃大量資料與算力" },
+          { "when": "已有現成好模型可用，不想從零訓練", "use": "拿預訓練模型微調或直接用", "why": "省下從頭訓練的成本，多數實際場景最划算" }
+        ]
+      },
+      "en": {
+        "q": "For the problem in front of you, should you use deep learning?",
+        "rows": [
+          { "when": "Small dataset, tabular numbers, need speed and explainability", "use": "Classic machine learning", "why": "Learns from little data, trains fast, is easy to tune and to explain" },
+          { "when": "Images, audio, text, lots of data, features hard to hand-design", "use": "Deep learning", "why": "Learns its own features and catches complex patterns, but is hungry for data and compute" },
+          { "when": "A good ready-made model exists and you'd rather not train from scratch", "use": "Fine-tune or just use a pretrained model", "why": "Saves the cost of training from zero, the best value in most real cases" }
+        ]
+      },
+      "ja": {
+        "q": "目の前の問題に、深層学習を使うべき？",
+        "rows": [
+          { "when": "データが少ない、表形式の数値、速さと説明性が要る", "use": "従来の機械学習", "why": "少ないデータで学べ、訓練が速く、調整も説明も容易" },
+          { "when": "画像・音声・文章、データが大量、特徴の手設計が難しい", "use": "深層学習", "why": "自ら特徴を抽き複雑なパターンを捉えるが、大量のデータと計算を要する" },
+          { "when": "使える既製モデルがあり、ゼロから訓練したくない", "use": "学習済みモデルを微調整または直接利用", "why": "ゼロからの訓練コストを省け、多くの実場面で最も割に合う" }
+        ]
+      }
+    },
     "practical": {
       "zh": [
         "<b>資料不多就別急著上深度學習</b>：深層網路要大量資料才學得動。資料量小或表格類問題，簡單模型（甚至決策樹）常又快又準。",
