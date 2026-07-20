@@ -1174,6 +1174,182 @@ export const PRACTICE = {
         "<b>大きなモデルを審査役にするときは慎重に</b>：AI に AI を採点させると省力ですが、審査役には偏り（長い回答を好む、最初の選択肢を好む）があるので、重要な判断は人手で抜き取り確認しましょう。"
       ]
     }
+  },
+  "history": {
+    "practical": {
+      "zh": [
+        "<b>看新聞先問「是架構還是規模」</b>：每次真突破，不是換了更好的架構，就是把資料和算力放大。看到「AI 大突破」先問它到底變了什麼，說不清楚的多半是行銷。",
+        "<b>別把「新」當成「更好」</b>：剛發表的模型常先聲奪人，好不好要等它在真實任務上被用一陣子。急著追最新，容易踩到還沒穩的坑。",
+        "<b>對「快要通用智慧了」保持冷靜</b>：歷史上每隔幾年就有一波過度承諾，接著就是 <b>AI Winter</b>。熱潮中最實用的態度，是看它現在能穩定做到什麼，而不是被願景帶著走。",
+        "<b>從失敗史借經驗</b>：神經網路、強化學習這些想法幾十年前就有，只是等到資料和硬體到位才成真。判斷一個點子會不會紅，先看卡它的是概念還是算力。"
+      ],
+      "en": [
+        "<b>Ask \"architecture or scale?\" first</b>: every real breakthrough was either a better architecture or simply more data and compute. When you see \"a big AI breakthrough,\" ask what actually changed; if there is no clear answer, it is usually marketing.",
+        "<b>Do not treat \"new\" as \"better\"</b>: a freshly announced model grabs attention, but whether it is good only shows after people use it on real tasks for a while. Chasing the newest thing often means hitting bugs that are not ironed out yet.",
+        "<b>Stay calm about \"general intelligence is almost here\"</b>: history shows a wave of overpromising every few years, followed by an <b>AI Winter</b>. In a hype cycle, the useful stance is to look at what it can reliably do now, not to be swept along by the vision.",
+        "<b>Borrow lessons from the failures</b>: ideas like neural networks and reinforcement learning existed decades ago and only worked once data and hardware caught up. To judge whether an idea will take off, first ask whether it is blocked by the concept or by compute."
+      ],
+      "ja": [
+        "<b>まず「構造か規模か」を問う</b>：本当の飛躍は、より良い構造か、より多いデータと計算のどちらかでした。「AI の大突破」を見たら、実際に何が変わったのかを問い、答えられないものは大抵マーケティングです。",
+        "<b>「新しい」を「優れている」と混同しない</b>：発表直後のモデルは目を引きますが、良し悪しは実タスクでしばらく使われて初めて分かります。最新を追い急ぐと、まだ枯れていない不具合を踏みがちです。",
+        "<b>「もうすぐ汎用知能」には冷静に</b>：歴史上、数年ごとに過剰な約束の波があり、その後に <b>AI Winter</b> が来ました。熱狂の中で実用的な態度は、ビジョンに流されず、今何を安定してできるかを見ることです。",
+        "<b>失敗の歴史から学ぶ</b>：ニューラルネットや強化学習の発想は数十年前からあり、データとハードが揃って初めて実現しました。ある発想が広まるかは、それを阻むのが概念か計算力かをまず見極めます。"
+      ]
+    }
+  },
+  "ai-intro": {
+    "practical": {
+      "zh": [
+        "<b>先問「規則寫得死嗎」</b>：規則清楚又固定（金額超過就示警），直接寫程式更快更可靠。要從一堆例子歸納、規則講不清楚時，才輪到 AI。",
+        "<b>把輸出當「帶信心度的猜測」</b>：AI 給的是機率最高的答案，不是保證。錯了代價很高的場景（醫療、金流），一定要留一道人工覆核。",
+        "<b>先確認有沒有資料</b>：AI 從例子學規律，沒有夠多、夠準的例子就別指望它。動手前先看手上有沒有可用的資料，這比選哪個模型更關鍵。",
+        "<b>先想清楚「決策要什麼」</b>：資料到預測只是中間，重點是預測完要做什麼決定。先把「拿到預測後怎麼行動」講清楚，才不會做出準卻沒用的模型。"
+      ],
+      "en": [
+        "<b>Ask \"can the rule be hard-coded?\" first</b>: when the rule is clear and fixed (flag any amount over a threshold), plain code is faster and more reliable. AI's turn comes only when the rule has to be inferred from many examples and cannot be spelled out.",
+        "<b>Treat the output as a \"confidence-weighted guess\"</b>: AI gives you the most likely answer, not a guarantee. In any setting where a mistake is costly (medicine, money), always keep a human review step.",
+        "<b>Confirm you actually have data</b>: AI learns patterns from examples, so do not count on it without enough accurate ones. Before starting, check whether usable data is on hand; that matters more than which model you pick.",
+        "<b>Get clear on \"what the decision needs\"</b>: data to prediction is only the middle; what matters is the decision made afterward. Spell out \"what we do once we have the prediction\" first, so you do not build a model that is accurate but useless."
+      ],
+      "ja": [
+        "<b>まず「ルールを固定で書けるか」を問う</b>：ルールが明確で固定なら（一定額を超えたら警告）、素直にコードで書く方が速く確実です。AI の出番は、多くの例から推論するしかなく、ルールを言葉にできないときだけです。",
+        "<b>出力は「確信度つきの推測」と捉える</b>：AI が返すのは最も確率の高い答えであって保証ではありません。誤りの代償が大きい場面（医療、金銭）では、必ず人手の確認を一段残します。",
+        "<b>まずデータがあるかを確認する</b>：AI は例からパターンを学ぶので、十分で正確な例がなければ期待できません。着手前に使えるデータが手元にあるかを見る方が、どのモデルを選ぶかより重要です。",
+        "<b>「意思決定に何が要るか」を先に固める</b>：データから予測までは途中で、肝心なのはその後の判断です。「予測を得たらどう動くか」を先に明確にすれば、正確でも役に立たないモデルを作らずに済みます。"
+      ]
+    }
+  },
+  "deep-learning": {
+    "practical": {
+      "zh": [
+        "<b>資料不多就別急著上深度學習</b>：深層網路要大量資料才學得動。資料量小或表格類問題，簡單模型（甚至決策樹）常又快又準。",
+        "<b>層數不是越多越好</b>：加深會更吃資料和算力，也更容易過擬合。先從夠用的深度開始，不夠再加，別一開始就疊到破百層。",
+        "<b>它最強在「特徵難手工設計」時</b>：影像、聲音、文字這種你很難用手講清楚「該看哪裡」的資料，才最能發揮它自己抽 <b>Feature</b> 的長處。",
+        "<b>善用「別人學好的特徵」</b>：淺層學到的邊緣、紋理很通用。拿訓練好的模型接著調（遷移學習），比從零開始省下大量資料和時間。"
+      ],
+      "en": [
+        "<b>Don't rush to deep learning with little data</b>: deep networks need a lot of data to train. On small datasets or tabular problems, a simple model (even a decision tree) is often faster and more accurate.",
+        "<b>More layers is not always better</b>: going deeper demands more data and compute and overfits more easily. Start with a depth that is enough and add more only if needed, instead of stacking past a hundred layers from the start.",
+        "<b>It shines when features are hard to hand-design</b>: data like images, audio, and text, where you can hardly spell out \"what to look at,\" is exactly where its ability to learn <b>Feature</b>s on its own pays off.",
+        "<b>Reuse \"features someone already learned\"</b>: the edges and textures learned in early layers are very general. Taking a trained model and tuning it further (transfer learning) saves a lot of data and time versus starting from scratch."
+      ],
+      "ja": [
+        "<b>データが少ないなら深層学習を急がない</b>：深いネットワークは大量のデータがないと学習できません。データが小さい、あるいは表形式の問題では、単純なモデル（決定木でも）の方が速く正確なことが多いです。",
+        "<b>層は多いほど良いわけではない</b>：深くするほどデータと計算を食い、過学習もしやすくなります。まず足りる深さから始め、不足なら足す。最初から百層超えを積まないことです。",
+        "<b>「特徴の手設計が難しい」ときに最も強い</b>：画像・音声・文章のように「どこを見るか」を言葉にしにくいデータでこそ、自ら <b>Feature</b> を抽き出す強みが活きます。",
+        "<b>「誰かが学んだ特徴」を活用する</b>：浅い層が学ぶ輪郭や質感は汎用的です。学習済みモデルを引き継いで調整する（転移学習）方が、ゼロから始めるより大量のデータと時間を節約できます。"
+      ]
+    }
+  },
+  "neural-network": {
+    "practical": {
+      "zh": [
+        "<b>權重就是「學到的東西」</b>：模型訓練完，學到的一切都存在這些 <b>Weight</b> 數字裡。所謂「載入一個模型」，載入的其實就是一整組調好的權重。",
+        "<b>別用「神經元」聯想大腦</b>：這裡的神經元只是乘加運算，不會思考。拿大腦當直覺可以，用它推論 AI「有意識」就會想歪。",
+        "<b>輸入要先整理成數字、對齊尺度</b>：網路只吃數字，各輸入的數值範圍差太多會讓訓練不穩。實務上會先把資料正規化到相近尺度再餵進去。",
+        "<b>它只是很多簡單單元疊出來的</b>：再厲害的模型，拆開都是同一種「乘權重、相加、擠壓」在重複。懂這點，面對「AI 很神秘」的說法就不會被唬住。"
+      ],
+      "en": [
+        "<b>The weights are \"what it learned\"</b>: once a model is trained, everything it learned lives in those <b>Weight</b> numbers. \"Loading a model\" really means loading one whole set of tuned weights.",
+        "<b>Don't let \"neuron\" evoke the brain</b>: the neurons here are just multiply-and-add, they do not think. The brain is fine as an intuition, but using it to conclude AI is \"conscious\" leads you astray.",
+        "<b>Turn inputs into numbers and align their scale</b>: a network only eats numbers, and inputs whose ranges differ wildly make training unstable. In practice you normalize the data to similar scales before feeding it in.",
+        "<b>It is just many simple units stacked up</b>: pull any impressive model apart and it is the same \"multiply by weights, add, squash\" repeated. Grasp this and claims that \"AI is mysterious\" will not fool you."
+      ],
+      "ja": [
+        "<b>重みこそ「学んだもの」</b>：学習が終わると、学んだことはすべてこの <b>Weight</b> という数値に収まります。「モデルを読み込む」とは、実は調整済みの重み一式を読み込むことです。",
+        "<b>「ニューロン」で脳を連想しない</b>：ここでのニューロンは掛けて足すだけで、思考しません。脳は直感には使えますが、それで AI に「意識がある」と結論づけると見誤ります。",
+        "<b>入力は数値化し、尺度を揃える</b>：ネットワークは数値しか受け取れず、入力ごとの範囲が違いすぎると学習が不安定になります。実務ではデータを近い尺度に正規化してから入れます。",
+        "<b>多数の単純な単位を積んだだけ</b>：どんな高度なモデルも、分解すれば同じ「重みを掛け、足し、押し込む」の繰り返しです。これが分かれば「AI は神秘的」という言い方に惑わされません。"
+      ]
+    }
+  },
+  "backprop": {
+    "practical": {
+      "zh": [
+        "<b>訓練就是前向、回推、微調的循環</b>：每一步都是算答案、反向分攤誤差、照著調權重。懂這個循環，看訓練曲線就知道機器在幹嘛。",
+        "<b>loss 不降，先查學習率</b>：反向傳播算出「往哪調」，一步走多大由學習率決定。loss 卡住或爆炸，第一個要動的通常就是學習率。",
+        "<b>梯度消失是深層網路的老問題</b>：誤差一層層回推，訊號可能越傳越弱，深層學不動。這也是為什麼會有殘差連接、正規化這些設計。",
+        "<b>你多半不用自己寫反向傳播</b>：現代框架（PyTorch 等）會自動幫你算梯度。懂原理是為了會除錯，不是要你手推 <b>Chain Rule</b>。"
+      ],
+      "en": [
+        "<b>Training is a loop of forward, backprop, tweak</b>: every step computes an answer, sends the error back to assign blame, and adjusts the weights accordingly. Grasp this loop and a training curve tells you what the machine is doing.",
+        "<b>If loss won't drop, check the learning rate first</b>: backprop works out \"which way to adjust,\" while the learning rate sets how big each step is. When loss stalls or explodes, the learning rate is usually the first thing to change.",
+        "<b>Vanishing gradients are a classic deep-network problem</b>: as error is pushed back layer by layer, the signal can fade until the deep layers barely learn. This is exactly why designs like residual connections and normalization exist.",
+        "<b>You rarely write backprop yourself</b>: modern frameworks (PyTorch and the like) compute gradients for you automatically. Understanding the principle is so you can debug, not so you derive the <b>Chain Rule</b> by hand."
+      ],
+      "ja": [
+        "<b>学習は順伝播・逆伝播・微調整のループ</b>：各ステップは答えを計算し、誤差を戻して責任を割り振り、それに沿って重みを調整します。このループが分かれば、学習曲線を見て機械が何をしているか読めます。",
+        "<b>loss が下がらなければ、まず学習率を疑う</b>：逆伝播は「どちらへ調整するか」を求め、一歩の大きさは学習率が決めます。loss が停滞または発散したら、最初に動かすのは大抵学習率です。",
+        "<b>勾配消失は深いネットの古典的な問題</b>：誤差を層ごとに戻すうち、信号が弱まって深い層が学べなくなることがあります。残差接続や正規化といった設計は、まさにこのために存在します。",
+        "<b>逆伝播を自分で書くことはほぼない</b>：現代のフレームワーク（PyTorch など）が勾配を自動で計算します。原理を理解するのはデバッグのためで、<b>Chain Rule</b> を手で導くためではありません。"
+      ]
+    }
+  },
+  "transformer": {
+    "practical": {
+      "zh": [
+        "<b>長文本會變貴變慢</b>：<b>Attention</b> 要衡量每個字跟其他字的關係，句子越長，成本大致以平方成長。塞超長 prompt 前，先想它值不值那個延遲和費用。",
+        "<b>把重點放在模型「注意得到」的地方</b>：模型靠上下文判斷每個字的意思，關鍵資訊擺在清楚、靠近問題的位置，比埋在一大段中間更容易被抓到。",
+        "<b>它一次看整段，不是逐字讀</b>：Transformer 平行衡量當下所有字，所以擅長跨句抓關係。懂這點就知道為什麼給足 <b>Context</b> 比拆成零碎片段更有效。",
+        "<b>GPT 的 T 就是它</b>：今天幾乎所有大模型都建立在 Transformer 上。看到各種新模型名詞，先知道底層多半是同一套 attention，就不會被術語淹沒。"
+      ],
+      "en": [
+        "<b>Long text gets expensive and slow</b>: <b>Attention</b> weighs how each word relates to every other word, so cost grows roughly with the square of the length. Before stuffing in a huge prompt, ask whether it is worth the latency and money.",
+        "<b>Put the key points where the model can \"attend\"</b>: the model reads each word's meaning from context, so key information placed clearly and near the question is easier to catch than buried in the middle of a long block.",
+        "<b>It reads the whole passage at once, not word by word</b>: a Transformer weighs all the visible words in parallel, so it is good at relationships across sentences. Grasp this and you see why giving enough <b>Context</b> beats chopping it into scattered fragments.",
+        "<b>The T in GPT is this</b>: nearly every large model today is built on the Transformer. When new model names come up, knowing the base is usually the same attention keeps you from drowning in jargon."
+      ],
+      "ja": [
+        "<b>長い文章は高く遅くなる</b>：<b>Attention</b> は各単語が他の全単語とどう関わるかを測るので、長さが増えるとコストはおおよそ二乗で膨らみます。超長い prompt を詰める前に、その遅延と費用に見合うか考えましょう。",
+        "<b>要点はモデルが「注意できる」位置に置く</b>：モデルは各語の意味を文脈から読むので、重要な情報は明確に、質問の近くに置く方が、長い塊の中に埋めるより拾われやすいです。",
+        "<b>一字ずつではなく段落を一度に読む</b>：Transformer は見えている語をすべて並列で測るため、文をまたぐ関係を捉えるのが得意です。これが分かれば、十分な <b>Context</b> を与える方が断片に刻むより効く理由が見えます。",
+        "<b>GPT の T がこれ</b>：今日の大規模モデルはほぼすべて Transformer の上に建っています。新しいモデル名が出ても、土台は同じ attention だと知っていれば専門用語に溺れません。"
+      ]
+    }
+  },
+  "pretraining": {
+    "practical": {
+      "zh": [
+        "<b>幾乎永遠用現成的預訓練模型</b>：從零 <b>Pretraining</b> 要上千張 GPU、數百萬美元。實務上你要嘛直接用、要嘛在它上面微調，不會自己從頭練一個。",
+        "<b>分清「基礎模型」和「助理」</b>：base model 只會接話，會乖乖回答是靠後續的指令微調和 <b>RLHF</b>。在 API 選模型時，你要的多半是調教過的版本。",
+        "<b>記住知識有「截止日」</b>：模型只知道訓練資料截止前的事。要它處理之後的新資訊，得靠 RAG 或工具餵給它，光問它會得到過時或編造的答案。",
+        "<b>知識存在權重裡、改不動</b>：預訓練學到的東西固定在權重中，你無法直接「編輯」某條事實。要更新或客製，靠的是微調、RAG 或 prompt，而不是改模型腦內記憶。"
+      ],
+      "en": [
+        "<b>Almost always use an existing pretrained model</b>: <b>Pretraining</b> from scratch takes thousands of GPUs and millions of dollars. In practice you either use one directly or fine-tune on top of it, never train your own from zero.",
+        "<b>Tell \"base model\" from \"assistant\" apart</b>: a base model only continues text; it answers obediently thanks to later instruction tuning and <b>RLHF</b>. When picking a model on an API, what you usually want is the tuned version.",
+        "<b>Remember knowledge has a \"cutoff date\"</b>: a model only knows things up to when its training data ends. To handle newer information, you must feed it via RAG or tools; just asking gets you outdated or made-up answers.",
+        "<b>Knowledge lives in the weights and can't be edited</b>: what pretraining learned is fixed in the weights, so you cannot directly \"edit\" a single fact. To update or customize, you rely on fine-tuning, RAG, or prompts, not on rewriting the model's memory."
+      ],
+      "ja": [
+        "<b>ほぼ常に既存の学習済みモデルを使う</b>：ゼロからの <b>Pretraining</b> は数千枚の GPU と数百万ドルを要します。実務では直接使うか、その上で微調整するかで、自前でゼロから訓練することはありません。",
+        "<b>「ベースモデル」と「アシスタント」を区別する</b>：base model は文を続けるだけで、素直に答えるのは後段の指示調整と <b>RLHF</b> のおかげです。API でモデルを選ぶとき、欲しいのは大抵調整済みの版です。",
+        "<b>知識には「締切日」があると覚える</b>：モデルは訓練データが終わる時点までしか知りません。それ以降の新情報を扱うには RAG やツールで与える必要があり、ただ尋ねると古い、あるいは作り話の答えが返ります。",
+        "<b>知識は重みの中にあり編集できない</b>：事前学習で学んだことは重みに固定され、特定の事実を直接「編集」はできません。更新や個別対応は、モデルの記憶を書き換えるのではなく、微調整・RAG・prompt に頼ります。"
+      ]
+    }
+  },
+  "capstone": {
+    "practical": {
+      "zh": [
+        "<b>從一個小而煩的真問題下手</b>：別一開始就想做大系統。挑一件重複、吃文字的小事練手，跑通整條管線的價值，遠大於空想一個宏大點子。",
+        "<b>先用現成模型驗證想法</b>：別急著訓練或微調。先拿現成模型加好的 prompt 做出堪用版，確認方向對了，再考慮要不要投入 RAG、微調這些重工。",
+        "<b>照場景挑零件，不要全上</b>：要查自己的資料才加 RAG，要它自己動手才上 agent。多數需求一個好 prompt 就解決，先解決問題再加複雜度。",
+        "<b>重要輸出一律驗證再用</b>：把 AI 的產出當草稿，關鍵內容自己查證。願意上線負責的是你，不是模型，這道 <b>Verification</b> 永遠不能省。"
+      ],
+      "en": [
+        "<b>Start with one small, annoying, real problem</b>: don't aim to build a big system from day one. Pick a repetitive, text-heavy little task to practice on; getting one full pipeline working is worth far more than dreaming up a grand idea.",
+        "<b>Validate the idea with an off-the-shelf model first</b>: don't rush to train or fine-tune. Get a usable version with a ready-made model plus a good prompt, confirm the direction is right, and only then consider heavy work like RAG or fine-tuning.",
+        "<b>Pick parts by the scenario, don't add them all</b>: add RAG only when it must consult your own data, bring in an agent only when it must act on its own. Most needs are solved by a good prompt, so solve the problem first and add complexity later.",
+        "<b>Always verify important output before using it</b>: treat AI's output as a draft and check the key content yourself. You, not the model, are the one who answers for what ships, so this <b>Verification</b> step can never be skipped."
+      ],
+      "ja": [
+        "<b>小さくて厄介な実問題から始める</b>：初日から大きなシステムを目指さないこと。繰り返しが多く文章を扱う小さな作業を選んで練習し、一本のパイプラインを通す方が、壮大な構想を空想するよりずっと価値があります。",
+        "<b>まず既製モデルで着想を検証する</b>：訓練や微調整を急がないこと。既製モデルと良い prompt で使える版を作り、方向が正しいと確かめてから、RAG や微調整といった重い作業を検討します。",
+        "<b>場面に合わせて部品を選び、全部は足さない</b>：自分のデータを参照する必要があるときだけ RAG を加え、自ら動く必要があるときだけ agent を入れます。多くの要望は良い prompt で解決するので、まず問題を解いてから複雑さを足します。",
+        "<b>重要な出力は必ず検証してから使う</b>：AI の産物は下書きと捉え、肝心な内容は自分で確かめます。世に出したものに責任を負うのはモデルではなくあなたなので、この <b>Verification</b> の一段は決して省けません。"
+      ]
+    }
   }
 };
 
