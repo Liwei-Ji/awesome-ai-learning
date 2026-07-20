@@ -7,6 +7,7 @@
   import Home from './components/Home.svelte';
   import Interview from './components/Interview.svelte';
   import Paths from './components/Paths.svelte';
+  import Browse from './components/Browse.svelte';
   import Seo from './components/Seo.svelte';
   import { nav, ui, toggleMenu, closeMenu, goPath, hrefPath, onNav } from './stores/state.svelte.js';
   import { t, i18n, setLocale } from './stores/i18n.svelte.js';
@@ -16,7 +17,7 @@
 
 <Seo />
 
-<div class="app" class:menu-open={ui.menuOpen} class:full={nav.mode === 'paths' && nav.path == null}>
+<div class="app" class:menu-open={ui.menuOpen} class:full={nav.mode === 'browse' || (nav.mode === 'paths' && nav.step == null)}>
   <!-- 手機頂列（桌機隱藏）：漢堡 + 品牌 -->
   <header class="topbar">
     <button class="burger" onclick={toggleMenu} aria-label="Menu" aria-expanded={ui.menuOpen}>
@@ -40,7 +41,9 @@
   <!-- svelte-ignore a11y_click_events_have_key_events a11y_no_static_element_interactions -->
   <div class="scrim" onclick={closeMenu} aria-hidden="true"></div>
 
-  {#if nav.mode === 'paths'}
+  {#if nav.mode === 'browse'}
+    <Browse />
+  {:else if nav.mode === 'paths'}
     <Paths />
   {:else if nav.mode === 'interview'}
     <Interview />

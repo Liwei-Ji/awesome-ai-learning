@@ -18,6 +18,8 @@ const routes = [
   ...Object.keys(CH).map((id) => ({ mode: 'course', current: Number(id), iv: null, pri: '0.8' })),
   { mode: 'interview', current: null, iv: null, pri: '0.7' }, // 挑戰題落地頁
   ...IV_ORDER.map((iv) => ({ mode: 'interview', current: null, iv, pri: '0.6' })),
+  { mode: 'browse', browse: 'lessons', pri: '0.8' }, // 課程目錄
+  { mode: 'browse', browse: 'challenges', pri: '0.7' }, // 挑戰題目錄
 ];
 
 const abs = (route, locale) => SITE + buildPath({ ...route, locale });

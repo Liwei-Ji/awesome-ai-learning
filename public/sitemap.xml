@@ -2472,4 +2472,52 @@
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/challenge/eval-regression" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/challenge/eval-regression" />
   </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/browse</loc>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/browse" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/browse" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/browse" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/browse" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/ja/browse</loc>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/browse" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/browse" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/browse" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/browse" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/zh/browse</loc>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/browse" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/browse" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/browse" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/browse" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/browse/challenges</loc>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/browse/challenges" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/browse/challenges" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/browse/challenges" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/browse/challenges" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/ja/browse/challenges</loc>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/browse/challenges" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/browse/challenges" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/browse/challenges" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/browse/challenges" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/zh/browse/challenges</loc>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/browse/challenges" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/browse/challenges" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/browse/challenges" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/browse/challenges" />
+  </url>
 </urlset>

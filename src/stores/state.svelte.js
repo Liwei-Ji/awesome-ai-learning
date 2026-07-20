@@ -10,15 +10,15 @@ import { parsePath, buildPath } from '../lib/router.js';
 import { i18n, htmlLangOf } from './i18n.svelte.js';
 
 function initial() {
-  const { mode, current, iv, path, step } = parsePath(location.pathname);
-  return { mode, current, iv, path, step };
+  const { mode, current, iv, path, step, browse } = parsePath(location.pathname);
+  return { mode, current, iv, path, step, browse };
 }
 
 export const nav = $state(initial());
 
 /** 依 nav + 目前語言重建路徑，寫回網址（預設 push，留下歷史）。 */
 function syncURL(replace = false) {
-  const path = buildPath({ locale: i18n.locale, mode: nav.mode, current: nav.current, iv: nav.iv, path: nav.path, step: nav.step });
+  const path = buildPath({ locale: i18n.locale, mode: nav.mode, current: nav.current, iv: nav.iv, path: nav.path, step: nav.step, browse: nav.browse });
   if (location.pathname === path && !replace) return; // 已在該路徑，不重複 push
   const full = path + location.hash;
   if (replace) history.replaceState(null, '', full);
@@ -62,11 +62,19 @@ export function setMode(m) {
   syncURL();
 }
 
+/** 切到課程目錄；tab = 'lessons'（課程）或 'challenges'（挑戰題） */
+export function goBrowse(tab = 'lessons') {
+  nav.mode = 'browse';
+  nav.browse = tab === 'challenges' ? 'challenges' : 'lessons';
+  syncURL();
+}
+
 /** 給 <a href> 用：依目前語言算出目的地路徑（讓爬蟲能跟連結） */
 export const hrefCourse = (id) => buildPath({ locale: i18n.locale, mode: 'course', current: id });
 export const hrefIv = (id) => buildPath({ locale: i18n.locale, mode: 'interview', iv: id });
 export const hrefPath = (id) => buildPath({ locale: i18n.locale, mode: 'paths', path: id });
 export const hrefPathStep = (id, step) => buildPath({ locale: i18n.locale, mode: 'paths', path: id, step });
+export const hrefBrowse = (tab = 'lessons') => buildPath({ locale: i18n.locale, mode: 'browse', browse: tab });
 
 /** 手機版：側邊欄抽屜開合狀態 */
 export const ui = $state({ menuOpen: false });
@@ -85,12 +93,13 @@ export function onNav(e, fn, close = true) {
 // 上一頁／下一頁：從網址還原 nav 與語言
 if (typeof window !== 'undefined') {
   window.addEventListener('popstate', () => {
-    const { locale, mode, current, iv, path, step } = parsePath(location.pathname);
+    const { locale, mode, current, iv, path, step, browse } = parsePath(location.pathname);
     nav.mode = mode;
     nav.current = current;
     nav.iv = iv;
     nav.path = path;
     nav.step = step;
+    nav.browse = browse;
     i18n.locale = locale;
     document.documentElement.lang = htmlLangOf(locale);
   });

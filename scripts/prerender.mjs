@@ -30,6 +30,8 @@ const routes = [
   ...Object.keys(CH).map((id) => ({ mode: 'course', current: Number(id), iv: null })),
   { mode: 'interview', current: null, iv: null },
   ...IV_ORDER.map((iv) => ({ mode: 'interview', current: null, iv })),
+  { mode: 'browse', browse: 'lessons' },
+  { mode: 'browse', browse: 'challenges' },
 ];
 const paths = routes.flatMap((r) => LOCALES.map((l) => buildPath({ ...r, locale: l })));
 

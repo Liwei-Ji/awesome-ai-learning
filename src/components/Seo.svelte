@@ -28,6 +28,10 @@
       }
       return { title: `${t('iv.interview')} · ${brand}`, desc: strip(t('iv.landingLede')) };
     }
+    if (nav.mode === 'browse') {
+      const key = nav.browse === 'challenges' ? 'browse.challengesTitle' : 'browse.lessonsTitle';
+      return { title: `${t(key)} · ${brand}`, desc: strip(t('browse.lede')) };
+    }
     if (nav.mode === 'paths') {
       if (nav.path) {
         const tx = pathText(pathById(nav.path), loc);
@@ -43,7 +47,7 @@
   });
 
   // 本頁路由（語言之外），供 canonical 與 hreflang 各語言重建路徑用
-  let route = $derived({ mode: nav.mode, current: nav.current, iv: nav.iv, path: nav.path });
+  let route = $derived({ mode: nav.mode, current: nav.current, iv: nav.iv, path: nav.path, browse: nav.browse });
   let canonical = $derived.by(() => {
     if (typeof location === 'undefined') return '';
     return location.origin + buildPath({ ...route, locale: i18n.locale });

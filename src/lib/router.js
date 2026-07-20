@@ -5,10 +5,12 @@
      /course/<slug>        某一章，英文
      /challenge            挑戰題落地頁，英文
      /challenge/<id>       某一題，英文
+     /browse               課程目錄（依主題陳列卡片），英文
+     /browse/challenges    挑戰題目錄（依分類陳列卡片），英文
      /paths                學習路線落地頁（卡片），英文
      /paths/<id>           某一條路線的路線圖，英文
      /zh…、/ja…            同上，但整站中文／日文（例 /zh/course/tokenizer）
-   nav 形狀：{ locale, mode:'course'|'interview'|'paths', current:章號|null, iv:題id|null, path:路線id|null }
+   nav 形狀：{ locale, mode:'course'|'interview'|'paths'|'browse', current:章號|null, iv:題id|null, path:路線id|null, browse:'lessons'|'challenges' }
    ============================================================ */
 import { CH, idOf } from '../data/chapters.js';
 import { INTERVIEWS } from '../data/interviews.js';
@@ -22,9 +24,12 @@ export function parsePath(pathname) {
   let locale = 'en';
   if (PREFIX[segs[0]]) locale = segs.shift();
 
-  let mode = 'course', current = null, iv = null, path = null, step = null;
+  let mode = 'course', current = null, iv = null, path = null, step = null, browse = 'lessons';
   if (segs.length === 0) {
     mode = 'paths'; // 根路徑（/、/zh、/ja）＝ 路線落地頁，即首頁
+  } else if (segs[0] === 'browse') {
+    mode = 'browse';
+    browse = segs[1] === 'challenges' ? 'challenges' : 'lessons';
   } else if (segs[0] === 'challenge') {
     mode = 'interview';
     const id = segs[1] || null;
@@ -40,13 +45,14 @@ export function parsePath(pathname) {
     const id = idOf(segs[1] || '');
     current = id >= 0 ? id : null;
   }
-  return { locale, mode, current, iv, path, step };
+  return { locale, mode, current, iv, path, step, browse };
 }
 
 /** { locale, mode, current, iv } → 路徑字串（一律以 / 開頭、無尾斜線） */
-export function buildPath({ locale = 'en', mode = 'course', current = null, iv = null, path = null, step = null } = {}) {
+export function buildPath({ locale = 'en', mode = 'course', current = null, iv = null, path = null, step = null, browse = 'lessons' } = {}) {
   let route = '';
-  if (mode === 'interview') route = iv != null ? `/challenge/${iv}` : '/challenge';
+  if (mode === 'browse') route = browse === 'challenges' ? '/browse/challenges' : '/browse';
+  else if (mode === 'interview') route = iv != null ? `/challenge/${iv}` : '/challenge';
   else if (mode === 'paths') route = path != null ? (step != null ? `/paths/${path}/${step}` : `/paths/${path}`) : ''; // 路線落地頁＝根路徑（首頁）
   else if (current != null && CH[current]) route = `/course/${CH[current].slug}`;
   const prefix = locale === 'en' ? '' : `/${locale}`;
