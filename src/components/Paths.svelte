@@ -297,8 +297,8 @@
   .acc-badge.iv { color: var(--muted); }
   .acc-label { font-size: 13.5px; color: var(--ink-2); }
 
-  /* 知識地圖：降級到頁尾 */
-  .mapsection { margin-top: 46px; padding-top: 30px; border-top: 1px solid var(--line); }
+  /* 知識地圖：降級到頁尾（無分隔線，靠間距分段）*/
+  .mapsection { margin-top: 30px; }
   .mapband {
     display: flex; align-items: center; justify-content: space-between; gap: 20px; width: 100%;
     text-align: left; padding: 20px 24px; border-radius: var(--r-lg, 16px); cursor: pointer;
