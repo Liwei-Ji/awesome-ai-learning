@@ -5,6 +5,40 @@
    quizFor 合併：ok 取 zh、文字取該語言（缺則回退 zh）。新增題目改這裡即可。
    ============================================================ */
 export const QUIZZES = {
+  "vector-search": {
+    "en": [
+      { "t": "It works like Ctrl+F, matching identical words in the documents by keyword.", "why": "That's old keyword search; modern RAG retrieval compares semantic closeness, so it finds matches even when the words differ." },
+      { "t": "It turns both the question and the documents into vectors and finds the few closest in meaning — that's semantic search.", "why": "Correct: embeddings put meaning into coordinates, nearest-neighbor finds the close ones, stored in a vector database." },
+      { "t": "It dumps all the documents into the model and lets the model read everything and pick.", "why": "The document volume far exceeds the context window, so it can't all fit; that's exactly why vector search narrows it down first." }
+    ],
+    "ja": [
+      { "t": "Ctrl+F のように、文書内の同じ語をキーワードで照合する。", "why": "それは旧来のキーワード検索。現代の RAG 検索は意味的な近さを比べ、語が違っても見つける。" },
+      { "t": "質問も文書もベクトルにし、意味が最も近い数節を探す。つまり意味検索。", "why": "正解：embedding が意味を座標にし、最近傍で近いものを探し、ベクトルデータベースに保存する。" },
+      { "t": "全文書をモデルに投入し、モデルが全部読んで選ぶ。", "why": "文書量はコンテキストウィンドウを遥かに超え、全部は載らない。だからこそ先にベクトル検索で絞る。" }
+    ],
+    "zh": [
+      { "t": "它像 Ctrl+F 一樣，用關鍵字在文件裡比對相同的字。", "ok": false, "why": "那是舊式關鍵字搜尋；現代 RAG 檢索比的是語意相近，字不同、意思近也找得到。" },
+      { "t": "把問題和文件都變成向量，找意思最接近（距離最近）的幾段，也就是語意搜尋。", "ok": true, "why": "正解：靠 embedding 把語意變成座標，用最近鄰找相近的，存在向量資料庫裡。" },
+      { "t": "它把整批文件全部丟進模型，讓模型自己讀完再挑。", "ok": false, "why": "文件量遠超 context window，不可能全塞；正因如此才要先用向量搜尋縮小範圍。" }
+    ]
+  },
+  "quantization": {
+    "en": [
+      { "t": "Because it's a completely different, natively small model, unrelated to the big one.", "why": "It's usually a quantized version of the same model: lowering weight precision makes it smaller and faster, not a different model." },
+      { "t": "Through quantization: lowering the numeric precision of the weights, which cuts size and boosts speed while quality drops only a little.", "why": "Correct: quantization trades a little accuracy for size and speed, so it fits consumer hardware." },
+      { "t": "It uploads the model to the phone, which then calls back to the maker's big GPU to compute.", "why": "That's actually still using a cloud API, not running locally; true local runs rely on the small footprint of a quantized model." }
+    ],
+    "ja": [
+      { "t": "それは全く別の、元から小さいモデルで、大きいモデルとは無関係だから。", "why": "多くは同じモデルの量子化版：重みの精度を下げて小さく速くしたもので、別モデルではない。" },
+      { "t": "量子化による：重みの数値精度を下げ、サイズを大きく減らし速くする。品質は少し落ちるだけ。", "why": "正解：量子化はわずかな正確さをサイズと速度に交換するので、消費者向けハードに載る。" },
+      { "t": "モデルをスマホにアップし、スマホが原メーカーの大 GPU に繋いで計算させる。", "why": "それは実際にはクラウド API の利用でローカル実行ではない。真のローカル実行は量子化された小さな容量に頼る。" }
+    ],
+    "zh": [
+      { "t": "因為那是完全不同、天生就小的模型，跟大模型沒關係。", "ok": false, "why": "多半是同一個模型的量化版：降低權重精度讓它變小變快，不是另一個模型。" },
+      { "t": "靠量化：把權重數字的精度降低，體積大減、速度變快，品質只掉一點。", "ok": true, "why": "正解：量化用一點準確度換體積與速度，所以塞得進消費級硬體。" },
+      { "t": "把模型上傳到手機，手機再連回原廠的大 GPU 幫忙算。", "ok": false, "why": "那其實還是用雲端 API，不算在本機跑；真正本機跑靠的是量化後的小體積模型。" }
+    ]
+  },
   "outline-workflow": {
     "en": [
       { "t": "Just tell it \"write a complete 3000-word report,\" one shot is the least effort.", "why": "Long content in one shot tends to ramble, drift, and contradict itself, and you still have to edit it end to end." },

@@ -150,6 +150,62 @@ export const INTERVIEWS = {
     ],
     related: ["thought-partner", "prompt"],
   },
+  "vector-search": {
+    cat: "retrieval",
+    label: "AI 到底怎麼「找到」對的資料？",
+    q: "RAG 說會先「檢索」出相關內容再回答。但它怎麼從上萬份文件裡找到對的那幾段？靠關鍵字比對嗎？",
+    trap: "別以為是像 Ctrl+F 那樣比對相同的字。現代檢索靠的是「語意相近」：把文字變成向量，找意思最接近的，而不是字面相同的。",
+    points: [
+      { icon: "atom", title: "底層原理", desc: "每段文字先用 embedding 變成一個<b>向量</b>（一串座標），意思相近的向量會靠在一起。檢索＝把你的問題也變成向量，去找<b>距離最近</b>的幾段（最近鄰搜尋，也就是語意搜尋）。" },
+      { icon: "scale", title: "為什麼比關鍵字好", desc: "使用者問「怎麼退款」，文件寫「退貨流程」——字不同、意思近。關鍵字比對會漏，<b>向量搜尋抓得到</b>，因為它比的是語意不是字面。存放並快速搜尋這些向量的地方，就叫<b>向量資料庫</b>。" },
+      { icon: "network", title: "實務要點", desc: "純語意也會漏「精確詞」（型號、代碼、人名），所以實務常<b>語意＋關鍵字混合（hybrid）</b>；先找回一批，再用更強的模型<b>重排（rerank）</b>取前幾筆。這就是 RAG 裡「檢索」那一步在做的事。" },
+    ],
+    core: [
+      { h: "先點根本", d: "檢索不是關鍵字比對，是<b>語意搜尋</b>：把問題和文件都變成向量，找距離最近的。" },
+      { h: "為什麼", d: "意思相近、字面不同（退款↔退貨）也抓得到，靠的是 embedding 的分佈特性。" },
+      { h: "存哪、怎麼快", d: "向量存進<b>向量資料庫</b>，用最近鄰演算法快速找相近的。" },
+      { h: "別忘了", d: "精確詞（型號、代碼）純語意會漏，實務用 <b>hybrid＋rerank</b>；這正是 RAG 的「檢索」步驟。" },
+    ],
+    plus: [
+      "這也是「語意搜尋」和舊式關鍵字搜尋引擎的根本差別。",
+      "換了 embedding 模型，整批文件的向量要重算，否則新舊對不上。",
+      "檢索品質決定 RAG 的天花板：找錯段落，再強的模型也答不對。",
+    ],
+    traps: [
+      "以為 RAG 的檢索是關鍵字比對（像 Ctrl+F）。",
+      "忽略精確詞（型號／代碼）用純語意會漏，不加關鍵字。",
+      "只看「找回幾筆」，不管找回的到底相不相關。",
+    ],
+    related: ["rag", "embedding", "context-window"],
+  },
+  "quantization": {
+    cat: "inference",
+    label: "為什麼有的模型塞得進手機和筆電？",
+    q: "同一個模型，怎麼有人能在自己筆電、甚至手機上跑，不用大 GPU？它不是很大嗎？",
+    trap: "別以為「能在本機跑＝模型變小、變笨」。多半是量化：把權重的數字精度降低，體積大減、速度變快，品質只掉一點。",
+    points: [
+      { icon: "atom", title: "底層原理", desc: "模型的權重原本用高精度數字（如 16 位元）存。<b>量化（quantization）</b>把它降到 8 位元、4 位元——數字變粗，但<b>檔案小好幾倍、算得更快、更省記憶體</b>，所以塞得進消費級硬體。" },
+      { icon: "scale", title: "代價與取捨", desc: "精度降低會讓品質<b>掉一點</b>（多半 4 位元還很可用，再低就明顯）。這是<b>用一點準確度換體積與速度</b>的取捨，不是模型「變笨」到不能用。" },
+      { icon: "network", title: "相關手段", desc: "還有<b>蒸餾（distillation）</b>：用大模型教一個小模型，得到又小又快、能力接近的版本。量化是「壓縮同一個模型」，蒸餾是「訓練一個小的接班」——都讓模型跑得起、跑得省。" },
+    ],
+    core: [
+      { h: "先點根本", d: "能在筆電／手機跑，多半靠<b>量化</b>：降低權重數字精度，體積小、速度快、省記憶體。" },
+      { h: "代價", d: "品質掉一點（4 位元常還可用），是拿準確度換體積與速度的取捨。" },
+      { h: "另一招", d: "<b>蒸餾</b>——大模型教小模型，得到又小又能力接近的版本。" },
+      { h: "別忘了", d: "這跟「自架 vs 用 API」是兩件事：那是決策，這是「怎麼把模型變小變便宜」的機制。" },
+    ],
+    plus: [
+      "同一模型常見多種量化版本（如 4-bit、8-bit）供你依硬體選。",
+      "量化讓「地端／離線／隱私」用法變可行，資料不必送雲端。",
+      "太激進的量化（如 2 位元）品質會明顯崩，不是越小越好。",
+    ],
+    traps: [
+      "以為「本機能跑的小模型」就等於原版模型，忽略量化的品質損失。",
+      "把量化（壓縮同一個模型）和蒸餾（訓練小模型）混為一談。",
+      "以為越小越好，用過度量化的版本做要求高的任務。",
+    ],
+    related: ["model-size", "inference"],
+  },
   "eval-benchmark": {
     cat: "eval",
     label: "Benchmark 分數能信多少？",
@@ -2155,6 +2211,58 @@ const INT_TR = {
         "Asking it to expand every section at once, so the length blows up and it's hard to review.",
       ],
     },
+    "vector-search": {
+      label: "How does AI actually \"find\" the right information?",
+      q: "RAG says it \"retrieves\" relevant content before answering. But how does it find the right few passages out of tens of thousands of documents? By keyword matching?",
+      trap: "Don't assume it's like Ctrl+F matching identical words. Modern retrieval relies on \"semantic closeness\": turning text into vectors and finding the nearest in meaning, not the same in wording.",
+      points: [
+        { title: "The underlying idea", desc: "Each passage is first turned into a <b>vector</b> (a list of coordinates) by an embedding model, and passages close in meaning end up close together. Retrieval = turning your question into a vector too and finding the <b>nearest</b> passages (nearest-neighbor, i.e. semantic search)." },
+        { title: "Why it beats keywords", desc: "A user asks \"how do I get a refund\" while the doc says \"return procedure\" — different words, close meaning. Keyword matching misses it; <b>vector search catches it</b>, because it compares meaning, not spelling. The place that stores and quickly searches these vectors is a <b>vector database</b>." },
+        { title: "In practice", desc: "Pure semantics can miss <b>exact terms</b> (model numbers, codes, names), so practice often uses <b>hybrid (semantic + keyword)</b>; retrieve a batch, then <b>rerank</b> with a stronger model to take the top few. This is exactly what the \"retrieve\" step in RAG does." },
+      ],
+      core: [
+        { h: "Start with the fundamentals", d: "Retrieval isn't keyword matching, it's <b>semantic search</b>: turn both the question and the docs into vectors and find the nearest." },
+        { h: "Why", d: "Close in meaning but different in wording (refund ↔ return) still matches, thanks to embeddings' distributional nature." },
+        { h: "Where and how fast", d: "Vectors are stored in a <b>vector database</b> and found quickly with nearest-neighbor algorithms." },
+        { h: "Don't forget", d: "Exact terms (model numbers, codes) get missed by pure semantics, so practice uses <b>hybrid + rerank</b>; this is precisely RAG's \"retrieve\" step." },
+      ],
+      plus: [
+        "This is also the fundamental difference between \"semantic search\" and old keyword search engines.",
+        "Change the embedding model and you must recompute every document's vectors, or old and new won't line up.",
+        "Retrieval quality is the ceiling of RAG: fetch the wrong passage and even the strongest model can't answer right.",
+      ],
+      traps: [
+        "Thinking RAG's retrieval is keyword matching (like Ctrl+F).",
+        "Ignoring that exact terms (model numbers/codes) get missed by pure semantics, and not adding keywords.",
+        "Only counting \"how many were fetched,\" not whether they're actually relevant.",
+      ],
+    },
+    "quantization": {
+      label: "Why can some models fit on a phone or laptop?",
+      q: "For the same model, how can people run it on their own laptop, even a phone, without a big GPU? Isn't it huge?",
+      trap: "Don't assume \"runs locally = the model got smaller and dumber.\" It's usually quantization: lowering the numeric precision of the weights, which shrinks size and speeds it up while quality drops only a little.",
+      points: [
+        { title: "The underlying idea", desc: "A model's weights are originally stored as high-precision numbers (like 16-bit). <b>Quantization</b> drops them to 8-bit or 4-bit — coarser numbers, but the <b>file is several times smaller, faster to compute, and lighter on memory</b>, so it fits consumer hardware." },
+        { title: "The cost and trade-off", desc: "Lower precision makes quality <b>drop a bit</b> (4-bit is usually still very usable; lower gets noticeable). It's a <b>trade of a little accuracy for size and speed</b>, not the model getting \"too dumb to use.\"" },
+        { title: "A related technique", desc: "There's also <b>distillation</b>: a large model teaches a small one, yielding a version that's small, fast, and close in ability. Quantization <b>compresses the same model</b>; distillation <b>trains a small successor</b> — both make models cheap enough to run." },
+      ],
+      core: [
+        { h: "Start with the fundamentals", d: "Running on a laptop/phone usually comes from <b>quantization</b>: lower the weights' numeric precision for smaller size, more speed, less memory." },
+        { h: "The cost", d: "Quality drops a bit (4-bit is often still usable); it's trading accuracy for size and speed." },
+        { h: "Another route", d: "<b>Distillation</b> — a big model teaches a small one, giving a small version close in ability." },
+        { h: "Don't forget", d: "This is separate from \"self-host vs use an API\": that's a decision, this is the mechanism for making a model smaller and cheaper." },
+      ],
+      plus: [
+        "The same model often comes in several quantized versions (e.g. 4-bit, 8-bit) so you can pick by your hardware.",
+        "Quantization makes local / offline / privacy uses viable, without sending data to the cloud.",
+        "Too-aggressive quantization (like 2-bit) clearly breaks quality — smaller isn't always better.",
+      ],
+      traps: [
+        "Assuming a \"small model that runs locally\" equals the original, ignoring quantization's quality loss.",
+        "Conflating quantization (compressing the same model) with distillation (training a small model).",
+        "Thinking smaller is always better, using an over-quantized version for demanding tasks.",
+      ],
+    },
     "eval-benchmark": {
       label: "How much can you trust a Benchmark score?",
       q: "When a model posts a high benchmark score, can you just trust that it is stronger?",
@@ -3685,6 +3793,58 @@ const INT_TR = {
         "全節を一度に展開させ、長さが膨れて確認しづらくなる。",
       ],
     },
+    "vector-search": {
+      label: "AI はどうやって正しい情報を「見つける」のか？",
+      q: "RAG は答える前に関連内容を「検索」すると言うが、何万もの文書から正しい数節をどう見つける？キーワード照合で？",
+      trap: "Ctrl+F のように同じ語を照合すると思わないこと。現代の検索は「意味的な近さ」に頼る：文字をベクトルにし、字面が同じでなく意味が最も近いものを探す。",
+      points: [
+        { title: "背後の考え方", desc: "各節はまず embedding でひとつの<b>ベクトル</b>（座標の並び）になり、意味の近いベクトルは近くに集まる。検索＝あなたの質問もベクトルにし、<b>最も近い</b>数節を探す（最近傍探索、つまり意味検索）。" },
+        { title: "なぜキーワードより良い", desc: "利用者が「返金は？」と聞き、文書に「返品手順」とある——語は違うが意味は近い。キーワード照合は取りこぼすが、<b>ベクトル検索は拾える</b>。字面でなく意味を比べるから。これらのベクトルを保存し高速に探す場所が<b>ベクトルデータベース</b>。" },
+        { title: "実務のポイント", desc: "純粋な意味検索は<b>厳密な語</b>（型番、コード、人名）を取りこぼすので、実務では<b>意味＋キーワードの併用（hybrid）</b>；まとめて取得し、より強いモデルで<b>再ランク（rerank）</b>して上位を採る。これが RAG の「検索」ステップの中身。" },
+      ],
+      core: [
+        { h: "まず根本", d: "検索はキーワード照合でなく<b>意味検索</b>：質問も文書もベクトルにし、最も近いものを探す。" },
+        { h: "なぜ", d: "意味が近く字面が違っても（返金↔返品）拾える。embedding の分布的性質による。" },
+        { h: "どこに・どう速く", d: "ベクトルは<b>ベクトルデータベース</b>に保存し、最近傍アルゴリズムで高速に探す。" },
+        { h: "忘れずに", d: "厳密な語（型番、コード）は純意味検索が漏らすので、実務は <b>hybrid＋rerank</b>；これがまさに RAG の「検索」ステップ。" },
+      ],
+      plus: [
+        "これは「意味検索」と旧来のキーワード検索エンジンの根本的な違いでもある。",
+        "embedding モデルを替えたら全文書のベクトルを再計算しないと、新旧が噛み合わない。",
+        "検索品質が RAG の天井：誤った節を取れば、どんな強力なモデルも正しく答えられない。",
+      ],
+      traps: [
+        "RAG の検索をキーワード照合（Ctrl+F のよう）だと思う。",
+        "厳密な語（型番／コード）が純意味検索で漏れることを無視し、キーワードを足さない。",
+        "「何件取れたか」だけ見て、取れたものが本当に関連するか気にしない。",
+      ],
+    },
+    "quantization": {
+      label: "なぜ一部のモデルはスマホやノートに載るのか？",
+      q: "同じモデルなのに、大きな GPU なしで自分のノート、さらにスマホで動かせる人がいるのはなぜ？大きいのでは？",
+      trap: "「ローカルで動く＝モデルが小さく・馬鹿になった」と思わないこと。多くは量子化：重みの数値精度を下げ、サイズを大きく減らし速くする。品質は少ししか落ちない。",
+      points: [
+        { title: "背後の考え方", desc: "モデルの重みは元々高精度の数値（16 ビットなど）で保存される。<b>量子化（quantization）</b>はこれを 8 ビット、4 ビットへ落とす——数値は粗くなるが<b>ファイルは数倍小さく、計算は速く、メモリも軽い</b>ので、消費者向けハードに載る。" },
+        { title: "代償とトレードオフ", desc: "精度を下げると品質は<b>少し落ちる</b>（4 ビットは大抵まだ十分使え、それ以下は目立つ）。<b>わずかな正確さをサイズと速度に交換</b>するもので、モデルが「使えないほど馬鹿」になるわけではない。" },
+        { title: "関連する手段", desc: "<b>蒸留（distillation）</b>もある：大きなモデルが小さなモデルを教え、小さく速く能力の近い版を得る。量子化は<b>同じモデルを圧縮</b>、蒸留は<b>小さな後継を訓練</b>——どちらもモデルを安く動かす。" },
+      ],
+      core: [
+        { h: "まず根本", d: "ノート／スマホで動くのは多くが<b>量子化</b>：重みの数値精度を下げ、小さく・速く・省メモリに。" },
+        { h: "代償", d: "品質は少し落ちる（4 ビットは大抵まだ使える）。正確さをサイズと速度に交換する。" },
+        { h: "もう一つの道", d: "<b>蒸留</b>——大モデルが小モデルを教え、小さく能力の近い版を得る。" },
+        { h: "忘れずに", d: "これは「自前運用 vs API」とは別物：あれは決定、これはモデルを小さく安くする仕組み。" },
+      ],
+      plus: [
+        "同じモデルに複数の量子化版（4-bit、8-bit など）があり、ハードに合わせて選べる。",
+        "量子化はローカル／オフライン／プライバシー用途を可能にし、データを雲へ送らずに済む。",
+        "過度な量子化（2 ビットなど）は品質が明確に崩れる。小さいほど良いではない。",
+      ],
+      traps: [
+        "「ローカルで動く小モデル」を原版と同一視し、量子化の品質低下を無視する。",
+        "量子化（同じモデルの圧縮）と蒸留（小モデルの訓練）を混同する。",
+        "小さいほど良いと思い、過度に量子化した版で要求の高いタスクをする。",
+      ],
+    },
     "eval-benchmark": {
       label: "Benchmark のスコアはどこまで信用できる？",
       q: "あるモデルの benchmark スコアが高いのを見て、それだけで強いと信じていい？",
@@ -5119,11 +5279,11 @@ export const IV_ORDER = [
   // 訓練
   "rlhf-why", "dpo-pipeline", "finetune-vs-rag", "lora", "catastrophic-forgetting", "data-quality", "why-not-pretrain", "scaling-law",
   // 推論：先「訓練 vs 推論」建立概念，再談限制
-  "train-vs-infer", "context-window", "faster-inference", "temperature",
+  "train-vs-infer", "context-window", "faster-inference", "quantization", "temperature",
   // Prompting：先學技巧（few-shot／CoT）再學評估
   "prompt-craft", "few-shot", "sycophancy", "honest-feedback", "manage-context", "outline-workflow", "cot-prompting", "prompt-eval", "prompt-vs-tune-vs-rag", "reasoning-models", "test-time-compute", "cot-limits",
   // 檢索（RAG）
-  "rag-documents", "chunking", "rag-retrieval", "rag-why-wrong", "rag-vs-longcontext",
+  "vector-search", "rag-documents", "chunking", "rag-retrieval", "rag-why-wrong", "rag-vs-longcontext",
   // Agent arc：概念→規劃→工具→JSON→記憶→量化→成本
   "agent-vs-workflow", "agent-planning", "agent-tools", "json-output", "agent-memory", "agent-eval", "agent-cost",
   // 生成／多模態：先生圖（擴散）成一組，再進多模態

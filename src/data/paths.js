@@ -187,7 +187,7 @@ export const PATHS = [
       { t: { zh: '觀念', en: 'Concept', ja: '概念' },
         steps: [{ k: 'course', ref: 'rag' }, { k: 'iv', ref: 'finetune-vs-rag' }, { k: 'iv', ref: 'rag-documents' }] },
       { t: { zh: '切與取', en: 'Chunk and retrieve', ja: '分割と検索' },
-        steps: [{ k: 'iv', ref: 'chunking' }, { k: 'iv', ref: 'rag-retrieval' }] },
+        steps: [{ k: 'iv', ref: 'vector-search' }, { k: 'iv', ref: 'chunking' }, { k: 'iv', ref: 'rag-retrieval' }] },
       { t: { zh: '為何還錯 · 取捨', en: 'Why it errs, trade-offs', ja: 'なぜ間違うか・トレードオフ' },
         steps: [{ k: 'iv', ref: 'rag-why-wrong' }, { k: 'iv', ref: 'rag-vs-longcontext' }, { k: 'iv', ref: 'data-leakage' }] },
       { t: { zh: '落地', en: 'Ship it', ja: '実装' },
@@ -257,7 +257,7 @@ export const PATHS = [
       { t: { zh: '大模型與記憶', en: 'The model and memory', ja: 'モデルと記憶' },
         steps: [{ k: 'course', ref: 'llm' }, { k: 'course', ref: 'model-size' }, { k: 'course', ref: 'model-knowledge' }, { k: 'iv', ref: 'what-model-stores' }] },
       { t: { zh: '推論與湧現', en: 'Inference and emergence', ja: '推論と創発' },
-        steps: [{ k: 'course', ref: 'context-window' }, { k: 'iv', ref: 'context-window' }, { k: 'course', ref: 'inference' }, { k: 'iv', ref: 'train-vs-infer' }, { k: 'iv', ref: 'faster-inference' }, { k: 'iv', ref: 'emergence' }] },
+        steps: [{ k: 'course', ref: 'context-window' }, { k: 'iv', ref: 'context-window' }, { k: 'course', ref: 'inference' }, { k: 'iv', ref: 'train-vs-infer' }, { k: 'iv', ref: 'faster-inference' }, { k: 'iv', ref: 'quantization' }, { k: 'iv', ref: 'emergence' }] },
     ],
   },
   {
