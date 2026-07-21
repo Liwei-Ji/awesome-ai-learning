@@ -5,6 +5,23 @@
    quizFor 合併：ok 取 zh、文字取該語言（缺則回退 zh）。新增題目改這裡即可。
    ============================================================ */
 export const QUIZZES = {
+  "manage-context": {
+    "en": [
+      { "t": "Keeping one continuous chat is best — AI fully remembers everything ever said in it.", "why": "The model is stateless and the context window is finite; more stuffed in is slower and pricier, and past the limit the oldest gets dropped — not “remembers all of it.”" },
+      { "t": "Periodically ask it to summarize the key points, keep important decisions externally, and start a fresh chat for unrelated tasks.", "why": "That’s the core of managing a long chat: anchor summaries, externalized key facts, and clean context boundaries." },
+      { "t": "If the chat gets slow and dull, the model got dumber — just switch to a bigger model.", "why": "Usually the context is just too long and dirty, not the model; a fresh chat with a pasted summary typically fixes it right away." }
+    ],
+    "ja": [
+      { "t": "一つの会話を続けるのが最良。AI は話した内容をすべて完全に覚えている。", "why": "モデルは無状態でコンテキストウィンドウは有限。詰めるほど遅く高く、上限を超えれば古いものが落ちる——「全部覚えている」ではない。" },
+      { "t": "定期的に要点を要約させ、重要な決定は外部に保存し、無関係なタスクは新しい会話で始める。", "why": "これが長い会話管理の核心：アンカー要約、外部化した重要事実、きれいな文脈の区切り。" },
+      { "t": "会話が遅く鈍くなったらモデルが劣化した証拠。大きいモデルに替えればよい。", "why": "多くは文脈が長く汚れているだけでモデルのせいではない。新しい会話に要約を貼ると大抵すぐ直る。" }
+    ],
+    "zh": [
+      { "t": "一直用同一條對話接下去最好，AI 會完整記得所有講過的內容。", "ok": false, "why": "模型無狀態、context window 有限，塞越多越慢越貴，超過還會截掉最舊的——不是「都記得」。" },
+      { "t": "適時要它總結目前重點、把關鍵決定另外存起來，不相干的新任務就開新對話。", "ok": true, "why": "這正是管理長對話的核心：做錨點總結、外存關鍵事實、切乾淨脈絡。" },
+      { "t": "對話變慢變鈍，代表模型變笨了，換更大的模型就好。", "ok": false, "why": "多半是脈絡太長太髒，不是模型變笨；開新對話、貼上總結通常立刻改善。" }
+    ]
+  },
   "sycophancy": {
     "en": [
       { "t": "“Great idea” means my direction got neutral validation, so I can proceed confidently.", "why": "That’s usually sycophancy: it’s trained to please you, so praise is often learned politeness, not judgment." },

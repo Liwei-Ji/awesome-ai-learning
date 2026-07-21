@@ -94,6 +94,34 @@ export const INTERVIEWS = {
     ],
     related: ["thought-partner", "prompt", "evaluation"],
   },
+  "manage-context": {
+    cat: "prompting",
+    label: "長對話越聊越走鐘，怎麼辦？",
+    q: "跟 AI 聊久了，它開始忘記前面、答非所問，又慢又貴。怎麼管理一段長對話？",
+    trap: "別以為「同一條對話一直接下去，它就都記得」。模型無狀態，每輪把整段歷史重讀一次；context window 有限，塞越多越慢、越貴、越容易漏。",
+    points: [
+      { icon: "atom", title: "為什麼會走鐘", desc: "模型<b>無狀態</b>：每一輪都把<b>整段對話歷史重讀一次</b>再回答。超過 <b>context window</b> 就會被截斷（最舊的被丟掉），關鍵資訊也會被大量閒聊<b>稀釋</b>（lost in the middle）。" },
+      { icon: "scale", title: "三個手法", desc: "① <b>適時開新對話</b>：不相干的新任務別接在舊對話後面；② <b>做階段總結當錨</b>：要它「把目前重點與決定總結成幾條」，再貼回去；③ <b>關鍵事實外存</b>：重要決定另存一份工作備忘，需要時再貼給它。" },
+      { icon: "network", title: "進階", desc: "固定脈絡放<b>專案／自訂指令</b>；長文件用<b>上傳或 RAG</b>，別整篇貼進對話；把「一次性探索」和「要延續的工作」<b>分開不同對話</b>。" },
+    ],
+    core: [
+      { h: "先點根本", d: "模型無狀態，長對話＝每輪重讀整段歷史；<b>context window 有限</b>，塞越多越慢、越貴、越易漏。" },
+      { h: "為什麼走鐘", d: "超過上限會<b>截斷</b>（丟最舊的），關鍵資訊被大量對話<b>稀釋</b>（lost in the middle）。" },
+      { h: "三個手法", d: "適時開新對話、要它做<b>階段總結當錨</b>、把關鍵事實<b>外存</b>再貼回。" },
+      { h: "別忘了", d: "固定脈絡用專案／自訂指令，長文件用上傳或 RAG；覺得鬼打牆，多半是脈絡髒了，開新對話貼上總結常立刻變好。" },
+    ],
+    plus: [
+      "「請把目前為止的重點與決定總結成 10 條」是最實用的長對話錨點。",
+      "越前面的訊息越可能被截掉；重要的限制與指令，適時重申一次。",
+      "覺得它開始鬼打牆，先別換模型——多半是脈絡太長太髒，不是模型變笨。",
+    ],
+    traps: [
+      "什麼都塞進同一條無限長的對話，以為它會通通記得。",
+      "把不相干的新任務接在舊對話後面，讓舊脈絡污染判斷。",
+      "假設它記得很前面的細節，不再重申關鍵限制。",
+    ],
+    related: ["thought-partner", "context-window", "memory"],
+  },
   "eval-benchmark": {
     cat: "eval",
     label: "Benchmark 分數能信多少？",
@@ -2047,6 +2075,32 @@ const INT_TR = {
         "Taking its criticism at face value, forgetting it may criticize just to criticize.",
       ],
     },
+    "manage-context": {
+      label: "A long chat keeps drifting — what do I do?",
+      q: "After a long chat, AI starts forgetting earlier parts, answering off-target, and getting slow and expensive. How do I manage a long conversation?",
+      trap: "Don't assume \"one endless chat means it remembers everything.\" The model is stateless and re-reads the whole history each turn; the context window is finite, so more stuffed in means slower, pricier, and more likely to miss things.",
+      points: [
+        { title: "Why it drifts", desc: "The model is <b>stateless</b>: every turn it <b>re-reads the entire conversation history</b> before answering. Past the <b>context window</b> it gets truncated (the oldest is dropped), and key info gets <b>diluted</b> by lots of chatter (lost in the middle)." },
+        { title: "Three techniques", desc: "① <b>Start a fresh chat</b> when the new task is unrelated; ② <b>summarize as an anchor</b>: ask it to \"summarize the key points and decisions so far\" and paste that back; ③ <b>externalize key facts</b>: keep important decisions in a working note and paste them in when needed." },
+        { title: "Going further", desc: "Put stable context in a <b>project / custom instructions</b>; for long documents use <b>upload or RAG</b> rather than pasting the whole thing; keep \"one-off exploration\" and \"work you want to continue\" in <b>separate chats</b>." },
+      ],
+      core: [
+        { h: "Start with the fundamentals", d: "The model is stateless; a long chat = re-reading the whole history each turn. The <b>context window is finite</b> — more stuffed in is slower, pricier, and easier to miss." },
+        { h: "Why it drifts", d: "Past the limit it <b>truncates</b> (drops the oldest), and key info gets <b>diluted</b> by lots of chat (lost in the middle)." },
+        { h: "Three techniques", d: "Start fresh chats, ask for a <b>periodic summary as an anchor</b>, and <b>externalize</b> key facts to paste back." },
+        { h: "Don't forget", d: "Put stable context in a project / custom instructions, long docs via upload or RAG; if it seems stuck, the context is usually dirty — a fresh chat with a summary often fixes it fast." },
+      ],
+      plus: [
+        "\"Summarize the key points and decisions so far in 10 bullets\" is the most useful long-chat anchor.",
+        "The earliest messages are the most likely to get truncated; restate important constraints now and then.",
+        "If it starts going in circles, don't switch models first — usually the context is just too long and dirty, not the model getting dumber.",
+      ],
+      traps: [
+        "Cramming everything into one infinitely long chat, assuming it remembers all of it.",
+        "Bolting an unrelated new task onto an old chat, letting stale context pollute the judgment.",
+        "Assuming it remembers details from far back, and never restating the key constraints.",
+      ],
+    },
     "eval-benchmark": {
       label: "How much can you trust a Benchmark score?",
       q: "When a model posts a high benchmark score, can you just trust that it is stronger?",
@@ -3525,6 +3579,32 @@ const INT_TR = {
         "批判を鵜呑みにし、批判のための批判の可能性を忘れる。",
       ],
     },
+    "manage-context": {
+      label: "長い会話ほど脱線する。どうする？",
+      q: "AI と長く話すと、前の内容を忘れ、的外れになり、遅く高くなります。長い会話をどう管理する？",
+      trap: "「一つの会話を延々続ければ全部覚えている」と思わないこと。モデルは無状態で毎ターン履歴全体を読み直す。コンテキストウィンドウは有限で、詰めるほど遅く高く、取りこぼしやすくなる。",
+      points: [
+        { title: "なぜ脱線するか", desc: "モデルは<b>無状態</b>：毎ターン<b>会話履歴全体を読み直して</b>から答える。<b>コンテキストウィンドウ</b>を超えると切り捨てられ（古いものが落ちる）、重要情報も大量の雑談で<b>薄まる</b>（lost in the middle）。" },
+        { title: "三つの手法", desc: "① 無関係な新タスクは<b>新しい会話</b>で；② <b>要約をアンカーに</b>：「ここまでの要点と決定を数点にまとめて」と頼み、貼り戻す；③ <b>重要な事実を外部化</b>：決定事項を作業メモに残し、必要時に貼る。" },
+        { title: "さらに進める", desc: "固定の文脈は<b>プロジェクト／カスタム指示</b>へ；長い文書は全文貼らず<b>アップロードや RAG</b>で；「使い捨ての探索」と「継続したい作業」は<b>別の会話</b>に分ける。" },
+      ],
+      core: [
+        { h: "まず根本", d: "モデルは無状態。長い会話＝毎ターン履歴全体を読み直し。<b>コンテキストウィンドウは有限</b>で、詰めるほど遅く高く、取りこぼす。" },
+        { h: "なぜ脱線", d: "上限を超えると<b>切り捨て</b>（古いものが落ちる）、重要情報が大量の会話で<b>薄まる</b>（lost in the middle）。" },
+        { h: "三つの手法", d: "新しい会話を始める、<b>定期的な要約をアンカー</b>に、重要事実を<b>外部化</b>して貼り戻す。" },
+        { h: "忘れずに", d: "固定文脈はプロジェクト／カスタム指示、長文書はアップロードや RAG。堂々巡りなら大抵は文脈が汚れている——新しい会話に要約を貼ると直ることが多い。" },
+      ],
+      plus: [
+        "「ここまでの要点と決定を 10 点にまとめて」は最も実用的な長い会話のアンカー。",
+        "最初のメッセージほど切り捨てられやすい。重要な制約は時々言い直す。",
+        "堂々巡りしても、まずモデルを替えない——多くは文脈が長く汚れているだけで、モデルが劣化したのではない。",
+      ],
+      traps: [
+        "何でも一つの無限に長い会話に詰め込み、全部覚えていると思い込む。",
+        "無関係な新タスクを古い会話に接ぎ、古い文脈が判断を汚す。",
+        "遠い過去の詳細を覚えていると仮定し、重要な制約を言い直さない。",
+      ],
+    },
     "eval-benchmark": {
       label: "Benchmark のスコアはどこまで信用できる？",
       q: "あるモデルの benchmark スコアが高いのを見て、それだけで強いと信じていい？",
@@ -4961,7 +5041,7 @@ export const IV_ORDER = [
   // 推論：先「訓練 vs 推論」建立概念，再談限制
   "train-vs-infer", "context-window", "faster-inference", "temperature",
   // Prompting：先學技巧（few-shot／CoT）再學評估
-  "prompt-craft", "few-shot", "sycophancy", "honest-feedback", "cot-prompting", "prompt-eval", "prompt-vs-tune-vs-rag", "reasoning-models", "test-time-compute", "cot-limits",
+  "prompt-craft", "few-shot", "sycophancy", "honest-feedback", "manage-context", "cot-prompting", "prompt-eval", "prompt-vs-tune-vs-rag", "reasoning-models", "test-time-compute", "cot-limits",
   // 檢索（RAG）
   "rag-documents", "chunking", "rag-retrieval", "rag-why-wrong", "rag-vs-longcontext",
   // Agent arc：概念→規劃→工具→JSON→記憶→量化→成本
