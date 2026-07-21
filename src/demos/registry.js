@@ -27,6 +27,9 @@ import NextToken from './NextToken.svelte';
 import ToChatGPT from './ToChatGPT.svelte';
 import PromptCraft from './PromptCraft.svelte';
 import SystemPrompt from './SystemPrompt.svelte';
+import ThoughtPartner from './ThoughtPartner.svelte';
+import FindInfo from './FindInfo.svelte';
+import NoCode from './NoCode.svelte';
 import RAG from './RAG.svelte';
 import FineTune from './FineTune.svelte';
 import Diffusion from './Diffusion.svelte';
@@ -61,6 +64,9 @@ const demos = {
   'reasoning': ThinkingBudget,
   'prompt': PromptCraft,
   'system-prompt': SystemPrompt,
+  'thought-partner': ThoughtPartner,
+  'find-info': FindInfo,
+  'no-code': NoCode,
   'rag': RAG,
   'fine-tuning': FineTune,
   'generative': Diffusion,
