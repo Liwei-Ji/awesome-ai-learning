@@ -122,6 +122,34 @@ export const INTERVIEWS = {
     ],
     related: ["thought-partner", "context-window", "memory"],
   },
+  "outline-workflow": {
+    cat: "prompting",
+    label: "用 AI 寫長篇，怎麼分工才不會爛尾？",
+    q: "我要用 AI 寫一份長報告，直接叫它「寫一篇 3000 字的 X」，出來又空又發散。有沒有更好的做法？",
+    trap: "別一句話就要它產出整份長文。長內容一次生成容易發散、離題、前後不一，正確做法是「先大綱、再逐段」，讓你在每一步把關方向。",
+    points: [
+      { icon: "atom", title: "為什麼一次生成會爛尾", desc: "叫它一次寫完整長文，它得<b>同時扛結構、內容、細節</b>，任何一步歪掉都會累積成篇；你也很難一次審完，改起來又牽一髮動全身。" },
+      { icon: "scale", title: "漸進式大綱流程", desc: "① 先只要<b>大綱</b>（章節標題＋每節一句重點），你審過、調整順序與範圍；② 大綱定案後<b>一節一節展開</b>，每次只寫一段；③ 每段當草稿，你給方向再進下一段。" },
+      { icon: "network", title: "為什麼有效", desc: "把<b>大決定（結構）和小決定（文字）分開</b>：你在最便宜的<b>大綱階段</b>就修正方向；每步輸出小、好審、好退，長對話脈絡也不會一次爆掉。" },
+    ],
+    core: [
+      { h: "先點根本", d: "別一句話要它寫完整長文；<b>先大綱、再逐段</b>，把方向的把關放在最前面、最便宜的地方。" },
+      { h: "為什麼爛尾", d: "一次生成要同時扛<b>結構＋內容＋細節</b>，歪一步累積成篇，又難審難改。" },
+      { h: "漸進流程", d: "先要大綱 → 審過調整 → 逐節展開 → 每段給方向再往下。" },
+      { h: "別忘了", d: "大綱是最值得花力氣的一步；結構對了，後面每段都省事。分段做也讓長對話脈絡更乾淨。" },
+    ],
+    plus: [
+      "「先給我大綱，等我確認再展開」一句話就能開啟這個流程。",
+      "每節展開前，把「這節要達成什麼、給誰看、多長」再講一次，品質更穩。",
+      "寫程式、做簡報也適用：先要架構／骨架，確認後再填內容。",
+    ],
+    traps: [
+      "一句「幫我寫一篇 3000 字的 X」就等成品，然後從頭改到尾。",
+      "大綱還沒定就開始展開，方向錯了整篇一起錯。",
+      "一次要它展開全部章節，長度爆掉又難審。",
+    ],
+    related: ["thought-partner", "prompt"],
+  },
   "eval-benchmark": {
     cat: "eval",
     label: "Benchmark 分數能信多少？",
@@ -2101,6 +2129,32 @@ const INT_TR = {
         "Assuming it remembers details from far back, and never restating the key constraints.",
       ],
     },
+    "outline-workflow": {
+      label: "Writing long-form with AI — how do you split the work so it doesn't fall apart?",
+      q: "I want AI to write a long report. I just say \"write a 3000-word piece on X\" and it comes out vague and rambling. Is there a better way?",
+      trap: "Don't ask for the whole long piece in one shot. Long content generated all at once tends to ramble, drift, and contradict itself; the right move is \"outline first, then expand section by section,\" so you steer at every step.",
+      points: [
+        { title: "Why one-shot falls apart", desc: "Ask it to write the whole long piece at once and it must <b>juggle structure, content, and detail together</b>; any wrong step compounds across the whole thing, and it's hard for you to review in one go or fix without ripple effects." },
+        { title: "The progressive-outline flow", desc: "① Ask only for an <b>outline</b> first (section headings + one line each), which you review and reorder; ② once the outline is set, <b>expand one section at a time</b>, one passage per turn; ③ treat each passage as a draft, give direction, then move to the next." },
+        { title: "Why it works", desc: "It <b>separates the big decision (structure) from the small ones (wording)</b>: you fix direction at the cheapest stage — the outline. Each step's output is small, easy to review and roll back, and the long-chat context doesn't blow up all at once." },
+      ],
+      core: [
+        { h: "Start with the fundamentals", d: "Don't ask for the whole long piece in one line; <b>outline first, then expand</b>, putting the steering up front where it's cheapest." },
+        { h: "Why it falls apart", d: "One-shot generation must carry <b>structure + content + detail</b> at once; one wrong step compounds, and it's hard to review or fix." },
+        { h: "The progressive flow", d: "Ask for an outline → review and adjust → expand section by section → give direction each passage before moving on." },
+        { h: "Don't forget", d: "The outline is the step most worth your effort; get the structure right and every passage after is easier. Working in chunks also keeps the long-chat context cleaner." },
+      ],
+      plus: [
+        "\"Give me an outline first, and wait for my okay before expanding\" is all it takes to start this flow.",
+        "Before expanding each section, restate \"what this section should achieve, for whom, how long\" for steadier quality.",
+        "It applies to coding and slide decks too: get the structure / skeleton first, confirm, then fill in the content.",
+      ],
+      traps: [
+        "Saying \"write me a 3000-word piece on X\" and waiting for the finished product, then editing end to end.",
+        "Starting to expand before the outline is settled — if the direction is wrong, the whole piece is wrong.",
+        "Asking it to expand every section at once, so the length blows up and it's hard to review.",
+      ],
+    },
     "eval-benchmark": {
       label: "How much can you trust a Benchmark score?",
       q: "When a model posts a high benchmark score, can you just trust that it is stronger?",
@@ -3605,6 +3659,32 @@ const INT_TR = {
         "遠い過去の詳細を覚えていると仮定し、重要な制約を言い直さない。",
       ],
     },
+    "outline-workflow": {
+      label: "AI で長文を書く：破綻しない分担のしかたは？",
+      q: "AI に長い報告を書かせたい。「X について 3000 字で書いて」と頼むと、薄くて散漫なものが出ます。もっと良い方法は？",
+      trap: "長文を一言で丸ごと出させないこと。一度に生成した長い内容は散漫・脱線・矛盾しがち。正しくは「まず大綱、次に一節ずつ展開」で、各段で方向を確かめる。",
+      points: [
+        { title: "なぜ一発生成は破綻するか", desc: "長文を一度に書かせると、<b>構成・内容・細部を同時に</b>抱えることになり、どこか外れると全体に累積する。あなたも一度に読み切れず、直すと全体に波及する。" },
+        { title: "漸進的アウトライン手順", desc: "① まず<b>大綱</b>だけ（見出し＋各節一行）を求め、順序と範囲を確認・調整；② 大綱確定後、<b>一節ずつ展開</b>し、毎回一段落だけ；③ 各段落を下書きとして方向を与え、次へ進む。" },
+        { title: "なぜ効くか", desc: "<b>大きな決定（構成）と小さな決定（言葉）を分離</b>：最も安い<b>大綱段階</b>で方向を正す。各ステップの出力は小さく、確認も差し戻しも容易で、長い会話の文脈も一度に膨れない。" },
+      ],
+      core: [
+        { h: "まず根本", d: "長文を一言で書かせない。<b>まず大綱、次に展開</b>。方向の確認を最初の、最も安い所に置く。" },
+        { h: "なぜ破綻", d: "一発生成は<b>構成＋内容＋細部</b>を同時に背負い、一歩の誤りが累積。確認も修正も難しい。" },
+        { h: "漸進手順", d: "大綱を求める → 確認・調整 → 一節ずつ展開 → 各段落で方向を与えてから次へ。" },
+        { h: "忘れずに", d: "大綱こそ最も労力をかける価値がある一歩。構成が正しければ後の各段落は楽。分割作業は長い会話の文脈もきれいに保つ。" },
+      ],
+      plus: [
+        "「まず大綱を出して、私の確認を待ってから展開して」の一言でこの流れを始められる。",
+        "各節の展開前に「この節の目的・読み手・長さ」を言い直すと品質が安定する。",
+        "コーディングやスライドにも通用：まず構成／骨組みを得て、確認後に中身を埋める。",
+      ],
+      traps: [
+        "「X について 3000 字で書いて」と言って完成品を待ち、端から端まで直す。",
+        "大綱が固まる前に展開を始め、方向が違えば全体も違う。",
+        "全節を一度に展開させ、長さが膨れて確認しづらくなる。",
+      ],
+    },
     "eval-benchmark": {
       label: "Benchmark のスコアはどこまで信用できる？",
       q: "あるモデルの benchmark スコアが高いのを見て、それだけで強いと信じていい？",
@@ -5041,7 +5121,7 @@ export const IV_ORDER = [
   // 推論：先「訓練 vs 推論」建立概念，再談限制
   "train-vs-infer", "context-window", "faster-inference", "temperature",
   // Prompting：先學技巧（few-shot／CoT）再學評估
-  "prompt-craft", "few-shot", "sycophancy", "honest-feedback", "manage-context", "cot-prompting", "prompt-eval", "prompt-vs-tune-vs-rag", "reasoning-models", "test-time-compute", "cot-limits",
+  "prompt-craft", "few-shot", "sycophancy", "honest-feedback", "manage-context", "outline-workflow", "cot-prompting", "prompt-eval", "prompt-vs-tune-vs-rag", "reasoning-models", "test-time-compute", "cot-limits",
   // 檢索（RAG）
   "rag-documents", "chunking", "rag-retrieval", "rag-why-wrong", "rag-vs-longcontext",
   // Agent arc：概念→規劃→工具→JSON→記憶→量化→成本

@@ -5,6 +5,23 @@
    quizFor 合併：ok 取 zh、文字取該語言（缺則回退 zh）。新增題目改這裡即可。
    ============================================================ */
 export const QUIZZES = {
+  "outline-workflow": {
+    "en": [
+      { "t": "Just tell it \"write a complete 3000-word report,\" one shot is the least effort.", "why": "Long content in one shot tends to ramble, drift, and contradict itself, and you still have to edit it end to end." },
+      { "t": "Ask for an outline first; review and adjust the structure, then expand section by section, giving direction each passage before moving on.", "why": "It separates structure from wording and lets you steer at the cheapest stage; each step is small, easy to review and roll back." },
+      { "t": "Have it expand every section at once so you see the whole thing fastest.", "why": "Expanding everything at once blows up the length and is hard to review, and one wrong direction dooms the whole piece; section by section is what lets you steer." }
+    ],
+    "ja": [
+      { "t": "「3000 字の完全な報告を書いて」と頼み、一発で出すのが一番楽。", "why": "一度に生成した長文は散漫・脱線・矛盾しがちで、結局端から端まで直すことになる。" },
+      { "t": "まず大綱を求め、構成を確認・調整してから一節ずつ展開し、各段落で方向を与えて進む。", "why": "構成と言葉を分離し、最も安い段階で方向を正せる。各ステップは小さく、確認も差し戻しも容易。" },
+      { "t": "全節を一度に展開させ、全体を最速で見る。", "why": "一度に全展開は長さが膨れて確認しづらく、方向が一つ狂えば全体が狂う。一節ずつが舵取りを可能にする。" }
+    ],
+    "zh": [
+      { "t": "直接叫它「寫一篇 3000 字的完整報告」，一次到位最省事。", "ok": false, "why": "一次生成長文容易發散、離題、前後不一，你還得從頭改到尾。" },
+      { "t": "先只要大綱，審過、調整結構後，再一節一節展開，每段給方向再往下。", "ok": true, "why": "把結構與文字分開，在最便宜的大綱階段就把關方向；每步小、好審、好退。" },
+      { "t": "讓它一次展開所有章節，這樣最快看到全貌。", "ok": false, "why": "全部一次展開長度爆掉、難審，且方向一歪就整篇一起歪；逐節展開才好把關。" }
+    ]
+  },
   "manage-context": {
     "en": [
       { "t": "Keeping one continuous chat is best — AI fully remembers everything ever said in it.", "why": "The model is stateless and the context window is finite; more stuffed in is slower and pricier, and past the limit the oldest gets dropped — not “remembers all of it.”" },

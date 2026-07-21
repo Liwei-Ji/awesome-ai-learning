@@ -165,7 +165,7 @@ export const PATHS = [
     },
     phases: [
       { t: { zh: '把話說對', en: 'Talk to it well', ja: 'うまく伝える' },
-        steps: [{ k: 'course', ref: 'prompt' }, { k: 'course', ref: 'thought-partner' }, { k: 'iv', ref: 'sycophancy' }, { k: 'iv', ref: 'honest-feedback' }, { k: 'iv', ref: 'manage-context' }, { k: 'iv', ref: 'prompt-craft' }, { k: 'iv', ref: 'few-shot' }] },
+        steps: [{ k: 'course', ref: 'prompt' }, { k: 'course', ref: 'thought-partner' }, { k: 'iv', ref: 'sycophancy' }, { k: 'iv', ref: 'honest-feedback' }, { k: 'iv', ref: 'manage-context' }, { k: 'iv', ref: 'outline-workflow' }, { k: 'iv', ref: 'prompt-craft' }, { k: 'iv', ref: 'few-shot' }] },
       { t: { zh: '找對資訊', en: 'Find the right info', ja: '正しく探す' },
         steps: [{ k: 'course', ref: 'model-knowledge' }, { k: 'course', ref: 'find-info' }, { k: 'iv', ref: 'trust-answer' }] },
       { t: { zh: '動手做東西', en: 'Make things', ja: '作ってみる' },
