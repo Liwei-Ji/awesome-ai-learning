@@ -817,6 +817,50 @@ export const PRACTICE = {
       ]
     }
   },
+  "find-info": {
+    "practical": {
+      "zh": [
+        "<b>要即時就明講「先搜尋」</b>：問價格、新聞、版本、法規時，直接說「先上網查再回答，附來源」。別預設它會自己去查，多數時候它只憑記憶。",
+        "<b>重要引用一定點進去</b>：它給的連結可能讀錯、引錯、甚至打不開。要拿去用的數字或引言，親自開原文確認來源真的這樣說。",
+        "<b>深題目用 Deep Research</b>：市場調查、方案比較、陌生領域入門這種值得等的，開深度研究讓它多來源交叉比對；日常小問題別殺雞用牛刀。",
+        "<b>逼它區分「確定 vs 推測」</b>：加一句「不確定的地方請標出來、別編」。這能大幅減少它把猜測講得像事實。"
+      ],
+      "en": [
+        "<b>Say “search first” when you need current info</b>: for prices, news, versions, or regulations, tell it “look it up online first, then answer, with sources.” Don’t assume it will search on its own — most of the time it just uses memory.",
+        "<b>Always open important citations</b>: its links can misread, miscite, or not open at all. For any number or quote you’ll use, open the original and confirm the source really says it.",
+        "<b>Use Deep Research for deep questions</b>: for things worth the wait — market research, comparing options, entering a new field — turn on deep research for multi-source cross-checking; don’t over-engineer everyday questions.",
+        "<b>Make it separate “sure vs guessing”</b>: add “flag anything you’re not sure about and don’t make it up.” This sharply cuts how often it states guesses as facts."
+      ],
+      "ja": [
+        "<b>最新情報なら「まず検索」と明言</b>：価格・ニュース・バージョン・法規は「まずネットで調べてから、出典つきで答えて」と伝える。勝手に検索すると期待しない。多くは記憶頼りです。",
+        "<b>重要な引用は必ず開く</b>：提示リンクは読み違い・誤引用・リンク切れもある。使う数字や引用は、原文を開いて本当にそう書いてあるか確認する。",
+        "<b>深い問いは Deep Research</b>：市場調査・選択肢比較・未知分野の入門など待つ価値のあるものは深層リサーチで多ソース照合。日常の小さな問いには使わない。",
+        "<b>「確実 vs 推測」を分けさせる</b>：「不確かな箇所は印を付け、でっち上げない」と一言足す。推測を事実のように語る頻度が大きく減る。"
+      ]
+    }
+  },
+  "no-code": {
+    "practical": {
+      "zh": [
+        "<b>先要「最簡能動版」</b>：別一次描述完美成品。先要一個跑得起來的骨架，看到畫面再一點一點加功能，改壞了也退得回。",
+        "<b>把需求講具體</b>：不是「做個網站」，而是「一頁式、放三張照片和報名表單、手機能看、走藍白色系」。越具體，一次到位的機率越高。",
+        "<b>要它順便驗</b>：做完加一句「自己測一遍、列出可能出錯的地方」。尤其資料分析，要它把算式與假設講出來，你才驗得動。",
+        "<b>認清界線</b>：拿來做原型、個人小工具很棒；但要給很多人用、碰到錢或個資，先找懂的人看過安全與效能再上線。"
+      ],
+      "en": [
+        "<b>Ask for the “simplest working version” first</b>: don’t describe the perfect product in one go. Get a running skeleton, then add features bit by bit as you see the screen — and you can always roll back.",
+        "<b>State the need concretely</b>: not “make a website,” but “one page, three photos and a signup form, works on mobile, blue-and-white palette.” The more specific, the likelier it nails it in one shot.",
+        "<b>Have it check its own work</b>: end with “test it yourself and list what might break.” For data analysis especially, make it state its formulas and assumptions so you can actually verify.",
+        "<b>Know the boundary</b>: great for prototypes and personal tools; but before serving many people or touching money or personal data, have someone who knows vet security and performance first."
+      ],
+      "ja": [
+        "<b>まず「動く最小版」を頼む</b>：完成品を一息で説明しない。動く骨組みをまず作らせ、画面を見ながら少しずつ機能を足す。壊れても戻せる。",
+        "<b>要望は具体的に</b>：「サイトを作って」ではなく「一枚もの、写真三枚と申込フォーム、スマホ対応、青と白の配色」。具体的なほど一発で決まりやすい。",
+        "<b>自己検証させる</b>：最後に「自分でテストして、壊れそうな箇所を挙げて」と足す。特にデータ分析は、式と前提を言わせると検証できる。",
+        "<b>境界を知る</b>：試作や個人ツールには最適。ただし大人数利用や金銭・個人情報が絡む前に、分かる人に安全と性能を点検してもらう。"
+      ]
+    }
+  },
   "generative": {
     "practical": {
       "zh": [

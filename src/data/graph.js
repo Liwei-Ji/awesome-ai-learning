@@ -41,6 +41,8 @@ export const PREREQ = {
   multimodal: ['embedding', 'llm'],
   prompt: ['llm'],
   'thought-partner': ['prompt'],
+  'find-info': ['model-knowledge'],
+  'no-code': ['agent'],
   rag: ['embedding', 'llm'],
   memory: ['context-window'],
   mcp: ['llm'],

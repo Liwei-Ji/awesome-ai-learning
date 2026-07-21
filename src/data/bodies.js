@@ -1570,6 +1570,142 @@ export const BODIES = {
       }
     ]
   },
+  "find-info": {
+    "zh": [
+      {
+        "h": "它是在「想」還是在「查」",
+        "p": "問 AI 問題前，先搞清楚一件事：它可能在<b>憑訓練時的記憶回答</b>，也可能<b>真的上網查了</b>。前者快但會過時、會編造；後者慢一點但有憑有據。分不清這兩種模式，就會把「背出來的」當成「查到的」。"
+      },
+      {
+        "h": "什麼時候要它先搜尋",
+        "p": "碰到<b>會過時的</b>（價格、版本、新聞、法規）、<b>具體到容易編的</b>（某篇論文、某個數據、某人說過的話），都該明講「先搜尋再回答」。穩定的常識與概念（歷史、原理、定義）用內建知識通常就夠。"
+      },
+      {
+        "h": "深度研究：讓它幫你做功課",
+        "p": "多數工具還有 <b>Deep Research（深度研究）</b>模式：AI 花幾分鐘到十幾分鐘，自己搜幾十個來源、交叉比對、整理成一份帶引用的報告。適合「值得花時間」的問題：市場調查、方案比較、陌生領域入門。"
+      },
+      {
+        "h": "它給的來源也要驗",
+        "p": "AI 附上連結不代表就對：它可能<b>讀錯內容、引錯段落</b>，甚至列出打不開的連結。重要的引用要<b>點進去看原文</b>：來源存在嗎？真的講了這句話嗎？是可信的網站還是內容農場？"
+      },
+      {
+        "h": "常見誤解",
+        "p": "最常見的誤解是<b>「AI 給的答案＝查證過的事實」</b>。其實沒開搜尋時，它只是憑記憶把「聽起來對的」接出來（見幻覺一章）。把它當成很會找資料的助理，而不是權威資料庫，你的判斷才是最後一關。"
+      }
+    ],
+    "en": [
+      {
+        "h": "Is it \"thinking\" or actually looking it up?",
+        "p": "Before asking AI a question, get one thing straight: it may be answering <b>from what it memorized in training</b>, or it may have <b>actually searched the web</b>. The former is fast but goes stale and can fabricate; the latter is slower but grounded. Confuse the two and you will treat something recited as something verified."
+      },
+      {
+        "h": "When to make it search first",
+        "p": "For anything <b>that dates</b> (prices, versions, news, regulations) or <b>specific enough to fabricate</b> (a paper, a statistic, something someone said), say explicitly \"search first, then answer.\" For stable concepts and common knowledge (history, principles, definitions), built-in knowledge is usually fine."
+      },
+      {
+        "h": "Deep research: let it do the homework",
+        "p": "Most tools also have a <b>Deep Research</b> mode: the AI spends several minutes searching dozens of sources, cross-checking, and producing a cited report. It suits questions worth the wait: market research, comparing options, getting oriented in an unfamiliar field."
+      },
+      {
+        "h": "Verify the sources it gives, too",
+        "p": "A link from the AI is not automatically right: it can <b>misread the content, cite the wrong passage</b>, or list links that do not open. For anything important, <b>open the original</b>: does the source exist? does it actually say this? is it a credible site or a content farm?"
+      },
+      {
+        "h": "A common misconception",
+        "p": "The most common misconception is that <b>\"an AI answer = a verified fact.\"</b> Without search on, it is just reciting what sounds right from memory (see the hallucination chapter). Treat it as an assistant who is great at finding things, not an authoritative database — your judgment is the final gate."
+      }
+    ],
+    "ja": [
+      {
+        "h": "「考えている」のか「調べている」のか",
+        "p": "AI に質問する前に、一つはっきりさせましょう。AI は<b>訓練時の記憶で答えている</b>場合と、<b>実際にウェブを検索した</b>場合があります。前者は速いが古くなり、でっち上げもある。後者は少し遅いが根拠つき。この二つを混同すると、「暗唱」を「検証済み」と思い込みます。"
+      },
+      {
+        "h": "いつ検索させるべきか",
+        "p": "<b>古くなるもの</b>（価格、バージョン、ニュース、法規）や、<b>具体的すぎて捏造しやすいもの</b>（ある論文、ある統計、誰かの発言）は、「まず検索してから答えて」と明示します。安定した常識や概念（歴史、原理、定義）なら内蔵知識で大抵十分です。"
+      },
+      {
+        "h": "深層リサーチ：宿題を任せる",
+        "p": "多くのツールには <b>Deep Research（深層リサーチ）</b>モードもあります。AI が数分〜十数分かけて数十のソースを検索し、照合し、引用つきレポートにまとめます。市場調査、選択肢の比較、未知分野の入門など、「時間をかける価値のある」問いに向きます。"
+      },
+      {
+        "h": "提示された出典も検証する",
+        "p": "AI がリンクを付けても正しいとは限りません。<b>内容を読み違える、別の箇所を引用する</b>、開けないリンクを並べることさえあります。重要な引用は<b>原文を開いて</b>確認を：出典は実在するか？本当にそう書いてあるか？信頼できるサイトか、コンテンツファームか？"
+      },
+      {
+        "h": "よくある誤解",
+        "p": "最も多い誤解は<b>「AI の答え＝検証済みの事実」</b>です。検索を使っていないとき、AI は記憶から「それらしいもの」を紡いでいるだけです（ハルシネーションの章を参照）。権威あるデータベースではなく、探し物の得意な助手と捉え、最後の関門はあなたの判断に。"
+      }
+    ]
+  },
+  "no-code": {
+    "zh": [
+      {
+        "h": "用說的做出東西",
+        "p": "以前想做個網頁、跑個資料分析，得先學程式。現在你可以<b>用自然語言描述需求</b>，AI 直接把程式寫出來、跑起來，你看結果、再用說的修改。這種做法有個流行的名字：<b>Vibe Coding（氛圍編程）</b>。"
+      },
+      {
+        "h": "背後是編程助手 + Agent",
+        "p": "支撐這件事的正是前面學過的整條鏈：<b>編程助手</b>（Claude Code、Cursor、Copilot 等）會讀寫程式、執行、看報錯自己修，其實就是一個會用工具的 <b>Agent</b>。你負責講清楚要什麼、判斷做得對不對。"
+      },
+      {
+        "h": "能做什麼",
+        "p": "不寫一行程式，你已經能：丟一份 Excel 要它<b>分析資料、畫圖表</b>；描述版面做出<b>個人網頁、報名頁</b>；做<b>小工具</b>（記帳、抽籤、倒數計時）；甚至做出能玩的<b>小遊戲</b>。從想法到能用，常常不用一小時。"
+      },
+      {
+        "h": "訣竅：小步迭代",
+        "p": "最重要的技巧是<b>一次要一點</b>：先要一個最簡單能動的版本，看到結果再說「按鈕改大」「加個排序」。一口氣描述完美成品，改壞了你也說不清哪裡壞；小步走，每一步都看得懂、退得回。"
+      },
+      {
+        "h": "常見誤解",
+        "p": "別以為「不用懂任何東西」。你不必會寫程式，但<b>要說得清楚需求、看得出結果對不對</b>：資料算得對嗎？頁面在手機上會不會爆版？拿去給別人用之前測過沒？AI 負責動手，<b>把關的仍然是你</b>。"
+      }
+    ],
+    "en": [
+      {
+        "h": "Build things by talking",
+        "p": "Making a web page or running a data analysis used to mean learning to code first. Now you can <b>describe what you want in plain language</b>, and AI writes the code and runs it; you look at the result and steer with words. This style has a popular name: <b>vibe coding</b>."
+      },
+      {
+        "h": "Behind it: coding assistants + agents",
+        "p": "What powers this is the very chain you have learned: a <b>coding assistant</b> (Claude Code, Cursor, Copilot, and the like) reads and writes code, runs it, sees errors, and fixes itself — it is really an <b>agent</b> that uses tools. Your job is to state what you want clearly and judge whether it is right."
+      },
+      {
+        "h": "What you can make",
+        "p": "Without writing a line of code, you can already: hand it a spreadsheet to <b>analyze data and draw charts</b>; describe a layout and get a <b>personal site or signup page</b>; build <b>small tools</b> (expense tracker, raffle picker, countdown); even a playable <b>mini game</b>. Idea to usable often takes under an hour."
+      },
+      {
+        "h": "The trick: iterate in small steps",
+        "p": "The key skill is <b>asking for a little at a time</b>: get the simplest working version first, then react to what you see — \"make the button bigger,\" \"add sorting.\" Describe the perfect product in one breath and when it breaks you cannot say where; in small steps, every change is understandable and reversible."
+      },
+      {
+        "h": "A common misconception",
+        "p": "Don't assume \"you need to understand nothing.\" You don't have to write code, but you <b>do have to state the need clearly and tell whether the result is right</b>: are the numbers correct? does the page break on a phone? did you test it before handing it to others? AI does the hands-on work — <b>you are still the gatekeeper</b>."
+      }
+    ],
+    "ja": [
+      {
+        "h": "話すだけで形にする",
+        "p": "ウェブページを作る、データ分析を回す——以前はまずプログラミングの勉強が必要でした。今は<b>自然言語で要望を伝える</b>だけで、AI がコードを書いて動かし、あなたは結果を見て言葉で直していけます。このやり方には流行りの名前があります：<b>Vibe Coding（バイブコーディング）</b>。"
+      },
+      {
+        "h": "背後にはコーディング助手と Agent",
+        "p": "これを支えるのは、ここまで学んだ鎖そのものです。<b>コーディング助手</b>（Claude Code、Cursor、Copilot など）はコードを読み書きし、実行し、エラーを見て自分で直す——つまりツールを使う <b>Agent</b> です。あなたの仕事は、要望を明確に伝え、正しくできたか判断することです。"
+      },
+      {
+        "h": "何が作れるか",
+        "p": "一行も書かずに、もうこれだけできます：Excel を渡して<b>データ分析とグラフ作成</b>；レイアウトを説明して<b>個人サイトや申込ページ</b>；<b>小さなツール</b>（家計簿、抽選、カウントダウン）；遊べる<b>ミニゲーム</b>まで。思いつきから使えるまで、一時間かからないことも多いです。"
+      },
+      {
+        "h": "コツは小刻みな反復",
+        "p": "最重要の技は<b>一度に少しだけ頼む</b>こと。まず最小限動く版を作らせ、結果を見て「ボタンを大きく」「並べ替えを追加」と返す。完成品を一息で描写すると、壊れてもどこが悪いか言えません。小刻みなら、どの一歩も理解でき、戻せます。"
+      },
+      {
+        "h": "よくある誤解",
+        "p": "「何も分からなくていい」と思わないこと。コードは書けなくてよいですが、<b>要望を明確に言え、結果の正誤を見抜ける</b>必要はあります。数字は合っているか？スマホで崩れないか？人に渡す前に試したか？手を動かすのは AI、<b>関門はあなた</b>です。"
+      }
+    ]
+  },
   "generative": {
     "zh": [
       {

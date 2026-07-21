@@ -280,6 +280,30 @@ export const CH_TR = {
         ["Context", "The background you provide, which decides the quality of the answer"],
       ],
     },
+    "find-info": {
+      t: "Finding Information with AI", sub: "Built-in knowledge, web search, deep research — when to use which",
+      key: [
+        ["01", "First tell apart: is it answering from memory, or did it actually look it up"],
+        ["02", "For anything dated or easy to fabricate, make it search before answering"],
+        ["03", "Check the sources it gives too — open them before you cite them"],
+      ],
+      terms: [
+        ["Web Search", "Having the AI search the web first, then answer from the results"],
+        ["Deep Research", "The AI spends minutes gathering from many sources, cross-checking, and producing a report"],
+      ],
+    },
+    "no-code": {
+      t: "Build Things with AI, No Code", sub: "Websites, analysis, and tools — just by describing them",
+      key: [
+        ["01", "Describe what you want in plain language and AI produces a working result"],
+        ["02", "Data analysis, web pages, small games — all buildable by talking"],
+        ["03", "The trick: iterate in small steps — ask for a little, check, then adjust"],
+      ],
+      terms: [
+        ["Vibe Coding", "Describing what you want in conversation and letting AI write the code, while you judge results and steer"],
+        ["Coding Assistant", "An AI tool that reads and writes code and runs tests"],
+      ],
+    },
     "generative": {
       t: "Generative AI: How AI Draws", sub: "Denoising from static into an image, step by step (diffusion)",
       key: [
@@ -676,6 +700,30 @@ export const CH_TR = {
       terms: [
         ["Sycophancy おべっか・同調", "AI が本音より、あなたに合わせて聞きたいことを言う傾向"],
         ["Context 文脈", "あなたが与える背景情報。回答の品質を左右する"],
+      ],
+    },
+    "find-info": {
+      t: "AI で正しく情報を探す", sub: "内蔵知識・ウェブ検索・深層リサーチ、それぞれの使いどき",
+      key: [
+        ["01", "まず見分ける：記憶で答えているのか、実際に調べたのか"],
+        ["02", "古くなる・でっち上げやすい質問は、検索させてから答えさせる"],
+        ["03", "提示された出典も確認する。開いて読んでから引用する"],
+      ],
+      terms: [
+        ["Web Search ウェブ検索", "AI にまずウェブを検索させ、結果に基づいて答えさせること"],
+        ["Deep Research 深層リサーチ", "AI が数分かけて多方面から収集・照合し、レポートを作ること"],
+      ],
+    },
+    "no-code": {
+      t: "コードなしで AI と作る", sub: "言葉で伝えるだけで、ウェブや分析やツールが形になる",
+      key: [
+        ["01", "自然言語で要望を伝えると、AI が動く成果物を作る"],
+        ["02", "データ分析・ウェブページ・小さなゲームまで、話すだけで作れる"],
+        ["03", "コツは小刻みな反復：少しずつ頼み、結果を見て直す"],
+      ],
+      terms: [
+        ["Vibe Coding バイブコーディング", "対話で要望を伝えて AI にコードを書かせ、人は結果を見て舵を取るやり方"],
+        ["Coding Assistant コーディング助手", "コードを読み書きし、テストも実行する AI ツール"],
       ],
     },
     "generative": {

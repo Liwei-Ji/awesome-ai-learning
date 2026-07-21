@@ -286,6 +286,30 @@ const DATA = {
       ['Context 脈絡', '你給的背景資訊，決定回答的品質'],
     ],
   },
+  'find-info': {
+    t: '用 AI 找對資訊', sub: '內建知識、上網搜尋、深度研究，各在何時用',
+    key: [
+      ['01', '先分清：它在憑記憶答，還是真的查了'],
+      ['02', '會過時、會編造的問題，要它先搜尋再答'],
+      ['03', '它給的來源也要核對，點進去看再引用'],
+    ],
+    terms: [
+      ['Web Search 網路搜尋', '讓 AI 先上網查，再根據結果回答'],
+      ['Deep Research 深度研究', 'AI 花數分鐘多方蒐集、交叉比對後產出報告'],
+    ],
+  },
+  'no-code': {
+    t: '不寫程式，用 AI 做東西', sub: '用說的，就能做出網頁、分析與小工具',
+    key: [
+      ['01', '用自然語言描述需求，AI 直接生出可用的成品'],
+      ['02', '從資料分析、網頁到小遊戲，都能用說的做出來'],
+      ['03', '訣竅：小步迭代，一次要一點、看結果再改'],
+    ],
+    terms: [
+      ['Vibe Coding 氛圍編程', '用對話描述需求、讓 AI 寫程式，人只看結果調方向'],
+      ['Coding Assistant 編程助手', '會讀寫程式、執行測試的 AI 工具'],
+    ],
+  },
   'generative': {
     t: '生成式 AI：AI 怎麼畫圖', sub: '從雜訊逐步去噪成圖（Diffusion）',
     key: [
@@ -415,7 +439,7 @@ const OUTLINE = [
   { key: 'learn', t: 'AI 如何學習', desc: '模型怎麼被訓練', slugs: ['deep-learning', 'neural-network', 'training', 'backprop', 'cnn'] },
   { key: 'llm', t: '大型語言模型 LLM', desc: 'ChatGPT 的核心', slugs: ['tokenizer', 'embedding', 'rnn', 'transformer', 'llm', 'model-size', 'model-knowledge', 'context-window', 'inference'] },
   { key: 'chatgpt', t: '從模型到 ChatGPT', desc: '把模型訓練成助理', slugs: ['pretraining', 'fine-tuning', 'reasoning'] },
-  { key: 'apps', t: '生成式 AI 與 AI Agent', desc: '一條完整的應用鏈', slugs: ['prompt', 'thought-partner', 'generative', 'multimodal', 'rag', 'memory', 'mcp', 'agent', 'integration'] },
+  { key: 'apps', t: '生成式 AI 與 AI Agent', desc: '一條完整的應用鏈', slugs: ['prompt', 'thought-partner', 'find-info', 'generative', 'multimodal', 'rag', 'memory', 'mcp', 'agent', 'no-code', 'integration'] },
   { key: 'literacy', t: 'AI 素養', desc: '會用，也會判斷', slugs: ['limits', 'evaluation', 'capstone'] },
 ];
 

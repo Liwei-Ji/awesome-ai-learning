@@ -154,6 +154,25 @@ export const PATHS = [
     ],
   },
   {
+    id: 'power-user',
+    icon: 'Sparkles',
+    group: 'track',
+    time: { zh: '約 2 小時', en: '~2 hrs', ja: '約2時間' },
+    t: {
+      zh: { title: 'AI 高效使用', tagline: '從問對問題、找對資訊，到不寫程式做出東西，把 AI 用到極致。', who: '想把每天在用的 AI 榨出更多價值的人，不寫程式也行。' },
+      en: { title: 'Become an AI Power User', tagline: 'From asking well and finding the right info to building things without code.', who: 'Anyone who wants far more out of the AI they already use daily — no coding needed.' },
+      ja: { title: 'AI を使いこなす', tagline: 'うまく尋ね、正しく情報を探し、コードなしで作る——AI を最大限に。', who: '毎日使う AI からもっと引き出したい人。コード不要。' },
+    },
+    phases: [
+      { t: { zh: '把話說對', en: 'Talk to it well', ja: 'うまく伝える' },
+        steps: [{ k: 'course', ref: 'prompt' }, { k: 'course', ref: 'thought-partner' }, { k: 'iv', ref: 'prompt-craft' }, { k: 'iv', ref: 'few-shot' }] },
+      { t: { zh: '找對資訊', en: 'Find the right info', ja: '正しく探す' },
+        steps: [{ k: 'course', ref: 'model-knowledge' }, { k: 'course', ref: 'find-info' }, { k: 'iv', ref: 'trust-answer' }] },
+      { t: { zh: '動手做東西', en: 'Make things', ja: '作ってみる' },
+        steps: [{ k: 'course', ref: 'no-code' }, { k: 'course', ref: 'generative' }, { k: 'course', ref: 'multimodal' }] },
+    ],
+  },
+  {
     id: 'rag',
     deepens: 'builder',
     icon: 'Library',
@@ -471,6 +490,26 @@ const OUTCOMES = {
       'ニューラルネットを理解：深層学習とニューラルネットの構成と動作。',
       'モデルの学び方を掴む：勾配降下と逆伝播で、モデルが自ら重みを見つける仕組み。',
       '視覚と規模を知る：CNN が画像を見る方法と、なぜ大きいほど強いのか（スケーリング則）。',
+    ],
+  },
+  'power-user': {
+    zh: [
+      '把話說對：給足脈絡、用範例，讓 AI 一次就懂你要什麼。',
+      '把 AI 當思考夥伴：要它挑毛病、講反方，而不是一味附和你。',
+      '找對資訊：分清它在憑記憶還是真的查了，並學會核對它給的來源。',
+      '不寫程式也做得出東西：資料分析、網頁、小工具，用說的就能做。',
+    ],
+    en: [
+      'Talk to it well: give enough context and examples so it gets what you want in one shot.',
+      'Use AI as a thought partner: make it poke holes and argue the other side, not just agree.',
+      'Find the right info: tell memory from real search, and verify the sources it gives.',
+      'Build without code: data analysis, web pages, and small tools, just by describing them.',
+    ],
+    ja: [
+      'うまく伝える：十分な文脈と例を与え、一度で意図を掴ませる。',
+      'AI を思考のパートナーに：同調させず、粗を突かせ反対側も言わせる。',
+      '正しく探す：記憶か実検索かを見分け、示された出典を検証する。',
+      'コードなしで作る：データ分析・ウェブ・小ツールを、話すだけで。',
     ],
   },
   prompt: {
