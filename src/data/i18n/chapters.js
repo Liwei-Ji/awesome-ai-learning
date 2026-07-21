@@ -268,6 +268,18 @@ export const CH_TR = {
         ["Few-shot", "Including a few examples in the prompt"],
       ],
     },
+    "system-prompt": {
+      t: "System Prompts & Prompt Templates", sub: "Make your prompting reusable and consistent",
+      key: [
+        ["01", "System prompt: set the AI's role and rules for the whole conversation"],
+        ["02", "Prompt template: turn a prompt that works into a fill-in-the-blank pattern"],
+        ["03", "Set it once, benefit every time — quality goes from luck to consistent"],
+      ],
+      terms: [
+        ["System Prompt", "The behind-the-scenes instruction that sets the AI's identity, rules, and tone across the whole conversation"],
+        ["Template", "A reusable prompt with variables ({input}) that locks in a phrasing that works"],
+      ],
+    },
     "thought-partner": {
       t: "AI as a Thought Partner", sub: "Not just answers — think better with it",
       key: [
@@ -688,6 +700,18 @@ export const CH_TR = {
       terms: [
         ["Prompt プロンプト", "モデルに渡す入力・指示"],
         ["Few-shot 少数事例", "プロンプトにいくつか例を添えること"],
+      ],
+    },
+    "system-prompt": {
+      t: "システムプロンプトとテンプレート", sub: "プロンプトを再利用でき、制御できるように",
+      key: [
+        ["01", "システムプロンプト：会話全体にわたる AI の役割とルールを設定"],
+        ["02", "プロンプトテンプレート：うまくいく問い方を穴埋め型にする"],
+        ["03", "一度設定すれば毎回効く。品質を運任せから一貫へ"],
+      ],
+      terms: [
+        ["System Prompt システムプロンプト", "会話全体にわたり AI の役割・ルール・口調を設定する裏側の指示"],
+        ["Template テンプレート", "変数（{入力}）を持つ再利用可能なプロンプト。うまくいく問い方を固定する"],
       ],
     },
     "thought-partner": {

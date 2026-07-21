@@ -1502,6 +1502,74 @@ export const BODIES = {
       }
     ]
   },
+  "system-prompt": {
+    "zh": [
+      {
+        "h": "從「每次重講」到「設定一次」",
+        "p": "一次性提示的麻煩，是每次都要重講角色、規則、格式。<b>System Prompt</b> 和<b>提示範本</b>解決的正是這件事：把重複的部分固定下來，讓每次輸出穩定、可預期，而不是每次碰運氣。"
+      },
+      {
+        "h": "System Prompt 是什麼",
+        "p": "每次對話其實有兩層：你看得到的<b>使用者訊息</b>，和幕後的 <b>System Prompt（系統提示）</b>。後者設定 AI 的<b>身分、規則、語氣</b>，整段對話都適用。ChatGPT 的「自訂指令」、Claude 的專案指示、API 的 system 角色，都是它。例如「你是嚴謹的法律助理，只根據我給的文件回答，不確定就說不知道」。"
+      },
+      {
+        "h": "提示範本是什麼",
+        "p": "當你發現某個問法特別好用，就把它<b>做成範本</b>：固定的架構加上可替換的<b>變數</b>。例如「把以下 {文章} 摘成 3 個重點，給 {對象} 看，語氣 {正式／輕鬆}」。下次只要換掉大括號裡的內容，不必從頭想。"
+      },
+      {
+        "h": "為什麼你該在意",
+        "p": "這是從「每次碰運氣」變成「穩定產出」的關鍵。個人的重複任務、團隊協作、接進產品，都靠固定的 system prompt 與範本來保證<b>一致</b>。你等於把一次調好的成果，變成可以無限重用的工具。"
+      },
+      {
+        "h": "常見誤解",
+        "p": "別把 system prompt 當「密語」，以為寫了就一定聽話。它是強力引導，但仍可能被長對話稀釋、或被使用者訊息蓋過（這也是 <b>prompt injection</b> 的來源）。範本也不是一成不變：好範本是「用過幾次、看結果微調」出來的。"
+      }
+    ],
+    "en": [
+      {
+        "h": "From \"re-explaining every time\" to \"set it once\"",
+        "p": "The hassle with one-off prompts is re-explaining the role, rules, and format every time. <b>System prompts</b> and <b>prompt templates</b> fix exactly that: lock down the repeated parts so each output is stable and predictable, instead of luck every time."
+      },
+      {
+        "h": "What a system prompt is",
+        "p": "Every conversation actually has two layers: the <b>user message</b> you see, and the behind-the-scenes <b>system prompt</b>. The latter sets the AI's <b>identity, rules, and tone</b> for the whole conversation. ChatGPT's custom instructions, Claude's project instructions, and the API's system role are all this. For example: \"You are a careful legal assistant; answer only from the documents I give, and say you don't know when unsure.\""
+      },
+      {
+        "h": "What a prompt template is",
+        "p": "When you find a phrasing that works especially well, turn it into a <b>template</b>: a fixed structure plus replaceable <b>variables</b>. For example: \"Summarize the following {article} into 3 key points for {audience}, in a {formal/casual} tone.\" Next time you just swap what's in the braces instead of starting over."
+      },
+      {
+        "h": "Why you should care",
+        "p": "This is the shift from \"luck each time\" to \"consistent output.\" Personal repeated tasks, team collaboration, and wiring AI into a product all rely on fixed system prompts and templates for <b>consistency</b>. You turn a one-time tuning into a tool you can reuse endlessly."
+      },
+      {
+        "h": "A common misconception",
+        "p": "Don't treat a system prompt as a \"magic password\" that guarantees obedience. It's a strong steer, but it can still be diluted over a long chat or overridden by user messages (this is also where <b>prompt injection</b> comes from). Templates aren't fixed forever either: a good one is shaped by using it a few times and tweaking from the results."
+      }
+    ],
+    "ja": [
+      {
+        "h": "「毎回説明し直す」から「一度設定する」へ",
+        "p": "一回きりのプロンプトの面倒は、役割・ルール・形式を毎回説明し直すこと。<b>システムプロンプト</b>と<b>プロンプトテンプレート</b>はまさにそこを解決します。繰り返す部分を固定し、毎回を運任せでなく、安定して予測できる出力にします。"
+      },
+      {
+        "h": "システムプロンプトとは",
+        "p": "会話は実は二層あります：あなたが見る<b>ユーザーメッセージ</b>と、裏側の<b>システムプロンプト</b>。後者は AI の<b>身分・ルール・口調</b>を会話全体に設定します。ChatGPT の「カスタム指示」、Claude のプロジェクト指示、API の system ロールがこれです。例：「あなたは厳密な法務アシスタント。渡した文書のみに基づいて答え、不確かなら分からないと言う」。"
+      },
+      {
+        "h": "プロンプトテンプレートとは",
+        "p": "特にうまくいく問い方を見つけたら、<b>テンプレート</b>にします：固定の構造＋差し替え可能な<b>変数</b>。例：「以下の {記事} を {読み手} 向けに 3 点へ要約し、口調は {フォーマル／カジュアル}」。次回は波括弧の中身を替えるだけで、一から考えずに済みます。"
+      },
+      {
+        "h": "なぜ気にすべきか",
+        "p": "これは「毎回運任せ」から「一貫した出力」への転換です。個人の反復作業、チーム協働、製品への組み込みは、固定のシステムプロンプトとテンプレートで<b>一貫性</b>を担保します。一度の調整を、無限に再利用できる道具に変えるのです。"
+      },
+      {
+        "h": "よくある誤解",
+        "p": "システムプロンプトを「呪文」と思い、書けば必ず従うと考えないこと。強力な誘導ですが、長い会話で薄まったり、ユーザーメッセージに上書きされたりします（これが <b>prompt injection</b> の源でもある）。テンプレートも不変ではありません。良い型は、数回使い結果を見て微調整して育つものです。"
+      }
+    ]
+  },
   "thought-partner": {
     "zh": [
       {

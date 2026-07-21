@@ -146,7 +146,7 @@ export const PATHS = [
     },
     phases: [
       { t: { zh: '基礎', en: 'Basics', ja: '基礎' },
-        steps: [{ k: 'course', ref: 'prompt' }, { k: 'course', ref: 'thought-partner' }, { k: 'iv', ref: 'prompt-craft' }, { k: 'iv', ref: 'few-shot' }, { k: 'iv', ref: 'sycophancy' }, { k: 'iv', ref: 'honest-feedback' }, { k: 'iv', ref: 'temperature' }] },
+        steps: [{ k: 'course', ref: 'prompt' }, { k: 'course', ref: 'system-prompt' }, { k: 'course', ref: 'thought-partner' }, { k: 'iv', ref: 'prompt-craft' }, { k: 'iv', ref: 'few-shot' }, { k: 'iv', ref: 'sycophancy' }, { k: 'iv', ref: 'honest-feedback' }, { k: 'iv', ref: 'temperature' }] },
       { t: { zh: '進階', en: 'Advanced', ja: '応用' },
         steps: [{ k: 'course', ref: 'reasoning' }, { k: 'iv', ref: 'cot-prompting' }, { k: 'iv', ref: 'reasoning-models' }, { k: 'iv', ref: 'test-time-compute' }, { k: 'iv', ref: 'cot-limits' }] },
       { t: { zh: '選擇與評估', en: 'Choose and evaluate', ja: '選択と評価' },
@@ -165,7 +165,7 @@ export const PATHS = [
     },
     phases: [
       { t: { zh: '把話說對', en: 'Talk to it well', ja: 'うまく伝える' },
-        steps: [{ k: 'course', ref: 'prompt' }, { k: 'course', ref: 'thought-partner' }, { k: 'iv', ref: 'sycophancy' }, { k: 'iv', ref: 'honest-feedback' }, { k: 'iv', ref: 'manage-context' }, { k: 'iv', ref: 'outline-workflow' }, { k: 'iv', ref: 'prompt-craft' }, { k: 'iv', ref: 'few-shot' }] },
+        steps: [{ k: 'course', ref: 'prompt' }, { k: 'course', ref: 'system-prompt' }, { k: 'course', ref: 'thought-partner' }, { k: 'iv', ref: 'sycophancy' }, { k: 'iv', ref: 'honest-feedback' }, { k: 'iv', ref: 'manage-context' }, { k: 'iv', ref: 'outline-workflow' }, { k: 'iv', ref: 'prompt-craft' }, { k: 'iv', ref: 'few-shot' }] },
       { t: { zh: '找對資訊', en: 'Find the right info', ja: '正しく探す' },
         steps: [{ k: 'course', ref: 'model-knowledge' }, { k: 'course', ref: 'find-info' }, { k: 'iv', ref: 'trust-answer' }] },
       { t: { zh: '動手做東西', en: 'Make things', ja: '作ってみる' },

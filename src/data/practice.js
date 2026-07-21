@@ -795,6 +795,28 @@ export const PRACTICE = {
       }
     }
   },
+  "system-prompt": {
+    "practical": {
+      "zh": [
+        "<b>把重複的設定丟進自訂指令</b>：你的身分、偏好的語氣、輸出格式、常用限制，寫進 ChatGPT 自訂指令或 Claude 專案，就不必每次重打。",
+        "<b>範本用大括號標變數</b>：像「把 {內容} 改寫成給 {對象} 的 {字數} 字版本」，固定架構、只換變數，重複任務秒套。",
+        "<b>範本附一個範例輸出</b>：在範本裡放一個你要的成品長相當標準，模型照著做，格式和語氣會穩很多。",
+        "<b>system prompt 別放機密、也別當唯一防線</b>：它可能被長對話稀釋或被使用者訊息蓋過；重要規則在應用層另外把關。"
+      ],
+      "en": [
+        "<b>Put repeated setup into custom instructions</b>: your role, preferred tone, output format, and common constraints — write them into ChatGPT custom instructions or a Claude project so you don't re-type them every time.",
+        "<b>Mark variables with braces in templates</b>: like \"rewrite {content} into a {length}-word version for {audience}\" — fix the structure, swap only the variables, and repeated tasks become instant.",
+        "<b>Include an example output in the template</b>: put one sample of the result you want as the standard; the model follows it and the format and tone get much more stable.",
+        "<b>Don't put secrets in a system prompt, or rely on it as the only guard</b>: it can be diluted over a long chat or overridden by user messages; enforce critical rules at the app layer too."
+      ],
+      "ja": [
+        "<b>繰り返す設定はカスタム指示へ</b>：自分の役割、好みの口調、出力形式、よく使う制約を ChatGPT のカスタム指示や Claude のプロジェクトに書けば、毎回打ち直さずに済む。",
+        "<b>テンプレートは波括弧で変数を示す</b>：「{内容} を {読み手} 向けに {字数} 字へ書き換えて」のように、構造は固定し変数だけ替える。反復作業が一瞬。",
+        "<b>テンプレートに例の出力を添える</b>：欲しい成果物の見本を基準として入れる。モデルがそれに倣い、形式と口調がぐっと安定する。",
+        "<b>system prompt に機密を入れない・唯一の防線にしない</b>：長い会話で薄まり、ユーザーメッセージに上書きされうる。重要なルールはアプリ層でも守る。"
+      ]
+    }
+  },
   "thought-partner": {
     "practical": {
       "zh": [

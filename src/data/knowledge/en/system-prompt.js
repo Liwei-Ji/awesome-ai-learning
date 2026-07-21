@@ -1,0 +1,24 @@
+export default {
+  qs: ['What is a system prompt?', 'How do I make a good prompt template?', 'How is a system prompt different from a normal prompt?', 'Are custom instructions a system prompt?'],
+  kb: [
+    [['system prompt', 'what is', 'behind the scenes', 'system'], 'A <b>system prompt</b> is the behind-the-scenes instruction that sets the AI’s <b>identity, rules, and tone</b>, applied across the <b>whole conversation</b>, present every turn. It isn’t the question you just typed; it’s the frame for “who this AI is and how it should behave” throughout.'],
+    [['custom instruction', 'projects', 'gpts', 'settings', 'where'], 'You use it daily: ChatGPT’s <b>custom instructions</b>, Claude’s <b>project instructions</b>, “build your own GPT/assistant,” and the API’s <b>system role</b> are all system prompts. Set it once and every later conversation carries it automatically.'],
+    [['difference', 'vs prompt', 'user', 'user message', 'two layers'], 'A conversation has two layers: the <b>user message</b> (what you just typed) + the <b>system prompt</b> (behind the scenes, persistent). The difference is <b>scope</b>: the user message is this one question; the system prompt is the rule for the whole conversation. Like “what to ask on this call” vs “the standing rules for this support agent.”'],
+    [['template', 'what is', 'fill in', 'variables'], 'A <b>prompt template</b> turns a phrasing that works into a <b>fixed structure + replaceable variables</b>. E.g. “Summarize {article} into 3 points for {audience}, in a {formal/casual} tone.” For repeated tasks you swap the braces instead of rethinking it each time.'],
+    [['how to make template', 'design template', 'good template', 'technique'], 'Keys to a good template: ① hard-code the <b>unchanging</b> parts (role, format, rules) and pull the <b>variable</b> parts into placeholders; ② include an <b>example output</b> as the standard; ③ <b>tweak from results</b> after a few uses. A good template is shaped, not written once and frozen.'],
+    [['variables', 'placeholder', 'braces', 'parameters'], 'A template marks the <b>variables</b> with <b>{braces}</b> (e.g. {topic}, {audience}, {length}). This lets one prompt apply to countless specific cases, and makes it obvious to others “what goes here.”'],
+    [['repeated', 'standardize', 'team', 'consistency', 'why'], 'Why it matters: it moves quality from <b>luck each time</b> to <b>stable and repeatable</b>. Individuals save re-typing, teams share one phrasing, and products rely on a fixed system prompt so every user gets consistent behavior.'],
+    [['role', 'persona', 'act as', 'identity', 'set role'], 'System prompts are most often used to <b>set a role</b>: “you are a senior copywriter / a careful legal assistant / a patient tutor.” Same move as assigning a role in the thought-partner chapter, except the system prompt keeps that role <b>fixed for the whole conversation</b>, no re-stating each turn.'],
+    [['injection', 'override', 'diluted', 'stops working', 'security'], 'A system prompt isn’t all-powerful: over a long chat its influence can be <b>diluted</b>, and user messages may <b>try to override</b> it — which is exactly where <b>prompt injection</b> comes from. So don’t rely on the system prompt alone for critical rules; add checks at the application layer.'],
+    [['prompt', 'relation', 'ties back', 'advanced'], 'This chapter is <b>Prompt</b>, leveled up: the prompt chapter teaches “how to ask once,” this teaches making a good phrasing <b>fixed and reusable</b>. System prompt = set “how to behave” once; template = save “how to ask” for reuse.'],
+    [['api', 'developer', 'ship', 'code', 'system role'], 'For developers: an API call splits messages into <b>system / user / assistant</b> roles, and system is where rules and persona go. Writing a solid system prompt + templates is basic hygiene for <b>shipping stable</b> AI features.'],
+    [['misconception', 'myth', 'assume', 'magic', 'password'], 'Common misconception: treating a system prompt as a <b>“magic password” that guarantees obedience</b>. It’s a strong steer, not a guarantee; and don’t treat templates as rigid formulas. Both should be <b>used then tuned</b> to get better over time.'],
+  ],
+  notes: [
+    'System prompt = behind-the-scenes instruction setting the AI’s identity/rules/tone for the whole conversation (custom instructions, projects, and the API system role all are this).',
+    'A prompt template = fixed structure + replaceable variables ({input}) that saves a phrasing that works for reuse.',
+    'Both move quality from “luck each time” to “stable and repeatable” — for individuals, teams, and products.',
+    'System prompts are often used to fix a role; same as the thought-partner role move, but persistent across the whole chat.',
+    'It isn’t all-powerful: long chats dilute it and user messages may override it (prompt injection); enforce critical rules at the app layer too.',
+  ],
+};

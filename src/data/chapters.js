@@ -274,6 +274,18 @@ const DATA = {
       ['Few-shot 少樣本', '在提示裡附上幾個範例'],
     ],
   },
+  'system-prompt': {
+    t: 'System Prompt 與提示範本', sub: '讓提示可重複、可控',
+    key: [
+      ['01', 'System Prompt：設定 AI 全程的角色與規則'],
+      ['02', '提示範本：把好用的問法做成填空模板'],
+      ['03', '一次設定、每次受用，品質從碰運氣變穩定'],
+    ],
+    terms: [
+      ['System Prompt 系統提示', '設定 AI 身分、規則、語氣的幕後指令，套用整段對話'],
+      ['Template 提示範本', '帶變數（{輸入}）的可重複提示，把成功的問法固定下來'],
+    ],
+  },
   'thought-partner': {
     t: 'AI 當思考夥伴', sub: '不只問答案，用它幫你想得更好',
     key: [
@@ -439,7 +451,7 @@ const OUTLINE = [
   { key: 'learn', t: 'AI 如何學習', desc: '模型怎麼被訓練', slugs: ['deep-learning', 'neural-network', 'training', 'backprop', 'cnn'] },
   { key: 'llm', t: '大型語言模型 LLM', desc: 'ChatGPT 的核心', slugs: ['tokenizer', 'embedding', 'rnn', 'transformer', 'llm', 'model-size', 'model-knowledge', 'context-window', 'inference'] },
   { key: 'chatgpt', t: '從模型到 ChatGPT', desc: '把模型訓練成助理', slugs: ['pretraining', 'fine-tuning', 'reasoning'] },
-  { key: 'apps', t: '生成式 AI 與 AI Agent', desc: '一條完整的應用鏈', slugs: ['prompt', 'thought-partner', 'find-info', 'generative', 'multimodal', 'rag', 'memory', 'mcp', 'agent', 'no-code', 'integration'] },
+  { key: 'apps', t: '生成式 AI 與 AI Agent', desc: '一條完整的應用鏈', slugs: ['prompt', 'system-prompt', 'thought-partner', 'find-info', 'generative', 'multimodal', 'rag', 'memory', 'mcp', 'agent', 'no-code', 'integration'] },
   { key: 'literacy', t: 'AI 素養', desc: '會用，也會判斷', slugs: ['limits', 'evaluation', 'capstone'] },
 ];
 
