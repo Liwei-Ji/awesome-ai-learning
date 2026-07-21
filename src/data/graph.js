@@ -40,6 +40,7 @@ export const PREREQ = {
   generative: ['deep-learning'],
   multimodal: ['embedding', 'llm'],
   prompt: ['llm'],
+  'thought-partner': ['prompt'],
   rag: ['embedding', 'llm'],
   memory: ['context-window'],
   mcp: ['llm'],

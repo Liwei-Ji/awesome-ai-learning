@@ -146,7 +146,7 @@ export const PATHS = [
     },
     phases: [
       { t: { zh: '基礎', en: 'Basics', ja: '基礎' },
-        steps: [{ k: 'course', ref: 'prompt' }, { k: 'iv', ref: 'prompt-craft' }, { k: 'iv', ref: 'few-shot' }, { k: 'iv', ref: 'temperature' }] },
+        steps: [{ k: 'course', ref: 'prompt' }, { k: 'course', ref: 'thought-partner' }, { k: 'iv', ref: 'prompt-craft' }, { k: 'iv', ref: 'few-shot' }, { k: 'iv', ref: 'temperature' }] },
       { t: { zh: '進階', en: 'Advanced', ja: '応用' },
         steps: [{ k: 'course', ref: 'reasoning' }, { k: 'iv', ref: 'cot-prompting' }, { k: 'iv', ref: 'reasoning-models' }, { k: 'iv', ref: 'test-time-compute' }, { k: 'iv', ref: 'cot-limits' }] },
       { t: { zh: '選擇與評估', en: 'Choose and evaluate', ja: '選択と評価' },

@@ -268,6 +268,18 @@ export const CH_TR = {
         ["Few-shot", "Including a few examples in the prompt"],
       ],
     },
+    "thought-partner": {
+      t: "AI as a Thought Partner", sub: "Not just answers — think better with it",
+      key: [
+        ["01", "Give enough context: your role, goal, audience, and constraints"],
+        ["02", "Ask it to poke holes and argue the other side, not just agree with you"],
+        ["03", "The value is in the back-and-forth, not a single question"],
+      ],
+      terms: [
+        ["Sycophancy", "AI's tendency to go along with you and say what you want to hear, rather than the truth"],
+        ["Context", "The background you provide, which decides the quality of the answer"],
+      ],
+    },
     "generative": {
       t: "Generative AI: How AI Draws", sub: "Denoising from static into an image, step by step (diffusion)",
       key: [
@@ -652,6 +664,18 @@ export const CH_TR = {
       terms: [
         ["Prompt プロンプト", "モデルに渡す入力・指示"],
         ["Few-shot 少数事例", "プロンプトにいくつか例を添えること"],
+      ],
+    },
+    "thought-partner": {
+      t: "AI を思考のパートナーに", sub: "答えだけでなく、より良く考えるために",
+      key: [
+        ["01", "十分な文脈を与える：役割・目標・読み手・制約"],
+        ["02", "同調させず、粗を突かせ反対の立場も言わせる"],
+        ["03", "価値は一問一答でなく、往復のやり取りにある"],
+      ],
+      terms: [
+        ["Sycophancy おべっか・同調", "AI が本音より、あなたに合わせて聞きたいことを言う傾向"],
+        ["Context 文脈", "あなたが与える背景情報。回答の品質を左右する"],
       ],
     },
     "generative": {

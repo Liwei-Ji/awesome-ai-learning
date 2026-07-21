@@ -1502,6 +1502,74 @@ export const BODIES = {
       }
     ]
   },
+  "thought-partner": {
+    "zh": [
+      {
+        "h": "AI 不只給答案",
+        "p": "多數人把 AI 當成「問問題、拿答案」的機器，但它更強的用法是當<b>思考夥伴</b>：幫你把想法想得更廣、更清楚、更周全。同一個工具，當搜尋引擎用只拿到一層，當夥伴用能幫你把整件事想通。"
+      },
+      {
+        "h": "先給足脈絡",
+        "p": "它不知道你是誰、要做什麼。把<b>脈絡</b>講清楚，品質差很多：你的角色、目標、給誰看、有什麼限制、已經試過什麼。與其問「幫我寫行銷文案」，不如說「我是小型咖啡店老闆，想在 IG 吸引附近上班族，語氣輕鬆、預算低」。"
+      },
+      {
+        "h": "別讓它一味附和你",
+        "p": "AI 有個內建傾向叫 <b>Sycophancy（諂媚附和）</b>：它被訓練成討你喜歡，所以你問「這樣對吧？」它多半順著說對。想要真話就要主動要求：「挑出這個計畫的三個最大風險」「用反方立場反駁我」「有什麼我沒想到的？」"
+      },
+      {
+        "h": "價值在來回，不在一問一答",
+        "p": "把 AI 當夥伴，重點是<b>多輪對話</b>：先讓它發想、你再質疑、它再修正、最後一起收斂。問一句就走，等於只用了它一成的功力。好的用法，像和一個懂很多、又不怕被你反駁的同事來回討論。"
+      },
+      {
+        "h": "常見誤解",
+        "p": "最常見的誤解：<b>把 AI 的稱讚當背書</b>。它說「這是很棒的想法！」不代表真的好，那可能只是附和。越重要的決定，越要逼它<b>扮演反方、講出你不想聽的</b>，而不是找它來蓋章同意。"
+      }
+    ],
+    "en": [
+      {
+        "h": "AI does more than answer",
+        "p": "Most people use AI as an \"ask a question, get an answer\" machine, but its stronger use is as a <b>thought partner</b>: helping you think wider, clearer, and more thoroughly. The same tool, used as a search engine, gives you one layer; used as a partner, it helps you think a whole problem through."
+      },
+      {
+        "h": "Give it enough context first",
+        "p": "It does not know who you are or what you are doing. Spelling out the <b>context</b> changes the quality a lot: your role, your goal, who it is for, your constraints, what you have already tried. Instead of \"write me marketing copy,\" say \"I run a small café and want to attract nearby office workers on Instagram, casual tone, low budget.\""
+      },
+      {
+        "h": "Don't let it just agree with you",
+        "p": "AI has a built-in tendency called <b>sycophancy</b>: it is trained to please you, so if you ask \"this is right, isn't it?\" it will usually go along. To get the truth, ask for it directly: \"name the three biggest risks in this plan,\" \"argue the opposite side,\" \"what am I missing?\""
+      },
+      {
+        "h": "The value is in the back-and-forth",
+        "p": "Using AI as a partner is about <b>multiple turns</b>: let it brainstorm, you push back, it revises, and you converge together. Asking once and leaving uses maybe a tenth of it. The good mode is like talking a problem through with a knowledgeable colleague who is not afraid to be pushed back on."
+      },
+      {
+        "h": "A common misconception",
+        "p": "The most common misconception: <b>taking AI's praise as endorsement</b>. \"That's a great idea!\" does not mean it is, it may just be agreeing. The more important the decision, the more you should force it to <b>play devil's advocate and tell you what you don't want to hear</b>, not rubber-stamp you."
+      }
+    ],
+    "ja": [
+      {
+        "h": "AI は答えるだけではない",
+        "p": "多くの人は AI を「質問して答えをもらう」機械として使いますが、より強力な使い方は<b>思考のパートナー</b>です。考えをより広く、明確に、周到にする手助けをします。同じツールでも、検索エンジンとして使えば一層だけ、パートナーとして使えば問題全体を考え抜けます。"
+      },
+      {
+        "h": "まず十分な文脈を与える",
+        "p": "AI はあなたが誰で何をしたいか知りません。<b>文脈</b>を明示すると品質が大きく変わります。あなたの役割、目標、誰向けか、制約、すでに試したこと。「マーケ文を書いて」より、「小さなカフェの経営者で、近所の会社員を Instagram で惹きたい、カジュアルな口調、低予算」と伝えましょう。"
+      },
+      {
+        "h": "一方的に同意させない",
+        "p": "AI には <b>Sycophancy（おべっか・同調）</b> という内在傾向があります。喜ばせるよう訓練されているので、「これで合ってるよね？」と聞けば大抵同調します。本音を得るには直接求めます：「この計画の最大のリスクを三つ挙げて」「反対の立場で反論して」「私が見落としているのは？」"
+      },
+      {
+        "h": "価値は一問一答でなく往復にある",
+        "p": "パートナーとして使う核心は<b>複数ターンの対話</b>です。まず発想させ、あなたが反論し、修正させ、一緒に収束させる。一度聞いて終わりでは、実力の一割しか使えていません。良い使い方は、博識で反論を恐れない同僚と問題を話し合う感覚です。"
+      },
+      {
+        "h": "よくある誤解",
+        "p": "最も多い誤解は<b>AI の称賛を裏書きと受け取る</b>ことです。「素晴らしいアイデアですね！」は本当に良いとは限らず、ただの同調かもしれません。重要な決定ほど、賛同の印を押させるのではなく、<b>反対の役を演じさせ、聞きたくないことを言わせる</b>べきです。"
+      }
+    ]
+  },
   "generative": {
     "zh": [
       {

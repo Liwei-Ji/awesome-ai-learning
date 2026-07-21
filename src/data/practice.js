@@ -795,6 +795,28 @@ export const PRACTICE = {
       }
     }
   },
+  "thought-partner": {
+    "practical": {
+      "zh": [
+        "<b>先給脈絡再問</b>：一句話交代你的角色、目標、給誰看、限制。與其「幫我寫」，不如「我是＿＿，要給＿＿看，語氣＿＿，別超過＿＿字」。",
+        "<b>主動要反方</b>：問完「你覺得呢」，追加「挑出三個最大風險」「用反對立場反駁我」。這樣才逼出真話，繞過它附和你的傾向。",
+        "<b>用多輪逼近</b>：第一個答案當草稿，別急著收。追問「還有別的角度嗎」「哪裡最弱」，來回幾輪品質才會好。",
+        "<b>要它寫得像人</b>：附上一兩段你的舊文當語氣範例，並明講「不要條列、不要開場白」，比只說「寫自然一點」有效得多。"
+      ],
+      "en": [
+        "<b>Give context before you ask</b>: one line on your role, goal, audience, and constraints. Instead of \"write this for me,\" try \"I'm ___, it's for ___, tone ___, under ___ words.\"",
+        "<b>Ask for the opposing view</b>: after \"what do you think,\" add \"name the three biggest risks\" or \"argue the opposite side.\" That forces out the truth and gets around its tendency to agree with you.",
+        "<b>Converge over multiple turns</b>: treat the first answer as a draft, don't stop there. Push with \"what other angles are there?\" and \"where is this weakest?\"; quality comes from the back-and-forth.",
+        "<b>Make it write like a human</b>: paste a paragraph or two of your own past writing as a tone sample, and say explicitly \"no bullet points, no preamble\" — far more effective than \"write more naturally.\""
+      ],
+      "ja": [
+        "<b>質問の前に文脈を与える</b>：役割・目標・読み手・制約を一行で。「書いて」より「私は＿＿、＿＿向け、口調は＿＿、＿＿字以内で」。",
+        "<b>反対意見を求める</b>：「どう思う？」の後に「最大のリスクを三つ」「反対の立場で反論して」を足す。これで本音を引き出し、同調の傾向を回避できる。",
+        "<b>複数ターンで詰める</b>：最初の答えは下書き。すぐ止めず「他の角度は？」「どこが一番弱い？」と往復する。品質はやり取りから生まれる。",
+        "<b>人間らしく書かせる</b>：自分の過去の文を一、二段落、口調の見本として貼り、「箇条書き禁止、前置き禁止」と明言する。「もっと自然に」より遥かに効く。"
+      ]
+    }
+  },
   "generative": {
     "practical": {
       "zh": [
