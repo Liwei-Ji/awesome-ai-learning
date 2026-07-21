@@ -19,10 +19,10 @@
       persLabel: '選一個系統提示：',
       question: '我睡不著，給我一個建議。',
       personas: [
-        { icon: '⚪', name: '（無）預設', sys: '（沒有系統提示）', ans: '試著放下手機，做幾次深呼吸，讓身體慢慢放鬆下來。' },
-        { icon: '🫶', name: '溫柔睡眠教練', sys: '你是溫柔體貼的睡眠教練，語氣安撫、給具體步驟。', ans: '先別急，這很常見。把燈調暗、手機放遠，跟我做 4-7-8 呼吸：吸 4 秒、憋 7 秒、慢慢吐 8 秒，重複幾輪，你會慢慢放鬆下來的。' },
-        { icon: '🎖️', name: '簡潔教官（一句話）', sys: '你是簡潔的教官，只用一句話、直接下指令。', ans: '放下手機，關燈，閉眼，專注呼吸——現在。' },
-        { icon: '🪶', name: '愛比喻的詩人', sys: '你是愛用比喻的詩人，用意象回答。', ans: '讓思緒像退潮的海，一波一波退去；把今天輕輕放回岸上，明天自會醒來。' },
+        { name: '（無）預設', sys: '（沒有系統提示）', ans: '試著放下手機，做幾次深呼吸，讓身體慢慢放鬆下來。' },
+        { name: '溫柔睡眠教練', sys: '你是溫柔體貼的睡眠教練，語氣安撫、給具體步驟。', ans: '先別急，這很常見。把燈調暗、手機放遠，跟我做 4-7-8 呼吸：吸 4 秒、憋 7 秒、慢慢吐 8 秒，重複幾輪，你會慢慢放鬆下來的。' },
+        { name: '簡潔教官（一句話）', sys: '你是簡潔的教官，只用一句話、直接下指令。', ans: '放下手機，關燈，閉眼，專注呼吸——現在。' },
+        { name: '愛比喻的詩人', sys: '你是愛用比喻的詩人，用意象回答。', ans: '讓思緒像退潮的海，一波一波退去；把今天輕輕放回岸上，明天自會醒來。' },
       ],
       tplParts: ['把 ', ' 摘成 ', ' 個重點，寫給 ', ' 看。'],
       topics: ['這篇文章', '這份財報', '這場會議'],
@@ -43,10 +43,10 @@
       persLabel: 'Pick a system prompt:',
       question: 'I can’t sleep. Give me one tip.',
       personas: [
-        { icon: '⚪', name: '(none) default', sys: '(no system prompt)', ans: 'Try putting your phone down and taking a few deep breaths to let your body relax.' },
-        { icon: '🫶', name: 'Gentle sleep coach', sys: 'You are a warm, caring sleep coach; soothing tone, concrete steps.', ans: 'It’s okay, this is common. Dim the lights, move your phone away, and try 4-7-8 breathing with me: in for 4, hold for 7, out slowly for 8. A few rounds and you’ll ease down.' },
-        { icon: '🎖️', name: 'Terse instructor (one line)', sys: 'You are a terse drill instructor; one line, direct orders only.', ans: 'Phone down. Lights off. Eyes closed. Focus on your breath — now.' },
-        { icon: '🪶', name: 'Metaphor-loving poet', sys: 'You are a poet who loves metaphors; answer in imagery.', ans: 'Let your thoughts ebb like a tide going out, wave by wave; set today gently back on the shore, and tomorrow will wake on its own.' },
+        { name: '(none) default', sys: '(no system prompt)', ans: 'Try putting your phone down and taking a few deep breaths to let your body relax.' },
+        { name: 'Gentle sleep coach', sys: 'You are a warm, caring sleep coach; soothing tone, concrete steps.', ans: 'It’s okay, this is common. Dim the lights, move your phone away, and try 4-7-8 breathing with me: in for 4, hold for 7, out slowly for 8. A few rounds and you’ll ease down.' },
+        { name: 'Terse instructor (one line)', sys: 'You are a terse drill instructor; one line, direct orders only.', ans: 'Phone down. Lights off. Eyes closed. Focus on your breath — now.' },
+        { name: 'Metaphor-loving poet', sys: 'You are a poet who loves metaphors; answer in imagery.', ans: 'Let your thoughts ebb like a tide going out, wave by wave; set today gently back on the shore, and tomorrow will wake on its own.' },
       ],
       tplParts: ['Summarize ', ' into ', ' key points for ', '.'],
       topics: ['this article', 'this report', 'this meeting'],
@@ -67,10 +67,10 @@
       persLabel: 'システムプロンプトを選ぶ：',
       question: '眠れません。アドバイスを一つ。',
       personas: [
-        { icon: '⚪', name: '（なし）既定', sys: '（システムプロンプトなし）', ans: 'スマホを置いて、深呼吸を数回して、体をゆっくりほぐしてみましょう。' },
-        { icon: '🫶', name: '優しい睡眠コーチ', sys: 'あなたは優しく思いやりのある睡眠コーチ。落ち着いた口調で具体的な手順を。', ans: '大丈夫、よくあることです。照明を落とし、スマホを遠ざけ、4-7-8 呼吸を一緒に：4 秒吸って、7 秒止めて、8 秒かけて吐く。数回でだんだん落ち着きますよ。' },
-        { icon: '🎖️', name: '簡潔な教官（一言）', sys: 'あなたは簡潔な教官。一言だけ、直接的な指示を。', ans: 'スマホを置け。消灯。目を閉じろ。呼吸に集中——今すぐ。' },
-        { icon: '🪶', name: '比喩好きの詩人', sys: 'あなたは比喩を好む詩人。イメージで答える。', ans: '思考を引き潮の海のように、波ごとに引かせよう。今日をそっと岸へ返せば、明日はひとりでに目を覚ます。' },
+        { name: '（なし）既定', sys: '（システムプロンプトなし）', ans: 'スマホを置いて、深呼吸を数回して、体をゆっくりほぐしてみましょう。' },
+        { name: '優しい睡眠コーチ', sys: 'あなたは優しく思いやりのある睡眠コーチ。落ち着いた口調で具体的な手順を。', ans: '大丈夫、よくあることです。照明を落とし、スマホを遠ざけ、4-7-8 呼吸を一緒に：4 秒吸って、7 秒止めて、8 秒かけて吐く。数回でだんだん落ち着きますよ。' },
+        { name: '簡潔な教官（一言）', sys: 'あなたは簡潔な教官。一言だけ、直接的な指示を。', ans: 'スマホを置け。消灯。目を閉じろ。呼吸に集中——今すぐ。' },
+        { name: '比喩好きの詩人', sys: 'あなたは比喩を好む詩人。イメージで答える。', ans: '思考を引き潮の海のように、波ごとに引かせよう。今日をそっと岸へ返せば、明日はひとりでに目を覚ます。' },
       ],
       tplParts: ['', ' を ', ' 点にまとめて、', ' 向けに。'],
       topics: ['この記事', 'この決算書', 'この会議'],
@@ -115,7 +115,7 @@
   <div class="ctl-row">
     <span class="glab">{ui.persLabel}</span>
     {#each ui.personas as per, i}
-      <button class="pl" class:on={p === i} onclick={() => (p = i)}>{per.icon} {per.name}</button>
+      <button class="pl" class:on={p === i} onclick={() => (p = i)}>{per.name}</button>
     {/each}
   </div>
 
