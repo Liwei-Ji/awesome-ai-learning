@@ -1,5 +1,5 @@
 <script>
-  /* 概念關聯圖（radial）：25 個知識點成環，弦線＝前置依賴（PREREQ）。
+  /* 概念關聯圖（radial）：全部知識點成環（BRANCHES+FLOW，不含序章），弦線＝前置依賴（PREREQ）。
      滑過任一點高亮它的依賴、點擊進該章。自足元件、自帶 hover。 */
   import { CH } from '../data/chapters.js';
   import { chOf } from '../data/localize.js';

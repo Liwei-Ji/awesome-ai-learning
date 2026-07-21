@@ -8,6 +8,10 @@
   import { dur } from '../lib/motion.js';
   import { i18n } from '../stores/i18n.svelte.js';
   import ConceptGraph from '../components/ConceptGraph.svelte';
+  import { BRANCHES, FLOW } from '../data/graph.js';
+
+  // 關聯圖節點數（不含序章）：跟課綱同步，避免寫死過時
+  const N_CONCEPTS = [...BRANCHES, ...FLOW].reduce((n, c) => n + c.ids.length, 0);
 
   const NAMES = ['Data', 'Machine Learning', 'Deep Learning', 'Neural Network', 'Transformer', 'LLM', 'AI Agent', 'Application'];
 
@@ -23,7 +27,7 @@
       arrived: '✓ 抵達應用層',
       restart: '重來',
       hint: '由下而上：資料在底層，應用在頂層。看懂這條管線，你就有了<b>設計 AI 應用的地圖</b>，接下來就是挑一個真實問題套進去。',
-      h3b: '課程全景：25 個知識點怎麼互相依賴',
+      h3b: `課程全景：${N_CONCEPTS} 個知識點怎麼互相依賴`,
       lede2: '整門課其實是一張網。滑過任一個知識點，看它<b>依賴哪些前置概念</b>、又被哪些後續應用用到；點擊可跳到該章。',
     },
     en: {
@@ -37,7 +41,7 @@
       arrived: '✓ Reached the application layer',
       restart: 'Restart',
       hint: 'Bottom-up: data sits at the base, the application at the top. Once you understand this pipeline, you’ve got a <b>map for designing AI apps</b>, next, just pick a real problem and drop it in.',
-      h3b: 'Course map: how the 25 concepts depend on one another',
+      h3b: `Course map: how the ${N_CONCEPTS} concepts depend on one another`,
       lede2: 'The whole course is really a web. Hover over any concept to see <b>which prerequisite concepts it depends on</b> and which later applications use it; click to jump to that chapter.',
     },
     ja: {
@@ -51,7 +55,7 @@
       arrived: '✓ アプリケーション層に到達',
       restart: 'やり直す',
       hint: '下から上へ：データが最下層、アプリケーションが最上層です。このパイプラインが分かれば、<b>AI アプリを設計するための地図</b>が手に入ります、あとは現実の問題を 1 つ選んで、そこに当てはめるだけです。',
-      h3b: 'コース全体像：25 個の概念はどう依存し合うか',
+      h3b: `コース全体像：${N_CONCEPTS} 個の概念はどう依存し合うか`,
       lede2: 'コース全体は、実は 1 枚の網です。どの概念でもマウスを乗せると、<b>どの前提概念に依存しているか</b>、そしてどの後続の応用で使われるかが見られます。クリックするとその章に移動します。',
     },
   };
