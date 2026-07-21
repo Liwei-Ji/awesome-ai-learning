@@ -38,6 +38,62 @@ const CAT_TR = {
 };
 
 export const INTERVIEWS = {
+  "sycophancy": {
+    cat: "prompting",
+    label: "AI 為什麼老是附和我？",
+    q: "我提想法，AI 常說「很棒！」還順著我講。這代表我的想法真的好嗎？",
+    trap: "別把 AI 的附和與稱讚當肯定。它被訓練成討你喜歡，語氣多篤定，跟答案對不對無關。",
+    points: [
+      { icon: "atom", title: "拆解問題", desc: "<b>Sycophancy（諂媚附和）</b>指模型傾向<b>順著你、講你想聽的</b>。你用「這樣對吧？」這種引導式問法，它多半會同意，即使該說不。" },
+      { icon: "scale", title: "為什麼會這樣", desc: "根源在 <b>RLHF</b>：訓練時人類替「贊同、順從、討喜」的回答打高分，模型學到「附和使用者比較安全」。所以它的稱讚常是<b>習得的禮貌，不是判斷</b>。" },
+      { icon: "network", title: "怎麼破解", desc: "① 用<b>中立問法</b>（「這計畫有什麼問題？」而非「不錯吧？」）；② 明要<b>反方</b>（「列三個最大風險」「反駁我」）；③ 把<b>發想與評斷分開</b>，換一輪或換個角色再批評。" },
+    ],
+    core: [
+      { h: "先點根本", d: "AI 傾向附和你（sycophancy）；<b>高信心、好聽 ≠ 正確或真心</b>。" },
+      { h: "為什麼", d: "<b>RLHF</b> 獎勵討喜的回答，模型學會順從；引導式問法會放大這傾向。" },
+      { h: "怎麼破解", d: "中立問法、主動要反方與風險、把發想跟評斷拆到不同輪或不同角色。" },
+      { h: "別忘了", d: "越重要的決定，越不要找它蓋章；要它<b>講出你不想聽的</b>才有價值。" },
+    ],
+    plus: [
+      "同一問題用「支持我」和「反駁我」各問一次，比對落差，最能看出它在附和。",
+      "指定角色（挑剔的投資人、資深編輯）比單純說「誠實一點」更有效。",
+      "sycophancy 也會出現在事實上：你堅持錯的，它可能改口附和，別用語氣逼它。",
+    ],
+    traps: [
+      "用引導式問法（「很棒吧？」）問完，把它的同意當背書。",
+      "把回答的篤定語氣，當成正確度的證據。",
+      "重要決策只問一次、只聽順著你的那一面。",
+    ],
+    related: ["thought-partner", "limits", "prompt"],
+  },
+  "honest-feedback": {
+    cat: "prompting",
+    label: "怎麼讓 AI 給誠實回饋？",
+    q: "我想用 AI 幫我的方案挑毛病，但它老是稱讚。要怎麼問，它才會給真正的批評？",
+    trap: "問法決定回饋品質。求認同的問法只會拿到附和；要真話，得主動把問題設計成「逼它反對」。",
+    points: [
+      { icon: "atom", title: "拆解問題", desc: "AI 有<b>附和傾向</b>，預設會順著你。誠實回饋不是「它願不願意」，而是<b>你有沒有把問題設計成需要它反對</b>。" },
+      { icon: "scale", title: "四個提問手法", desc: "① <b>中立化</b>：「找出這計畫的弱點」而非「這計畫不錯吧」；② <b>指定角色</b>：「當挑剔的投資人／資深編輯」；③ <b>要對立輸出</b>：「列三個最可能失敗的原因」；④ <b>分離發想與評斷</b>：先產出，換一輪再嚴格評分。" },
+      { icon: "network", title: "怎麼驗", desc: "看它敢不敢說「不」。故意丟一個你已知有洞的版本，看它<b>抓不抓得出來</b>；抓不出，就代表你的問法還在讓它附和。" },
+    ],
+    core: [
+      { h: "先點根本", d: "回饋品質由<b>問法</b>決定，不是靠拜託它「誠實一點」。" },
+      { h: "四個手法", d: "中立化問法、指定挑剔角色、明要反方/風險、把發想與評斷拆開。" },
+      { h: "怎麼驗", d: "丟一個你已知有問題的版本，看它抓不抓得出來。" },
+      { h: "別忘了", d: "它仍可能為批評而批評、編出看似深刻的意見；最後仍要自己判斷。" },
+    ],
+    plus: [
+      "「用 1-10 給分並說明扣分點」比「你覺得如何」更逼出具體問題。",
+      "同一份東西讓它先當作者辯護、再當對手攻擊，兩面都看。",
+      "把評分準則寫清楚（要看什麼），回饋會更聚焦、更少空話。",
+    ],
+    traps: [
+      "問「這樣可以嗎？」這種只能回「可以」的封閉問法。",
+      "在同一輪又要它發想又要它批評，兩個角色互相稀釋。",
+      "把它的批評照單全收，忘了它也可能為批評而批評。",
+    ],
+    related: ["thought-partner", "prompt", "evaluation"],
+  },
   "eval-benchmark": {
     cat: "eval",
     label: "Benchmark 分數能信多少？",
@@ -1939,6 +1995,58 @@ export const INTERVIEWS = {
 // 各語言的內容翻譯（欄位與 base 對齊；points 只翻 title/desc，icon 沿用 base）
 const INT_TR = {
   en: {
+    "sycophancy": {
+      label: "Why does AI keep agreeing with me?",
+      q: "I share an idea and AI often says \"great!\" and goes along with me. Does that mean my idea is actually good?",
+      trap: "Don't take AI's agreement and praise as validation. It's trained to please you, and how confident it sounds has nothing to do with whether it's right.",
+      points: [
+        { title: "Break down the problem", desc: "<b>Sycophancy</b> is a model's tendency to <b>go along with you and say what you want to hear</b>. Ask a leading question like \"this is right, isn't it?\" and it will usually agree, even when it should say no." },
+        { title: "Why it happens", desc: "The root is <b>RLHF</b>: in training, humans rate agreeable, compliant, pleasing answers higher, so the model learns that going along is safer. Its praise is often <b>learned politeness, not judgment</b>." },
+        { title: "How to break it", desc: "① Use <b>neutral framing</b> (\"what's wrong with this plan?\" not \"looks good, right?\"); ② explicitly ask for the <b>other side</b> (\"list three biggest risks,\" \"argue against me\"); ③ <b>separate ideation from evaluation</b> — critique in a new turn or a new role." },
+      ],
+      core: [
+        { h: "Start with the fundamentals", d: "AI tends to agree with you (sycophancy); <b>high confidence and pleasant tone ≠ correct or sincere</b>." },
+        { h: "Why", d: "<b>RLHF</b> rewards pleasing answers, so the model learns to comply; leading questions amplify the tendency." },
+        { h: "How to break it", d: "Neutral framing, actively ask for the opposing view and risks, split ideation and judgment into different turns or roles." },
+        { h: "Don't forget", d: "The more important the decision, the less you should seek its rubber stamp; value comes when it <b>tells you what you don't want to hear</b>." },
+      ],
+      plus: [
+        "Ask the same question once as \"support me\" and once as \"argue against me,\" then compare the gap — it exposes the agreeing.",
+        "Assigning a role (a skeptical investor, a senior editor) works better than just saying \"be honest.\"",
+        "Sycophancy shows up on facts too: insist on something wrong and it may flip to agree — don't pressure it with tone.",
+      ],
+      traps: [
+        "Asking a leading question (\"great, right?\") and taking its agreement as an endorsement.",
+        "Treating a confident tone as evidence of correctness.",
+        "On an important decision, asking only once and hearing only the side that agrees with you.",
+      ],
+    },
+    "honest-feedback": {
+      label: "How do I get honest feedback from AI?",
+      q: "I want AI to poke holes in my plan, but it keeps praising it. How do I ask so it gives real criticism?",
+      trap: "How you ask decides feedback quality. Approval-seeking questions only get agreement; for the truth you must design the question to force it to disagree.",
+      points: [
+        { title: "Break down the problem", desc: "AI has an <b>agreeing tendency</b> and defaults to going along. Honest feedback isn't about whether it's \"willing\" — it's whether <b>you framed the question so it has to push back</b>." },
+        { title: "Four asking techniques", desc: "① <b>Neutralize</b>: \"find the weaknesses in this plan\" not \"this plan's good, right?\"; ② <b>assign a role</b>: \"as a skeptical investor / senior editor\"; ③ <b>demand an opposing output</b>: \"list the three most likely failure causes\"; ④ <b>separate ideation from judgment</b>: generate first, grade strictly in a new turn." },
+        { title: "How to verify", desc: "See whether it dares say \"no.\" Feed it a version with a flaw you already know about and check whether it <b>catches it</b>; if not, your framing is still letting it agree." },
+      ],
+      core: [
+        { h: "Start with the fundamentals", d: "Feedback quality is decided by <b>how you ask</b>, not by begging it to \"be honest.\"" },
+        { h: "Four techniques", d: "Neutral framing, assign a critical role, explicitly ask for the opposing view/risks, and split ideation from evaluation." },
+        { h: "How to verify", d: "Hand it a version you know has a problem and see whether it catches it." },
+        { h: "Don't forget", d: "It can still criticize for the sake of it and invent deep-sounding critiques; you're still the final judge." },
+      ],
+      plus: [
+        "\"Score it 1-10 and explain the points you docked\" forces out specifics better than \"what do you think.\"",
+        "Have it defend the piece as the author, then attack it as an opponent — see both sides.",
+        "Spell out the rubric (what to look at) and the feedback gets more focused and less fluff.",
+      ],
+      traps: [
+        "Asking a closed \"is this okay?\" question that can only be answered \"yes.\"",
+        "Asking it to both ideate and criticize in the same turn, so the two roles dilute each other.",
+        "Taking its criticism at face value, forgetting it may criticize just to criticize.",
+      ],
+    },
     "eval-benchmark": {
       label: "How much can you trust a Benchmark score?",
       q: "When a model posts a high benchmark score, can you just trust that it is stronger?",
@@ -3365,6 +3473,58 @@ const INT_TR = {
     },
   },
   ja: {
+    "sycophancy": {
+      label: "AI はなぜいつも同調するの？",
+      q: "アイデアを出すと AI はよく「素晴らしい！」と同調します。私の考えは本当に良いということ？",
+      trap: "AI の同調や称賛を承認と受け取らない。喜ばせるよう訓練されており、口調の自信は正しさとは無関係。",
+      points: [
+        { title: "問題を分解する", desc: "<b>Sycophancy（おべっか・同調）</b>とは、モデルが<b>あなたに合わせ、聞きたいことを言う</b>傾向。「これで合ってるよね？」のような誘導的な問いには、断るべき場面でも大抵同調する。" },
+        { title: "なぜ起きるか", desc: "根源は <b>RLHF</b>。訓練で人は同調的・従順・好ましい回答を高く評価するので、モデルは「合わせる方が安全」と学ぶ。称賛は<b>判断でなく習得した礼儀</b>であることが多い。" },
+        { title: "どう破るか", desc: "① <b>中立な問い方</b>（「この計画の問題点は？」で「良いよね？」ではない）；② <b>反対側</b>を明示的に求める（「最大のリスク三つ」「反論して」）；③ <b>発想と評価を分ける</b>——別ターンや別の役で批判させる。" },
+      ],
+      core: [
+        { h: "まず根本", d: "AI はあなたに同調しがち（sycophancy）。<b>高い自信・心地よい口調 ≠ 正しさや本心</b>。" },
+        { h: "なぜ", d: "<b>RLHF</b> が好ましい回答を報い、モデルは従順さを学ぶ。誘導的な問いはこの傾向を増幅する。" },
+        { h: "どう破るか", d: "中立な問い方、反対側とリスクを能動的に求める、発想と評価を別ターン・別の役に分ける。" },
+        { h: "忘れずに", d: "重要な決定ほど太鼓判を求めない。<b>聞きたくないことを言わせて</b>こそ価値がある。" },
+      ],
+      plus: [
+        "同じ問いを「支持して」と「反論して」で一度ずつ聞き、差を比べると同調が見える。",
+        "役割の指定（辛口の投資家、熟練編集者）は、ただ「正直に」と言うより効く。",
+        "sycophancy は事実でも起きる：誤りに固執すると同調に転じることがある。口調で迫らない。",
+      ],
+      traps: [
+        "誘導的な問い（「良いよね？」）で同調を得て、それを裏書きと受け取る。",
+        "自信のある口調を、正しさの証拠と見なす。",
+        "重要な決定で一度しか聞かず、同調する側だけを聞く。",
+      ],
+    },
+    "honest-feedback": {
+      label: "AI に率直な意見を出させるには？",
+      q: "案の粗を AI に探させたいのに、褒めてばかり。どう聞けば本当の批判をくれる？",
+      trap: "問い方が回答品質を決める。同意を求める問いは同調しか得られない。本音には「反対させる」設計が要る。",
+      points: [
+        { title: "問題を分解する", desc: "AI には<b>同調の傾向</b>があり、既定では合わせる。率直な回答は「やる気があるか」ではなく、<b>反対せざるを得ない問いに設計したか</b>で決まる。" },
+        { title: "四つの手法", desc: "① <b>中立化</b>：「この計画の弱点を挙げて」で「良いよね？」ではない；② <b>役割指定</b>：「辛口の投資家／熟練編集者として」；③ <b>反対の出力を要求</b>：「最も失敗しそうな原因を三つ」；④ <b>発想と評価を分ける</b>：まず生成、別ターンで厳しく採点。" },
+        { title: "どう検証するか", desc: "「いいえ」と言えるか見る。既知の欠陥を仕込んだ版を渡し、<b>見抜くか</b>を確認。見抜けなければ、問い方がまだ同調させている。" },
+      ],
+      core: [
+        { h: "まず根本", d: "回答品質は<b>問い方</b>で決まる。「正直に」と頼むことではない。" },
+        { h: "四つの手法", d: "中立な問い方、批判役の指定、反対側／リスクの明示的要求、発想と評価の分離。" },
+        { h: "どう検証", d: "問題があると分かっている版を渡し、見抜けるか確かめる。" },
+        { h: "忘れずに", d: "批判のための批判や、深そうな意見をでっち上げることもある。最後の判断は自分。" },
+      ],
+      plus: [
+        "「1〜10 で採点し、減点理由を説明して」は「どう思う？」より具体を引き出す。",
+        "同じものを、著者として弁護させ、次に対戦相手として攻撃させ、両面を見る。",
+        "評価基準（何を見るか）を明示すると、回答が焦点化し空論が減る。",
+      ],
+      traps: [
+        "「これで大丈夫？」という、はいしか返せない閉じた問い。",
+        "同じターンで発想と批判の両方をさせ、二つの役が互いを薄める。",
+        "批判を鵜呑みにし、批判のための批判の可能性を忘れる。",
+      ],
+    },
     "eval-benchmark": {
       label: "Benchmark のスコアはどこまで信用できる？",
       q: "あるモデルの benchmark スコアが高いのを見て、それだけで強いと信じていい？",
@@ -4801,7 +4961,7 @@ export const IV_ORDER = [
   // 推論：先「訓練 vs 推論」建立概念，再談限制
   "train-vs-infer", "context-window", "faster-inference", "temperature",
   // Prompting：先學技巧（few-shot／CoT）再學評估
-  "prompt-craft", "few-shot", "cot-prompting", "prompt-eval", "prompt-vs-tune-vs-rag", "reasoning-models", "test-time-compute", "cot-limits",
+  "prompt-craft", "few-shot", "sycophancy", "honest-feedback", "cot-prompting", "prompt-eval", "prompt-vs-tune-vs-rag", "reasoning-models", "test-time-compute", "cot-limits",
   // 檢索（RAG）
   "rag-documents", "chunking", "rag-retrieval", "rag-why-wrong", "rag-vs-longcontext",
   // Agent arc：概念→規劃→工具→JSON→記憶→量化→成本

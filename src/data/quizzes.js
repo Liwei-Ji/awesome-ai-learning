@@ -5,6 +5,40 @@
    quizFor 合併：ok 取 zh、文字取該語言（缺則回退 zh）。新增題目改這裡即可。
    ============================================================ */
 export const QUIZZES = {
+  "sycophancy": {
+    "en": [
+      { "t": "“Great idea” means my direction got neutral validation, so I can proceed confidently.", "why": "That’s usually sycophancy: it’s trained to please you, so praise is often learned politeness, not judgment." },
+      { "t": "Reframe the question neutrally and ask it to name the three biggest risks and the opposing case, then decide.", "why": "Neutral framing plus actively asking for the other side gets around its urge to agree and forces useful feedback." },
+      { "t": "Its tone is very confident, so the answer is probably right.", "why": "Confident tone has nothing to do with correctness; high confidence ≠ correct, which is exactly the trap." }
+    ],
+    "ja": [
+      { "t": "「素晴らしいアイデア」は中立的な承認なので、安心して進めてよい。", "why": "多くは sycophancy。喜ばせるよう訓練されており、称賛は判断でなく習得した礼儀のことが多い。" },
+      { "t": "問い方を中立にし、最大のリスク三つと反対論を挙げさせてから判断する。", "why": "中立な問い方と反対側の要求で、同調の傾向を回避し有用な回答を引き出せる。" },
+      { "t": "口調が自信たっぷりだから、答えは正しいはず。", "why": "自信のある口調は正しさと無関係。高い自信≠正確——まさにそこが罠。" }
+    ],
+    "zh": [
+      { "t": "AI 說「很棒的想法」，代表我的方向獲得中立肯定，可以放心推進。", "ok": false, "why": "那多半是 sycophancy：它被訓練成討你喜歡，稱讚常是習得的禮貌，不是判斷。" },
+      { "t": "把問法改成中立，甚至主動要它挑三個最大風險與反方論點，再據此判斷。", "ok": true, "why": "中立＋主動要反方，能繞過它的附和傾向，逼出真正有用的回饋。" },
+      { "t": "它語氣很篤定，所以答案應該是對的。", "ok": false, "why": "語氣篤定和正確與否無關；高信心 ≠ 正確，這正是要小心的地方。" }
+    ]
+  },
+  "honest-feedback": {
+    "en": [
+      { "t": "Just ask “my plan’s fine, right?” — if it says yes, there’s no big problem.", "why": "A closed, approval-seeking question only gets agreement; “fine, right?” almost guarantees a “yes.”" },
+      { "t": "Have it play a harsh critic, list the three most likely failure causes, and test it on a flaw you left in on purpose.", "why": "Designing it to argue against you, plus verifying with a known flaw, is what gets real critique." },
+      { "t": "Just write “please be honest” a few times in the prompt and it’ll tell the truth.", "why": "Repeating “be honest” does little; what works is neutral framing, a critic role, and separating ideation from judgment." }
+    ],
+    "ja": [
+      { "t": "「この案で大丈夫ですよね？」と直接聞き、はいと言えば問題なし。", "why": "閉じた・同意を求める問い方は同調しか得られない。「ですよね？」はほぼ「はい」を招く。" },
+      { "t": "辛口の批判役を演じさせ、最も失敗しそうな原因を三つ挙げさせ、わざと残した欠陥を見抜けるか試す。", "why": "反対させる設計と既知の欠陥での検証こそ、本当の批判を引き出す。" },
+      { "t": "プロンプトに「必ず正直に」と何度も書けば真実を言う。", "why": "「正直に」と唱えても効果は限定的。効くのは中立な問い方、批判役の指定、発想と評価の分離。" }
+    ],
+    "zh": [
+      { "t": "直接問「我這個方案還可以吧？」，如果它說可以就代表沒大問題。", "ok": false, "why": "封閉、求認同的問法只會拿到附和；「還可以吧」幾乎注定得到「可以」。" },
+      { "t": "要它扮演挑剔的對手，列出三個最可能失敗的原因，並用一個你故意留的漏洞測試它抓不抓得到。", "ok": true, "why": "設計成「逼它反對」＋用已知漏洞驗證，才拿得到真正的批評。" },
+      { "t": "在提示裡多寫幾次「請務必誠實」，它就會給真話。", "ok": false, "why": "光喊「誠實」效果有限；真正有效的是中立問法、指定反方角色、把發想與評斷分開。" }
+    ]
+  },
   "eval-benchmark": {
     "en": [
       { "t": "The higher a model's benchmark score, the better it will perform on any task you give it.", "why": "Strong at math does not mean strong at your customer-service tone; the total score also hides the subcategory you care about." },

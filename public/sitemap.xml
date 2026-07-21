@@ -553,6 +553,54 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/course/prompt" />
   </url>
   <url>
+    <loc>https://awesome-ai-learning.vercel.app/course/thought-partner</loc>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/thought-partner" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/thought-partner" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/course/thought-partner" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/course/thought-partner" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/ja/course/thought-partner</loc>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/thought-partner" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/thought-partner" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/course/thought-partner" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/course/thought-partner" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/zh/course/thought-partner</loc>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/thought-partner" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/thought-partner" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/course/thought-partner" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/course/thought-partner" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/course/find-info</loc>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/find-info" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/find-info" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/course/find-info" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/course/find-info" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/ja/course/find-info</loc>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/find-info" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/find-info" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/course/find-info" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/course/find-info" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/zh/course/find-info</loc>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/find-info" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/find-info" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/course/find-info" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/course/find-info" />
+  </url>
+  <url>
     <loc>https://awesome-ai-learning.vercel.app/course/generative</loc>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/generative" />
@@ -695,6 +743,30 @@
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/agent" />
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/course/agent" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/course/agent" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/course/no-code</loc>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/no-code" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/no-code" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/course/no-code" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/course/no-code" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/ja/course/no-code</loc>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/no-code" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/no-code" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/course/no-code" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/course/no-code" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/zh/course/no-code</loc>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/no-code" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/no-code" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/course/no-code" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/course/no-code" />
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/course/integration</loc>
