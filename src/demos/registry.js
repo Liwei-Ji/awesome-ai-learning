@@ -26,6 +26,7 @@ import Attention from './Attention.svelte';
 import NextToken from './NextToken.svelte';
 import ToChatGPT from './ToChatGPT.svelte';
 import PromptCraft from './PromptCraft.svelte';
+import SystemPrompt from './SystemPrompt.svelte';
 import RAG from './RAG.svelte';
 import FineTune from './FineTune.svelte';
 import Diffusion from './Diffusion.svelte';
@@ -59,6 +60,7 @@ const demos = {
   'pretraining': ToChatGPT,    // 深色發光版
   'reasoning': ThinkingBudget,
   'prompt': PromptCraft,
+  'system-prompt': SystemPrompt,
   'rag': RAG,
   'fine-tuning': FineTune,
   'generative': Diffusion,
