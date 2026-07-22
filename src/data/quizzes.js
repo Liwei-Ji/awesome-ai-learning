@@ -5,6 +5,40 @@
    quizFor 合併：ok 取 zh、文字取該語言（缺則回退 zh）。新增題目改這裡即可。
    ============================================================ */
 export const QUIZZES = {
+  "self-verify": {
+    "en": [
+      { "t": "As long as the agent produced a result, the task is done.", "why": "\"Producing\" isn't \"getting it right and finished\"; agents tend to hand over something that looks done, and without verification you don't know if it's correct." },
+      { "t": "Give a success condition that can be judged automatically, run a verifier (tests/rules/judge) each round, and feed failures back for a targeted retry.", "why": "That's the core of a reliable loop: a verifiable goal + self-check + fix-on-failure, so it actually runs to completion." },
+      { "t": "Just tell it \"please check carefully for mistakes\" and it'll guarantee correctness itself.", "why": "Self-assessment alone is unreliable (it goes easy on itself); you need objective, auto-judgeable checks, and a human spot-check for the subjective parts." }
+    ],
+    "ja": [
+      { "t": "agent が結果を出しさえすれば、タスクは完了だ。", "why": "「出す」は「正しく終える」ではない。agent は完成に見えるものを出しがちで、検証がなければ正しいか分からない。" },
+      { "t": "自動判定できる成功条件を与え、毎周 verifier（テスト／ルール／judge）でチェックし、失敗はエラーを戻して的を絞って再試行する。", "why": "これが信頼できるループの核心：検証可能な目標＋自己チェック＋失敗時の修正で、実際に完了まで走る。" },
+      { "t": "「間違いがないか丁寧に確認して」と言えば、自分で正しさを保証してくれる。", "why": "自己評価だけでは不確か（自分に甘い）。客観的で自動判定できるチェックが必要で、主観的な部分は人手の抜き取りを。" }
+    ],
+    "zh": [
+      { "t": "只要 agent 有產出結果，就代表任務完成了。", "ok": false, "why": "『產出』不等於『做對做完』；agent 傾向交出看似完成的東西，沒有驗證你不知道它對不對。" },
+      { "t": "給一個可自動判斷的成功條件，每輪用驗證器（測試／規則／評審）檢查，沒過就把錯誤餵回去針對性重試。", "ok": true, "why": "這是可靠迴圈的核心：可驗證目標＋自我檢查＋失敗修正，讓它真的跑到完成。" },
+      { "t": "叫它「請仔細檢查有沒有錯」就夠了，它會自己保證正確。", "ok": false, "why": "光叫它自評不可靠（它常對自己手軟）；要客觀、可自動判斷的檢查，主觀的還得人工抽查。" }
+    ]
+  },
+  "loop-control": {
+    "en": [
+      { "t": "Give it a clear enough goal and the agent will judge when it's done and wrap up on its own.", "why": "An agent is an LLM running in a loop; it doesn't know when \"enough\" is. Without explicit stop rules and limits it circles or burns through the budget." },
+      { "t": "Set hard limits (steps/time/spend) + a checkable done condition + anti-looping detection, and gate risky actions behind human confirmation.", "why": "That's loop engineering: making stop rules and an off-switch first-class so the loop runs reliably to completion." },
+      { "t": "If the loop won't stop, the model just isn't smart enough, use a stronger model and it'll stop by itself.", "why": "It has nothing to do with how smart the model is; the loop is undesigned. Even the strongest model with no stop rules will circle and burn money." }
+    ],
+    "ja": [
+      { "t": "十分に明確な目標を与えれば、agent は完了を自分で判断してまとめてくれる。", "why": "agent はループで動く LLM で、いつ「十分」かを知らない。明確な停止規則と上限がなければ堂々巡りするか予算を燃やす。" },
+      { "t": "ハード上限（ステップ／時間／費用）＋検証可能な完了条件＋ループ防止検知を設け、高リスク操作は人の確認を挟む。", "why": "これが loop engineering：停止規則と off-switch を第一級にし、ループが確実に完了まで走るようにする。" },
+      { "t": "ループが止まらないのはモデルが賢くないから。強いモデルにすれば自分で止まる。", "why": "モデルの賢さとは無関係で、ループが未設計なだけ。停止規則がなければどんな強力なモデルでも堂々巡りしコストを燃やす。" }
+    ],
+    "zh": [
+      { "t": "給一個夠清楚的目標，agent 就會自己判斷何時完成、自動收尾。", "ok": false, "why": "agent 是跑在迴圈裡的 LLM，不會自己知道『夠了』；沒有明確停止規則與上限，它會繞圈或燒光預算。" },
+      { "t": "設硬上限（步數／時間／花費）＋可檢查的完成條件＋防繞圈偵測，高風險動作再加人類確認。", "ok": true, "why": "這正是 loop engineering：把停止規則與 off-switch 當第一等設計，讓迴圈可靠地跑到完成。" },
+      { "t": "迴圈跑不停就是模型不夠聰明，換更強的模型就會自己停。", "ok": false, "why": "跟模型聰不聰明無關，是迴圈沒設計；再強的模型沒有停止規則一樣會繞圈燒錢。" }
+    ]
+  },
   "vector-search": {
     "en": [
       { "t": "It works like Ctrl+F, matching identical words in the documents by keyword.", "why": "That's old keyword search; modern RAG retrieval compares semantic closeness, so it finds matches even when the words differ." },

@@ -38,6 +38,62 @@ const CAT_TR = {
 };
 
 export const INTERVIEWS = {
+  "self-verify": {
+    cat: "agent",
+    label: "怎麼讓 agent 自己檢查、跑到完成？",
+    q: "我希望 agent 不用我盯著就能把事情做對、做完。但它常做一半、或交出看似完成其實有錯的結果。怎麼讓它自我檢查、修正到真的完成？",
+    trap: "別把「產出東西」當成「做完」。agent 沒有內建的「對不對」判斷；沒有明確的成功條件與自我檢查，它會停在「看起來完成」，而不是「真的完成」。可靠的迴圈＝每一圈都驗證、失敗就修。",
+    points: [
+      { icon: "atom", title: "問題出在哪", desc: "agent 一輪輪跑，但它<b>不會自動知道結果對不對</b>——LLM 傾向「產出得像完成」。要它「跑到完成」，關鍵是給迴圈一個<b>可檢查的成功條件＋自我驗證那一步</b>，否則它只是把不確定的東西交出來。" },
+      { icon: "scale", title: "自我檢查怎麼做", desc: "① <b>可驗證的目標</b>：把「完成」寫成能自動判斷的條件（測試通過、格式符合、數字對得上），而不是「你覺得好了嗎」；② <b>驗證器（verifier）</b>：每輪產出後跑一次檢查（跑測試、套規則、或另一個模型當評審）；③ <b>失敗就修</b>：沒過就把錯誤訊息餵回去，讓它針對問題重試，而不是重頭亂猜。" },
+      { icon: "network", title: "什麼能驗、什麼不能", desc: "能自動驗的（程式跑不跑、JSON 合不合規、數字對不對）最適合放進迴圈自動判；主觀的（文案好不好）驗不準，該留<b>人工抽查</b>。別假裝所有東西都能自動判對。" },
+    ],
+    core: [
+      { h: "先點根本", d: "<b>「產出」不等於「做完」</b>。agent 不會自動知道對不對；可靠的迴圈要有<b>可檢查的成功條件＋每輪自我驗證</b>。" },
+      { h: "自我檢查三步", d: "可驗證的目標 → 每輪跑<b>驗證器</b>（測試／規則／評審）→ 失敗把錯誤餵回去、<b>針對性重試</b>。" },
+      { h: "什麼能驗", d: "客觀、可自動判斷的（測試、格式、數字）最適合自動迴圈；主觀品質驗不準，留人工抽查。" },
+      { h: "別忘了", d: "驗證器本身也會錯（用模型當評審有偏誤）；要配上一題的<b>停止規則</b>，避免「一直修卻永遠修不好」的無限重試。" },
+    ],
+    plus: [
+      "「產生 → 批評 → 修正」（generate → critique → revise）是最常見的自我修正迴圈。",
+      "讓它先寫出「怎樣算成功」的檢查清單，再自己逐項核對，比空泛地「檢查一下」有效得多。",
+      "能寫成測試的任務（程式、資料轉換）最適合全自動迴圈，因為對錯是機器判的、不靠感覺。",
+    ],
+    traps: [
+      "把「它產出了結果」當成「任務完成」，完全不做驗證。",
+      "只讓它自評「我覺得可以」，沒有客觀、可自動判斷的成功條件。",
+      "失敗就無限重試，沒有配上限（會把預算燒光）。",
+    ],
+    related: ["agent", "evaluation", "integration"],
+  },
+  "loop-control": {
+    cat: "agent",
+    label: "怎麼讓 agent 迴圈不失控？",
+    q: "agent 會自己一步步跑（想→做→看→再想）。怎麼確保它不會鬼打牆、無限跑下去、或把預算燒光？",
+    trap: "別以為「給個好目標，它就會自己收尾」。agent 是跑在迴圈裡的 LLM，沒有明確的停止規則與上限，它會繞圈、重複、或一路燒到錢包見底。設計那個迴圈，就叫 loop engineering。",
+    points: [
+      { icon: "atom", title: "問題出在哪", desc: "agent 本質是「<b>LLM ＋工具，跑在一個迴圈裡</b>」：想→做→看→再想。它不會自己知道何時「夠了」，<b>停止與邊界得由你設計</b>。當模型會跑迴圈後，瓶頸從「提示寫得好不好」變成「<b>迴圈可不可靠</b>」——這一層就叫 loop engineering。" },
+      { icon: "scale", title: "三道防線", desc: "① <b>硬上限</b>：最大步數、逾時、token／花費預算，到頂就停；② <b>可檢查的完成條件</b>：把「什麼叫完成」寫成程式能判斷的條件，而不是靠模型自我感覺；③ <b>防繞圈</b>：偵測到重複動作或「沒有進展」就中斷或換策略。" },
+      { icon: "network", title: "別無人看管就上線", desc: "高風險動作（付款、刪除、寄信）設<b>人類確認關卡</b>；每一步都<b>留紀錄</b>好回溯；先在<b>沙箱／限額</b>下跑，穩了再逐步放寬。" },
+    ],
+    core: [
+      { h: "先點根本", d: "agent＝跑在迴圈裡的 LLM；<b>沒有停止規則與上限，它會繞圈、重複、燒預算</b>。設計迴圈本身（loop engineering）比只寫提示更關鍵。" },
+      { h: "三道防線", d: "<b>硬上限</b>（步數／逾時／花費）＋<b>可檢查的完成條件</b>＋<b>防繞圈</b>（偵測重複或無進展）。" },
+      { h: "高風險要人把關", d: "付款、刪除這類不可逆動作加<b>人類確認</b>；每步留紀錄，出事能回溯是哪一步。" },
+      { h: "別忘了", d: "先小額／沙箱試跑再放大；<b>「off-switch」和「怎麼算完成」要當第一等設計</b>，不是事後才補。" },
+    ],
+    plus: [
+      "「無進展偵測」很實用：連續幾步結果沒變、或在原地打轉，就強制停。",
+      "預算上限要設在「金額」，不能只限步數——單一步（例如一次長生成或昂貴工具）也可能很貴。",
+      "讓 agent 每輪回報「還差什麼、要不要繼續」，你更容易判斷何時該收手。",
+    ],
+    traps: [
+      "只給目標、不設任何上限，期待它自己收尾。",
+      "只限步數、不限花費（一步就可能燒很多錢）。",
+      "把付款、刪除這類高風險動作直接讓它自動執行，沒有人類確認。",
+    ],
+    related: ["agent", "integration", "mcp"],
+  },
   "sycophancy": {
     cat: "prompting",
     label: "AI 為什麼老是附和我？",
@@ -2107,6 +2163,58 @@ export const INTERVIEWS = {
 // 各語言的內容翻譯（欄位與 base 對齊；points 只翻 title/desc，icon 沿用 base）
 const INT_TR = {
   en: {
+    "self-verify": {
+      label: "How do you get an agent to check itself and run to completion?",
+      q: "I want the agent to get things right and finished without me watching. But it often stops halfway, or hands over something that looks done but is wrong. How do I make it self-check and fix until it's truly done?",
+      trap: "Don't mistake \"produced something\" for \"done.\" An agent has no built-in sense of \"right or wrong\"; without a clear success condition and a self-check, it stops at \"looks finished\" rather than \"is finished.\" A reliable loop verifies every round and fixes on failure.",
+      points: [
+        { title: "Where it goes wrong", desc: "An agent runs round after round, but it <b>doesn't automatically know whether the result is correct</b>, an LLM tends to \"produce something that looks done.\" To make it run to completion, the key is giving the loop a <b>checkable success condition plus a self-verification step</b>; otherwise it just hands over something uncertain." },
+        { title: "How self-checking works", desc: "① <b>A verifiable goal</b>: express \"done\" as something judged automatically (tests pass, format matches, numbers reconcile), not \"does this look good?\"; ② <b>a verifier</b>: after each round, run a check (run tests, apply rules, or another model as judge); ③ <b>fix on failure</b>: feed the error back so it retries against the specific problem, instead of guessing from scratch." },
+        { title: "What can and can't be verified", desc: "Things checkable automatically (does the code run, is the JSON valid, do the numbers add up) are ideal to judge inside the loop; subjective things (is the copy good) can't be verified reliably and should keep a <b>human spot-check</b>. Don't pretend everything can be auto-judged." },
+      ],
+      core: [
+        { h: "Start with the fundamentals", d: "<b>\"Producing\" isn't \"finishing.\"</b> An agent doesn't automatically know if it's right; a reliable loop needs a <b>checkable success condition plus a self-check each round</b>." },
+        { h: "Self-check in three steps", d: "A verifiable goal → run a <b>verifier</b> each round (tests/rules/judge) → feed the error back and <b>retry against it</b>." },
+        { h: "What's verifiable", d: "Objective, auto-judgeable things (tests, format, numbers) suit an automatic loop; subjective quality can't be verified well, keep a human spot-check." },
+        { h: "Don't forget", d: "The verifier itself can be wrong (a model-as-judge has biases); pair it with the <b>stop rules</b> from the previous question to avoid \"fixing forever without ever fixing it.\"" },
+      ],
+      plus: [
+        "\"Generate → critique → revise\" is the most common self-correction loop.",
+        "Have it first write the \"what counts as success\" checklist, then verify item by item, far better than a vague \"check it.\"",
+        "Tasks you can write tests for (code, data transforms) suit a fully automatic loop, because right/wrong is machine-judged, not a gut feel.",
+      ],
+      traps: [
+        "Treating \"it produced a result\" as \"the task is done,\" with no verification at all.",
+        "Only letting it self-assess \"I think it's fine,\" with no objective, auto-judgeable success condition.",
+        "Retrying forever on failure with no cap (it burns the budget).",
+      ],
+    },
+    "loop-control": {
+      label: "How do you keep an agent loop from running out of control?",
+      q: "An agent runs itself step by step (think → act → observe → think again). How do you keep it from going in circles, running forever, or burning through your budget?",
+      trap: "Don't assume \"give it a good goal and it'll wrap up on its own.\" An agent is an LLM running in a loop; with no clear stop rules or limits, it circles, repeats, or burns money until the wallet is empty. Designing that loop is what \"loop engineering\" means.",
+      points: [
+        { title: "Where it goes wrong", desc: "An agent is essentially \"<b>an LLM plus tools, running in a loop</b>\": think → act → observe → think again. It doesn't know on its own when \"enough is enough\", <b>the stops and boundaries are yours to design</b>. Once models run in loops, the bottleneck shifts from \"how well you phrased the prompt\" to \"<b>how reliable the loop is</b>\", that layer is loop engineering." },
+        { title: "Three lines of defense", desc: "① <b>Hard limits</b>: max steps, timeouts, and a token/cost budget that stop it when hit; ② <b>a checkable done condition</b>: express \"what counts as finished\" as something code can verify, not the model's gut feel; ③ <b>anti-looping</b>: detect repeated actions or \"no progress\" and break or switch strategy." },
+        { title: "Don't ship it unsupervised", desc: "Put a <b>human-confirmation gate</b> on risky actions (payments, deletes, sending mail); <b>log every step</b> so you can trace it; run it in a <b>sandbox / under a spending cap</b> first, and loosen up only once it's proven." },
+      ],
+      core: [
+        { h: "Start with the fundamentals", d: "An agent = an LLM running in a loop; <b>with no stop rules or limits it circles, repeats, and burns budget</b>. Designing the loop itself (loop engineering) matters more than just writing the prompt." },
+        { h: "Three lines of defense", d: "<b>Hard limits</b> (steps/timeout/cost) + a <b>checkable done condition</b> + <b>anti-looping</b> (detect repeats or no progress)." },
+        { h: "Gate the risky stuff", d: "Add <b>human confirmation</b> for irreversible actions like payments and deletes; log each step so you can trace which one went wrong." },
+        { h: "Don't forget", d: "Test small / in a sandbox before scaling up; treat the <b>off-switch and \"what counts as done\" as first-class design</b>, not afterthoughts." },
+      ],
+      plus: [
+        "\"No-progress detection\" is handy: if several steps in a row produce no change or spin in place, force a stop.",
+        "Set the budget cap in money, not just steps, a single step (a long generation or an expensive tool call) can be costly.",
+        "Have the agent report each round \"what's still missing, should I continue?\", it makes it far easier to judge when to stop.",
+      ],
+      traps: [
+        "Giving it a goal with no limits at all and expecting it to wrap up by itself.",
+        "Capping steps but not spend (one step can cost a lot).",
+        "Letting it auto-execute risky actions (payments, deletes) with no human confirmation.",
+      ],
+    },
     "sycophancy": {
       label: "Why does AI keep agreeing with me?",
       q: "I share an idea and AI often says \"great!\" and goes along with me. Does that mean my idea is actually good?",
@@ -3689,6 +3797,58 @@ const INT_TR = {
     },
   },
   ja: {
+    "self-verify": {
+      label: "agent に自分でチェックさせ、完了まで走らせるには？",
+      q: "見張らなくても agent に正しく・最後までやってほしい。でも途中で止まったり、完成に見えて実は誤った結果を出したりする。どうすれば自己チェックして、本当に完了するまで直させられる？",
+      trap: "「何か出した」を「完了」と取り違えないこと。agent に「正誤」の内蔵判断はなく、明確な成功条件と自己チェックがなければ「完成に見える」で止まり、「完成した」には至らない。信頼できるループは毎周検証し、失敗したら直す。",
+      points: [
+        { title: "どこで狂うか", desc: "agent は周回を重ねるが、<b>結果が正しいか自動では分からない</b>——LLM は「完成に見えるもの」を出しがち。完了まで走らせる鍵は、ループに<b>検証可能な成功条件＋自己検証のステップ</b>を与えること。でなければ不確かなものを渡すだけ。" },
+        { title: "自己チェックの作り方", desc: "① <b>検証可能な目標</b>：「完了」を自動判定できる形に（テスト通過、形式一致、数字が合う）、「良さそう？」ではなく；② <b>検証器（verifier）</b>：毎周の出力後にチェックを走らせる（テスト実行、ルール適用、別モデルを judge に）；③ <b>失敗したら直す</b>：エラーを戻し、その問題に対して再試行させる。ゼロから当てずっぽうにさせない。" },
+        { title: "検証できるもの・できないもの", desc: "自動検証できるもの（コードが動くか、JSON が妥当か、数字が合うか）はループ内で自動判定に最適；主観的なもの（文章の良し悪し）は確実に検証できず、<b>人手の抜き取り</b>を残すべき。何でも自動判定できるふりをしない。" },
+      ],
+      core: [
+        { h: "まず根本", d: "<b>「出す」は「終える」ではない</b>。agent は正誤を自動では知らない；信頼できるループには<b>検証可能な成功条件＋毎周の自己チェック</b>が要る。" },
+        { h: "自己チェック三段", d: "検証可能な目標 → 毎周<b>検証器</b>を走らせる（テスト／ルール／judge）→ エラーを戻して<b>それに対し再試行</b>。" },
+        { h: "検証できるもの", d: "客観的で自動判定できるもの（テスト、形式、数字）が自動ループに最適；主観的な品質は検証しづらく、人手の抜き取りを残す。" },
+        { h: "忘れずに", d: "検証器自身も誤る（モデルを judge にすると偏る）；前問の<b>停止規則</b>と組み合わせ、「直し続けても直らない」無限再試行を避ける。" },
+      ],
+      plus: [
+        "「生成 → 批評 → 修正」（generate → critique → revise）が最も一般的な自己修正ループ。",
+        "まず「何をもって成功か」のチェックリストを書かせ、項目ごとに照合させると、漠然と「確認して」より遥かに効く。",
+        "テストを書けるタスク（コード、データ変換）は完全自動ループに最適。正誤を機械が判定し、感覚に頼らないから。",
+      ],
+      traps: [
+        "「結果を出した」を「タスク完了」と見なし、検証をまったくしない。",
+        "「良いと思う」と自己評価させるだけで、客観的・自動判定できる成功条件がない。",
+        "失敗したら無限に再試行し、上限を設けない（予算を燃やす）。",
+      ],
+    },
+    "loop-control": {
+      label: "agent のループを暴走させないには？",
+      q: "agent は自分で一歩ずつ進む（考える→動く→観察→また考える）。堂々巡り・無限ループ・予算の使い果たしを、どう防ぐ？",
+      trap: "「良い目標を与えれば自分でまとめてくれる」と思わないこと。agent はループの中で動く LLM で、明確な停止規則と上限がなければ、堂々巡り・繰り返し・財布が空になるまでコストを燃やす。そのループを設計することを「loop engineering」と呼ぶ。",
+      points: [
+        { title: "どこで狂うか", desc: "agent は本質的に「<b>LLM ＋ツールがループで動く</b>」もの：考える→動く→観察→また考える。いつ「十分」かを自分では知らず、<b>停止と境界はあなたが設計</b>する。モデルがループで動き出すと、ボトルネックは「プロンプトの巧拙」から「<b>ループの信頼性</b>」へ移る——その層が loop engineering。" },
+        { title: "三つの防衛線", desc: "① <b>ハード上限</b>：最大ステップ数、タイムアウト、token／コスト予算。到達したら停止；② <b>検証可能な完了条件</b>：「完了」をモデルの主観でなくコードで判定できる形にする；③ <b>ループ防止</b>：同じ動作の繰り返しや「進展なし」を検知したら中断か戦略変更。" },
+        { title: "無人で公開しない", desc: "高リスクな操作（支払い、削除、送信）には<b>人による確認ゲート</b>；各ステップを<b>記録</b>して追跡可能に；まず<b>サンドボックス／上限つき</b>で走らせ、実証できてから緩める。" },
+      ],
+      core: [
+        { h: "まず根本", d: "agent＝ループで動く LLM。<b>停止規則と上限がなければ、堂々巡り・繰り返し・予算を燃やす</b>。ループ自体の設計（loop engineering）が、プロンプトを書くこと以上に重要。" },
+        { h: "三つの防衛線", d: "<b>ハード上限</b>（ステップ／タイムアウト／コスト）＋<b>検証可能な完了条件</b>＋<b>ループ防止</b>（繰り返し・進展なしの検知）。" },
+        { h: "高リスクは人が関門", d: "支払いや削除など不可逆な操作には<b>人による確認</b>を。各ステップを記録し、どこで狂ったか追える。" },
+        { h: "忘れずに", d: "まず少額／サンドボックスで試してから拡大；<b>off-switch と「何をもって完了か」を第一級の設計</b>に、後付けにしない。" },
+      ],
+      plus: [
+        "「進展なし検知」は実用的：数ステップ連続で結果が変わらない・堂々巡りなら強制停止。",
+        "予算上限はステップ数だけでなく「金額」で。単一ステップ（長い生成や高価なツール呼び出し）も高くつく。",
+        "毎ラウンド「何が足りない、続けるか」を agent に報告させると、いつ止めるか判断しやすい。",
+      ],
+      traps: [
+        "上限をまったく設けず、目標だけ与えて自分でまとめると期待する。",
+        "ステップ数は制限するのに費用は制限しない（一歩で大きく燃えることも）。",
+        "支払い・削除など高リスク操作を、人の確認なしで自動実行させる。",
+      ],
+    },
     "sycophancy": {
       label: "AI はなぜいつも同調するの？",
       q: "アイデアを出すと AI はよく「素晴らしい！」と同調します。私の考えは本当に良いということ？",
@@ -5285,7 +5445,7 @@ export const IV_ORDER = [
   // 檢索（RAG）
   "vector-search", "rag-documents", "chunking", "rag-retrieval", "rag-why-wrong", "rag-vs-longcontext",
   // Agent arc：概念→規劃→工具→JSON→記憶→量化→成本
-  "agent-vs-workflow", "agent-planning", "agent-tools", "json-output", "agent-memory", "agent-eval", "agent-cost",
+  "agent-vs-workflow", "agent-planning", "loop-control", "self-verify", "agent-tools", "json-output", "agent-memory", "agent-eval", "agent-cost",
   // 生成／多模態：先生圖（擴散）成一組，再進多模態
   "diffusion-how", "diffusion-not-collage", "genimg-errors", "diffusion-vs-gan", "multimodal-key", "vlm-see",
   // 素養／風險：可靠性 → 安全 → 能力邊界

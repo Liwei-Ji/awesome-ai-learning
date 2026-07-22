@@ -213,7 +213,7 @@ export const PATHS = [
       { t: { zh: '記憶與整合', en: 'Memory and integration', ja: '記憶と統合' },
         steps: [{ k: 'course', ref: 'integration' }, { k: 'iv', ref: 'agent-memory' }, { k: 'iv', ref: 'realtime-assistant' }] },
       { t: { zh: '量化與成本', en: 'Metrics and cost', ja: '評価とコスト' },
-        steps: [{ k: 'iv', ref: 'agent-eval' }, { k: 'iv', ref: 'agent-cost' }] },
+        steps: [{ k: 'iv', ref: 'loop-control' }, { k: 'iv', ref: 'self-verify' }, { k: 'iv', ref: 'agent-eval' }, { k: 'iv', ref: 'agent-cost' }] },
     ],
   },
   {
