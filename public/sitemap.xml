@@ -2,6 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://awesome-ai-learning.vercel.app/</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja" />
@@ -10,6 +11,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja" />
@@ -18,6 +20,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja" />
@@ -26,6 +29,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/course/history</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/history" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/history" />
@@ -34,6 +38,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/course/history</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/history" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/history" />
@@ -42,6 +47,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/course/history</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/history" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/history" />
@@ -50,6 +56,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/course/ai-intro</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/ai-intro" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/ai-intro" />
@@ -58,6 +65,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/course/ai-intro</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/ai-intro" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/ai-intro" />
@@ -66,6 +74,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/course/ai-intro</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/ai-intro" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/ai-intro" />
@@ -74,6 +83,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/course/ml</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/ml" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/ml" />
@@ -82,6 +92,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/course/ml</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/ml" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/ml" />
@@ -90,6 +101,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/course/ml</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/ml" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/ml" />
@@ -98,6 +110,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/course/data</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/data" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/data" />
@@ -106,6 +119,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/course/data</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/data" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/data" />
@@ -114,6 +128,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/course/data</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/data" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/data" />
@@ -122,6 +137,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/course/deep-learning</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/deep-learning" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/deep-learning" />
@@ -130,6 +146,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/course/deep-learning</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/deep-learning" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/deep-learning" />
@@ -138,6 +155,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/course/deep-learning</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/deep-learning" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/deep-learning" />
@@ -146,6 +164,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/course/neural-network</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/neural-network" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/neural-network" />
@@ -154,6 +173,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/course/neural-network</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/neural-network" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/neural-network" />
@@ -162,6 +182,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/course/neural-network</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/neural-network" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/neural-network" />
@@ -170,6 +191,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/course/training</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/training" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/training" />
@@ -178,6 +200,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/course/training</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/training" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/training" />
@@ -186,6 +209,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/course/training</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/training" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/training" />
@@ -194,6 +218,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/course/backprop</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/backprop" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/backprop" />
@@ -202,6 +227,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/course/backprop</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/backprop" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/backprop" />
@@ -210,6 +236,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/course/backprop</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/backprop" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/backprop" />
@@ -218,6 +245,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/course/cnn</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/cnn" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/cnn" />
@@ -226,6 +254,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/course/cnn</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/cnn" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/cnn" />
@@ -234,6 +263,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/course/cnn</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/cnn" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/cnn" />
@@ -242,6 +272,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/course/tokenizer</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/tokenizer" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/tokenizer" />
@@ -250,6 +281,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/course/tokenizer</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/tokenizer" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/tokenizer" />
@@ -258,6 +290,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/course/tokenizer</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/tokenizer" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/tokenizer" />
@@ -266,6 +299,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/course/embedding</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/embedding" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/embedding" />
@@ -274,6 +308,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/course/embedding</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/embedding" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/embedding" />
@@ -282,6 +317,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/course/embedding</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/embedding" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/embedding" />
@@ -290,6 +326,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/course/rnn</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/rnn" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/rnn" />
@@ -298,6 +335,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/course/rnn</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/rnn" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/rnn" />
@@ -306,6 +344,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/course/rnn</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/rnn" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/rnn" />
@@ -314,6 +353,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/course/transformer</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/transformer" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/transformer" />
@@ -322,6 +362,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/course/transformer</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/transformer" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/transformer" />
@@ -330,6 +371,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/course/transformer</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/transformer" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/transformer" />
@@ -338,6 +380,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/course/llm</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/llm" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/llm" />
@@ -346,6 +389,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/course/llm</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/llm" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/llm" />
@@ -354,6 +398,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/course/llm</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/llm" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/llm" />
@@ -362,6 +407,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/course/model-size</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/model-size" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/model-size" />
@@ -370,6 +416,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/course/model-size</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/model-size" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/model-size" />
@@ -378,6 +425,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/course/model-size</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/model-size" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/model-size" />
@@ -386,6 +434,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/course/model-knowledge</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/model-knowledge" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/model-knowledge" />
@@ -394,6 +443,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/course/model-knowledge</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/model-knowledge" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/model-knowledge" />
@@ -402,6 +452,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/course/model-knowledge</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/model-knowledge" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/model-knowledge" />
@@ -410,6 +461,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/course/context-window</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/context-window" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/context-window" />
@@ -418,6 +470,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/course/context-window</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/context-window" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/context-window" />
@@ -426,6 +479,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/course/context-window</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/context-window" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/context-window" />
@@ -434,6 +488,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/course/inference</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/inference" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/inference" />
@@ -442,6 +497,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/course/inference</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/inference" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/inference" />
@@ -450,6 +506,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/course/inference</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/inference" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/inference" />
@@ -458,6 +515,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/course/pretraining</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/pretraining" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/pretraining" />
@@ -466,6 +524,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/course/pretraining</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/pretraining" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/pretraining" />
@@ -474,6 +533,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/course/pretraining</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/pretraining" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/pretraining" />
@@ -482,6 +542,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/course/fine-tuning</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/fine-tuning" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/fine-tuning" />
@@ -490,6 +551,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/course/fine-tuning</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/fine-tuning" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/fine-tuning" />
@@ -498,6 +560,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/course/fine-tuning</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/fine-tuning" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/fine-tuning" />
@@ -506,6 +569,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/course/reasoning</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/reasoning" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/reasoning" />
@@ -514,6 +578,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/course/reasoning</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/reasoning" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/reasoning" />
@@ -522,6 +587,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/course/reasoning</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/reasoning" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/reasoning" />
@@ -530,6 +596,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/course/prompt</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/prompt" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/prompt" />
@@ -538,6 +605,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/course/prompt</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/prompt" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/prompt" />
@@ -546,6 +614,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/course/prompt</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/prompt" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/prompt" />
@@ -554,6 +623,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/course/system-prompt</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/system-prompt" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/system-prompt" />
@@ -562,6 +632,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/course/system-prompt</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/system-prompt" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/system-prompt" />
@@ -570,6 +641,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/course/system-prompt</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/system-prompt" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/system-prompt" />
@@ -578,6 +650,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/course/thought-partner</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/thought-partner" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/thought-partner" />
@@ -586,6 +659,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/course/thought-partner</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/thought-partner" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/thought-partner" />
@@ -594,6 +668,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/course/thought-partner</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/thought-partner" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/thought-partner" />
@@ -602,6 +677,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/course/find-info</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/find-info" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/find-info" />
@@ -610,6 +686,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/course/find-info</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/find-info" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/find-info" />
@@ -618,6 +695,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/course/find-info</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/find-info" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/find-info" />
@@ -626,6 +704,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/course/generative</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/generative" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/generative" />
@@ -634,6 +713,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/course/generative</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/generative" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/generative" />
@@ -642,6 +722,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/course/generative</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/generative" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/generative" />
@@ -650,6 +731,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/course/multimodal</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/multimodal" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/multimodal" />
@@ -658,6 +740,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/course/multimodal</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/multimodal" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/multimodal" />
@@ -666,6 +749,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/course/multimodal</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/multimodal" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/multimodal" />
@@ -674,6 +758,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/course/rag</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/rag" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/rag" />
@@ -682,6 +767,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/course/rag</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/rag" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/rag" />
@@ -690,6 +776,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/course/rag</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/rag" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/rag" />
@@ -698,6 +785,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/course/memory</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/memory" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/memory" />
@@ -706,6 +794,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/course/memory</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/memory" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/memory" />
@@ -714,6 +803,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/course/memory</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/memory" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/memory" />
@@ -722,6 +812,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/course/mcp</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/mcp" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/mcp" />
@@ -730,6 +821,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/course/mcp</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/mcp" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/mcp" />
@@ -738,6 +830,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/course/mcp</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/mcp" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/mcp" />
@@ -746,6 +839,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/course/agent</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/agent" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/agent" />
@@ -754,6 +848,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/course/agent</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/agent" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/agent" />
@@ -762,6 +857,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/course/agent</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/agent" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/agent" />
@@ -770,6 +866,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/course/no-code</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/no-code" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/no-code" />
@@ -778,6 +875,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/course/no-code</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/no-code" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/no-code" />
@@ -786,6 +884,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/course/no-code</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/no-code" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/no-code" />
@@ -794,6 +893,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/course/integration</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/integration" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/integration" />
@@ -802,6 +902,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/course/integration</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/integration" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/integration" />
@@ -810,6 +911,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/course/integration</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/integration" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/integration" />
@@ -818,6 +920,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/course/limits</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/limits" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/limits" />
@@ -826,6 +929,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/course/limits</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/limits" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/limits" />
@@ -834,6 +938,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/course/limits</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/limits" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/limits" />
@@ -842,6 +947,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/course/evaluation</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/evaluation" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/evaluation" />
@@ -850,6 +956,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/course/evaluation</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/evaluation" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/evaluation" />
@@ -858,6 +965,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/course/evaluation</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/evaluation" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/evaluation" />
@@ -866,6 +974,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/course/capstone</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/capstone" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/capstone" />
@@ -874,6 +983,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/course/capstone</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/capstone" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/capstone" />
@@ -882,6 +992,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/course/capstone</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/course/capstone" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/course/capstone" />
@@ -890,6 +1001,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge" />
@@ -898,6 +1010,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge" />
@@ -906,6 +1019,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge" />
@@ -914,6 +1028,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/tokenizer-why</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/tokenizer-why" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/tokenizer-why" />
@@ -922,6 +1037,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/tokenizer-why</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/tokenizer-why" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/tokenizer-why" />
@@ -930,6 +1046,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/tokenizer-why</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/tokenizer-why" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/tokenizer-why" />
@@ -938,6 +1055,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/embedding-meaning</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/embedding-meaning" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/embedding-meaning" />
@@ -946,6 +1064,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/embedding-meaning</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/embedding-meaning" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/embedding-meaning" />
@@ -954,6 +1073,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/embedding-meaning</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/embedding-meaning" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/embedding-meaning" />
@@ -962,6 +1082,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/attention-compute</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/attention-compute" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/attention-compute" />
@@ -970,6 +1091,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/attention-compute</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/attention-compute" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/attention-compute" />
@@ -978,6 +1100,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/attention-compute</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/attention-compute" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/attention-compute" />
@@ -986,6 +1109,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/multi-head</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/multi-head" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/multi-head" />
@@ -994,6 +1118,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/multi-head</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/multi-head" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/multi-head" />
@@ -1002,6 +1127,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/multi-head</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/multi-head" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/multi-head" />
@@ -1010,6 +1136,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/positional-encoding</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/positional-encoding" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/positional-encoding" />
@@ -1018,6 +1145,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/positional-encoding</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/positional-encoding" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/positional-encoding" />
@@ -1026,6 +1154,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/positional-encoding</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/positional-encoding" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/positional-encoding" />
@@ -1034,6 +1163,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/transformer-vs-rnn</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/transformer-vs-rnn" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/transformer-vs-rnn" />
@@ -1042,6 +1172,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/transformer-vs-rnn</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/transformer-vs-rnn" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/transformer-vs-rnn" />
@@ -1050,6 +1181,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/transformer-vs-rnn</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/transformer-vs-rnn" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/transformer-vs-rnn" />
@@ -1058,6 +1190,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/what-model-stores</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/what-model-stores" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/what-model-stores" />
@@ -1066,6 +1199,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/what-model-stores</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/what-model-stores" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/what-model-stores" />
@@ -1074,6 +1208,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/what-model-stores</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/what-model-stores" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/what-model-stores" />
@@ -1082,6 +1217,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/emergence</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/emergence" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/emergence" />
@@ -1090,6 +1226,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/emergence</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/emergence" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/emergence" />
@@ -1098,6 +1235,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/emergence</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/emergence" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/emergence" />
@@ -1106,6 +1244,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/rlhf-why</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/rlhf-why" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/rlhf-why" />
@@ -1114,6 +1253,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/rlhf-why</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/rlhf-why" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/rlhf-why" />
@@ -1122,6 +1262,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/rlhf-why</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/rlhf-why" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/rlhf-why" />
@@ -1130,6 +1271,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/dpo-pipeline</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/dpo-pipeline" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/dpo-pipeline" />
@@ -1138,6 +1280,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/dpo-pipeline</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/dpo-pipeline" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/dpo-pipeline" />
@@ -1146,6 +1289,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/dpo-pipeline</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/dpo-pipeline" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/dpo-pipeline" />
@@ -1154,6 +1298,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/finetune-vs-rag</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/finetune-vs-rag" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/finetune-vs-rag" />
@@ -1162,6 +1307,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/finetune-vs-rag</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/finetune-vs-rag" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/finetune-vs-rag" />
@@ -1170,6 +1316,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/finetune-vs-rag</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/finetune-vs-rag" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/finetune-vs-rag" />
@@ -1178,6 +1325,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/lora</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/lora" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/lora" />
@@ -1186,6 +1334,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/lora</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/lora" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/lora" />
@@ -1194,6 +1343,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/lora</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/lora" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/lora" />
@@ -1202,6 +1352,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/catastrophic-forgetting</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/catastrophic-forgetting" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/catastrophic-forgetting" />
@@ -1210,6 +1361,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/catastrophic-forgetting</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/catastrophic-forgetting" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/catastrophic-forgetting" />
@@ -1218,6 +1370,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/catastrophic-forgetting</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/catastrophic-forgetting" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/catastrophic-forgetting" />
@@ -1226,6 +1379,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/data-quality</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/data-quality" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/data-quality" />
@@ -1234,6 +1388,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/data-quality</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/data-quality" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/data-quality" />
@@ -1242,6 +1397,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/data-quality</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/data-quality" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/data-quality" />
@@ -1250,6 +1406,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/why-not-pretrain</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/why-not-pretrain" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/why-not-pretrain" />
@@ -1258,6 +1415,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/why-not-pretrain</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/why-not-pretrain" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/why-not-pretrain" />
@@ -1266,6 +1424,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/why-not-pretrain</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/why-not-pretrain" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/why-not-pretrain" />
@@ -1274,6 +1433,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/scaling-law</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/scaling-law" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/scaling-law" />
@@ -1282,6 +1442,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/scaling-law</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/scaling-law" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/scaling-law" />
@@ -1290,6 +1451,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/scaling-law</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/scaling-law" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/scaling-law" />
@@ -1298,6 +1460,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/train-vs-infer</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/train-vs-infer" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/train-vs-infer" />
@@ -1306,6 +1469,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/train-vs-infer</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/train-vs-infer" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/train-vs-infer" />
@@ -1314,6 +1478,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/train-vs-infer</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/train-vs-infer" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/train-vs-infer" />
@@ -1322,6 +1487,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/context-window</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/context-window" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/context-window" />
@@ -1330,6 +1496,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/context-window</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/context-window" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/context-window" />
@@ -1338,6 +1505,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/context-window</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/context-window" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/context-window" />
@@ -1346,6 +1514,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/faster-inference</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/faster-inference" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/faster-inference" />
@@ -1354,6 +1523,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/faster-inference</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/faster-inference" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/faster-inference" />
@@ -1362,6 +1532,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/faster-inference</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/faster-inference" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/faster-inference" />
@@ -1370,6 +1541,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/quantization</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/quantization" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/quantization" />
@@ -1378,6 +1550,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/quantization</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/quantization" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/quantization" />
@@ -1386,6 +1559,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/quantization</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/quantization" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/quantization" />
@@ -1394,6 +1568,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/temperature</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/temperature" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/temperature" />
@@ -1402,6 +1577,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/temperature</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/temperature" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/temperature" />
@@ -1410,6 +1586,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/temperature</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/temperature" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/temperature" />
@@ -1418,6 +1595,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/prompt-craft</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/prompt-craft" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/prompt-craft" />
@@ -1426,6 +1604,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/prompt-craft</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/prompt-craft" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/prompt-craft" />
@@ -1434,6 +1613,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/prompt-craft</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/prompt-craft" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/prompt-craft" />
@@ -1442,6 +1622,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/few-shot</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/few-shot" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/few-shot" />
@@ -1450,6 +1631,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/few-shot</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/few-shot" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/few-shot" />
@@ -1458,6 +1640,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/few-shot</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/few-shot" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/few-shot" />
@@ -1466,6 +1649,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/sycophancy</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/sycophancy" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/sycophancy" />
@@ -1474,6 +1658,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/sycophancy</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/sycophancy" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/sycophancy" />
@@ -1482,6 +1667,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/sycophancy</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/sycophancy" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/sycophancy" />
@@ -1490,6 +1676,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/honest-feedback</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/honest-feedback" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/honest-feedback" />
@@ -1498,6 +1685,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/honest-feedback</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/honest-feedback" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/honest-feedback" />
@@ -1506,6 +1694,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/honest-feedback</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/honest-feedback" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/honest-feedback" />
@@ -1514,6 +1703,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/manage-context</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/manage-context" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/manage-context" />
@@ -1522,6 +1712,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/manage-context</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/manage-context" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/manage-context" />
@@ -1530,6 +1721,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/manage-context</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/manage-context" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/manage-context" />
@@ -1538,6 +1730,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/outline-workflow</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/outline-workflow" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/outline-workflow" />
@@ -1546,6 +1739,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/outline-workflow</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/outline-workflow" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/outline-workflow" />
@@ -1554,6 +1748,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/outline-workflow</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/outline-workflow" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/outline-workflow" />
@@ -1562,6 +1757,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/cot-prompting</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/cot-prompting" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/cot-prompting" />
@@ -1570,6 +1766,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/cot-prompting</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/cot-prompting" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/cot-prompting" />
@@ -1578,6 +1775,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/cot-prompting</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/cot-prompting" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/cot-prompting" />
@@ -1586,6 +1784,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/prompt-eval</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/prompt-eval" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/prompt-eval" />
@@ -1594,6 +1793,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/prompt-eval</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/prompt-eval" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/prompt-eval" />
@@ -1602,6 +1802,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/prompt-eval</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/prompt-eval" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/prompt-eval" />
@@ -1610,6 +1811,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/prompt-vs-tune-vs-rag</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/prompt-vs-tune-vs-rag" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/prompt-vs-tune-vs-rag" />
@@ -1618,6 +1820,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/prompt-vs-tune-vs-rag</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/prompt-vs-tune-vs-rag" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/prompt-vs-tune-vs-rag" />
@@ -1626,6 +1829,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/prompt-vs-tune-vs-rag</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/prompt-vs-tune-vs-rag" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/prompt-vs-tune-vs-rag" />
@@ -1634,6 +1838,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/reasoning-models</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/reasoning-models" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/reasoning-models" />
@@ -1642,6 +1847,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/reasoning-models</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/reasoning-models" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/reasoning-models" />
@@ -1650,6 +1856,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/reasoning-models</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/reasoning-models" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/reasoning-models" />
@@ -1658,6 +1865,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/test-time-compute</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/test-time-compute" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/test-time-compute" />
@@ -1666,6 +1874,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/test-time-compute</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/test-time-compute" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/test-time-compute" />
@@ -1674,6 +1883,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/test-time-compute</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/test-time-compute" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/test-time-compute" />
@@ -1682,6 +1892,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/cot-limits</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/cot-limits" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/cot-limits" />
@@ -1690,6 +1901,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/cot-limits</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/cot-limits" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/cot-limits" />
@@ -1698,6 +1910,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/cot-limits</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/cot-limits" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/cot-limits" />
@@ -1706,6 +1919,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/vector-search</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/vector-search" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/vector-search" />
@@ -1714,6 +1928,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/vector-search</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/vector-search" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/vector-search" />
@@ -1722,6 +1937,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/vector-search</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/vector-search" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/vector-search" />
@@ -1730,6 +1946,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/rag-documents</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/rag-documents" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/rag-documents" />
@@ -1738,6 +1955,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/rag-documents</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/rag-documents" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/rag-documents" />
@@ -1746,6 +1964,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/rag-documents</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/rag-documents" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/rag-documents" />
@@ -1754,6 +1973,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/chunking</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/chunking" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/chunking" />
@@ -1762,6 +1982,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/chunking</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/chunking" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/chunking" />
@@ -1770,6 +1991,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/chunking</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/chunking" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/chunking" />
@@ -1778,6 +2000,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/rag-retrieval</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/rag-retrieval" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/rag-retrieval" />
@@ -1786,6 +2009,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/rag-retrieval</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/rag-retrieval" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/rag-retrieval" />
@@ -1794,6 +2018,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/rag-retrieval</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/rag-retrieval" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/rag-retrieval" />
@@ -1802,6 +2027,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/rag-why-wrong</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/rag-why-wrong" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/rag-why-wrong" />
@@ -1810,6 +2036,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/rag-why-wrong</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/rag-why-wrong" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/rag-why-wrong" />
@@ -1818,6 +2045,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/rag-why-wrong</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/rag-why-wrong" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/rag-why-wrong" />
@@ -1826,6 +2054,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/rag-vs-longcontext</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/rag-vs-longcontext" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/rag-vs-longcontext" />
@@ -1834,6 +2063,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/rag-vs-longcontext</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/rag-vs-longcontext" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/rag-vs-longcontext" />
@@ -1842,6 +2072,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/rag-vs-longcontext</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/rag-vs-longcontext" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/rag-vs-longcontext" />
@@ -1850,6 +2081,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/agent-vs-workflow</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/agent-vs-workflow" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/agent-vs-workflow" />
@@ -1858,6 +2090,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/agent-vs-workflow</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/agent-vs-workflow" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/agent-vs-workflow" />
@@ -1866,6 +2099,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/agent-vs-workflow</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/agent-vs-workflow" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/agent-vs-workflow" />
@@ -1874,6 +2108,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/agent-planning</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/agent-planning" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/agent-planning" />
@@ -1882,6 +2117,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/agent-planning</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/agent-planning" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/agent-planning" />
@@ -1890,6 +2126,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/agent-planning</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/agent-planning" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/agent-planning" />
@@ -1898,6 +2135,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/loop-control</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/loop-control" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/loop-control" />
@@ -1906,6 +2144,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/loop-control</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/loop-control" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/loop-control" />
@@ -1914,6 +2153,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/loop-control</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/loop-control" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/loop-control" />
@@ -1922,6 +2162,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/self-verify</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/self-verify" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/self-verify" />
@@ -1930,6 +2171,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/self-verify</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/self-verify" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/self-verify" />
@@ -1938,6 +2180,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/self-verify</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/self-verify" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/self-verify" />
@@ -1946,6 +2189,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/agent-tools</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/agent-tools" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/agent-tools" />
@@ -1954,6 +2198,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/agent-tools</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/agent-tools" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/agent-tools" />
@@ -1962,6 +2207,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/agent-tools</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/agent-tools" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/agent-tools" />
@@ -1970,6 +2216,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/json-output</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/json-output" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/json-output" />
@@ -1978,6 +2225,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/json-output</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/json-output" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/json-output" />
@@ -1986,6 +2234,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/json-output</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/json-output" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/json-output" />
@@ -1994,6 +2243,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/agent-memory</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/agent-memory" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/agent-memory" />
@@ -2002,6 +2252,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/agent-memory</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/agent-memory" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/agent-memory" />
@@ -2010,6 +2261,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/agent-memory</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/agent-memory" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/agent-memory" />
@@ -2018,6 +2270,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/agent-eval</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/agent-eval" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/agent-eval" />
@@ -2026,6 +2279,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/agent-eval</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/agent-eval" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/agent-eval" />
@@ -2034,6 +2288,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/agent-eval</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/agent-eval" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/agent-eval" />
@@ -2042,6 +2297,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/agent-cost</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/agent-cost" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/agent-cost" />
@@ -2050,6 +2306,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/agent-cost</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/agent-cost" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/agent-cost" />
@@ -2058,6 +2315,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/agent-cost</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/agent-cost" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/agent-cost" />
@@ -2066,6 +2324,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/diffusion-how</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/diffusion-how" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/diffusion-how" />
@@ -2074,6 +2333,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/diffusion-how</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/diffusion-how" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/diffusion-how" />
@@ -2082,6 +2342,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/diffusion-how</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/diffusion-how" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/diffusion-how" />
@@ -2090,6 +2351,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/diffusion-not-collage</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/diffusion-not-collage" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/diffusion-not-collage" />
@@ -2098,6 +2360,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/diffusion-not-collage</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/diffusion-not-collage" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/diffusion-not-collage" />
@@ -2106,6 +2369,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/diffusion-not-collage</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/diffusion-not-collage" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/diffusion-not-collage" />
@@ -2114,6 +2378,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/genimg-errors</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/genimg-errors" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/genimg-errors" />
@@ -2122,6 +2387,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/genimg-errors</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/genimg-errors" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/genimg-errors" />
@@ -2130,6 +2396,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/genimg-errors</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/genimg-errors" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/genimg-errors" />
@@ -2138,6 +2405,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/diffusion-vs-gan</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/diffusion-vs-gan" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/diffusion-vs-gan" />
@@ -2146,6 +2414,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/diffusion-vs-gan</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/diffusion-vs-gan" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/diffusion-vs-gan" />
@@ -2154,6 +2423,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/diffusion-vs-gan</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/diffusion-vs-gan" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/diffusion-vs-gan" />
@@ -2162,6 +2432,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/multimodal-key</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/multimodal-key" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/multimodal-key" />
@@ -2170,6 +2441,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/multimodal-key</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/multimodal-key" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/multimodal-key" />
@@ -2178,6 +2450,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/multimodal-key</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/multimodal-key" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/multimodal-key" />
@@ -2186,6 +2459,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/vlm-see</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/vlm-see" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/vlm-see" />
@@ -2194,6 +2468,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/vlm-see</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/vlm-see" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/vlm-see" />
@@ -2202,6 +2477,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/vlm-see</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/vlm-see" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/vlm-see" />
@@ -2210,6 +2486,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/hallucination</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/hallucination" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/hallucination" />
@@ -2218,6 +2495,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/hallucination</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/hallucination" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/hallucination" />
@@ -2226,6 +2504,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/hallucination</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/hallucination" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/hallucination" />
@@ -2234,6 +2513,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/bias</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/bias" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/bias" />
@@ -2242,6 +2522,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/bias</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/bias" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/bias" />
@@ -2250,6 +2531,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/bias</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/bias" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/bias" />
@@ -2258,6 +2540,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/trust-answer</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/trust-answer" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/trust-answer" />
@@ -2266,6 +2549,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/trust-answer</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/trust-answer" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/trust-answer" />
@@ -2274,6 +2558,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/trust-answer</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/trust-answer" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/trust-answer" />
@@ -2282,6 +2567,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/prompt-injection</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/prompt-injection" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/prompt-injection" />
@@ -2290,6 +2576,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/prompt-injection</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/prompt-injection" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/prompt-injection" />
@@ -2298,6 +2585,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/prompt-injection</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/prompt-injection" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/prompt-injection" />
@@ -2306,6 +2594,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/jailbreak</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/jailbreak" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/jailbreak" />
@@ -2314,6 +2603,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/jailbreak</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/jailbreak" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/jailbreak" />
@@ -2322,6 +2612,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/jailbreak</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/jailbreak" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/jailbreak" />
@@ -2330,6 +2621,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/guardrails</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/guardrails" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/guardrails" />
@@ -2338,6 +2630,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/guardrails</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/guardrails" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/guardrails" />
@@ -2346,6 +2639,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/guardrails</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/guardrails" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/guardrails" />
@@ -2354,6 +2648,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/data-leakage</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/data-leakage" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/data-leakage" />
@@ -2362,6 +2657,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/data-leakage</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/data-leakage" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/data-leakage" />
@@ -2370,6 +2666,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/data-leakage</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/data-leakage" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/data-leakage" />
@@ -2378,6 +2675,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/ai-limits</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/ai-limits" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/ai-limits" />
@@ -2386,6 +2684,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/ai-limits</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/ai-limits" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/ai-limits" />
@@ -2394,6 +2693,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/ai-limits</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/ai-limits" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/ai-limits" />
@@ -2402,6 +2702,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/can-llm-reason</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/can-llm-reason" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/can-llm-reason" />
@@ -2410,6 +2711,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/can-llm-reason</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/can-llm-reason" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/can-llm-reason" />
@@ -2418,6 +2720,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/can-llm-reason</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/can-llm-reason" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/can-llm-reason" />
@@ -2426,6 +2729,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/design-doc-qa</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/design-doc-qa" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/design-doc-qa" />
@@ -2434,6 +2738,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/design-doc-qa</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/design-doc-qa" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/design-doc-qa" />
@@ -2442,6 +2747,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/design-doc-qa</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/design-doc-qa" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/design-doc-qa" />
@@ -2450,6 +2756,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/design-support-bot</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/design-support-bot" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/design-support-bot" />
@@ -2458,6 +2765,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/design-support-bot</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/design-support-bot" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/design-support-bot" />
@@ -2466,6 +2774,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/design-support-bot</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/design-support-bot" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/design-support-bot" />
@@ -2474,6 +2783,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/realtime-assistant</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/realtime-assistant" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/realtime-assistant" />
@@ -2482,6 +2792,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/realtime-assistant</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/realtime-assistant" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/realtime-assistant" />
@@ -2490,6 +2801,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/realtime-assistant</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/realtime-assistant" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/realtime-assistant" />
@@ -2498,6 +2810,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/design-build-vs-buy</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/design-build-vs-buy" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/design-build-vs-buy" />
@@ -2506,6 +2819,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/design-build-vs-buy</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/design-build-vs-buy" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/design-build-vs-buy" />
@@ -2514,6 +2828,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/design-build-vs-buy</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/design-build-vs-buy" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/design-build-vs-buy" />
@@ -2522,6 +2837,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/design-data-pipeline</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/design-data-pipeline" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/design-data-pipeline" />
@@ -2530,6 +2846,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/design-data-pipeline</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/design-data-pipeline" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/design-data-pipeline" />
@@ -2538,6 +2855,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/design-data-pipeline</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/design-data-pipeline" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/design-data-pipeline" />
@@ -2546,6 +2864,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/design-latency-scale</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/design-latency-scale" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/design-latency-scale" />
@@ -2554,6 +2873,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/design-latency-scale</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/design-latency-scale" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/design-latency-scale" />
@@ -2562,6 +2882,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/design-latency-scale</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/design-latency-scale" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/design-latency-scale" />
@@ -2570,6 +2891,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/design-cost</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/design-cost" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/design-cost" />
@@ -2578,6 +2900,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/design-cost</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/design-cost" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/design-cost" />
@@ -2586,6 +2909,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/design-cost</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/design-cost" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/design-cost" />
@@ -2594,6 +2918,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/design-eval-improve</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/design-eval-improve" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/design-eval-improve" />
@@ -2602,6 +2927,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/design-eval-improve</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/design-eval-improve" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/design-eval-improve" />
@@ -2610,6 +2936,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/design-eval-improve</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/design-eval-improve" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/design-eval-improve" />
@@ -2618,6 +2945,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/monitoring</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/monitoring" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/monitoring" />
@@ -2626,6 +2954,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/monitoring</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/monitoring" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/monitoring" />
@@ -2634,6 +2963,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/monitoring</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/monitoring" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/monitoring" />
@@ -2642,6 +2972,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/eval-benchmark</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/eval-benchmark" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/eval-benchmark" />
@@ -2650,6 +2981,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/eval-benchmark</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/eval-benchmark" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/eval-benchmark" />
@@ -2658,6 +2990,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/eval-benchmark</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/eval-benchmark" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/eval-benchmark" />
@@ -2666,6 +2999,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/eval-llm-judge</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/eval-llm-judge" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/eval-llm-judge" />
@@ -2674,6 +3008,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/eval-llm-judge</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/eval-llm-judge" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/eval-llm-judge" />
@@ -2682,6 +3017,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/eval-llm-judge</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/eval-llm-judge" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/eval-llm-judge" />
@@ -2690,6 +3026,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/eval-set</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/eval-set" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/eval-set" />
@@ -2698,6 +3035,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/eval-set</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/eval-set" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/eval-set" />
@@ -2706,6 +3044,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/eval-set</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/eval-set" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/eval-set" />
@@ -2714,6 +3053,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/eval-offline-online</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/eval-offline-online" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/eval-offline-online" />
@@ -2722,6 +3062,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/eval-offline-online</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/eval-offline-online" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/eval-offline-online" />
@@ -2730,6 +3071,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/eval-offline-online</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/eval-offline-online" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/eval-offline-online" />
@@ -2738,6 +3080,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/challenge/eval-regression</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/eval-regression" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/eval-regression" />
@@ -2746,6 +3089,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/challenge/eval-regression</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/eval-regression" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/eval-regression" />
@@ -2754,6 +3098,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/challenge/eval-regression</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/challenge/eval-regression" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/challenge/eval-regression" />
@@ -2761,7 +3106,413 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/challenge/eval-regression" />
   </url>
   <url>
+    <loc>https://awesome-ai-learning.vercel.app/paths/understand</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/paths/understand" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/paths/understand" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/paths/understand" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/paths/understand" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/ja/paths/understand</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/paths/understand" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/paths/understand" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/paths/understand" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/paths/understand" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/zh/paths/understand</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/paths/understand" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/paths/understand" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/paths/understand" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/paths/understand" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/paths/builder</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/paths/builder" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/paths/builder" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/paths/builder" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/paths/builder" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/ja/paths/builder</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/paths/builder" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/paths/builder" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/paths/builder" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/paths/builder" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/zh/paths/builder</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/paths/builder" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/paths/builder" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/paths/builder" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/paths/builder" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/paths/engineer</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/paths/engineer" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/paths/engineer" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/paths/engineer" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/paths/engineer" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/ja/paths/engineer</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/paths/engineer" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/paths/engineer" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/paths/engineer" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/paths/engineer" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/zh/paths/engineer</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/paths/engineer" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/paths/engineer" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/paths/engineer" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/paths/engineer" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/paths/leader</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/paths/leader" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/paths/leader" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/paths/leader" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/paths/leader" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/ja/paths/leader</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/paths/leader" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/paths/leader" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/paths/leader" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/paths/leader" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/zh/paths/leader</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/paths/leader" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/paths/leader" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/paths/leader" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/paths/leader" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/paths/foundations</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/paths/foundations" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/paths/foundations" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/paths/foundations" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/paths/foundations" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/ja/paths/foundations</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/paths/foundations" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/paths/foundations" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/paths/foundations" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/paths/foundations" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/zh/paths/foundations</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/paths/foundations" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/paths/foundations" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/paths/foundations" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/paths/foundations" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/paths/prompt</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/paths/prompt" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/paths/prompt" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/paths/prompt" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/paths/prompt" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/ja/paths/prompt</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/paths/prompt" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/paths/prompt" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/paths/prompt" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/paths/prompt" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/zh/paths/prompt</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/paths/prompt" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/paths/prompt" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/paths/prompt" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/paths/prompt" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/paths/power-user</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/paths/power-user" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/paths/power-user" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/paths/power-user" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/paths/power-user" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/ja/paths/power-user</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/paths/power-user" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/paths/power-user" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/paths/power-user" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/paths/power-user" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/zh/paths/power-user</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/paths/power-user" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/paths/power-user" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/paths/power-user" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/paths/power-user" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/paths/rag</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/paths/rag" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/paths/rag" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/paths/rag" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/paths/rag" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/ja/paths/rag</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/paths/rag" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/paths/rag" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/paths/rag" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/paths/rag" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/zh/paths/rag</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/paths/rag" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/paths/rag" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/paths/rag" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/paths/rag" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/paths/agent</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/paths/agent" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/paths/agent" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/paths/agent" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/paths/agent" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/ja/paths/agent</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/paths/agent" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/paths/agent" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/paths/agent" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/paths/agent" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/zh/paths/agent</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/paths/agent" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/paths/agent" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/paths/agent" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/paths/agent" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/paths/safety</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/paths/safety" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/paths/safety" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/paths/safety" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/paths/safety" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/ja/paths/safety</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/paths/safety" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/paths/safety" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/paths/safety" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/paths/safety" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/zh/paths/safety</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/paths/safety" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/paths/safety" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/paths/safety" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/paths/safety" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/paths/llm-internals</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/paths/llm-internals" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/paths/llm-internals" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/paths/llm-internals" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/paths/llm-internals" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/ja/paths/llm-internals</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/paths/llm-internals" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/paths/llm-internals" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/paths/llm-internals" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/paths/llm-internals" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/zh/paths/llm-internals</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/paths/llm-internals" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/paths/llm-internals" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/paths/llm-internals" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/paths/llm-internals" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/paths/train-tune</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/paths/train-tune" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/paths/train-tune" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/paths/train-tune" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/paths/train-tune" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/ja/paths/train-tune</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/paths/train-tune" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/paths/train-tune" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/paths/train-tune" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/paths/train-tune" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/zh/paths/train-tune</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/paths/train-tune" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/paths/train-tune" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/paths/train-tune" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/paths/train-tune" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/paths/genmm</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/paths/genmm" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/paths/genmm" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/paths/genmm" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/paths/genmm" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/ja/paths/genmm</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/paths/genmm" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/paths/genmm" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/paths/genmm" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/paths/genmm" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/zh/paths/genmm</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/paths/genmm" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/paths/genmm" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/paths/genmm" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/paths/genmm" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/paths/system-design</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/paths/system-design" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/paths/system-design" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/paths/system-design" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/paths/system-design" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/ja/paths/system-design</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/paths/system-design" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/paths/system-design" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/paths/system-design" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/paths/system-design" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/zh/paths/system-design</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/paths/system-design" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/paths/system-design" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/paths/system-design" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/paths/system-design" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/paths/evaluate</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/paths/evaluate" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/paths/evaluate" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/paths/evaluate" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/paths/evaluate" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/ja/paths/evaluate</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/paths/evaluate" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/paths/evaluate" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/paths/evaluate" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/paths/evaluate" />
+  </url>
+  <url>
+    <loc>https://awesome-ai-learning.vercel.app/zh/paths/evaluate</loc>
+    <lastmod>2026-07-22</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/paths/evaluate" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/paths/evaluate" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://awesome-ai-learning.vercel.app/zh/paths/evaluate" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://awesome-ai-learning.vercel.app/paths/evaluate" />
+  </url>
+  <url>
     <loc>https://awesome-ai-learning.vercel.app/browse</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/browse" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/browse" />
@@ -2770,6 +3521,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/browse</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/browse" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/browse" />
@@ -2778,6 +3530,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/browse</loc>
+    <lastmod>2026-07-21</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/browse" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/browse" />
@@ -2786,6 +3539,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/browse/challenges</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/browse/challenges" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/browse/challenges" />
@@ -2794,6 +3548,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/ja/browse/challenges</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/browse/challenges" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/browse/challenges" />
@@ -2802,6 +3557,7 @@
   </url>
   <url>
     <loc>https://awesome-ai-learning.vercel.app/zh/browse/challenges</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://awesome-ai-learning.vercel.app/browse/challenges" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://awesome-ai-learning.vercel.app/ja/browse/challenges" />
