@@ -101,6 +101,11 @@
       </div>
     </section>
 
+    <div class="catblock">
+      <div class="catdiv">{t('paths.secCourses')}</div>
+      <p class="catlede">{t('paths.secCoursesLede')}</p>
+    </div>
+
     <section class="pgroup" id="journeys">
       <div class="grouphead"><h2>{t('paths.journeys')}</h2><span class="ghint">{t('paths.journeysHint')}</span></div>
       <div class="grid grid-j">
@@ -113,7 +118,7 @@
             <p class="pc-who"><span>{t('paths.forWho')}</span>{tx.who}</p>
             <div class="pc-foot">
               {#if st.complete}<span class="pc-done">✓ {t('paths.done')}</span>{:else}<span>{st.done} / {st.total}</span>{/if}
-              <span class="arrow">→</span>
+              <span class="pc-go">{t('paths.goCourses')}<span class="pc-go-arr">→</span></span>
             </div>
           </a>
         {/each}
@@ -134,12 +139,17 @@
             {/if}
             <div class="pc-foot">
               {#if st.complete}<span class="pc-done">✓ {t('paths.done')}</span>{:else}<span>{st.done} / {st.total}</span>{/if}
-              <span class="arrow">→</span>
+              <span class="pc-go">{t('paths.goCourses')}<span class="pc-go-arr">→</span></span>
             </div>
           </a>
         {/each}
       </div>
     </section>
+
+    <div class="catblock">
+      <div class="catdiv">{t('paths.secContent')}</div>
+      <p class="catlede">{t('paths.secContentLede')}</p>
+    </div>
 
     <section class="pgroup">
       <div class="grouphead"><h2>{t('paths.browseTitle')}</h2><span class="ghint">{t('paths.browseHint')}</span></div>
@@ -147,12 +157,12 @@
         <a class="pcard t" href={hrefBrowse('lessons')} onclick={(e) => onNav(e, () => goBrowse('lessons'))}>
           <div class="pc-title"><h3>{t('iv.course')}</h3><span class="pc-time">{courseCount} {t('paths.certLesson')}</span></div>
           <p class="pc-line">{t('paths.courseLede')}</p>
-          <div class="pc-foot">{t('paths.courseFoot')} <span class="arrow">→</span></div>
+          <div class="pc-foot">{t('paths.courseFoot')} <span class="pc-go">{t('paths.goCourses')}<span class="pc-go-arr">→</span></span></div>
         </a>
         <a class="pcard t" href={hrefBrowse('challenges')} onclick={(e) => onNav(e, () => goBrowse('challenges'))}>
           <div class="pc-title"><h3>{t('iv.interview')}</h3><span class="pc-time">{challengeCount} {t('paths.certChallenge')}</span></div>
           <p class="pc-line">{t('paths.challengeLede')}</p>
-          <div class="pc-foot">{catCount} {t('paths.challengeFoot')} <span class="arrow">→</span></div>
+          <div class="pc-foot">{catCount} {t('paths.challengeFoot')} <span class="pc-go">{t('paths.goChallenges')}<span class="pc-go-arr">→</span></span></div>
         </a>
       </div>
     </section>
@@ -434,7 +444,24 @@
   .pc-deep { font-size: 12px; color: var(--muted); margin-top: 10px; }
   .pc-deep span { color: var(--teal); font-weight: 600; margin-right: 6px; }
   .pc-foot { display: flex; align-items: center; justify-content: space-between; margin-top: auto; padding-top: 12px; border-top: 1px solid var(--line); font-family: var(--mono); font-size: 12px; color: var(--muted); }
-  .arrow { color: var(--accent-ink); font-weight: 700; }
+  .pc-go {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 5px 12px; border-radius: 999px;
+    border: 1px solid var(--line-2); background: var(--surface);
+    color: var(--accent-ink); font-family: var(--sans); font-size: 12px; font-weight: 650;
+    letter-spacing: var(--ls-tight); white-space: nowrap;
+    transition: background .15s, border-color .15s, color .15s;
+  }
+  .pcard:hover .pc-go { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .pc-go-arr { font-family: var(--mono); font-weight: 700; }
+
+  /* 大字分類標題（課程／內容）＋副標：左對齊、切齊下方段落標題，形成「大標題＋副標＋小標」堆疊 */
+  .catblock { max-width: 960px; margin: clamp(56px, 9vh, 100px) auto clamp(16px, 2.2vh, 24px); }
+  .catdiv {
+    color: var(--ink); font-size: clamp(32px, 5vw, 54px); font-weight: 780;
+    letter-spacing: -.025em; line-height: 1.05; margin: 0 0 10px;
+  }
+  .catlede { margin: 0; max-width: 56ch; color: var(--ink-2); font-size: var(--fs-lede); line-height: var(--lh-snug); }
   .pc-done { color: var(--teal); font-weight: 700; }
   .pcard.complete { border-color: color-mix(in srgb, var(--teal) 45%, var(--line)); }
 </style>
