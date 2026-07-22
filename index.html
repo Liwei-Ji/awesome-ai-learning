@@ -11,7 +11,8 @@
     <meta name="author" content="Awesome AI Learning" />
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#e07f0e" />
-    <link rel="canonical" href="https://awesome-ai-learning.vercel.app/" />
+    <!-- 不寫死 canonical：這份 index.html 會被所有路由共用，寫死等於把每個網址都標成首頁（Google 會把整站併成一頁而丟棄其餘）。
+         canonical 改由 Seo.svelte 於執行階段依當前路由設定；預渲染（prerender.mjs）時則會把正確的 per-route canonical 烘進靜態 HTML。 -->
 
     <!-- Open Graph (social sharing preview) -->
     <meta property="og:type" content="website" />
