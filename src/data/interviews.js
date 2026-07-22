@@ -5492,3 +5492,21 @@ export function ivOf(id, locale = 'zh') {
     traps: tr.traps ?? base.traps,
   };
 }
+
+/** 搜尋用文本：整題全文（label＋題幹＋trap＋觀點卡＋核心答＋加分/陷阱），三語全收（小寫）。
+    讓中英關鍵字、以及只出現在觀點卡裡的概念詞（如 sycophancy、verifier）都搜得到。
+    以 id 快取，避免每次輸入都重算三語字串。 */
+const _SEARCH_CACHE = {};
+export function ivSearchText(id) {
+  if (_SEARCH_CACHE[id]) return _SEARCH_CACHE[id];
+  const parts = [];
+  for (const loc of ['zh', 'en', 'ja']) {
+    const o = ivOf(id, loc);
+    if (!o) continue;
+    parts.push(o.label || '', o.q || '', o.trap || '');
+    (o.points || []).forEach((p) => parts.push(p.title || '', p.desc || ''));
+    (o.core || []).forEach((c) => parts.push(c.h || '', c.d || ''));
+    parts.push(...(o.plus || []), ...(o.traps || []));
+  }
+  return (_SEARCH_CACHE[id] = parts.join(' ').toLowerCase());
+}

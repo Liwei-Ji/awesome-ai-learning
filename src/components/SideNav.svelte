@@ -3,7 +3,7 @@
   // 課程 mode → GROUPS + CH 自動生成章節清單；
   // 面試 mode → 題庫（搜尋 + 分類 + 題目 label），沿用同一套 .group/.chap 樣式。
   import { GROUPS, idOf } from '../data/chapters.js';
-  import { IV_CATS, ivByCat, ivOf, ivLabel, catNameOf } from '../data/interviews.js';
+  import { IV_CATS, ivByCat, ivOf, ivLabel, catNameOf, ivSearchText } from '../data/interviews.js';
   import { PATHS, pathById, pathSteps, pathText, locText } from '../data/paths.js';
   import { chOf } from '../data/localize.js';
   import { nav, go, goIv, goPath, goPathStep, setMode, hrefCourse, hrefIv, hrefPath, hrefPathStep, onNav } from '../stores/state.svelte.js';
@@ -40,7 +40,7 @@
     IV_CATS.map((c) => {
       let ids = ivByCat(c.key);
       const needle = q.trim().toLowerCase();
-      if (needle) ids = ids.filter((id) => (ivLabel(id, i18n.locale) + ivOf(id, i18n.locale).q).toLowerCase().includes(needle));
+      if (needle) ids = ids.filter((id) => ivSearchText(id).includes(needle));
       return { key: c.key, name: catNameOf(c.key, i18n.locale), ids };
     }),
   );

@@ -5,7 +5,7 @@
      一個輕量頁首（回首頁 + 兩個分頁 + 搜尋），單頁自足，不依賴側欄。 */
   import { GROUPS, TOTAL } from '../data/chapters.js';
   import { chOf } from '../data/localize.js';
-  import { IV_CATS, IV_ORDER, ivByCat, ivLabel, ivOf, catNameOf } from '../data/interviews.js';
+  import { IV_CATS, IV_ORDER, ivByCat, ivLabel, ivOf, catNameOf, ivSearchText } from '../data/interviews.js';
   import { nav, go, goIv, goBrowse, goPath, hrefCourse, hrefIv, hrefPath, hrefBrowse, onNav } from '../stores/state.svelte.js';
   import { t, i18n } from '../stores/i18n.svelte.js';
   import { fly } from 'svelte/transition';
@@ -34,7 +34,7 @@
       name: catNameOf(c.key, locale),
       ids: ivByCat(c.key).filter((id) => {
         if (!needle) return true;
-        return (ivLabel(id, locale) + ' ' + ivOf(id, locale).q).toLowerCase().includes(needle);
+        return ivSearchText(id).includes(needle);
       }),
     })).filter((c) => c.ids.length),
   );
