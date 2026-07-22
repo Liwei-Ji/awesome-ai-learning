@@ -77,19 +77,29 @@
   <main class="stage phome">
     <!-- 目標優先落地頁：hero → 完整路線 → 主題深潛 → 目錄 → 知識地圖（降級到頁尾）-->
     <header class="lhero">
-      <h1>{t('home.title')}</h1>
-      <p class="lede">{t('paths.landingLede')}</p>
-      <div class="lcta">
-        <button class="btn primary" onclick={() => scrollToId('journeys')}>{t('home.ctaPath')} ↓</button>
-        <a class="btn ghost" href={hrefBrowse('lessons')} onclick={(e) => onNav(e, () => goBrowse('lessons'))}>{t('home.ctaBrowse')}</a>
-      </div>
-      <div class="lstats">
-        <div class="lstat"><b>{courseCount}</b><span>{t('home.statLessons')}</span></div>
-        <div class="lstat"><b>{challengeCount}</b><span>{t('home.statChallenges')}</span></div>
-        <div class="lstat"><b>{pathCount}</b><span>{t('home.statPaths')}</span></div>
-        <div class="lstat"><b>3</b><span>{t('home.statLangs')}</span></div>
+      <div class="hero-art">
+        <div class="hero-copy">
+          <h1>{t('home.title')}</h1>
+          <p class="lede">{t('paths.landingLede')}</p>
+        </div>
       </div>
     </header>
+
+    <!-- 副英雄區（第二屏）：概覽數據滿版置中，看不到上方 hero 與下方課程；下接主要行動按鈕 -->
+    <section class="statspage">
+      <div class="sp-inner">
+        <div class="sp-row">
+          <div class="sp-stat"><b class="sp-num">{courseCount}</b><span class="sp-label">{t('home.statLessons')}</span></div>
+          <div class="sp-stat"><b class="sp-num">{challengeCount}</b><span class="sp-label">{t('home.statChallenges')}</span></div>
+          <div class="sp-stat"><b class="sp-num">{pathCount}</b><span class="sp-label">{t('home.statPaths')}</span></div>
+          <div class="sp-stat"><b class="sp-num">3</b><span class="sp-label">{t('home.statLangs')}</span></div>
+        </div>
+        <div class="lcta sp-cta">
+          <button class="btn primary" onclick={() => scrollToId('journeys')}>{t('home.ctaPath')} ↓</button>
+          <a class="btn ghost" href={hrefBrowse('lessons')} onclick={(e) => onNav(e, () => goBrowse('lessons'))}>{t('home.ctaBrowse')}</a>
+        </div>
+      </div>
+    </section>
 
     <section class="pgroup" id="journeys">
       <div class="grouphead"><h2>{t('paths.journeys')}</h2><span class="ghint">{t('paths.journeysHint')}</span></div>
@@ -161,6 +171,12 @@
         </div>
       {/if}
     </section>
+
+    <!-- 頁尾：一條灰線，其下靠右顯示資料來源（短句）與作者 -->
+    <footer class="lfoot">
+      <p class="lf-src">{t('home.footSource')}</p>
+      <p class="lf-by">{t('home.footBy')} <span>Liwei Ji</span></p>
+    </footer>
   </main>
 {:else if !nav.step}
   <!-- 路線總覽：進入某條路線先看「你將學到什麼」，再按開始進第一課（全寬、無側欄）-->
@@ -229,6 +245,8 @@
 
 <style>
   .phead, .pgroup, .lhero { max-width: 960px; margin-left: auto; margin-right: auto; }
+  /* 首頁採整頁式英雄／副英雄（各滿一屏）：移除 stage 上緣留白，讓第一屏貼齊視窗頂端 */
+  .phome { padding-top: 0; }
 
   .phead { padding-bottom: 22px; margin-bottom: 28px; border-bottom: 1px solid var(--line); }
   .phead.psep { margin-top: 40px; padding-top: 34px; border-top: 1px solid var(--line); }
@@ -237,23 +255,96 @@
 
   /* 目標優先 hero：滿版第一屏，垂直置中；下一段（路線）落在折線外，無區隔線 */
   .lhero {
-    min-height: 100%; box-sizing: border-box;
+    min-height: 100vh; box-sizing: border-box;
     display: flex; flex-direction: column; justify-content: center;
-    padding: 48px 0; margin-bottom: 56px;
+    padding: 48px 0;
   }
   .lhero .eyebrow { display: block; margin-bottom: 16px; }
+
+  /* 抽象花瓣光暈橫幅（純 CSS 漸層繪製）：柔粉為主，邊緣過渡薰衣草／淺藍，中心暖金橘光暈，柔焦夢幻。
+     標題＋導言疊在圖上、錨定左下；上半留白讓光暈盡情發散。文字落在較冷的粉／紫角落（避開金橘熱區），
+     再以一層「暖白角落柔光」（非陰影，是內層漸層）把該角提亮，確保粉彩上的小字仍清晰。整體無 box-shadow。 */
+  .hero-art {
+    position: relative; box-sizing: border-box;
+    min-height: clamp(380px, 40vw, 460px); border-radius: 22px; margin: 0 0 26px; overflow: hidden;
+    display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-end;
+    padding: clamp(36px, 5vw, 52px) clamp(28px, 5vw, 52px) clamp(32px, 4.5vw, 44px);
+    background:
+      /* 暖白角落柔光：只提亮左下文字區，右上光暈維持純淨夢幻 */
+      radial-gradient(132% 120% at 0% 100%, rgba(255, 251, 253, .54), rgba(255, 251, 253, .14) 44%, rgba(255, 251, 253, 0) 66%),
+      linear-gradient(to top, rgba(255, 252, 253, .30), rgba(255, 252, 253, 0) 44%),
+      /* 原始花瓣光暈（位置不動） */
+      radial-gradient(65% 85% at 47% 58%, rgba(255, 180, 96, .70), rgba(255, 180, 96, 0) 48%),
+      radial-gradient(75% 80% at 24% 28%, rgba(198, 182, 255, .72), transparent 60%),
+      radial-gradient(80% 85% at 82% 74%, rgba(150, 201, 255, .66), transparent 58%),
+      radial-gradient(90% 55% at 68% 16%, rgba(255, 255, 255, .42), transparent 62%),
+      linear-gradient(120deg, #ffd8e7 0%, #f4cce4 32%, #e7caf0 62%, #d5d7f3 84%, #d0e3f7 100%);
+  }
+  .hero-copy { position: relative; max-width: 30rem; }
+  /* 以 .lhero .hero-art 前綴（0,2,1）穩定勝過既有的 .lhero h1／.lede（0,1,1），純加成不刪舊規則 */
+  .lhero .hero-art h1 { margin: 0 0 13px; }
+  .lhero .hero-art .lede { margin: 0; max-width: 26rem; color: var(--ink-2); text-shadow: 0 1px 1px rgba(255, 255, 255, .5); }
+  @media (max-width: 560px) {
+    .hero-art { min-height: 340px; border-radius: 18px; padding: 30px 22px 28px; }
+    .hero-copy { max-width: 100%; }
+    .lhero .hero-art .lede { max-width: 34ch; }
+  }
   .lhero h1 { font-size: clamp(30px, 4.2vw, 44px); line-height: 1.1; letter-spacing: -.02em; font-weight: 740; margin: 0 0 16px; max-width: 18ch; text-wrap: balance; }
   .lhero .lede { color: var(--ink-2); max-width: 58ch; font-size: var(--fs-lede); line-height: var(--lh-snug); margin: 0; }
   .lcta { display: flex; align-items: center; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
   .lcta .btn { padding: 11px 20px; font-size: var(--fs-body); border-radius: var(--r-sm); }
   .lcta .btn.ghost { background: var(--surface); color: var(--ink); border: 1px solid var(--line-2); }
   .lcta .btn.ghost:hover { border-color: var(--accent); color: var(--accent-ink); }
-  .lstats { display: flex; gap: 30px; margin-top: 30px; flex-wrap: wrap; }
-  .lstat b { font-size: 25px; font-weight: 740; letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
-  .lstat span { display: block; font-size: 12.5px; color: var(--muted); margin-top: 2px; }
+  /* PAGE 2 · 副英雄區：概覽數據滿版第二屏（垂直＋水平置中，看不到上方 hero 與下方課程）。
+     四個超大數字排一列、數字後帶一抹 hero 粉彩光暈（粉／紫／藍／金），下接主要行動按鈕。
+     背景極淡回應 hero 光暈，無 box-shadow。 */
+  .statspage {
+    min-height: 100vh; box-sizing: border-box;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: clamp(64px, 10vh, 120px) 0; margin-bottom: 40px;
+    background:
+      radial-gradient(58% 62% at 50% 22%, rgba(255, 180, 96, .055), transparent 60%),
+      radial-gradient(70% 80% at 10% 92%, rgba(198, 182, 255, .06), transparent 62%),
+      radial-gradient(72% 82% at 92% 10%, rgba(150, 201, 255, .06), transparent 60%);
+  }
+  .sp-inner { max-width: 960px; width: 100%; margin: 0 auto; padding: 0 clamp(20px, 5vw, 40px); box-sizing: border-box; }
+  .sp-row { display: grid; grid-template-columns: repeat(4, 1fr); align-items: center; }
+  .sp-stat { position: relative; text-align: center; padding: clamp(6px, 1.5vw, 14px) clamp(8px, 2.4vw, 26px); }
+  /* 數字後方粉彩光暈（依序 粉／紫／藍／金，呼應 hero） */
+  .sp-stat::after {
+    content: ""; position: absolute; z-index: 0; left: 50%; top: 40%; transform: translate(-50%, -50%);
+    width: clamp(96px, 12vw, 162px); height: clamp(96px, 12vw, 162px); border-radius: 50%; filter: blur(4px); opacity: .55;
+  }
+  .sp-stat:nth-child(1)::after { background: radial-gradient(circle, rgba(255, 172, 204, .60), transparent 68%); }
+  .sp-stat:nth-child(2)::after { background: radial-gradient(circle, rgba(198, 182, 255, .55), transparent 68%); }
+  .sp-stat:nth-child(3)::after { background: radial-gradient(circle, rgba(150, 201, 255, .55), transparent 68%); }
+  .sp-stat:nth-child(4)::after { background: radial-gradient(circle, rgba(255, 190, 110, .58), transparent 68%); }
+  /* 髮絲垂直分隔（第 2/3/4 欄左側，上下淡出） */
+  .sp-stat::before {
+    content: ""; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+    width: 1px; height: 56%; opacity: 0;
+    background: linear-gradient(to bottom, transparent, var(--line-2) 16%, var(--line-2) 84%, transparent);
+  }
+  .sp-stat:not(:first-child)::before { opacity: 1; }
+  .sp-num { position: relative; z-index: 1; display: block; font-size: clamp(52px, 8vw, 104px); line-height: 1; font-weight: 720; color: var(--ink); letter-spacing: var(--ls-tight); font-variant-numeric: tabular-nums; }
+  .sp-label { position: relative; z-index: 1; display: block; margin-top: clamp(10px, 1.6vw, 18px); font-size: clamp(10.5px, 1.3vw, 12.5px); font-weight: 600; letter-spacing: .12em; text-transform: uppercase; line-height: 1.35; color: var(--muted); }
+  .sp-cta { justify-content: center; margin-top: clamp(40px, 6vh, 72px); }
+
+  /* 頁尾：一條灰線，其下靠右顯示資料來源（短句）＋作者 */
+  .lfoot {
+    max-width: 960px; margin: 44px auto 0; box-sizing: border-box;
+    border-top: 1px solid var(--line);
+    padding: 18px 0 4px; text-align: right;
+  }
+  .lf-src { margin: 0; color: var(--muted); font-size: 12.5px; line-height: var(--lh-snug); }
+  .lf-by { margin: 6px 0 0; color: var(--ink-2); font-size: 12.5px; }
+  .lf-by span { color: var(--ink); font-weight: 600; }
   @media (max-width: 560px) {
-    .lstats { gap: 18px 26px; }
-    .lstat b { font-size: 22px; }
+    .statspage { padding: clamp(56px, 12vh, 88px) 0; }
+    .sp-row { grid-template-columns: repeat(2, 1fr); row-gap: clamp(36px, 10vw, 56px); }
+    .sp-stat:not(:first-child)::before { opacity: 0; }
+    .sp-num { font-size: clamp(44px, 13vw, 72px); }
+    .sp-cta { margin-top: clamp(32px, 8vw, 48px); }
   }
 
   /* 路線總覽（你將學到什麼）：全寬、內容置中在可讀欄寬 */
