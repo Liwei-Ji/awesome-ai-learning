@@ -6,14 +6,16 @@
   import { i18n } from '../stores/i18n.svelte.js';
   import Stepper from '../components/Stepper.svelte';
   import Bars from '../components/Bars.svelte';
+  import { Cat, Dog, Bird } from '@lucide/svelte';
 
-  const EMOJI = ['🐱', '🐶', '🐦', '🐘'];
+  const ANIMALS = ['cat', 'dog', 'bird', 'elephant'];
   const SAY_ICON = ['🖼️', '🧠', '📊', '✅'];
+
   const DIST = {
-    '🐱': [['Cat', 95], ['Dog', 3], ['Fox', 2]],
-    '🐶': [['Dog', 92], ['Wolf', 5], ['Cat', 3]],
-    '🐦': [['Bird', 90], ['Butterfly', 7], ['Plane', 3]],
-    '🐘': [['Elephant', 97], ['Rhino', 2], ['Hippo', 1]],
+    cat: [['Cat', 95], ['Dog', 3], ['Fox', 2]],
+    dog: [['Dog', 92], ['Wolf', 5], ['Cat', 3]],
+    bird: [['Bird', 90], ['Butterfly', 7], ['Plane', 3]],
+    elephant: [['Elephant', 97], ['Rhino', 2], ['Hippo', 1]],
   };
 
   const L = {
@@ -60,17 +62,33 @@
 
   let ui = $derived(L[i18n.locale] || L.zh);
 
-  let current = $state('🐱');
+  let current = $state('cat');
   let stage = $state(0);
 
   let atEnd = $derived(stage === 3);
   let dist = $derived(DIST[current]);
   let rows = $derived(dist.map((d, i) => ({ nm: d[0], val: d[1], win: i === 0 })));
 
-  function pick(emo) { current = emo; stage = 0; }
+  function pick(id) { current = id; stage = 0; }
   function next() { if (!atEnd) stage += 1; }
   function restart() { stage = 0; }
 </script>
+
+{#snippet icon(id, size)}
+  {#if id === 'cat'}<Cat {size} strokeWidth={1.75} />
+  {:else if id === 'dog'}<Dog {size} strokeWidth={1.75} />
+  {:else if id === 'bird'}<Bird {size} strokeWidth={1.75} />
+  {:else}
+    <!-- lucide 沒有大象，這隻照 lucide 風格自製（24×24、stroke、圓角）：大耳＋長鼻 -->
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M5 15a7 7 0 0 1 14 0v1" />
+      <path d="M5 15a3 3 0 0 1-3-3 3 3 0 0 1 3-3" />
+      <path d="M12.5 16v3a2.5 2.5 0 0 0 5 0v-2" />
+      <path d="M19 16v3" />
+      <circle cx="9" cy="11" r="1" />
+    </svg>
+  {/if}
+{/snippet}
 
 <div class="panel">
   <div class="panel-h"><h3>{ui.h3}</h3><span class="eyebrow">★ Interactive</span></div>
@@ -82,9 +100,9 @@
     <div class="qrow">
       <span class="fieldk">{ui.pick}</span>
       <div class="pl-row">
-        {#each EMOJI as emo, i}
-          <button class="pl" class:on={current === emo} onclick={() => pick(emo)}>
-            <span class="emo">{emo}</span>{ui.names[i]}
+        {#each ANIMALS as id, i}
+          <button class="pl" class:on={current === id} onclick={() => pick(id)}>
+            {@render icon(id, 18)}{ui.names[i]}
           </button>
         {/each}
       </div>
@@ -93,7 +111,7 @@
     <div class="stageview">
       <span class="fieldk">{ui.doing}</span>
       {#key current}
-        <div class="hero" in:scale={{ start: 0.6, duration: dur(D.base), easing: ease }}>{current}</div>
+        <div class="hero" in:scale={{ start: 0.6, duration: dur(D.base), easing: ease }}>{@render icon(current, 88)}</div>
       {/key}
       <div class="doing">
         <span class="dicon">{SAY_ICON[stage]}</span>
@@ -139,13 +157,13 @@
   .lede { margin: 0 0 var(--sp-4); color: var(--ink-2); font-size: var(--fs-body); line-height: var(--lh-body); }
 
   .qrow { margin-bottom: var(--sp-4); }
-  .pl .emo { font-size: 18px; margin-right: 6px; }
+  .pl :global(svg) { vertical-align: middle; margin-right: 6px; flex: none; }
 
   .stageview {
     background: #fff; border: 1px solid var(--line); border-radius: var(--r);
     padding: 18px 18px 16px; margin-bottom: var(--sp-4);
   }
-  .hero { font-size: 52px; text-align: center; line-height: 1.1; margin: 4px 0 14px; }
+  .hero { text-align: center; line-height: 0; margin: 4px 0 14px; color: var(--accent-ink); }
 
   .doing {
     display: flex; align-items: center; gap: 12px;
