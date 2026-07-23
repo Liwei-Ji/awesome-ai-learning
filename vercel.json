@@ -2,5 +2,6 @@
   "installCommand": "PUPPETEER_SKIP_DOWNLOAD=1 npm install",
   "buildCommand": "vite build && node scripts/gen-sitemap.mjs && (node scripts/prerender.mjs || echo 'prerender skipped — shipping SPA shell (build still OK)')",
   "outputDirectory": "dist",
+  "cleanUrls": true,
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
