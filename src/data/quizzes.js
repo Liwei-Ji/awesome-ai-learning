@@ -39,6 +39,23 @@ export const QUIZZES = {
       { "t": "迴圈跑不停就是模型不夠聰明，換更強的模型就會自己停。", "ok": false, "why": "跟模型聰不聰明無關，是迴圈沒設計；再強的模型沒有停止規則一樣會繞圈燒錢。" }
     ]
   },
+  "loop-vs-graph": {
+    "en": [
+      { "t": "They are opposites: a loop is the old way and a graph replaces it, so always use a graph.", "why": "Not opposites. A loop is often a node inside a graph; the real difference is who decides the flow, and each fits different tasks." },
+      { "t": "A loop lets the model decide its next step dynamically (open-ended tasks); a graph fixes the flow as nodes and edges (decomposable, branching, multi-specialist work), and a loop can be one node in a graph.", "why": "Correct: the difference is who decides the flow (model vs structure), they compose, and you choose by whether the steps can be planned in advance." },
+      { "t": "A graph is just a loop drawn on a diagram; there is no real difference in behavior.", "why": "A graph gives explicit structure, isolation, and observability a raw loop does not; control lives in the wiring, not the model." }
+    ],
+    "ja": [
+      { "t": "両者は対立で、ループは古く、グラフが置き換える。だから常にグラフを使う。", "why": "対立ではない。ループはグラフの一ノードになることが多く、本当の違いは誰がフローを決めるか。用途も異なる。" },
+      { "t": "ループはモデルが次の一手を動的に決める（開放的なタスク）；グラフはノードとエッジでフローを固定する（分解・分岐・複数専門家）。そしてループはグラフの一ノードになれる。", "why": "正解：違いは誰がフローを決めるか（モデルか構造か）。両者は組み合わさり、手順を事前に計画できるかで選ぶ。" },
+      { "t": "グラフは図に描いたループにすぎず、挙動に実質的な違いはない。", "why": "グラフは素のループにない明示的な構造・隔離・可観測性を与える。制御はモデルでなく配線図にある。" }
+    ],
+    "zh": [
+      { "t": "兩者是對立的：loop 是舊做法、graph 取而代之，所以一律用 graph。", "ok": false, "why": "不是對立。loop 常常就是 graph 裡的一個節點；真正的差別是誰決定流程，各自適合不同任務。" },
+      { "t": "Loop 讓模型動態決定下一步（開放式任務）；graph 把流程固定成節點與邊（可分解、分支、多專才），而且 loop 可以是 graph 裡的一個節點。", "ok": true, "why": "正解：差別在誰決定流程（模型還是結構），兩者會組合，依「步驟能否事先規劃」來選。" },
+      { "t": "Graph 只是把 loop 畫成圖，行為上沒有實質差別。", "ok": false, "why": "graph 提供純 loop 沒有的明確結構、隔離與可觀測性；控制權在接線圖，而非模型。" }
+    ]
+  },
   "vector-search": {
     "en": [
       { "t": "It works like Ctrl+F, matching identical words in the documents by keyword.", "why": "That's old keyword search; modern RAG retrieval compares semantic closeness, so it finds matches even when the words differ." },

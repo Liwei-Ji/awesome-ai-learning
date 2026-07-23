@@ -358,6 +358,18 @@ const DATA = {
       ['Retrieval 檢索', '用向量相似度找相關資料'],
     ],
   },
+  'knowledge-graph': {
+    t: '知識圖譜與 GraphRAG', sub: '把知識連成關係網，回答跨文件的多跳問題',
+    key: [
+      ['01', '一般 RAG 搜「文字」；知識圖譜搜「關係」：實體→關係→實體'],
+      ['02', '擅長多跳問題：答案散在多份文件、要串起來才找得到'],
+      ['03', '圖的品質比模型大小更關鍵：好圖＋小模型 ＞ 壞圖＋大模型'],
+    ],
+    terms: [
+      ['知識圖譜 Knowledge Graph', '把資訊存成實體（節點）與關係（邊）的網路'],
+      ['GraphRAG', '用知識圖譜做檢索的 RAG：沿關係走，而非比對文字'],
+    ],
+  },
   'memory': {
     t: 'Memory：AI 怎麼記住你', sub: '跨對話的短期與長期記憶',
     key: [
@@ -392,6 +404,30 @@ const DATA = {
     terms: [
       ['Planning 規劃', '把大目標拆成可執行步驟'],
       ['Tool Use 工具', 'Agent 對外界採取的行動'],
+    ],
+  },
+  'orchestration': {
+    t: 'Agent 編排：把系統畫成圖', sub: '節點＝步驟，邊＝流向，用圖把多步驟串成可靠系統',
+    key: [
+      ['01', '任務太大就別靠單一 agent 硬做：把系統畫成圖（節點＝步驟，邊＝流向）'],
+      ['02', '常見樣式：路由、協調者－工人、平行、迴圈、交棒、人工審核'],
+      ['03', '用圖換到可控、可測、可追蹤：每個節點獨立、流程看得見'],
+    ],
+    terms: [
+      ['編排 Orchestration', '決定工作如何在多個步驟／agent 之間流動'],
+      ['協調者－工人 Orchestrator-worker', '主 agent 拆任務、分派給工人 agent 再彙整'],
+    ],
+  },
+  'skills': {
+    t: 'AI 技能包（Skills）', sub: '按需載入的能力包，教 agent 把某件事做好',
+    key: [
+      ['01', '技能包＝一包指令＋腳本／範本，教 agent 把某個任務做到位'],
+      ['02', '按需載入（progressive disclosure）：用到才讀細節，塞幾百個也不爆 context'],
+      ['03', '不用重新訓練：改檔案就換能力，可分享、可版本控管'],
+    ],
+    terms: [
+      ['Skill 技能包', '一包可載入的指令與資源，教 agent 完成特定任務'],
+      ['Progressive disclosure 漸進揭露', '平時只看名稱＋描述，需要時才載入完整內容'],
     ],
   },
   'integration': {
@@ -451,7 +487,7 @@ const OUTLINE = [
   { key: 'learn', t: 'AI 如何學習', desc: '模型怎麼被訓練', slugs: ['deep-learning', 'neural-network', 'training', 'backprop', 'cnn'] },
   { key: 'llm', t: '大型語言模型 LLM', desc: 'ChatGPT 的核心', slugs: ['tokenizer', 'embedding', 'rnn', 'transformer', 'llm', 'model-size', 'model-knowledge', 'context-window', 'inference'] },
   { key: 'chatgpt', t: '從模型到 ChatGPT', desc: '把模型訓練成助理', slugs: ['pretraining', 'fine-tuning', 'reasoning'] },
-  { key: 'apps', t: '生成式 AI 與 AI Agent', desc: '一條完整的應用鏈', slugs: ['prompt', 'system-prompt', 'thought-partner', 'find-info', 'generative', 'multimodal', 'rag', 'memory', 'mcp', 'agent', 'no-code', 'integration'] },
+  { key: 'apps', t: '生成式 AI 與 AI Agent', desc: '一條完整的應用鏈', slugs: ['prompt', 'system-prompt', 'thought-partner', 'find-info', 'generative', 'multimodal', 'rag', 'knowledge-graph', 'memory', 'mcp', 'agent', 'skills', 'orchestration', 'no-code', 'integration'] },
   { key: 'literacy', t: 'AI 素養', desc: '會用，也會判斷', slugs: ['limits', 'evaluation', 'capstone'] },
 ];
 

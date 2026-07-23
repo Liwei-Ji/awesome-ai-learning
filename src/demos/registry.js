@@ -31,6 +31,7 @@ import ThoughtPartner from './ThoughtPartner.svelte';
 import FindInfo from './FindInfo.svelte';
 import NoCode from './NoCode.svelte';
 import RAG from './RAG.svelte';
+import KnowledgeGraph from './KnowledgeGraph.svelte';
 import FineTune from './FineTune.svelte';
 import Diffusion from './Diffusion.svelte';
 import Memory from './Memory.svelte';
@@ -38,6 +39,8 @@ import MCP from './MCP.svelte';
 import Limits from './Limits.svelte';
 import Capstone from './Capstone.svelte';
 import Agent from './Agent.svelte';
+import Orchestration from './Orchestration.svelte';
+import Skills from './Skills.svelte';
 import Pipeline from './Pipeline.svelte';
 import Placeholder from './Placeholder.svelte';
 
@@ -68,6 +71,7 @@ const demos = {
   'find-info': FindInfo,
   'no-code': NoCode,
   'rag': RAG,
+  'knowledge-graph': KnowledgeGraph,
   'fine-tuning': FineTune,
   'generative': Diffusion,
   'multimodal': Multimodal,
@@ -77,6 +81,8 @@ const demos = {
   'evaluation': Evaluation,
   'capstone': Capstone,
   'agent': Agent,
+  'orchestration': Orchestration,
+  'skills': Skills,
   'integration': Pipeline,
 };
 

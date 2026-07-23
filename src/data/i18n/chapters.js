@@ -352,6 +352,18 @@ export const CH_TR = {
         ["Retrieval", "Finding relevant data by vector similarity"],
       ],
     },
+    "knowledge-graph": {
+      t: "Knowledge Graphs & GraphRAG", sub: "Link knowledge into a web of relationships to answer multi-hop questions",
+      key: [
+        ["01", "Plain RAG searches “text”; a knowledge graph searches “relationships”: entity → relation → entity"],
+        ["02", "It shines on multi-hop questions: the answer is scattered across documents and only appears once you connect the facts"],
+        ["03", "Graph quality matters more than model size: a good graph with a small model beats a poor graph with a big model"],
+      ],
+      terms: [
+        ["Knowledge Graph", "A network that stores information as entities (nodes) and relationships (edges)"],
+        ["GraphRAG", "RAG that retrieves over a knowledge graph: it follows relationships instead of matching text"],
+      ],
+    },
     "memory": {
       t: "Memory: How AI Remembers You", sub: "Short-term and long-term memory across conversations",
       key: [
@@ -386,6 +398,30 @@ export const CH_TR = {
       terms: [
         ["Planning", "Breaking a big goal into executable steps"],
         ["Tool Use", "The actions an Agent takes in the outside world"],
+      ],
+    },
+    "orchestration": {
+      t: "Agent Orchestration", sub: "Nodes are steps, edges are flow: wire multi-step systems as a graph",
+      key: [
+        ["01", "When a task is too big, do not force one agent to do it all: draw the system as a graph (nodes = steps, edges = flow)"],
+        ["02", "Common patterns: router, orchestrator-worker, parallel, loop, handoff, human review"],
+        ["03", "A graph buys you control, testability, and traceability: each node stands alone and the flow is visible"],
+      ],
+      terms: [
+        ["Orchestration", "Deciding how work flows between multiple steps or agents"],
+        ["Orchestrator-worker", "A lead agent splits the task, delegates to worker agents, then gathers the results"],
+      ],
+    },
+    "skills": {
+      t: "Agent Skills", sub: "Load-on-demand playbooks that teach an agent to do a job well",
+      key: [
+        ["01", "A skill = a bundle of instructions plus scripts/templates that teaches an agent to nail one task"],
+        ["02", "Load on demand (progressive disclosure): details are read only when needed, so hundreds fit without blowing up the context"],
+        ["03", "No retraining: swap a file to swap a capability, shareable and version-controllable"],
+      ],
+      terms: [
+        ["Skill", "A loadable bundle of instructions and resources that teaches an agent to do a specific task"],
+        ["Progressive disclosure", "Normally only the name and description are seen; the full content loads only when needed"],
       ],
     },
     "integration": {
@@ -786,6 +822,18 @@ export const CH_TR = {
         ["Retrieval 検索", "ベクトル類似度で関連資料を見つける"],
       ],
     },
+    "knowledge-graph": {
+      t: "知識グラフとGraphRAG", sub: "知識を関係のネットワークにつなぎ、複数文書をまたぐ質問に答える",
+      key: [
+        ["01", "普通の RAG は「テキスト」を、知識グラフは「関係」を探す：実体→関係→実体"],
+        ["02", "複数ホップの質問に強い：答えは複数文書に散らばり、事実をつないで初めて見つかる"],
+        ["03", "グラフの品質はモデルの大きさより重要：良いグラフ＋小さなモデル ＞ 悪いグラフ＋大きなモデル"],
+      ],
+      terms: [
+        ["知識グラフ Knowledge Graph", "情報を実体（ノード）と関係（エッジ）として保存するネットワーク"],
+        ["GraphRAG", "知識グラフで検索する RAG：テキストを照合せず、関係をたどる"],
+      ],
+    },
     "memory": {
       t: "Memory：AI はどうやってあなたを覚えるか", sub: "会話をまたぐ短期記憶と長期記憶",
       key: [
@@ -820,6 +868,30 @@ export const CH_TR = {
       terms: [
         ["Planning 計画", "大きな目標を実行可能な手順に分解すること"],
         ["Tool Use ツール", "Agent が外界に対して起こす行動"],
+      ],
+    },
+    "orchestration": {
+      t: "エージェントのオーケストレーション", sub: "ノードは手順、エッジは流れ。多段の仕組みをグラフとして組む",
+      key: [
+        ["01", "タスクが大きすぎるときは 1 つの agent に無理をさせない：システムをグラフとして描く（ノード＝手順、エッジ＝流れ）"],
+        ["02", "よくある様式：ルーター、オーケストレーター－ワーカー、並列、ループ、ハンドオフ、人による審査"],
+        ["03", "グラフにすると可制御・テスト可能・追跡可能になる：各ノードが独立し、流れが見える"],
+      ],
+      terms: [
+        ["Orchestration オーケストレーション", "複数の手順や agent の間で作業がどう流れるかを決めること"],
+        ["Orchestrator-worker オーケストレーター－ワーカー", "主 agent がタスクを分割し、ワーカー agent に振り分けて結果をまとめる"],
+      ],
+    },
+    "skills": {
+      t: "AIスキル（Skills）", sub: "必要なときだけ読み込む、タスクの手順書",
+      key: [
+        ["01", "スキル＝指令とスクリプト／テンプレートを一つにまとめ、agent にあるタスクをきちんとこなさせる"],
+        ["02", "必要なときだけ読み込む（progressive disclosure）：使うときだけ詳細を読むので、何百個あってもコンテキストが溢れない"],
+        ["03", "再学習は不要：ファイルを差し替えれば能力が変わり、共有もバージョン管理もできる"],
+      ],
+      terms: [
+        ["Skill スキル", "agent に特定のタスクを完成させる、読み込み可能な指令とリソースの一式"],
+        ["Progressive disclosure 段階的開示", "普段は名前と説明だけを見て、必要なときに完全な内容を読み込む"],
       ],
     },
     "integration": {

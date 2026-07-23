@@ -1011,6 +1011,31 @@ export const PRACTICE = {
       }
     }
   },
+  "knowledge-graph": {
+    "practical": {
+      "zh": [
+        "<b>先分清問題型態</b>：要用它的是<b>關係型／多跳</b>問題（答案要串起好幾份文件才浮現）；只是查單一事實，一般 RAG 更快更省，別為了炫技建圖。",
+        "<b>把力氣投在圖的品質，而非更大的模型</b>：<b>好圖＋小模型 ＞ 壞圖＋大模型</b>。抽取（實體、關係）與<b>去重正規化</b>（把「Anthropic」「Anthropic PBC」併成同一節點）做得好，準確率才上得去。",
+        "<b>先定義清楚的 schema</b>：講明有哪些實體型別與關係型別，抽取才有標準、節點才不會亂長。schema 模糊，圖就會又雜又不可信。",
+        "<b>常跟一般 RAG 併用</b>：用圖處理多跳與全局問題，用向量檢索補關鍵字與長尾細節，兩者互補比二選一穩。",
+        "<b>盯緊建圖與維護成本</b>：來源一變，圖就要重抽、重併、重算信心分數。上線前先想清楚更新頻率與誰維護，別讓圖悄悄過期。"
+      ],
+      "en": [
+        "<b>Sort the question type first</b>: reach for a graph on <b>relational or multi-hop</b> questions (where the answer only surfaces once you connect several documents); for a single-fact lookup, plain RAG is faster and cheaper, so don’t build a graph to show off.",
+        "<b>Spend effort on graph quality, not a bigger model</b>: <b>a good graph with a small model beats a poor graph with a big model</b>. Accuracy only climbs when extraction (entities, relationships) and <b>dedup and normalization</b> (merging “Anthropic” and “Anthropic PBC” into one node) are done well.",
+        "<b>Define a clear schema up front</b>: spell out which entity types and relation types exist so extraction has a standard and nodes don’t sprawl. A fuzzy schema yields a messy, untrustworthy graph.",
+        "<b>Combine it with plain RAG</b>: use the graph for multi-hop and global questions, and vector retrieval to catch keywords and long-tail details; the two complement each other better than picking one.",
+        "<b>Watch the build and maintenance cost</b>: when a source changes, the graph must be re-extracted, re-merged, and re-scored. Decide the refresh cadence and who owns it before you ship, or the graph quietly goes stale."
+      ],
+      "ja": [
+        "<b>まず質問の種類を見分ける</b>：グラフを使うのは<b>関係的・マルチホップ</b>の質問（複数の文書をつないで初めて答えが出るもの）です。単一の事実を引くだけなら普通の RAG の方が速く安いので、見せびらかしのためにグラフを作らないこと。",
+        "<b>大きなモデルより、グラフの品質に労力を注ぐ</b>：<b>良いグラフと小さなモデルは、悪いグラフと大きなモデルに勝つ</b>。抽出（実体・関係）と<b>重複排除・正規化</b>（「Anthropic」と「Anthropic PBC」を一つのノードに統合）をきちんとやって初めて精度が上がる。",
+        "<b>最初に明確なスキーマを定義する</b>：どんな実体型と関係型があるかを明示し、抽出に基準を持たせてノードが野放図に増えないようにする。スキーマが曖昧だと、雑で信用できないグラフになる。",
+        "<b>普通の RAG と併用する</b>：マルチホップやグローバルな質問にはグラフを、キーワードやロングテールの細部にはベクトル検索を使う。二者択一より、補い合わせた方が安定する。",
+        "<b>構築と保守のコストに注意</b>：ソースが変われば、グラフは再抽出・再統合・信頼度の再計算が必要になる。公開前に更新頻度と担当者を決めておかないと、グラフは静かに陳腐化する。"
+      ]
+    }
+  },
   "memory": {
     "practical": {
       "zh": [
@@ -1052,6 +1077,53 @@ export const PRACTICE = {
         "<b>サーバーは他人だと思って扱う</b>：送った内容を見られ、実際に動作も実行できます。信頼できる相手だけつなぎ、認証情報と権限に注意し、ツールの戻り値に潜む悪意ある指示にも警戒します。",
         "<b>ツールの説明を明確にすればモデルは正しく使う</b>：モデルは名前と説明でツールを選びます。曖昧だと誤った呼び出しや引数になるので、名前は分かりやすく、用途と入力をはっきり書きます。",
         "<b>自作の前に既存のサーバーを探す</b>：ファイル、データベース、Git など、よく使うサービスには公式やコミュニティの MCP サーバーが既にあります。まずそれを試し、本当に足りないときだけ自作します。"
+      ]
+    }
+  },
+  "skills": {
+    "practical": {
+      "zh": [
+        "<b>描述寫清楚，agent 才會在對的時候載入</b>：agent 是靠技能的名稱與描述決定要不要用它。把「什麼時候該用這個技能」講明白，別含糊，不然它不是漏掉就是載錯。",
+        "<b>常駐的部分越小越好</b>：一直可見的只該是名稱＋一句描述，細節、長步驟、範本都推進「用到才載入」的檔案裡。別把整本手冊塞進描述。",
+        "<b>一個技能只做一件事</b>：與其一包塞十件事，不如拆成多個小而準的技能。範圍清楚，agent 才挑得準，維護與版控也單純。",
+        "<b>把技能當程式碼看待</b>：別人給的技能可能夾帶指令與腳本。只裝信得過的來源，裝前看清楚內容，並且實測 agent 真的會觸發對的那一個。"
+      ],
+      "en": [
+        "<b>Write a crisp description so the agent loads it at the right time</b>: The agent decides whether to use a skill from its name and description. Spell out when this skill should be used and avoid vague wording, or it will either miss the skill or load the wrong one.",
+        "<b>Keep the always-on part tiny</b>: Only the name and a one-line description should be always visible; push the details, long steps, and templates into files that load on demand. Do not stuff the whole manual into the description.",
+        "<b>One skill, one job</b>: Rather than cramming ten tasks into one bundle, split them into small, precise skills. A clear scope lets the agent pick the right one and keeps maintenance and versioning simple.",
+        "<b>Treat skills like code</b>: A skill from someone else can carry instructions and scripts. Install only trusted sources, read what is inside first, and actually test that the agent triggers the right one."
+      ],
+      "ja": [
+        "<b>説明を明確に書き、agent が正しいタイミングで読み込むように</b>：agent はスキルの名前と説明を見て使うかどうかを決めます。「いつこのスキルを使うべきか」をはっきり書き、曖昧にしないこと。さもないと見落とすか、別のスキルを読み込みます。",
+        "<b>常駐する部分は小さく</b>：常に見えるのは名前と一行の説明だけにし、詳細や長い手順、テンプレートは「必要なときに読み込む」ファイルに押し込みます。マニュアル全部を説明に詰め込まないこと。",
+        "<b>一つのスキルは一つの仕事</b>：十個の仕事を一つに詰め込むより、小さく的確なスキルに分けます。範囲が明確なら agent は正しく選べ、保守もバージョン管理も単純です。",
+        "<b>スキルはコードとして扱う</b>：他人のスキルは指令やスクリプトを仕込めます。信頼できる出所だけを入れ、事前に中身を確認し、正しいスキルが発火するか実際にテストします。"
+      ]
+    }
+  },
+  "orchestration": {
+    "practical": {
+      "zh": [
+        "<b>先從能動的最簡單形狀做起</b>：別一開始就畫複雜大圖。一次呼叫能解決就別套圖，等真的有分支或迴圈了再長出節點，別過度設計。",
+        "<b>把狀態寫明確</b>：讓節點之間傳一份清楚的共享狀態（做了什麼、拿到什麼結果）。狀態看得見，整套系統才能除錯、能中斷後續跑。",
+        "<b>迴圈一定要加護欄</b>：任何會重複的節點都設好最多幾次（max iterations）與逾時，跑不完就停，別讓它無限繞、燒錢卡死。",
+        "<b>危險動作放一個人工審核節點</b>：寄信、付款、寫進正式環境這種不可逆的動作，讓流程先暫停等人同意，再往下走。",
+        "<b>節點小而可測</b>：每個節點只做一件事，能單獨測、失敗能隔離。節點越小越好組合、越好追蹤是哪一步出錯。"
+      ],
+      "en": [
+        "<b>Start with the simplest shape that works</b>: Don’t draw a big complex graph up front. If one call solves it, skip the graph, and only grow nodes once you actually have branching or loops. Don’t over-engineer.",
+        "<b>Make state explicit</b>: Pass a clear shared state between nodes (what was done, what results came back). Visible state is what lets the whole system be debugged and resumed after an interruption.",
+        "<b>Always guard your loops</b>: Give any repeating node a max-iterations cap and a timeout, so it stops when it can’t finish instead of spinning forever, burning money and stalling.",
+        "<b>Put a human-in-the-loop node on risky actions</b>: For irreversible actions like sending email, making a payment, or writing to production, pause the flow for a person to approve before it continues.",
+        "<b>Keep nodes small and testable</b>: Each node should do one thing so it can be tested alone and its failures isolated. Smaller nodes compose more easily and make it clear which step went wrong."
+      ],
+      "ja": [
+        "<b>まず動く一番シンプルな形から</b>：最初から複雑な大きいグラフを描かないこと。1 回の呼び出しで済むならグラフにせず、本当に分岐やループが出てきてからノードを増やす。過剰設計しない。",
+        "<b>状態を明示する</b>：ノード間で明確な共有状態（何をやったか、どんな結果が返ったか）を渡す。状態が見えることで、システム全体をデバッグでき、中断後も続きから走れる。",
+        "<b>ループには必ずガードを</b>：繰り返すノードには最大反復回数の上限とタイムアウトを設定し、終わらなければ止める。無限に回してコストを食い、止まらせないこと。",
+        "<b>危険な操作には人による審査ノードを置く</b>：メール送信、支払い、本番環境への書き込みなど不可逆な操作は、続行前にフローを一時停止して人の承認を得る。",
+        "<b>ノードは小さくテスト可能に</b>：各ノードは 1 つのことだけを行い、単独でテストでき、失敗を隔離できるようにする。小さいノードほど組み合わせやすく、どの手順で失敗したかも分かりやすい。"
       ]
     }
   },

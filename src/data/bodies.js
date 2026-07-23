@@ -1978,6 +1978,74 @@ export const BODIES = {
       }
     ]
   },
+  "knowledge-graph": {
+    "zh": [
+      {
+        "h": "知識圖譜是什麼",
+        "p": "一般 RAG 搜的是<b>文字</b>：找出用字跟問題相近的文件片段。<b>知識圖譜</b>換一種存法，把知識存成<b>實體（節點）</b>與<b>關係（邊）</b>的網路，每一條事實就是一組<b>三元組</b>：主體→關係→客體，例如「Anthropic → 打造 → Claude」。<b>GraphRAG</b> 就是沿著這些關係去檢索，而不是比對關鍵字。"
+      },
+      {
+        "h": "為什麼要用它",
+        "p": "殺手級用途是<b>多跳（multi-hop）推理</b>：答案不在任何一段文字裡，而是散在多份文件、要把好幾個事實串起來才浮現。像「哪些供應商同時也投資了我們的競爭對手？」平面 RAG 會卡住，因為沒有單一片段裝得下答案；圖譜卻能一路把鏈條走出來，例如某次延遲來自供應商問題，而那來自倉儲狀況，最後讓轉換率掉了 23%。"
+      },
+      {
+        "h": "區域搜尋與全局搜尋",
+        "p": "查詢分兩種。<b>區域搜尋（local）</b>問的是某個特定實體與它的鄰居，例如「這家供應商跟誰有往來」。<b>全局搜尋（global）</b>問的是整份資料的主題或模式，例如「這批文件在講哪幾件大事」，靠的是先把節點聚成社群、再摘要整群。"
+      },
+      {
+        "h": "圖是怎麼蓋出來的",
+        "p": "流程大致是：<b>實體抽取</b>（把裡面的「東西」挑出來）、<b>關係抽取</b>（它們怎麼連）、定義一套<b>schema</b>（有哪些實體與關係型別）、<b>去重與正規化</b>（把「Anthropic」和「Anthropic PBC」合成同一個節點）、再標上<b>信心分數</b>。查詢時可用圖查詢語言（<b>Cypher、SPARQL</b>），或讓 LLM 把問題翻成一段圖的走訪。"
+      },
+      {
+        "h": "好處與取捨",
+        "p": "好處：多跳準確率更高（實測約比基準 RAG 高 18%）、<b>省很多 token</b>（只取一小塊子圖，不用塞幾十段）、<b>幻覺更少</b>（關係是明寫的，不是憑感覺），還能回答平面 RAG 做不到的全局問題。關鍵心法：<b>圖的品質比模型大小更重要</b>，好圖配小模型，往往勝過壞圖配大模型。代價是<b>建圖與維護比丟片段進向量庫費工</b>，所以問題偏關係／多跳時才用它，單純查一筆就別用，實務上也常跟一般 RAG 搭配。"
+      }
+    ],
+    "en": [
+      {
+        "h": "What a knowledge graph is",
+        "p": "Plain RAG searches <b>text</b>: it finds document chunks whose wording is close to the question. A <b>knowledge graph</b> stores things differently, as a network of <b>entities (nodes)</b> and <b>relationships (edges)</b>, where each fact is a <b>triple</b>: subject → relation → object, for example “Anthropic → created → Claude.” <b>GraphRAG</b> then retrieves by following those relationships rather than matching keywords."
+      },
+      {
+        "h": "Why it matters",
+        "p": "The killer use case is <b>multi-hop reasoning</b>: questions whose answer sits in no single passage but is scattered across documents and only surfaces once you connect several facts. Take “which of our suppliers are also investors in a competitor?” Flat RAG stalls because no one chunk holds the answer; a graph traces the chain, for instance that a delay came from a supplier issue, which came from a warehouse problem, which cut conversion by 23 percent."
+      },
+      {
+        "h": "Local vs global search",
+        "p": "There are two flavors of query. <b>Local search</b> asks about a specific entity and its neighborhood, such as “who does this supplier deal with.” <b>Global search</b> asks about themes or patterns across the whole dataset, such as “what big topics run through these documents,” which works by grouping nodes into communities and summarizing each cluster."
+      },
+      {
+        "h": "How the graph is built",
+        "p": "The pipeline is roughly: <b>entity extraction</b> (pull out the things), <b>relationship extraction</b> (how they connect), a <b>schema</b> (the types of entities and relations), <b>deduplication and normalization</b> (merge “Anthropic” and “Anthropic PBC” into one canonical node), plus <b>confidence scores</b>. Querying then uses a graph query language (<b>Cypher, SPARQL</b>) or an LLM that translates the question into a graph traversal."
+      },
+      {
+        "h": "Benefits and the trade-off",
+        "p": "Benefits: better multi-hop accuracy (about 18 percent over baseline RAG in reported figures), <b>far fewer tokens</b> (you retrieve a focused subgraph, not dozens of chunks), <b>fewer hallucinations</b> (relationships are explicit, not vibes), and it can answer global questions flat RAG cannot. The key insight: <b>graph quality matters more than model size</b>, a smaller model with a good graph beats a bigger model with a poor graph. The cost is that <b>building and maintaining the graph is more work than dumping chunks into a vector database</b>, so use it when questions are relational or multi-hop, skip it for simple lookup, and in practice combine it with ordinary RAG."
+      }
+    ],
+    "ja": [
+      {
+        "h": "知識グラフとは",
+        "p": "普通の RAG が探すのは<b>テキスト</b>です。質問と言い回しが近い文書の断片を見つけます。<b>知識グラフ</b>は保存の仕方を変え、知識を<b>実体（ノード）</b>と<b>関係（エッジ）</b>のネットワークとして持ちます。一つひとつの事実は<b>三つ組（トリプル）</b>で、主語→関係→目的語、たとえば「Anthropic → 作った → Claude」です。<b>GraphRAG</b> は、キーワードを照合するのではなく、その関係をたどって検索します。"
+      },
+      {
+        "h": "なぜ大切か",
+        "p": "決め手となる用途は<b>マルチホップ推論</b>です。答えはどの一段落にもなく、複数の文書に散らばっていて、いくつかの事実をつないで初めて浮かび上がる質問です。「うちの供給業者のうち、競合に出資している会社はどれ？」のような問いでは、単一の断片に答えが収まらないため平面的な RAG は詰まります。グラフなら鎖をたどれます。たとえば、ある遅延は供給業者の問題から来ていて、それは倉庫の問題から来ていて、最終的に転換率を 23% 下げた、というように。"
+      },
+      {
+        "h": "ローカル検索とグローバル検索",
+        "p": "クエリには二種類あります。<b>ローカル検索</b>は特定の実体とその近隣を問うもので、「この供給業者は誰と取引しているか」のような質問です。<b>グローバル検索</b>はデータ全体にまたがる主題やパターンを問うもので、「この文書群には大きくどんな話題があるか」のような質問です。ノードをコミュニティにまとめ、各クラスターを要約して答えます。"
+      },
+      {
+        "h": "グラフはどう作るか",
+        "p": "流れはおおよそ、<b>実体抽出</b>（中の「もの」を取り出す）、<b>関係抽出</b>（どうつながるか）、<b>スキーマ</b>の定義（実体と関係の型）、<b>重複排除と正規化</b>（「Anthropic」と「Anthropic PBC」を一つの正規ノードに統合）、そして<b>信頼度スコア</b>です。検索時にはグラフクエリ言語（<b>Cypher、SPARQL</b>）を使うか、LLM が質問をグラフの走査に翻訳します。"
+      },
+      {
+        "h": "利点とトレードオフ",
+        "p": "利点：マルチホップの精度が高い（報告値でベースライン RAG より約 18%）、<b>トークンが大幅に少ない</b>（数十の断片ではなく、絞り込んだ部分グラフだけを取る）、<b>幻覚が少ない</b>（関係は雰囲気ではなく明示されている）、そして平面的な RAG では答えられないグローバルな質問に答えられます。核心：<b>グラフの品質はモデルの大きさより重要</b>で、良いグラフと小さなモデルは、悪いグラフと大きなモデルに勝ります。代償は、<b>グラフの構築と保守が、断片をベクトルデータベースに放り込むより手間がかかる</b>ことです。だから質問が関係的・マルチホップなときに使い、単純な照合には使わず、実務では通常の RAG と組み合わせます。"
+      }
+    ]
+  },
   "memory": {
     "zh": [
       {
@@ -2114,6 +2182,74 @@ export const BODIES = {
       }
     ]
   },
+  "skills": {
+    "zh": [
+      {
+        "h": "它是什麼",
+        "p": "<b>Skill</b>（技能包）就是一個資料夾：一份說明，加上可選的腳本、範本或參考檔案，教 AI agent 把某一件事做到位。它只在任務用得上時才載入，其餘時間只佔一個名字加一句簡短描述。"
+      },
+      {
+        "h": "平時只露名字，用到才展開",
+        "p": "agent 一開始只看得到每個技能的<b>名稱與一句描述</b>；判斷這次任務用得上，才把完整指令與附帶檔案讀進來。這就是<b>漸進揭露（progressive disclosure）</b>，也是為什麼你能塞給它幾百個技能，也不會一次擠爆上下文。"
+      },
+      {
+        "h": "跟工具／MCP 不一樣",
+        "p": "工具與 MCP 是 agent 的「手」：連到外部系統、讀資料、呼叫 API、實際動手。技能是「劇本」：該照什麼步驟、輸出什麼格式、怎麼做才漂亮。技能本身可以叫用工具。工具給的是<b>行動的能力</b>，技能給的是<b>把能力用好的知識</b>。"
+      },
+      {
+        "h": "不用重新訓練",
+        "p": "微調是把行為烤進權重，貴、靜態、要換就得重練。技能只是執行時載入的檔案：便宜、隨改隨用、能分享、能版本控管，像是「給流程用的 RAG」。想換一個能力，換一包檔案就好。"
+      },
+      {
+        "h": "它不是系統提示",
+        "p": "系統提示是全程都在的一段角色與規則；技能是<b>需要時才載入</b>，可以又長又細。常見誤解是把它當外掛模型或魔法，其實它只是打包好的 know-how。還要當成程式碼看待：來路不明的技能可能夾帶指令或腳本，別隨手就裝。"
+      }
+    ],
+    "en": [
+      {
+        "h": "What it is",
+        "p": "A <b>Skill</b> is a self-contained folder: a set of instructions plus optional scripts, templates, and reference files that teaches an AI agent how to do one specific task well. It is loaded only when the task calls for it; the rest of the time it costs only its name and a short description."
+      },
+      {
+        "h": "Only the name shows until it is needed",
+        "p": "The agent always sees just each skill's <b>name and a one-line description</b>. Only when it judges the skill relevant does it read the full instructions and bundled files. That is <b>progressive disclosure</b>, and it is why you can give an agent hundreds of skills without flooding its context."
+      },
+      {
+        "h": "Not the same as tools or MCP",
+        "p": "Tools and MCP are the agent's hands: they connect to outside systems, read data, call APIs, take actions. A skill is the playbook: what steps to follow, what format to produce, how to do the job well. A skill can itself call tools. Tools give the <b>ability to act</b>; skills give the <b>know-how to act well</b>."
+      },
+      {
+        "h": "No retraining needed",
+        "p": "Fine-tuning bakes behavior into the weights: expensive, static, and it needs retraining to change. A skill is just files loaded at runtime: cheap, editable, shareable, and version-controllable, like RAG for procedures. To change a capability, you just swap a folder of files."
+      },
+      {
+        "h": "It is not a system prompt",
+        "p": "A system prompt is a role and rules that stay in context the whole time; a skill is <b>loaded only when relevant</b> and can be long and detailed. A common misconception is to treat a skill as a plug-in model or magic. It is just packaged know-how, and you should treat it like code: an untrusted skill can carry instructions and scripts, so do not install ones you do not trust."
+      }
+    ],
+    "ja": [
+      {
+        "h": "スキルとは",
+        "p": "<b>Skill</b>（スキル）は一つのフォルダです。説明書に加えて、必要に応じてスクリプトやテンプレート、参考資料をまとめ、AI エージェントにある特定のタスクをうまくこなす方法を教えます。使うときだけ読み込まれ、普段は名前と短い説明だけを占めます。"
+      },
+      {
+        "h": "普段は名前だけ、必要なときに展開",
+        "p": "エージェントは最初、各スキルの<b>名前と一行の説明</b>しか見ません。そのスキルが今回のタスクに関係すると判断したときだけ、完全な指令と付属ファイルを読み込みます。これが<b>段階的開示（progressive disclosure）</b>で、だからこそ何百個のスキルを持たせてもコンテキストが溢れません。"
+      },
+      {
+        "h": "ツールや MCP とは違う",
+        "p": "ツールと MCP はエージェントの「手」です。外部システムにつなぎ、データを読み、API を呼び、実際に行動します。スキルは「台本」です。どんな手順で、どんな形式で出し、どうすればうまくいくか。スキル自身がツールを呼ぶこともできます。ツールは<b>行動する能力</b>を、スキルは<b>その能力をうまく使う知識</b>を与えます。"
+      },
+      {
+        "h": "再学習は要らない",
+        "p": "ファインチューニングは振る舞いを重みに焼き込みます。高価で静的、変えるには再学習が必要です。スキルは実行時に読み込むファイルにすぎません。安く、編集でき、共有でき、バージョン管理できる、いわば「手順版の RAG」です。能力を変えたいならフォルダを差し替えるだけです。"
+      },
+      {
+        "h": "システムプロンプトではない",
+        "p": "システムプロンプトは会話全体にわたって残る役割とルール。スキルは<b>関係するときだけ読み込まれ</b>、長く詳細にできます。よくある誤解は、スキルをプラグインのモデルや魔法だと思うこと。実際はパッケージ化された know-how にすぎず、コードとして扱うべきです。信頼できないスキルは指令やスクリプトを仕込めるので、素性の知れないものは入れないこと。"
+      }
+    ]
+  },
   "agent": {
     "zh": [
       {
@@ -2179,6 +2315,74 @@ export const BODIES = {
       {
         "h": "万能の自動操縦ではない",
         "p": "よくある誤解は、目標さえ与えればエージェントが必ず達成すると思うことです。実際には各ステップで判断を誤ったり間違ったツールを選んだりし、手順が増えるほど失敗が積み重なります。重要な作業では人が見張り、検証する必要があります。"
+      }
+    ]
+  },
+  "orchestration": {
+    "zh": [
+      {
+        "h": "一個 agent 做不完，就畫成圖",
+        "p": "單一 agent 就是一個「想→做→看」的迴圈，自己決定一切。任務一大、分支一多，它就容易亂繞、難控制也難除錯。這時把系統畫成一張<b>圖</b>：節點是步驟或子 agent，邊是它們之間的流向。<b>編排</b>就是決定工作怎麼在這張圖上流動。"
+      },
+      {
+        "h": "介於單一 agent 與寫死流程之間",
+        "p": "寫死的線性流程（A→B→C）很好預測，但太死板；單一 agent 很靈活，卻難掌控。<b>編排圖</b>取兩者中間：用明確的節點和邊，加上<b>條件路由</b>，所以你同時拿到結構與彈性。"
+      },
+      {
+        "h": "幾個必學的樣式",
+        "p": "<b>路由</b>：一個節點看輸入，把它送去對的分支。<b>協調者－工人</b>：主 agent 拆任務、分派給工人 agent 再彙整。<b>平行展開再彙整</b>：同時跑好幾個節點，最後合併。<b>迴圈</b>：一個節點重複到條件滿足，但要有<b>上限</b>防止無限跑。<b>交棒</b>：一個 agent 把控制權和情境交給專家 agent。<b>人工審核</b>：某個節點先暫停等人同意再繼續。"
+      },
+      {
+        "h": "圖會帶著共享狀態",
+        "p": "圖在節點之間傳遞一份<b>狀態</b>：做了哪些事、拿到什麼中間結果。狀態寫得清楚，整個系統才<b>可除錯、可續跑</b>。這也是為什麼要用圖而不是一坨大 prompt：<b>可控</b>（看得見也管得住流程）、<b>可靠</b>（每個節點能單獨測，失敗被隔離）、<b>可追蹤</b>（能回放跑了哪條路）、<b>可重用</b>（節點能組合）。LangGraph 這類框架就是把這件事做成工具。"
+      },
+      {
+        "h": "什麼時候用，什麼時候別用",
+        "p": "有分支、有迴圈、要多個專家分工的<b>多步驟任務</b>才需要編排；<b>單純一次呼叫就別套圖</b>。常見坑：<b>過度設計</b>（一次呼叫就夠卻硬畫圖）、<b>狀態肥大</b>、<b>無限迴圈</b>（要加上限），還有跳太多節點拖慢速度、墊高成本。記住整條鏈：agent 是會思考的迴圈，工具／MCP 是它的手，技能包是它的劇本，而編排是把多步驟、多 agent 接成一套可靠系統的<b>接線圖</b>。"
+      }
+    ],
+    "en": [
+      {
+        "h": "When one agent is not enough, draw a graph",
+        "p": "A single agent is one think, act, observe loop that decides everything itself. Once a task gets big or branchy, it tends to wander and is hard to control or debug. So you draw the system as a <b>graph</b>: nodes are steps or sub-agents, edges are the flow between them. <b>Orchestration</b> is how you decide the work moves through that graph."
+      },
+      {
+        "h": "The middle ground between one agent and a rigid workflow",
+        "p": "A hard-coded linear workflow (A→B→C) is predictable but rigid; a single agent is flexible but hard to control. An <b>orchestration graph</b> sits in between: explicit nodes and edges with <b>conditional routing</b>, so you get structure and flexibility at once."
+      },
+      {
+        "h": "A few patterns worth knowing",
+        "p": "<b>Router</b>: a node inspects the input and sends it down the right branch. <b>Orchestrator-worker</b>: a lead agent breaks a goal into subtasks, delegates each to a worker, then gathers the results. <b>Parallel fan-out then gather</b>: run several nodes at once, then merge. <b>Loop</b>: a node repeats until a condition is met, with a <b>guard or max iterations</b> so it cannot run forever. <b>Handoff</b>: one agent passes control and context to a specialist. <b>Human-in-the-loop</b>: a node pauses for approval before continuing."
+      },
+      {
+        "h": "The graph carries shared state",
+        "p": "The graph passes a shared <b>state</b> between nodes: what has been done and what intermediate results came back. Explicit state is what makes the system <b>debuggable and resumable</b>. That is also why you reach for a graph instead of one giant prompt: <b>controllability</b> (you can see and constrain the flow), <b>reliability</b> (each node is testable and failures are isolated), <b>observability</b> (you can trace which path ran), and <b>reusability</b> (nodes compose). Frameworks like LangGraph make this concrete."
+      },
+      {
+        "h": "When to use it, and when not to",
+        "p": "Reach for orchestration on <b>multi-step tasks with branching, loops, or multiple specialists</b>; do <b>not</b> wrap a single simple call in a graph. Common pitfalls: <b>over-engineering</b> (a graph where one call would do), <b>state bloat</b>, and <b>infinite loops</b> (which need guards), plus too many hops adding latency and cost. Keep the whole chain in mind: the agent is the reasoning loop, tools and MCP are its hands, skills are its playbooks, and orchestration is the <b>wiring diagram</b> that connects multiple steps or agents into one reliable system."
+      }
+    ],
+    "ja": [
+      {
+        "h": "1 つの agent で足りないなら、グラフにする",
+        "p": "単一の agent は「考える→実行→見る」を回すループで、すべてを自分で決めます。タスクが大きく、分岐が多くなると、あちこちさまよいがちで、制御もデバッグも難しくなります。そこでシステムを<b>グラフ</b>として描きます：ノードは手順や子 agent、エッジはその間の流れです。<b>オーケストレーション</b>とは、作業がこのグラフ上をどう流れるかを決めることです。"
+      },
+      {
+        "h": "単一 agent と固定ワークフローの中間",
+        "p": "固定した直線的なワークフロー（A→B→C）は予測しやすい反面、融通が利きません。単一 agent は柔軟ですが制御が難しい。<b>オーケストレーショングラフ</b>はその中間です：明示的なノードとエッジに<b>条件分岐（ルーティング）</b>を加えるので、構造と柔軟さを同時に得られます。"
+      },
+      {
+        "h": "押さえておきたい様式",
+        "p": "<b>ルーター</b>：あるノードが入力を見て、正しい分岐へ送る。<b>オーケストレーター－ワーカー</b>：主 agent が目標をサブタスクに分け、ワーカーに振り分け、結果をまとめる。<b>並列展開してから集約</b>：複数のノードを同時に走らせ、最後に統合する。<b>ループ</b>：条件が満たされるまでノードを繰り返すが、無限に回らないよう<b>ガード（最大反復回数）</b>を付ける。<b>ハンドオフ</b>：ある agent が制御と文脈を専門の agent に渡す。<b>ヒューマン・イン・ザ・ループ</b>：あるノードが承認を待って一時停止してから続行する。"
+      },
+      {
+        "h": "グラフは共有状態を運ぶ",
+        "p": "グラフはノード間で共有の<b>状態</b>を運びます：何をやったか、どんな中間結果が返ってきたか。状態を明示することで、システムは<b>デバッグ可能かつ再開可能</b>になります。巨大な 1 つの prompt ではなくグラフを選ぶ理由もここにあります：<b>可制御性</b>（流れが見え、制約できる）、<b>信頼性</b>（各ノードをテストでき、失敗が隔離される）、<b>可観測性</b>（どの経路を通ったか追える）、<b>再利用性</b>（ノードを組み合わせられる）。LangGraph のようなフレームワークがこれを具体化します。"
+      },
+      {
+        "h": "使うべきとき、使わないとき",
+        "p": "分岐やループ、複数の専門家による分担がある<b>多段のタスク</b>にこそオーケストレーションを使います。<b>単純な 1 回の呼び出し</b>をグラフで包む必要はありません。よくある落とし穴：<b>過剰設計</b>（1 回の呼び出しで済むのにグラフにする）、<b>状態の肥大化</b>、<b>無限ループ</b>（ガードが必要）、そしてノードを経由しすぎて遅延とコストが増えること。全体の鎖を意識しましょう：agent は思考のループ、ツールと MCP はその手、スキルは手順書、そしてオーケストレーションは複数の手順や agent を 1 つの信頼できるシステムへつなぐ<b>配線図</b>です。"
       }
     ]
   },

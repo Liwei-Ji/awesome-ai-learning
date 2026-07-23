@@ -94,6 +94,34 @@ export const INTERVIEWS = {
     ],
     related: ["agent", "integration", "mcp"],
   },
+  "loop-vs-graph": {
+    cat: "agent",
+    label: "Agent 的「迴圈」和「編排圖」差在哪？",
+    q: "同樣是讓 AI 做多步驟的事，「單一 agent 迴圈（loop）」和「把系統編排成一張圖（graph）」差在哪？各在什麼情況該用哪一種？",
+    trap: "別把兩者當成互斥的對立。真正的差別是「誰決定流程」：loop 是模型在迴圈裡自己決定下一步；graph 是你把節點與邊先接好、流程由結構決定。而且一個 loop 常常只是 graph 裡的一個節點，它們會組合，不是二選一。",
+    points: [
+      { icon: "atom", title: "Loop：模型自己迭代", desc: "單一 agent 跑在一個迴圈裡：<b>想→做→看→再想</b>，由<b>模型動態決定下一步</b>。適合<b>開放式、無法預先規劃路徑</b>的任務。代價是可能鬼打牆、無限跑、難觀測，所以要靠 loop engineering 加上限與完成條件。" },
+      { icon: "scale", title: "Graph：結構先接好", desc: "把系統畫成<b>節點（步驟／子 agent）＋邊（流向）</b>，用<b>路由、平行、迴圈、交棒</b>把流程接好。控制權在<b>接線圖</b>：每個節點可單獨測試、流程看得見、失敗能隔離。適合<b>可分解成已知步驟、需要分支或多個專才</b>的任務。" },
+      { icon: "network", title: "關鍵：誰決定流程", desc: "差別不是「有沒有用 LLM」，而是<b>流程由模型即時決定（loop）還是由結構事先決定（graph）</b>。兩者常組合：graph 的某個節點裡就是一個 agent loop。先用最簡單能解的形狀，別為單一簡單呼叫硬套一張大圖。" },
+    ],
+    core: [
+      { h: "先點根本", d: "<b>Loop</b>＝單一 agent 在迴圈裡自決下一步（控制在模型內）；<b>Graph</b>＝多節點＋邊的外部結構（控制在接線圖）。差別是<b>誰決定流程</b>，不是有沒有用到 LLM。" },
+      { h: "各自的強項", d: "Loop 適合<b>開放式、路徑無法預先規劃</b>的探索；Graph 適合<b>可分解、要分支／平行／多專才</b>、且需要可控可測的任務。" },
+      { h: "它們會組合", d: "一個 <b>loop 可以是 graph 裡的一個節點</b>；一張 graph 也可以在某個節點放一個自由迭代的 agent。實務上常是<b>帶 agent-loop 節點的 graph</b>。" },
+      { h: "別忘了", d: "兩者都要<b>煞車</b>：loop 要步數／花費上限與完成條件；graph 的迴圈節點也要 guard。<b>先用最小可行的形狀</b>，需要控制與可觀測性時才升級成 graph。" },
+    ],
+    plus: [
+      "判斷法則：說得出固定步驟就先用 graph；連下一步都要看結果才知道，才需要 loop。",
+      "可觀測性差很多：graph 能畫出走了哪條路、卡在哪個節點；純 loop 只能看一長串思考紀錄。",
+      "多數「AI 產品」其實是 graph（固定流程＋幾個 LLM 節點），只有少數步驟真的無法預先決定時才需要 agent loop。",
+    ],
+    traps: [
+      "把 loop 和 graph 當成二選一的對立（其實 loop 常是 graph 的一個節點）。",
+      "任務明明能拆成固定步驟，卻硬用單一自由 agent loop，結果難控又難測。",
+      "為了一個簡單呼叫套一張大 graph，徒增狀態與延遲（過度工程）。",
+    ],
+    related: ["orchestration", "loop-control", "agent-vs-workflow"],
+  },
   "sycophancy": {
     cat: "prompting",
     label: "AI 為什麼老是附和我？",
@@ -2215,6 +2243,32 @@ const INT_TR = {
         "Letting it auto-execute risky actions (payments, deletes) with no human confirmation.",
       ],
     },
+    "loop-vs-graph": {
+      label: "What is the difference between an agent loop and an orchestration graph?",
+      q: "Both do multi-step work with AI. What is the difference between a single agent loop and wiring the system as a graph, and when should you use each?",
+      trap: "Don't treat them as opposites. The real difference is who decides the flow: a loop lets the model decide the next step inside a loop; a graph is where you wire up the nodes and edges in advance and the structure decides the flow. And a loop is often just one node inside a graph, they compose, it is not either/or.",
+      points: [
+        { title: "Loop: the model iterates itself", desc: "A single agent runs in a loop: <b>think → act → observe → think again</b>, with the <b>model deciding the next step dynamically</b>. Good for <b>open-ended tasks whose path can't be planned in advance</b>. The cost: it can circle, run forever, and be hard to observe, so it needs loop engineering (limits and a done condition)." },
+        { title: "Graph: structure wired first", desc: "Draw the system as <b>nodes (steps / sub-agents) plus edges (flow)</b>, using <b>routing, parallelism, loops, and handoffs</b> to fix the flow. Control lives in the <b>wiring</b>: each node is testable on its own, the flow is visible, and failures are isolated. Good for <b>tasks that decompose into known steps, or need branching or several specialists</b>." },
+        { title: "The key: who decides the flow", desc: "The difference isn't \"whether an LLM is used\", it's <b>whether the model decides the flow live (loop) or the structure decides it up front (graph)</b>. They often combine: a node inside a graph can itself be an agent loop. Use the simplest shape that works, don't wrap a single simple call in a big graph." },
+      ],
+      core: [
+        { h: "Start with the fundamentals", d: "<b>Loop</b> = a single agent deciding its next step inside a loop (control lives in the model); <b>Graph</b> = an external structure of nodes plus edges (control lives in the wiring). The difference is <b>who decides the flow</b>, not whether an LLM is involved." },
+        { h: "What each is good at", d: "A loop suits <b>open-ended exploration whose path can't be pre-planned</b>; a graph suits <b>decomposable tasks that need branching / parallelism / multiple specialists</b> and want to stay controllable and testable." },
+        { h: "They compose", d: "A <b>loop can be a single node inside a graph</b>; a graph can also place a freely-iterating agent at one node. In practice you often get a <b>graph with agent-loop nodes</b>." },
+        { h: "Don't forget", d: "Both need <b>brakes</b>: a loop needs step/cost limits and a done condition; a graph's loop node needs a guard too. <b>Start with the minimal shape</b> and only upgrade to a graph when you need control and observability." },
+      ],
+      plus: [
+        "Rule of thumb: if you can name the fixed steps, reach for a graph; if you can't know the next step until you see the last result, that's when you need a loop.",
+        "Observability differs a lot: a graph can show which path ran and which node it's stuck on; a raw loop only gives you a long trace of thoughts.",
+        "Most \"AI products\" are really graphs (a fixed flow plus a few LLM nodes); only the few genuinely unplannable steps need an agent loop.",
+      ],
+      traps: [
+        "Treating loop and graph as an either/or (a loop is often just one node in a graph).",
+        "Forcing a single free-running agent loop on a task that clearly decomposes into fixed steps, ending up hard to control and test.",
+        "Wrapping one simple call in a big graph, adding state and latency for nothing (over-engineering).",
+      ],
+    },
     "sycophancy": {
       label: "Why does AI keep agreeing with me?",
       q: "I share an idea and AI often says \"great!\" and goes along with me. Does that mean my idea is actually good?",
@@ -3849,6 +3903,32 @@ const INT_TR = {
         "支払い・削除など高リスク操作を、人の確認なしで自動実行させる。",
       ],
     },
+    "loop-vs-graph": {
+      label: "agent の「ループ」と「オーケストレーショングラフ」の違いは？",
+      q: "どちらも AI に多段の作業をさせる。単一の agent ループと、システムをグラフとして組むことの違いは何か。それぞれいつ使う？",
+      trap: "両者を対立するものと考えないこと。本当の違いは「誰がフローを決めるか」：ループはモデルがループ内で次の一手を決める；グラフはノードとエッジを事前に配線し、構造がフローを決める。しかもループはしばしばグラフの中の一つのノードにすぎず、二者択一ではなく組み合わせる。",
+      points: [
+        { title: "ループ：モデルが自ら反復", desc: "単一の agent がループで動く：<b>考える→動く→観察→また考える</b>で、<b>次の一手をモデルが動的に決める</b>。<b>事前に経路を計画できない開放的なタスク</b>に向く。代償として堂々巡り・無限ループ・観測しにくさがあり、loop engineering（上限と完了条件）が要る。" },
+        { title: "グラフ：先に構造を配線", desc: "システムを<b>ノード（手順／サブ agent）＋エッジ（流れ）</b>として描き、<b>ルーティング・並列・ループ・引き継ぎ</b>でフローを固定する。制御は<b>配線図</b>にあり、各ノードは単独でテスト可能、流れが見え、失敗を隔離できる。<b>既知の手順に分解でき、分岐や複数の専門家が要る</b>タスクに向く。" },
+        { title: "核心：誰がフローを決めるか", desc: "違いは「LLM を使うか」ではなく、<b>モデルがその場で決める（ループ）か、構造が事前に決める（グラフ）か</b>。両者はよく組み合わさる：グラフのあるノードが agent ループそのものになる。最も単純な形から始め、単純な一回の呼び出しを大きなグラフで包まない。" },
+      ],
+      core: [
+        { h: "まず根本", d: "<b>ループ</b>＝単一 agent がループ内で次の一手を決める（制御はモデル内）；<b>グラフ</b>＝ノードとエッジの外部構造（制御は配線図）。違いは<b>誰がフローを決めるか</b>で、LLM を使うかどうかではない。" },
+        { h: "それぞれの得意", d: "ループは<b>経路を事前に計画できない開放的な探索</b>に向き、グラフは<b>分解でき、分岐／並列／複数の専門家が要る</b>、かつ制御・テスト可能に保ちたいタスクに向く。" },
+        { h: "組み合わさる", d: "<b>ループはグラフの中の一つのノード</b>になれる；グラフもあるノードに自由反復する agent を置ける。実務では<b>agent ループのノードを持つグラフ</b>になることが多い。" },
+        { h: "忘れずに", d: "どちらも<b>ブレーキ</b>が要る：ループはステップ／コスト上限と完了条件、グラフのループノードにも guard を。<b>最小の形から始め</b>、制御と可観測性が必要になってからグラフへ上げる。" },
+      ],
+      plus: [
+        "目安：固定の手順を言えるならグラフ；結果を見るまで次の一手が分からないなら、そこがループの出番。",
+        "可観測性が大きく違う：グラフはどの経路を通りどのノードで詰まったか示せる；素のループは長い思考ログしか出ない。",
+        "多くの「AI プロダクト」は実はグラフ（固定フロー＋いくつかの LLM ノード）で、本当に計画できない少数の手順だけが agent ループを要る。",
+      ],
+      traps: [
+        "ループとグラフを二者択一と捉える（ループはしばしばグラフの一ノード）。",
+        "明らかに固定手順に分解できるタスクに、単一の自由 agent ループを無理に使い、制御もテストも難しくする。",
+        "単純な一回の呼び出しを大きなグラフで包み、状態と遅延を無駄に増やす（過度な工程化）。",
+      ],
+    },
     "sycophancy": {
       label: "AI はなぜいつも同調するの？",
       q: "アイデアを出すと AI はよく「素晴らしい！」と同調します。私の考えは本当に良いということ？",
@@ -5445,7 +5525,7 @@ export const IV_ORDER = [
   // 檢索（RAG）
   "vector-search", "rag-documents", "chunking", "rag-retrieval", "rag-why-wrong", "rag-vs-longcontext",
   // Agent arc：概念→規劃→工具→JSON→記憶→量化→成本
-  "agent-vs-workflow", "agent-planning", "loop-control", "self-verify", "agent-tools", "json-output", "agent-memory", "agent-eval", "agent-cost",
+  "agent-vs-workflow", "agent-planning", "loop-control", "self-verify", "loop-vs-graph", "agent-tools", "json-output", "agent-memory", "agent-eval", "agent-cost",
   // 生成／多模態：先生圖（擴散）成一組，再進多模態
   "diffusion-how", "diffusion-not-collage", "genimg-errors", "diffusion-vs-gan", "multimodal-key", "vlm-see",
   // 素養／風險：可靠性 → 安全 → 能力邊界
