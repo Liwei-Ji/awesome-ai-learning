@@ -1,162 +1,123 @@
 <script>
-  /* Ch · AI 技能包（Skills）。同一任務比較「有技能」vs「沒技能」：
-     有技能時 agent 平時只看到卡片的名稱＋描述，挑中對的那張才「載入完整指令」
-     （漸進揭露），照著把事做到位；沒技能只能憑通用知識硬做。淺色、離線、示意。 */
-  import { fade, fly } from 'svelte/transition';
+  /* Ch · AI 技能包（Skills）。重點：讓「技能包到底是什麼」一眼看懂。
+     技能包＝一個自成一包的資料夾：外面只有名稱＋一句描述（agent 平時只看這個），
+     裡面是完整手冊（SKILL.md）＋範本／腳本。平時只看得到名稱＋描述，用到才整包載入（漸進揭露）。
+     互動：點開任一個技能，看它裡面裝了什麼。淺色、離線、示意。 */
+  import { slide, fade } from 'svelte/transition';
   import { dur, D, ease } from '../lib/motion.js';
   import { i18n } from '../stores/i18n.svelte.js';
+  import { Folder, FolderOpen, FileText, FileCode } from '@lucide/svelte';
 
   const L = {
     zh: {
-      h3: '互動：agent 挑技能、載入、把事做好',
-      lede: '同一個任務，比較<b>有技能</b>與<b>沒技能</b>。有技能時，agent 只先看每張卡的<b>名稱＋描述</b>，挑中對的那張才<b>載入完整指令</b>（漸進揭露），再照著把事做到位。',
-      taskLabel: '選一個任務：',
-      tasks: [
-        { label: '把這季財報做成投影片', skillId: 'deck', generic: '產出一份格式雜亂、少了關鍵數字的投影片，還要大改。', good: '照〈財報投影片〉的版型與檢查表，產出結構完整、數字齊全的投影片。' },
-        { label: '幫這個 PR 做程式碼審查', skillId: 'pr', generic: '只泛泛說「看起來還行」，漏掉測試與邊界情況。', good: '照〈PR 審查〉清單逐項檢查，指出缺測試、命名與邊界問題。' },
-        { label: '生成品牌一致的社群貼文', skillId: 'brand', generic: '寫出語氣飄忽、不符品牌調性的貼文。', good: '照〈品牌貼文〉的語氣與格式規範，產出一致、可直接發的貼文。' },
-      ],
+      h3: '互動：打開一個技能包，看它裡面裝什麼',
+      lede: '技能包不是「幾句提示」，而是一個<b>自成一包的資料夾</b>。平時 agent 只看得到每個技能的<b>名稱＋一句描述</b>；<b>用到時才整包載入</b>裡面的完整手冊與檔案。點開下面任一個看看。',
+      shelfLabel: '平時 agent 只看得到這些（名稱＋描述）· 點開看裡面',
+      instr: '指令',
       skills: [
-        { id: 'brand', name: '品牌貼文', desc: '照品牌語氣與格式產出社群貼文', howto: ['用第一人稱、親切但專業的語氣', '開頭一句 hook，結尾加行動呼籲', '固定 hashtag 與字數上限'] },
-        { id: 'pr', name: 'PR 審查', desc: '照團隊清單逐項檢查 PR', howto: ['先看有沒有對應的測試', '檢查命名、錯誤處理、邊界情況', '用建議語氣，標出必改與可選'] },
-        { id: 'deck', name: '財報投影片', desc: '把財報數字整理成投影片', howto: ['固定版型：摘要、營收、獲利、展望', '每頁一個重點數字＋同比', '最後附上風險與假設'] },
-        { id: 'sql', name: 'SQL 報表', desc: '把需求轉成查詢並輸出報表', howto: [] },
+        { id: 'brand', name: '品牌貼文', desc: '用品牌語氣寫社群貼文',
+          steps: ['用第一人稱、親切但專業的語氣', '開頭一句 hook，結尾加行動呼籲', '固定 hashtag，字數上限 ≤200'],
+          files: [{ name: 'post-template.md', note: '貼文範本' }, { name: 'brand-voice.md', note: '語氣參考' }] },
+        { id: 'pr', name: 'PR 審查', desc: '照團隊清單逐項檢查 PR',
+          steps: ['先確認有沒有對應的測試', '檢查命名、錯誤處理、邊界情況', '用建議語氣，標出「必改」與「可選」'],
+          files: [{ name: 'review-checklist.md', note: '審查清單' }, { name: 'run-checks.sh', note: '自動檢查腳本', code: true }] },
+        { id: 'deck', name: '財報投影片', desc: '把財報數字整理成投影片',
+          steps: ['固定版型：摘要、營收、獲利、展望', '每頁一個重點數字＋同比', '最後附上風險與假設'],
+          files: [{ name: 'deck-template.pptx', note: '投影片範本' }, { name: 'pull-figures.py', note: '抓數字腳本', code: true }] },
       ],
-      modeSkill: '有技能', modeNone: '沒技能',
-      shelfLabel: '技能書架（平時只看得到名稱＋描述）',
-      matchTag: '命中',
-      loadBtn: '＋ 載入完整指令',
-      loadedTag: '✓ 已載入',
-      loadedLabel: '已載入的完整指令',
-      resultLabel: '完成結果',
-      beforeLoad: 'agent 已挑中這張技能，但還沒載入細節——它現在只知道名稱與描述。按「載入」看它展開完整指令。',
-      noSkillNote: '沒有可用技能，agent 只能憑通用知識硬做：',
-      hint: '重點：技能的<b>名稱與描述</b>常駐可見，讓 agent 判斷該不該用；完整指令<b>用到才載入</b>，所以塞幾百個也不爆上下文。挑對＋載入，泛泛的嘗試就變成照 SOP 的到位成果。',
+      anat: '<b>技能包＝一個資料夾</b>：外面一句<b>描述</b>（agent 平時只看這個），裡面是<b>完整手冊（SKILL.md）＋範本／腳本</b>。整包可分享、可版本控管。',
+      hint: '重點：名稱＋描述<b>常駐可見</b>，讓 agent 判斷「這任務該用哪個技能」；<b>完整內容用到才載入</b>，所以塞幾百個技能也不爆上下文。改能力＝<b>換一個資料夾</b>，不用重新訓練。',
     },
     en: {
-      h3: 'Interactive: the agent picks a skill, loads it, does the job well',
-      lede: 'Same task, <b>with a skill</b> vs <b>without</b>. With skills, the agent first sees only each card’s <b>name and description</b>, picks the right one, then <b>loads its full instructions</b> (progressive disclosure) and follows them to nail the task.',
-      taskLabel: 'Pick a task:',
-      tasks: [
-        { label: 'Turn this quarter’s report into slides', skillId: 'deck', generic: 'Produces messy slides missing key numbers that need a big rewrite.', good: 'Uses the “Report Deck” layout and checklist to produce complete, number-complete slides.' },
-        { label: 'Review this pull request', skillId: 'pr', generic: 'Just says “looks fine,” missing tests and edge cases.', good: 'Walks the “PR Review” checklist item by item, flagging missing tests, naming, and edge cases.' },
-        { label: 'Write an on-brand social post', skillId: 'brand', generic: 'Writes a post with a wandering tone that is off-brand.', good: 'Follows the “Brand Post” tone and format rules to produce a consistent, ready-to-publish post.' },
-      ],
+      h3: 'Interactive: open a skill and see what is inside',
+      lede: 'A skill is not “a few prompts”, it is a <b>self-contained folder</b>. Normally the agent sees only each skill’s <b>name and one-line description</b>; it <b>loads the whole package</b> (the full playbook and files) only when a task needs it. Open any one below.',
+      shelfLabel: 'Normally the agent only sees these (name + description) · open one to look inside',
+      instr: 'instructions',
       skills: [
-        { id: 'brand', name: 'Brand Post', desc: 'Produce social posts in the brand’s voice and format', howto: ['First person, warm but professional tone', 'Open with a hook, end with a call to action', 'Fixed hashtags and a length cap'] },
-        { id: 'pr', name: 'PR Review', desc: 'Check a pull request against the team checklist', howto: ['Check there are matching tests first', 'Review naming, error handling, edge cases', 'Suggesting tone; mark must-fix vs optional'] },
-        { id: 'deck', name: 'Report Deck', desc: 'Turn financial numbers into slides', howto: ['Fixed layout: summary, revenue, profit, outlook', 'One key number per slide, with year-over-year', 'End with risks and assumptions'] },
-        { id: 'sql', name: 'SQL Report', desc: 'Turn a request into a query and output a report', howto: [] },
+        { id: 'brand', name: 'Brand Post', desc: 'Write social posts in the brand voice',
+          steps: ['First person, warm but professional tone', 'Open with a hook, end with a call to action', 'Fixed hashtags, length cap ≤200 chars'],
+          files: [{ name: 'post-template.md', note: 'post template' }, { name: 'brand-voice.md', note: 'voice reference' }] },
+        { id: 'pr', name: 'PR Review', desc: 'Check a PR against the team checklist',
+          steps: ['Confirm there are matching tests first', 'Check naming, error handling, edge cases', 'Suggesting tone; mark “must-fix” vs “optional”'],
+          files: [{ name: 'review-checklist.md', note: 'review checklist' }, { name: 'run-checks.sh', note: 'auto-check script', code: true }] },
+        { id: 'deck', name: 'Report Deck', desc: 'Turn financial numbers into slides',
+          steps: ['Fixed layout: summary, revenue, profit, outlook', 'One key number per slide, with year-over-year', 'End with risks and assumptions'],
+          files: [{ name: 'deck-template.pptx', note: 'slide template' }, { name: 'pull-figures.py', note: 'figure-pulling script', code: true }] },
       ],
-      modeSkill: 'With skills', modeNone: 'No skill',
-      shelfLabel: 'Skill shelf (normally only names and descriptions are visible)',
-      matchTag: 'match',
-      loadBtn: '+ Load full instructions',
-      loadedTag: '✓ loaded',
-      loadedLabel: 'Loaded full instructions',
-      resultLabel: 'Result',
-      beforeLoad: 'The agent picked this skill but has not loaded the details yet — it only knows the name and description. Hit “load” to expand the full instructions.',
-      noSkillNote: 'No skill available, so the agent just improvises from general knowledge:',
-      hint: 'Takeaway: a skill’s <b>name and description</b> stay visible so the agent can decide whether to use it; the full instructions <b>load only when needed</b>, so hundreds fit without blowing up the context. Pick the right one and load it, and a vague attempt becomes an on-SOP result.',
+      anat: '<b>A skill = a folder</b>: a one-line <b>description</b> on the outside (all the agent normally sees), and inside the <b>full playbook (SKILL.md) plus templates / scripts</b>. The whole folder is shareable and version-controlled.',
+      hint: 'Takeaway: name + description <b>stay visible</b> so the agent can judge “which skill fits this task”; the <b>full contents load only when needed</b>, so hundreds of skills fit without blowing up the context. To change a capability you <b>swap a folder</b>, no retraining.',
     },
     ja: {
-      h3: 'インタラクティブ：agent がスキルを選び、読み込み、うまくこなす',
-      lede: '同じタスクを<b>スキルあり</b>と<b>なし</b>で比較。スキルありでは、agent はまず各カードの<b>名前と説明</b>だけを見て正しい一枚を選び、<b>完全な指令を読み込み</b>（段階的開示）、それに従ってタスクをこなします。',
-      taskLabel: 'タスクを選ぶ：',
-      tasks: [
-        { label: '今期の決算をスライドにする', skillId: 'deck', generic: '書式がばらばらで重要な数字が抜けた、大幅な手直しが要るスライドを出す。', good: '〈決算スライド〉の版型とチェックリストに沿って、構成も数字もそろったスライドを出す。' },
-        { label: 'この PR をコードレビューする', skillId: 'pr', generic: '「だいたい良さそう」と言うだけで、テストや境界条件を見落とす。', good: '〈PR レビュー〉のチェックリストを一項目ずつ確認し、テスト不足・命名・境界の問題を指摘する。' },
-        { label: 'ブランドに合った SNS 投稿を作る', skillId: 'brand', generic: '口調がぶれ、ブランドの調子に合わない投稿を書く。', good: '〈ブランド投稿〉の口調と書式ルールに沿って、一貫した、すぐ出せる投稿を作る。' },
-      ],
+      h3: 'インタラクティブ：スキルを開いて中身を見る',
+      lede: 'スキルは「数個のプロンプト」ではなく、<b>自己完結したフォルダ</b>。普段 agent は各スキルの<b>名前と一行の説明</b>しか見ません。タスクで必要になったときだけ<b>まるごと読み込みます</b>（完全な手順書とファイル）。下のどれか開いてみてください。',
+      shelfLabel: '普段 agent はこれだけ見える（名前＋説明）· 開いて中を見る',
+      instr: '指令',
       skills: [
-        { id: 'brand', name: 'ブランド投稿', desc: 'ブランドの口調と書式で SNS 投稿を作る', howto: ['一人称、親しみやすいが専門的な口調', '冒頭にフック、末尾に行動喚起', '固定のハッシュタグと文字数上限'] },
-        { id: 'pr', name: 'PR レビュー', desc: 'チームのチェックリストで PR を確認', howto: ['まず対応するテストがあるか確認', '命名・エラー処理・境界条件を点検', '提案する口調で、必須と任意を区別'] },
-        { id: 'deck', name: '決算スライド', desc: '決算の数字をスライドにまとめる', howto: ['固定版型：要約・売上・利益・見通し', '1 枚に重要数字 1 つ＋前年比', '最後にリスクと前提を添える'] },
-        { id: 'sql', name: 'SQL レポート', desc: '要件をクエリに変換してレポート出力', howto: [] },
+        { id: 'brand', name: 'ブランド投稿', desc: 'ブランドの声で SNS 投稿を書く',
+          steps: ['一人称、親しみやすいが専門的な口調', '冒頭にフック、末尾に行動喚起', '固定ハッシュタグ、文字数上限 ≤200'],
+          files: [{ name: 'post-template.md', note: '投稿テンプレ' }, { name: 'brand-voice.md', note: '口調の参考' }] },
+        { id: 'pr', name: 'PR レビュー', desc: 'チームのチェックリストで PR を確認',
+          steps: ['まず対応するテストがあるか確認', '命名・エラー処理・境界条件を点検', '提案する口調で「必須」と「任意」を区別'],
+          files: [{ name: 'review-checklist.md', note: 'レビュー表' }, { name: 'run-checks.sh', note: '自動チェック', code: true }] },
+        { id: 'deck', name: '決算スライド', desc: '決算の数字をスライドにまとめる',
+          steps: ['固定版型：要約・売上・利益・見通し', '1 枚に重要数字 1 つ＋前年比', '最後にリスクと前提を添える'],
+          files: [{ name: 'deck-template.pptx', note: 'スライド雛形' }, { name: 'pull-figures.py', note: '数字抽出スクリプト', code: true }] },
       ],
-      modeSkill: 'スキルあり', modeNone: 'スキルなし',
-      shelfLabel: 'スキル棚（普段は名前と説明だけ見える）',
-      matchTag: '命中',
-      loadBtn: '＋ 完全な指令を読み込む',
-      loadedTag: '✓ 読み込み済み',
-      loadedLabel: '読み込んだ完全な指令',
-      resultLabel: '完成結果',
-      beforeLoad: 'agent はこのスキルを選びましたが、まだ詳細は読み込んでいません。今は名前と説明しか知りません。「読み込む」を押すと完全な指令が展開します。',
-      noSkillNote: '使えるスキルがなく、agent は一般知識で無理やりこなすだけ：',
-      hint: 'ポイント：スキルの<b>名前と説明</b>は常に見え、agent が使うかどうかを判断できる。完全な指令は<b>必要なときだけ読み込む</b>ので、何百個あってもコンテキストは溢れない。正しく選んで読み込めば、漠然とした試みが SOP どおりの成果に変わる。',
+      anat: '<b>スキル＝フォルダ</b>：外側に一行の<b>説明</b>（agent が普段見るのはこれだけ）、中に<b>完全な手順書（SKILL.md）＋テンプレ／スクリプト</b>。フォルダごと共有でき、バージョン管理できる。',
+      hint: 'ポイント：名前と説明は<b>常に見え</b>、agent が「このタスクにどのスキルか」を判断できる。<b>中身は必要なときだけ読み込む</b>ので、何百個あってもコンテキストは溢れない。能力を変える＝<b>フォルダを差し替える</b>だけ、再学習は不要。',
     },
   };
 
   let ui = $derived(L[i18n.locale] || L.zh);
-  let mode = $state('skills');
-  let ti = $state(0);
-  let opened = $state(false);
-
-  let task = $derived(ui.tasks[ti]);
-  let matched = $derived(ui.skills.find((s) => s.id === task.skillId));
-
-  const pickTask = (i) => { ti = i; opened = false; };
-  const setMode = (m) => { mode = m; opened = false; };
+  let open = $state(0); // 預設打開第一個，讓讀者立刻看到「裡面長什麼」
+  const toggle = (i) => { open = open === i ? -1 : i; };
 </script>
 
 <div class="panel">
   <div class="panel-h"><h3>{ui.h3}</h3><span class="eyebrow">★ Interactive</span></div>
   <p class="lede">{@html ui.lede}</p>
 
-  <div class="ctl-row">
-    <span class="glab">{ui.taskLabel}</span>
-    {#each ui.tasks as t, i}
-      <button class="pl" class:on={ti === i} onclick={() => pickTask(i)}>{t.label}</button>
-    {/each}
-  </div>
-
   <div class="demo-stage light">
-    <div class="mode">
-      <button class="tab" class:on={mode === 'skills'} onclick={() => setMode('skills')}>{ui.modeSkill}</button>
-      <button class="tab" class:on={mode === 'none'} onclick={() => setMode('none')}>{ui.modeNone}</button>
+    <span class="k mono">{ui.shelfLabel}</span>
+    <div class="shelf">
+      {#each ui.skills as s, i (s.id)}
+        {@const isOpen = open === i}
+        <div class="folder" class:open={isOpen}>
+          <button class="fhead" onclick={() => toggle(i)} aria-expanded={isOpen}>
+            <span class="ficon">
+              {#if isOpen}<FolderOpen size={17} strokeWidth={2} />{:else}<Folder size={17} strokeWidth={2} />{/if}
+            </span>
+            <span class="ftitle">
+              <span class="fname">{s.name}</span>
+              <span class="fdesc">{s.desc}</span>
+            </span>
+            <span class="caret" class:up={isOpen}>›</span>
+          </button>
+
+          {#if isOpen}
+            <div class="fbody" transition:slide={{ duration: dur(D.base), easing: ease }}>
+              <div class="skillmd">
+                <span class="fline"><FileText size={14} strokeWidth={2} /><b class="fn">SKILL.md</b><span class="fnote">· {ui.instr}</span></span>
+                <ol class="steps">
+                  {#each s.steps as st, k}
+                    <li in:fade={{ duration: dur(D.fast), delay: dur(k * 60) }}>{st}</li>
+                  {/each}
+                </ol>
+              </div>
+              <div class="files">
+                {#each s.files as f}
+                  <span class="file">
+                    {#if f.code}<FileCode size={14} strokeWidth={2} />{:else}<FileText size={14} strokeWidth={2} />{/if}
+                    <b class="fn">{f.name}</b><span class="fnote">{f.note}</span>
+                  </span>
+                {/each}
+              </div>
+            </div>
+          {/if}
+        </div>
+      {/each}
     </div>
-
-    {#if mode === 'skills'}
-      <span class="k mono">{ui.shelfLabel}</span>
-      <div class="shelf">
-        {#each ui.skills as s (s.id)}
-          {@const isMatch = s.id === task.skillId}
-          <div class="card" class:match={isMatch} class:faded={!isMatch}>
-            <div class="cname">{s.name}{#if isMatch}<span class="mtag" transition:fade={{ duration: dur(D.fast) }}>{ui.matchTag}</span>{/if}</div>
-            <div class="cdesc">{s.desc}</div>
-            {#if isMatch}
-              {#if !opened}
-                <button class="loadbtn" onclick={() => (opened = true)} transition:fade={{ duration: dur(D.fast) }}>{ui.loadBtn}</button>
-              {:else}
-                <span class="loadedtag" transition:fade={{ duration: dur(D.fast) }}>{ui.loadedTag}</span>
-              {/if}
-            {/if}
-          </div>
-        {/each}
-      </div>
-
-      {#if opened}
-        <div class="loaded" in:fly={{ y: 8, duration: dur(D.base), easing: ease }}>
-          <span class="k mono">{ui.loadedLabel} · {matched.name}</span>
-          <ul class="howto">
-            {#each matched.howto as step, i}
-              <li in:fly={{ y: 6, duration: dur(D.base), delay: dur(i * 70), easing: ease }}>{step}</li>
-            {/each}
-          </ul>
-        </div>
-        <div class="res good" in:fade={{ duration: dur(D.base) }}>
-          <span class="k mono">{ui.resultLabel}</span>
-          <div class="rbox">✓ {task.good}</div>
-        </div>
-      {:else}
-        {#key ti}<p class="note" in:fade={{ duration: dur(D.fast) }}>{ui.beforeLoad}</p>{/key}
-      {/if}
-    {:else}
-      <div class="res bad" in:fade={{ duration: dur(D.base) }}>
-        <span class="note">{ui.noSkillNote}</span>
-        {#key ti}<div class="rbox rbad" in:fade={{ duration: dur(D.fast) }}>✕ {task.generic}</div>{/key}
-      </div>
-    {/if}
+    <p class="anat">{@html ui.anat}</p>
   </div>
 
   <p class="hint">{@html ui.hint}</p>
@@ -164,39 +125,36 @@
 
 <style>
   .lede { margin: 0 0 var(--sp-3); color: var(--ink-2); font-size: var(--fs-body); line-height: var(--lh-body); }
-  .k { font-size: var(--fs-micro); letter-spacing: .1em; color: var(--muted); display: block; margin-bottom: 4px; }
+  .k { font-size: var(--fs-micro); letter-spacing: .1em; color: var(--muted); display: block; margin-bottom: 8px; }
 
-  .ctl-row { display: flex; flex-wrap: wrap; gap: var(--sp-2); margin: 0 0 12px; align-items: center; }
-  .glab { font-size: var(--fs-cap); color: var(--muted); }
-  .pl { font-size: var(--fs-cap); padding: 5px 11px; border-radius: 99px; border: 1px solid var(--line-2); background: var(--surface-2); color: var(--ink-2); cursor: pointer; }
-  .pl:hover { border-color: var(--accent); color: var(--accent-ink); }
-  .pl.on { background: var(--accent); border-color: transparent; color: #3a1e00; font-weight: 600; }
+  .shelf { display: flex; flex-direction: column; gap: 8px; }
+  .folder { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; transition: border-color .15s; }
+  .folder.open { border-color: var(--teal); }
 
-  .mode { display: flex; gap: 6px; margin-bottom: var(--sp-3); }
-  .tab { font-size: var(--fs-cap); padding: 4px 12px; border-radius: var(--r-sm); border: 1px solid var(--line-2); background: var(--surface-2); color: var(--ink-2); cursor: pointer; }
-  .tab.on { background: var(--surface); border-color: var(--teal); color: var(--teal-ink, #0b6b63); font-weight: 600; }
+  .fhead { width: 100%; display: flex; align-items: center; gap: 10px; padding: 11px 13px; background: none; border: 0; cursor: pointer; text-align: left; }
+  .fhead:hover { background: var(--surface-2); }
+  .ficon { flex: none; color: var(--teal, #0f8a80); display: inline-flex; }
+  .ftitle { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+  .fname { font-size: var(--fs-sm); font-weight: 650; color: var(--ink); }
+  .fdesc { font-size: var(--fs-cap); color: var(--muted); line-height: 1.4; }
+  .caret { flex: none; color: var(--muted); font-size: 18px; transition: transform .18s; transform: rotate(90deg); }
+  .caret.up { transform: rotate(-90deg); }
 
-  .shelf { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: var(--sp-2); }
-  @media (max-width: 720px) { .shelf { grid-template-columns: 1fr; } }
-  .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 9px 11px; transition: border-color .15s, opacity .15s; }
-  .card.faded { opacity: .5; }
-  .card.match { border-color: var(--teal); background: #0f8a800e; opacity: 1; }
-  .cname { font-size: var(--fs-sm); font-weight: 650; color: var(--ink); display: flex; align-items: center; gap: 7px; }
-  .cdesc { font-size: var(--fs-cap); color: var(--muted); margin-top: 2px; line-height: 1.5; }
-  .mtag { font-size: 10px; font-weight: 600; padding: 1px 7px; border-radius: 99px; background: var(--teal); color: #fff; letter-spacing: .04em; }
-  .loadbtn { margin-top: 8px; font-size: var(--fs-cap); padding: 4px 10px; border-radius: var(--r-sm); border: 1px dashed var(--teal); background: #0f8a8014; color: var(--teal-ink, #0b6b63); cursor: pointer; }
-  .loadbtn:hover { background: #0f8a8026; }
-  .loadedtag { display: inline-block; margin-top: 8px; font-size: var(--fs-cap); color: var(--teal-ink, #0b6b63); font-weight: 600; }
+  .fbody { border-top: 1px dashed var(--line-2); padding: 11px 13px 13px; background: var(--surface-2); }
+  .skillmd { }
+  .fline { display: flex; align-items: center; gap: 6px; font-size: var(--fs-cap); color: var(--ink-2); }
+  .fline :global(svg) { color: var(--accent-ink); flex: none; }
+  .fn { font-family: var(--mono); font-size: var(--fs-cap); font-weight: 600; color: var(--ink); }
+  .fnote { color: var(--muted); font-weight: 400; }
+  .steps { margin: 6px 0 0; padding-left: 30px; }
+  .steps li { font-size: var(--fs-cap); color: var(--ink-2); line-height: 1.7; }
 
-  .loaded { background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--r); padding: 10px 12px; margin: var(--sp-2) 0; }
-  .howto { margin: 4px 0 0; padding-left: 18px; }
-  .howto li { font-size: var(--fs-cap); color: var(--ink-2); line-height: 1.75; }
+  .files { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 11px; padding-top: 10px; border-top: 1px solid var(--line); }
+  .file { display: inline-flex; align-items: center; gap: 6px; font-size: var(--fs-cap); }
+  .file :global(svg) { color: var(--muted); flex: none; }
 
-  .res { margin-top: var(--sp-2); }
-  .rbox { border-radius: var(--r); padding: 10px 12px; font-size: var(--fs-sm); line-height: 1.6; background: #0f8a8012; border: 1px solid #0f8a8055; color: var(--teal-ink, #0b6b63); }
-  .rbad { background: #e07f0e14; border-color: #e07f0e66; color: var(--accent-ink); }
-
-  .note { font-size: var(--fs-cap); color: var(--muted); line-height: var(--lh-body); margin: var(--sp-2) 0 0; display: block; }
+  .anat { font-size: var(--fs-cap); color: var(--ink-2); line-height: var(--lh-body); margin: var(--sp-3) 0 0; padding-top: var(--sp-2); border-top: 1px solid var(--line); }
+  .anat :global(b) { color: var(--ink); }
 
   .hint { font-size: var(--fs-cap); color: var(--muted); line-height: var(--lh-body); margin: var(--sp-3) 0 0; }
   .hint :global(b) { color: var(--ink-2); }
