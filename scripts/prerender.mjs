@@ -8,9 +8,9 @@ import path from 'path';
 import http from 'http';
 import { fileURLToPath } from 'url';
 import { spawn } from 'child_process';
-import puppeteer from 'puppeteer';
 import { CH } from '../src/data/chapters.js';
 import { IV_ORDER } from '../src/data/interviews.js';
+import { PATHS } from '../src/data/paths.js';
 import { buildPath } from '../src/lib/router.js';
 
 const ROOT = path.resolve(fileURLToPath(import.meta.url), '../..');
@@ -18,9 +18,11 @@ const DIST = path.join(ROOT, 'dist');
 const SITE = 'https://awesome-ai-learning.vercel.app';
 const PORT = 4189;
 const ORIGIN = `http://localhost:${PORT}`;
-// 本機用系統 Chrome（快、免下載）；Vercel 等 build 環境沒有系統 Chrome，改用 puppeteer 內建 Chromium
+// 本機／CI 有系統 Chrome 就直接用（快）；沒有的 build 環境（如 Vercel）改用 @sparticuz/chromium + puppeteer-core。
 const MAC_CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
-const CHROME = process.env.CHROME_PATH || (fs.existsSync(MAC_CHROME) ? MAC_CHROME : puppeteer.executablePath());
+const LINUX_CHROME = '/usr/bin/google-chrome';
+const LOCAL_CHROME = process.env.CHROME_PATH
+  || (fs.existsSync(MAC_CHROME) ? MAC_CHROME : (fs.existsSync(LINUX_CHROME) ? LINUX_CHROME : null));
 const LOCALES = ['en', 'ja', 'zh'];
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -30,6 +32,7 @@ const routes = [
   ...Object.keys(CH).map((id) => ({ mode: 'course', current: Number(id), iv: null })),
   { mode: 'interview', current: null, iv: null },
   ...IV_ORDER.map((iv) => ({ mode: 'interview', current: null, iv })),
+  ...PATHS.map((p) => ({ mode: 'paths', path: p.id })),
   { mode: 'browse', browse: 'lessons' },
   { mode: 'browse', browse: 'challenges' },
 ];
@@ -59,7 +62,16 @@ const server = spawn('npx', ['vite', 'preview', '--port', String(PORT)], { cwd: 
 let browser;
 try {
   await waitReady();
-  browser = await puppeteer.launch({ executablePath: CHROME, headless: 'new', args: ['--no-sandbox'] });
+  if (LOCAL_CHROME) {
+    const puppeteer = (await import('puppeteer')).default;
+    browser = await puppeteer.launch({ executablePath: LOCAL_CHROME, headless: 'new', args: ['--no-sandbox'] });
+    console.log('prerender: launching local Chrome →', LOCAL_CHROME);
+  } else {
+    const chromium = (await import('@sparticuz/chromium')).default;
+    const puppeteer = (await import('puppeteer-core')).default;
+    browser = await puppeteer.launch({ args: chromium.args, executablePath: await chromium.executablePath(), headless: true });
+    console.log('prerender: launching @sparticuz/chromium (serverless build env)');
+  }
   const page = await browser.newPage();
 
   let ok = 0;

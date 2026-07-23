@@ -13,6 +13,7 @@
     "test:e2e": "node e2e/interaction.test.js"
   },
   "devDependencies": {
+    "@sparticuz/chromium": "^149.0.0",
     "@sveltejs/vite-plugin-svelte": "^5.0.0",
     "puppeteer": "^25.3.0",
     "puppeteer-core": "^25.0.0",
