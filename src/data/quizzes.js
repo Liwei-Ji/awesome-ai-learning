@@ -56,6 +56,40 @@ export const QUIZZES = {
       { "t": "Graph 只是把 loop 畫成圖，行為上沒有實質差別。", "ok": false, "why": "graph 提供純 loop 沒有的明確結構、隔離與可觀測性；控制權在接線圖，而非模型。" }
     ]
   },
+  "skill-vs-loop": {
+    "en": [
+      { "t": "A skill replaces the loop: once the right skill is loaded, the agent no longer needs loop control.", "why": "A skill is just instructions; the agent in its loop still executes, and limits / done conditions / anti-looping still must be set." },
+      { "t": "The loop is the control mechanism (decide the next step, when to stop); a skill is packaged know-how (how to do the job well). The engine and the manual, they combine.", "why": "Correct: different dimensions. The agent runs in its loop and loads the right skill at a step; neither replaces the other." },
+      { "t": "They are the same thing at different sizes: a skill is just a small loop.", "why": "A skill is a static, loadable file of procedural knowledge; a loop is runtime control behavior. They are not the same kind of thing at all." }
+    ],
+    "ja": [
+      { "t": "スキルはループの代替：正しいスキルを読み込めば loop control は不要になる。", "why": "スキルは指示にすぎない。実行するのはループ内の agent で、上限・完了条件・ループ防止は変わらず必要。" },
+      { "t": "ループは制御機構（次の一手と停止を決める）、スキルはパッケージ化された know-how（仕事のやり方）。エンジンとマニュアルで、組み合わせて使う。", "why": "正解：次元が違う。agent はループの中で動き、必要なステップでスキルを読み込む。どちらも他方を代替しない。" },
+      { "t": "両者は大きさが違うだけの同じもの：スキルは小さなループにすぎない。", "why": "スキルは静的で読み込み可能な手順知識のファイル、ループは実行時の制御挙動。まったく別種のもの。" }
+    ],
+    "zh": [
+      { "t": "技能可以取代迴圈：載入對的技能後，就不需要 loop control 了。", "ok": false, "why": "技能只是指令；執行的仍是迴圈裡的 agent，上限、完成條件、防繞圈照樣要設。" },
+      { "t": "Loop 是控制機制（決定下一步、何時停）；skill 是打包的 know-how（這件事怎麼做好）。一個引擎、一個手冊，組合使用。", "ok": true, "why": "正解：不同維度。agent 在迴圈裡跑，需要時載入對的技能照著做；兩者互補、互不取代。" },
+      { "t": "兩者是同一種東西、只是大小不同：技能就是一個小迴圈。", "ok": false, "why": "技能是靜態、可載入的程序知識檔案；迴圈是執行期的控制行為。根本是不同種類的東西。" }
+    ]
+  },
+  "skill-selection": {
+    "en": [
+      { "t": "Progressive disclosure already solves scale: since only names and descriptions are visible, 500 skills work the same as 5.", "why": "500 descriptions also flood the context and add selection noise; at scale you need retrieval (top-k), tiers/routing, and measurement on top." },
+      { "t": "Write descriptions as trigger conditions, retrieve top-k candidates by vector search (Skill RAG), shrink the space with categories/routers, and measure precision and recall.", "why": "Correct: the combo of description design + retrieval + tiered routing + measurement is what keeps invocation precise at scale." },
+      { "t": "Just use a bigger model: a smart enough model will always pick the right skill from any list.", "why": "Model size doesn't fix indistinct descriptions or a flooded candidate list; selection quality comes from the descriptions, retrieval, and routing around the model." }
+    ],
+    "ja": [
+      { "t": "段階的開示が規模問題を解決済み：名前と説明しか見えないのだから、500 個でも 5 個と同じように動く。", "why": "500 件の説明はそれ自体がコンテキストを圧迫し選択ノイズになる。規模では検索（top-k）、階層／ルーティング、計測が要る。" },
+      { "t": "説明をトリガー条件として書き、ベクトル検索で top-k 候補に絞り（Skill RAG）、カテゴリやルーターで選択空間を狭め、precision と recall を計測する。", "why": "正解：説明の設計＋検索＋階層ルーティング＋計測の組み合わせが、規模での正確な呼び出しを支える。" },
+      { "t": "より大きなモデルを使えばよい：十分賢いモデルはどんなリストからでも正しいスキルを選ぶ。", "why": "モデルの規模は、区別のつかない説明や溢れた候補リストを直せない。選択の質はモデルの周りの説明・検索・ルーティングから来る。" }
+    ],
+    "zh": [
+      { "t": "漸進揭露已經解決規模問題：反正平時只看得到名稱＋描述，500 個和 5 個一樣好挑。", "ok": false, "why": "500 條描述本身也會塞爆 context、製造選擇雜訊；規模化還需要檢索（top-k）、分層路由與量測。" },
+      { "t": "把描述寫成觸發條件、用向量檢索取 top-k 候選（Skill RAG）、用分類／router 縮小選擇空間，並量測 precision 與 recall。", "ok": true, "why": "正解：描述設計＋檢索＋分層路由＋量測的組合拳，才能在規模化時維持精準調用。" },
+      { "t": "換更大的模型就好：夠聰明的模型從任何清單都能挑對技能。", "ok": false, "why": "模型大小治不了「描述分不清」與「候選清單爆量」；選擇品質來自模型周邊的描述、檢索與路由。" }
+    ]
+  },
   "vector-search": {
     "en": [
       { "t": "It works like Ctrl+F, matching identical words in the documents by keyword.", "why": "That's old keyword search; modern RAG retrieval compares semantic closeness, so it finds matches even when the words differ." },

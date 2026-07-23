@@ -1,0 +1,395 @@
+<!doctype html>
+<!-- Awesome AI Learning · course promo: Knowledge Graphs & GraphRAG (lesson: knowledge-graph)
+     Self-contained HTML animatic per .claude/skills/promo-video.
+     16:9 master (1280x720). ?ar=1x1 for square. ?clean=1 hides chrome for recording.
+     ?intro=1..6 opening variants. Space = play/pause, R = restart. window.__jump(i) for verification.
+     Copy sources (real, not invented): CH_TR.en['knowledge-graph'], BODIES['knowledge-graph'].en,
+     knowledge/en/knowledge-graph.js, PRACTICE['knowledge-graph'].en.
+     No em dashes anywhere. Music: local background_music.mp3 (same folder), beat pulse via AnalyserNode. -->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Awesome AI Learning · Knowledge Graphs & GraphRAG (course video)</title>
+<style>
+  :root{
+    --bg:#eef1f6; --surface:#ffffff; --surface-2:#f6f8fb; --surface-3:#eceff5;
+    --ink:#141821; --ink-2:#3b4557; --muted:#5b6678; --line:#dde3ec; --line-2:#c6cfdd;
+    --accent:#e07f0e; --accent-soft:#f6a940; --accent-ink:#a85a08;
+    --teal:#0f8a80; --good:#1f9d57; --crit:#d23f3f;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Noto Sans TC",sans-serif;
+    --r:12px; --e-2:0 3px 10px rgba(20,30,55,.06); --e-3:0 14px 36px rgba(20,30,55,.11);
+    --beat:0;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%;background:#0b0d12;font-family:var(--sans)}
+  #wrap{position:fixed;inset:0;display:grid;place-items:center}
+  #stage{position:relative;width:1280px;height:720px;background:var(--bg);overflow:hidden;border-radius:2px}
+  body.ar1x1 #stage{width:1080px;height:1080px}
+
+  /* progress */
+  #prog{position:absolute;left:0;top:0;height:3px;width:0%;background:var(--accent);z-index:40;
+        box-shadow:0 0 calc(6px + 10px*var(--beat)) rgba(224,127,14,calc(.35 + .45*var(--beat)))}
+
+  /* scenes */
+  .scene{position:absolute;inset:0;padding:72px 84px 118px;opacity:0;visibility:hidden}
+  body.ar1x1 .scene{padding:64px 64px 128px}
+  .scene.on{opacity:1;visibility:visible}
+  .scene .eyebrow{font-family:var(--mono);font-size:13px;letter-spacing:.14em;color:var(--accent-ink);margin-bottom:18px}
+  .scene h1{font-size:54px;line-height:1.08;letter-spacing:-.02em;font-weight:760;color:var(--ink);max-width:15ch;text-wrap:balance}
+  .scene .sub{margin-top:16px;font-size:20px;line-height:1.5;color:var(--ink-2);max-width:44ch}
+  .scene.center{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+  .scene.center h1{max-width:22ch}
+  .scene.split{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center}
+  body.ar1x1 .scene.split{grid-template-columns:1fr;gap:28px;align-content:center}
+  .step{font-family:var(--mono);font-size:12.5px;letter-spacing:.16em;color:var(--teal);margin-bottom:14px}
+  .scene.split h1{font-size:44px}
+
+  /* burned caption */
+  #cap{position:absolute;left:50%;bottom:34px;transform:translateX(-50%);z-index:30;max-width:76%;
+       background:rgba(20,24,33,.86);color:#fff;font-size:19px;line-height:1.45;padding:10px 20px;
+       border-radius:10px;text-align:center;opacity:0;transition:opacity .35s}
+  #cap.on{opacity:1}
+
+  /* enter animations (staged via .on) */
+  .on .a1,.on .a2,.on .a3,.on .a4{opacity:0;animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
+  .on .a2{animation-delay:.25s}.on .a3{animation-delay:.5s}.on .a4{animation-delay:.75s}
+  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  /* intro variants on scene 0 */
+  .intro-2.on .a1,.intro-2.on .a2,.intro-2.on .a3{animation-name:fadeIn}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  .intro-3.on h1{animation:none;opacity:1;clip-path:inset(0 100% 0 0);animation:wipe 1s .2s cubic-bezier(.2,.7,.2,1) forwards}
+  @keyframes wipe{to{clip-path:inset(0 0 0 0)}}
+  .intro-4.on h1{filter:blur(14px);opacity:0;animation:sharpen 1s .2s forwards}
+  @keyframes sharpen{to{filter:blur(0);opacity:1}}
+  .intro-5.on h1{transform-origin:left center;opacity:0;animation:zoomIn .9s .2s cubic-bezier(.2,.7,.2,1) forwards}
+  @keyframes zoomIn{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+  .intro-6.on h1 .w{display:inline-block;opacity:0;animation:rise .55s cubic-bezier(.2,.7,.2,1) forwards}
+
+  /* ===== visuals ===== */
+  .viz{position:relative;min-height:340px}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--e-2)}
+  @keyframes pop{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:scale(1)}}
+  @keyframes slot{to{opacity:1;transform:none}}
+
+  /* S2 flat chunks: disconnected snippets, keyword hits, no answer */
+  .chks{display:flex;flex-direction:column;gap:12px;max-width:430px;width:100%}
+  .chk{padding:12px 16px;opacity:0;transform:translateX(26px)}
+  .on .c1{animation:slot .55s .4s cubic-bezier(.2,.7,.2,1) forwards}
+  .on .c2{animation:slot .55s .75s cubic-bezier(.2,.7,.2,1) forwards}
+  .on .c3{animation:slot .55s 1.1s cubic-bezier(.2,.7,.2,1) forwards}
+  .chk .ctag{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--muted);margin-bottom:8px}
+  .chk .cline{display:flex;align-items:center;gap:8px;margin:6px 0}
+  .chk .cline i{display:inline-block;height:8px;border-radius:5px;background:var(--surface-3)}
+  .chk .kw{font-family:var(--mono);font-size:12px;padding:2px 8px;border-radius:6px;background:#fdf1e3;color:var(--accent-ink)}
+  .nov{font-family:var(--mono);font-size:13px;color:var(--crit);text-align:center;padding:10px 14px;
+       border:1.5px dashed var(--crit);border-radius:10px;background:#fdf3f3;opacity:0;transform:translateY(10px)}
+  .on .nov{animation:slot .55s 1.7s cubic-bezier(.2,.7,.2,1) forwards}
+
+  /* S3 triple: subject → relation → object */
+  .trip{display:flex;flex-direction:column;gap:22px;align-items:center}
+  .trow{display:flex;align-items:flex-end;gap:16px}
+  .tcol{display:flex;flex-direction:column;align-items:center;gap:9px;opacity:0;transform:scale(.8)}
+  .on .tc1{animation:pop .5s .5s cubic-bezier(.2,.7,.3,1.3) forwards}
+  .on .tc2{animation:pop .5s .95s cubic-bezier(.2,.7,.3,1.3) forwards}
+  .on .tc3{animation:pop .5s 1.4s cubic-bezier(.2,.7,.3,1.3) forwards}
+  .tcol .tl{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;color:var(--muted)}
+  .tnode{padding:12px 22px;border-radius:12px;background:var(--surface);box-shadow:var(--e-2);
+         font-weight:700;font-size:20px;color:var(--ink)}
+  .tnode.tsub{border:1.5px solid var(--teal)}
+  .tnode.tobj{border:1.5px solid var(--accent)}
+  .trel{font-family:var(--mono);font-size:15px;color:var(--teal);padding:12px 6px}
+  .tmore{font-family:var(--mono);font-size:12.5px;color:var(--muted);opacity:0}
+  .on .tmore{animation:fadeIn .5s 1.95s forwards}
+
+  /* S4 GraphRAG: follow edges hop by hop, path lights to the answer */
+  .gwrap{display:flex;flex-direction:column;gap:10px;align-items:center}
+  .gsvg .ge{stroke:var(--line-2);stroke-width:2}
+  .gsvg .ge1,.gsvg .ge2{stroke:var(--teal);stroke-width:2.5;stroke-dasharray:1;stroke-dashoffset:1}
+  .on .ge1{animation:draw .6s .8s cubic-bezier(.2,.7,.2,1) forwards}
+  .on .ge2{animation:draw .6s 1.7s cubic-bezier(.2,.7,.2,1) forwards}
+  @keyframes draw{to{stroke-dashoffset:0}}
+  .gsvg .gn circle{fill:var(--surface);stroke:var(--line-2);stroke-width:1.5;transition:stroke .35s,fill .35s}
+  .on .n0 circle{stroke:var(--teal);fill:#e9f6f4;transition-delay:.5s}
+  .on .n1 circle{stroke:var(--teal);fill:#e9f6f4;transition-delay:1.4s}
+  .on .n3 circle{stroke:var(--accent);fill:#fdf1e3;transition-delay:2.3s}
+  .gsvg text{font-family:var(--mono)}
+  .gsvg .gnl{font-size:11.5px;fill:var(--muted);text-anchor:middle}
+  .gsvg .gel{font-size:11px;fill:var(--teal);opacity:0}
+  .on .gl1{animation:fadeIn .4s 1.15s forwards}
+  .on .gl2{animation:fadeIn .4s 2.05s forwards}
+  .ans{padding:12px 22px;border:1.5px solid var(--accent);border-radius:var(--r);background:#fffdf9;
+       font-weight:700;color:var(--accent-ink);text-align:center;opacity:0;transform:translateY(10px)}
+  .on .ans{animation:slot .5s 2.7s cubic-bezier(.2,.7,.2,1) forwards}
+
+  /* S5 key insight: good graph + small model beats poor graph + big model */
+  .qual{display:flex;flex-direction:column;gap:12px;max-width:430px;width:100%;align-items:stretch}
+  .qrow{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 20px;
+        font-weight:700;font-size:18px;color:var(--ink);opacity:0;transform:translateX(26px)}
+  .qrow.win{border-color:var(--accent)}
+  .on .qrow.win{animation:slot .55s .5s cubic-bezier(.2,.7,.2,1) forwards}
+  .on .qrow.lose{animation:slot .55s 1.25s cubic-bezier(.2,.7,.2,1) forwards}
+  .qrow.lose{color:var(--muted);font-weight:600}
+  .qmark{font-family:var(--mono);font-size:17px}
+  .qmark.g{color:var(--good)}
+  .qmark.b{color:var(--crit)}
+  .vs{font-family:var(--mono);font-size:12px;letter-spacing:.16em;color:var(--muted);text-align:center;opacity:0}
+  .on .vs{animation:fadeIn .4s .95s forwards}
+
+  /* S6 in practice: match the tool to the question */
+  .dec{display:flex;flex-direction:column;gap:12px;max-width:460px;width:100%}
+  .drow{display:flex;align-items:center;gap:12px;padding:15px 18px;opacity:0;transform:translateX(26px)}
+  .on .d1{animation:slot .55s .5s cubic-bezier(.2,.7,.2,1) forwards}
+  .on .d2{animation:slot .55s .95s cubic-bezier(.2,.7,.2,1) forwards}
+  .drow .q{flex:1;font-size:16px;color:var(--ink-2)}
+  .drow .da{font-family:var(--mono);color:var(--muted)}
+  .drow .tool{font-family:var(--mono);font-size:12.5px;padding:6px 12px;border-radius:8px;flex:none}
+  .tool.graph{background:#fdf1e3;color:var(--accent-ink);border:1px solid var(--accent-soft)}
+  .tool.rag{background:#e9f6f4;color:var(--teal);border:1px solid var(--teal)}
+  .dnote{font-family:var(--mono);font-size:12.5px;color:var(--good);text-align:center;opacity:0}
+  .on .dnote{animation:fadeIn .5s 1.6s forwards}
+
+  /* CTA */
+  .url{margin-top:26px;font-family:var(--mono);font-size:21px;color:var(--accent-ink);opacity:0}
+  .on .url{animation:rise .7s 1s forwards}
+  .one{margin-top:22px;font-size:16.5px;color:var(--muted);opacity:0}
+  .on .one{animation:rise .7s .7s forwards}
+  .beatglow{position:absolute;left:50%;top:54%;width:520px;height:520px;transform:translate(-50%,-50%);pointer-events:none;
+            background:radial-gradient(circle,rgba(224,127,14,.10),transparent 65%);opacity:calc(.4 + .6*var(--beat))}
+
+  /* controls (hidden by ?clean=1) */
+  #ctrl{position:absolute;right:14px;bottom:12px;z-index:50;display:flex;gap:8px}
+  #ctrl button{font:600 13px var(--mono);color:var(--ink-2);background:rgba(255,255,255,.9);
+               border:1px solid var(--line-2);border-radius:8px;padding:6px 12px;cursor:pointer}
+  body.clean #ctrl{display:none}
+</style>
+</head>
+<body>
+<div id="wrap"><div id="stage">
+  <div id="prog"></div>
+
+  <!-- S0 hook -->
+  <section class="scene center" id="s0"><div class="txt">
+    <div class="eyebrow a1">AWESOME AI LEARNING · KNOWLEDGE GRAPHS &amp; GRAPHRAG</div>
+    <h1 class="a2">Which of our suppliers also invests in a competitor?</h1>
+    <p class="sub a3">No single document holds the answer.</p>
+  </div></section>
+
+  <!-- S1 misconception -->
+  <section class="scene center"><div class="txt">
+    <h1 class="a1">Bigger chunks will not save you.</h1>
+    <p class="sub a2">Flat RAG matches text, not the connections between facts.</p>
+  </div></section>
+
+  <!-- S2 flat chunks -->
+  <section class="scene split"><div class="txt">
+    <div class="step a1">THE PROBLEM · FLAT CHUNKS</div>
+    <h1 class="a2">Snippets that never meet.</h1>
+    <p class="sub a3">Keyword match retrieves similar wording, but no one chunk holds the answer.</p>
+  </div><div class="viz" style="display:grid;place-items:center">
+    <div class="chks">
+      <div class="card chk c1">
+        <div class="ctag">CHUNK · DOC 07</div>
+        <div class="cline"><i style="width:86%"></i></div>
+        <div class="cline"><span class="kw">supplier</span><i style="width:52%"></i></div>
+      </div>
+      <div class="card chk c2">
+        <div class="ctag">CHUNK · DOC 12</div>
+        <div class="cline"><span class="kw">competitor</span><i style="width:58%"></i></div>
+        <div class="cline"><i style="width:74%"></i></div>
+      </div>
+      <div class="card chk c3">
+        <div class="ctag">CHUNK · DOC 31</div>
+        <div class="cline"><i style="width:66%"></i></div>
+        <div class="cline"><span class="kw">invests</span><i style="width:48%"></i></div>
+      </div>
+      <div class="nov">✕ no single chunk holds the answer</div>
+    </div>
+  </div></section>
+
+  <!-- S3 triples -->
+  <section class="scene split"><div class="txt">
+    <div class="step a1">THE SHIFT · TRIPLES</div>
+    <h1 class="a2">Store facts as connections.</h1>
+    <p class="sub a3">Every fact becomes a triple：subject → relation → object.</p>
+  </div><div class="viz" style="display:grid;place-items:center">
+    <div class="trip">
+      <div class="trow">
+        <div class="tcol tc1"><div class="tl">SUBJECT</div><div class="tnode tsub">Anthropic</div></div>
+        <div class="tcol tc2"><div class="tl">RELATION</div><div class="trel">created →</div></div>
+        <div class="tcol tc3"><div class="tl">OBJECT</div><div class="tnode tobj">Claude</div></div>
+      </div>
+      <div class="tmore">entities are nodes · relationships are edges</div>
+    </div>
+  </div></section>
+
+  <!-- S4 GraphRAG -->
+  <section class="scene split"><div class="txt">
+    <div class="step a1">THE PAYOFF · GRAPHRAG</div>
+    <h1 class="a2">Follow the edges to the answer.</h1>
+    <p class="sub a3">The path is explicit：fewer tokens, fewer hallucinations, and answers no single chunk holds.</p>
+  </div><div class="viz" style="display:grid;place-items:center">
+    <div class="gwrap">
+      <svg class="gsvg" viewBox="0 0 460 310" width="440" height="296" aria-hidden="true">
+        <line class="ge" x1="102" y1="176" x2="212" y2="234"/>
+        <line class="ge ge1" pathLength="1" x1="102" y1="146" x2="208" y2="94"/>
+        <line class="ge ge2" pathLength="1" x1="258" y1="86" x2="364" y2="112"/>
+        <text class="gel gl1" x="86" y="86">hop 1 · supplies</text>
+        <text class="gel gl2" x="288" y="72">hop 2 · invests in</text>
+        <g class="gn n0"><circle cx="80" cy="160" r="26"/></g>
+        <g class="gn n1"><circle cx="232" cy="82" r="26"/></g>
+        <g class="gn n2"><circle cx="232" cy="246" r="26"/></g>
+        <g class="gn n3"><circle cx="390" cy="118" r="26"/></g>
+        <text class="gnl" x="80" y="206">us</text>
+        <text class="gnl" x="232" y="128">supplier A</text>
+        <text class="gnl" x="232" y="292">supplier B</text>
+        <text class="gnl" x="390" y="164">competitor X</text>
+      </svg>
+      <div class="ans">✓ Supplier A</div>
+    </div>
+  </div></section>
+
+  <!-- S5 key insight -->
+  <section class="scene split"><div class="txt">
+    <div class="step a1">KEY INSIGHT</div>
+    <h1 class="a2">Graph quality beats model size.</h1>
+    <p class="sub a3">Invest in extraction, dedup, and a clear schema before paying for a bigger model.</p>
+  </div><div class="viz" style="display:grid;place-items:center">
+    <div class="qual">
+      <div class="card qrow win"><span>Good graph ＋ small model</span><span class="qmark g">✓ wins</span></div>
+      <div class="vs">BEATS</div>
+      <div class="card qrow lose"><span>Poor graph ＋ big model</span><span class="qmark b">✕</span></div>
+    </div>
+  </div></section>
+
+  <!-- S6 in practice -->
+  <section class="scene split"><div class="txt">
+    <div class="step a1">IN PRACTICE</div>
+    <h1 class="a2">Match the tool to the question.</h1>
+    <p class="sub a3">Reach for the graph when answers span documents. Keep plain RAG for a single fact.</p>
+  </div><div class="viz" style="display:grid;place-items:center">
+    <div class="dec">
+      <div class="card drow d1"><span class="q">Relational／multi-hop question</span><span class="da">→</span><span class="tool graph">Knowledge graph</span></div>
+      <div class="card drow d2"><span class="q">Single-fact lookup</span><span class="da">→</span><span class="tool rag">Plain RAG</span></div>
+      <div class="dnote">✓ in practice, combine both</div>
+    </div>
+  </div></section>
+
+  <!-- S7 CTA -->
+  <section class="scene center"><div class="beatglow"></div><div class="txt">
+    <div class="eyebrow a1">KNOWLEDGE GRAPHS &amp; GRAPHRAG</div>
+    <h1 class="a2">From scattered chunks to a web of relationships.</h1>
+    <p class="one a3">One lesson in Awesome AI Learning. Free and hands-on.</p>
+    <div class="url a4">awesome-ai-learning.vercel.app</div>
+  </div></section>
+
+  <div id="cap"></div>
+  <div id="ctrl"><button id="mute">♪</button><button id="play">⏸</button></div>
+</div></div>
+
+<audio id="bgm" src="background_music.mp3" loop preload="auto"></audio>
+
+<script>
+(() => {
+  const qs = new URLSearchParams(location.search);
+  if (qs.get('clean') === '1') document.body.classList.add('clean');
+  if (qs.get('ar') === '1x1') document.body.classList.add('ar1x1');
+  const intro = Math.min(6, Math.max(1, parseInt(qs.get('intro') || '1', 10) || 1));
+  const s0 = document.getElementById('s0');
+  s0.classList.add('intro-' + intro);
+  if (intro === 6) { // word by word
+    const h = s0.querySelector('h1');
+    h.innerHTML = h.textContent.split(' ').map((w, i) =>
+      `<span class="w" style="animation-delay:${.25 + i * .14}s">${w}&nbsp;</span>`).join('');
+  }
+
+  const scenes = [...document.querySelectorAll('.scene')];
+  const caps = [
+    'Which of our suppliers also invests in a competitor? No single document says.',
+    'Flat RAG matches wording. This question lives in the connections.',
+    'Keyword match retrieves similar text, but the facts stay scattered.',
+    'A knowledge graph stores each fact as subject → relation → object.',
+    'GraphRAG follows the edges hop by hop until the answer lights up.',
+    'A good graph with a small model beats a poor graph with a big model.',
+    'Graphs for relational and multi-hop questions. Plain RAG for simple lookup.',
+    'Knowledge Graphs & GraphRAG：one lesson, start anytime.',
+  ];
+  const durs = [6500, 6500, 8000, 8000, 9000, 7500, 8000, 8000];
+  const total = durs.reduce((a, b) => a + b, 0);
+  const cap = document.getElementById('cap');
+  const prog = document.getElementById('prog');
+
+  let elapsed = 0, idx = -1, playing = true, last = performance.now();
+
+  function setScene(i) {
+    if (i === idx) return;
+    idx = i;
+    scenes.forEach((s, k) => s.classList.toggle('on', k === i));
+    cap.textContent = caps[i] || '';
+    cap.classList.add('on');
+  }
+  function tick(now) {
+    const dt = now - last; last = now;
+    if (playing) elapsed = (elapsed + dt) % total;
+    let a = 0, i = 0;
+    for (; i < durs.length; i++) { if (elapsed < a + durs[i]) break; a += durs[i]; }
+    setScene(Math.min(i, durs.length - 1));
+    prog.style.width = (elapsed / total * 100) + '%';
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+
+  // audio + beat pulse
+  const bgm = document.getElementById('bgm');
+  let actx = null, analyser = null, data = null, muted = false;
+  function startAudio() {
+    if (actx || muted) return;
+    try {
+      actx = new (window.AudioContext || window.webkitAudioContext)();
+      const src = actx.createMediaElementSource(bgm);
+      analyser = actx.createAnalyser(); analyser.fftSize = 256;
+      src.connect(analyser); analyser.connect(actx.destination);
+      data = new Uint8Array(analyser.frequencyBinCount);
+      bgm.play().catch(() => {});
+      pump();
+    } catch (e) {}
+  }
+  function pump() {
+    if (!analyser) return;
+    analyser.getByteFrequencyData(data);
+    let s = 0; for (let i = 2; i < 24; i++) s += data[i];
+    const beat = Math.min(1, s / (22 * 200));
+    document.documentElement.style.setProperty('--beat', beat.toFixed(3));
+    requestAnimationFrame(pump);
+  }
+  ['pointerdown', 'keydown', 'touchstart'].forEach(ev => document.addEventListener(ev, startAudio, { once: false }));
+
+  const btnPlay = document.getElementById('play');
+  const btnMute = document.getElementById('mute');
+  btnPlay.onclick = () => { playing = !playing; btnPlay.textContent = playing ? '⏸' : '▶'; };
+  btnMute.onclick = () => { muted = !muted; bgm.muted = muted; btnMute.textContent = muted ? '♪̸' : '♪'; };
+  document.addEventListener('keydown', e => {
+    if (e.code === 'Space') { e.preventDefault(); btnPlay.onclick(); }
+    if (e.key === 'r' || e.key === 'R') { elapsed = 0; idx = -1; }
+  });
+
+  // deterministic jump for headless verification
+  window.__jump = (i) => {
+    let a = 0; for (let k = 0; k < i; k++) a += durs[k];
+    elapsed = a + 60; idx = -1; playing = false; btnPlay.textContent = '▶';
+  };
+
+  // fit stage to window
+  function fit() {
+    const st = document.getElementById('stage');
+    const w = document.body.classList.contains('ar1x1') ? 1080 : 1280;
+    const h = document.body.classList.contains('ar1x1') ? 1080 : 720;
+    const k = Math.min(innerWidth / w, innerHeight / h);
+    st.style.transform = `scale(${k})`; st.style.transformOrigin = 'center';
+  }
+  addEventListener('resize', fit); fit();
+})();
+</script>
+</body>
+</html>

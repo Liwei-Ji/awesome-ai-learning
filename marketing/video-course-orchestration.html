@@ -1,0 +1,451 @@
+<!doctype html>
+<!-- Awesome AI Learning · course promo: Agent Orchestration (slug: orchestration)
+     Self-contained HTML animatic per .claude/skills/promo-video.
+     16:9 master (1280x720). ?ar=1x1 for square. ?clean=1 hides chrome for recording.
+     ?intro=1..6 opening variants. Space = play/pause, R = restart. window.__jump(i) for verification.
+     Copy sources (real, not invented): CH_TR.en['orchestration'], BODIES['orchestration'].en,
+     knowledge/en/orchestration.js, PRACTICE['orchestration'].en.
+     No em dashes anywhere. Music: local background_music.mp3 (same folder), beat pulse via AnalyserNode. -->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Awesome AI Learning · Agent Orchestration (course video)</title>
+<style>
+  :root{
+    --bg:#eef1f6; --surface:#ffffff; --surface-2:#f6f8fb; --surface-3:#eceff5;
+    --ink:#141821; --ink-2:#3b4557; --muted:#5b6678; --line:#dde3ec; --line-2:#c6cfdd;
+    --accent:#e07f0e; --accent-soft:#f6a940; --accent-ink:#a85a08;
+    --teal:#0f8a80; --good:#1f9d57; --crit:#d23f3f;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Noto Sans TC",sans-serif;
+    --r:12px; --e-2:0 3px 10px rgba(20,30,55,.06); --e-3:0 14px 36px rgba(20,30,55,.11);
+    --beat:0;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%;background:#0b0d12;font-family:var(--sans)}
+  #wrap{position:fixed;inset:0;display:grid;place-items:center}
+  #stage{position:relative;width:1280px;height:720px;background:var(--bg);overflow:hidden;border-radius:2px}
+  body.ar1x1 #stage{width:1080px;height:1080px}
+
+  /* progress */
+  #prog{position:absolute;left:0;top:0;height:3px;width:0%;background:var(--accent);z-index:40;
+        box-shadow:0 0 calc(6px + 10px*var(--beat)) rgba(224,127,14,calc(.35 + .45*var(--beat)))}
+
+  /* scenes */
+  .scene{position:absolute;inset:0;padding:72px 84px 118px;opacity:0;visibility:hidden}
+  body.ar1x1 .scene{padding:64px 64px 128px}
+  .scene.on{opacity:1;visibility:visible}
+  .scene .eyebrow{font-family:var(--mono);font-size:13px;letter-spacing:.14em;color:var(--accent-ink);margin-bottom:18px}
+  .scene h1{font-size:54px;line-height:1.08;letter-spacing:-.02em;font-weight:760;color:var(--ink);max-width:15ch;text-wrap:balance}
+  .scene .sub{margin-top:16px;font-size:20px;line-height:1.5;color:var(--ink-2);max-width:44ch}
+  .scene.center{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+  .scene.center h1{max-width:20ch}
+  .scene.split{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center}
+  body.ar1x1 .scene.split{grid-template-columns:1fr;gap:28px;align-content:center}
+  .step{font-family:var(--mono);font-size:12.5px;letter-spacing:.16em;color:var(--teal);margin-bottom:14px}
+  .scene.split h1{font-size:44px}
+
+  /* burned caption */
+  #cap{position:absolute;left:50%;bottom:34px;transform:translateX(-50%);z-index:30;max-width:76%;
+       background:rgba(20,24,33,.86);color:#fff;font-size:19px;line-height:1.45;padding:10px 20px;
+       border-radius:10px;text-align:center;opacity:0;transition:opacity .35s}
+  #cap.on{opacity:1}
+
+  /* enter animations (staged via .on) */
+  .on .a1,.on .a2,.on .a3,.on .a4{opacity:0;animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
+  .on .a2{animation-delay:.25s}.on .a3{animation-delay:.5s}.on .a4{animation-delay:.75s}
+  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  /* intro variants on scene 0 */
+  .intro-2.on .a1,.intro-2.on .a2,.intro-2.on .a3{animation-name:fadeIn}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  .intro-3.on h1{animation:none;opacity:1;clip-path:inset(0 100% 0 0);animation:wipe 1s .2s cubic-bezier(.2,.7,.2,1) forwards}
+  @keyframes wipe{to{clip-path:inset(0 0 0 0)}}
+  .intro-4.on h1{filter:blur(14px);opacity:0;animation:sharpen 1s .2s forwards}
+  @keyframes sharpen{to{filter:blur(0);opacity:1}}
+  .intro-5.on h1{transform-origin:left center;opacity:0;animation:zoomIn .9s .2s cubic-bezier(.2,.7,.2,1) forwards}
+  @keyframes zoomIn{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+  .intro-6.on h1 .w{display:inline-block;opacity:0;animation:rise .55s cubic-bezier(.2,.7,.2,1) forwards}
+
+  /* ===== visuals ===== */
+  .viz{position:relative;min-height:340px}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--e-2)}
+  @keyframes pop{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:scale(1)}}
+  @keyframes slot{to{opacity:1;transform:none}}
+  @keyframes draw{to{stroke-dashoffset:0}}
+
+  /* S1 misconception: three approaches, graph wins */
+  .tri{display:flex;flex-direction:column;gap:14px;max-width:440px;width:100%}
+  .opt{padding:14px 18px;display:flex;align-items:center;gap:16px;opacity:0;transform:translateY(14px)}
+  .on .opt1{animation:slot .55s .45s cubic-bezier(.2,.7,.2,1) forwards}
+  .on .opt2{animation:slot .55s .85s cubic-bezier(.2,.7,.2,1) forwards}
+  .on .opt3{animation:slot .55s 1.25s cubic-bezier(.2,.7,.2,1) forwards}
+  .opt .ot{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--muted);width:104px;flex:none}
+  .opt .od{flex:1;font-size:15px;line-height:1.35;color:var(--ink-2)}
+  .opt svg{flex:none}
+  .opt svg .st{stroke:var(--line-2);stroke-width:2.5;fill:none}
+  .opt svg .dot{fill:var(--line-2)}
+  .opt.win{border-color:var(--accent);background:#fffdf9;box-shadow:var(--e-3)}
+  .opt.win .ot{color:var(--accent-ink)}
+  .opt.win svg .st{stroke:var(--accent)}
+  .opt.win svg .dot{fill:var(--accent)}
+
+  /* S2 the idea: a small graph forms */
+  .gwrap{display:grid;place-items:center;width:100%}
+  .gsvg{width:470px;max-width:100%;overflow:visible}
+  .gsvg .e{stroke:var(--line-2);stroke-width:2.5;fill:none;stroke-dasharray:1;stroke-dashoffset:1}
+  .on .gsvg .e12{animation:draw .6s .85s forwards}
+  .on .gsvg .e13{animation:draw .6s 1s forwards}
+  .on .gsvg .e24{animation:draw .6s 1.55s forwards}
+  .on .gsvg .e34{animation:draw .6s 1.7s forwards}
+  .gsvg .nd{opacity:0;transform-box:fill-box;transform-origin:center}
+  .on .gsvg .nd1{animation:pop .5s .45s cubic-bezier(.2,.7,.3,1.3) forwards}
+  .on .gsvg .nd2{animation:pop .5s 1.15s cubic-bezier(.2,.7,.3,1.3) forwards}
+  .on .gsvg .nd3{animation:pop .5s 1.3s cubic-bezier(.2,.7,.3,1.3) forwards}
+  .on .gsvg .nd4{animation:pop .5s 1.95s cubic-bezier(.2,.7,.3,1.3) forwards}
+  .gsvg circle{fill:var(--surface);stroke:var(--line-2);stroke-width:2}
+  .gsvg .nd1 circle{fill:#fdf1e3;stroke:var(--accent)}
+  .gsvg .nd4 circle{fill:#e9f6f4;stroke:var(--teal)}
+  .gsvg .ann{font-family:var(--mono);font-size:12px;letter-spacing:.08em;fill:var(--teal);opacity:0}
+  .gsvg .ann2{fill:var(--accent-ink)}
+  .on .gsvg .ann{animation:fadeIn .5s 2.5s forwards}
+  .gsvg .al{stroke:var(--line-2);stroke-width:1.5;stroke-dasharray:3 4;opacity:0}
+  .on .gsvg .al{animation:fadeIn .5s 2.5s forwards}
+
+  /* S3 router */
+  .rt{position:relative;width:470px;height:300px}
+  .rt svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+  .rt svg .c{stroke:var(--line-2);stroke-width:2.5;fill:none;stroke-dasharray:1;stroke-dashoffset:1}
+  .on .rt .c0{animation:draw .45s .75s forwards}
+  .on .rt .cb{animation:draw .55s 1.35s forwards}
+  .rt svg .pick{stroke:var(--accent);stroke-width:3;fill:none;stroke-dasharray:1;stroke-dashoffset:1}
+  .on .rt .pick{animation:draw .55s 2.2s forwards}
+  .rin{position:absolute;left:0;top:108px;width:122px;padding:12px 14px;opacity:0;transform:scale(.7)}
+  .on .rin{animation:pop .5s .35s cubic-bezier(.2,.7,.3,1.3) forwards}
+  .rin .ph{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--muted);margin-bottom:8px}
+  .rin i{display:block;height:8px;border-radius:5px;background:var(--surface-3);margin:6px 0}
+  .rin i:last-child{width:70%}
+  .router{position:absolute;left:184px;top:118px;width:64px;height:64px;border-radius:50%;background:var(--surface);
+          border:2px solid var(--line-2);box-shadow:var(--e-2);display:grid;place-items:center;
+          font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;color:var(--ink-2);opacity:0;transform:scale(.7)}
+  .on .router{animation:pop .5s 1.05s cubic-bezier(.2,.7,.3,1.3) forwards}
+  .br{position:absolute;left:330px;width:140px;padding:13px 12px;text-align:center;
+      font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--ink-2);opacity:0;transform:scale(.7)}
+  .b1{top:22px}.b2{top:126px}.b3{top:230px}
+  .on .b1{animation:pop .45s 1.65s forwards, choose .4s 2.55s forwards}
+  .on .b2{animation:pop .45s 1.75s forwards, dim .4s 2.55s forwards}
+  .on .b3{animation:pop .45s 1.85s forwards, dim .4s 2.55s forwards}
+  @keyframes choose{to{border-color:var(--accent);background:#fdf1e3;color:var(--accent-ink);box-shadow:var(--e-3)}}
+  @keyframes dim{to{opacity:.4}}
+
+  /* S4 orchestrator-worker: fan out, run in parallel, gather */
+  .ow{position:relative;width:470px;height:330px}
+  .ow svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+  .ow svg .c{stroke:var(--line-2);stroke-width:2.5;fill:none;stroke-dasharray:1;stroke-dashoffset:1}
+  .on .ow .cf{animation:draw .5s .7s forwards}
+  .on .ow .cg{animation:draw .5s 2.3s forwards}
+  .ond{position:absolute;width:130px;padding:10px 12px;text-align:center;
+       font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;color:var(--ink-2);opacity:0;transform:scale(.7)}
+  .lead{left:170px;top:0;border-color:var(--accent-soft);background:#fffdf9;color:var(--accent-ink)}
+  .on .lead{animation:pop .5s .35s cubic-bezier(.2,.7,.3,1.3) forwards}
+  .w1{left:10px;top:122px}.w2{left:170px;top:122px}.w3{left:330px;top:122px}
+  .on .w1,.on .w2,.on .w3{animation:pop .45s 1.05s cubic-bezier(.2,.7,.3,1.3) forwards}
+  .ond .wb{margin-top:8px;height:6px;border-radius:4px;background:var(--surface-3);overflow:hidden}
+  .ond .wb i{display:block;height:100%;width:0;border-radius:4px;background:var(--teal)}
+  .on .ond .wb i{animation:grow 1s 1.45s cubic-bezier(.2,.7,.2,1) forwards}
+  @keyframes grow{to{width:100%}}
+  .gat{left:170px;top:254px}
+  .gat b{color:var(--good);font-weight:700}
+  .on .gat{animation:pop .5s 2.7s cubic-bezier(.2,.7,.3,1.3) forwards}
+
+  /* S5 guarded loop */
+  .loopc{width:440px;max-width:100%;padding:22px 24px 18px;position:relative}
+  .guard{position:absolute;top:-13px;right:18px;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;
+         color:var(--accent-ink);background:#fdf1e3;border:1px solid var(--accent-soft);padding:4px 10px;border-radius:6px;
+         opacity:0;transform:scale(.7)}
+  .on .guard{animation:pop .45s .45s cubic-bezier(.2,.7,.3,1.3) forwards}
+  .try{display:flex;align-items:center;gap:12px;padding:11px 4px;border-bottom:1px dashed var(--line);
+       font-family:var(--mono);font-size:13px;color:var(--ink-2);opacity:0}
+  .try:last-of-type{border-bottom:none}
+  .on .t1{animation:fadeIn .4s .8s forwards}
+  .on .t2{animation:fadeIn .4s 1.4s forwards}
+  .on .t3{animation:fadeIn .4s 2s forwards}
+  .try .res{margin-left:auto;font-weight:700}
+  .try .fail{color:var(--crit)}
+  .try .ok{color:var(--good)}
+  .pass{margin-top:12px;text-align:center;font-family:var(--mono);font-size:12.5px;color:var(--good);opacity:0}
+  .on .pass{animation:fadeIn .5s 2.6s forwards}
+
+  /* S6 why a graph */
+  .why{display:flex;flex-direction:column;gap:12px;max-width:440px;width:100%}
+  .wcard{padding:15px 18px;display:flex;gap:14px;align-items:center;opacity:0;transform:translateY(12px)}
+  .on .wc1{animation:slot .5s .5s cubic-bezier(.2,.7,.2,1) forwards}
+  .on .wc2{animation:slot .5s .95s cubic-bezier(.2,.7,.2,1) forwards}
+  .on .wc3{animation:slot .5s 1.4s cubic-bezier(.2,.7,.2,1) forwards}
+  .wcard .chk{color:var(--good);font-weight:700;font-size:17px}
+  .wcard .wt{font-size:16.5px;color:var(--ink-2)}
+  .wtag{margin-top:6px;text-align:center;font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;color:var(--teal);opacity:0}
+  .on .wtag{animation:fadeIn .5s 2s forwards}
+
+  /* CTA */
+  .url{margin-top:26px;font-family:var(--mono);font-size:21px;color:var(--accent-ink);opacity:0}
+  .on .url{animation:rise .7s 1s forwards}
+  .one{margin-top:22px;font-size:16.5px;color:var(--muted);opacity:0}
+  .on .one{animation:rise .7s .7s forwards}
+  .beatglow{position:absolute;left:50%;top:54%;width:520px;height:520px;transform:translate(-50%,-50%);pointer-events:none;
+            background:radial-gradient(circle,rgba(224,127,14,.10),transparent 65%);opacity:calc(.4 + .6*var(--beat))}
+
+  /* controls (hidden by ?clean=1) */
+  #ctrl{position:absolute;right:14px;bottom:12px;z-index:50;display:flex;gap:8px}
+  #ctrl button{font:600 13px var(--mono);color:var(--ink-2);background:rgba(255,255,255,.9);
+               border:1px solid var(--line-2);border-radius:8px;padding:6px 12px;cursor:pointer}
+  body.clean #ctrl{display:none}
+</style>
+</head>
+<body>
+<div id="wrap"><div id="stage">
+  <div id="prog"></div>
+
+  <!-- S0 hook -->
+  <section class="scene center" id="s0"><div class="txt">
+    <div class="eyebrow a1">AWESOME AI LEARNING · AGENT ORCHESTRATION</div>
+    <h1 class="a2">One agent, one giant prompt, and it wanders.</h1>
+    <p class="sub a3">What do you do when the task is too big for one loop?</p>
+  </div></section>
+
+  <!-- S1 misconception -->
+  <section class="scene split"><div class="txt">
+    <h1 class="a1">More autonomy is not automatically better.</h1>
+    <p class="sub a2">A free-running agent is hard to control. A hard-coded pipeline is too stiff. The graph is the middle ground.</p>
+  </div><div class="viz" style="display:grid;place-items:center">
+    <div class="tri">
+      <div class="card opt opt1"><span class="ot">SINGLE AGENT</span><span class="od">flexible, hard to control</span>
+        <svg width="84" height="30" viewBox="0 0 84 30"><path class="st" d="M4,16 C16,2 26,30 40,12 S64,26 76,8"/><circle class="dot" cx="79" cy="7" r="3"/></svg></div>
+      <div class="card opt opt2"><span class="ot">FIXED PIPELINE</span><span class="od">predictable, rigid</span>
+        <svg width="84" height="30" viewBox="0 0 84 30"><path class="st" d="M12,15 H72"/><circle class="dot" cx="10" cy="15" r="5"/><circle class="dot" cx="42" cy="15" r="5"/><circle class="dot" cx="74" cy="15" r="5"/></svg></div>
+      <div class="card opt opt3 win"><span class="ot">GRAPH</span><span class="od">structure and flexibility at once</span>
+        <svg width="84" height="30" viewBox="0 0 84 30"><path class="st" d="M12,15 L42,4 L72,15 M12,15 L42,26 L72,15"/><circle class="dot" cx="12" cy="15" r="4.5"/><circle class="dot" cx="42" cy="4" r="4.5"/><circle class="dot" cx="42" cy="26" r="4.5"/><circle class="dot" cx="72" cy="15" r="4.5"/></svg></div>
+    </div>
+  </div></section>
+
+  <!-- S2 the idea: nodes and edges -->
+  <section class="scene split"><div class="txt">
+    <div class="step a1">THE IDEA</div>
+    <h1 class="a2">Nodes are steps. Edges are flow.</h1>
+    <p class="sub a3">Draw the system as a graph and you can see what runs first, where it goes next, and where it branches.</p>
+  </div><div class="viz gwrap">
+    <svg class="gsvg" viewBox="0 0 470 300">
+      <path class="e e12" pathLength="1" d="M86,150 C130,150 150,80 194,80"/>
+      <path class="e e13" pathLength="1" d="M86,150 C130,150 150,220 194,220"/>
+      <path class="e e24" pathLength="1" d="M246,80 C290,80 310,150 354,150"/>
+      <path class="e e34" pathLength="1" d="M246,220 C290,220 310,150 354,150"/>
+      <g class="nd nd1"><circle cx="60" cy="150" r="26"/></g>
+      <g class="nd nd2"><circle cx="220" cy="80" r="26"/></g>
+      <g class="nd nd3"><circle cx="220" cy="220" r="26"/></g>
+      <g class="nd nd4"><circle cx="380" cy="150" r="26"/></g>
+      <line class="al" x1="220" y1="46" x2="220" y2="24"/>
+      <text class="ann" x="234" y="20">NODE = A STEP</text>
+      <line class="al" x1="300" y1="185" x2="322" y2="230"/>
+      <text class="ann ann2" x="290" y="252">EDGE = THE FLOW</text>
+    </svg>
+  </div></section>
+
+  <!-- S3 router -->
+  <section class="scene split"><div class="txt">
+    <div class="step a1">PATTERN · ROUTER</div>
+    <h1 class="a2">Send it down the right branch.</h1>
+    <p class="sub a3">A router node inspects the input and picks the path：a refund, a technical issue, or a general question.</p>
+  </div><div class="viz" style="display:grid;place-items:center">
+    <div class="rt">
+      <svg viewBox="0 0 470 300">
+        <path class="c c0" pathLength="1" d="M124,150 H182"/>
+        <path class="c cb" pathLength="1" d="M250,150 C292,150 292,44 328,44"/>
+        <path class="c cb" pathLength="1" d="M250,150 H328"/>
+        <path class="c cb" pathLength="1" d="M250,150 C292,150 292,252 328,252"/>
+        <path class="pick" pathLength="1" d="M250,150 C292,150 292,44 328,44"/>
+      </svg>
+      <div class="card rin"><div class="ph">INPUT</div><i></i><i></i></div>
+      <div class="router">ROUTER</div>
+      <div class="card br b1">REFUND</div>
+      <div class="card br b2">TECHNICAL</div>
+      <div class="card br b3">GENERAL</div>
+    </div>
+  </div></section>
+
+  <!-- S4 orchestrator-worker + parallel gather -->
+  <section class="scene split"><div class="txt">
+    <div class="step a1">PATTERN · ORCHESTRATOR AND WORKERS</div>
+    <h1 class="a2">Split, delegate, gather.</h1>
+    <p class="sub a3">A lead agent breaks the goal into subtasks, workers run in parallel, and the results merge into one.</p>
+  </div><div class="viz" style="display:grid;place-items:center">
+    <div class="ow">
+      <svg viewBox="0 0 470 330">
+        <path class="c cf" pathLength="1" d="M235,42 C235,84 75,84 75,120"/>
+        <path class="c cf" pathLength="1" d="M235,42 V120"/>
+        <path class="c cf" pathLength="1" d="M235,42 C235,84 395,84 395,120"/>
+        <path class="c cg" pathLength="1" d="M75,182 C75,218 235,218 235,252"/>
+        <path class="c cg" pathLength="1" d="M235,182 V252"/>
+        <path class="c cg" pathLength="1" d="M395,182 C395,218 235,218 235,252"/>
+      </svg>
+      <div class="card ond lead">LEAD AGENT</div>
+      <div class="card ond w1">WORKER 1<div class="wb"><i></i></div></div>
+      <div class="card ond w2">WORKER 2<div class="wb"><i></i></div></div>
+      <div class="card ond w3">WORKER 3<div class="wb"><i></i></div></div>
+      <div class="card ond gat">GATHER <b>✓</b></div>
+    </div>
+  </div></section>
+
+  <!-- S5 guarded loop -->
+  <section class="scene split"><div class="txt">
+    <div class="step a1">PATTERN · GUARDED LOOP</div>
+    <h1 class="a2">Retry, but with a cap.</h1>
+    <p class="sub a3">A loop repeats until the check passes, with max iterations and a timeout so it cannot run forever.</p>
+  </div><div class="viz" style="display:grid;place-items:center">
+    <div class="card loopc">
+      <div class="guard">GUARD：MAX 3</div>
+      <div class="try t1"><span>TRY 1 · draft → check</span><span class="res fail">✗</span></div>
+      <div class="try t2"><span>TRY 2 · revise → check</span><span class="res fail">✗</span></div>
+      <div class="try t3"><span>TRY 3 · revise → check</span><span class="res ok">✓</span></div>
+      <div class="pass">✓ condition met, exit loop</div>
+    </div>
+  </div></section>
+
+  <!-- S6 why a graph -->
+  <section class="scene split"><div class="txt">
+    <div class="step a1">WHY IT WORKS</div>
+    <h1 class="a2">You can see the whole system.</h1>
+    <p class="sub a3">Each node is testable on its own, the path that ran is traceable, and failures stay isolated.</p>
+  </div><div class="viz" style="display:grid;place-items:center">
+    <div class="why">
+      <div class="card wcard wc1"><span class="chk">✓</span><span class="wt">Each node testable on its own</span></div>
+      <div class="card wcard wc2"><span class="chk">✓</span><span class="wt">The path visible and traceable</span></div>
+      <div class="card wcard wc3"><span class="chk">✓</span><span class="wt">Failures isolated, not everywhere</span></div>
+      <div class="wtag">CONTROLLABLE · OBSERVABLE</div>
+    </div>
+  </div></section>
+
+  <!-- S7 takeaway -->
+  <section class="scene center"><div class="txt">
+    <div class="step a1">IN PRACTICE</div>
+    <h1 class="a2">Start with the simplest shape that works.</h1>
+    <p class="sub a3" style="margin-left:auto;margin-right:auto">If one call solves it, skip the graph. Grow nodes only when you have real branching. And guard every loop.</p>
+  </div></section>
+
+  <!-- S8 CTA -->
+  <section class="scene center"><div class="beatglow"></div><div class="txt">
+    <div class="eyebrow a1">AGENT ORCHESTRATION</div>
+    <h1 class="a2">Nodes are steps, edges are flow：wire it as a graph.</h1>
+    <p class="one a3">One lesson in Awesome AI Learning. Free and hands-on.</p>
+    <div class="url a4">awesome-ai-learning.vercel.app</div>
+  </div></section>
+
+  <div id="cap"></div>
+  <div id="ctrl"><button id="mute">♪</button><button id="play">⏸</button></div>
+</div></div>
+
+<audio id="bgm" src="background_music.mp3" loop preload="auto"></audio>
+
+<script>
+(() => {
+  const qs = new URLSearchParams(location.search);
+  if (qs.get('clean') === '1') document.body.classList.add('clean');
+  if (qs.get('ar') === '1x1') document.body.classList.add('ar1x1');
+  const intro = Math.min(6, Math.max(1, parseInt(qs.get('intro') || '1', 10) || 1));
+  const s0 = document.getElementById('s0');
+  s0.classList.add('intro-' + intro);
+  if (intro === 6) { // word by word
+    const h = s0.querySelector('h1');
+    h.innerHTML = h.textContent.split(' ').map((w, i) =>
+      `<span class="w" style="animation-delay:${.25 + i * .14}s">${w}&nbsp;</span>`).join('');
+  }
+
+  const scenes = [...document.querySelectorAll('.scene')];
+  const caps = [
+    'One agent, one giant prompt, and it wanders. Now what?',
+    'A free agent is hard to steer. A fixed pipeline cannot adapt. The graph sits in between.',
+    'Draw the system as a graph：nodes are steps, edges are the flow between them.',
+    'A router reads the input and sends it down the right branch.',
+    'A lead agent splits the goal, workers run in parallel, results merge.',
+    'A loop retries until the check passes, capped so it cannot spin forever.',
+    'Every node testable. Every path visible. Failures stay isolated.',
+    'Start with the simplest shape that works, and guard every loop.',
+    'Agent Orchestration：one lesson, start anytime.',
+  ];
+  const durs = [6500, 7000, 7500, 7500, 8000, 7500, 7000, 6500, 8000];
+  const total = durs.reduce((a, b) => a + b, 0);
+  const cap = document.getElementById('cap');
+  const prog = document.getElementById('prog');
+
+  let elapsed = 0, idx = -1, playing = true, last = performance.now();
+
+  function setScene(i) {
+    if (i === idx) return;
+    idx = i;
+    scenes.forEach((s, k) => s.classList.toggle('on', k === i));
+    cap.textContent = caps[i] || '';
+    cap.classList.add('on');
+  }
+  function tick(now) {
+    const dt = now - last; last = now;
+    if (playing) elapsed = (elapsed + dt) % total;
+    let a = 0, i = 0;
+    for (; i < durs.length; i++) { if (elapsed < a + durs[i]) break; a += durs[i]; }
+    setScene(Math.min(i, durs.length - 1));
+    prog.style.width = (elapsed / total * 100) + '%';
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+
+  // audio + beat pulse
+  const bgm = document.getElementById('bgm');
+  let actx = null, analyser = null, data = null, muted = false;
+  function startAudio() {
+    if (actx || muted) return;
+    try {
+      actx = new (window.AudioContext || window.webkitAudioContext)();
+      const src = actx.createMediaElementSource(bgm);
+      analyser = actx.createAnalyser(); analyser.fftSize = 256;
+      src.connect(analyser); analyser.connect(actx.destination);
+      data = new Uint8Array(analyser.frequencyBinCount);
+      bgm.play().catch(() => {});
+      pump();
+    } catch (e) {}
+  }
+  function pump() {
+    if (!analyser) return;
+    analyser.getByteFrequencyData(data);
+    let s = 0; for (let i = 2; i < 24; i++) s += data[i];
+    const beat = Math.min(1, s / (22 * 200));
+    document.documentElement.style.setProperty('--beat', beat.toFixed(3));
+    requestAnimationFrame(pump);
+  }
+  ['pointerdown', 'keydown', 'touchstart'].forEach(ev => document.addEventListener(ev, startAudio, { once: false }));
+
+  const btnPlay = document.getElementById('play');
+  const btnMute = document.getElementById('mute');
+  btnPlay.onclick = () => { playing = !playing; btnPlay.textContent = playing ? '⏸' : '▶'; };
+  btnMute.onclick = () => { muted = !muted; bgm.muted = muted; btnMute.textContent = muted ? '♪̸' : '♪'; };
+  document.addEventListener('keydown', e => {
+    if (e.code === 'Space') { e.preventDefault(); btnPlay.onclick(); }
+    if (e.key === 'r' || e.key === 'R') { elapsed = 0; idx = -1; }
+  });
+
+  // deterministic jump for headless verification
+  window.__jump = (i) => {
+    let a = 0; for (let k = 0; k < i; k++) a += durs[k];
+    elapsed = a + 60; idx = -1; playing = false; btnPlay.textContent = '▶';
+  };
+
+  // fit stage to window
+  function fit() {
+    const st = document.getElementById('stage');
+    const w = document.body.classList.contains('ar1x1') ? 1080 : 1280;
+    const h = document.body.classList.contains('ar1x1') ? 1080 : 720;
+    const k = Math.min(innerWidth / w, innerHeight / h);
+    st.style.transform = `scale(${k})`; st.style.transformOrigin = 'center';
+  }
+  addEventListener('resize', fit); fit();
+})();
+</script>
+</body>
+</html>

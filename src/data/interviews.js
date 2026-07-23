@@ -122,6 +122,62 @@ export const INTERVIEWS = {
     ],
     related: ["orchestration", "loop-control", "agent-vs-workflow"],
   },
+  "skill-vs-loop": {
+    cat: "agent",
+    label: "Skill 和 Loop 差在哪？",
+    q: "技能包（skill）和 agent 的迴圈（loop）都跟「把任務做好」有關。它們差在哪？有了技能，是不是就不用管迴圈了？",
+    trap: "別把兩者當成同一個維度的東西。loop 是 agent 的控制機制：想→做→看→再想，決定下一步與何時停；skill 是打包好的 know-how：教「這件事怎麼做好」。一個是引擎、一個是手冊，互補而非替代。",
+    points: [
+      { icon: "atom", title: "Loop：引擎", desc: "迴圈是 agent 的<b>控制機制</b>：想→做→看→再想，<b>動態決定下一步、決定何時算完成</b>。它是<b>執行期的行為</b>，管的是「怎麼持續前進、怎麼停」。" },
+      { icon: "scale", title: "Skill：手冊", desc: "技能是<b>打包的程序知識</b>：一包指令＋範本／腳本，教「<b>這個任務該怎麼做到位</b>」。它是<b>靜態、可載入的檔案</b>：可分享、可版本控管，改能力＝換資料夾。" },
+      { icon: "network", title: "互補，不是替代", desc: "agent 在<b>迴圈裡跑</b>，跑到某一步時<b>載入對的技能</b>照著做。技能<b>不會自己執行</b>（照著做的仍是迴圈裡的 agent），也<b>不會幫你停迴圈</b>：步數／花費上限與完成條件照樣要設。" },
+    ],
+    core: [
+      { h: "先點根本", d: "<b>Loop</b>＝控制機制（引擎）：動態決定下一步與何時停；<b>Skill</b>＝打包的程序知識（手冊）：教這件事怎麼做好。<b>不同維度、不能互相取代</b>。" },
+      { h: "各管什麼", d: "Loop 管<b>執行流程</b>（前進、重試、停止）；Skill 管<b>做法</b>（步驟、格式、標準）。一個動態、一個靜態。" },
+      { h: "怎麼組合", d: "典型样貌：agent 的迴圈跑到某一步，<b>依名稱＋描述載入對的技能</b>，照手冊把那一步做好，再回到迴圈繼續。<b>引擎轉、手冊教</b>。" },
+      { h: "別忘了", d: "有技能<b>不代表不用 loop control</b>：上限、完成條件、防繞圈照設。技能只是指令，<b>真正執行與收尾的是迴圈裡的 agent</b>。" },
+    ],
+    plus: [
+      "類比：loop 是一個工人反覆做到完成（馬達）；skill 是交給那個工人的 SOP 手冊。",
+      "技能內容可以「描述」一個需要迭代的程序，但那是手冊上的文字，跟 agent 的執行迴圈是兩回事。",
+      "全景定位：agent＝推理迴圈（引擎）、工具/MCP＝手、skill＝手冊、orchestration＝接線圖。",
+    ],
+    traps: [
+      "以為載入技能後它會「自己把事做完」（技能只是指令，執行的是 agent）。",
+      "有了技能就不設迴圈上限與完成條件（技能不會幫你煞車）。",
+      "把控制流程寫進技能手冊（該由 loop／編排管的事，塞進了 know-how）。",
+    ],
+    related: ["skills", "agent", "orchestration"],
+  },
+  "skill-selection": {
+    cat: "agent",
+    label: "技能一多，怎麼精準調用？",
+    q: "agent 只有 5 個技能時，隨手挑就行；有 500 個時，怎麼確保它每次都載入對的那個、不誤觸別的？",
+    trap: "別以為「漸進揭露」就解決一切。平時只看名稱＋描述沒錯，但 500 條描述本身也會塞爆 context、製造選擇雜訊。規模化的技能調用是一套組合拳：描述設計＋檢索＋分層路由，最後還要量測。",
+    points: [
+      { icon: "atom", title: "描述就是路由器", desc: "agent <b>只靠名稱＋描述</b>決定要不要載入。所以描述要寫成「<b>什麼時候該用我</b>」而不是「我是什麼」，必要時加<b>反向界線</b>（不適用於 X），並讓各技能的描述<b>彼此區隔</b>，否則模型分不出來。" },
+      { icon: "scale", title: "Skill RAG：檢索先篩", desc: "技能一多，就把每個技能的名稱＋描述做成 <b>embedding</b>；任務進來先用<b>向量搜尋取 top-k 候選</b>，只把這幾個給模型挑。等於<b>對技能做 RAG</b>，可以擴到上千個。" },
+      { icon: "network", title: "分層與路由", desc: "把技能編成<b>類別／命名空間</b>（先選類、再選技能），或在編排圖放一個 <b>router 節點</b>先分類任務、直接映射到技能。也可依情境<b>白名單</b>（這個場景只露出相關技能）、模稜兩可時<b>反問澄清</b>。" },
+    ],
+    core: [
+      { h: "先點根本", d: "調用精準度的第一因是<b>描述品質</b>：把描述寫成<b>觸發條件</b>（何時用我＋何時別用我），這是 agent 唯一常駐可見的資訊。" },
+      { h: "規模化靠檢索", d: "漸進揭露壓平了「載入成本」，但<b>描述總量仍有限</b>：技能多到一個程度，改用<b>向量檢索取 top-k</b> 再讓模型挑（Skill RAG）。" },
+      { h: "縮小選擇空間", d: "<b>分類／命名空間／router 節點／情境白名單</b>，每一步都讓候選變少，誤觸自然下降。" },
+      { h: "要量測", d: "拿代表性任務跑：該載入的有沒有載（<b>recall</b>）、載到錯的沒有（<b>precision</b>）；記錄每次選了哪個技能，錯了就回頭修描述。" },
+    ],
+    plus: [
+      "描述加一句「不適用於 X」很省事：最常見的誤觸就是兩個相近技能互搶。",
+      "把一批代表性任務存成「技能選擇評測集」，改描述後重跑，馬上知道有沒有變好。",
+      "同名／近義技能是誤觸主因：要嘛合併、要嘛改名改描述，讓界線清楚。",
+    ],
+    traps: [
+      "描述只寫「我是什麼」，不寫「什麼時候用我」（agent 沒有判斷依據）。",
+      "技能上百個仍讓模型掃完整清單挑（不做檢索、不分層），又慢又容易錯。",
+      "從不量測選擇對錯：誤觸了也不知道，描述永遠不會變好。",
+    ],
+    related: ["skills", "embedding", "orchestration"],
+  },
   "sycophancy": {
     cat: "prompting",
     label: "AI 為什麼老是附和我？",
@@ -2269,6 +2325,58 @@ const INT_TR = {
         "Wrapping one simple call in a big graph, adding state and latency for nothing (over-engineering).",
       ],
     },
+    "skill-vs-loop": {
+      label: "What is the difference between a skill and a loop?",
+      q: "Skills and the agent loop are both about \"doing the task well\". How do they differ, and once you have skills, can you stop worrying about the loop?",
+      trap: "Don't treat them as the same kind of thing. The loop is the agent's control mechanism: think → act → observe → think again, deciding the next step and when to stop. A skill is packaged know-how: how to do this job well. One is the engine, the other is the manual, they complement, not replace, each other.",
+      points: [
+        { title: "Loop: the engine", desc: "The loop is the agent's <b>control mechanism</b>: think → act → observe → think again, <b>dynamically deciding the next step and what counts as done</b>. It is <b>runtime behavior</b>, in charge of \"how to keep moving and how to stop\"." },
+        { title: "Skill: the manual", desc: "A skill is <b>packaged procedural knowledge</b>: instructions plus templates/scripts that teach \"<b>how to do this task properly</b>\". It is a <b>static, loadable file</b>: shareable, version-controlled, and changing a capability means swapping a folder." },
+        { title: "Complements, not substitutes", desc: "The agent <b>runs in its loop</b>, and at some step <b>loads the right skill</b> and follows it. A skill <b>does not execute itself</b> (the agent in the loop does the following), and it <b>won't stop the loop for you</b>: step/cost limits and a done condition still must be set." },
+      ],
+      core: [
+        { h: "Start with the fundamentals", d: "<b>Loop</b> = the control mechanism (engine): dynamically decides the next step and when to stop; <b>Skill</b> = packaged procedural knowledge (manual): how to do the job well. <b>Different dimensions, neither replaces the other</b>." },
+        { h: "What each governs", d: "The loop governs the <b>execution flow</b> (advance, retry, stop); the skill governs the <b>method</b> (steps, format, standards). One dynamic, one static." },
+        { h: "How they combine", d: "The typical shape: the agent's loop reaches a step, <b>loads the right skill by name + description</b>, does that step by the manual, then returns to the loop. <b>The engine turns, the manual teaches</b>." },
+        { h: "Don't forget", d: "Having skills <b>does not remove the need for loop control</b>: limits, done conditions, and anti-looping still apply. A skill is just instructions, <b>the agent in the loop is what executes and finishes</b>." },
+      ],
+      plus: [
+        "Analogy: the loop is a worker iterating until the job is done (the motor); a skill is the SOP handbook you hand that worker.",
+        "A skill's content can describe an iterative procedure, but that is text in the manual, not the agent's execution loop.",
+        "The big picture: agent = the reasoning loop (engine), tools/MCP = the hands, skills = the manuals, orchestration = the wiring diagram.",
+      ],
+      traps: [
+        "Assuming a loaded skill will \"finish the job by itself\" (a skill is just instructions; the agent executes).",
+        "Skipping loop limits and done conditions because \"we have skills now\" (skills won't brake for you).",
+        "Writing control flow into the skill manual (things the loop/orchestration should govern, stuffed into know-how).",
+      ],
+    },
+    "skill-selection": {
+      label: "As skills pile up, how do you invoke the right one?",
+      q: "With 5 skills the agent can just pick; with 500, how do you make sure it loads the right one every time and doesn't trigger the wrong one?",
+      trap: "Don't assume progressive disclosure solves everything. Yes, normally only names + descriptions are visible, but 500 descriptions also flood the context and add selection noise. Precise invocation at scale is a combo: description design + retrieval + tiered routing, and then you measure it.",
+      points: [
+        { title: "The description is the router", desc: "The agent decides whether to load a skill <b>from its name + description alone</b>. So write the description as \"<b>when to use me</b>\", not \"what I am\"; add <b>negative boundaries</b> (not for X) where needed; and keep descriptions <b>distinct from each other</b>, or the model can't tell them apart." },
+        { title: "Skill RAG: retrieve first", desc: "Once skills multiply, <b>embed</b> each skill's name + description; when a task arrives, run a <b>vector search for the top-k candidates</b> and let the model choose only among those. That is <b>RAG over your skills</b>, and it scales to thousands." },
+        { title: "Tiers and routing", desc: "Organize skills into <b>categories / namespaces</b> (pick the category, then the skill), or put a <b>router node</b> in the orchestration graph to classify the task and map it straight to a skill. Also <b>whitelist per context</b> (only expose relevant skills in a given scene) and <b>ask a clarifying question</b> when it's ambiguous." },
+      ],
+      core: [
+        { h: "Start with the fundamentals", d: "The first driver of invocation accuracy is <b>description quality</b>: write it as a <b>trigger condition</b> (when to use me + when not to), it is the only information the agent always sees." },
+        { h: "Scale needs retrieval", d: "Progressive disclosure flattens loading cost, but the <b>total volume of descriptions is still bounded</b>: past a point, switch to <b>vector retrieval for top-k</b> and let the model pick among those (Skill RAG)." },
+        { h: "Shrink the choice space", d: "<b>Categories / namespaces / a router node / per-context whitelists</b>, every layer cuts the candidates, and wrong triggers drop with them." },
+        { h: "Measure it", d: "Run representative tasks: did it load what it should (<b>recall</b>), did it avoid loading the wrong one (<b>precision</b>)? Log which skill was chosen each time and fix descriptions when it errs." },
+      ],
+      plus: [
+        "Adding one line, \"not for X\", to a description is cheap and effective: the most common mis-trigger is two similar skills grabbing each other's jobs.",
+        "Keep a batch of representative tasks as a \"skill-selection eval set\"; rerun it after editing descriptions and you'll know immediately whether things improved.",
+        "Same-name / near-synonym skills are the main source of mis-triggers: merge them, or rename and sharpen the descriptions until the boundary is clear.",
+      ],
+      traps: [
+        "Descriptions that only say \"what I am\", never \"when to use me\" (the agent has nothing to judge by).",
+        "Hundreds of skills but the model still scans the full list (no retrieval, no tiers), slow and error-prone.",
+        "Never measuring selection accuracy: mis-triggers go unnoticed and descriptions never improve.",
+      ],
+    },
     "sycophancy": {
       label: "Why does AI keep agreeing with me?",
       q: "I share an idea and AI often says \"great!\" and goes along with me. Does that mean my idea is actually good?",
@@ -3929,6 +4037,58 @@ const INT_TR = {
         "単純な一回の呼び出しを大きなグラフで包み、状態と遅延を無駄に増やす（過度な工程化）。",
       ],
     },
+    "skill-vs-loop": {
+      label: "スキルとループの違いは？",
+      q: "スキルも agent のループも「タスクをうまくこなす」ための仕組み。両者はどう違う？スキルがあればループの心配は要らない？",
+      trap: "両者を同じ種類のものと考えないこと。ループは agent の制御機構：考える→動く→観察→また考える、次の一手と停止を決める。スキルはパッケージ化された know-how：この仕事をどううまくやるか。片方はエンジン、片方はマニュアルで、置き換えではなく補完し合う。",
+      points: [
+        { title: "ループ：エンジン", desc: "ループは agent の<b>制御機構</b>：考える→動く→観察→また考える、<b>次の一手と「何をもって完了か」を動的に決める</b>。<b>実行時の挙動</b>であり、「どう進み続け、どう止まるか」を司る。" },
+        { title: "スキル：マニュアル", desc: "スキルは<b>パッケージ化された手順知識</b>：指示＋テンプレ／スクリプトで「<b>このタスクをどう正しくやるか</b>」を教える。<b>静的で読み込み可能なファイル</b>：共有でき、バージョン管理でき、能力を変える＝フォルダの差し替え。" },
+        { title: "補完であって代替ではない", desc: "agent は<b>ループの中で動き</b>、あるステップで<b>適切なスキルを読み込んで</b>それに従う。スキルは<b>自分では実行しない</b>（従うのはループ内の agent）し、<b>ループを止めてもくれない</b>：ステップ／コスト上限と完了条件は変わらず必要。" },
+      ],
+      core: [
+        { h: "まず根本", d: "<b>ループ</b>＝制御機構（エンジン）：次の一手と停止を動的に決める；<b>スキル</b>＝パッケージ化された手順知識（マニュアル）：仕事のやり方を教える。<b>次元が違い、互いに代替しない</b>。" },
+        { h: "それぞれの担当", d: "ループは<b>実行フロー</b>（前進・再試行・停止）を、スキルは<b>やり方</b>（手順・書式・基準）を司る。片方は動的、片方は静的。" },
+        { h: "どう組み合わさるか", d: "典型形：agent のループがあるステップに達し、<b>名前＋説明で適切なスキルを読み込み</b>、マニュアルどおりにそのステップをこなし、ループに戻る。<b>エンジンが回り、マニュアルが教える</b>。" },
+        { h: "忘れずに", d: "スキルがあっても <b>loop control は不要にならない</b>：上限・完了条件・ループ防止はそのまま。スキルは指示にすぎず、<b>実行して仕上げるのはループ内の agent</b>。" },
+      ],
+      plus: [
+        "たとえ：ループは完了まで繰り返し働く作業者（モーター）；スキルはその作業者に渡す SOP ハンドブック。",
+        "スキルの中身に「反復する手順」を書くことはできるが、それはマニュアル上の文章で、agent の実行ループとは別物。",
+        "全体像：agent＝推論ループ（エンジン）、ツール/MCP＝手、スキル＝マニュアル、オーケストレーション＝配線図。",
+      ],
+      traps: [
+        "スキルを読み込めば「勝手に仕事が終わる」と思う（スキルは指示にすぎず、実行するのは agent）。",
+        "「スキルがあるから」とループの上限・完了条件を省く（スキルはブレーキを踏んでくれない）。",
+        "制御フローをスキルのマニュアルに書き込む（ループ／オーケストレーションが司るべきことを know-how に詰め込む）。",
+      ],
+    },
+    "skill-selection": {
+      label: "スキルが増えたら、どう正確に呼び出す？",
+      q: "スキルが 5 個なら agent は適当に選べる。500 個になったら、毎回正しい一つを読み込み、誤発動を防ぐには？",
+      trap: "段階的開示がすべて解決すると思わないこと。普段は名前＋説明しか見えないとはいえ、500 件の説明はそれ自体がコンテキストを圧迫し、選択ノイズになる。規模での正確な呼び出しは組み合わせ技：説明の設計＋検索＋階層ルーティング、そして計測。",
+      points: [
+        { title: "説明がルーター", desc: "agent は<b>名前＋説明だけ</b>で読み込みを判断する。だから説明は「私は何か」でなく「<b>いつ私を使うか</b>」として書く；必要なら<b>逆の境界</b>（X には不向き）を足す；各スキルの説明を<b>互いに区別できる</b>ようにする。" },
+        { title: "Skill RAG：まず検索で絞る", desc: "スキルが増えたら、各スキルの名前＋説明を <b>embedding</b> にし、タスクが来たら<b>ベクトル検索で top-k 候補</b>を取り、その中からだけモデルに選ばせる。つまり<b>スキルに対する RAG</b>で、数千個まで拡張できる。" },
+        { title: "階層とルーティング", desc: "スキルを<b>カテゴリ／名前空間</b>に整理（先にカテゴリ、次にスキル）するか、オーケストレーショングラフに <b>router ノード</b>を置いてタスクを分類しスキルへ直接対応付ける。<b>コンテキストごとのホワイトリスト</b>（その場面に関係あるスキルだけ見せる）や、曖昧なら<b>聞き返す</b>のも有効。" },
+      ],
+      core: [
+        { h: "まず根本", d: "呼び出し精度の第一要因は<b>説明の質</b>：説明を<b>トリガー条件</b>（いつ使う＋いつ使わない）として書く。agent が常に見えるのはそれだけ。" },
+        { h: "規模には検索", d: "段階的開示は読み込みコストを平らにするが、<b>説明の総量には限界がある</b>：ある規模を超えたら<b>ベクトル検索で top-k</b> に絞り、その中から選ばせる（Skill RAG）。" },
+        { h: "選択空間を狭める", d: "<b>カテゴリ／名前空間／router ノード／場面ごとのホワイトリスト</b>。層を重ねるほど候補が減り、誤発動も減る。" },
+        { h: "計測する", d: "代表的なタスクで走らせる：読むべきものを読んだか（<b>recall</b>）、間違ったものを読まなかったか（<b>precision</b>）。毎回どのスキルを選んだか記録し、誤ったら説明を直す。" },
+      ],
+      plus: [
+        "説明に「X には不向き」と一行足すのは安くて効く：最も多い誤発動は、似た二つのスキルが仕事を取り合うこと。",
+        "代表タスクを「スキル選択の評価セット」として保存し、説明を直したら再実行。改善したか即座に分かる。",
+        "同名・類義のスキルは誤発動の主因：統合するか、名前と説明を研ぎ直して境界を明確に。",
+      ],
+      traps: [
+        "説明が「私は何か」だけで「いつ使うか」を書かない（agent に判断材料がない）。",
+        "スキルが数百あるのにモデルに全リストを走査させる（検索も階層もなし）。遅くて間違いやすい。",
+        "選択の正誤を計測しない：誤発動に気づかず、説明は永遠に良くならない。",
+      ],
+    },
     "sycophancy": {
       label: "AI はなぜいつも同調するの？",
       q: "アイデアを出すと AI はよく「素晴らしい！」と同調します。私の考えは本当に良いということ？",
@@ -5525,7 +5685,7 @@ export const IV_ORDER = [
   // 檢索（RAG）
   "vector-search", "rag-documents", "chunking", "rag-retrieval", "rag-why-wrong", "rag-vs-longcontext",
   // Agent arc：概念→規劃→工具→JSON→記憶→量化→成本
-  "agent-vs-workflow", "agent-planning", "loop-control", "self-verify", "loop-vs-graph", "agent-tools", "json-output", "agent-memory", "agent-eval", "agent-cost",
+  "agent-vs-workflow", "agent-planning", "loop-control", "self-verify", "loop-vs-graph", "skill-vs-loop", "skill-selection", "agent-tools", "json-output", "agent-memory", "agent-eval", "agent-cost",
   // 生成／多模態：先生圖（擴散）成一組，再進多模態
   "diffusion-how", "diffusion-not-collage", "genimg-errors", "diffusion-vs-gan", "multimodal-key", "vlm-see",
   // 素養／風險：可靠性 → 安全 → 能力邊界

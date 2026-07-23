@@ -3,7 +3,7 @@
      Self-contained HTML animatic per .claude/skills/promo-video.
      16:9 master (1280x720). ?ar=1x1 for square. ?clean=1 hides chrome for recording.
      ?intro=1..6 opening variants. Space = play/pause, R = restart. window.__jump(i) for verification.
-     Copy sources (real, not invented): paths.js rag track EN (tagline, phases), CH_TR.en rag + memory lessons.
+     Copy sources (real, not invented): paths.js rag track EN (tagline, phases), CH_TR.en rag + knowledge-graph + memory lessons.
      No em dashes anywhere. Music: local background_music.mp3 (same folder), beat pulse via AnalyserNode. -->
 <html lang="en">
 <head>
@@ -148,7 +148,32 @@
   .wrongans .flag{margin-top:10px;font-family:var(--mono);font-size:12px;color:#d23f3f;opacity:0}
   .on .wrongans .flag{animation:fadeIn .45s 2.1s forwards}
 
-  /* S6 memory: a note persists across sessions */
+  /* S6 graphrag: flat chunks stay apart, graph path lights up hop by hop */
+  .kgviz{display:flex;flex-direction:column;gap:12px;max-width:430px;width:100%}
+  .kgpanel{padding:14px 16px;opacity:0;transform:translateY(12px)}
+  .on .kgflat{animation:slot .5s .35s cubic-bezier(.2,.7,.2,1) forwards}
+  .on .kggraph{animation:slot .5s .9s cubic-bezier(.2,.7,.2,1) forwards}
+  .kgpanel .ph{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--muted);margin-bottom:10px}
+  .kgchunks{display:flex;gap:10px;align-items:center}
+  .kgchunks i{display:block;flex:1;height:26px;border-radius:7px;background:var(--surface-3);border:1px dashed var(--line-2)}
+  .kgmiss{margin-top:9px;font-family:var(--mono);font-size:11.5px;color:#d23f3f;opacity:0}
+  .on .kgmiss{animation:fadeIn .4s 1.15s forwards}
+  .kgmap{display:flex;align-items:center;gap:8px;padding:2px 4px}
+  .kgn{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;flex:none;font-family:var(--mono);
+       font-size:13px;color:var(--ink-2);background:var(--surface-2);border:1.5px solid var(--line-2);opacity:0;transform:scale(.7)}
+  .on .n1{animation:pop .4s 1.3s cubic-bezier(.2,.7,.3,1.3) forwards,kgHop .35s 1.75s forwards}
+  .on .n2{animation:pop .4s 1.42s cubic-bezier(.2,.7,.3,1.3) forwards,kgHop .35s 2.4s forwards}
+  .on .n3{animation:pop .4s 1.54s cubic-bezier(.2,.7,.3,1.3) forwards,kgAns .35s 3.05s forwards}
+  @keyframes kgHop{to{background:#e9f6f4;border-color:var(--teal);color:var(--teal)}}
+  @keyframes kgAns{to{background:#fdf1e3;border-color:var(--accent);color:var(--accent-ink);box-shadow:0 0 0 3px rgba(224,127,14,.16)}}
+  .kge{flex:1;height:2px;border-radius:2px;background:var(--line-2);opacity:0}
+  .on .e1{animation:fadeIn .3s 1.66s forwards,kgEdgeOn .35s 2.1s forwards}
+  .on .e2{animation:fadeIn .3s 1.66s forwards,kgEdgeOn .35s 2.75s forwards}
+  @keyframes kgEdgeOn{to{background:var(--teal)}}
+  .kghit{margin-top:10px;font-family:var(--mono);font-size:11.5px;color:var(--good);opacity:0}
+  .on .kghit{animation:fadeIn .45s 3.4s forwards}
+
+  /* S7 memory: a note persists across sessions */
   .memviz{display:flex;flex-direction:column;gap:11px;max-width:430px;width:100%}
   .sess{padding:14px 16px;opacity:0;transform:translateY(12px)}
   .on .sess1{animation:slot .5s .4s cubic-bezier(.2,.7,.2,1) forwards}
@@ -266,7 +291,25 @@
     </div>
   </div></section>
 
-  <!-- S6 ship it: memory + doc Q&A -->
+  <!-- S6 graphrag -->
+  <section class="scene split"><div class="txt">
+    <div class="step a1">STEP 5 · GRAPHRAG</div>
+    <h1 class="a2">Search relationships, not just text.</h1>
+    <p class="sub a3">Multi-hop questions scatter the answer across documents. A knowledge graph links entities and relations, so retrieval can follow the chain.</p>
+  </div><div class="viz" style="display:grid;place-items:center">
+    <div class="kgviz">
+      <div class="card kgpanel kgflat"><div class="ph">FLAT CHUNKS</div>
+        <div class="kgchunks"><i></i><i></i><i></i></div>
+        <div class="kgmiss">✗ facts stay disconnected</div>
+      </div>
+      <div class="card kgpanel kggraph"><div class="ph">KNOWLEDGE GRAPH</div>
+        <div class="kgmap"><span class="kgn n1">A</span><span class="kge e1"></span><span class="kgn n2">B</span><span class="kge e2"></span><span class="kgn n3">C</span></div>
+        <div class="kghit">✓ entity → relation → entity, to the answer</div>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- S7 ship it: memory + doc Q&A -->
   <section class="scene split"><div class="txt">
     <div class="step a1">FINALLY · SHIP IT</div>
     <h1 class="a2">Give your system memory.</h1>
@@ -279,7 +322,7 @@
     </div>
   </div></section>
 
-  <!-- S7 CTA -->
+  <!-- S8 CTA -->
   <section class="scene center"><div class="beatglow"></div><div class="txt">
     <div class="eyebrow a1">BUILD A RAG SYSTEM</div>
     <h1 class="a2">Let AI look things up: chunking, retrieval, why it still errs.</h1>
@@ -315,10 +358,11 @@
     'Chunking：split documents into pieces retrieval can actually find.',
     'Vector search matches your question to chunks by meaning.',
     'Retrieve the wrong chunk and you get a confident wrong answer.',
+    'GraphRAG searches relationships：entity → relation → entity, hop by hop to the answer.',
     'Models start every chat blank. Memory is an external store that slips notes back in.',
     'Build a RAG System：one track, start anytime.',
   ];
-  const durs = [7000, 6500, 7500, 7500, 7500, 7500, 7500, 8000];
+  const durs = [7000, 6500, 7500, 7500, 7500, 7500, 7000, 7500, 8000];
   const total = durs.reduce((a, b) => a + b, 0);
   const cap = document.getElementById('cap');
   const prog = document.getElementById('prog');

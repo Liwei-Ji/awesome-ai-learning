@@ -3,7 +3,7 @@
      Self-contained HTML animatic per .claude/skills/promo-video.
      16:9 master (1280x720). ?ar=1x1 for square. ?clean=1 hides chrome for recording.
      ?intro=1..6 opening variants. Space = play/pause, R = restart. window.__jump(i) for verification.
-     Copy sources (real, not invented): paths.js agent track EN, lessonInfo (agent, mcp, integration), phase titles.
+     Copy sources (real, not invented): paths.js agent track EN, lessonInfo (agent, mcp, skills, orchestration, integration), phase titles.
      No em dashes anywhere. Music: local background_music.mp3 (same folder), beat pulse via AnalyserNode. -->
 <html lang="en">
 <head>
@@ -131,7 +131,52 @@
   .marr{align-self:center;font-size:22px;color:var(--muted);flex:none;opacity:0}
   .on .marr{animation:fadeIn .4s 1.75s forwards}
 
-  /* S5 integration: the stack builds bottom-up */
+  /* S5 skills: playbook folders, the matching one loads on demand */
+  .skl{display:flex;flex-direction:column;gap:10px;max-width:430px;width:100%}
+  .fold{padding:12px 14px;opacity:0;transform:translateY(12px)}
+  .on .fd1{animation:slot .5s .45s cubic-bezier(.2,.7,.2,1) forwards}
+  .on .fd2{animation:slot .5s .75s cubic-bezier(.2,.7,.2,1) forwards,hilite .45s 1.6s forwards}
+  .on .fd3{animation:slot .5s 1.05s cubic-bezier(.2,.7,.2,1) forwards}
+  @keyframes hilite{to{border-color:var(--teal);background:#f4fbfa}}
+  .fh{display:flex;align-items:center;gap:10px}
+  .fcar{font-size:12px;color:var(--muted);flex:none}
+  .fd2 .fcar{color:var(--teal)}
+  .on .fd2 .fcar{animation:caret .3s 1.7s forwards}
+  @keyframes caret{to{transform:rotate(90deg)}}
+  .fname{font-family:var(--mono);font-size:12.5px;color:var(--ink)}
+  .fdesc{margin-left:auto;font-size:12px;color:var(--muted)}
+  .fbody{max-height:0;overflow:hidden}
+  .on .fd2 .fbody{animation:unfold .5s 1.85s cubic-bezier(.2,.7,.2,1) forwards}
+  @keyframes unfold{to{max-height:96px}}
+  .frow{font-family:var(--mono);font-size:11px;color:var(--ink-2);padding:5px 0 0 22px;opacity:0}
+  .frow:first-child{margin-top:9px;border-top:1px dashed var(--line);padding-top:9px}
+  .on .fr1{animation:fadeIn .35s 2.1s forwards}
+  .on .fr2{animation:fadeIn .35s 2.3s forwards}
+  .on .fr3{animation:fadeIn .35s 2.5s forwards}
+
+  /* S6 orch: router fans out to parallel workers, results merge */
+  .orch{position:relative;width:340px;height:300px}
+  .owires{position:absolute;inset:0;width:100%;height:100%}
+  .oedge{stroke:var(--line-2);stroke-width:2;stroke-dasharray:200;stroke-dashoffset:200}
+  .on .oe1{animation:draw .45s .95s forwards}
+  .on .oe2{animation:draw .45s 1.1s forwards}
+  .on .oe3{animation:draw .45s 1.95s forwards}
+  .on .oe4{animation:draw .45s 2.1s forwards}
+  @keyframes draw{to{stroke-dashoffset:0}}
+  .opos{position:absolute;transform:translate(-50%,-50%);z-index:1}
+  .onode{display:inline-block;font-family:var(--mono);font-size:12px;letter-spacing:.12em;padding:9px 16px;border-radius:9px;
+         background:var(--surface);border:1px solid var(--line-2);color:var(--ink-2);box-shadow:var(--e-2);
+         opacity:0;transform:scale(.8);white-space:nowrap}
+  .on .nrt{animation:pop .45s .45s cubic-bezier(.2,.7,.3,1.3) forwards}
+  .on .nwa{animation:pop .45s 1.45s cubic-bezier(.2,.7,.3,1.3) forwards}
+  .on .nwb{animation:pop .45s 1.6s cubic-bezier(.2,.7,.3,1.3) forwards}
+  .on .nmg{animation:pop .45s 2.45s cubic-bezier(.2,.7,.3,1.3) forwards}
+  .nrt{border-color:var(--teal);color:var(--teal);background:#e9f6f4}
+  .nmg{border-color:var(--accent);color:var(--accent-ink);background:#fffdf9}
+  .olab{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;color:var(--teal);opacity:0}
+  .on .olab{animation:fadeIn .4s 1.95s forwards}
+
+  /* S7 integration: the stack builds bottom-up */
   .stack{display:flex;flex-direction:column-reverse;gap:10px;max-width:430px;width:100%}
   .layer{padding:13px;text-align:center;font-family:var(--mono);font-size:12.5px;letter-spacing:.14em;color:var(--ink-2);opacity:0;transform:translateY(14px)}
   .on .ly1{animation:slot .5s .45s cubic-bezier(.2,.7,.2,1) forwards}
@@ -141,7 +186,7 @@
   .ly1{background:var(--surface-2)}
   .ly4{border-color:var(--accent);color:var(--accent-ink);background:#fffdf9}
 
-  /* S6 measure: eval and cost bars */
+  /* S8 measure: eval and cost bars */
   .ab{display:flex;flex-direction:column;gap:16px;max-width:430px;width:100%}
   .abrow{display:flex;align-items:center;gap:14px}
   .abrow .lab{font-family:var(--mono);font-size:12px;color:var(--muted);width:104px;flex:none}
@@ -234,9 +279,45 @@
     </div>
   </div></section>
 
-  <!-- S5 integration -->
+  <!-- S5 skills -->
   <section class="scene split"><div class="txt">
-    <div class="step a1">STEP 4 · INTEGRATE</div>
+    <div class="step a1">STEP 4 · SKILLS</div>
+    <h1 class="a2">Give it playbooks.</h1>
+    <p class="sub a3">Skills are folders of know-how that load on demand. The agent sees each name and description, and reads the full instructions only when it needs them.</p>
+  </div><div class="viz" style="display:grid;place-items:center">
+    <div class="skl">
+      <div class="card fold fd1"><div class="fh"><span class="fcar">▸</span><span class="fname">web-research</span><span class="fdesc">search and cite sources</span></div></div>
+      <div class="card fold fd2"><div class="fh"><span class="fcar">▸</span><span class="fname">pdf-report</span><span class="fdesc">turn findings into a PDF</span></div>
+        <div class="fbody"><div class="frow fr1">SKILL.md · full instructions</div><div class="frow fr2">template.md</div><div class="frow fr3">build_pdf.py</div></div>
+      </div>
+      <div class="card fold fd3"><div class="fh"><span class="fcar">▸</span><span class="fname">data-cleanup</span><span class="fdesc">tidy messy tables</span></div></div>
+    </div>
+  </div></section>
+
+  <!-- S6 orchestration -->
+  <section class="scene split"><div class="txt">
+    <div class="step a1">STEP 5 · ORCHESTRATION</div>
+    <h1 class="a2">Wire it as a graph.</h1>
+    <p class="sub a3">Nodes are steps, edges are flow. Patterns like the router, parallel workers, and the guarded loop keep every step visible and testable.</p>
+  </div><div class="viz" style="display:grid;place-items:center">
+    <div class="orch">
+      <svg class="owires" viewBox="0 0 340 300" aria-hidden="true">
+        <line class="oedge oe1" x1="170" y1="33" x2="75" y2="150"></line>
+        <line class="oedge oe2" x1="170" y1="33" x2="265" y2="150"></line>
+        <line class="oedge oe3" x1="75" y1="150" x2="170" y2="267"></line>
+        <line class="oedge oe4" x1="265" y1="150" x2="170" y2="267"></line>
+      </svg>
+      <div class="opos" style="left:50%;top:11%"><span class="onode nrt">ROUTER</span></div>
+      <div class="opos" style="left:22%;top:50%"><span class="onode nwa">WORKER A</span></div>
+      <div class="opos" style="left:78%;top:50%"><span class="onode nwb">WORKER B</span></div>
+      <div class="opos" style="left:50%;top:50%"><span class="olab">PARALLEL</span></div>
+      <div class="opos" style="left:50%;top:89%"><span class="onode nmg">MERGE</span></div>
+    </div>
+  </div></section>
+
+  <!-- S7 integration -->
+  <section class="scene split"><div class="txt">
+    <div class="step a1">STEP 6 · INTEGRATE</div>
     <h1 class="a2">See the whole system.</h1>
     <p class="sub a3">Data sits at the bottom, the application at the top. Every piece you learned is one segment of the pipeline.</p>
   </div><div class="viz" style="display:grid;place-items:center">
@@ -248,7 +329,7 @@
     </div>
   </div></section>
 
-  <!-- S6 measure -->
+  <!-- S8 measure -->
   <section class="scene split"><div class="txt">
     <div class="step a1">FINALLY · MEASURE</div>
     <h1 class="a2">Ship it under control.</h1>
@@ -261,7 +342,7 @@
     </div>
   </div></section>
 
-  <!-- S7 CTA -->
+  <!-- S9 CTA -->
   <section class="scene center"><div class="beatglow"></div><div class="txt">
     <div class="eyebrow a1">BUILD AI AGENTS</div>
     <h1 class="a2">From workflow vs agent to tools, memory, metrics and cost.</h1>
@@ -296,11 +377,13 @@
     'It breaks the task apart and picks what to do first.',
     'MCP：one standard socket, no per-tool wiring.',
     'With memory, the agent picks up right where it left off.',
+    'Skills：name and description up front, the full playbook loads on demand.',
+    'Orchestration：nodes are steps, edges are flow.',
     'Data at the bottom, application at the top：one pipeline.',
     'Cap the loops, verify, evaluate, and keep cost visible.',
     'Build AI Agents：one track, start anytime.',
   ];
-  const durs = [7000, 6500, 7500, 7500, 7500, 7500, 7500, 8000];
+  const durs = [7000, 6500, 7000, 7000, 7500, 6000, 6000, 7000, 7500, 8000];
   const total = durs.reduce((a, b) => a + b, 0);
   const cap = document.getElementById('cap');
   const prog = document.getElementById('prog');
