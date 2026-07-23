@@ -1,0 +1,395 @@
+<!doctype html>
+<!-- Awesome AI Learning · course/track promo: Evaluation & Decisions (track: evaluate)
+     Self-contained HTML animatic per .claude/skills/promo-video.
+     16:9 master (1280x720). ?ar=1x1 for square. ?clean=1 hides chrome for recording.
+     ?intro=1..6 opening variants. Space = play/pause, R = restart. window.__jump(i) for verification.
+     Copy sources (real, not invented): paths.js evaluate track EN (tagline, phases), lessonInfo for
+     evaluation + limits (CH_TR.en). No em dashes anywhere.
+     Music: local background_music.mp3 (same folder), beat pulse via AnalyserNode. -->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Awesome AI Learning · Evaluation & Decisions (track video)</title>
+<style>
+  :root{
+    --bg:#eef1f6; --surface:#ffffff; --surface-2:#f6f8fb; --surface-3:#eceff5;
+    --ink:#141821; --ink-2:#3b4557; --muted:#5b6678; --line:#dde3ec; --line-2:#c6cfdd;
+    --accent:#e07f0e; --accent-soft:#f6a940; --accent-ink:#a85a08;
+    --teal:#0f8a80; --good:#1f9d57;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Noto Sans TC",sans-serif;
+    --r:12px; --e-2:0 3px 10px rgba(20,30,55,.06); --e-3:0 14px 36px rgba(20,30,55,.11);
+    --beat:0;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%;background:#0b0d12;font-family:var(--sans)}
+  #wrap{position:fixed;inset:0;display:grid;place-items:center}
+  #stage{position:relative;width:1280px;height:720px;background:var(--bg);overflow:hidden;border-radius:2px}
+  body.ar1x1 #stage{width:1080px;height:1080px}
+
+  /* progress */
+  #prog{position:absolute;left:0;top:0;height:3px;width:0%;background:var(--accent);z-index:40;
+        box-shadow:0 0 calc(6px + 10px*var(--beat)) rgba(224,127,14,calc(.35 + .45*var(--beat)))}
+
+  /* scenes */
+  .scene{position:absolute;inset:0;padding:72px 84px 118px;opacity:0;visibility:hidden}
+  body.ar1x1 .scene{padding:64px 64px 128px}
+  .scene.on{opacity:1;visibility:visible}
+  .scene .eyebrow{font-family:var(--mono);font-size:13px;letter-spacing:.14em;color:var(--accent-ink);margin-bottom:18px}
+  .scene h1{font-size:54px;line-height:1.08;letter-spacing:-.02em;font-weight:760;color:var(--ink);max-width:15ch;text-wrap:balance}
+  .scene .sub{margin-top:16px;font-size:20px;line-height:1.5;color:var(--ink-2);max-width:44ch}
+  .scene.center{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+  .scene.center h1{max-width:20ch}
+  .scene.split{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center}
+  body.ar1x1 .scene.split{grid-template-columns:1fr;gap:28px;align-content:center}
+  .step{font-family:var(--mono);font-size:12.5px;letter-spacing:.16em;color:var(--teal);margin-bottom:14px}
+  .scene.split h1{font-size:44px}
+
+  /* burned caption */
+  #cap{position:absolute;left:50%;bottom:34px;transform:translateX(-50%);z-index:30;max-width:76%;
+       background:rgba(20,24,33,.86);color:#fff;font-size:19px;line-height:1.45;padding:10px 20px;
+       border-radius:10px;text-align:center;opacity:0;transition:opacity .35s}
+  #cap.on{opacity:1}
+
+  /* enter animations (staged via .on) */
+  .on .a1,.on .a2,.on .a3,.on .a4{opacity:0;animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
+  .on .a2{animation-delay:.25s}.on .a3{animation-delay:.5s}.on .a4{animation-delay:.75s}
+  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  /* intro variants on scene 0 */
+  .intro-2.on .a1,.intro-2.on .a2,.intro-2.on .a3{animation-name:fadeIn}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  .intro-3.on h1{animation:none;opacity:1;clip-path:inset(0 100% 0 0);animation:wipe 1s .2s cubic-bezier(.2,.7,.2,1) forwards}
+  @keyframes wipe{to{clip-path:inset(0 0 0 0)}}
+  .intro-4.on h1{filter:blur(14px);opacity:0;animation:sharpen 1s .2s forwards}
+  @keyframes sharpen{to{filter:blur(0);opacity:1}}
+  .intro-5.on h1{transform-origin:left center;opacity:0;animation:zoomIn .9s .2s cubic-bezier(.2,.7,.2,1) forwards}
+  @keyframes zoomIn{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+  .intro-6.on h1 .w{display:inline-block;opacity:0;animation:rise .55s cubic-bezier(.2,.7,.2,1) forwards}
+
+  /* ===== visuals ===== */
+  .viz{position:relative;min-height:340px}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--e-2)}
+  .ph{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--muted);margin-bottom:12px}
+  @keyframes pop{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:scale(1)}}
+  @keyframes slot{to{opacity:1;transform:none}}
+  @keyframes lit{to{opacity:1}}
+  @keyframes growW{to{width:var(--w)}}
+  @keyframes growH{to{height:var(--h)}}
+
+  /* S2 rubric: four standards check off one by one */
+  .rub{padding:22px;width:100%;max-width:430px}
+  .rrow{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);opacity:.25}
+  .rrow:last-of-type{border-bottom:0}
+  .rrow .rlab{font-family:var(--mono);font-size:13px;color:var(--ink-2);width:158px;flex:none}
+  .rrow .rline{flex:1;height:8px;border-radius:5px;background:var(--surface-3)}
+  .rrow .rchk{font-size:15px;color:var(--good);width:20px;text-align:right;opacity:0;transform:scale(.6)}
+  .on .rrow{animation:lit .4s forwards}
+  .on .r1{animation-delay:.5s}.on .r2{animation-delay:.9s}.on .r3{animation-delay:1.3s}.on .r4{animation-delay:1.7s}
+  .on .rrow .rchk{animation:pop .4s cubic-bezier(.2,.7,.3,1.3) forwards}
+  .on .r1 .rchk{animation-delay:.75s}.on .r2 .rchk{animation-delay:1.15s}
+  .on .r3 .rchk{animation-delay:1.55s}.on .r4 .rchk{animation-delay:1.95s}
+  .rverdict{margin-top:14px;font-family:var(--mono);font-size:12.5px;color:var(--good);opacity:0}
+  .on .rverdict{animation:fadeIn .5s 2.4s forwards}
+
+  /* S3 benchmark: three models, same test, score bars */
+  .bench{display:flex;flex-direction:column;gap:15px;max-width:430px;width:100%}
+  .bench .bh{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--muted)}
+  .brow{display:flex;align-items:center;gap:14px}
+  .brow .lab{font-family:var(--mono);font-size:12px;color:var(--muted);width:84px;flex:none}
+  .brow .bar{flex:1;height:20px;border-radius:8px;background:var(--surface-3);overflow:hidden;
+             border:1px solid var(--line);box-shadow:var(--e-2)}
+  .brow .fill{height:100%;width:0;border-radius:8px;background:var(--line-2)}
+  .brow.top .fill{background:linear-gradient(90deg,var(--accent-soft),var(--accent))}
+  .on .brow .fill{animation:growW 1.1s cubic-bezier(.2,.7,.2,1) forwards}
+  .on .b1 .fill{animation-delay:.5s}.on .b2 .fill{animation-delay:.75s}.on .b3 .fill{animation-delay:1s}
+  .brow .pct{font-family:var(--mono);font-size:12.5px;color:var(--ink-2);width:44px;text-align:right;opacity:0}
+  .on .brow .pct{animation:fadeIn .4s 1.8s forwards}
+  .bnote{font-family:var(--mono);font-size:12.5px;color:var(--teal);opacity:0}
+  .on .bnote{animation:fadeIn .5s 2.2s forwards}
+
+  /* S4 decisions: three option cards, evidence bars, one fits */
+  .pickwrap{max-width:430px;width:100%}
+  .pick{display:flex;gap:12px}
+  .opt{flex:1;padding:16px 12px 14px;text-align:center;opacity:0;transform:translateY(14px)}
+  .on .opt1{animation:slot .5s .45s cubic-bezier(.2,.7,.2,1) forwards}
+  .on .opt2{animation:slot .5s .75s cubic-bezier(.2,.7,.2,1) forwards}
+  .on .opt3{animation:slot .5s 1.05s cubic-bezier(.2,.7,.2,1) forwards}
+  .opt .ot{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--ink-2);margin-bottom:12px}
+  .opt .ob{height:7px;border-radius:5px;background:var(--surface-3);overflow:hidden}
+  .opt .of{height:100%;width:0;border-radius:5px;background:var(--line-2)}
+  .opt.win .of{background:linear-gradient(90deg,var(--accent-soft),var(--accent))}
+  .on .opt .of{animation:growW 1s 1.5s cubic-bezier(.2,.7,.2,1) forwards}
+  .opt.win{position:relative}
+  .on .opt.win{animation:slot .5s 1.05s cubic-bezier(.2,.7,.2,1) forwards,winring .4s 2.4s forwards}
+  @keyframes winring{to{border-color:var(--accent);box-shadow:0 0 0 3px rgba(224,127,14,.15),var(--e-2)}}
+  .pverdict{margin-top:14px;font-family:var(--mono);font-size:12.5px;color:var(--good);text-align:center;opacity:0}
+  .on .pverdict{animation:fadeIn .5s 2.7s forwards}
+
+  /* S5 monitor: release columns, one regression flagged, next recovers */
+  .mon{max-width:430px;width:100%}
+  .mon .bh{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--muted)}
+  .cols{display:flex;gap:18px;align-items:flex-end;height:168px;margin-top:14px;padding:0 6px}
+  .colu{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:8px}
+  .colu .cb{width:100%;height:0;border-radius:8px 8px 4px 4px;background:var(--teal);opacity:.85}
+  .colu.bad .cb{background:#d23f3f}
+  .colu.best .cb{background:linear-gradient(180deg,var(--accent-soft),var(--accent))}
+  .on .c1 .cb{animation:growH .7s .5s cubic-bezier(.2,.7,.2,1) forwards}
+  .on .c2 .cb{animation:growH .7s .85s cubic-bezier(.2,.7,.2,1) forwards}
+  .on .c3 .cb{animation:growH .7s 1.2s cubic-bezier(.2,.7,.2,1) forwards}
+  .on .c4 .cb{animation:growH .7s 1.9s cubic-bezier(.2,.7,.2,1) forwards}
+  .colu .cl{font-family:var(--mono);font-size:11px;color:var(--muted)}
+  .mverdict{margin-top:14px;font-family:var(--mono);font-size:12.5px;color:#d23f3f;opacity:0}
+  .on .mverdict{animation:fadeIn .5s 2s forwards}
+
+  /* S6 limits: a confident answer gets flagged as made up */
+  .wrong{position:relative;max-width:430px;width:100%}
+  .acard{padding:20px;position:relative}
+  .badge{position:absolute;top:16px;right:16px;font-family:var(--mono);font-size:10.5px;
+         padding:4px 9px;border-radius:6px;background:#e9f6f4;color:var(--teal);opacity:0}
+  .on .badge{animation:pop .45s .6s cubic-bezier(.2,.7,.3,1.3) forwards}
+  .alines{margin-top:26px}
+  .al{height:10px;border-radius:6px;background:var(--surface-3);margin-bottom:9px}
+  .al:nth-child(1){width:90%}.al:nth-child(2){width:76%}.al:nth-child(4){width:58%}
+  .al.hot{width:83%;background:var(--surface-3)}
+  .on .al.hot{animation:goHot .4s 1.3s forwards}
+  @keyframes goHot{to{background:#fbe3e3}}
+  .stampx{position:absolute;left:50%;top:54%;font-family:var(--mono);font-weight:700;font-size:15px;
+          letter-spacing:.08em;color:#d23f3f;border:2px solid #d23f3f;padding:8px 16px;border-radius:8px;
+          background:rgba(255,255,255,.88);opacity:0;transform:translate(-50%,-50%) rotate(-8deg) scale(1.5)}
+  .on .stampx{animation:stamp .45s 1.7s cubic-bezier(.2,.7,.3,1.2) forwards}
+  @keyframes stamp{to{opacity:1;transform:translate(-50%,-50%) rotate(-8deg) scale(1)}}
+  .wnote{margin-top:12px;font-family:var(--mono);font-size:12px;color:var(--muted);opacity:0}
+  .on .wnote{animation:fadeIn .5s 2.4s forwards}
+
+  /* CTA */
+  .url{margin-top:26px;font-family:var(--mono);font-size:21px;color:var(--accent-ink);opacity:0}
+  .on .url{animation:rise .7s 1s forwards}
+  .one{margin-top:22px;font-size:16.5px;color:var(--muted);opacity:0}
+  .on .one{animation:rise .7s .7s forwards}
+  .beatglow{position:absolute;left:50%;top:54%;width:520px;height:520px;transform:translate(-50%,-50%);pointer-events:none;
+            background:radial-gradient(circle,rgba(224,127,14,.10),transparent 65%);opacity:calc(.4 + .6*var(--beat))}
+
+  /* controls (hidden by ?clean=1) */
+  #ctrl{position:absolute;right:14px;bottom:12px;z-index:50;display:flex;gap:8px}
+  #ctrl button{font:600 13px var(--mono);color:var(--ink-2);background:rgba(255,255,255,.9);
+               border:1px solid var(--line-2);border-radius:8px;padding:6px 12px;cursor:pointer}
+  body.clean #ctrl{display:none}
+</style>
+</head>
+<body>
+<div id="wrap"><div id="stage">
+  <div id="prog"></div>
+
+  <!-- S0 hook -->
+  <section class="scene center" id="s0"><div class="txt">
+    <div class="eyebrow a1">AWESOME AI LEARNING · EVALUATION &amp; DECISIONS</div>
+    <h1 class="a2">It sounds right. Is it right?</h1>
+    <p class="sub a3">Anyone can get an answer. Judging it is the real skill.</p>
+  </div></section>
+
+  <!-- S1 misconception -->
+  <section class="scene center"><div class="txt">
+    <h1 class="a1">Bigger is not always better.</h1>
+    <p class="sub a2">Newer and bigger does not win at everything. It depends on your task, so you need a way to measure.</p>
+  </div></section>
+
+  <!-- S2 standards rubric -->
+  <section class="scene split"><div class="txt">
+    <div class="step a1">STEP 1 · WHAT GOOD LOOKS LIKE</div>
+    <h1 class="a2">Give good a definition.</h1>
+    <p class="sub a3">Correct, complete, relevant, no hallucination. Score against standards, not vibes.</p>
+  </div><div class="viz" style="display:grid;place-items:center">
+    <div class="card rub">
+      <div class="ph">ANSWER REVIEW</div>
+      <div class="rrow r1"><span class="rlab">Correct</span><span class="rline"></span><span class="rchk">✓</span></div>
+      <div class="rrow r2"><span class="rlab">Complete</span><span class="rline"></span><span class="rchk">✓</span></div>
+      <div class="rrow r3"><span class="rlab">Relevant</span><span class="rline"></span><span class="rchk">✓</span></div>
+      <div class="rrow r4"><span class="rlab">No hallucination</span><span class="rline"></span><span class="rchk">✓</span></div>
+      <div class="rverdict">✓ pass, same rubric every time</div>
+    </div>
+  </div></section>
+
+  <!-- S3 benchmarks -->
+  <section class="scene split"><div class="txt">
+    <div class="step a1">STEP 2 · BENCHMARKS</div>
+    <h1 class="a2">Same test. Fair comparison.</h1>
+    <p class="sub a3">A benchmark is a standardized test that lets models be compared. Build an eval set for your own task.</p>
+  </div><div class="viz" style="display:grid;place-items:center">
+    <div class="bench">
+      <div class="bh">SAME QUESTIONS · EVERY MODEL</div>
+      <div class="brow top b1"><span class="lab">MODEL A</span><div class="bar"><div class="fill" style="--w:82%"></div></div><span class="pct">82%</span></div>
+      <div class="brow b2"><span class="lab">MODEL B</span><div class="bar"><div class="fill" style="--w:71%"></div></div><span class="pct">71%</span></div>
+      <div class="brow b3"><span class="lab">MODEL C</span><div class="bar"><div class="fill" style="--w:64%"></div></div><span class="pct">64%</span></div>
+      <div class="bnote">scored on your eval set, not on hype</div>
+    </div>
+  </div></section>
+
+  <!-- S4 decisions -->
+  <section class="scene split"><div class="txt">
+    <div class="step a1">STEP 3 · DECISIONS</div>
+    <h1 class="a2">Pick with evidence.</h1>
+    <p class="sub a3">Prompt, fine-tune, or RAG. Agent or workflow. Build or buy. The eval decides, not the trend.</p>
+  </div><div class="viz" style="display:grid;place-items:center">
+    <div class="pickwrap">
+      <div class="pick">
+        <div class="card opt opt1"><div class="ot">PROMPT</div><div class="ob"><div class="of" style="--w:46%"></div></div></div>
+        <div class="card opt opt2"><div class="ot">FINE-TUNE</div><div class="ob"><div class="of" style="--w:58%"></div></div></div>
+        <div class="card opt opt3 win"><div class="ot">RAG</div><div class="ob"><div class="of" style="--w:84%"></div></div></div>
+      </div>
+      <div class="pverdict">✓ this task says RAG. Yours may not.</div>
+    </div>
+  </div></section>
+
+  <!-- S5 measure and improve -->
+  <section class="scene split"><div class="txt">
+    <div class="step a1">STEP 4 · MEASURE AND IMPROVE</div>
+    <h1 class="a2">Ship, watch, improve.</h1>
+    <p class="sub a3">Offline evals, online monitoring, and regression checks on every change.</p>
+  </div><div class="viz" style="display:grid;place-items:center">
+    <div class="mon">
+      <div class="bh">QUALITY BY RELEASE</div>
+      <div class="cols">
+        <div class="colu c1"><div class="cb" style="--h:58%"></div><span class="cl">v1</span></div>
+        <div class="colu c2"><div class="cb" style="--h:76%"></div><span class="cl">v2</span></div>
+        <div class="colu c3 bad"><div class="cb" style="--h:40%"></div><span class="cl">v3</span></div>
+        <div class="colu c4 best"><div class="cb" style="--h:90%"></div><span class="cl">v4</span></div>
+      </div>
+      <div class="mverdict">✗ regression caught before users saw it</div>
+    </div>
+  </div></section>
+
+  <!-- S6 limits -->
+  <section class="scene split"><div class="txt">
+    <div class="step a1">FINALLY · THE JUDGMENT FLOOR</div>
+    <h1 class="a2">Confident can still be wrong.</h1>
+    <p class="sub a3">Hallucination makes things up. Bias comes from data and gets amplified. Know where trust ends.</p>
+  </div><div class="viz" style="display:grid;place-items:center">
+    <div class="wrong">
+      <div class="card acard">
+        <div class="ph">AI ANSWER</div>
+        <div class="badge">CONFIDENCE 98%</div>
+        <div class="alines"><div class="al"></div><div class="al"></div><div class="al hot"></div><div class="al"></div></div>
+      </div>
+      <div class="stampx">✗ MADE UP</div>
+      <div class="wnote">it does not exist. The model never hesitated.</div>
+    </div>
+  </div></section>
+
+  <!-- S7 CTA -->
+  <section class="scene center"><div class="beatglow"></div><div class="txt">
+    <div class="eyebrow a1">EVALUATION &amp; DECISIONS</div>
+    <h1 class="a2">How to tell if AI is doing well, and how to pick the right option.</h1>
+    <p class="one a3">One guided track in Awesome AI Learning. Free and hands-on.</p>
+    <div class="url a4">awesome-ai-learning.vercel.app</div>
+  </div></section>
+
+  <div id="cap"></div>
+  <div id="ctrl"><button id="mute">♪</button><button id="play">⏸</button></div>
+</div></div>
+
+<audio id="bgm" src="background_music.mp3" loop preload="auto"></audio>
+
+<script>
+(() => {
+  const qs = new URLSearchParams(location.search);
+  if (qs.get('clean') === '1') document.body.classList.add('clean');
+  if (qs.get('ar') === '1x1') document.body.classList.add('ar1x1');
+  const intro = Math.min(6, Math.max(1, parseInt(qs.get('intro') || '1', 10) || 1));
+  const s0 = document.getElementById('s0');
+  s0.classList.add('intro-' + intro);
+  if (intro === 6) { // word by word
+    const h = s0.querySelector('h1');
+    h.innerHTML = h.textContent.split(' ').map((w, i) =>
+      `<span class="w" style="animation-delay:${.25 + i * .14}s">${w}&nbsp;</span>`).join('');
+  }
+
+  const scenes = [...document.querySelectorAll('.scene')];
+  const caps = [
+    'AI answers with total confidence, whether it is right or wrong.',
+    'The newest, biggest model is not automatically best for your task.',
+    'Good has standards：correct, complete, relevant, no hallucination.',
+    'A benchmark is a standardized test. Every model, same questions.',
+    'Prompt, fine-tune, or RAG? Agent or workflow? Decide with evidence.',
+    'Evaluate offline, monitor online, catch regressions before users do.',
+    'High confidence does not mean correct. Hallucination and bias set the floor.',
+    'Evaluation & Decisions：one track, start anytime.',
+  ];
+  const durs = [6500, 6500, 7500, 7500, 7500, 7500, 7500, 8000];
+  const total = durs.reduce((a, b) => a + b, 0);
+  const cap = document.getElementById('cap');
+  const prog = document.getElementById('prog');
+
+  let elapsed = 0, idx = -1, playing = true, last = performance.now();
+
+  function setScene(i) {
+    if (i === idx) return;
+    idx = i;
+    scenes.forEach((s, k) => s.classList.toggle('on', k === i));
+    cap.textContent = caps[i] || '';
+    cap.classList.add('on');
+  }
+  function tick(now) {
+    const dt = now - last; last = now;
+    if (playing) elapsed = (elapsed + dt) % total;
+    let a = 0, i = 0;
+    for (; i < durs.length; i++) { if (elapsed < a + durs[i]) break; a += durs[i]; }
+    setScene(Math.min(i, durs.length - 1));
+    prog.style.width = (elapsed / total * 100) + '%';
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+
+  // audio + beat pulse
+  const bgm = document.getElementById('bgm');
+  let actx = null, analyser = null, data = null, muted = false;
+  function startAudio() {
+    if (actx || muted) return;
+    try {
+      actx = new (window.AudioContext || window.webkitAudioContext)();
+      const src = actx.createMediaElementSource(bgm);
+      analyser = actx.createAnalyser(); analyser.fftSize = 256;
+      src.connect(analyser); analyser.connect(actx.destination);
+      data = new Uint8Array(analyser.frequencyBinCount);
+      bgm.play().catch(() => {});
+      pump();
+    } catch (e) {}
+  }
+  function pump() {
+    if (!analyser) return;
+    analyser.getByteFrequencyData(data);
+    let s = 0; for (let i = 2; i < 24; i++) s += data[i];
+    const beat = Math.min(1, s / (22 * 200));
+    document.documentElement.style.setProperty('--beat', beat.toFixed(3));
+    requestAnimationFrame(pump);
+  }
+  ['pointerdown', 'keydown', 'touchstart'].forEach(ev => document.addEventListener(ev, startAudio, { once: false }));
+
+  const btnPlay = document.getElementById('play');
+  const btnMute = document.getElementById('mute');
+  btnPlay.onclick = () => { playing = !playing; btnPlay.textContent = playing ? '⏸' : '▶'; };
+  btnMute.onclick = () => { muted = !muted; bgm.muted = muted; btnMute.textContent = muted ? '♪̸' : '♪'; };
+  document.addEventListener('keydown', e => {
+    if (e.code === 'Space') { e.preventDefault(); btnPlay.onclick(); }
+    if (e.key === 'r' || e.key === 'R') { elapsed = 0; idx = -1; }
+  });
+
+  // deterministic jump for headless verification
+  window.__jump = (i) => {
+    let a = 0; for (let k = 0; k < i; k++) a += durs[k];
+    elapsed = a + 60; idx = -1; playing = false; btnPlay.textContent = '▶';
+  };
+
+  // fit stage to window
+  function fit() {
+    const st = document.getElementById('stage');
+    const w = document.body.classList.contains('ar1x1') ? 1080 : 1280;
+    const h = document.body.classList.contains('ar1x1') ? 1080 : 720;
+    const k = Math.min(innerWidth / w, innerHeight / h);
+    st.style.transform = `scale(${k})`; st.style.transformOrigin = 'center';
+  }
+  addEventListener('resize', fit); fit();
+})();
+</script>
+</body>
+</html>

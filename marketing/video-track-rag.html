@@ -1,0 +1,398 @@
+<!doctype html>
+<!-- Awesome AI Learning · course/track promo: Build a RAG System (track: rag)
+     Self-contained HTML animatic per .claude/skills/promo-video.
+     16:9 master (1280x720). ?ar=1x1 for square. ?clean=1 hides chrome for recording.
+     ?intro=1..6 opening variants. Space = play/pause, R = restart. window.__jump(i) for verification.
+     Copy sources (real, not invented): paths.js rag track EN (tagline, phases), CH_TR.en rag + memory lessons.
+     No em dashes anywhere. Music: local background_music.mp3 (same folder), beat pulse via AnalyserNode. -->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Awesome AI Learning · Build a RAG System (track video)</title>
+<style>
+  :root{
+    --bg:#eef1f6; --surface:#ffffff; --surface-2:#f6f8fb; --surface-3:#eceff5;
+    --ink:#141821; --ink-2:#3b4557; --muted:#5b6678; --line:#dde3ec; --line-2:#c6cfdd;
+    --accent:#e07f0e; --accent-soft:#f6a940; --accent-ink:#a85a08;
+    --teal:#0f8a80; --good:#1f9d57;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Noto Sans TC",sans-serif;
+    --r:12px; --e-2:0 3px 10px rgba(20,30,55,.06); --e-3:0 14px 36px rgba(20,30,55,.11);
+    --beat:0;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%;background:#0b0d12;font-family:var(--sans)}
+  #wrap{position:fixed;inset:0;display:grid;place-items:center}
+  #stage{position:relative;width:1280px;height:720px;background:var(--bg);overflow:hidden;border-radius:2px}
+  body.ar1x1 #stage{width:1080px;height:1080px}
+
+  /* progress */
+  #prog{position:absolute;left:0;top:0;height:3px;width:0%;background:var(--accent);z-index:40;
+        box-shadow:0 0 calc(6px + 10px*var(--beat)) rgba(224,127,14,calc(.35 + .45*var(--beat)))}
+
+  /* scenes */
+  .scene{position:absolute;inset:0;padding:72px 84px 118px;opacity:0;visibility:hidden}
+  body.ar1x1 .scene{padding:64px 64px 128px}
+  .scene.on{opacity:1;visibility:visible}
+  .scene .eyebrow{font-family:var(--mono);font-size:13px;letter-spacing:.14em;color:var(--accent-ink);margin-bottom:18px}
+  .scene h1{font-size:54px;line-height:1.08;letter-spacing:-.02em;font-weight:760;color:var(--ink);max-width:15ch;text-wrap:balance}
+  .scene .sub{margin-top:16px;font-size:20px;line-height:1.5;color:var(--ink-2);max-width:44ch}
+  .scene.center{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+  .scene.center h1{max-width:20ch}
+  .scene.split{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center}
+  body.ar1x1 .scene.split{grid-template-columns:1fr;gap:28px;align-content:center}
+  .step{font-family:var(--mono);font-size:12.5px;letter-spacing:.16em;color:var(--teal);margin-bottom:14px}
+  .scene.split h1{font-size:44px}
+
+  /* burned caption */
+  #cap{position:absolute;left:50%;bottom:34px;transform:translateX(-50%);z-index:30;max-width:76%;
+       background:rgba(20,24,33,.86);color:#fff;font-size:19px;line-height:1.45;padding:10px 20px;
+       border-radius:10px;text-align:center;opacity:0;transition:opacity .35s}
+  #cap.on{opacity:1}
+
+  /* enter animations (staged via .on) */
+  .on .a1,.on .a2,.on .a3,.on .a4{opacity:0;animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
+  .on .a2{animation-delay:.25s}.on .a3{animation-delay:.5s}.on .a4{animation-delay:.75s}
+  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  /* intro variants on scene 0 */
+  .intro-2.on .a1,.intro-2.on .a2,.intro-2.on .a3{animation-name:fadeIn}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  .intro-3.on h1{animation:none;opacity:1;clip-path:inset(0 100% 0 0);animation:wipe 1s .2s cubic-bezier(.2,.7,.2,1) forwards}
+  @keyframes wipe{to{clip-path:inset(0 0 0 0)}}
+  .intro-4.on h1{filter:blur(14px);opacity:0;animation:sharpen 1s .2s forwards}
+  @keyframes sharpen{to{filter:blur(0);opacity:1}}
+  .intro-5.on h1{transform-origin:left center;opacity:0;animation:zoomIn .9s .2s cubic-bezier(.2,.7,.2,1) forwards}
+  @keyframes zoomIn{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+  .intro-6.on h1 .w{display:inline-block;opacity:0;animation:rise .55s cubic-bezier(.2,.7,.2,1) forwards}
+
+  /* ===== visuals ===== */
+  .viz{position:relative;min-height:340px}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--e-2)}
+  @keyframes pop{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:scale(1)}}
+  @keyframes slot{to{opacity:1;transform:none}}
+
+  /* S2 rag concept: docs light up, then an answer with a cite */
+  .ragviz{display:flex;flex-direction:column;gap:14px;max-width:430px;width:100%}
+  .docs{display:flex;gap:12px}
+  .doc{flex:1;padding:12px 13px;opacity:0;transform:translateY(12px)}
+  .on .d1{animation:slot .5s .35s cubic-bezier(.2,.7,.2,1) forwards}
+  .on .d2{animation:slot .5s .55s cubic-bezier(.2,.7,.2,1) forwards,hitOn .4s 1.3s forwards}
+  .on .d3{animation:slot .5s .75s cubic-bezier(.2,.7,.2,1) forwards}
+  @keyframes hitOn{to{border-color:var(--teal);box-shadow:0 0 0 3px rgba(15,138,128,.14)}}
+  .doc .di{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--muted);margin-bottom:8px}
+  .doc i{display:block;height:7px;border-radius:4px;background:var(--surface-3);margin:6px 0}
+  .doc i:last-child{width:68%}
+  .d2 .di{color:var(--teal)}
+  .ranswer{padding:16px 18px;border:1.5px solid var(--accent);background:#fffdf9;opacity:0;transform:translateY(14px)}
+  .on .ranswer{animation:slot .55s 1.9s cubic-bezier(.2,.7,.2,1) forwards}
+  .ranswer .ph{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent-ink);margin-bottom:10px}
+  .ranswer i{display:block;height:9px;border-radius:5px;background:#fdf1e3;margin:7px 0}
+  .ranswer i:nth-of-type(2){width:72%}
+  .cite{display:inline-block;margin-top:9px;font-family:var(--mono);font-size:11.5px;color:var(--teal);
+        border:1px solid var(--line);padding:3px 9px;border-radius:6px;opacity:0}
+  .on .cite{animation:fadeIn .45s 2.6s forwards}
+
+  /* S3 chunking: one document splits into labeled chunk chips */
+  .ckviz{display:flex;flex-direction:column;gap:12px;max-width:430px;width:100%}
+  .docfull{padding:16px 18px;opacity:0;transform:translateY(12px)}
+  .on .docfull{animation:slot .5s .35s cubic-bezier(.2,.7,.2,1) forwards}
+  .docfull .ph{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--muted);margin-bottom:10px}
+  .docfull i{display:block;height:8px;border-radius:4px;background:var(--surface-3);margin:7px 0}
+  .docfull i:nth-child(2){width:94%}.docfull i:nth-child(3){width:82%}.docfull i:nth-child(4){width:88%}
+  .ckarrow{text-align:center;color:var(--muted);font-size:19px;line-height:1;opacity:0}
+  .on .ckarrow{animation:fadeIn .4s .95s forwards}
+  .cks{display:flex;flex-wrap:wrap;gap:9px}
+  .ck{font-family:var(--mono);font-size:12.5px;padding:7px 12px;border-radius:8px;border:1px solid var(--line-2);opacity:0;transform:scale(.7)}
+  .ck.a{background:#fdf1e3;color:var(--accent-ink)}
+  .ck.b{background:#e9f6f4;color:var(--teal)}
+  .ck.c{background:var(--surface-2);color:var(--ink-2)}
+  .on .ck:nth-child(1){animation:pop .45s 1.15s cubic-bezier(.2,.7,.3,1.3) forwards}
+  .on .ck:nth-child(2){animation:pop .45s 1.3s cubic-bezier(.2,.7,.3,1.3) forwards}
+  .on .ck:nth-child(3){animation:pop .45s 1.45s cubic-bezier(.2,.7,.3,1.3) forwards}
+  .on .ck:nth-child(4){animation:pop .45s 1.6s cubic-bezier(.2,.7,.3,1.3) forwards}
+  .on .ck:nth-child(5){animation:pop .45s 1.75s cubic-bezier(.2,.7,.3,1.3) forwards}
+  .on .ck:nth-child(6){animation:pop .45s 1.9s cubic-bezier(.2,.7,.3,1.3) forwards}
+
+  /* S4 vector search: points in a space, nearest chunks light up */
+  .vwrap{display:flex;flex-direction:column;gap:12px;max-width:430px;width:100%}
+  .vspace{position:relative;width:100%;height:250px}
+  .pt{position:absolute;width:10px;height:10px;border-radius:50%;background:var(--line-2)}
+  .pt.q{width:14px;height:14px;background:var(--accent)}
+  .on .pt.q{animation:pulseq 1.6s .6s infinite}
+  @keyframes pulseq{0%{box-shadow:0 0 0 0 rgba(224,127,14,.35)}70%{box-shadow:0 0 0 13px rgba(224,127,14,0)}100%{box-shadow:0 0 0 0 rgba(224,127,14,0)}}
+  .on .pt.hit{animation:toTeal .4s 1.7s forwards}
+  @keyframes toTeal{to{background:var(--teal);box-shadow:0 0 0 3px rgba(15,138,128,.16)}}
+  .ln{position:absolute;height:2px;background:var(--teal);transform-origin:left center;opacity:0;border-radius:2px}
+  .on .ln{animation:fadeIn .5s 1.45s forwards}
+  .vlegend{display:flex;gap:20px;font-family:var(--mono);font-size:11.5px;color:var(--muted);opacity:0}
+  .on .vlegend{animation:fadeIn .5s 2.2s forwards}
+  .vlegend .swq{color:var(--accent)}
+  .vlegend .swh{color:var(--teal)}
+
+  /* S5 why it errs: a wrong chunk retrieved, a confident wrong answer flagged */
+  .errviz{display:flex;flex-direction:column;gap:12px;max-width:430px;width:100%}
+  .retbad{padding:14px 16px;display:flex;gap:12px;align-items:center;opacity:0;transform:translateX(26px)}
+  .on .retbad{animation:slot .55s .45s cubic-bezier(.2,.7,.2,1) forwards}
+  .retbad .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--ink-2);border:1px solid var(--line);padding:3px 8px;border-radius:6px;flex:none}
+  .retbad .exl{flex:1}
+  .retbad .exl i{display:block;height:9px;border-radius:5px;background:var(--surface-3);margin:5px 0}
+  .retbad .exl i:first-child{width:84%}.retbad .exl i:last-child{width:60%}
+  .retbad .miss{font-family:var(--mono);font-size:11.5px;color:#d23f3f;flex:none;opacity:0}
+  .on .retbad .miss{animation:fadeIn .4s 1.1s forwards}
+  .wrongans{padding:16px 18px;border:1.5px solid #e7b6b6;background:#fffafa;opacity:0;transform:translateY(14px)}
+  .on .wrongans{animation:slot .55s 1.4s cubic-bezier(.2,.7,.2,1) forwards}
+  .wrongans .ph{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--muted);margin-bottom:10px}
+  .wrongans i{display:block;height:9px;border-radius:5px;background:var(--surface-3);margin:7px 0}
+  .wrongans i:nth-of-type(2){width:70%}
+  .wrongans .flag{margin-top:10px;font-family:var(--mono);font-size:12px;color:#d23f3f;opacity:0}
+  .on .wrongans .flag{animation:fadeIn .45s 2.1s forwards}
+
+  /* S6 memory: a note persists across sessions */
+  .memviz{display:flex;flex-direction:column;gap:11px;max-width:430px;width:100%}
+  .sess{padding:14px 16px;opacity:0;transform:translateY(12px)}
+  .on .sess1{animation:slot .5s .4s cubic-bezier(.2,.7,.2,1) forwards}
+  .on .sess2{animation:slot .5s 1.7s cubic-bezier(.2,.7,.2,1) forwards}
+  .sess .ph{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--muted);margin-bottom:9px}
+  .sess i{display:block;height:8px;border-radius:4px;background:var(--surface-3);margin:6px 0}
+  .sess1 i:first-of-type{width:88%}.sess1 i:last-of-type{width:64%}
+  .sess2 i:first-of-type{width:80%}.sess2 i:last-of-type{width:58%}
+  .notechip{display:inline-block;margin-top:8px;font-family:var(--mono);font-size:11.5px;color:var(--teal);
+            background:#e9f6f4;border:1px solid var(--teal);border-radius:7px;padding:4px 10px;opacity:0;transform:scale(.75)}
+  .on .sess1 .notechip{animation:pop .45s 1.1s cubic-bezier(.2,.7,.3,1.3) forwards}
+  .memflow{text-align:center;font-family:var(--mono);font-size:11.5px;color:var(--muted);opacity:0}
+  .on .memflow{animation:fadeIn .45s 1.45s forwards}
+  .sess2 .notechip{margin-top:0;margin-bottom:8px}
+  .on .sess2 .notechip{animation:pop .45s 2.25s cubic-bezier(.2,.7,.3,1.3) forwards}
+
+  /* CTA */
+  .url{margin-top:26px;font-family:var(--mono);font-size:21px;color:var(--accent-ink);opacity:0}
+  .on .url{animation:rise .7s 1s forwards}
+  .one{margin-top:22px;font-size:16.5px;color:var(--muted);opacity:0}
+  .on .one{animation:rise .7s .7s forwards}
+  .beatglow{position:absolute;left:50%;top:54%;width:520px;height:520px;transform:translate(-50%,-50%);pointer-events:none;
+            background:radial-gradient(circle,rgba(224,127,14,.10),transparent 65%);opacity:calc(.4 + .6*var(--beat))}
+
+  /* controls (hidden by ?clean=1) */
+  #ctrl{position:absolute;right:14px;bottom:12px;z-index:50;display:flex;gap:8px}
+  #ctrl button{font:600 13px var(--mono);color:var(--ink-2);background:rgba(255,255,255,.9);
+               border:1px solid var(--line-2);border-radius:8px;padding:6px 12px;cursor:pointer}
+  body.clean #ctrl{display:none}
+</style>
+</head>
+<body>
+<div id="wrap"><div id="stage">
+  <div id="prog"></div>
+
+  <!-- S0 hook -->
+  <section class="scene center" id="s0"><div class="txt">
+    <div class="eyebrow a1">AWESOME AI LEARNING · BUILD A RAG SYSTEM</div>
+    <h1 class="a2">Your AI has never read your documents.</h1>
+    <p class="sub a3">It may not remember, and it can misremember.</p>
+  </div></section>
+
+  <!-- S1 misconception -->
+  <section class="scene center"><div class="txt">
+    <h1 class="a1">The fix is not retraining.</h1>
+    <p class="sub a2">Give the model a knowledge base and let it look things up：retrieve first, then generate.</p>
+  </div></section>
+
+  <!-- S2 concept: retrieve then generate -->
+  <section class="scene split"><div class="txt">
+    <div class="step a1">STEP 1 · RETRIEVE, THEN GENERATE</div>
+    <h1 class="a2">Look it up before answering.</h1>
+    <p class="sub a3">Find the relevant passages in a knowledge base, then let the LLM answer, with sources it can cite.</p>
+  </div><div class="viz" style="display:grid;place-items:center">
+    <div class="ragviz">
+      <div class="docs">
+        <div class="card doc d1"><span class="di">DOC 1</span><i></i><i></i></div>
+        <div class="card doc d2"><span class="di">DOC 2</span><i></i><i></i></div>
+        <div class="card doc d3"><span class="di">DOC 3</span><i></i><i></i></div>
+      </div>
+      <div class="card ranswer"><div class="ph">ANSWER</div><i></i><i></i><span class="cite">✓ cites source 2</span></div>
+    </div>
+  </div></section>
+
+  <!-- S3 chunking -->
+  <section class="scene split"><div class="txt">
+    <div class="step a1">STEP 2 · CHUNKING</div>
+    <h1 class="a2">Split documents into searchable pieces.</h1>
+    <p class="sub a3">How you chunk decides what retrieval can find later.</p>
+  </div><div class="viz" style="display:grid;place-items:center">
+    <div class="ckviz">
+      <div class="card docfull"><div class="ph">DOCUMENT</div><i></i><i></i><i></i></div>
+      <div class="ckarrow">↓</div>
+      <div class="cks">
+        <span class="ck a">overview</span><span class="ck b">setup</span><span class="ck c">api</span>
+        <span class="ck b">pricing</span><span class="ck c">faq</span><span class="ck a">limits</span>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- S4 vector search -->
+  <section class="scene split"><div class="txt">
+    <div class="step a1">STEP 3 · VECTOR SEARCH</div>
+    <h1 class="a2">Match by meaning, not keywords.</h1>
+    <p class="sub a3">Your question and every chunk become points in a space; the nearest ones come back.</p>
+  </div><div class="viz" style="display:grid;place-items:center">
+    <div class="vwrap">
+      <div class="card vspace">
+        <span class="pt" style="left:48px;top:36px"></span>
+        <span class="pt" style="left:352px;top:52px"></span>
+        <span class="pt" style="left:78px;top:196px"></span>
+        <span class="pt" style="left:338px;top:204px"></span>
+        <span class="pt" style="left:292px;top:26px"></span>
+        <span class="pt" style="left:96px;top:120px"></span>
+        <span class="pt" style="left:370px;top:130px"></span>
+        <span class="ln" style="left:207px;top:128px;width:72px;transform:rotate(-136deg)"></span>
+        <span class="ln" style="left:207px;top:128px;width:80px;transform:rotate(35deg)"></span>
+        <span class="pt hit" style="left:150px;top:74px"></span>
+        <span class="pt hit" style="left:268px;top:170px"></span>
+        <span class="pt q" style="left:200px;top:122px"></span>
+      </div>
+      <div class="vlegend"><span class="swq">● your question</span><span class="swh">● nearest chunks</span></div>
+    </div>
+  </div></section>
+
+  <!-- S5 why it errs -->
+  <section class="scene split"><div class="txt">
+    <div class="step a1">STEP 4 · WHY IT STILL ERRS</div>
+    <h1 class="a2">Wrong chunk in, wrong answer out.</h1>
+    <p class="sub a3">Retrieval can miss, long context is not a free fix, and private data can leak. Learn the trade-offs.</p>
+  </div><div class="viz" style="display:grid;place-items:center">
+    <div class="errviz">
+      <div class="card retbad"><span class="tag">RETRIEVED</span><span class="exl"><i></i><i></i></span><span class="miss">✗ off-topic</span></div>
+      <div class="card wrongans"><div class="ph">ANSWER</div><i></i><i></i><div class="flag">⚠ fluent, confident, wrong</div></div>
+    </div>
+  </div></section>
+
+  <!-- S6 ship it: memory + doc Q&A -->
+  <section class="scene split"><div class="txt">
+    <div class="step a1">FINALLY · SHIP IT</div>
+    <h1 class="a2">Give your system memory.</h1>
+    <p class="sub a3">The model starts every conversation blank; an external store slips notes back into the context. Then design a real doc Q&amp;A service.</p>
+  </div><div class="viz" style="display:grid;place-items:center">
+    <div class="memviz">
+      <div class="card sess sess1"><div class="ph">SESSION 1</div><i></i><i></i><span class="notechip">note ✓ saved</span></div>
+      <div class="memflow">stored outside the model ↓</div>
+      <div class="card sess sess2"><div class="ph">SESSION 2</div><span class="notechip">note ↩ back in context</span><i></i><i></i></div>
+    </div>
+  </div></section>
+
+  <!-- S7 CTA -->
+  <section class="scene center"><div class="beatglow"></div><div class="txt">
+    <div class="eyebrow a1">BUILD A RAG SYSTEM</div>
+    <h1 class="a2">Let AI look things up: chunking, retrieval, why it still errs.</h1>
+    <p class="one a3">One guided track in Awesome AI Learning. Free and hands-on.</p>
+    <div class="url a4">awesome-ai-learning.vercel.app</div>
+  </div></section>
+
+  <div id="cap"></div>
+  <div id="ctrl"><button id="mute">♪</button><button id="play">⏸</button></div>
+</div></div>
+
+<audio id="bgm" src="background_music.mp3" loop preload="auto"></audio>
+
+<script>
+(() => {
+  const qs = new URLSearchParams(location.search);
+  if (qs.get('clean') === '1') document.body.classList.add('clean');
+  if (qs.get('ar') === '1x1') document.body.classList.add('ar1x1');
+  const intro = Math.min(6, Math.max(1, parseInt(qs.get('intro') || '1', 10) || 1));
+  const s0 = document.getElementById('s0');
+  s0.classList.add('intro-' + intro);
+  if (intro === 6) { // word by word
+    const h = s0.querySelector('h1');
+    h.innerHTML = h.textContent.split(' ').map((w, i) =>
+      `<span class="w" style="animation-delay:${.25 + i * .14}s">${w}&nbsp;</span>`).join('');
+  }
+
+  const scenes = [...document.querySelectorAll('.scene')];
+  const caps = [
+    'The model has read the internet. It has not read your documents.',
+    'Retraining will not teach it your files. Retrieval will.',
+    'RAG finds the relevant passages first, then lets the model answer.',
+    'Chunking：split documents into pieces retrieval can actually find.',
+    'Vector search matches your question to chunks by meaning.',
+    'Retrieve the wrong chunk and you get a confident wrong answer.',
+    'Models start every chat blank. Memory is an external store that slips notes back in.',
+    'Build a RAG System：one track, start anytime.',
+  ];
+  const durs = [7000, 6500, 7500, 7500, 7500, 7500, 7500, 8000];
+  const total = durs.reduce((a, b) => a + b, 0);
+  const cap = document.getElementById('cap');
+  const prog = document.getElementById('prog');
+
+  let elapsed = 0, idx = -1, playing = true, last = performance.now();
+
+  function setScene(i) {
+    if (i === idx) return;
+    idx = i;
+    scenes.forEach((s, k) => s.classList.toggle('on', k === i));
+    cap.textContent = caps[i] || '';
+    cap.classList.add('on');
+  }
+  function tick(now) {
+    const dt = now - last; last = now;
+    if (playing) elapsed = (elapsed + dt) % total;
+    let a = 0, i = 0;
+    for (; i < durs.length; i++) { if (elapsed < a + durs[i]) break; a += durs[i]; }
+    setScene(Math.min(i, durs.length - 1));
+    prog.style.width = (elapsed / total * 100) + '%';
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+
+  // audio + beat pulse
+  const bgm = document.getElementById('bgm');
+  let actx = null, analyser = null, data = null, muted = false;
+  function startAudio() {
+    if (actx || muted) return;
+    try {
+      actx = new (window.AudioContext || window.webkitAudioContext)();
+      const src = actx.createMediaElementSource(bgm);
+      analyser = actx.createAnalyser(); analyser.fftSize = 256;
+      src.connect(analyser); analyser.connect(actx.destination);
+      data = new Uint8Array(analyser.frequencyBinCount);
+      bgm.play().catch(() => {});
+      pump();
+    } catch (e) {}
+  }
+  function pump() {
+    if (!analyser) return;
+    analyser.getByteFrequencyData(data);
+    let s = 0; for (let i = 2; i < 24; i++) s += data[i];
+    const beat = Math.min(1, s / (22 * 200));
+    document.documentElement.style.setProperty('--beat', beat.toFixed(3));
+    requestAnimationFrame(pump);
+  }
+  ['pointerdown', 'keydown', 'touchstart'].forEach(ev => document.addEventListener(ev, startAudio, { once: false }));
+
+  const btnPlay = document.getElementById('play');
+  const btnMute = document.getElementById('mute');
+  btnPlay.onclick = () => { playing = !playing; btnPlay.textContent = playing ? '⏸' : '▶'; };
+  btnMute.onclick = () => { muted = !muted; bgm.muted = muted; btnMute.textContent = muted ? '♪̸' : '♪'; };
+  document.addEventListener('keydown', e => {
+    if (e.code === 'Space') { e.preventDefault(); btnPlay.onclick(); }
+    if (e.key === 'r' || e.key === 'R') { elapsed = 0; idx = -1; }
+  });
+
+  // deterministic jump for headless verification
+  window.__jump = (i) => {
+    let a = 0; for (let k = 0; k < i; k++) a += durs[k];
+    elapsed = a + 60; idx = -1; playing = false; btnPlay.textContent = '▶';
+  };
+
+  // fit stage to window
+  function fit() {
+    const st = document.getElementById('stage');
+    const w = document.body.classList.contains('ar1x1') ? 1080 : 1280;
+    const h = document.body.classList.contains('ar1x1') ? 1080 : 720;
+    const k = Math.min(innerWidth / w, innerHeight / h);
+    st.style.transform = `scale(${k})`; st.style.transformOrigin = 'center';
+  }
+  addEventListener('resize', fit); fit();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,432 @@
+<!doctype html>
+<!-- Awesome AI Learning · course/track promo: Training & Fine-tuning (track: train-tune)
+     Self-contained HTML animatic per .claude/skills/promo-video.
+     16:9 master (1280x720). ?ar=1x1 for square. ?clean=1 hides chrome for recording.
+     ?intro=1..6 opening variants. Space = play/pause, R = restart. window.__jump(i) for verification.
+     Copy sources (real, not invented): paths.js train-tune track EN, lessonInfo for
+     neural-network, training, backprop, pretraining, fine-tuning.
+     No em dashes anywhere. Music: local background_music.mp3 (same folder), beat pulse via AnalyserNode. -->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Awesome AI Learning · Training & Fine-tuning (track video)</title>
+<style>
+  :root{
+    --bg:#eef1f6; --surface:#ffffff; --surface-2:#f6f8fb; --surface-3:#eceff5;
+    --ink:#141821; --ink-2:#3b4557; --muted:#5b6678; --line:#dde3ec; --line-2:#c6cfdd;
+    --accent:#e07f0e; --accent-soft:#f6a940; --accent-ink:#a85a08;
+    --teal:#0f8a80; --good:#1f9d57; --crit:#d23f3f;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Noto Sans TC",sans-serif;
+    --r:12px; --e-2:0 3px 10px rgba(20,30,55,.06); --e-3:0 14px 36px rgba(20,30,55,.11);
+    --beat:0;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%;background:#0b0d12;font-family:var(--sans)}
+  #wrap{position:fixed;inset:0;display:grid;place-items:center}
+  #stage{position:relative;width:1280px;height:720px;background:var(--bg);overflow:hidden;border-radius:2px}
+  body.ar1x1 #stage{width:1080px;height:1080px}
+
+  /* progress */
+  #prog{position:absolute;left:0;top:0;height:3px;width:0%;background:var(--accent);z-index:40;
+        box-shadow:0 0 calc(6px + 10px*var(--beat)) rgba(224,127,14,calc(.35 + .45*var(--beat)))}
+
+  /* scenes */
+  .scene{position:absolute;inset:0;padding:72px 84px 118px;opacity:0;visibility:hidden}
+  body.ar1x1 .scene{padding:64px 64px 128px}
+  .scene.on{opacity:1;visibility:visible}
+  .scene .eyebrow{font-family:var(--mono);font-size:13px;letter-spacing:.14em;color:var(--accent-ink);margin-bottom:18px}
+  .scene h1{font-size:54px;line-height:1.08;letter-spacing:-.02em;font-weight:760;color:var(--ink);max-width:15ch;text-wrap:balance}
+  .scene .sub{margin-top:16px;font-size:20px;line-height:1.5;color:var(--ink-2);max-width:44ch}
+  .scene.center{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+  .scene.center h1{max-width:20ch}
+  .scene.split{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center}
+  body.ar1x1 .scene.split{grid-template-columns:1fr;gap:28px;align-content:center}
+  .step{font-family:var(--mono);font-size:12.5px;letter-spacing:.16em;color:var(--teal);margin-bottom:14px}
+  .scene.split h1{font-size:44px}
+  .scene.cta h1{font-size:44px;max-width:24ch}
+
+  /* burned caption */
+  #cap{position:absolute;left:50%;bottom:34px;transform:translateX(-50%);z-index:30;max-width:76%;
+       background:rgba(20,24,33,.86);color:#fff;font-size:19px;line-height:1.45;padding:10px 20px;
+       border-radius:10px;text-align:center;opacity:0;transition:opacity .35s}
+  #cap.on{opacity:1}
+
+  /* enter animations (staged via .on) */
+  .on .a1,.on .a2,.on .a3,.on .a4{opacity:0;animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
+  .on .a2{animation-delay:.25s}.on .a3{animation-delay:.5s}.on .a4{animation-delay:.75s}
+  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  /* intro variants on scene 0 */
+  .intro-2.on .a1,.intro-2.on .a2,.intro-2.on .a3{animation-name:fadeIn}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  .intro-3.on h1{animation:none;opacity:1;clip-path:inset(0 100% 0 0);animation:wipe 1s .2s cubic-bezier(.2,.7,.2,1) forwards}
+  @keyframes wipe{to{clip-path:inset(0 0 0 0)}}
+  .intro-4.on h1{filter:blur(14px);opacity:0;animation:sharpen 1s .2s forwards}
+  @keyframes sharpen{to{filter:blur(0);opacity:1}}
+  .intro-5.on h1{transform-origin:left center;opacity:0;animation:zoomIn .9s .2s cubic-bezier(.2,.7,.2,1) forwards}
+  @keyframes zoomIn{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+  .intro-6.on h1 .w{display:inline-block;opacity:0;animation:rise .55s cubic-bezier(.2,.7,.2,1) forwards}
+
+  /* ===== visuals ===== */
+  .viz{position:relative;min-height:340px}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--e-2)}
+  @keyframes pop{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:scale(1)}}
+  @keyframes slot{to{opacity:1;transform:none}}
+
+  /* S2 neural network: weighted edges light, decision node fires */
+  .nn{padding:20px 22px 16px;width:100%;max-width:430px}
+  .nn .ph{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--muted);margin-bottom:10px}
+  .nn svg{display:block;width:100%;height:auto}
+  .nn .nd{fill:var(--surface-3);stroke:var(--line-2);stroke-width:1.5;opacity:0}
+  .on .nn .nd{animation:fadeIn .45s .25s forwards}
+  .nn .e{fill:none;stroke-linecap:round;opacity:0}
+  .nn .e.p{stroke:var(--teal)}
+  .nn .e.n{stroke:var(--crit)}
+  .on .nn .g1{animation:edgeIn .5s .55s forwards}
+  .on .nn .g2{animation:edgeIn .5s 1.15s forwards}
+  @keyframes edgeIn{to{opacity:.85}}
+  .nn .no{fill:var(--surface-3);stroke:var(--line-2);stroke-width:1.5;opacity:0}
+  .on .nn .no{animation:fadeIn .45s .25s forwards,fire .6s 1.7s forwards}
+  @keyframes fire{to{fill:var(--accent);stroke:var(--accent-ink)}}
+  .nnlg{display:flex;gap:18px;margin-top:10px;font-family:var(--mono);font-size:11px;color:var(--muted);opacity:0}
+  .on .nnlg{animation:fadeIn .5s 1.3s forwards}
+  .nnlg .sw{display:inline-block;width:16px;height:4px;border-radius:2px;margin-right:6px;vertical-align:middle}
+  .nnlg .swp{background:var(--teal)}
+  .nnlg .swn{background:var(--crit)}
+
+  /* S3 gradient descent: error slope, steps walking down */
+  .gd{padding:20px 22px 16px;width:100%;max-width:430px}
+  .gd .ph{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--muted);margin-bottom:10px;display:flex;justify-content:space-between}
+  .gd svg{display:block;width:100%;height:auto}
+  .gd .ax{fill:none;stroke:var(--line-2);stroke-width:1.5}
+  .gd .bowl{fill:none;stroke:var(--line-2);stroke-width:2.5;stroke-dasharray:1;stroke-dashoffset:1}
+  .on .gd .bowl{animation:draw 1.1s .4s cubic-bezier(.2,.7,.2,1) forwards}
+  @keyframes draw{to{stroke-dashoffset:0}}
+  .gd .stp{fill:var(--teal);opacity:0}
+  .on .gd .p1{animation:fadeIn .35s 1.3s forwards}
+  .on .gd .p2{animation:fadeIn .35s 1.65s forwards}
+  .on .gd .p3{animation:fadeIn .35s 2s forwards}
+  .gd .smin{fill:var(--accent);opacity:0}
+  .on .gd .smin{animation:fadeIn .4s 2.35s forwards}
+  .gd .ring{fill:none;stroke:var(--accent-soft);stroke-width:2;opacity:0}
+  .on .gd .ring{animation:fadeIn .4s 2.5s forwards}
+  .gdl{margin-top:10px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--muted);opacity:0}
+  .on .gdl{animation:fadeIn .5s 2.6s forwards}
+
+  /* S4 backprop: forward pass, error at output, blame flows back */
+  .bp{width:100%;max-width:430px}
+  .bprow{display:flex;align-items:stretch;gap:8px}
+  .bl{flex:1;padding:12px 6px 10px;text-align:center;font-family:var(--mono);font-size:10.5px;
+      letter-spacing:.06em;color:var(--ink-2);position:relative}
+  .bl .bbar{height:6px;border-radius:4px;background:var(--surface-3);margin-bottom:8px}
+  .on .b1 .bbar{animation:fwd .35s .4s forwards}
+  .on .b2 .bbar{animation:fwd .35s .65s forwards}
+  .on .b3 .bbar{animation:fwd .35s .9s forwards}
+  .on .b4 .bbar{animation:fwd .35s 1.15s forwards}
+  @keyframes fwd{to{background:var(--teal)}}
+  .barr{align-self:center;color:var(--line-2);font-size:15px;flex:none}
+  .barr.h{visibility:hidden}
+  .etag{position:absolute;top:-11px;right:8px;font-size:10px;color:#fff;background:var(--crit);
+        border-radius:6px;padding:2px 7px;opacity:0;transform:scale(.7)}
+  .on .etag{animation:pop .45s 1.4s cubic-bezier(.2,.7,.3,1.3) forwards}
+  .nrow{display:flex;align-items:stretch;gap:8px;margin-top:10px}
+  .ncell{flex:1;text-align:center}
+  .nchip{display:inline-block;width:100%;font-family:var(--mono);font-size:10.5px;color:var(--accent-ink);
+         background:#fdf1e3;border:1px solid var(--accent-soft);border-radius:6px;padding:5px 0;opacity:0;transform:translateX(14px)}
+  .on .nc2{animation:slot .45s 1.8s cubic-bezier(.2,.7,.2,1) forwards}
+  .on .nc1{animation:slot .45s 2.15s cubic-bezier(.2,.7,.2,1) forwards}
+  .bfin{margin-top:14px;text-align:center;font-family:var(--mono);font-size:12px;color:var(--good);opacity:0}
+  .on .bfin{animation:fadeIn .5s 2.6s forwards}
+
+  /* S5 assistant pipeline: pretrain, instruct, RLHF */
+  .pipe{display:flex;flex-direction:column;gap:12px;max-width:430px;width:100%}
+  .st{padding:14px 16px;display:flex;gap:14px;align-items:center;opacity:0;transform:translateX(26px)}
+  .on .st1{animation:slot .55s .45s cubic-bezier(.2,.7,.2,1) forwards}
+  .on .st2{animation:slot .55s .95s cubic-bezier(.2,.7,.2,1) forwards}
+  .st3{border-color:var(--accent);opacity:0;transform:translateY(16px)}
+  .on .st3{animation:slot .6s 1.55s cubic-bezier(.2,.7,.2,1) forwards}
+  .st .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--teal);
+           border:1px solid var(--line);padding:3px 8px;border-radius:6px;flex:none}
+  .st3 .tag{color:var(--accent-ink);border-color:var(--accent-soft)}
+  .st .sd{flex:1;font-size:14.5px;line-height:1.4;color:var(--ink-2)}
+
+  /* S6 fine-tuning: base model takes on a specialty */
+  .ft{max-width:430px;width:100%}
+  .ftbase{padding:20px 22px;position:relative}
+  .ftbase .ph{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--muted);margin-bottom:12px}
+  .plines .pl{height:10px;border-radius:6px;background:var(--surface-3);margin-bottom:9px}
+  .plines .pl:nth-child(1){width:92%}.plines .pl:nth-child(2){width:78%}.plines .pl:nth-child(3){width:85%}
+  .dchip{position:absolute;top:-14px;right:18px;font-family:var(--mono);font-size:12px;background:#e9f6f4;
+         color:var(--teal);border:1px solid var(--teal);padding:6px 12px;border-radius:8px;opacity:0;transform:translateY(-24px)}
+  .on .dchip{animation:dropIn .6s .8s cubic-bezier(.2,.7,.2,1) forwards}
+  @keyframes dropIn{to{opacity:1;transform:none}}
+  .spec{margin-top:6px;display:inline-block;font-family:var(--mono);font-size:12px;color:var(--good);
+        border:1px solid var(--good);padding:5px 10px;border-radius:8px;opacity:0;transform:scale(.8)}
+  .on .spec{animation:pop .5s 1.5s cubic-bezier(.2,.7,.3,1.3) forwards}
+  .ftrow{display:flex;gap:10px;margin-top:12px}
+  .mini{flex:1;font-family:var(--mono);font-size:11px;line-height:1.5;color:var(--ink-2);background:var(--surface);
+        border:1px solid var(--line);border-radius:8px;padding:8px 10px;text-align:center;box-shadow:var(--e-2);opacity:0}
+  .on .mini:nth-child(1){animation:fadeIn .5s 2.05s forwards}
+  .on .mini:nth-child(2){animation:fadeIn .5s 2.35s forwards}
+
+  /* CTA */
+  .url{margin-top:26px;font-family:var(--mono);font-size:21px;color:var(--accent-ink);opacity:0}
+  .on .url{animation:rise .7s 1s forwards}
+  .one{margin-top:22px;font-size:16.5px;color:var(--muted);opacity:0}
+  .on .one{animation:rise .7s .7s forwards}
+  .beatglow{position:absolute;left:50%;top:54%;width:520px;height:520px;transform:translate(-50%,-50%);pointer-events:none;
+            background:radial-gradient(circle,rgba(224,127,14,.10),transparent 65%);opacity:calc(.4 + .6*var(--beat))}
+
+  /* controls (hidden by ?clean=1) */
+  #ctrl{position:absolute;right:14px;bottom:12px;z-index:50;display:flex;gap:8px}
+  #ctrl button{font:600 13px var(--mono);color:var(--ink-2);background:rgba(255,255,255,.9);
+               border:1px solid var(--line-2);border-radius:8px;padding:6px 12px;cursor:pointer}
+  body.clean #ctrl{display:none}
+</style>
+</head>
+<body>
+<div id="wrap"><div id="stage">
+  <div id="prog"></div>
+
+  <!-- S0 hook -->
+  <section class="scene center" id="s0"><div class="txt">
+    <div class="eyebrow a1">AWESOME AI LEARNING · TRAINING &amp; FINE-TUNING</div>
+    <h1 class="a2">How does a machine actually learn?</h1>
+    <p class="sub a3">Nobody writes the rules. It finds them.</p>
+  </div></section>
+
+  <!-- S1 misconception -->
+  <section class="scene center"><div class="txt">
+    <h1 class="a1">Training is not programming.</h1>
+    <p class="sub a2">It is millions of weights, nudged again and again until the error shrinks.</p>
+  </div></section>
+
+  <!-- S2 neural networks -->
+  <section class="scene split"><div class="txt">
+    <div class="step a1">HOW IT LEARNS · NEURAL NETWORKS</div>
+    <h1 class="a2">Everything is a weight.</h1>
+    <p class="sub a3">Each connection carries an importance：positive supports, negative opposes. Signals sum layer by layer into one decision.</p>
+  </div><div class="viz" style="display:grid;place-items:center">
+    <div class="card nn">
+      <div class="ph">NETWORK</div>
+      <svg viewBox="0 0 380 210" aria-hidden="true">
+        <line class="e p g1" x1="36" y1="45"  x2="190" y2="75"  stroke-width="3.2"/>
+        <line class="e n g1" x1="36" y1="45"  x2="190" y2="135" stroke-width="1.8"/>
+        <line class="e p g1" x1="36" y1="105" x2="190" y2="75"  stroke-width="2.2"/>
+        <line class="e p g1" x1="36" y1="105" x2="190" y2="135" stroke-width="3.6"/>
+        <line class="e n g1" x1="36" y1="165" x2="190" y2="75"  stroke-width="1.5"/>
+        <line class="e p g1" x1="36" y1="165" x2="190" y2="135" stroke-width="2.4"/>
+        <line class="e p g2" x1="190" y1="75"  x2="344" y2="105" stroke-width="4"/>
+        <line class="e p g2" x1="190" y1="135" x2="344" y2="105" stroke-width="2.6"/>
+        <circle class="nd" cx="36" cy="45"  r="9"/>
+        <circle class="nd" cx="36" cy="105" r="9"/>
+        <circle class="nd" cx="36" cy="165" r="9"/>
+        <circle class="nd" cx="190" cy="75"  r="9"/>
+        <circle class="nd" cx="190" cy="135" r="9"/>
+        <circle class="no" cx="344" cy="105" r="11"/>
+      </svg>
+      <div class="nnlg"><span><span class="sw swp"></span>positive = support</span><span><span class="sw swn"></span>negative = opposition</span></div>
+    </div>
+  </div></section>
+
+  <!-- S3 gradient descent -->
+  <section class="scene split"><div class="txt">
+    <div class="step a1">HOW IT LEARNS · GRADIENT DESCENT</div>
+    <h1 class="a2">Walk down the error slope.</h1>
+    <p class="sub a3">Training keeps nudging the weights to shrink the error. The learning rate sets how big each step is.</p>
+  </div><div class="viz" style="display:grid;place-items:center">
+    <div class="card gd">
+      <div class="ph"><span>ERROR</span><span>▼</span></div>
+      <svg viewBox="0 0 380 200" aria-hidden="true">
+        <path class="ax" d="M14,14 L14,182 L366,182"/>
+        <path class="bowl" pathLength="1" d="M20,40 Q170,215 360,80"/>
+        <circle class="stp p1" cx="57"  cy="78"  r="7"/>
+        <circle class="stp p2" cx="114" cy="117" r="7"/>
+        <circle class="stp p3" cx="163" cy="135" r="7"/>
+        <circle class="smin"   cx="208" cy="139" r="8"/>
+        <circle class="ring"   cx="208" cy="139" r="15"/>
+      </svg>
+      <div class="gdl">LEARNING RATE = STEP SIZE</div>
+    </div>
+  </div></section>
+
+  <!-- S4 backpropagation -->
+  <section class="scene split"><div class="txt">
+    <div class="step a1">HOW IT LEARNS · BACKPROPAGATION</div>
+    <h1 class="a2">Hand out the blame.</h1>
+    <p class="sub a3">Run forward to get an answer, then go backward and compute how much blame each weight carries.</p>
+  </div><div class="viz" style="display:grid;place-items:center">
+    <div class="bp">
+      <div class="bprow">
+        <div class="card bl b1"><div class="bbar"></div>INPUT</div>
+        <div class="barr">→</div>
+        <div class="card bl b2"><div class="bbar"></div>LAYER 1</div>
+        <div class="barr">→</div>
+        <div class="card bl b3"><div class="bbar"></div>LAYER 2</div>
+        <div class="barr">→</div>
+        <div class="card bl b4"><div class="bbar"></div>OUTPUT<span class="etag">error</span></div>
+      </div>
+      <div class="nrow">
+        <div class="ncell"></div>
+        <div class="barr h">→</div>
+        <div class="ncell"><span class="nchip nc1">◀ blame</span></div>
+        <div class="barr h">→</div>
+        <div class="ncell"><span class="nchip nc2">◀ blame</span></div>
+        <div class="barr h">→</div>
+        <div class="ncell"></div>
+      </div>
+      <div class="bfin">✓ weights nudged, error shrinks</div>
+    </div>
+  </div></section>
+
+  <!-- S5 from model to ChatGPT -->
+  <section class="scene split"><div class="txt">
+    <div class="step a1">FROM MODEL TO CHATGPT</div>
+    <h1 class="a2">Pretrain, instruct, align.</h1>
+    <p class="sub a3">Read massively to learn language itself. Then instruction tuning and RLHF shape it into a useful, safer assistant.</p>
+  </div><div class="viz" style="display:grid;place-items:center">
+    <div class="pipe">
+      <div class="card st st1"><span class="tag">1 · PRETRAIN</span><span class="sd">Read massively. Learn language itself.</span></div>
+      <div class="card st st2"><span class="tag">2 · INSTRUCT</span><span class="sd">Answer the way humans actually ask.</span></div>
+      <div class="card st st3"><span class="tag">3 · RLHF</span><span class="sd">Human preference：more useful, safer answers.</span></div>
+    </div>
+  </div></section>
+
+  <!-- S6 tuning choices -->
+  <section class="scene split"><div class="txt">
+    <div class="step a1">TUNING CHOICES</div>
+    <h1 class="a2">Make it yours.</h1>
+    <p class="sub a3">Train a general model further on your own data：your tone, your format, your expertise. Far cheaper than starting from scratch.</p>
+  </div><div class="viz" style="display:grid;place-items:center">
+    <div class="ft">
+      <div class="card ftbase">
+        <div class="ph">BASE MODEL</div>
+        <div class="plines"><div class="pl"></div><div class="pl"></div><div class="pl"></div></div>
+        <div class="spec">✓ your specialty</div>
+        <div class="dchip">+ your data</div>
+      </div>
+      <div class="ftrow">
+        <div class="mini">LoRA：lightweight fine-tuning</div>
+        <div class="mini">Fresh facts：consider RAG</div>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- S7 CTA -->
+  <section class="scene center cta"><div class="beatglow"></div><div class="txt">
+    <div class="eyebrow a1">TRAINING &amp; FINE-TUNING</div>
+    <h1 class="a2">How a model is trained and tuned: RLHF, LoRA, fine-tune vs RAG.</h1>
+    <p class="one a3">One guided track in Awesome AI Learning. Free and hands-on.</p>
+    <div class="url a4">awesome-ai-learning.vercel.app</div>
+  </div></section>
+
+  <div id="cap"></div>
+  <div id="ctrl"><button id="mute">♪</button><button id="play">⏸</button></div>
+</div></div>
+
+<audio id="bgm" src="background_music.mp3" loop preload="auto"></audio>
+
+<script>
+(() => {
+  const qs = new URLSearchParams(location.search);
+  if (qs.get('clean') === '1') document.body.classList.add('clean');
+  if (qs.get('ar') === '1x1') document.body.classList.add('ar1x1');
+  const intro = Math.min(6, Math.max(1, parseInt(qs.get('intro') || '1', 10) || 1));
+  const s0 = document.getElementById('s0');
+  s0.classList.add('intro-' + intro);
+  if (intro === 6) { // word by word
+    const h = s0.querySelector('h1');
+    h.innerHTML = h.textContent.split(' ').map((w, i) =>
+      `<span class="w" style="animation-delay:${.25 + i * .14}s">${w}&nbsp;</span>`).join('');
+  }
+
+  const scenes = [...document.querySelectorAll('.scene')];
+  const caps = [
+    'ChatGPT was never programmed with answers. It was trained.',
+    'No hand-written rules：just weights, adjusted until the error shrinks.',
+    'A weight says how much one connection matters：support or opposition.',
+    'Gradient descent：small steps downhill on the error slope.',
+    'Backprop hands blame backward. It is what makes deep networks feasible.',
+    'Pretraining, instruction tuning, RLHF：how an assistant is actually made.',
+    'Fine-tune for tone and expertise. LoRA keeps it light. Fresh facts favor RAG.',
+    'Training & Fine-tuning：one track, start anytime.',
+  ];
+  const durs = [7000, 6500, 7500, 7500, 7500, 7500, 7500, 8000];
+  const total = durs.reduce((a, b) => a + b, 0);
+  const cap = document.getElementById('cap');
+  const prog = document.getElementById('prog');
+
+  let elapsed = 0, idx = -1, playing = true, last = performance.now();
+
+  function setScene(i) {
+    if (i === idx) return;
+    idx = i;
+    scenes.forEach((s, k) => s.classList.toggle('on', k === i));
+    cap.textContent = caps[i] || '';
+    cap.classList.add('on');
+  }
+  function tick(now) {
+    const dt = now - last; last = now;
+    if (playing) elapsed = (elapsed + dt) % total;
+    let a = 0, i = 0;
+    for (; i < durs.length; i++) { if (elapsed < a + durs[i]) break; a += durs[i]; }
+    setScene(Math.min(i, durs.length - 1));
+    prog.style.width = (elapsed / total * 100) + '%';
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+
+  // audio + beat pulse
+  const bgm = document.getElementById('bgm');
+  let actx = null, analyser = null, data = null, muted = false;
+  function startAudio() {
+    if (actx || muted) return;
+    try {
+      actx = new (window.AudioContext || window.webkitAudioContext)();
+      const src = actx.createMediaElementSource(bgm);
+      analyser = actx.createAnalyser(); analyser.fftSize = 256;
+      src.connect(analyser); analyser.connect(actx.destination);
+      data = new Uint8Array(analyser.frequencyBinCount);
+      bgm.play().catch(() => {});
+      pump();
+    } catch (e) {}
+  }
+  function pump() {
+    if (!analyser) return;
+    analyser.getByteFrequencyData(data);
+    let s = 0; for (let i = 2; i < 24; i++) s += data[i];
+    const beat = Math.min(1, s / (22 * 200));
+    document.documentElement.style.setProperty('--beat', beat.toFixed(3));
+    requestAnimationFrame(pump);
+  }
+  ['pointerdown', 'keydown', 'touchstart'].forEach(ev => document.addEventListener(ev, startAudio, { once: false }));
+
+  const btnPlay = document.getElementById('play');
+  const btnMute = document.getElementById('mute');
+  btnPlay.onclick = () => { playing = !playing; btnPlay.textContent = playing ? '⏸' : '▶'; };
+  btnMute.onclick = () => { muted = !muted; bgm.muted = muted; btnMute.textContent = muted ? '♪̸' : '♪'; };
+  document.addEventListener('keydown', e => {
+    if (e.code === 'Space') { e.preventDefault(); btnPlay.onclick(); }
+    if (e.key === 'r' || e.key === 'R') { elapsed = 0; idx = -1; }
+  });
+
+  // deterministic jump for headless verification
+  window.__jump = (i) => {
+    let a = 0; for (let k = 0; k < i; k++) a += durs[k];
+    elapsed = a + 60; idx = -1; playing = false; btnPlay.textContent = '▶';
+  };
+
+  // fit stage to window
+  function fit() {
+    const st = document.getElementById('stage');
+    const w = document.body.classList.contains('ar1x1') ? 1080 : 1280;
+    const h = document.body.classList.contains('ar1x1') ? 1080 : 720;
+    const k = Math.min(innerWidth / w, innerHeight / h);
+    st.style.transform = `scale(${k})`; st.style.transformOrigin = 'center';
+  }
+  addEventListener('resize', fit); fit();
+})();
+</script>
+</body>
+</html>

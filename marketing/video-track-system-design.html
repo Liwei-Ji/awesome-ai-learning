@@ -1,0 +1,396 @@
+<!doctype html>
+<!-- Awesome AI Learning · course/track promo: System Design (track: system-design)
+     Self-contained HTML animatic per .claude/skills/promo-video.
+     16:9 master (1280x720). ?ar=1x1 for square. ?clean=1 hides chrome for recording.
+     ?intro=1..6 opening variants. Space = play/pause, R = restart. window.__jump(i) for verification.
+     Copy sources (real, not invented): paths.js system-design track EN, CH_TR.en (rag, agent, integration, evaluation).
+     No em dashes anywhere. Music: local background_music.mp3 (same folder), beat pulse via AnalyserNode. -->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Awesome AI Learning · System Design (track video)</title>
+<style>
+  :root{
+    --bg:#eef1f6; --surface:#ffffff; --surface-2:#f6f8fb; --surface-3:#eceff5;
+    --ink:#141821; --ink-2:#3b4557; --muted:#5b6678; --line:#dde3ec; --line-2:#c6cfdd;
+    --accent:#e07f0e; --accent-soft:#f6a940; --accent-ink:#a85a08;
+    --teal:#0f8a80; --good:#1f9d57;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Noto Sans TC",sans-serif;
+    --r:12px; --e-2:0 3px 10px rgba(20,30,55,.06); --e-3:0 14px 36px rgba(20,30,55,.11);
+    --beat:0;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%;background:#0b0d12;font-family:var(--sans)}
+  #wrap{position:fixed;inset:0;display:grid;place-items:center}
+  #stage{position:relative;width:1280px;height:720px;background:var(--bg);overflow:hidden;border-radius:2px}
+  body.ar1x1 #stage{width:1080px;height:1080px}
+
+  /* progress */
+  #prog{position:absolute;left:0;top:0;height:3px;width:0%;background:var(--accent);z-index:40;
+        box-shadow:0 0 calc(6px + 10px*var(--beat)) rgba(224,127,14,calc(.35 + .45*var(--beat)))}
+
+  /* scenes */
+  .scene{position:absolute;inset:0;padding:72px 84px 118px;opacity:0;visibility:hidden}
+  body.ar1x1 .scene{padding:64px 64px 128px}
+  .scene.on{opacity:1;visibility:visible}
+  .scene .eyebrow{font-family:var(--mono);font-size:13px;letter-spacing:.14em;color:var(--accent-ink);margin-bottom:18px}
+  .scene h1{font-size:54px;line-height:1.08;letter-spacing:-.02em;font-weight:760;color:var(--ink);max-width:15ch;text-wrap:balance}
+  .scene .sub{margin-top:16px;font-size:20px;line-height:1.5;color:var(--ink-2);max-width:44ch}
+  .scene.center{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+  .scene.center h1{max-width:20ch}
+  .scene.split{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center}
+  body.ar1x1 .scene.split{grid-template-columns:1fr;gap:28px;align-content:center}
+  .step{font-family:var(--mono);font-size:12.5px;letter-spacing:.16em;color:var(--teal);margin-bottom:14px}
+  .scene.split h1{font-size:44px}
+
+  /* burned caption */
+  #cap{position:absolute;left:50%;bottom:34px;transform:translateX(-50%);z-index:30;max-width:76%;
+       background:rgba(20,24,33,.86);color:#fff;font-size:19px;line-height:1.45;padding:10px 20px;
+       border-radius:10px;text-align:center;opacity:0;transition:opacity .35s}
+  #cap.on{opacity:1}
+
+  /* enter animations (staged via .on) */
+  .on .a1,.on .a2,.on .a3,.on .a4{opacity:0;animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
+  .on .a2{animation-delay:.25s}.on .a3{animation-delay:.5s}.on .a4{animation-delay:.75s}
+  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  /* intro variants on scene 0 */
+  .intro-2.on .a1,.intro-2.on .a2,.intro-2.on .a3{animation-name:fadeIn}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  .intro-3.on h1{animation:none;opacity:1;clip-path:inset(0 100% 0 0);animation:wipe 1s .2s cubic-bezier(.2,.7,.2,1) forwards}
+  @keyframes wipe{to{clip-path:inset(0 0 0 0)}}
+  .intro-4.on h1{filter:blur(14px);opacity:0;animation:sharpen 1s .2s forwards}
+  @keyframes sharpen{to{filter:blur(0);opacity:1}}
+  .intro-5.on h1{transform-origin:left center;opacity:0;animation:zoomIn .9s .2s cubic-bezier(.2,.7,.2,1) forwards}
+  @keyframes zoomIn{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+  .intro-6.on h1 .w{display:inline-block;opacity:0;animation:rise .55s cubic-bezier(.2,.7,.2,1) forwards}
+
+  /* ===== visuals ===== */
+  .viz{position:relative;min-height:340px}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--e-2)}
+  @keyframes pop{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:scale(1)}}
+  @keyframes slot{to{opacity:1;transform:none}}
+
+  /* S2 whole chain: the pipeline stack lights up from data to application */
+  .stack{display:flex;flex-direction:column;gap:10px;max-width:430px;width:100%}
+  .lay{padding:13px 16px;display:flex;align-items:center;gap:14px;opacity:0;transform:translateY(10px)}
+  .lay .lt{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;color:var(--muted);width:118px;flex:none}
+  .lay .ll{flex:1;height:9px;border-radius:5px;background:var(--surface-3)}
+  .lay.l1{border-color:var(--accent-soft)}
+  .lay.l1 .lt{color:var(--accent-ink)}
+  .lay.l1 .ll{background:#fdf1e3}
+  .lay.l5 .lt{color:var(--teal)}
+  .lay.l5 .ll{background:#e9f6f4}
+  .on .l5{animation:slot .5s .45s cubic-bezier(.2,.7,.2,1) forwards}
+  .on .l4{animation:slot .5s .85s cubic-bezier(.2,.7,.2,1) forwards}
+  .on .l3{animation:slot .5s 1.25s cubic-bezier(.2,.7,.2,1) forwards}
+  .on .l2{animation:slot .5s 1.65s cubic-bezier(.2,.7,.2,1) forwards}
+  .on .l1{animation:slot .5s 2.05s cubic-bezier(.2,.7,.2,1) forwards}
+
+  /* S3 rag: docs light up, then an answer with a cite */
+  .rag{display:flex;flex-direction:column;gap:12px;max-width:430px;width:100%}
+  .docs{display:flex;gap:10px}
+  .doc{flex:1;padding:12px;opacity:0;transform:translateY(10px)}
+  .doc i{display:block;height:7px;border-radius:4px;background:var(--surface-3);margin:6px 0}
+  .doc i:first-child{width:88%}.doc i:last-child{width:64%}
+  .on .doc:nth-child(1){animation:slot .45s .4s cubic-bezier(.2,.7,.2,1) forwards}
+  .on .doc:nth-child(2){animation:slot .45s .55s cubic-bezier(.2,.7,.2,1) forwards, hit .4s 1.25s forwards}
+  .on .doc:nth-child(3){animation:slot .45s .7s cubic-bezier(.2,.7,.2,1) forwards}
+  @keyframes hit{to{border-color:var(--teal);box-shadow:0 0 0 3px rgba(15,138,128,.14)}}
+  .ragans{display:flex;align-items:center;gap:12px;padding:14px 16px;border:1.5px solid var(--accent);background:#fffdf9;
+          opacity:0;transform:translateY(12px)}
+  .on .ragans{animation:slot .55s 1.85s cubic-bezier(.2,.7,.2,1) forwards}
+  .ragans .ral{flex:1}
+  .ragans .ral i{display:block;height:9px;border-radius:5px;background:#fdf1e3;margin:5px 0}
+  .ragans .ral i:first-child{width:92%}.ragans .ral i:last-child{width:60%}
+  .cite{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--teal);border:1px solid var(--line);
+        padding:3px 8px;border-radius:6px;flex:none}
+
+  /* S4 agent: a goal splits into steps and tool calls */
+  .ag{display:flex;flex-direction:column;gap:10px;max-width:430px;width:100%}
+  .goal{padding:12px 16px;font-family:var(--mono);font-size:12.5px;letter-spacing:.1em;color:var(--accent-ink);
+        border:1.5px solid var(--accent);background:#fffdf9;border-radius:var(--r);text-align:center;opacity:0}
+  .on .goal{animation:pop .5s .4s cubic-bezier(.2,.7,.3,1.3) forwards}
+  .stp{display:flex;align-items:center;gap:12px;padding:11px 14px;opacity:0;transform:translateX(22px)}
+  .stp .num{width:22px;height:22px;border-radius:50%;border:1px solid var(--line-2);flex:none;display:grid;place-items:center;
+            font-family:var(--mono);font-size:11px;color:var(--muted)}
+  .stp .sl{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--muted);flex:none}
+  .stp .nl{flex:1;height:8px;border-radius:5px;background:var(--surface-3)}
+  .tool{font-family:var(--mono);font-size:11px;padding:3px 9px;border-radius:6px;background:#e9f6f4;color:var(--teal);
+        border:1px solid var(--line);flex:none}
+  .stp .dn{font-family:var(--mono);font-size:11.5px;color:var(--good);flex:none;margin-left:auto}
+  .on .stp1{animation:slot .5s .95s cubic-bezier(.2,.7,.2,1) forwards}
+  .on .stp2{animation:slot .5s 1.35s cubic-bezier(.2,.7,.2,1) forwards}
+  .on .stp3{animation:slot .5s 1.75s cubic-bezier(.2,.7,.2,1) forwards}
+
+  /* S5 cost + reliability: budget meters and a guardrail catch */
+  .cr{display:flex;flex-direction:column;gap:14px;max-width:430px;width:100%}
+  .crcard{padding:18px 20px}
+  .mrow{margin-bottom:14px}
+  .mrow:last-child{margin-bottom:0}
+  .mrow .ml{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:6px}
+  .mrow .ok{color:var(--good);opacity:0}
+  .on .ok{animation:fadeIn .4s 1.7s forwards}
+  .mrow .bar{height:10px;border-radius:6px;background:var(--surface-3);overflow:hidden;position:relative}
+  .mrow .thr{position:absolute;top:0;bottom:0;width:2px;background:var(--line-2);left:80%}
+  .mrow .fillc{height:100%;width:0;border-radius:6px;background:linear-gradient(90deg,var(--accent-soft),var(--accent))}
+  .on .mc1 .fillc{animation:toCost 1.1s .5s cubic-bezier(.2,.7,.2,1) forwards}
+  .on .mc2 .fillc{animation:toLat 1.1s .8s cubic-bezier(.2,.7,.2,1) forwards}
+  @keyframes toCost{to{width:46%}}
+  @keyframes toLat{to{width:58%}}
+  .guard{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1.5px solid #d23f3f;border-radius:var(--r);
+         background:#fdf3f3;font-family:var(--mono);font-size:12.5px;color:#b03030;opacity:0;transform:translateY(10px);
+         box-shadow:var(--e-2)}
+  .on .guard{animation:slot .5s 2s cubic-bezier(.2,.7,.2,1) forwards}
+
+  /* S6 evaluate + launch: quality checks, then a live monitor */
+  .ev{display:flex;flex-direction:column;gap:11px;max-width:430px;width:100%}
+  .evrow{display:flex;align-items:center;gap:10px;padding:10px 14px;font-family:var(--mono);font-size:12.5px;
+         color:var(--ink-2);opacity:0;transform:translateY(8px)}
+  .evrow .ck{color:var(--good);font-weight:700}
+  .on .er1{animation:slot .4s .4s cubic-bezier(.2,.7,.2,1) forwards}
+  .on .er2{animation:slot .4s .7s cubic-bezier(.2,.7,.2,1) forwards}
+  .on .er3{animation:slot .4s 1s cubic-bezier(.2,.7,.2,1) forwards}
+  .on .er4{animation:slot .4s 1.3s cubic-bezier(.2,.7,.2,1) forwards}
+  .mon{display:flex;align-items:center;gap:12px;padding:12px 16px;opacity:0}
+  .on .mon{animation:fadeIn .5s 1.9s forwards}
+  .mon .dot{width:8px;height:8px;border-radius:50%;background:var(--good);flex:none;animation:blink 1.2s infinite}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:.35}}
+  .mon .mlab{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--muted);flex:none}
+  .mon .bars{display:flex;gap:4px;align-items:flex-end;height:26px;flex:1;justify-content:flex-end}
+  .mon .bars b{width:8px;height:26px;background:var(--teal);border-radius:2px;opacity:.85;
+               transform-origin:bottom;animation:mpulse 1.15s infinite ease-in-out}
+  .mon .bars b:nth-child(2){animation-delay:.14s}.mon .bars b:nth-child(3){animation-delay:.28s}
+  .mon .bars b:nth-child(4){animation-delay:.42s}.mon .bars b:nth-child(5){animation-delay:.56s}
+  .mon .bars b:nth-child(6){animation-delay:.7s}.mon .bars b:nth-child(7){animation-delay:.84s}
+  .mon .bars b:nth-child(8){animation-delay:.98s}
+  @keyframes mpulse{0%,100%{transform:scaleY(.3)}50%{transform:scaleY(1)}}
+
+  /* CTA */
+  .url{margin-top:26px;font-family:var(--mono);font-size:21px;color:var(--accent-ink);opacity:0}
+  .on .url{animation:rise .7s 1s forwards}
+  .one{margin-top:22px;font-size:16.5px;color:var(--muted);opacity:0}
+  .on .one{animation:rise .7s .7s forwards}
+  .beatglow{position:absolute;left:50%;top:54%;width:520px;height:520px;transform:translate(-50%,-50%);pointer-events:none;
+            background:radial-gradient(circle,rgba(224,127,14,.10),transparent 65%);opacity:calc(.4 + .6*var(--beat))}
+
+  /* controls (hidden by ?clean=1) */
+  #ctrl{position:absolute;right:14px;bottom:12px;z-index:50;display:flex;gap:8px}
+  #ctrl button{font:600 13px var(--mono);color:var(--ink-2);background:rgba(255,255,255,.9);
+               border:1px solid var(--line-2);border-radius:8px;padding:6px 12px;cursor:pointer}
+  body.clean #ctrl{display:none}
+</style>
+</head>
+<body>
+<div id="wrap"><div id="stage">
+  <div id="prog"></div>
+
+  <!-- S0 hook -->
+  <section class="scene center" id="s0"><div class="txt">
+    <div class="eyebrow a1">AWESOME AI LEARNING · SYSTEM DESIGN</div>
+    <h1 class="a2">The demo was easy. Shipping is not.</h1>
+    <p class="sub a3">What turns an AI demo into a product people can rely on?</p>
+  </div></section>
+
+  <!-- S1 misconception -->
+  <section class="scene center"><div class="txt">
+    <h1 class="a1">A model is not a product.</h1>
+    <p class="sub a2">Between them sits a system：data, retrieval, agents, guardrails, evaluation. Someone has to design it.</p>
+  </div></section>
+
+  <!-- S2 the whole chain (integration) -->
+  <section class="scene split"><div class="txt">
+    <div class="step a1">STEP 1 · THE WHOLE CHAIN</div>
+    <h1 class="a2">See the whole chain.</h1>
+    <p class="sub a3">Data sits at the bottom, the application at the top. Every part is one segment of the pipeline.</p>
+  </div><div class="viz" style="display:grid;place-items:center">
+    <div class="stack">
+      <div class="card lay l1"><span class="lt">APPLICATION</span><span class="ll"></span></div>
+      <div class="card lay l2"><span class="lt">AGENTS</span><span class="ll"></span></div>
+      <div class="card lay l3"><span class="lt">MODEL</span><span class="ll"></span></div>
+      <div class="card lay l4"><span class="lt">RETRIEVAL</span><span class="ll"></span></div>
+      <div class="card lay l5"><span class="lt">DATA</span><span class="ll"></span></div>
+    </div>
+  </div></section>
+
+  <!-- S3 rag -->
+  <section class="scene split"><div class="txt">
+    <div class="step a1">STEP 2 · RETRIEVAL</div>
+    <h1 class="a2">Let AI look things up.</h1>
+    <p class="sub a3">An LLM may not remember, and can misremember. Retrieve first, then generate.</p>
+  </div><div class="viz" style="display:grid;place-items:center">
+    <div class="rag">
+      <div class="docs">
+        <div class="card doc"><i></i><i></i><i></i></div>
+        <div class="card doc"><i></i><i></i><i></i></div>
+        <div class="card doc"><i></i><i></i><i></i></div>
+      </div>
+      <div class="card ragans"><span class="ral"><i></i><i></i></span><span class="cite">✓ SOURCE CITED</span></div>
+    </div>
+  </div></section>
+
+  <!-- S4 agent -->
+  <section class="scene split"><div class="txt">
+    <div class="step a1">STEP 3 · AGENTS</div>
+    <h1 class="a2">From answers to outcomes.</h1>
+    <p class="sub a3">Regular AI：ask → answer. An agent takes a goal, breaks it apart, and calls tools to get it done.</p>
+  </div><div class="viz" style="display:grid;place-items:center">
+    <div class="ag">
+      <div class="goal">GOAL：ANSWER THE CUSTOMER</div>
+      <div class="card stp stp1"><span class="num">1</span><span class="sl">PLAN</span><span class="nl"></span></div>
+      <div class="card stp stp2"><span class="num">2</span><span class="sl">CALL TOOLS</span><span class="tool">search</span><span class="tool">API</span></div>
+      <div class="card stp stp3"><span class="num">3</span><span class="sl">COMBINE</span><span class="nl"></span><span class="dn">✓ done</span></div>
+    </div>
+  </div></section>
+
+  <!-- S5 cost and reliability -->
+  <section class="scene split"><div class="txt">
+    <div class="step a1">STEP 4 · COST AND RELIABILITY</div>
+    <h1 class="a2">Design for cost and failure.</h1>
+    <p class="sub a3">Support bot, data pipeline, realtime assistant：every scenario trades cost, latency, and risk.</p>
+  </div><div class="viz" style="display:grid;place-items:center">
+    <div class="cr">
+      <div class="card crcard">
+        <div class="mrow mc1"><div class="ml"><span>COST PER QUERY</span><span class="ok">✓ within budget</span></div>
+          <div class="bar"><span class="thr"></span><div class="fillc"></div></div></div>
+        <div class="mrow mc2"><div class="ml"><span>LATENCY P95</span><span class="ok">✓ within target</span></div>
+          <div class="bar"><span class="thr"></span><div class="fillc"></div></div></div>
+      </div>
+      <div class="guard">⚠ data leak caught → blocked by guardrail</div>
+    </div>
+  </div></section>
+
+  <!-- S6 evaluate and launch -->
+  <section class="scene split"><div class="txt">
+    <div class="step a1">FINALLY · EVALUATE AND LAUNCH</div>
+    <h1 class="a2">Measure it. Then ship it.</h1>
+    <p class="sub a3">Good has standards：correct, complete, relevant, no hallucination. Launch, then keep monitoring.</p>
+  </div><div class="viz" style="display:grid;place-items:center">
+    <div class="ev">
+      <div class="card evrow er1"><span class="ck">✓</span>correct</div>
+      <div class="card evrow er2"><span class="ck">✓</span>complete</div>
+      <div class="card evrow er3"><span class="ck">✓</span>relevant</div>
+      <div class="card evrow er4"><span class="ck">✓</span>no hallucination</div>
+      <div class="card mon"><span class="dot"></span><span class="mlab">MONITORING</span>
+        <div class="bars"><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b></div></div>
+    </div>
+  </div></section>
+
+  <!-- S7 CTA -->
+  <section class="scene center"><div class="beatglow"></div><div class="txt">
+    <div class="eyebrow a1">SYSTEM DESIGN</div>
+    <h1 class="a2">Assemble AI into a product that ships: architecture, cost, monitoring.</h1>
+    <p class="one a3">One guided track in Awesome AI Learning. Free and hands-on.</p>
+    <div class="url a4">awesome-ai-learning.vercel.app</div>
+  </div></section>
+
+  <div id="cap"></div>
+  <div id="ctrl"><button id="mute">♪</button><button id="play">⏸</button></div>
+</div></div>
+
+<audio id="bgm" src="background_music.mp3" loop preload="auto"></audio>
+
+<script>
+(() => {
+  const qs = new URLSearchParams(location.search);
+  if (qs.get('clean') === '1') document.body.classList.add('clean');
+  if (qs.get('ar') === '1x1') document.body.classList.add('ar1x1');
+  const intro = Math.min(6, Math.max(1, parseInt(qs.get('intro') || '1', 10) || 1));
+  const s0 = document.getElementById('s0');
+  s0.classList.add('intro-' + intro);
+  if (intro === 6) { // word by word
+    const h = s0.querySelector('h1');
+    h.innerHTML = h.textContent.split(' ').map((w, i) =>
+      `<span class="w" style="animation-delay:${.25 + i * .14}s">${w}&nbsp;</span>`).join('');
+  }
+
+  const scenes = [...document.querySelectorAll('.scene')];
+  const caps = [
+    'A working demo is one thing. A product that ships is another.',
+    'The model is one component. The system is the product.',
+    'Understand the whole picture and you can start designing AI apps.',
+    'Retrieval grounds answers in your knowledge base and cites sources.',
+    'An agent breaks the goal apart, calls tools, and combines the results.',
+    'Cost, latency, guardrails, leakage：decide before launch, not after.',
+    'Newer and bigger does not win at everything, it depends on your task.',
+    'System Design：one track, start anytime.',
+  ];
+  const durs = [6000, 6500, 7500, 7500, 7500, 7500, 7500, 8000];
+  const total = durs.reduce((a, b) => a + b, 0);
+  const cap = document.getElementById('cap');
+  const prog = document.getElementById('prog');
+
+  let elapsed = 0, idx = -1, playing = true, last = performance.now();
+
+  function setScene(i) {
+    if (i === idx) return;
+    idx = i;
+    scenes.forEach((s, k) => s.classList.toggle('on', k === i));
+    cap.textContent = caps[i] || '';
+    cap.classList.add('on');
+  }
+  function tick(now) {
+    const dt = now - last; last = now;
+    if (playing) elapsed = (elapsed + dt) % total;
+    let a = 0, i = 0;
+    for (; i < durs.length; i++) { if (elapsed < a + durs[i]) break; a += durs[i]; }
+    setScene(Math.min(i, durs.length - 1));
+    prog.style.width = (elapsed / total * 100) + '%';
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+
+  // audio + beat pulse
+  const bgm = document.getElementById('bgm');
+  let actx = null, analyser = null, data = null, muted = false;
+  function startAudio() {
+    if (actx || muted) return;
+    try {
+      actx = new (window.AudioContext || window.webkitAudioContext)();
+      const src = actx.createMediaElementSource(bgm);
+      analyser = actx.createAnalyser(); analyser.fftSize = 256;
+      src.connect(analyser); analyser.connect(actx.destination);
+      data = new Uint8Array(analyser.frequencyBinCount);
+      bgm.play().catch(() => {});
+      pump();
+    } catch (e) {}
+  }
+  function pump() {
+    if (!analyser) return;
+    analyser.getByteFrequencyData(data);
+    let s = 0; for (let i = 2; i < 24; i++) s += data[i];
+    const beat = Math.min(1, s / (22 * 200));
+    document.documentElement.style.setProperty('--beat', beat.toFixed(3));
+    requestAnimationFrame(pump);
+  }
+  ['pointerdown', 'keydown', 'touchstart'].forEach(ev => document.addEventListener(ev, startAudio, { once: false }));
+
+  const btnPlay = document.getElementById('play');
+  const btnMute = document.getElementById('mute');
+  btnPlay.onclick = () => { playing = !playing; btnPlay.textContent = playing ? '⏸' : '▶'; };
+  btnMute.onclick = () => { muted = !muted; bgm.muted = muted; btnMute.textContent = muted ? '♪̸' : '♪'; };
+  document.addEventListener('keydown', e => {
+    if (e.code === 'Space') { e.preventDefault(); btnPlay.onclick(); }
+    if (e.key === 'r' || e.key === 'R') { elapsed = 0; idx = -1; }
+  });
+
+  // deterministic jump for headless verification
+  window.__jump = (i) => {
+    let a = 0; for (let k = 0; k < i; k++) a += durs[k];
+    elapsed = a + 60; idx = -1; playing = false; btnPlay.textContent = '▶';
+  };
+
+  // fit stage to window
+  function fit() {
+    const st = document.getElementById('stage');
+    const w = document.body.classList.contains('ar1x1') ? 1080 : 1280;
+    const h = document.body.classList.contains('ar1x1') ? 1080 : 720;
+    const k = Math.min(innerWidth / w, innerHeight / h);
+    st.style.transform = `scale(${k})`; st.style.transformOrigin = 'center';
+  }
+  addEventListener('resize', fit); fit();
+})();
+</script>
+</body>
+</html>
