@@ -276,7 +276,7 @@
      再以一層「暖白角落柔光」（非陰影，是內層漸層）把該角提亮，確保粉彩上的小字仍清晰。整體無 box-shadow。 */
   .hero-art {
     position: relative; box-sizing: border-box;
-    min-height: clamp(380px, 40vw, 460px); border-radius: 22px; margin: 0 0 26px; overflow: hidden;
+    min-height: clamp(460px, 66vh, 680px); border-radius: 22px; margin: 0 0 26px; overflow: hidden;
     display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-end;
     padding: clamp(36px, 5vw, 52px) clamp(28px, 5vw, 52px) clamp(32px, 4.5vw, 44px);
     background:
@@ -295,7 +295,7 @@
   .lhero .hero-art h1 { margin: 0 0 13px; }
   .lhero .hero-art .lede { margin: 0; max-width: 26rem; color: var(--ink-2); text-shadow: 0 1px 1px rgba(255, 255, 255, .5); }
   @media (max-width: 560px) {
-    .hero-art { min-height: 340px; border-radius: 18px; padding: 30px 22px 28px; }
+    .hero-art { min-height: clamp(380px, 58vh, 520px); border-radius: 18px; padding: 30px 22px 28px; }
     .hero-copy { max-width: 100%; }
     .lhero .hero-art .lede { max-width: 34ch; }
   }
