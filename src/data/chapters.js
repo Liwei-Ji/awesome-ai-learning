@@ -346,6 +346,18 @@ const DATA = {
       ['Modality 模態', '一種資料型態，例如文字、影像或聲音'],
     ],
   },
+  'vector-search': {
+    t: '向量檢索：從百萬段落找到對的', sub: '靠語意相近找，不靠關鍵字比對',
+    key: [
+      ['01', '把問題也變成向量：意思近＝距離近，取最近的 k 個'],
+      ['02', '百萬向量不能逐一比：近似最近鄰（ANN）＋向量資料庫'],
+      ['03', '向量抓語意、關鍵字抓精確字：實務常用混合檢索＋重排'],
+    ],
+    terms: [
+      ['最近鄰 Nearest neighbor', '向量空間中距離最近的幾筆資料'],
+      ['向量資料庫 Vector database', '專存向量、支援快速相似度搜尋的資料庫'],
+    ],
+  },
   'rag': {
     t: 'RAG：讓 AI 查資料', sub: '先檢索、再生成',
     key: [
@@ -487,7 +499,7 @@ const OUTLINE = [
   { key: 'learn', t: 'AI 如何學習', desc: '模型怎麼被訓練', slugs: ['deep-learning', 'neural-network', 'training', 'backprop', 'cnn'] },
   { key: 'llm', t: '大型語言模型 LLM', desc: 'ChatGPT 的核心', slugs: ['tokenizer', 'embedding', 'rnn', 'transformer', 'llm', 'model-size', 'model-knowledge', 'context-window', 'inference'] },
   { key: 'chatgpt', t: '從模型到 ChatGPT', desc: '把模型訓練成助理', slugs: ['pretraining', 'fine-tuning', 'reasoning'] },
-  { key: 'apps', t: '生成式 AI 與 AI Agent', desc: '一條完整的應用鏈', slugs: ['prompt', 'system-prompt', 'thought-partner', 'find-info', 'generative', 'multimodal', 'rag', 'knowledge-graph', 'memory', 'mcp', 'agent', 'skills', 'orchestration', 'no-code', 'integration'] },
+  { key: 'apps', t: '生成式 AI 與 AI Agent', desc: '一條完整的應用鏈', slugs: ['prompt', 'system-prompt', 'thought-partner', 'find-info', 'generative', 'multimodal', 'vector-search', 'rag', 'knowledge-graph', 'memory', 'mcp', 'agent', 'skills', 'orchestration', 'no-code', 'integration'] },
   { key: 'literacy', t: 'AI 素養', desc: '會用，也會判斷', slugs: ['limits', 'evaluation', 'capstone'] },
 ];
 

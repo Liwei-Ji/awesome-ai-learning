@@ -1910,6 +1910,74 @@ export const BODIES = {
       }
     ]
   },
+  "vector-search": {
+    "zh": [
+      {
+        "h": "問題是什麼",
+        "p": "先講分工：<b>Embedding</b> 那課講的是「意義怎麼變成向量」；這課只講一件事：<b>怎麼在幾百萬個向量裡，快速找出最接近的幾個</b>。找到的段落，再交給下一課 RAG 去生成答案。場景是：你有幾萬份文件，手上只有一句問題。Ctrl+F 和關鍵字搜尋會漏掉「換句話說」的段落，字面不同、意思卻相同。你需要的是<b>照意義搜尋</b>。"
+      },
+      {
+        "h": "核心一步",
+        "p": "把問題也用同一個 embedding 模型轉成向量，讓它落進<b>和段落相同的向量空間</b>。意思相近的文字，在空間裡距離就近。於是「搜尋」變成一個幾何問題：找出離問題向量<b>最近的幾個鄰居</b>。"
+      },
+      {
+        "h": "「近」怎麼算",
+        "p": "最常用的量法是 <b>cosine 相似度</b>：比較兩個向量的方向夾角，方向越一致，代表意義越接近。算完每段的相似度後，取分數最高的 k 段，這就是 <b>top-k</b>，例如取最相關的 5 段交給下游使用。"
+      },
+      {
+        "h": "百萬等級怎麼辦",
+        "p": "段落一多，逐一比對就太慢了。<b>近似最近鄰（ANN）</b>的思路是「犧牲一點點準確，換取巨大速度」：<b>HNSW</b> 像在圖上一層層跳到目標附近，而不是全部掃過；<b>IVF</b> 先把向量分桶，只搜最可能的幾桶。<b>向量資料庫</b>（如 pgvector、FAISS、Pinecone）就是專門存向量、把這種快速搜尋包裝好的系統。"
+      },
+      {
+        "h": "常見誤解",
+        "p": "常見誤會是「有了向量檢索就不需要關鍵字了」。向量抓語意，卻可能漏掉<b>精確字串</b>：產品代號、人名、版本號這種一字不能差的東西，反而是<b>關鍵字檢索（BM25）</b>最準。實務上常用<b>混合檢索</b>兩路並行，再用<b>重排（rerank）</b>精選最好的幾段。另外，<b>切塊品質</b>與 <b>metadata 篩選</b>也直接決定找不找得到。"
+      }
+    ],
+    "en": [
+      {
+        "h": "The problem",
+        "p": "First, the division of labor: the <b>Embedding</b> lesson covered how meaning becomes a vector; this lesson covers exactly one thing: <b>how to quickly find the closest few among millions of vectors</b>. The passages you find then go to the RAG lesson to generate answers. The scene: tens of thousands of documents, and a one-line question. Ctrl+F and keyword search miss the passages that say the same thing in different words. What you need is to <b>search by meaning</b>."
+      },
+      {
+        "h": "The core move",
+        "p": "Turn the question into a vector with the same embedding model, so it lands in <b>the same vector space as the passages</b>. Text that is close in meaning sits close in that space. Searching then becomes a geometry problem: find the <b>nearest neighbors</b> of the query vector."
+      },
+      {
+        "h": "What counts as close",
+        "p": "The usual measure is <b>cosine similarity</b>: compare the angle between two vectors, and the more aligned their directions, the closer the meaning. Score every passage, then keep the k highest, that is <b>top-k</b>, for example the 5 most relevant passages handed downstream."
+      },
+      {
+        "h": "What about millions",
+        "p": "Once there are millions of passages, comparing one by one is far too slow. <b>Approximate nearest neighbor (ANN)</b> trades a tiny bit of accuracy for huge speed: <b>HNSW</b> hops along a graph toward the right neighborhood instead of scanning everything, and <b>IVF</b> sorts vectors into buckets and searches only the most likely few. A <b>vector database</b> (such as pgvector, FAISS, or Pinecone) is a system built to store vectors and serve exactly this fast search."
+      },
+      {
+        "h": "A common misconception",
+        "p": "A common myth is that once you have vector search, keywords are obsolete. Vectors capture meaning but can miss <b>exact strings</b>: product codes, names, and version numbers must match to the letter, and that is where <b>keyword search (BM25)</b> shines. In practice, run <b>hybrid retrieval</b> with both paths, then use a <b>reranker</b> to pick the best few. Chunking quality and <b>metadata filters</b> also decide what can be found at all."
+      }
+    ],
+    "ja": [
+      {
+        "h": "何が問題か",
+        "p": "まず分担から。<b>Embedding</b> の章で学んだのは「意味がどうベクトルになるか」でした。この章はただ一つ、<b>数百万のベクトルから最も近い数個をどう速く見つけるか</b>だけを扱います。見つけた段落は、次の RAG の章で答えの生成に使われます。場面はこうです。数万件の文書があり、手元には一行の質問だけ。Ctrl+F やキーワード検索は「別の言い方で同じことを言う」段落を取りこぼします。必要なのは<b>意味で探す</b>ことです。"
+      },
+      {
+        "h": "核心の一手",
+        "p": "質問も同じ embedding モデルでベクトルに変え、<b>段落と同じベクトル空間</b>に落とします。意味が近い文章は、空間の中でも距離が近い。すると「検索」は幾何の問題になります。クエリのベクトルの<b>最も近い近傍</b>を見つけることです。"
+      },
+      {
+        "h": "「近さ」の測り方",
+        "p": "よく使うのは <b>コサイン類似度</b>です。二つのベクトルの方向の角度を比べ、方向が揃うほど意味が近いとみなします。すべての段落のスコアを計算したら、上位 k 件だけ取ります。これが <b>top-k</b> で、たとえば最も関連する 5 段落を下流に渡します。"
+      },
+      {
+        "h": "数百万件ではどうする",
+        "p": "段落が数百万になると、一つずつ比べるのは遅すぎます。<b>近似最近傍（ANN）</b>は「精度をほんの少し犠牲にして、速度を大きく稼ぐ」考え方です。<b>HNSW</b> はグラフの上を跳びながら目標の近所へ向かい、全件は走査しません。<b>IVF</b> はベクトルをバケツに分け、可能性の高い数個だけ探します。<b>ベクトルデータベース</b>（pgvector、FAISS、Pinecone など）は、ベクトルを保存しこの高速検索を提供する専用システムです。"
+      },
+      {
+        "h": "よくある誤解",
+        "p": "よくある誤解は「ベクトル検索があればキーワードは不要」というものです。ベクトルは意味を捉えますが、<b>正確な文字列</b>を取りこぼすことがあります。製品コード、人名、バージョン番号のような一字一句が大事なものは、むしろ<b>キーワード検索（BM25）</b>が最も正確です。実務では両方を走らせる<b>ハイブリッド検索</b>に、<b>リランク（rerank）</b>で最良の数段落を選び直すのが定番です。さらに<b>チャンク分割の品質</b>と <b>metadata フィルタ</b>も、そもそも何が見つかるかを直接決めます。"
+      }
+    ]
+  },
   "rag": {
     "zh": [
       {

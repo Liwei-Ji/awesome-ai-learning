@@ -340,6 +340,18 @@ export const CH_TR = {
         ["Modality", "One type of data, such as text, image, or sound"],
       ],
     },
+    "vector-search": {
+      t: "Vector Search: Finding the Right Few in Millions", sub: "Search by meaning, not keyword matching",
+      key: [
+        ["01", "Turn the question into a vector too: close in meaning = close in distance, take the nearest k"],
+        ["02", "You can't compare millions of vectors one by one: approximate nearest neighbor (ANN) plus a vector database"],
+        ["03", "Vectors catch meaning, keywords catch exact strings: in practice use hybrid retrieval plus rerank"],
+      ],
+      terms: [
+        ["Nearest neighbor", "The few entries closest in distance in the vector space"],
+        ["Vector database", "A database built to store vectors and serve fast similarity search"],
+      ],
+    },
     "rag": {
       t: "RAG: Let AI Look Things Up", sub: "Retrieve first, then generate",
       key: [
@@ -808,6 +820,18 @@ export const CH_TR = {
       terms: [
         ["Multimodal マルチモーダル", "複数の種類（文字/画像/音声/動画）を扱えるモデル"],
         ["Modality モダリティ", "1 種類のデータ形式、例えば文字・画像・音声"],
+      ],
+    },
+    "vector-search": {
+      t: "ベクトル検索：数百万から正しい断片を見つける", sub: "キーワード一致ではなく意味の近さで探す",
+      key: [
+        ["01", "質問もベクトルにする：意味が近い＝距離が近い、最も近い k 個を取る"],
+        ["02", "数百万のベクトルは一つずつ比べられない：近似最近傍（ANN）＋ベクトルデータベース"],
+        ["03", "ベクトルは意味を、キーワードは正確な文字列を捉える：実務ではハイブリッド検索＋リランク"],
+      ],
+      terms: [
+        ["最近傍 Nearest neighbor", "ベクトル空間で距離が最も近い数件のデータ"],
+        ["ベクトルデータベース Vector database", "ベクトル専用に保存し、高速な類似度検索を提供するデータベース"],
       ],
     },
     "rag": {

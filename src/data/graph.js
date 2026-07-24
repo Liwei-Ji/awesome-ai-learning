@@ -47,6 +47,7 @@ export const PREREQ = {
   'thought-partner': ['prompt'],
   'find-info': ['model-knowledge'],
   'no-code': ['agent'],
+  'vector-search': ['embedding'],
   rag: ['embedding', 'llm'],
   'knowledge-graph': ['rag'],
   memory: ['context-window'],

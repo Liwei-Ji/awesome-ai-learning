@@ -927,6 +927,31 @@ export const PRACTICE = {
       ]
     }
   },
+  "vector-search": {
+    "practical": {
+      "zh": [
+        "<b>預設就用混合檢索＋重排</b>：純向量會漏精確字、純關鍵字會漏換句話說。兩路並行撈候選，再用 reranker 精選，是目前最穩的起手式。",
+        "<b>切塊決定找不找得到</b>：檢索只能回傳「切出來的塊」。段落切碎了，答案就散在幾塊裡誰也搜不全。先把切塊調好，再調搜尋參數。",
+        "<b>用數字量檢索，別用感覺</b>：準備一批「問題＋正確段落」的測試集，量 recall@k（前 k 名有沒有涵蓋正解）。沒有這個數字，任何調整都是用猜的。",
+        "<b>精確代號交給關鍵字</b>：型號、單號、版本號這類一字不能差的查詢，向量常分不出來，務必保留 BM25 這一路兜底。",
+        "<b>先用 metadata 縮小候選池</b>：日期、部門、文件類型先篩過再搜向量，又快又準，還能避免撈到過期文件。"
+      ],
+      "en": [
+        "<b>Default to hybrid retrieval plus rerank</b>: pure vector misses exact strings, pure keyword misses paraphrases. Run both paths to gather candidates, then let a reranker pick, that is the most reliable starting point today.",
+        "<b>Chunking decides what retrieval can find</b>: search can only return the chunks you cut. If a passage is shredded, the answer is scattered across pieces no query can gather. Fix chunking before tuning search parameters.",
+        "<b>Measure retrieval with numbers, not vibes</b>: build a test set of questions paired with their correct passages and track recall@k (do the top k contain the right one). Without that number every tweak is a guess.",
+        "<b>Route exact identifiers to keyword search</b>: model numbers, ticket ids, and version strings must match to the letter, and vectors often blur them. Always keep a BM25 path as the safety net.",
+        "<b>Cut the candidate pool with metadata filters first</b>: filter by date, team, or document type before the vector search runs. It is faster, more accurate, and keeps stale documents out."
+      ],
+      "ja": [
+        "<b>既定はハイブリッド検索＋リランク</b>：ベクトルだけでは正確な文字列を、キーワードだけでは言い換えを取りこぼします。両方で候補を集め、reranker で選び直すのが現状いちばん安定した型です。",
+        "<b>チャンク分割が「見つかるか」を決める</b>：検索が返せるのは切ったチャンクだけ。段落が細切れなら答えは複数の断片に散らばり、どんなクエリでも拾いきれません。検索パラメータより先にチャンクを整えます。",
+        "<b>検索は数字で測る、勘で調整しない</b>：「質問＋正解の段落」のテストセットを作り、recall@k（上位 k 件に正解が入るか）を追います。この数字なしの調整はすべて当てずっぽうです。",
+        "<b>正確な識別子はキーワード検索に任せる</b>：型番、伝票番号、バージョン番号のような一字も違えられない検索は、ベクトルではよくぼやけます。BM25 の経路を必ず保険として残しましょう。",
+        "<b>まず metadata フィルタで候補を絞る</b>：日付、部署、文書タイプで絞ってからベクトル検索。速くて正確なうえ、期限切れの文書を拾わずに済みます。"
+      ]
+    }
+  },
   "rag": {
     "practical": {
       "zh": [

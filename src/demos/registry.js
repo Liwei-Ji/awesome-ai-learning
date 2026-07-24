@@ -30,6 +30,7 @@ import SystemPrompt from './SystemPrompt.svelte';
 import ThoughtPartner from './ThoughtPartner.svelte';
 import FindInfo from './FindInfo.svelte';
 import NoCode from './NoCode.svelte';
+import VectorSearch from './VectorSearch.svelte';
 import RAG from './RAG.svelte';
 import KnowledgeGraph from './KnowledgeGraph.svelte';
 import FineTune from './FineTune.svelte';
@@ -70,6 +71,7 @@ const demos = {
   'thought-partner': ThoughtPartner,
   'find-info': FindInfo,
   'no-code': NoCode,
+  'vector-search': VectorSearch,
   'rag': RAG,
   'knowledge-graph': KnowledgeGraph,
   'fine-tuning': FineTune,
