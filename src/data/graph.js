@@ -58,5 +58,6 @@ export const PREREQ = {
   integration: ['agent', 'rag'],
   limits: ['llm'],
   evaluation: ['limits', 'llm'],
+  observability: ['evaluation'],
   capstone: ['integration'],
 };

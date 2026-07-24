@@ -2658,6 +2658,74 @@ export const BODIES = {
       }
     ]
   },
+  "observability": {
+    "zh": [
+      {
+        "h": "壞掉了，但沒有聲音",
+        "p": "上一章「AI 評估」講的是上線前：用 benchmark 和盲測確認它夠好才放行。這一章講上線後。傳統軟體壞掉會大聲報錯，AI 壞掉不會：換了模型、微調了 prompt、使用者的問題悄悄變了型，它照樣輸出，只是變爛。沒有觀測，你會在幾週後才從生氣的使用者口中知道。"
+      },
+      {
+        "h": "先把紀錄留下來",
+        "p": "第一步是<b>記錄</b>（logging）：每一次呼叫都記下輸入、輸出、模型版本、prompt 版本、token 用量與成本、延遲、呼叫了哪些工具。多步驟的流程（agent、RAG）要串成同一條 <b>trace</b>（追蹤），出事時才能回放「它看到了什麼、做了什麼」。"
+      },
+      {
+        "h": "量什麼才有意義",
+        "p": "延遲、錯誤率、成本這些系統指標是基本盤；更關鍵的是 AI 特有的<b>品質指標</b>：回答有沒有附引用、拒答率、被按倒讚的比例。還要盯 <b>drift</b>（漂移）：輸入分布變了（出現新型問題）、品質在沒人注意時慢慢下滑。"
+      },
+      {
+        "h": "線上品質誰來評",
+        "p": "你不可能每則回覆都親自看。做法是<b>抽樣</b>：讓另一個模型照你的標準打分（LLM-as-judge），分數一變就告警，被標記的樣本再交給人工複核。評審自己也會偏、也會漂，所以要定期人工抽查它打的分數，替評審校準。"
+      },
+      {
+        "h": "別讓改動變成事故",
+        "p": "每次改動（換模型、改 prompt、改檢索）上線前，先跑<b>回歸測試集</b>：一套從過去踩過的坑累積出來的固定題目，比較改動前後的分數。風險大的改動用灰度或 A/B 慢慢放量。記住：改 prompt 也算部署，同樣要走這一套。"
+      }
+    ],
+    "en": [
+      {
+        "h": "It breaks without a sound",
+        "p": "The previous chapter, AI Evaluation, is about before launch: benchmarks and blind tests confirm it is good enough to ship. This chapter is about after launch. Traditional software fails loudly with errors; AI fails silently: a model swap, a prompt tweak, or user questions quietly changing shape, and it keeps producing output, just worse. Without observation, you find out weeks later from angry users."
+      },
+      {
+        "h": "Keep the records first",
+        "p": "Step one is <b>logging</b>: for every call, record the input, output, model version, prompt version, token usage and cost, latency, and which tools were called. Multi-step runs (agent, RAG) must be chained into one <b>trace</b>, so when something goes wrong you can replay what it saw and what it did."
+      },
+      {
+        "h": "What is worth measuring",
+        "p": "System metrics like latency, error rate, and cost are table stakes; what matters more are AI-specific <b>quality metrics</b>: whether answers include citations, the refusal rate, the share of thumbs-down. Also watch for <b>drift</b>: the input distribution shifting (new kinds of questions showing up) and quality slowly declining while nobody is looking."
+      },
+      {
+        "h": "Who judges live quality",
+        "p": "You cannot read every response yourself. The approach is <b>sampling</b>: let another model score against your standards (LLM-as-judge), alert as soon as the score moves, and have humans review the flagged samples. The judge is biased and drifts too, so periodically spot-check its scores by hand to keep the judge calibrated."
+      },
+      {
+        "h": "Do not let a change become an incident",
+        "p": "Before any change ships (model swap, prompt edit, retrieval change), run a <b>regression test set</b>: a fixed set of questions built up from past failures, and compare scores before and after. Roll out risky changes gradually with a canary or A/B. Remember: a prompt edit counts as a deployment and goes through the same routine."
+      }
+    ],
+    "ja": [
+      {
+        "h": "壊れても、音がしない",
+        "p": "前章の「AI 評価」は公開前の話でした。ベンチマークとブラインドテストで十分に良いと確かめてから出す。この章は公開後の話です。従来のソフトは壊れると大きくエラーを出しますが、AI は静かに壊れます。モデルの入れ替え、prompt の微調整、ユーザーの質問の変化で、出力は続くのに質だけ落ちる。観測がなければ、数週間後に怒ったユーザーから知ることになります。"
+      },
+      {
+        "h": "まず記録を残す",
+        "p": "第一歩は<b>ロギング</b>（logging）です。呼び出しごとに、入力、出力、モデルのバージョン、prompt のバージョン、トークン使用量とコスト、レイテンシ、呼んだツールを記録します。多段階の処理（エージェント、RAG）は一本の <b>trace</b>（トレース）につなぎ、問題が起きたとき「何を見て、何をしたか」を再生できるようにします。"
+      },
+      {
+        "h": "何を測れば意味があるか",
+        "p": "レイテンシ、エラー率、コストといったシステム指標は当然の土台。より重要なのは AI 特有の<b>品質指標</b>です。回答に引用が付いているか、拒答率、低評価の割合。さらに <b>drift</b>（ドリフト）も見張ります。入力の分布が変わる（新しい種類の質問が現れる）、品質が誰も気づかぬうちにゆっくり下がる、といった変化です。"
+      },
+      {
+        "h": "本番の品質は誰が評価するか",
+        "p": "すべての応答を自分で読むことはできません。やり方は<b>サンプリング</b>です。別のモデルに基準どおり採点させ（LLM-as-judge）、スコアが動いたら警報を出し、フラグの付いたサンプルを人が確認します。審査役自身も偏り、ずれていくので、定期的にその採点を人手で抜き取り確認し、審査役を校正します。"
+      },
+      {
+        "h": "変更を事故にしない",
+        "p": "変更（モデル入れ替え、prompt 修正、検索の変更）を出す前に、必ず<b>回帰テストセット</b>を回します。過去の失敗から積み上げた固定の問題集で、変更前後のスコアを比べるのです。リスクの大きい変更はカナリアや A/B で少しずつ広げます。忘れずに：prompt の修正もデプロイであり、同じ手順を通します。"
+      }
+    ]
+  },
   "capstone": {
     "zh": [
       {

@@ -266,6 +266,7 @@
   /* 目標優先 hero：滿版第一屏，垂直置中；下一段（路線）落在折線外，無區隔線 */
   .lhero {
     min-height: 100vh; box-sizing: border-box;
+    max-width: 1200px; /* 英雄區單獨放寬（其他區塊維持 957 行的 960px 欄寬） */
     display: flex; flex-direction: column; justify-content: center;
     padding: 48px 0;
   }
@@ -276,7 +277,7 @@
      再以一層「暖白角落柔光」（非陰影，是內層漸層）把該角提亮，確保粉彩上的小字仍清晰。整體無 box-shadow。 */
   .hero-art {
     position: relative; box-sizing: border-box;
-    min-height: clamp(460px, 66vh, 680px); border-radius: 22px; margin: 0 0 26px; overflow: hidden;
+    min-height: clamp(460px, 78vh, 800px); border-radius: 22px; margin: 0 0 26px; overflow: hidden;
     display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-end;
     padding: clamp(36px, 5vw, 52px) clamp(28px, 5vw, 52px) clamp(32px, 4.5vw, 44px);
     background:

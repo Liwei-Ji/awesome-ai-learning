@@ -3,7 +3,9 @@
     "allow": [
       "Bash(node -e ' *)",
       "Bash(node --input-type=module -e ' *)",
-      "Bash(node verify-vs-render.mjs)"
+      "Bash(node verify-vs-render.mjs)",
+      "Bash(grep -n \"min-height: clamp\\\\|\\\\.phead, .pgroup, .lhero\\\\|\\\\.lhero {\" src/components/Paths.svelte)",
+      "Bash(node verify-obs2.mjs)"
     ]
   }
 }

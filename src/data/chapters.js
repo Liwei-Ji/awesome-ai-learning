@@ -478,6 +478,18 @@ const DATA = {
       ['Evaluation 評估', '用明確標準判斷輸出好不好'],
     ],
   },
+  'observability': {
+    t: 'AI 觀測與追蹤', sub: '上線後，怎麼知道它還好著',
+    key: [
+      ['01', 'AI 壞了不報錯：照樣輸出、只是變爛，靠觀測才看得見'],
+      ['02', '三件套：留紀錄（logging）→ 看得見（tracing）→ 量得出（metrics）'],
+      ['03', '抓退化兩招：回歸測試集先跑，加上線上抽樣評分（LLM-as-judge）'],
+    ],
+    terms: [
+      ['Tracing 追蹤', '把一次請求經過的每一步串成可回放的鏈'],
+      ['Drift 漂移', '輸入或品質隨時間悄悄偏移：沒有報錯，但變爛'],
+    ],
+  },
   'capstone': {
     t: '你能用 AI 做什麼', sub: '把地圖變成行動（總結）',
     key: [
@@ -500,7 +512,7 @@ const OUTLINE = [
   { key: 'llm', t: '大型語言模型 LLM', desc: 'ChatGPT 的核心', slugs: ['tokenizer', 'embedding', 'rnn', 'transformer', 'llm', 'model-size', 'model-knowledge', 'context-window', 'inference'] },
   { key: 'chatgpt', t: '從模型到 ChatGPT', desc: '把模型訓練成助理', slugs: ['pretraining', 'fine-tuning', 'reasoning'] },
   { key: 'apps', t: '生成式 AI 與 AI Agent', desc: '一條完整的應用鏈', slugs: ['prompt', 'system-prompt', 'thought-partner', 'find-info', 'generative', 'multimodal', 'vector-search', 'rag', 'knowledge-graph', 'memory', 'mcp', 'agent', 'skills', 'orchestration', 'no-code', 'integration'] },
-  { key: 'literacy', t: 'AI 素養', desc: '會用，也會判斷', slugs: ['limits', 'evaluation', 'capstone'] },
+  { key: 'literacy', t: 'AI 素養', desc: '會用，也會判斷', slugs: ['limits', 'evaluation', 'observability', 'capstone'] },
 ];
 
 // ---------- 派生：有序 slug、章號、CH、GROUPS ----------

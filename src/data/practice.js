@@ -1360,6 +1360,31 @@ export const PRACTICE = {
       ]
     }
   },
+  "observability": {
+    "practical": {
+      "zh": [
+        "<b>上線第一天就開全量記錄</b>：輸入、輸出、模型與 prompt 版本、token、延遲，一個都別省。紀錄不能回溯補，等發現品質下滑才想開 log，前面的線索已經沒了。",
+        "<b>每個線上失敗都收進回歸題庫</b>：使用者按倒讚、客訴、被抓到的幻覺，都改寫成一題固定測試。題庫就是你的免疫系統，同一個坑不該踩第二次。",
+        "<b>改 prompt 也算部署</b>：換模型、改 prompt、動檢索，任何一個上線前都先跑回歸測試集，比較前後分數。「只是改幾個字」正是最常改壞的那種。",
+        "<b>定期人工抽查評審的分數</b>：LLM-as-judge 幫你大量打分，但評審自己也會偏、也會漂。每隔一段時間抽幾十筆人工對答案，別讓監控儀表本身壞掉。",
+        "<b>個資先遮罩再落盤</b>：日誌裡的姓名、電話、帳號在儲存前就去識別化，並設保存期限與存取權限。觀測是看系統，不是看使用者。"
+      ],
+      "en": [
+        "<b>Turn on full logging from day one</b>: input, output, model and prompt versions, tokens, latency, skip none of it. Logs cannot be backfilled; by the time a quality drop makes you want them, the clues are already gone.",
+        "<b>Turn every production failure into a regression case</b>: thumbs-downs, complaints, and caught hallucinations each become one fixed test question. The test set is your immune system, and the same pothole should never be hit twice.",
+        "<b>Prompt edits count as deployments</b>: model swaps, prompt edits, retrieval changes, run the regression set and compare scores before shipping any of them. \"Just changing a few words\" is exactly the kind of change that breaks things most often.",
+        "<b>Audit the judge's scores by hand periodically</b>: LLM-as-judge grades at scale, but the judge is biased and drifts too. Every so often, hand-check a few dozen of its scores so the monitoring gauge itself does not break.",
+        "<b>Mask PII before storing logs</b>: de-identify names, phone numbers, and account IDs before they hit disk, and set retention limits and access controls. Observability is for watching the system, not the users."
+      ],
+      "ja": [
+        "<b>公開初日から全量ロギングを</b>：入力、出力、モデルと prompt のバージョン、トークン、レイテンシ、どれも省かない。ログは後から遡って埋められません。品質低下に気づいてから欲しくなっても、手がかりはもう消えています。",
+        "<b>本番の失敗はすべて回帰問題集へ</b>：低評価、クレーム、見つかった幻覚は、それぞれ固定のテスト問題に書き換えます。問題集はあなたの免疫系で、同じ穴を二度踏んではいけません。",
+        "<b>prompt の修正もデプロイのうち</b>：モデル入れ替え、prompt 修正、検索の変更、どれも出す前に回帰テストセットを回して前後のスコアを比べます。「数文字変えるだけ」こそ、最もよく壊す類いの変更です。",
+        "<b>審査役の採点を定期的に人手で確認</b>：LLM-as-judge は大量に採点してくれますが、審査役自身も偏り、ずれていきます。ときどき数十件を人手で突き合わせ、監視の計器そのものを壊さないようにしましょう。",
+        "<b>個人情報はマスクしてから保存</b>：ログ内の氏名、電話番号、アカウントは保存前に匿名化し、保存期間とアクセス権限も決めます。観測はシステムを見るためで、ユーザーを見るためではありません。"
+      ]
+    }
+  },
   "history": {
     "practical": {
       "zh": [

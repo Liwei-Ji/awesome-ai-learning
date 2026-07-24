@@ -6,6 +6,7 @@
 import History from './History.svelte';
 import Multimodal from './Multimodal.svelte';
 import Evaluation from './Evaluation.svelte';
+import Observability from './Observability.svelte';
 import Classify from './Classify.svelte';
 import DataSize from './DataSize.svelte';
 import DataFuel from './DataFuel.svelte';
@@ -81,6 +82,7 @@ const demos = {
   'mcp': MCP,
   'limits': Limits,
   'evaluation': Evaluation,
+  'observability': Observability,
   'capstone': Capstone,
   'agent': Agent,
   'orchestration': Orchestration,

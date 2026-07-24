@@ -472,6 +472,18 @@ export const CH_TR = {
         ["Evaluation", "Judging whether an output is good using clear criteria"],
       ],
     },
+    "observability": {
+      t: "AI Observability & Tracing", sub: "After launch, how do you know it is still OK?",
+      key: [
+        ["01", "A broken AI throws no error: it keeps producing output, just worse, and only observation makes that visible"],
+        ["02", "The trio: keep records (logging) → see the steps (tracing) → measure it (metrics)"],
+        ["03", "Two moves to catch degradation: run a regression test set first, plus online sampled scoring (LLM-as-judge)"],
+      ],
+      terms: [
+        ["Tracing", "Chaining every step of one request into a replayable trail"],
+        ["Drift", "Inputs or quality quietly shifting over time: no error, just worse"],
+      ],
+    },
     "capstone": {
       t: "What Can You Do with AI?", sub: "Turning the map into action (wrap-up)",
       key: [
@@ -952,6 +964,18 @@ export const CH_TR = {
       terms: [
         ["Benchmark ベンチマーク", "標準化された問題のセットで、モデルの能力を比較するために使う"],
         ["Evaluation 評価", "明確な基準を使って出力の良し悪しを判断すること"],
+      ],
+    },
+    "observability": {
+      t: "AIの可観測性とトレーシング", sub: "公開後、まだ大丈夫だとどうやって知る？",
+      key: [
+        ["01", "AI は壊れてもエラーを出さない：出力は続き、質だけ落ちる、観測して初めて見える"],
+        ["02", "三点セット：記録を残す（logging）→ 見えるようにする（tracing）→ 測れるようにする（metrics）"],
+        ["03", "劣化を捕まえる二手：まず回帰テストセットを回し、加えて本番で抽出採点（LLM-as-judge）"],
+      ],
+      terms: [
+        ["Tracing トレーシング", "一つのリクエストが通った各ステップを、再生できる鎖につなぐこと"],
+        ["Drift ドリフト", "入力や品質が時間とともに静かにずれること：エラーは出ないが、悪くなる"],
       ],
     },
     "capstone": {
