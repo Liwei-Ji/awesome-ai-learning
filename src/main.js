@@ -3,11 +3,10 @@ import { mount } from 'svelte';
 import './styles/tokens.css';
 import './styles/global.css';
 import App from './App.svelte';
-import { injectAnalytics } from '@vercel/analytics/sveltekit';
+import { inject } from '@vercel/analytics';
 
 // 啟用 Vercel Analytics
-injectAnalytics({ mode: dev ? 'development' : 'production' });
-
+inject();
 
 // 清空掛載點（預渲染快照會先填入內容，client 端重新掛載前先清掉，避免疊加）
 const target = document.getElementById('app');
